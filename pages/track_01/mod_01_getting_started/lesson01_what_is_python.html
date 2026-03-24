@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson 1 — What is Python? | Python Learning Hub</title>
-  <meta name="description" content="Learn What is Python? in Python. Part of the Getting Started module in the Python Learning Hub.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,12 +18,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
 
   <style>
+    :root {
+      --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
     * { scroll-behavior: smooth; }
 
     /* Prism overrides */
     pre[class*="language-"] {
       border-radius: 0.75rem;
-      font-family: 'Fira Code', monospace;
+      font-family: var(--font-mono);
       font-size: 0.875rem;
       margin: 0;
       padding: 1.25rem 1.5rem;
@@ -41,7 +39,7 @@
 
     /* Root styling */
     body {
-      font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-family: var(--font-body);
       background: #f9fafb;
       color: #1f2937;
       line-height: 1.6;
@@ -239,22 +237,11 @@
     }
 
     /* Layout */
-    .lesson-layout {
-      display: flex;
-      gap: 1.75rem;
-      align-items: flex-start;
-    }
+    .lesson-layout { display: block; }
+    .lesson-layout > main { overflow: hidden; }
 
     /* TOC Sidebar */
-    .lesson-toc-sidebar {
-      width: 240px;
-      flex-shrink: 0;
-      position: sticky;
-      top: 1.5rem;
-      max-height: calc(100vh - 2rem);
-      overflow-y: auto;
-      transition: width 0.25s ease, opacity 0.25s ease;
-    }
+    .lesson-toc-sidebar { float: left; width: 240px; margin-right: 1.75rem; margin-bottom: 1rem; position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem); overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease; }
     .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
     .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
     .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
@@ -453,7 +440,7 @@
 
     /* Responsive */
     @media (max-width: 767px) {
-      .lesson-toc-sidebar { display: none; }
+      .lesson-toc-sidebar { float: none; display: none; }
       .lesson-layout { display: block; }
       #lesson-nav { display: block; }
       .hero-container { min-height: auto; }
@@ -474,8 +461,6 @@
       flex-shrink: 0;
     }
   </style>
-</head>
-<body>
 
 <!-- Scroll progress bar -->
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
@@ -2327,6 +2312,3 @@ FROM orders;</code></pre>
     if (window.Prism) Prism.highlightAll();
   });
 </script>
-
-</body>
-</html>
