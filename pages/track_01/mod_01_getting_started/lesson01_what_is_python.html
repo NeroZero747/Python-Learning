@@ -37,16 +37,6 @@
       background: #1e1e2e;
     }
 
-    /* Root styling */
-    body {
-      font-family: var(--font-body);
-      background: #f9fafb;
-      color: #1f2937;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-    }
-
     /* Headings */
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-body) !important;
@@ -77,15 +67,15 @@
     @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Code Examples */
-    .ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
+    .ce-step:not(.ce-step-active):hover { background: #374151; color: #ffffff; }
     .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
     /* Common Mistakes */
-    .mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
+    .mk-step:not(.mk-step-active):hover { background: #374151; color: #ffffff; }
     .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
     /* Knowledge Check */
-    .qz-step:not(.qz-step-active):hover { background: #374151; color: #d1d5db; }
+    .qz-step:not(.qz-step-active):hover { background: #374151; color: #ffffff; }
     .qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
     /* Practice Exercises */
@@ -108,7 +98,7 @@
     .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
 
     /* Practice exercise tab pills */
-    .pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #ffffff; }
     .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
     /* ═══════════════════════════════════════════════════════
@@ -462,9 +452,6 @@
       vertical-align: middle;
       flex-shrink: 0;
     }
-  </style>
-
-<style>
   /* ============================================================
      CONFLUENCE ISOLATION — scoped to #hub-root
      All rules use !important to beat Confluence's element styles.
@@ -578,6 +565,34 @@
   /* ── Section header card titles ── */
   #hub-root .text-xl.font-bold,
   #hub-root h2.text-xl { font-size: 1.25rem !important; font-weight: 700 !important; }
+  /* ── Dark pill tabs — dark bg, white text ── */
+  #hub-root .ce-step:not(.ce-step-active),
+  #hub-root .mk-step:not(.mk-step-active),
+  #hub-root .qz-step:not(.qz-step-active),
+  #hub-root .pe-step:not(.pe-step-active) {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+  }
+  #hub-root .ce-step-active,
+  #hub-root .mk-step-active,
+  #hub-root .qz-step-active,
+  #hub-root .pe-step-active { color: #ffffff !important; }
+
+  /* ── Key Concepts: active label must override .text-gray-400 !important ── */
+  #hub-root .kc-tab-active .kc-tab-label { color: #111827 !important; }
+  #hub-root .kc-tab:not(.kc-tab-active) .kc-tab-label { color: #9ca3af !important; }
+
+  /* ── Background-colour utilities ── */
+  #hub-root .bg-white    { background-color: #ffffff !important; }
+  #hub-root .bg-gray-50  { background-color: #f9fafb !important; }
+  #hub-root .bg-gray-100 { background-color: #f3f4f6 !important; }
+  #hub-root .bg-gray-200 { background-color: #e5e7eb !important; }
+  #hub-root .bg-gray-800 { background-color: #1f2937 !important; }
+  #hub-root .bg-gray-900 { background-color: #111827 !important; }
+
+  /* ── Stat pill icons and labels — consistent full visibility ── */
+  #hub-root .hero-pill .iconify { opacity: 1 !important; }
+  #hub-root .hero-pill .opacity-55 { opacity: 0.7 !important; }
 </style>
 
 <!-- Scroll progress bar -->
@@ -634,7 +649,7 @@
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 01</p>
 
             <!-- Title -->
-            <h1 class="hero-title-main text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">
+            <h1 class="hero-title-main text-3xl md:text-4xl font-extrabold text-white mb-5 leading-[1.15] tracking-tight">
               What is Python?
             </h1>
 
@@ -2261,12 +2276,12 @@ FROM orders;</code></pre>
       if (i === idx) {
         t.classList.add('kc-tab-active');
         t.style.background = c.activeBg;
-        if (num) { num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
+        if (num) { num.classList.remove('bg-gray-100','text-gray-400'); num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
         if (label) { label.style.color = '#111827'; }
       } else {
         t.classList.remove('kc-tab-active');
         t.style.background = '';
-        if (num) { num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
+        if (num) { num.classList.add('bg-gray-100','text-gray-400'); num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
         if (label) { label.style.color = '#9ca3af'; }
       }
     });
@@ -2297,13 +2312,15 @@ FROM orders;</code></pre>
     document.querySelectorAll('.ce-step').forEach((s, i) => {
       if (i === idx) {
         s.classList.add('ce-step-active');
+        s.classList.remove('text-gray-400');
         s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)';
         s.style.color = '#fff';
         s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
       } else {
         s.classList.remove('ce-step-active');
+        s.classList.add('text-gray-400');
         s.style.background = '#1f2937';
-        s.style.color = '#9ca3af';
+        s.style.color = '#ffffff';
         s.style.boxShadow = 'none';
       }
     });
@@ -2326,13 +2343,15 @@ FROM orders;</code></pre>
     document.querySelectorAll('.mk-step').forEach((s, i) => {
       if (i === idx) {
         s.classList.add('mk-step-active');
+        s.classList.remove('text-gray-400');
         s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)';
         s.style.color = '#fff';
         s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
       } else {
         s.classList.remove('mk-step-active');
+        s.classList.add('text-gray-400');
         s.style.background = '#1f2937';
-        s.style.color = '#9ca3af';
+        s.style.color = '#ffffff';
         s.style.boxShadow = 'none';
       }
     });
@@ -2355,13 +2374,15 @@ FROM orders;</code></pre>
     document.querySelectorAll('.pe-step').forEach((s, i) => {
       if (i === idx) {
         s.classList.add('pe-step-active');
+        s.classList.remove('text-gray-400');
         s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)';
         s.style.color = '#fff';
         s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
       } else {
         s.classList.remove('pe-step-active');
+        s.classList.add('text-gray-400');
         s.style.background = '#1f2937';
-        s.style.color = '#9ca3af';
+        s.style.color = '#ffffff';
         s.style.boxShadow = 'none';
       }
     });
@@ -2384,13 +2405,15 @@ FROM orders;</code></pre>
     document.querySelectorAll('.qz-step').forEach((s, i) => {
       if (i === idx) {
         s.classList.add('qz-step-active');
+        s.classList.remove('text-gray-400');
         s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)';
         s.style.color = '#fff';
         s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
       } else {
         s.classList.remove('qz-step-active');
+        s.classList.add('text-gray-400');
         s.style.background = '#1f2937';
-        s.style.color = '#9ca3af';
+        s.style.color = '#ffffff';
         s.style.boxShadow = 'none';
       }
     });
