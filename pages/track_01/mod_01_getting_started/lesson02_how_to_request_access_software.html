@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 &mdash; How to Request Access &amp; Software | Python Learning Hub</title>
+  <meta name="description" content="Learn How to Request Access &amp; Software in Python. Part of the Getting Started module in the Python Learning Hub.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+  <style>
+    * { scroll-behavior: smooth; }
+    pre[class*="language-"] { border-radius: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
+    code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
+    body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #1f2937; line-height: 1.6; margin: 0; padding: 0; }
+    h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
+    h2 { font-size: 1.25rem; font-weight: 700; }
+    h3 { font-size: 1rem; font-weight: 600; }
+    .text-brand { color: #CB187D; }
+    .text-brand-dark { color: #7F004C; }
+    .bg-brand { background: #CB187D; }
+    .bg-brand-soft { background: #fdf0f7; }
+    .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+    .bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
+    .bg-code { background: #1e1e2e; }
+    .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
+    .pre-reset { margin: 0; border-radius: 0; background: transparent; }
+    .kc-tab-active { background: #fdf0f7; }
+    .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+    .kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
+    .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
+    .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .qz-step:not(.qz-step-active):hover { background: #374151; color: #d1d5db; }
+    .qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+    .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+    .accordion-body { display: none !important; }
+    .accordion-body.open { display: block !important; }
+    .accordion-toggle { display: flex !important; align-items: center !important; gap: 8px !important; width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important; font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important; border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important; color: #7F004C !important; line-height: 1.2 !important; text-decoration: none !important; transition: background 0.15s, border-color 0.15s !important; }
+    .accordion-toggle:hover { background: #f9d9ee !important; border-color: #CB187D !important; }
+    .accordion-toggle.open { background: #fdf0f7 !important; border-color: #CB187D !important; border-style: solid !important; }
+    .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
+    .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
+    .hero-container { position: relative; border-radius: 1.25rem; overflow: hidden; min-height: 380px; background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%); }
+    .hero-dots { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px); background-size: 24px 24px; }
+    .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255, 255, 255, 0.12); }
+    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127, 0, 76, 0.35); }
+    .hero-glow-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%); opacity: 0.7; }
+    .hero-pill { background: #ffffff; border: none; color: #7F004C; font-weight: 700; transition: transform 0.2s ease; }
+    .hero-pill:hover { transform: translateY(-1px); }
+    .hero-abstract-card { position: relative; border-radius: 1rem; overflow: hidden; padding: 1rem; display: flex; align-items: center; justify-content: center; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 11px 26px; border-radius: 999px; font-weight: 700; font-size: 0.875rem; color: #7F004C; background: #ffffff; border: none; cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease; text-decoration: none; }
+    .hero-cta:hover { transform: translateY(-2px); filter: brightness(0.96); }
+    .progress-ring-circle { transform: rotate(-90deg); transform-origin: 50% 50%; }
+    .stat-card { transition: background 0.2s ease; }
+    .stat-card:hover { background: rgba(255,255,255,0.15) !important; }
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D); background-size: 200% 100%; animation: scrollGradient 3s linear infinite; z-index: 9999; transition: width 0.15s; }
+    @keyframes scrollGradient { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+    .lesson-layout { display: flex; gap: 1.75rem; align-items: flex-start; }
+    .lesson-toc-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem); overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease; }
+    .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
+    .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-module-list { display: none; }
+    .toc-toggle-btn { background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D; display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border-radius: 6px; transition: background 0.15s; }
+    .toc-toggle-btn:hover { background: #fdf0f7; }
+    .toc-link { transition: color 0.15s, padding-left 0.15s; }
+    .toc-link:hover { color: #CB187D; padding-left: 4px; }
+    .toc-link.active { color: #CB187D; font-weight: 600; border-left: 3px solid #CB187D; padding-left: 8px; }
+    .obj-card { transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
+    .obj-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px -6px rgba(203, 24, 125, 0.18), 0 6px 12px -2px rgba(203, 24, 125, 0.1); border-color: #CB187D; }
+    .obj-card-kt:hover { box-shadow: none; }
+    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; }
+    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; }
+    .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+    .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+    .obj-card:hover .obj-icon .iconify { color: white !important; }
+    .tab-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff; line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s; }
+    .tab-btn:hover { color: #CB187D; border-color: #CB187D; background: #fdf0f7; }
+    .tab-btn.active { color: #fff; background: #CB187D; border-color: #CB187D; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .copy-btn { position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center; background: rgba(203, 24, 125, 0.15); border: 1px solid rgba(203, 24, 125, 0.3); color: #CB187D; border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .copy-btn:hover { background: rgba(203, 24, 125, 0.3); }
+    .copy-btn-light { position: static; color: #fff; border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.1); }
+    .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2); }
+    .lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: #CB187D; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(203, 24, 125, 0.3); cursor: pointer; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none; }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #7F004C; }
+    .quiz-btn.correct { background: #f0fdf4; border-color: #22c55e; color: #16a34a; }
+    .quiz-btn.incorrect { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+    .mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08); }
+    .flow-stepper .flow-step { transition: transform 0.15s ease; }
+    .flow-stepper .flow-step:hover { transform: translateX(4px); }
+    .recap-item { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .recap-item:hover { transform: translateX(4px); box-shadow: -4px 0 0 0 #10b981; }
+    .overview-card { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+    .overview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.12); border-color: rgba(203, 24, 125, 0.3); }
+    @media (max-width: 767px) { .lesson-toc-sidebar { display: none; } .lesson-layout { display: block; } #lesson-nav { display: block; } .hero-container { min-height: auto; } .hero-split { flex-direction: column !important; } .hero-abstract-card { margin-top: 1.5rem; } .hero-title-main { font-size: 1.75rem !important; } }
+    @media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; } .obj-card:hover { transform: none; box-shadow: none; } }
+    .iconify { vertical-align: middle; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div class="bg-gray-50 min-h-screen">
+
+  <!-- HERO -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+    <section class="hero-container">
+      <div class="hero-dots"></div>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-glow-line"></div>
+      <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+        <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:rocket"></span> Module 1
+              </span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="inline-flex items-center gap-1"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span></span> Beginner
+              </span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 10 min read
+              </span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 02</p>
+            <h1 class="hero-title-main text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">How to Request Access &amp; Software</h1>
+            <p class="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-lg">Learn what tools you need, how to request access to Python, and how to prepare your development environment for writing code.</p>
+            <div class="flex items-center gap-4 mb-5 text-sm">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                  <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+                </span>
+                <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+              </div>
+              <span class="text-white/30">|</span>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                  <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+                </span>
+                <span class="text-white/85 font-medium text-xs">March 21, 2026</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span><span class="font-extrabold">4</span><span class="font-semibold opacity-55">Goals</span></a>
+              <a href="#access-request" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:box-archive" style="opacity:0.5;"></span><span class="font-extrabold">12</span><span class="font-semibold opacity-55">Apps</span></a>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
+                <span class="font-extrabold">2<span class="font-bold opacity-50">/6</span></span>
+                <span class="font-semibold opacity-55">Progress</span>
+              </span>
+            </div>
+          </div>
+          <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+            <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+              <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+  <defs>
+    <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+    <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+    <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+    <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+  </defs>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+  <g clip-path="url(#hexClip)" opacity="1">
+    <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+    <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+    <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+    <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+    <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+    <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+    <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
+    <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+    <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+    <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+  </g>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+  <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+  <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+  <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+  <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+  <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+  <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+  <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
+</svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+    <div class="lesson-layout">
+      <aside class="lesson-toc-sidebar">
+        <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+          <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+            <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+            <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+              <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+            </button>
+          </div>
+          <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+            <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective
+</a>
+<a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview
+</a>
+<a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:layer-group"></span> Key Takeaways
+</a>
+<a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
+</a>
+<a href="#access-request" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:key"></span> Access Request
+</a>
+<a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap
+</a>
+<a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson
+</a>
+
+          </nav>
+          <div class="toc-module-list px-3 py-3">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+            <div class="space-y-1"><a href="lesson01_what_is_python.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">1. What is Python?</span>
+</a>
+<a href="lesson02_how_to_request_access_software.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span>
+  <span class="truncate">2. How to Request Access &amp; Software</span>
+</a>
+<a href="lesson03_how_to_install_extensions_in_vs_code.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">3. How to Install Extensions in VS Code</span>
+</a>
+<a href="lesson04_how_to_setup_a_virtual_environment.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">4. How to Setup a Virtual Environment</span>
+</a>
+<a href="lesson05_how_to_install_libraries_in_a_virtual_environment.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">5. How to Install Libraries in a Virtual Environment</span>
+</a>
+<a href="lesson06_how_to_run_a_python_notebook_or_script.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">6. How to Run a Python Notebook or Script</span>
+</a>
+</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="min-w-0 flex-1 space-y-10">
+        <section id="objective">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:toolbox"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Identify the Tools Required for Python Development</p>
+    <p class="text-xs text-gray-500 mt-0.5">The interpreter, a code editor, and a package manager — the essential trio</p>
+  </div>
+</div>
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:key"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Request Access to Python in Your Organization</p>
+    <p class="text-xs text-gray-500 mt-0.5">Navigate IT portals, approvals, and corporate software catalogs</p>
+  </div>
+</div>
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:laptop-code"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Understand the Standard Development Toolkit</p>
+    <p class="text-xs text-gray-500 mt-0.5">From VS Code to pip — what gets installed and why it matters</p>
+  </div>
+</div>
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:code-compare"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Distinguish Python from Its Supporting Tools</p>
+    <p class="text-xs text-gray-500 mt-0.5">Python is the language — VS Code, pip, and the terminal are how you use it</p>
+  </div>
+</div>
+</div>
+      <div class="mt-5"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">By the end of this lesson, you will understand the core tools needed to start writing Python — and how to get them set up in your environment.</p>
+</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <!-- Hook quote -->
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-start gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Python is a programming language &mdash; but you can&rsquo;t use it by double-clicking a file. You need a small ecosystem of tools to write, run, and manage Python code effectively.</p>
+        </div>
+      </div>
+
+      <!-- Analogy intro + 4 tool cards -->
+      <div>
+        <p class="text-sm text-gray-600 leading-relaxed mb-4">Think of it like a kitchen: Python is the recipe, but you still need the right appliances to cook. Each tool in your Python environment has a specific, non-overlapping job:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:gear"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Python Interpreter</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The stove &mdash; turns ingredients into a meal</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Reads your <code class="font-mono">.py</code> files and executes them line by line. Without it, your scripts are just plain text files.</p>
+          </div>
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:laptop-code"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Code Editor (VS Code)</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The kitchen &mdash; where all the work happens</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Where you write, organize, and debug your scripts. Gives you syntax highlighting, error detection, and code completion.</p>
+          </div>
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:box-open"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Package Manager (pip)</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The pantry &mdash; stocked with 500,000+ libraries</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Installs third-party libraries like Pandas, NumPy, and Requests with a single <code class="font-mono">pip install</code> command.</p>
+          </div>
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:terminal"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Terminal / Command Line</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The controls &mdash; where you direct everything</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Run scripts, check your Python version, and install packages &mdash; all from one central interface.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What you can do with these tools -->
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-5 py-4">
+        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Together, these four tools let you:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:pen-to-square"></span> Write &amp; edit code</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:play"></span> Execute programs</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:cubes"></span> Install libraries</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:bug"></span> Debug errors</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:folder-tree"></span> Organize projects</span>
+        </div>
+      </div>
+
+      <!-- Closing guidance -->
+      <p class="text-sm text-gray-600 leading-relaxed">In some companies, these tools come <strong>pre-installed</strong> on your machine or are available through an internal software catalog. In others, you&rsquo;ll need to request access through IT or install them yourself. Either way, this lesson walks you through what to expect.</p>
+
+    </div>
+  </div>
+</section>
+
+<section id="key-ideas">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:layer-group"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+  </div>
+</div>
+        <div class="bg-white px-8 py-7 space-y-4">
+<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:terminal"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Python Requires a Development Environment</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Python code does not execute on its own &mdash; the <strong>Python interpreter</strong> reads each line and carries out your instructions. Without it installed, a <code class="text-[11px] bg-pink-50 text-[#CB187D] px-1.5 py-0.5 rounded font-mono border border-pink-100">.py</code> file is nothing more than plain text.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Python interpreter</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Runs .py files</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">python3 --version</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Installing Python = installing the interpreter</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:wand-magic-sparkles"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">The Right Editor Supercharges Your Workflow</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">You could write Python in Notepad, but a proper editor like VS Code catches mistakes before you run your code, suggests completions as you type, and lets you debug line by line.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Syntax highlighting</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Error detection</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Code completion</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Built-in debugger</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:cubes"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Libraries Extend Python Capabilities</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Python built-in language is intentionally lean. Its real power comes from over <strong>500,000 community-built libraries</strong> on PyPI, each installable in seconds with <code class="text-[11px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-mono border border-blue-100">pip</code>.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">pandas</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">requests</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">matplotlib</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">numpy</span>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="key-concepts">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
+  </div>
+</div>
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+          <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Python Interpreter</span>
+</button>
+<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Integrated Development Environment</span>
+</button>
+<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Package Manager</span>
+</button>
+
+        </div>
+        <div class="flex-1 min-w-0 md:pl-5">
+          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
+  <div class="rounded-2xl border border-pink-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
+      <div class="mb-3">
+        <h3 class="text-sm font-bold text-gray-900 leading-tight">Python Interpreter</h3>
+        <span class="text-[10px] font-bold text-[#CB187D] uppercase tracking-widest">Definition</span>
+      </div>
+      <div class="space-y-3 mb-4">
+        <p class="text-xs text-gray-600 leading-relaxed">The Python interpreter is the core program that <strong>reads your code and executes it</strong>, one line at a time. Think of it as a translator between your human-readable Python and the machine instructions your computer understands.</p>
+        <p class="text-xs text-gray-600 leading-relaxed">When you run <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">python3 script.py</code> in a terminal, the interpreter verifies syntax, runs each instruction in order, and returns results &mdash; all in milliseconds.</p>
+      </div>
+      <div class="space-y-2">
+        <div class="rounded-xl overflow-hidden bg-code">
+          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+            <div class="flex items-center gap-2">
+              <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+              <span class="text-[11px] font-semibold text-gray-400">script.py &mdash; your code</span>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">name = "Alex"
+print(f"Hello, {name}!")
+print("Python is running.")</code></pre>
+        </div>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+            <div class="flex items-center gap-2">
+              <span class="iconify text-gray-400 text-xs" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[11px] font-semibold text-gray-400">Terminal &mdash; run it with the interpreter</span>
+            </div>
+          </div>
+          <pre class="overflow-x-auto pre-reset"><code class="language-bash">python3 script.py
+# Hello, Alex!
+# Python is running.</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+  <div class="rounded-2xl border border-violet-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
+      <div class="mb-3">
+        <h3 class="text-sm font-bold text-gray-900 leading-tight">Integrated Development Environment</h3>
+        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
+      </div>
+      <div class="space-y-3 mb-4">
+        <p class="text-xs text-gray-600 leading-relaxed">An IDE (Integrated Development Environment) or code editor is your <strong>workspace for writing, testing, and debugging</strong> Python code. It&rsquo;s the difference between writing a document in Notepad versus using Microsoft Word.</p>
+        <p class="text-xs text-gray-600 leading-relaxed">Modern editors give you real-time feedback so you catch mistakes <em>while typing</em>, not just when you run your code:</p>
+      </div>
+      <div class="space-y-3">
+        <div class="overflow-x-auto rounded-xl border border-gray-100">
+          <table class="w-full text-xs">
+            <thead>
+              <tr class="bg-gray-50 border-b border-gray-100">
+                <th class="px-3 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">Editor</th>
+                <th class="px-3 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">Best For</th>
+                <th class="px-3 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-gray-100 hover:bg-violet-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">VS Code <span class="ml-1 text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">Recommended</span></td>
+                <td class="px-3 py-2.5 text-gray-500">General Python development</td>
+                <td class="px-3 py-2.5 text-gray-500">All levels</td>
+              </tr>
+              <tr class="border-t border-gray-100 hover:bg-violet-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">PyCharm</td>
+                <td class="px-3 py-2.5 text-gray-500">Large Python projects</td>
+                <td class="px-3 py-2.5 text-gray-500">Intermediate</td>
+              </tr>
+              <tr class="border-t border-gray-100 hover:bg-violet-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">Jupyter Notebook</td>
+                <td class="px-3 py-2.5 text-gray-500">Data analysis &amp; exploration</td>
+                <td class="px-3 py-2.5 text-gray-500">All levels</td>
+              </tr>
+              <tr class="border-t border-gray-100 hover:bg-violet-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">Google Colab</td>
+                <td class="px-3 py-2.5 text-gray-500">Cloud-based, no install needed</td>
+                <td class="px-3 py-2.5 text-gray-500">Beginner</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-start gap-2.5 rounded-lg bg-violet-50 border border-violet-100 px-3 py-2.5">
+          <span class="iconify text-violet-500 text-xs shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+          <p class="text-[11px] text-violet-700 leading-relaxed"><strong>Starting out?</strong> VS Code is free, lightweight, and has excellent Python extension support. It&rsquo;s the industry standard for most teams.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+  <div class="rounded-2xl border border-blue-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
+      <div class="mb-3">
+        <h3 class="text-sm font-bold text-gray-900 leading-tight">Package Manager</h3>
+        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
+      </div>
+      <div class="space-y-3 mb-4">
+        <p class="text-xs text-gray-600 leading-relaxed"><strong>pip</strong> is Python&rsquo;s built-in package manager. It connects to <strong>PyPI</strong> (the Python Package Index) &mdash; a public repository of 500,000+ libraries &mdash; and installs them to your machine with one command.</p>
+        <p class="text-xs text-gray-600 leading-relaxed">Here&rsquo;s the full workflow from install to using a library in your code:</p>
+      </div>
+      <div class="space-y-2">
+        <div class="rounded-xl overflow-hidden bg-code">
+          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+            <div class="flex items-center gap-2">
+              <span class="iconify text-gray-400 text-xs" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[11px] font-semibold text-gray-400">Step 1 &mdash; Install the library</span>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <pre class="overflow-x-auto pre-reset"><code class="language-bash">pip install pandas</code></pre>
+        </div>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+            <div class="flex items-center gap-2">
+              <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+              <span class="text-[11px] font-semibold text-gray-400">Step 2 &mdash; Import and use it in your script</span>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+data = {"Name": ["Alice", "Bob"], "Score": [95, 87]}
+df = pd.DataFrame(data)
+print(df)</code></pre>
+        </div>
+        <div class="flex items-start gap-2.5 rounded-lg bg-blue-50 border border-blue-100 px-3 py-2.5">
+          <span class="iconify text-blue-500 text-xs shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+          <p class="text-[11px] text-blue-700 leading-relaxed">Run <code class="font-mono">pip list</code> in your terminal to see all installed libraries, or <code class="font-mono">pip show pandas</code> to check a specific one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="access-request">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:key"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Access Request</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Software and entitlements you need to request before getting started</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <div class="rounded-2xl overflow-hidden border border-[#f5c6e0]">
+        <div class="bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5 flex items-center gap-5">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-2xl" data-icon="fa6-solid:clipboard-list"></span>
+          </span>
+          <div>
+            <p class="text-base font-bold text-white leading-tight">Before you can start coding at work, you&rsquo;ll need the right software and access approved by IT.</p>
+            <p class="text-xs text-white/75 mt-1">Use the lists below to know exactly what to request and where to request it.</p>
+          </div>
+        </div>
+        <div class="bg-[#fdf0f7] px-6 py-3 flex items-center gap-2">
+          <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:clock"></span>
+          <p class="text-xs text-[#7F004C]"><strong>Plan ahead:</strong> IT approvals typically take <strong>1&ndash;3 business days</strong> &mdash; submit your request before you need it.</p>
+        </div>
+      </div>
+
+      <!-- SOFTWARE APP STORE -->
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+        <div class="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-xs" data-icon="fa6-solid:store"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800">Software App Store</p>
+            <p class="text-xs text-gray-400">Request the following applications through your company software catalog</p>
+          </div>
+        </div>
+        <div class="px-5 py-4 space-y-3">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Required</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-100 bg-white hover:border-[#f5c6e0] hover:bg-[#fdf0f7] transition-all">
+              <span class="iconify text-[#CB187D] shrink-0" data-icon="logos:python"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-800">Python 3.12</p>
+                <p class="text-[10px] text-gray-400">Interpreter</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-100 bg-white hover:border-[#f5c6e0] hover:bg-[#fdf0f7] transition-all">
+              <span class="iconify text-blue-500 shrink-0" data-icon="logos:visual-studio-code"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-800">Microsoft Visual Studio Code</p>
+                <p class="text-[10px] text-gray-400">IDE</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-100 bg-white hover:border-[#f5c6e0] hover:bg-[#fdf0f7] transition-all">
+              <span class="iconify text-orange-500 shrink-0" data-icon="logos:git-icon"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-800">Git 2.49</p>
+                <p class="text-[10px] text-gray-400">Version Control</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-100 bg-white hover:border-[#f5c6e0] hover:bg-[#fdf0f7] transition-all">
+              <span class="iconify text-blue-700 shrink-0" data-icon="fa6-brands:windows"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-800">Windows PowerShell 7.5</p>
+                <p class="text-[10px] text-gray-400">Terminal / Shell</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mt-4 mb-2">Optional</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-gray-200 bg-gray-50 hover:border-violet-200 hover:bg-violet-50/30 transition-all">
+              <span class="iconify text-violet-500 shrink-0" data-icon="logos:pycharm"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-700">PyCharm 2025.1 Community</p>
+                <p class="text-[10px] text-gray-400">Free</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-gray-200 bg-gray-50 hover:border-violet-200 hover:bg-violet-50/30 transition-all">
+              <span class="iconify text-violet-600 shrink-0" data-icon="logos:pycharm"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-700">PyCharm 2025.1 Professional</p>
+                <p class="text-[10px] text-gray-400">Paid license</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-gray-200 bg-gray-50 hover:border-green-200 hover:bg-green-50/30 transition-all">
+              <span class="iconify text-green-600 shrink-0" data-icon="simple-icons:anaconda"></span>
+              <div>
+                <p class="text-xs font-semibold text-gray-700">Anaconda</p>
+                <p class="text-[10px] text-gray-400">Data science suite</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCESS CENTRAL CARDS -->
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+        <div class="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-xs" data-icon="fa6-solid:id-badge"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800">Access Central &mdash; Roles &amp; Entitlements</p>
+            <p class="text-xs text-gray-400">These are separate from software — request them through Access Central to unlock specific platform access</p>
+          </div>
+        </div>
+        <div class="px-5 py-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- JupyterHub -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-orange-50 border-b border-orange-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-orange-200 shrink-0">
+              <span class="iconify text-[#F37626] text-sm" data-icon="simple-icons:jupyter"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-gray-800">JupyterHub</p>
+              <p class="text-[10px] text-gray-500">Cloud-based notebook access</p>
+            </div>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Data_Science_User</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">CNC_JupyterHub_Prod_AWS</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">CNC_JupyterHub_AWS_Users</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">CNC_JupyterHub_NonProd_AWS</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-orange-50 border-t border-orange-100">
+            <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-orange-700 leading-relaxed">Run Python notebooks in the cloud without local installation &mdash; ideal for data analysis and team collaboration.</p>
+          </div>
+        </div>
+
+        <!-- GitLab -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-purple-50 border-b border-purple-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-purple-200 shrink-0">
+              <span class="iconify text-[#FC6D26] text-sm" data-icon="simple-icons:gitlab"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-gray-800">GitLab</p>
+              <p class="text-[10px] text-gray-500">Version control &amp; CI/CD</p>
+            </div>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-purple-50/50 border border-purple-100">
+              <span class="iconify text-purple-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Gitlab_Users</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-purple-50 border-t border-purple-100">
+            <span class="iconify text-purple-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-purple-700 leading-relaxed">Store your codebase, manage team repositories, and run automated CI/CD pipelines (cron jobs).</p>
+          </div>
+        </div>
+
+        <!-- Posit Connect -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-blue-50 border-b border-blue-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-blue-200 shrink-0">
+              <span class="iconify text-[#447099] text-sm" data-icon="simple-icons:posit"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-gray-800">Posit Connect</p>
+              <p class="text-[10px] text-gray-500">App deployment &amp; file sharing</p>
+            </div>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-blue-50/50 border border-blue-100">
+              <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">CNC_POSIT_CONNECT_PUBLISHER_DP</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-blue-50/50 border border-blue-100">
+              <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">CNC_POSIT_CONNECT_VIEWER_DP</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-blue-50 border-t border-blue-100">
+            <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-blue-700 leading-relaxed">Deploy Streamlit/Shiny apps and share object store files (Pins: CSV, Parquet) with your team.</p>
+          </div>
+        </div>
+
+        <!-- Databricks -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-green-50 border-b border-green-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-green-200 shrink-0">
+              <span class="iconify text-[#FF3621] text-sm" data-icon="simple-icons:databricks"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-gray-800">Databricks</p>
+              <p class="text-[10px] text-gray-500">Unified data &amp; AI platform</p>
+            </div>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-green-50/50 border border-green-100">
+              <span class="iconify text-green-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:shield-halved"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Databricks_Users</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-green-50 border-t border-green-100">
+            <span class="iconify text-green-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-green-700 leading-relaxed">Access the Databricks lakehouse platform for large-scale data engineering and ML workloads.</p>
+          </div>
+        </div>
+
+      </div><!-- end grid -->
+        </div><!-- end px-5 py-4 -->
+      </div><!-- end Access Central wrapper card -->
+
+      <!-- ACCESS CENTRAL DATABASE CARDS -->
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+        <div class="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-xs" data-icon="fa6-solid:database"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800">Access Central &mdash; Database Access</p>
+            <p class="text-xs text-gray-400">For database access, request it through Access Central &mdash; select whichever databases you need</p>
+          </div>
+        </div>
+        <div class="px-5 py-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            <!-- Oracle DB -->
+            <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div class="flex items-center gap-2.5 px-4 py-3 bg-red-50 border-b border-red-100">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-red-200 shrink-0">
+                  <span class="iconify text-[#F80000] text-sm" data-icon="simple-icons:oracle"></span>
+                </span>
+                <div>
+                  <p class="text-xs font-bold text-gray-800">Oracle DB</p>
+                  <p class="text-[10px] text-gray-500">Production Oracle databases</p>
+                </div>
+              </div>
+              <div class="px-4 py-3 space-y-1.5">
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-red-50/50 border border-red-100">
+                  <span class="iconify text-red-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">HNODW_APP_P</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">ABS Data Warehouse</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-red-50/50 border border-red-100">
+                  <span class="iconify text-red-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">HNBKB_APP_P</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">ABS Broker Data Warehouse</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-red-50/50 border border-red-100">
+                  <span class="iconify text-red-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">PORTICO_APP_P</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Portico Provider database</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-red-50/50 border border-red-100">
+                  <span class="iconify text-red-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">PLM2_APP_P</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">CenProv database</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-red-50/50 border border-red-100">
+                  <span class="iconify text-red-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">MEDCAR6_SB_P</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Amisys Claims database Medicare</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-red-50/50 border border-red-100">
+                  <span class="iconify text-red-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">CACMEX6_SB_P</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Amisys Claims database Marketplace</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 px-4 py-2.5 bg-red-50 border-t border-red-100">
+                <span class="iconify text-red-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-[10px] text-red-700 leading-relaxed">Production Oracle databases for various business applications &mdash; request only the databases relevant to your role.</p>
+              </div>
+            </div>
+
+            <!-- Teradata DB -->
+            <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div class="flex items-center gap-2.5 px-4 py-3 bg-cyan-50 border-b border-cyan-100">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-cyan-200 shrink-0">
+                  <span class="iconify text-[#F37440] text-sm" data-icon="simple-icons:teradata"></span>
+                </span>
+                <div>
+                  <p class="text-xs font-bold text-gray-800">Teradata DB</p>
+                  <p class="text-[10px] text-gray-500">Enterprise data warehouse</p>
+                </div>
+              </div>
+              <div class="px-4 py-3 space-y-1.5">
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-cyan-50/50 border border-cyan-100">
+                  <span class="iconify text-cyan-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">ETL_ACCESS_OWN (EDW)</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Corp. Data Warehouse</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-cyan-50/50 border border-cyan-100">
+                  <span class="iconify text-cyan-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">CAT_ACCESS_OWN (CAT)</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Corp. Analytics Table database</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 px-4 py-2.5 bg-cyan-50 border-t border-cyan-100">
+                <span class="iconify text-cyan-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-[10px] text-cyan-700 leading-relaxed">Enterprise data warehouses for corp-wide and reporting analytics &mdash; request access based on your analysis needs.</p>
+              </div>
+            </div>
+
+            <!-- Snowflake -->
+            <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div class="flex items-center gap-2.5 px-4 py-3 bg-sky-50 border-b border-sky-100">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-sky-200 shrink-0">
+                  <span class="iconify text-[#29B5E8] text-sm" data-icon="simple-icons:snowflake"></span>
+                </span>
+                <div>
+                  <p class="text-xs font-bold text-gray-800">Snowflake</p>
+                  <p class="text-[10px] text-gray-500">Enterprise Data Hub</p>
+                </div>
+              </div>
+              <div class="px-4 py-3 space-y-1.5">
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-sky-50/50 border border-sky-100">
+                  <span class="iconify text-sky-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">Enterprise Data Hub &mdash; [App Name] &mdash; [Role]</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Snowflake data warehouse</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 px-4 py-2.5 bg-sky-50 border-t border-sky-100">
+                <span class="iconify text-sky-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-[10px] text-sky-700 leading-relaxed">Cloud-based data warehouse &mdash; specify the App Name and Role when submitting your request through Access Central.</p>
+              </div>
+            </div>
+
+            <!-- Databricks -->
+            <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div class="flex items-center gap-2.5 px-4 py-3 bg-green-50 border-b border-green-100">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-green-200 shrink-0">
+                  <span class="iconify text-[#FF3621] text-sm" data-icon="simple-icons:databricks"></span>
+                </span>
+                <div>
+                  <p class="text-xs font-bold text-gray-800">Databricks</p>
+                  <p class="text-[10px] text-gray-500">Unified data &amp; AI platform</p>
+                </div>
+              </div>
+              <div class="px-4 py-3 space-y-1.5">
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-green-50/50 border border-green-100">
+                  <span class="iconify text-green-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">CNC_DTBX_[App Name]</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Databricks workspace access</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 px-4 py-2.5 bg-green-50 border-t border-green-100">
+                <span class="iconify text-green-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-[10px] text-green-700 leading-relaxed">Specify the App Name when submitting your request to get access to the relevant Databricks workspace.</p>
+              </div>
+            </div>
+
+            <!-- SQL Server -->
+            <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div class="flex items-center gap-2.5 px-4 py-3 bg-slate-50 border-b border-slate-100">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-slate-200 shrink-0">
+                  <span class="iconify text-[#CC2927] text-sm" data-icon="simple-icons:microsoftsqlserver"></span>
+                </span>
+                <div>
+                  <p class="text-xs font-bold text-gray-800">SQL Server</p>
+                  <p class="text-[10px] text-gray-500">Microsoft SQL Server databases</p>
+                </div>
+              </div>
+              <div class="px-4 py-3 space-y-1.5">
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-slate-50/50 border border-slate-100">
+                  <span class="iconify text-slate-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">ADUT-[Role]</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">ADUT SQL Server instance</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-slate-50/50 border border-slate-100">
+                  <span class="iconify text-slate-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">CALPAR-[Role]</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">CALPAR SQL Server instance</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-slate-50/50 border border-slate-100">
+                  <span class="iconify text-slate-400 shrink-0 text-[10px] mt-1" data-icon="fa6-solid:database"></span>
+                  <div class="min-w-0">
+                    <p class="text-[11px] font-medium text-gray-700 break-words">[AD Group]-[Role]</p>
+                    <p class="text-[10px] text-gray-400 leading-snug">Custom AD group access</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 px-4 py-2.5 bg-slate-50 border-t border-slate-100">
+                <span class="iconify text-slate-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-[10px] text-slate-700 leading-relaxed">Specify the Role and AD Group when submitting your request &mdash; your manager can confirm which groups apply to your work.</p>
+              </div>
+            </div>
+
+          </div><!-- end grid -->
+        </div><!-- end px-5 py-4 -->
+      </div><!-- end Access Central Database wrapper card -->
+
+      <!-- TIP BANNER -->
+      <div class="flex items-start gap-3.5 px-5 py-4 rounded-2xl bg-amber-50 border border-amber-200">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-amber-100 border border-amber-200 shrink-0 mt-0.5">
+          <span class="iconify text-amber-500 text-base" data-icon="fa6-solid:lightbulb"></span>
+        </span>
+        <div>
+          <p class="text-sm font-semibold text-amber-800 mb-0.5">Don't see what you need?</p>
+          <p class="text-xs text-amber-700 leading-relaxed">The lists above cover the most common access requests, but they're not exhaustive. You can search for any role, entitlement, or database directly in <span class="font-semibold">Access Central</span> — just use the search bar to find and request whatever you need.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A quick summary of what you learned</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">Python development requires an interpreter, editor, package manager, and terminal</p>
+    </div>
+  </div>
+</div>
+<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">The Python interpreter is what actually executes your .py files</p>
+    </div>
+  </div>
+</div>
+<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">Editors like VS Code provide syntax highlighting, debugging, and autocompletion</p>
+    </div>
+  </div>
+</div>
+<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">Libraries (installed via pip) extend Python with data analysis, APIs, and more</p>
+    </div>
+  </div>
+</div>
+</div>
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-white">Lesson Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 4 key concepts. Ready for the next lesson?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="next-lesson" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">3</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 3</p>
+          <h3 class="text-base font-bold text-gray-800">How to Install Extensions in VS Code</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-gray-700">What VS Code Extensions Are and Why They Matter</p>
+            </div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:magnifying-glass"></span>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-gray-700">How to Search and Install Extensions from the Marketplace</p>
+            </div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:star"></span>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-gray-700">Recommended Extensions for Python Development</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom nav -->
+<section>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <a href="lesson01_what_is_python.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+      <span class="iconify text-gray-400 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">What is Python?</p>
+      </div>
+    </a>
+    <a href="../../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+      <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
+    </a>
+    <a href="lesson03_how_to_install_extensions_in_vs_code.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">How to Install Extensions in VS Code</p>
+      </div>
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+    </a>
+  </div>
+</section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleToc() {
+    const sidebar = document.querySelector('.lesson-toc-sidebar');
+    const icon = document.getElementById('toc-toggle-icon');
+    const collapsed = sidebar.classList.toggle('toc-collapsed');
+    icon.setAttribute('data-icon', collapsed ? 'fa6-solid:angles-right' : 'fa6-solid:angles-left');
+    if (window.Iconify) Iconify.scan();
+  }
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = [...tocLinks].map(link => document.getElementById(link.getAttribute('href').replace('#', ''))).filter(Boolean);
+  function updateScrollSpy() {
+    let currentId = '';
+    sections.forEach(section => { if (window.scrollY >= section.offsetTop - 120) currentId = section.id; });
+    tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + currentId); });
+  }
+  function updateScrollProgress() {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+  function updateBackToTop() { document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400); }
+  window.addEventListener('scroll', () => { updateScrollSpy(); updateScrollProgress(); updateBackToTop(); });
+
+  function copyCode(btn) {
+    const container = btn.closest('.relative') || btn.parentElement.closest('div');
+    const pre = container ? container.querySelector('pre') : null;
+    const text = pre ? pre.innerText : '';
+    function showFeedback() {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';
+      btn.style.background = 'rgba(34,197,94,0.2)'; btn.style.borderColor = 'rgba(34,197,94,0.5)'; btn.style.color = '#4ade80';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; }, 2000);
+    }
+    function fallbackCopy() {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); showFeedback();
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy); } else { fallbackCopy(); }
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    if (!isOpen && window.Prism) Prism.highlightAllUnder(body);
+  }
+
+  function switchTab(btn, panelId) {
+    const container = btn.closest('.bg-white') || btn.closest('section') || btn.parentElement.closest('div');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById(panelId);
+    if (panel) { panel.classList.add('active'); if (window.Prism) Prism.highlightAllUnder(panel); }
+  }
+
+  const kcColors = [
+    { num: '#CB187D', numShadow: 'rgba(203,24,125,0.25)', activeBg: '#fdf0f7' },
+    { num: '#7c3aed', numShadow: 'rgba(124,58,237,0.25)', activeBg: '#f5f3ff' },
+    { num: '#2563eb', numShadow: 'rgba(37,99,235,0.25)',  activeBg: '#eff6ff' },
+    { num: '#059669', numShadow: 'rgba(5,150,105,0.25)',  activeBg: '#ecfdf5' },
+    { num: '#d97706', numShadow: 'rgba(217,119,6,0.25)',  activeBg: '#fffbeb' },
+    { num: '#0891b2', numShadow: 'rgba(8,145,178,0.25)',  activeBg: '#ecfeff' }
+  ];
+  function switchKcTab(idx) {
+    const c = kcColors[idx % kcColors.length];
+    const tabs = document.querySelectorAll('.kc-tab');
+    const panels = document.querySelectorAll('.kc-panel');
+    const indicator = document.querySelector('.kc-indicator');
+    tabs.forEach((t, i) => {
+      const num = t.querySelector('.kc-tab-num');
+      const label = t.querySelector('.kc-tab-label');
+      if (i === idx) {
+        t.classList.add('kc-tab-active'); t.style.background = c.activeBg;
+        if (num) { num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
+        if (label) { label.style.color = '#111827'; }
+      } else {
+        t.classList.remove('kc-tab-active'); t.style.background = '';
+        if (num) { num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
+        if (label) { label.style.color = '#9ca3af'; }
+      }
+    });
+    if (indicator && tabs[idx]) { indicator.style.top = tabs[idx].offsetTop + 'px'; indicator.style.height = tabs[idx].offsetHeight + 'px'; indicator.style.background = c.num; }
+    panels.forEach((p, i) => { if (i === idx) { p.classList.remove('hidden'); p.classList.remove('kc-panel-anim'); void p.offsetWidth; p.classList.add('kc-panel-anim'); } else { p.classList.add('hidden'); } });
+    const visible = panels[idx]; if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+
+  function _switchDarkPills(prefix, idx) {
+    document.querySelectorAll('.' + prefix + '-step').forEach((s, i) => {
+      if (i === idx) {
+        s.classList.add(prefix + '-step-active');
+        s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)'; s.style.color = '#fff';
+        s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
+      } else {
+        s.classList.remove(prefix + '-step-active');
+        s.style.background = '#1f2937'; s.style.color = '#9ca3af'; s.style.boxShadow = 'none';
+      }
+    });
+    document.querySelectorAll('.' + prefix + '-panel').forEach((p, i) => {
+      if (i === idx) { p.classList.remove('hidden'); p.classList.remove(prefix + '-panel-anim'); void p.offsetWidth; p.classList.add(prefix + '-panel-anim'); }
+      else { p.classList.add('hidden'); }
+    });
+    const visible = document.querySelectorAll('.' + prefix + '-panel:not(.hidden)')[0];
+    if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+  function switchCeTab(idx) { _switchDarkPills('ce', idx); }
+  function switchMkTab(idx) { _switchDarkPills('mk', idx); }
+  function switchPeTab(idx) { _switchDarkPills('pe', idx); }
+  function switchQzTab(idx) { _switchDarkPills('qz', idx); }
+
+  function checkQuiz(btn, answer) {
+    const question = btn.closest('.quiz-question');
+    const feedback = question.querySelector('.quiz-feedback');
+    const buttons = question.querySelectorAll('.quiz-btn');
+    buttons.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
+    if (answer === true) {
+      btn.classList.add('correct'); btn.style.opacity = '1';
+      feedback.textContent = '\u2713 Correct! Well done.';
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-green-600';
+    } else {
+      btn.classList.add('incorrect'); btn.style.opacity = '1';
+      feedback.textContent = '\u2717 Not quite \u2014 review the recap section above for a hint.';
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-red-500';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => { if (window.Prism) Prism.highlightAll(); });
+</script>
+
+</body>
+</html>

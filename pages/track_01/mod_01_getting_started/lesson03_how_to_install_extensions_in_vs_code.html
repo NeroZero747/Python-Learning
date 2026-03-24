@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 &mdash; How to Install Extensions in VS Code | Python Learning Hub</title>
+  <meta name="description" content="Learn How to Install Extensions in VS Code in Python. Part of the Getting Started module in the Python Learning Hub.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+  <style>
+    * { scroll-behavior: smooth; }
+    pre[class*="language-"] { border-radius: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
+    code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
+    body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #1f2937; line-height: 1.6; margin: 0; padding: 0; }
+    h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
+    h2 { font-size: 1.25rem; font-weight: 700; }
+    h3 { font-size: 1rem; font-weight: 600; }
+    .text-brand { color: #CB187D; }
+    .text-brand-dark { color: #7F004C; }
+    .bg-brand { background: #CB187D; }
+    .bg-brand-soft { background: #fdf0f7; }
+    .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+    .bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
+    .bg-code { background: #1e1e2e; }
+    .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
+    .pre-reset { margin: 0; border-radius: 0; background: transparent; }
+    .kc-tab-active { background: #fdf0f7; }
+    .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+    .kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
+    .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
+    .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+    .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+    .accordion-body { display: none !important; }
+    .accordion-body.open { display: block !important; }
+    .accordion-toggle { display: flex !important; align-items: center !important; gap: 8px !important; width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important; font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important; border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important; color: #7F004C !important; line-height: 1.2 !important; text-decoration: none !important; transition: background 0.15s, border-color 0.15s !important; }
+    .accordion-toggle:hover { background: #f9d9ee !important; border-color: #CB187D !important; }
+    .accordion-toggle.open { background: #fdf0f7 !important; border-color: #CB187D !important; border-style: solid !important; }
+    .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
+    .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
+    .hero-container { position: relative; border-radius: 1.25rem; overflow: hidden; min-height: 380px; background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%); }
+    .hero-dots { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px); background-size: 24px 24px; }
+    .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255, 255, 255, 0.12); }
+    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127, 0, 76, 0.35); }
+    .hero-glow-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%); opacity: 0.7; }
+    .hero-pill { background: #ffffff; border: none; color: #7F004C; font-weight: 700; transition: transform 0.2s ease; }
+    .hero-pill:hover { transform: translateY(-1px); }
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D); background-size: 200% 100%; animation: scrollGradient 3s linear infinite; z-index: 9999; transition: width 0.15s; }
+    @keyframes scrollGradient { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+    .lesson-layout { display: flex; gap: 1.75rem; align-items: flex-start; }
+    .lesson-toc-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem); overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease; }
+    .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
+    .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-module-list { display: none; }
+    .toc-toggle-btn { background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D; display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border-radius: 6px; transition: background 0.15s; }
+    .toc-toggle-btn:hover { background: #fdf0f7; }
+    .toc-link { transition: color 0.15s, padding-left 0.15s; }
+    .toc-link:hover { color: #CB187D; padding-left: 4px; }
+    .toc-link.active { color: #CB187D; font-weight: 600; border-left: 3px solid #CB187D; padding-left: 8px; }
+    .obj-card { transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
+    .obj-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px -6px rgba(203, 24, 125, 0.18), 0 6px 12px -2px rgba(203, 24, 125, 0.1); border-color: #CB187D; }
+    .obj-card-kt:hover { box-shadow: none; }
+    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; }
+    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; }
+    .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+    .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+    .obj-card:hover .obj-icon .iconify { color: white !important; }
+    .tab-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff; line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s; }
+    .tab-btn:hover { color: #CB187D; border-color: #CB187D; background: #fdf0f7; }
+    .tab-btn.active { color: #fff; background: #CB187D; border-color: #CB187D; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .copy-btn { position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center; background: rgba(203, 24, 125, 0.15); border: 1px solid rgba(203, 24, 125, 0.3); color: #CB187D; border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .copy-btn:hover { background: rgba(203, 24, 125, 0.3); }
+    .copy-btn-light { position: static; color: #fff; border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.1); }
+    .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2); }
+    .lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: #CB187D; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(203, 24, 125, 0.3); cursor: pointer; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none; }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #7F004C; }
+    .mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08); }
+    .flow-stepper .flow-step { transition: transform 0.15s ease; }
+    .flow-stepper .flow-step:hover { transform: translateX(4px); }
+    .recap-item { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .recap-item:hover { transform: translateX(4px); box-shadow: -4px 0 0 0 #10b981; }
+    .overview-card { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+    .overview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.12); border-color: rgba(203, 24, 125, 0.3); }
+    @media (max-width: 767px) { .lesson-toc-sidebar { display: none; } .lesson-layout { display: block; } #lesson-nav { display: block; } .hero-container { min-height: auto; } .hero-split { flex-direction: column !important; } .hero-abstract-card { margin-top: 1.5rem; } }
+    @media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; } .obj-card:hover { transform: none; box-shadow: none; } }
+    .iconify { vertical-align: middle; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div class="bg-gray-50 min-h-screen">
+
+  <!-- HERO -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+    <section class="hero-container">
+      <div class="hero-dots"></div>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-glow-line"></div>
+      <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+        <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:rocket"></span> Module 1
+              </span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="inline-flex items-center gap-1"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span></span> Beginner
+              </span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 5 min read
+              </span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 03</p>
+            <h1 class="hero-title-main text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">How to Install Extensions in VS Code</h1>
+            <p class="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-lg">Learn which VS Code extensions are essential for Python, how to install them, and how they transform a plain text editor into a full development environment.</p>
+            <div class="flex items-center gap-4 mb-5 text-sm">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                  <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+                </span>
+                <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+              </div>
+              <span class="text-white/30">|</span>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                  <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+                </span>
+                <span class="text-white/85 font-medium text-xs">March 21, 2026</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span><span class="font-extrabold">4</span><span class="font-semibold opacity-55">Goals</span></a>
+              <a href="#install-guide" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:list-ol" style="opacity:0.5;"></span><span class="font-extrabold">3</span><span class="font-semibold opacity-55">Steps</span></a>
+              <a href="#install-guide" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:puzzle-piece" style="opacity:0.5;"></span><span class="font-extrabold">4</span><span class="font-semibold opacity-55">Extensions</span></a>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
+                <span class="font-extrabold">3<span class="font-bold opacity-50">/6</span></span>
+                <span class="font-semibold opacity-55">Progress</span>
+              </span>
+            </div>
+          </div>
+          <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+            <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+              <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+  <defs>
+    <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+    <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+    <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+    <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+  </defs>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+  <g clip-path="url(#hexClip)" opacity="1">
+    <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+    <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+    <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+    <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+    <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+    <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+    <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
+    <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+    <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+    <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+  </g>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+  <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+  <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+  <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+  <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+  <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+  <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+  <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
+</svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+    <div class="lesson-layout">
+      <aside class="lesson-toc-sidebar">
+        <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+          <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+            <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+            <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+              <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+            </button>
+          </div>
+          <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+            <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective
+</a>
+<a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview
+</a>
+<a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:layer-group"></span> Key Takeaways
+</a>
+<a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
+</a>
+<a href="#install-guide" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:puzzle-piece"></span> Extension Guide
+</a>
+<a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap
+</a>
+<a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson
+</a>
+
+          </nav>
+          <div class="toc-module-list px-3 py-3">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+            <div class="space-y-1"><a href="lesson01_what_is_python.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">1. What is Python?</span>
+</a>
+<a href="lesson02_how_to_request_access_software.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">2. How to Request Access &amp; Software</span>
+</a>
+<a href="lesson03_how_to_install_extensions_in_vs_code.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span>
+  <span class="truncate">3. How to Install Extensions in VS Code</span>
+</a>
+<a href="lesson04_how_to_setup_a_virtual_environment.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">4. How to Setup a Virtual Environment</span>
+</a>
+<a href="lesson05_how_to_install_libraries_in_a_virtual_environment.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">5. How to Install Libraries in a Virtual Environment</span>
+</a>
+<a href="lesson06_how_to_run_a_python_notebook_or_script.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">6. How to Run a Python Notebook or Script</span>
+</a>
+</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="min-w-0 flex-1 space-y-10">
+        <section id="objective">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:puzzle-piece"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Understand What VS Code Extensions Are</p>
+    <p class="text-xs text-gray-500 mt-0.5">Small software packages that add features to the editor</p>
+  </div>
+</div>
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:wand-magic-sparkles"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">See How Extensions Improve Python Development</p>
+    <p class="text-xs text-gray-500 mt-0.5">Syntax highlighting, IntelliSense, debugging, and notebook support</p>
+  </div>
+</div>
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:star"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Know Which Extensions to Install First</p>
+    <p class="text-xs text-gray-500 mt-0.5">Python, Pylance, Jupyter, and Black Formatter — the essential four</p>
+  </div>
+</div>
+<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:download"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Install and Manage Extensions in VS Code</p>
+    <p class="text-xs text-gray-500 mt-0.5">Use the Extensions panel or the command palette to find and install</p>
+  </div>
+</div>
+</div>
+      <div class="mt-5"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">By the end of this lesson, you will have a fully configured VS Code environment ready for Python development — with the right extensions in place from day one.</p>
+</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <!-- Hook quote -->
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Ext</span>
+        <div class="relative flex items-start gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">VS Code is a plain text editor out of the box &mdash; but with the right extensions installed, it becomes a <strong>full Python development environment</strong> that catches your mistakes before you even run your code.</p>
+        </div>
+      </div>
+
+      <!-- What extensions are + analogy -->
+      <div>
+        <p class="text-sm text-gray-600 leading-relaxed mb-4">VS Code bare is like a word processor with no spell-check &mdash; you can type, but it won&rsquo;t tell you when you&rsquo;ve made a mistake. Extensions add the smarts: error highlighting, auto-complete, debugging, and formatting, all in one place. Here are the four you need for Python:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-brands:python"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Python (by Microsoft)</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The engine &mdash; makes Python development work</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Run scripts, debug code, and get IntelliSense completions. Without this, VS Code doesn&rsquo;t understand Python at all.</p>
+          </div>
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:magnifying-glass-chart"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Pylance</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The analyst &mdash; catches issues as you type</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Advanced type-checking, faster code analysis, and rich auto-complete suggestions that understand your entire codebase.</p>
+          </div>
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="simple-icons:jupyter"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Jupyter</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The notebook &mdash; run code cell by cell</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Open and run <code class="font-mono">.ipynb</code> notebook files directly in VS Code &mdash; essential for data analysis and exploration workflows.</p>
+          </div>
+          <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2.5">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:paintbrush"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800 leading-tight">Black Formatter</p>
+                <p class="text-[10px] text-gray-400 italic leading-tight">The cleaner &mdash; formats your code automatically</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Auto-formats your Python code to the Black style standard on every save &mdash; consistent, readable code with zero effort.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Together summary -->
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-5 py-4">
+        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">With these four extensions, VS Code gives you:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:highlighter"></span> Syntax highlighting</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:bolt"></span> IntelliSense completions</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:bug"></span> Step-through debugger</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:book"></span> Notebook support</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-gray-200 text-gray-600"><span class="iconify text-brand text-[10px]" data-icon="fa6-solid:paintbrush"></span> Auto-formatting</span>
+        </div>
+      </div>
+
+      <!-- Closing note -->
+      <p class="text-sm text-gray-600 leading-relaxed">Extensions are free, installed in seconds through the VS Code Extensions panel, and can be enabled or disabled at any time. You don&rsquo;t need to install hundreds &mdash; start with these four and your environment is production-ready.</p>
+
+    </div>
+  </div>
+</section>
+
+<section id="key-ideas">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-4">
+<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">VS Code Is Extensible by Design</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">VS Code ships as a lightweight text editor. Extensions are what give it language-specific capabilities &mdash; without any extensions, it has no idea what Python even is.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Syntax highlighting</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Code completion</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Debugger</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Auto-formatting</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-brands:python"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">The Python Extension Is Non-Negotiable</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">The <strong>Python extension by Microsoft</strong> is the single most important extension. Without it, you cannot run Python scripts, use the debugger, or get code suggestions in VS Code.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Run Python scripts</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Debugger support</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Code suggestions</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Install it first</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:star"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Start with the Essential Four</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">You don&rsquo;t need hundreds of extensions &mdash; just four get you fully productive for Python development. Install more later as your workflow demands.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Python</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Pylance</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Jupyter</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Black Formatter</span>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="key-concepts">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
+  </div>
+</div>
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+          <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">What is an Extension?</span>
+</button>
+<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Python Extension</span>
+</button>
+<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Pylance</span>
+</button>
+
+        </div>
+        <div class="flex-1 min-w-0 md:pl-5">
+          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
+  <div class="rounded-2xl border border-pink-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
+      <div class="mb-3">
+        <h3 class="text-sm font-bold text-gray-900 leading-tight">What is an Extension?</h3>
+        <span class="text-[10px] font-bold text-[#CB187D] uppercase tracking-widest">Definition</span>
+      </div>
+      <div class="space-y-3 mb-4">
+        <p class="text-xs text-gray-600 leading-relaxed">A VS Code <strong>extension</strong> is a small software package that adds new features to the editor. Extensions are installed from the VS Code Marketplace &mdash; for free &mdash; and activate automatically based on the file type you open.</p>
+        <p class="text-xs text-gray-600 leading-relaxed">Without extensions, VS Code is just a text editor. With them, it becomes a full IDE. The extensions below are the ones every Python developer installs:</p>
+      </div>
+      <div class="space-y-2">
+        <div class="overflow-x-auto rounded-xl border border-gray-100">
+          <table class="w-full text-xs">
+            <thead>
+              <tr class="bg-gray-50 border-b border-gray-100">
+                <th class="px-3 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">Extension</th>
+                <th class="px-3 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">Purpose</th>
+                <th class="px-3 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-gray-100 hover:bg-pink-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">Python</td>
+                <td class="px-3 py-2.5 text-gray-500">Run, debug, IntelliSense</td>
+                <td class="px-3 py-2.5"><span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">Required</span></td>
+              </tr>
+              <tr class="border-t border-gray-100 hover:bg-pink-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">Pylance</td>
+                <td class="px-3 py-2.5 text-gray-500">Type checking &amp; analysis</td>
+                <td class="px-3 py-2.5"><span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">Required</span></td>
+              </tr>
+              <tr class="border-t border-gray-100 hover:bg-pink-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">Jupyter</td>
+                <td class="px-3 py-2.5 text-gray-500">Notebook support</td>
+                <td class="px-3 py-2.5"><span class="text-[9px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-1.5 py-0.5 rounded-full">Recommended</span></td>
+              </tr>
+              <tr class="border-t border-gray-100 hover:bg-pink-50/40">
+                <td class="px-3 py-2.5 font-semibold text-gray-700">Black Formatter</td>
+                <td class="px-3 py-2.5 text-gray-500">Auto-format on save</td>
+                <td class="px-3 py-2.5"><span class="text-[9px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-1.5 py-0.5 rounded-full">Recommended</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-start gap-2.5 rounded-lg bg-pink-50 border border-pink-100 px-3 py-2.5">
+          <span class="iconify text-[#CB187D] text-xs shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+          <p class="text-[11px] text-[#7F004C] leading-relaxed">Open the Extensions panel with <code class="font-mono">Ctrl + Shift + X</code> (Windows) or <code class="font-mono">Cmd + Shift + X</code> (Mac), then search for each extension by name.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+  <div class="rounded-2xl border border-violet-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
+      <div class="mb-3">
+        <h3 class="text-sm font-bold text-gray-900 leading-tight">Python Extension (by Microsoft)</h3>
+        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
+      </div>
+      <div class="space-y-3 mb-4">
+        <p class="text-xs text-gray-600 leading-relaxed">The <strong>Python extension</strong> (published by Microsoft) is the core extension for Python development in VS Code. It connects VS Code to whichever Python interpreter is installed on your machine and enables the full development workflow.</p>
+        <p class="text-xs text-gray-600 leading-relaxed">When you open a <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">.py</code> file, the Python extension activates automatically and unlocks:</p>
+      </div>
+      <div class="space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+          <div class="flex items-center gap-2 rounded-lg bg-white border border-violet-100 px-3 py-2.5">
+            <span class="iconify text-violet-500 text-xs shrink-0" data-icon="fa6-solid:play"></span>
+            <span class="text-xs text-gray-600">Run Python scripts</span>
+          </div>
+          <div class="flex items-center gap-2 rounded-lg bg-white border border-violet-100 px-3 py-2.5">
+            <span class="iconify text-violet-500 text-xs shrink-0" data-icon="fa6-solid:bug"></span>
+            <span class="text-xs text-gray-600">Step-through debugger</span>
+          </div>
+          <div class="flex items-center gap-2 rounded-lg bg-white border border-violet-100 px-3 py-2.5">
+            <span class="iconify text-violet-500 text-xs shrink-0" data-icon="fa6-solid:bolt"></span>
+            <span class="text-xs text-gray-600">IntelliSense completions</span>
+          </div>
+          <div class="flex items-center gap-2 rounded-lg bg-white border border-violet-100 px-3 py-2.5">
+            <span class="iconify text-violet-500 text-xs shrink-0" data-icon="fa6-solid:gear"></span>
+            <span class="text-xs text-gray-600">Interpreter selection</span>
+          </div>
+          <div class="flex items-center gap-2 rounded-lg bg-white border border-violet-100 px-3 py-2.5 col-span-2">
+            <span class="iconify text-violet-500 text-xs shrink-0" data-icon="simple-icons:jupyter"></span>
+            <span class="text-xs text-gray-600">Jupyter Notebook integration</span>
+          </div>
+        </div>
+        <div class="flex items-start gap-2.5 rounded-lg bg-violet-50 border border-violet-100 px-3 py-2.5">
+          <span class="iconify text-violet-500 text-xs shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+          <p class="text-[11px] text-violet-700 leading-relaxed"><strong>Always install the one by Microsoft</strong> &mdash; search for "Python" in the Extensions panel and look for the publisher badge that says "Microsoft".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+  <div class="rounded-2xl border border-blue-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
+      <div class="mb-3">
+        <h3 class="text-sm font-bold text-gray-900 leading-tight">Pylance</h3>
+        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
+      </div>
+      <div class="space-y-3 mb-4">
+        <p class="text-xs text-gray-600 leading-relaxed"><strong>Pylance</strong> is a language server for Python that works alongside the Python extension. It gives VS Code a deeper understanding of your code &mdash; not just whether it runs, but whether it&rsquo;s <em>correct</em>.</p>
+        <p class="text-xs text-gray-600 leading-relaxed">Here&rsquo;s what Pylance catches that the basic Python extension misses:</p>
+      </div>
+      <div class="space-y-2">
+        <div class="rounded-xl overflow-hidden bg-code">
+          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+            <div class="flex items-center gap-2">
+              <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+              <span class="text-[11px] font-semibold text-gray-400">script.py &mdash; Pylance catches this error before you run</span>
+            </div>
+          </div>
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">def greet(name: str) -> str:
+    return "Hello, " + name
+
+result = greet(42)   # Pylance: Argument of type "int"
+                     # is not assignable to parameter "str"</code></pre>
+        </div>
+        <div class="flex items-start gap-2.5 rounded-lg bg-blue-50 border border-blue-100 px-3 py-2.5">
+          <span class="iconify text-blue-500 text-xs shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+          <p class="text-[11px] text-blue-700 leading-relaxed">Pylance is usually installed automatically with the Python extension, but you can also install it separately. Set <code class="font-mono">python.analysis.typeCheckingMode</code> to <code class="font-mono">"basic"</code> or <code class="font-mono">"strict"</code> in settings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install-guide">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:puzzle-piece"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Extension Guide</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How to install each extension and what it does</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <!-- How to install intro card -->
+      <div class="rounded-2xl overflow-hidden border border-[#f5c6e0]">
+        <div class="bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5 flex items-center gap-5">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-2xl" data-icon="fa6-solid:download"></span>
+          </span>
+          <div>
+            <p class="text-base font-bold text-white leading-tight">Installing extensions takes less than a minute each.</p>
+            <p class="text-xs text-white/75 mt-1">Open the Extensions panel with <code class="font-mono bg-white/10 px-1 rounded">Ctrl + Shift + X</code> and search by name.</p>
+          </div>
+        </div>
+        <div class="bg-[#fdf0f7] px-6 py-3 flex items-center gap-2">
+          <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-xs text-[#7F004C]">Always verify the publisher name before installing &mdash; look for <strong>Microsoft</strong> on the Python and Pylance extensions.</p>
+        </div>
+      </div>
+
+      <!-- Step-by-step installation guide -->
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+        <div class="flex items-center gap-3 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-xs" data-icon="fa6-solid:list-ol"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800">How to Install an Extension</p>
+            <p class="text-xs text-gray-400">A 3-step process that works for any extension</p>
+          </div>
+        </div>
+        <div class="px-5 py-5 space-y-0">
+          <!-- Step 1 -->
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center shrink-0">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#CB187D] to-[#e84aad] flex items-center justify-center text-white text-xs font-bold shadow-md">1</div>
+              <div class="flex-1 w-px bg-gray-200 mt-2"></div>
+            </div>
+            <div class="flex-1 pb-6">
+              <p class="text-sm font-bold text-gray-800 mb-1">Open the Extensions panel</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Press <code class="font-mono text-[11px] bg-gray-100 px-1.5 py-0.5 rounded">Ctrl + Shift + X</code> (Windows) or <code class="font-mono text-[11px] bg-gray-100 px-1.5 py-0.5 rounded">Cmd + Shift + X</code> (Mac), or click the blocks icon in the left sidebar.</p>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center shrink-0">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#CB187D] to-[#e84aad] flex items-center justify-center text-white text-xs font-bold shadow-md">2</div>
+              <div class="flex-1 w-px bg-gray-200 mt-2"></div>
+            </div>
+            <div class="flex-1 pb-6">
+              <p class="text-sm font-bold text-gray-800 mb-1">Search for the extension by name</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Type the extension name in the search box. Check that the publisher matches (e.g., <strong>Microsoft</strong> for Python and Pylance).</p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center shrink-0">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#CB187D] to-[#e84aad] flex items-center justify-center text-white text-xs font-bold shadow-md">3</div>
+            </div>
+            <div class="flex-1 pb-2">
+              <p class="text-sm font-bold text-gray-800 mb-1">Click Install, then Reload if prompted</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Some extensions need VS Code to reload before activating. Click <strong>Reload Window</strong> if the prompt appears.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extension cards grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Python -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-blue-50 border-b border-blue-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-blue-200 shrink-0">
+              <span class="iconify text-[#3776AB] text-sm" data-icon="fa6-brands:python"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs font-bold text-gray-800">Python</p>
+              <p class="text-[10px] text-gray-500">Publisher: Microsoft</p>
+            </div>
+            <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full shrink-0">Required</span>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-blue-50/50 border border-blue-100">
+              <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Run and debug Python scripts from VS Code</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-blue-50/50 border border-blue-100">
+              <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Select interpreter / virtual environment</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-blue-50/50 border border-blue-100">
+              <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">IntelliSense code suggestions</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-blue-50 border-t border-blue-100">
+            <span class="iconify text-blue-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-blue-700 leading-relaxed">Install this first — all other Python tools in VS Code depend on it.</p>
+          </div>
+        </div>
+
+        <!-- Pylance -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-violet-50 border-b border-violet-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-violet-200 shrink-0">
+              <span class="iconify text-violet-600 text-sm" data-icon="fa6-solid:magnifying-glass-chart"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs font-bold text-gray-800">Pylance</p>
+              <p class="text-[10px] text-gray-500">Publisher: Microsoft</p>
+            </div>
+            <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full shrink-0">Required</span>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-violet-50/50 border border-violet-100">
+              <span class="iconify text-violet-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Type checking — catch bugs before running</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-violet-50/50 border border-violet-100">
+              <span class="iconify text-violet-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Rich code analysis and hints</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-violet-50/50 border border-violet-100">
+              <span class="iconify text-violet-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Faster, smarter auto-complete</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-violet-50 border-t border-violet-100">
+            <span class="iconify text-violet-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-violet-700 leading-relaxed">Often installed automatically with the Python extension — check your installed list first.</p>
+          </div>
+        </div>
+
+        <!-- Jupyter -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-orange-50 border-b border-orange-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-orange-200 shrink-0">
+              <span class="iconify text-[#F37626] text-sm" data-icon="simple-icons:jupyter"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs font-bold text-gray-800">Jupyter</p>
+              <p class="text-[10px] text-gray-500">Publisher: Microsoft</p>
+            </div>
+            <span class="text-[9px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-1.5 py-0.5 rounded-full shrink-0">Recommended</span>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Open and run <code class="font-mono">.ipynb</code> notebooks in VS Code</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Run code cell by cell interactively</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-orange-50/50 border border-orange-100">
+              <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">View charts and dataframes inline</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-orange-50 border-t border-orange-100">
+            <span class="iconify text-orange-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-orange-700 leading-relaxed">Essential for data analysis — use this instead of launching JupyterLab separately.</p>
+          </div>
+        </div>
+
+        <!-- Black Formatter -->
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-2.5 px-4 py-3 bg-gray-50 border-b border-gray-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-gray-200 shrink-0">
+              <span class="iconify text-gray-600 text-sm" data-icon="fa6-solid:paintbrush"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs font-bold text-gray-800">Black Formatter</p>
+              <p class="text-[10px] text-gray-500">Publisher: Microsoft</p>
+            </div>
+            <span class="text-[9px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-1.5 py-0.5 rounded-full shrink-0">Recommended</span>
+          </div>
+          <div class="px-4 py-3 space-y-1.5">
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-gray-50/80 border border-gray-100">
+              <span class="iconify text-gray-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Auto-formats Python code on every save</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-gray-50/80 border border-gray-100">
+              <span class="iconify text-gray-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Enforces the Black code style standard</span>
+            </div>
+            <div class="flex items-start gap-2 py-1.5 px-3 rounded-lg bg-gray-50/80 border border-gray-100">
+              <span class="iconify text-gray-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:check"></span>
+              <span class="text-[11px] font-medium text-gray-700 min-w-0 break-words">Eliminates formatting debates in team code reviews</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 px-4 py-2.5 bg-gray-50 border-t border-gray-100">
+            <span class="iconify text-gray-400 shrink-0 text-[10px] mt-0.5" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-[10px] text-gray-600 leading-relaxed">Enable "Format on Save" in VS Code settings to get auto-formatting every time you hit Ctrl+S.</p>
+          </div>
+        </div>
+
+      </div><!-- end grid -->
+
+      <!-- Optional Extensions -->
+      <div class="rounded-2xl border border-dashed border-gray-200 overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center justify-between gap-4 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gray-100 shrink-0">
+              <span class="iconify text-gray-500 text-xs" data-icon="fa6-solid:wand-magic-sparkles"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-bold text-gray-800">Optional Extensions</p>
+              <p class="text-xs text-gray-400">Expand your setup as your workflow grows &mdash; none required to get started</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full shrink-0">23 extensions</span>
+        </div>
+        <!-- Body -->
+        <div class="px-5 py-5 bg-white space-y-5">
+
+          <!-- Code Quality -->
+          <div>
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+              <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Code Quality</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-emerald-100 bg-emerald-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Ruff</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Blazing-fast Python linter and formatter &mdash; replaces Flake8, isort, and more in one tool</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-emerald-100 bg-emerald-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">autoDocstring</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Auto-generates formatted docstrings for Python functions and methods on a single keypress</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-emerald-100 bg-emerald-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Prettier &mdash; Code formatter</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Opinionated formatter for HTML, JSON, YAML, Markdown, and web files</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-emerald-100 bg-emerald-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Prettier SQL VS Code</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Formats SQL files with consistent style using the Prettier engine</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-emerald-100 bg-emerald-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">dbt formatter</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Applies consistent SQL formatting to dbt model files across your project</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Readability & Navigation -->
+          <div>
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="w-2 h-2 rounded-full bg-violet-400 shrink-0"></span>
+              <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Readability &amp; Navigation</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Better Comments</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Color-codes comments by type &mdash; alerts, questions, TODOs, and strikethroughs</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Better Folding</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Enhanced code folding with custom region support and improved fold indicators</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Color Highlight</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Previews hex and RGB color values inline so you see the actual color in code</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Comment Anchors</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Tag comments with ANCHOR, TODO, FIXME, and jump between them instantly</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Comment Headers</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Insert styled section divider comments to organize large files at a glance</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">indent-rainbow</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Colorizes each indentation level so nesting depth is visible at a glance</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-violet-100 bg-violet-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">TODO Highlights</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Highlights TODO, FIXME, and custom keywords with configurable colors</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Git -->
+          <div>
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+              <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Git</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-amber-100 bg-amber-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Git Graph</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Visualizes your repository&rsquo;s branch history as an interactive, clickable graph</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-amber-100 bg-amber-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Git History</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Browse file and commit history, diff commits, and compare branches side by side</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-amber-100 bg-amber-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">gitignore</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Generate .gitignore files from curated templates for popular languages and frameworks</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data & Files -->
+          <div>
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+              <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Data &amp; Files</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-blue-100 bg-blue-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Excel Viewer</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Preview .xlsx and .csv files in a spreadsheet-style tab &mdash; no Excel needed</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-blue-100 bg-blue-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Rainbow CSV</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Highlights each CSV and TSV column in a distinct color for easy visual parsing</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-blue-100 bg-blue-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">json</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Enhanced JSON support with schema-based validation and smart auto-complete</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-blue-100 bg-blue-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">parquet-viewer</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Inspect Parquet files as a tabular view right in VS Code &mdash; no Python script needed</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-blue-100 bg-blue-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Jupyter</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Run .ipynb notebooks and interactive Python cells directly inside VS Code</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Productivity -->
+          <div>
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="w-2 h-2 rounded-full bg-slate-400 shrink-0"></span>
+              <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Productivity</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-slate-100 bg-slate-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Live Preview</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Renders HTML files in an embedded browser panel &mdash; instant feedback without switching tabs</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-slate-100 bg-slate-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Output Colorizer</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Adds syntax coloring to the VS Code output and terminal panels for faster scanning</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 px-3.5 py-2.5 rounded-xl border border-slate-100 bg-slate-50/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0 mt-[5px]"></span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-gray-800">Path Intellisense</p>
+                  <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">Auto-completes file system paths as you type &mdash; works in Python, config files, and more</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- end optional extensions -->
+
+    </div>
+  </div>
+</section>
+
+
+<section id="recap">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A quick summary of what you learned</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">VS Code extensions add new tools and features directly into the editor to improve your workflow</p>
+    </div>
+  </div>
+</div>
+<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">The Python extension enables syntax highlighting, linting, and debugging for Python files in VS Code</p>
+    </div>
+  </div>
+</div>
+<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">Pylance adds advanced code analysis and intelligent auto-completion to help you write Python faster</p>
+    </div>
+  </div>
+</div>
+<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:check"></span>
+      </span>
+      <p class="text-sm text-gray-700 font-medium leading-relaxed">Installing extensions from the Marketplace takes only a few clicks using the Extensions panel in the sidebar</p>
+    </div>
+  </div>
+</div>
+</div>
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-white">Lesson Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 4 key concepts. Ready for the next lesson?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="next-lesson" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">4</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 4</p>
+          <h3 class="text-base font-bold text-gray-800">How to Set Up a Virtual Environment</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:box"></span>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-gray-700">What Virtual Environments Are and Why Projects Need Them</p>
+            </div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:terminal"></span>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-gray-700">How to Create One with python -m venv in the Terminal</p>
+            </div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:power-off"></span>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-gray-700">How to Activate and Deactivate the Environment</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom nav -->
+<section>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <a href="lesson02_how_to_request_access_software.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+      <span class="iconify text-gray-400 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">How to Request Access &amp; Software</p>
+      </div>
+    </a>
+    <a href="../../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+      <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
+    </a>
+    <a href="lesson04_how_to_setup_a_virtual_environment.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">How to Set Up a Virtual Environment</p>
+      </div>
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+    </a>
+  </div>
+</section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleToc() {
+    const sidebar = document.querySelector('.lesson-toc-sidebar');
+    const icon = document.getElementById('toc-toggle-icon');
+    const collapsed = sidebar.classList.toggle('toc-collapsed');
+    icon.setAttribute('data-icon', collapsed ? 'fa6-solid:angles-right' : 'fa6-solid:angles-left');
+    if (window.Iconify) Iconify.scan();
+  }
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = [...tocLinks].map(link => document.getElementById(link.getAttribute('href').replace('#', ''))).filter(Boolean);
+  function updateScrollSpy() {
+    let currentId = '';
+    sections.forEach(section => { if (window.scrollY >= section.offsetTop - 120) currentId = section.id; });
+    tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + currentId); });
+  }
+  function updateScrollProgress() {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+  function updateBackToTop() { document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400); }
+  window.addEventListener('scroll', () => { updateScrollSpy(); updateScrollProgress(); updateBackToTop(); });
+
+  function copyCode(btn) {
+    const container = btn.closest('.relative') || btn.parentElement.closest('div');
+    const pre = container ? container.querySelector('pre') : null;
+    const text = pre ? pre.innerText : '';
+    function showFeedback() {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';
+      btn.style.background = 'rgba(34,197,94,0.2)'; btn.style.borderColor = 'rgba(34,197,94,0.5)'; btn.style.color = '#4ade80';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; }, 2000);
+    }
+    function fallbackCopy() {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); showFeedback();
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy); } else { fallbackCopy(); }
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    if (!isOpen && window.Prism) Prism.highlightAllUnder(body);
+  }
+
+  function switchTab(btn, panelId) {
+    const container = btn.closest('.bg-white') || btn.closest('section') || btn.parentElement.closest('div');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById(panelId);
+    if (panel) { panel.classList.add('active'); if (window.Prism) Prism.highlightAllUnder(panel); }
+  }
+
+  const kcColors = [
+    { num: '#CB187D', numShadow: 'rgba(203,24,125,0.25)', activeBg: '#fdf0f7' },
+    { num: '#7c3aed', numShadow: 'rgba(124,58,237,0.25)', activeBg: '#f5f3ff' },
+    { num: '#2563eb', numShadow: 'rgba(37,99,235,0.25)',  activeBg: '#eff6ff' },
+    { num: '#059669', numShadow: 'rgba(5,150,105,0.25)',  activeBg: '#ecfdf5' },
+    { num: '#d97706', numShadow: 'rgba(217,119,6,0.25)',  activeBg: '#fffbeb' },
+    { num: '#0891b2', numShadow: 'rgba(8,145,178,0.25)',  activeBg: '#ecfeff' }
+  ];
+  function switchKcTab(idx) {
+    const c = kcColors[idx % kcColors.length];
+    const tabs = document.querySelectorAll('.kc-tab');
+    const panels = document.querySelectorAll('.kc-panel');
+    const indicator = document.querySelector('.kc-indicator');
+    tabs.forEach((t, i) => {
+      const num = t.querySelector('.kc-tab-num');
+      const label = t.querySelector('.kc-tab-label');
+      if (i === idx) {
+        t.classList.add('kc-tab-active'); t.style.background = c.activeBg;
+        if (num) { num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
+        if (label) { label.style.color = '#111827'; }
+      } else {
+        t.classList.remove('kc-tab-active'); t.style.background = '';
+        if (num) { num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
+        if (label) { label.style.color = '#9ca3af'; }
+      }
+    });
+    if (indicator && tabs[idx]) { indicator.style.top = tabs[idx].offsetTop + 'px'; indicator.style.height = tabs[idx].offsetHeight + 'px'; indicator.style.background = c.num; }
+    panels.forEach((p, i) => { if (i === idx) { p.classList.remove('hidden'); p.classList.remove('kc-panel-anim'); void p.offsetWidth; p.classList.add('kc-panel-anim'); } else { p.classList.add('hidden'); } });
+    const visible = panels[idx]; if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+
+  function _switchDarkPills(prefix, idx) {
+    document.querySelectorAll('.' + prefix + '-step').forEach((s, i) => {
+      if (i === idx) {
+        s.classList.add(prefix + '-step-active');
+        s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)'; s.style.color = '#fff';
+        s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
+      } else {
+        s.classList.remove(prefix + '-step-active');
+        s.style.background = '#1f2937'; s.style.color = '#9ca3af'; s.style.boxShadow = 'none';
+      }
+    });
+    document.querySelectorAll('.' + prefix + '-panel').forEach((p, i) => {
+      if (i === idx) { p.classList.remove('hidden'); p.classList.remove(prefix + '-panel-anim'); void p.offsetWidth; p.classList.add(prefix + '-panel-anim'); }
+      else { p.classList.add('hidden'); }
+    });
+    const visible = document.querySelectorAll('.' + prefix + '-panel:not(.hidden)')[0];
+    if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+  function switchCeTab(idx) { _switchDarkPills('ce', idx); }
+  function switchMkTab(idx) { _switchDarkPills('mk', idx); }
+  function switchPeTab(idx) { _switchDarkPills('pe', idx); }
+
+  document.addEventListener('DOMContentLoaded', () => { if (window.Prism) Prism.highlightAll(); });
+</script>
+
+</body>
+</html>
