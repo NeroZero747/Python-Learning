@@ -1,0 +1,1003 @@
+<!-- =============================================================
+     Module 1 — Getting Started | Python Learning Hub
+     ============================================================= -->
+
+<!-- ── Fonts ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" />
+
+<!-- ── Tailwind CSS (CDN) ── -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ── Iconify ── -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<style>
+
+  /* ==========================================================================
+     1. GLOBAL RESETS
+     ========================================================================== */
+  * { scroll-behavior: smooth; }
+
+  /* ==========================================================================
+     2. CONFLUENCE CSS ISOLATION
+     ========================================================================== */
+
+  #hub-root,
+  #hub-root * {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+    box-sizing: border-box !important;
+  }
+
+  #hub-root {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #1f2937 !important;
+  }
+
+  /* ── Text colours ── */
+  #hub-root .text-white      { color: #ffffff !important; }
+  #hub-root .text-gray-900   { color: #111827 !important; }
+  #hub-root .text-gray-800   { color: #1f2937 !important; }
+  #hub-root .text-gray-700   { color: #374151 !important; }
+  #hub-root .text-gray-600   { color: #4b5563 !important; }
+  #hub-root .text-gray-500   { color: #6b7280 !important; }
+  #hub-root .text-gray-400   { color: #9ca3af !important; }
+  #hub-root .text-gray-300   { color: #d1d5db !important; }
+
+  /* ── Font weights ── */
+  #hub-root .font-bold       { font-weight: 700 !important; }
+  #hub-root .font-semibold   { font-weight: 600 !important; }
+  #hub-root .font-medium     { font-weight: 500 !important; }
+
+  /* ── Font sizes ── */
+  #hub-root .text-4xl  { font-size: 2.25rem   !important; line-height: 2.5rem    !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem  !important; line-height: 2.25rem   !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem    !important; line-height: 2rem      !important; }
+  #hub-root .text-xl   { font-size: 1.25rem   !important; line-height: 1.75rem   !important; }
+  #hub-root .text-lg   { font-size: 1.125rem  !important; line-height: 1.75rem   !important; }
+  #hub-root .text-base { font-size: 1rem      !important; line-height: 1.5rem    !important; }
+  #hub-root .text-sm   { font-size: 0.875rem  !important; line-height: 1.25rem   !important; }
+  #hub-root .text-xs   { font-size: 0.75rem   !important; line-height: 1rem      !important; }
+
+  /* ── Layout utilities ── */
+  #hub-root .flex             { display: flex !important; }
+  #hub-root .inline-flex      { display: inline-flex !important; }
+  #hub-root .items-center     { align-items: center !important; }
+  #hub-root .items-start      { align-items: flex-start !important; }
+  #hub-root .justify-center   { justify-content: center !important; }
+  #hub-root .justify-between  { justify-content: space-between !important; }
+  #hub-root .shrink-0         { flex-shrink: 0 !important; }
+  #hub-root .min-w-0          { min-width: 0 !important; }
+  #hub-root .gap-1            { gap: 0.25rem !important; }
+  #hub-root .gap-2            { gap: 0.5rem !important; }
+  #hub-root .gap-3            { gap: 0.75rem !important; }
+  #hub-root .gap-4            { gap: 1rem !important; }
+  #hub-root .gap-6            { gap: 1.5rem !important; }
+  #hub-root .gap-8            { gap: 2rem !important; }
+  #hub-root .ml-auto          { margin-left: auto !important; }
+
+  /* ── Headings ── */
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+  }
+  #hub-root h1 { font-size: 1.75rem  !important; font-weight: 700 !important; }
+  #hub-root h2 { font-size: 1.25rem  !important; font-weight: 700 !important; }
+  #hub-root h3 { font-size: 1rem     !important; font-weight: 600 !important; }
+  #hub-root h4 { font-size: 0.875rem !important; font-weight: 600 !important; }
+
+  /* ── Links ── */
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  /* ── Iconify alignment ── */
+  #hub-root .iconify {
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+  #hub-root :not(.block) > .iconify:not(.block) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ==========================================================================
+     3. MODULE HERO
+     ========================================================================== */
+
+  .hero-container {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    min-height: 380px;
+    background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%);
+  }
+  .hero-dots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(70px);
+  }
+  .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255,255,255,0.12); }
+  .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127,0,76,0.35); }
+  .hero-glow-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%);
+    opacity: 0.7;
+  }
+  .hero-pill {
+    background: #ffffff;
+    border: none;
+    color: #CB187D;
+    font-weight: 700;
+    pointer-events: none;
+    cursor: default;
+  }
+  .hero-abstract-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: 0.25rem;
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #CB187D;
+    background: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    text-decoration: none;
+  }
+  .hero-cta:hover { transform: translateY(-2px); filter: brightness(0.96); }
+  .skill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #d1d5db;
+    display: inline-block;
+  }
+  .skill-dot-active { background: #22c55e; }
+  .hero-svg { max-height: 320px; }
+  .hero-py-icon-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+  .hero-py-icon { font-size: 70px; filter: drop-shadow(0 0 14px rgba(255,212,59,0.25)); }
+
+  /* ==========================================================================
+     4. BRAND DESIGN TOKENS
+     ========================================================================== */
+
+  .text-brand      { color: #CB187D; }
+  .text-brand-dark { color: #7F004C; }
+  .bg-brand        { background: #CB187D; }
+  .bg-brand-dark   { background: #7F004C; }
+  .bg-brand-soft   { background: #fdf0f7; }
+  .bg-amber-tip    { background: #fff7ed; border-color: #fed7aa !important; }
+
+  /* ==========================================================================
+     5. STATS BAR
+     ========================================================================== */
+
+  .stats-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    background: #fff;
+    border: 1px solid #f3f4f6;
+  }
+  .stats-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  /* ==========================================================================
+     6. LESSON ACCORDION
+     ========================================================================== */
+
+  .lesson-accordion {
+    border: 1px solid #f3f4f6;
+    border-radius: 1rem;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .lesson-accordion.active {
+    border-color: #CB187D;
+    box-shadow: 0 4px 20px -4px rgba(203, 24, 125, 0.12);
+  }
+  .lesson-accordion:hover:not(.active) {
+    border-color: #e5e7eb;
+  }
+
+  /* Header row (always visible) */
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease;
+  }
+  .accordion-header:hover {
+    background: #fafafa;
+  }
+
+  /* Pink number badge */
+  .lesson-num {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: #CB187D;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  /* Category + Title block */
+  .lesson-info { flex: 1; min-width: 0; }
+  .lesson-category {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .lesson-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.3;
+  }
+
+  /* Difficulty pill */
+  .lesson-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #fdf0f7;
+    color: #CB187D;
+    white-space: nowrap;
+  }
+
+  /* Time estimate */
+  .lesson-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #f9fafb;
+    color: #6b7280;
+    border: 1px solid #f3f4f6;
+    white-space: nowrap;
+  }
+
+  /* Chevron */
+  .accordion-chevron {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background: #f9fafb;
+    color: #9ca3af;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .lesson-accordion.active .accordion-chevron {
+    transform: rotate(180deg);
+    background: #fdf0f7;
+    color: #CB187D;
+  }
+
+  /* Expandable body */
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .lesson-accordion.active .accordion-body {
+    max-height: 500px;
+  }
+  .accordion-body-inner {
+    padding: 0 1.5rem 1.5rem 5rem;
+  }
+
+  /* Goal text */
+  .lesson-goal {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Checklist items */
+  .lesson-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+  }
+  .lesson-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #4b5563;
+    padding: 0.3rem 0;
+  }
+  .lesson-checklist li .iconify {
+    color: #CB187D;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* Start Lesson button */
+  .start-lesson-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    background: #1f2937;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .start-lesson-btn:hover {
+    background: #CB187D;
+    transform: translateY(-1px);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .accordion-header { flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .accordion-body-inner { padding: 0 1rem 1rem 1rem; }
+    .lesson-badge, .lesson-time { font-size: 0.7rem; }
+  }
+
+  /* ==========================================================================
+     7. OBJECTIVES GRID
+     ========================================================================== */
+
+  .obj-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .obj-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.15), 0 4px 8px -2px rgba(203, 24, 125, 0.06);
+    border-color: #CB187D;
+  }
+
+  /* ── Bottom nav hover ── */
+  .lesson-nav-link:hover p,
+  .lesson-nav-link:hover span,
+  .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+  #hub-root .lesson-nav-link:hover p,
+  #hub-root .lesson-nav-link:hover span,
+  #hub-root .lesson-nav-link:hover svg { color: #CB187D !important; transition: color 0.15s !important; }
+
+  /* ==========================================================================
+     8. RESPONSIVE
+     ========================================================================== */
+
+  @media (max-width: 640px) {
+    .hero-content { padding: 1.75rem; }
+    #hub-root .hero-title { font-size: 1.75rem !important; }
+    .stats-grid { grid-template-columns: 1fr !important; }
+  }
+
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ROOT WRAPPER
+     ═══════════════════════════════════════════════════════════ -->
+<div id="hub-root" class="bg-gray-50 font-sans text-gray-800 leading-relaxed">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO BANNER
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-8 pb-0">
+    <section class="hero-container">
+      <!-- Background layers -->
+      <div class="hero-dots"></div>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-glow-line"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+
+          <!-- LEFT COLUMN — Module info -->
+          <div class="flex-1 min-w-0">
+
+            <!-- Badge row -->
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:cubes"></span> Module 1
+              </span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="inline-flex items-center gap-1">
+                  <span class="skill-dot skill-dot-active"></span>
+                  <span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+                Beginner
+              </span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+                <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 45 – 60 min
+              </span>
+            </div>
+
+            <!-- Track label -->
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Track 01 &middot; Module 1</p>
+
+            <!-- Title -->
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-8 leading-[1.15] tracking-tight">Getting Started</h1>
+
+            <!-- Subtitle -->
+            <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-4 max-w-lg">
+              Set up your Python environment and learn the fundamentals — from what Python is and how to install it, to writing and running your first notebook.
+            </p>
+
+            <!-- Author & Date -->
+            <div class="flex items-center gap-4 mb-5 text-sm">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                  <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+                </span>
+                <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+              </div>
+              <span class="text-white/30">|</span>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                  <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+                </span>
+                <span class="text-white/85 font-medium text-xs">March 24, 2026</span>
+              </div>
+            </div>
+
+            <!-- CTA buttons -->
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="lesson01_what_is_python.html" class="hero-cta">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Module
+              </a>
+              <a href="../../../hub_home_page.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
+                <span class="iconify text-[10px]" data-icon="fa6-solid:house"></span> Back to Hub
+              </a>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN — Hex illustration -->
+          <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+            <div class="hero-abstract-card">
+              <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto hero-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/>
+                  </linearGradient>
+                  <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/>
+                  </linearGradient>
+                  <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%">
+                    <stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/>
+                  </radialGradient>
+                  <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/>
+                  </radialGradient>
+                  <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+                </defs>
+                <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+                <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+                <g clip-path="url(#hexClip)" opacity="1">
+                  <g opacity="0.06">
+                    <circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/>
+                    <circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/>
+                    <circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/>
+                    <circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/>
+                  </g>
+                  <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none">
+                    <path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/>
+                    <circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/>
+                  </g>
+                  <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none">
+                    <path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/>
+                    <circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/>
+                  </g>
+                  <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none">
+                    <path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/>
+                    <circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/>
+                  </g>
+                  <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none">
+                    <path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/>
+                    <circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/>
+                  </g>
+                  <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7">
+                    <text x="42" y="145">&gt;&gt;&gt; import pandas</text>
+                    <text x="185" y="92">def main():</text>
+                    <text x="38" y="92">class Data:</text>
+                  </g>
+                  <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7">
+                    <text x="160" y="255">return result</text>
+                    <text x="42" y="260">for i in range:</text>
+                    <text x="175" y="275">print("done")</text>
+                  </g>
+                  <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round">
+                    <polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/>
+                    <polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/>
+                  </g>
+                  <g opacity="0.04" stroke="white" stroke-width="1" fill="none">
+                    <polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/>
+                    <polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/>
+                    <polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/>
+                    <polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/>
+                  </g>
+                  <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4">
+                    <path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/>
+                  </g>
+                  <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4">
+                    <path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/>
+                  </g>
+                  <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+                </g>
+                <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+                <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+                <foreignObject x="95" y="85" width="90" height="90">
+                  <div xmlns="http://www.w3.org/1999/xhtml" class="hero-py-icon-wrap">
+                    <span class="iconify hero-py-icon" data-icon="logos:python"></span>
+                  </div>
+                </foreignObject>
+                <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+                <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+                <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+                <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+                <g opacity="0.5">
+                  <rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/>
+                  <rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/>
+                  <text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-8 pb-10 space-y-8">
+
+    <!-- ── WHAT YOU'LL LEARN ─────────────────────────────────── -->
+    <section id="objectives">
+      <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+        <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+          </span>
+          <div class="min-w-0">
+            <h2 class="text-xl font-bold text-gray-900 leading-tight">What You'll Learn</h2>
+            <p class="text-sm text-gray-400 leading-snug mt-0.5">Key outcomes for this module.</p>
+          </div>
+        </div>
+
+        <div class="bg-white px-8 py-7">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:lightbulb"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">What Python Is</p>
+                <p class="text-xs text-gray-400">Understand the purpose and value of Python</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:download"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Tools &amp; Software</p>
+                <p class="text-xs text-gray-400">Get access to what you need to code</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:puzzle-piece"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">VS Code Extensions</p>
+                <p class="text-xs text-gray-400">Install extensions for Python development</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:folder-tree"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Virtual Environments</p>
+                <p class="text-xs text-gray-400">Create isolated project environments</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:box-open"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Install Libraries</p>
+                <p class="text-xs text-gray-400">Add packages to extend Python's functionality</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:play"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Run Code</p>
+                <p class="text-xs text-gray-400">Execute scripts and Jupyter notebooks</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PREREQUISITES ─────────────────────────────────────── -->
+    <section id="prerequisites">
+      <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+        <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+          </span>
+          <div class="min-w-0">
+            <h2 class="text-xl font-bold text-gray-900 leading-tight">Prerequisites</h2>
+            <p class="text-sm text-gray-400 leading-snug mt-0.5">What you should have before starting this module.</p>
+          </div>
+        </div>
+
+        <div class="bg-white px-8 py-7">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">A computer with internet access</p>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">Willingness to learn something new</p>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">No prior programming experience required</p>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">Basic familiarity with files and folders</p>
+            </div>
+
+          </div>
+
+          <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-sm text-gray-600">
+              This is the first module in the learning path — <strong>no previous modules need to be completed</strong>. Jump right in!
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── LEARNING PATH ─────────────────────────────────────── -->
+    <section id="lessons">
+      <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+        <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
+          </span>
+          <div class="min-w-0">
+            <h2 class="text-xl font-bold text-gray-900 leading-tight">Learning Path</h2>
+            <p class="text-sm text-gray-400 leading-snug mt-0.5">Work through each lesson in order. Click on a lesson to see its details.</p>
+          </div>
+        </div>
+
+        <div class="bg-white px-6 py-6">
+          <div class="space-y-3">
+
+            <!-- Lesson 1 (expanded by default) -->
+            <div class="lesson-accordion active">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">1</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Introduction</p>
+                  <p class="lesson-name">What is Python?</p>
+                </div>
+                <span class="lesson-badge">Beginner</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 5 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Understand what Python is, why it's popular, and how it's used in data analysis, automation, and application development.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> What Python is and why it matters</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> How Python compares to tools like Excel and SQL</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Common use cases for Python in the workplace</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Why Python is a great first programming language</li>
+                  </ul>
+                  <a href="lesson1_what_is_python.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 2 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">2</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Setup</p>
+                  <p class="lesson-name">How to Request Access &amp; Software</p>
+                </div>
+                <span class="lesson-badge">Beginner</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 10 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Learn what tools and software you need for Python development and how to request or install them.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Required software for Python development</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> How to request access through your organization</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Installing Python and VS Code</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Verifying your setup is ready</li>
+                  </ul>
+                  <a href="lesson2_request_access_and_software.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 3 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">3</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Setup</p>
+                  <p class="lesson-name">How to Install Extensions in VS Code</p>
+                </div>
+                <span class="lesson-badge">Beginner</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 8 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Install and configure the essential VS Code extensions that transform the editor into a full Python development environment.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Must-have extensions for Python in VS Code</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> How to find and install extensions</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Configuring extensions for your workflow</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Recommended extensions for productivity</li>
+                  </ul>
+                  <a href="lesson3_install_extensions_in_vscode.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 4 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">4</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Environment</p>
+                  <p class="lesson-name">How to Setup a Virtual Environment</p>
+                </div>
+                <span class="lesson-badge">Beginner</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 10 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Create and manage virtual environments to isolate project dependencies and avoid version conflicts.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> What virtual environments are and why they matter</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating a virtual environment with venv</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Activating and deactivating environments</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Selecting the interpreter in VS Code</li>
+                  </ul>
+                  <a href="lesson4_setup_virtual_environment.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 5 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">5</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Environment</p>
+                  <p class="lesson-name">How to Install Libraries</p>
+                </div>
+                <span class="lesson-badge">Beginner</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 8 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Install and manage Python libraries using pip to extend your application's functionality.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> What pip is and how package management works</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Installing packages from PyPI</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Using requirements.txt for reproducibility</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Checking installed packages and versions</li>
+                  </ul>
+                  <a href="lesson5_install_libraries_in_virtual_environment.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 6 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">6</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Workflow</p>
+                  <p class="lesson-name">How to Run a Notebook or Script</p>
+                </div>
+                <span class="lesson-badge">Beginner</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 10 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Execute Python code using both scripts and Jupyter Notebooks for different development workflows.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Running .py scripts from the terminal and VS Code</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating and running Jupyter Notebooks</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Differences between scripts and notebooks</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> When to use each approach</li>
+                  </ul>
+                  <a href="lesson6_run_notebook_or_script.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /space-y-3 -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MODULE NAVIGATION ─────────────────────────────────── -->
+    <section id="module-nav">
+      <div class="flex flex-col sm:flex-row gap-3">
+
+        <!-- No previous — Module 1 is the start -->
+        <div class="flex-1"></div>
+
+        <!-- Next module -->
+        <a href="../mod_02_programming_foundations/module.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right" style="text-decoration:none;">
+          <div class="min-w-0">
+            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+            <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Module 2 — Programming Foundations</p>
+          </div>
+          <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+        </a>
+
+      </div>
+    </section>
+
+  </div><!-- /max-w container -->
+
+</div><!-- /#hub-root -->
+
+<!-- Accordion toggle script -->
+<script>
+function toggleAccordion(header) {
+  var item = header.closest('.lesson-accordion');
+  item.classList.toggle('active');
+}
+</script>
