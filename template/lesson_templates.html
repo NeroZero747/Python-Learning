@@ -1,0 +1,2667 @@
+<!-- =============================================================
+     Lesson 2 — Variables & Data Types | Python Learning Hub
+     ============================================================= -->
+
+<!-- ── Fonts ──
+     Inter        → UI text (weights 400–700)
+     Fira Code    → monospace code blocks (weights 400–600)  -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" />
+
+<!-- ── Tailwind CSS (CDN) ── -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ── Iconify — renders <span class="iconify"> elements as inline SVGs ── -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<!-- ── Prism.js — syntax highlighting for Python code blocks ── -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+  crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"
+  crossorigin="anonymous"></script>
+
+<style>
+
+  /* ==========================================================================
+     1. GLOBAL RESETS
+     ========================================================================== */
+
+  /* Enable smooth anchor scrolling page-wide */
+  * { scroll-behavior: smooth; }
+
+  /* ==========================================================================
+     2. PRISM.JS — SYNTAX HIGHLIGHTING OVERRIDES
+     Override the default Prism theme to match our dark brand code palette.
+     ========================================================================== */
+
+  pre[class*="language-"] {
+    border-radius: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.875rem;
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+  }
+
+  code[class*="language-"],
+  pre[class*="language-"] {
+    background: #1e1e2e; /* matches .bg-code */
+  }
+
+  /* ==========================================================================
+     2. CONFLUENCE CSS ISOLATION
+     All rules scoped to #hub-root so they never bleed into Confluence's own UI.
+     !important is intentional — it beats Confluence's opinionated element styles.
+     ========================================================================== */
+
+  /* Base font & box model reset */
+  #hub-root,
+  #hub-root * {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+    box-sizing: border-box !important;
+  }
+
+  #hub-root {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #1f2937 !important;
+  }
+
+  /* ── Text colours ── */
+  #hub-root .text-white      { color: #ffffff !important; }
+  #hub-root .text-gray-900   { color: #111827 !important; }
+  #hub-root .text-gray-800   { color: #1f2937 !important; }
+  #hub-root .text-gray-700   { color: #374151 !important; }
+  #hub-root .text-gray-600   { color: #4b5563 !important; }
+  #hub-root .text-gray-500   { color: #6b7280 !important; }
+  #hub-root .text-gray-400   { color: #9ca3af !important; }
+  #hub-root .text-gray-300   { color: #d1d5db !important; }
+
+  /* ── Font weights ── */
+  #hub-root .font-bold       { font-weight: 700 !important; }
+  #hub-root .font-semibold   { font-weight: 600 !important; }
+  #hub-root .font-medium     { font-weight: 500 !important; }
+
+  /* ── Font sizes — rem anchored to the 16px root above ── */
+  #hub-root .text-4xl  { font-size: 2.25rem   !important; line-height: 2.5rem    !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem  !important; line-height: 2.25rem   !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem    !important; line-height: 2rem      !important; }
+  #hub-root .text-xl   { font-size: 1.25rem   !important; line-height: 1.75rem   !important; }
+  #hub-root .text-lg   { font-size: 1.125rem  !important; line-height: 1.75rem   !important; }
+  #hub-root .text-base { font-size: 1rem      !important; line-height: 1.5rem    !important; }
+  #hub-root .text-sm   { font-size: 0.875rem  !important; line-height: 1.25rem   !important; }
+  #hub-root .text-xs   { font-size: 0.75rem   !important; line-height: 1rem      !important; }
+
+  /* ── Layout utilities — lock flex/grid so Confluence can't override ── */
+  #hub-root .flex             { display: flex !important; }
+  #hub-root .inline-flex      { display: inline-flex !important; }
+  #hub-root .items-center     { align-items: center !important; }
+  #hub-root .items-start      { align-items: flex-start !important; }
+  #hub-root .justify-center   { justify-content: center !important; }
+  #hub-root .justify-between  { justify-content: space-between !important; }
+  #hub-root .shrink-0         { flex-shrink: 0 !important; }
+  #hub-root .min-w-0          { min-width: 0 !important; }
+  #hub-root .gap-1            { gap: 0.25rem !important; }
+  #hub-root .gap-2            { gap: 0.5rem !important; }
+  #hub-root .gap-3            { gap: 0.75rem !important; }
+  #hub-root .gap-4            { gap: 1rem !important; }
+  #hub-root .gap-6            { gap: 1.5rem !important; }
+  #hub-root .gap-8            { gap: 2rem !important; }
+  #hub-root .ml-auto          { margin-left: auto !important; }
+
+  /* ── Headings — strip Confluence default margins & padding ── */
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+  }
+  #hub-root h1 { font-size: 1.75rem  !important; font-weight: 700 !important; }
+  #hub-root h2 { font-size: 1.25rem  !important; font-weight: 700 !important; }
+  #hub-root h3 { font-size: 1rem     !important; font-weight: 600 !important; }
+  #hub-root h4 { font-size: 0.875rem !important; font-weight: 600 !important; }
+  #hub-root h5, #hub-root h6 { font-size: 0.8rem !important; font-weight: 600 !important; }
+
+  /* ── Links — prevent Confluence from styling anchors ── */
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  /* ── Code font — apply Fira Code everywhere Confluence might reset it ── */
+  #hub-root code,
+  #hub-root pre,
+  #hub-root [class*="language-"] {
+    font-family: 'Fira Code', ui-monospace, 'Cascadia Code', monospace !important;
+  }
+
+  /* ── Iconify icon alignment ──
+     Icons render inline on the text baseline by default.
+     Force them to sit in the middle of their line/flex context. */
+  #hub-root .iconify {
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+  /* Inline (non-block) context: centre icon vertically with surrounding text */
+  #hub-root :not(.block) > .iconify:not(.block) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Block context: centre icon horizontally */
+  #hub-root .iconify.block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ==========================================================================
+     3. PAGE LAYOUT
+     ========================================================================== */
+
+  /* Two-column flex layout: sticky TOC sidebar + scrollable main content */
+  .lesson-layout {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+  }
+
+  /* ==========================================================================
+     4. HERO BANNER
+     ========================================================================== */
+
+  /* Gradient background applied to the hero <section> */
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #CB187D 0%, #7F004C 100%);
+  }
+
+  /* Inner padding / alignment for hero content */
+  .hero-content {
+    padding: 2.75rem;
+    text-align: left;
+  }
+
+  /* Top-row module/level badges */
+  .badge-hero        { background: #fff;    color: #1f2937; }
+  .badge-hero-yellow { background: #fbbf24; color: #1f2937; }
+  .badge-hero-green  { background: #bbf7d0; color: #1f2937; }
+
+  /* Title sizing (overrides Confluence h1 reset above) */
+  #hub-root .hero-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Author / date metadata row */
+  .hero-meta-wrapper { padding-top: 0rem; margin-bottom: 1.25rem; }
+  .hero-meta-text    { color: rgba(255, 255, 255, 0.82); }
+
+  /* Bullet separator between author and date */
+  .hero-sep { color: rgba(255, 255, 255, 0.700); margin: 0 5px; }
+
+  /* Intro paragraph */
+  .hero-desc { color: white; margin-bottom: 1.5rem; }
+
+  /* ==========================================================================
+     5. FLOATING TOC SIDEBAR
+     ========================================================================== */
+
+  /* Sticky sidebar — stays in place as the user scrolls */
+  .lesson-toc-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 2.5rem;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+    transition: width 0.25s ease, opacity 0.25s ease;
+  }
+
+  /* Collapsed state: narrow strip showing only the toggle button */
+  .lesson-toc-sidebar.toc-collapsed              { width: 44px; overflow: hidden; }
+  .lesson-toc-sidebar.toc-collapsed .toc-body   { display: none; }
+  .lesson-toc-sidebar.toc-collapsed .toc-header-label   { display: none; }
+  .lesson-toc-sidebar.toc-collapsed .toc-header-map-icon { display: none; }
+
+  /* Absolute-positioned toggle button — never moves between states */
+  .toc-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    color: #CB187D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .toc-toggle-btn:hover { background: #fdf0f7; }
+
+  /* TOC nav link states */
+  .toc-link { transition: color 0.15s, padding-left 0.15s; }
+  .toc-link:hover { color: #CB187D; padding-left: 4px; }
+  .toc-link.active {
+    color: #CB187D;
+    font-weight: 600;
+    border-left: 3px solid #CB187D;
+    padding-left: 8px;
+  }
+
+  /* ── Responsive: hide sidebar on mobile, restore lesson-nav card ── */
+  @media (max-width: 767px) {
+    .lesson-toc-sidebar { display: none; }
+    .lesson-layout      { display: block !important; }
+    #lesson-nav         { display: block; }
+  }
+
+  /* ==========================================================================
+     6. BRAND DESIGN TOKENS
+     Centralised colour utilities used across all components.
+     ========================================================================== */
+
+  /* ── Text colours ── */
+  .text-brand      { color: #CB187D; }
+  .text-brand-dark { color: #7F004C; }
+  .text-python     { color: #FFD43B; } /* Python logo yellow */
+
+  /* ── Background fills ── */
+  .bg-brand      { background: #CB187D; }
+  .bg-brand-dark { background: #7F004C; }
+  .bg-brand-soft { background: #fdf0f7; } /* very light pink — used for soft badges/icons */
+
+  /* ── Decision-flow step fills (progressively darker pink) ── */
+  .bg-brand-step-2 { background: #a01060; }
+  .bg-brand-step-3 { background: #8a0058; }
+
+  /* ── Gradient connector lines for the decision flow diagram ── */
+  .bg-flow-line-1 { background: linear-gradient(#CB187D, #7F004C); }
+  .bg-flow-line-2 { background: linear-gradient(#a01060, #7F004C); }
+  .bg-flow-line-3 { background: linear-gradient(#8a0058, #7F004C); }
+
+  /* ── Soft bordered panels ── */
+  .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0 !important; }
+  .bg-success-soft  { background: #f0fdf4; border-color: #bbf7d0 !important; }
+  .bg-error-soft    { background: #fef2f2; border-color: #fecaca !important; }
+
+  /* ── Amber callout / tip panel ── */
+  .bg-amber-tip { background: #fff7ed; border-color: #fed7aa !important; }
+
+  /* ==========================================================================
+     7. COMPONENTS — CARDS
+     ========================================================================== */
+
+  /* Objective / navigation grid cards — subtle lift on hover */
+  .obj-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .obj-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px -6px rgba(203, 24, 125, 0.22), 0 4px 12px -2px rgba(203, 24, 125, 0.1);
+    border-color: #CB187D;
+  }
+
+  /* Bottom lesson navigation link hover — all child text/icons turn brand pink */
+  #hub-root .lesson-nav-link:hover p,
+  #hub-root .lesson-nav-link:hover span,
+  #hub-root .lesson-nav-link:hover svg {
+    color: #CB187D !important;
+    transition: color 0.15s !important;
+  }
+
+  /* ==========================================================================
+     8. COMPONENTS — BADGES
+     ========================================================================== */
+
+  /* Generic pill badge base style */
+  #hub-root .badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 2px 10px !important;
+    border-radius: 9999px !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Brand-coloured exercise badge */
+  #hub-root .badge-exercise { background: #fdf0f7 !important; color: #CB187D !important; }
+
+  /* Inline code type tag (e.g. "str", "int") beside a concept heading */
+  .badge-mistake-tag { background: #fdf0f7; color: #7F004C; }
+
+  /* ==========================================================================
+     9. COMPONENTS — TABS
+     ========================================================================== */
+
+  /* Pill-style tab button (default / hover / active) */
+  #hub-root .tab-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 18px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    border: 1.5px solid #e5e7eb !important;
+    border-radius: 999px !important;
+    color: #6b7280 !important;
+    background: #fff !important;
+    line-height: 1.2 !important;
+    transition: color 0.15s, background 0.15s, border-color 0.15s !important;
+  }
+  #hub-root .tab-btn:hover {
+    color: #CB187D !important;
+    border-color: #CB187D !important;
+    background: #fdf0f7 !important;
+  }
+  #hub-root .tab-btn.active {
+    color: #fff !important;
+    background: #CB187D !important;
+    border-color: #CB187D !important;
+  }
+
+  /* Tab panels — only the .active panel is shown */
+  #hub-root .tab-panel        { display: none  !important; }
+  #hub-root .tab-panel.active { display: block !important; }
+
+  /* ==========================================================================
+     10. COMPONENTS — ACCORDION
+     ========================================================================== */
+
+  /* Accordion body hidden by default; toggled via JS */
+  #hub-root .accordion-body      { display: none  !important; }
+  #hub-root .accordion-body.open { display: block !important; }
+
+  /* Dashed toggle button — turns solid when open */
+  #hub-root .accordion-toggle {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 10px 16px !important;
+    border-radius: 10px !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    border: 2px dashed #f5c6e0 !important;
+    background: #fdf0f7 !important;
+    color: #7F004C !important;
+    line-height: 1.2 !important;
+    text-decoration: none !important;
+    transition: background 0.15s, border-color 0.15s !important;
+  }
+  #hub-root .accordion-toggle:hover {
+    background: #f9d9ee !important;
+    border-color: #CB187D !important;
+  }
+  #hub-root .accordion-toggle.open {
+    background: #fdf0f7 !important;
+    border-color: #CB187D !important;
+    border-style: solid !important;
+  }
+
+  /* Chevron icon rotates 180° when accordion is open */
+  #hub-root .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
+  #hub-root .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
+
+  /* ==========================================================================
+     11. COMPONENTS — COPY BUTTON
+     ========================================================================== */
+
+  /* Floating copy button overlaid on code blocks */
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(203, 24, 125, 0.15);
+    border: 1px solid rgba(203, 24, 125, 0.3);
+    color: #CB187D;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-btn:hover { background: rgba(203, 24, 125, 0.3); }
+
+  /* Light variant — used inside dark code blocks */
+  .copy-btn-light {
+    position: static;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2) !important; }
+
+  /* ==========================================================================
+     12. COMPONENTS — COMPARISON GRID (Python vs SQL vs Excel)
+     ========================================================================== */
+
+  .cmp-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 1fr;
+  }
+  .cmp-row:not(:first-child)       { border-top: 1px solid #f3f4f6; }
+  .cmp-row:not(:first-child):hover { background: #fdf9fe; }
+
+  .cmp-cell { padding: 12px 16px; display: flex; align-items: center; }
+
+  /* Stack to two columns on small screens */
+  @media (max-width: 640px) {
+    .cmp-row { grid-template-columns: 1fr 1fr; }
+    .cmp-cell:first-child {
+      grid-column: 1 / -1;
+      background: #fdf0f7;
+      border-bottom: 1px solid #f5c6e0;
+    }
+  }
+
+  /* ==========================================================================
+     13. COMPONENTS — COMMON MISTAKES SECTION
+     ========================================================================== */
+
+  /* Card wrapper with subtle pink border */
+  .mistake-card       { border: 1px solid #f3e8f0; }
+  .mistake-arrow-ring { border: 2px solid #f3e8f0; }
+
+  /* Before/after code panels */
+  .bg-mistake-bad  { background: #fff8f8; } /* red-tinted  — wrong code */
+  .bg-mistake-good { background: #f0fdf4; } /* green-tinted — correct code */
+
+  /* Tip callout at the bottom of a mistake card */
+  .mistake-tip { border-color: #f3e8f0 !important; background: #fffbeb; }
+
+  /* Practice exercise box */
+  .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+
+  /* ==========================================================================
+     14. CODE & SYNTAX HIGHLIGHTING UTILITIES
+     ========================================================================== */
+
+  /* Dark background shared by all code-related elements */
+  .bg-code { background: #1e1e2e; }
+
+  /* Reset Prism's default pre margin/radius when embedded inside custom wrappers */
+  .pre-reset { margin: 0; border-radius: 0; background: transparent; }
+
+  /* Separator line inside code blocks (e.g. between code and output) */
+  .border-code-sep { border-color: rgba(255, 255, 255, 0.08) !important; }
+
+  /* ── Inline syntax token colours — match Prism's One Dark palette ── */
+  .code-syn-str   { background: #1e1e2e; color: #f9a8d4; } /* string  — pink  */
+  .code-syn-int   { background: #1e1e2e; color: #93c5fd; } /* int     — blue  */
+  .code-syn-float { background: #1e1e2e; color: #6ee7b7; } /* float   — teal  */
+  .code-syn-true  { background: #1e1e2e; color: #86efac; } /* True    — green */
+  .code-syn-false { background: #1e1e2e; color: #fca5a5; } /* False   — red   */
+
+</style>
+<!-- ═══════════════════════════════════════════════════════════
+     ROOT WRAPPER — Confluence CSS isolation scoped to #hub-root
+     ═══════════════════════════════════════════════════════════ -->
+<div id="hub-root" class="bg-gray-50 font-sans text-gray-800 leading-relaxed">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO BANNER
+       Full-width gradient banner with lesson title, author and intro.
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-8 pb-0">
+    <section class="rounded-2xl bg-hero-gradient mb-0">
+      <div class="hero-content">
+
+        <!-- Module + difficulty badges -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <span class="badge-hero inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold">
+            <span class="iconify" data-icon="fa6-solid:graduation-cap"></span> Lesson 2
+          </span>
+          <span class="badge-hero-green text-green-800 inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold">
+            <span class="iconify" data-icon="mdi:leaf"></span> Beginner
+          </span>
+          <span class="inline-flex items-center bg-white px-4 py-2 rounded-full text-sm font-semibold">
+            <img src="#-base64" alt="Logo" class="logo-img" style="height: 17px; width: auto;">
+          </span>
+        </div>
+
+        <!-- Lesson title -->
+        <h1 class="hero-title font-bold text-white">
+          Variables &amp; Data Types
+        </h1>
+
+        <!-- Author + last-updated metadata -->
+        <div class="hero-meta-wrapper">
+          <div class="hero-meta-text flex flex-wrap items-center gap-2 text-sm">
+            <span class="iconify" data-icon="mdi:user-circle" style="height: 15px; width: auto;"></span> John Doe
+            <span class="hero-sep">&bull;</span>
+            <span class="iconify" data-icon="boxicons:calendar-filled" style="height: 15px; width: auto;"></span> Updated Mar 18, 2026
+          </div>
+        </div>
+
+        <!-- Short lesson summary -->
+        <p class="hero-desc max-w-[75%]">
+          Understand how Python stores information using variables and how
+          data types shape the way values behave in a program.
+        </p>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN LAYOUT
+       Two-column flex: sticky TOC sidebar (desktop) + scrollable content.
+       On mobile (< 768px) the sidebar is hidden and the lesson-nav section
+       card is shown instead (see #lesson-nav below).
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-10 pb-10">
+    <div class="lesson-layout">
+
+      <!-- ═══════════════════════════════════════════════════════════
+           STICKY TOC SIDEBAR
+           Collapses to a 44px strip when the toggle button is clicked.
+           JS: toggleToc() in the <script> block at the bottom.
+           ═══════════════════════════════════════════════════════════ -->
+      <aside class="lesson-toc-sidebar">
+        <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+
+          <!-- Sidebar header: map icon + label + collapse toggle -->
+          <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100 bg-white">
+            <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">Table of Contents</span>
+            <!-- Toggle button — stays pinned to the right via position:absolute -->
+            <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+              <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+            </button>
+          </div>
+
+          <!-- Nav links — hidden when sidebar is collapsed -->
+          <nav class="toc-body bg-white px-2 py-2" aria-label="Lesson sections">
+            <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective
+            </a>
+            <a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview
+            </a>
+            <a href="#data-types-table" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:shapes"></span> Common Data Types
+            </a>
+            <a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:layer-group"></span> Core Concepts
+            </a>
+            <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
+            </a>
+            <a href="#decision-flow" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:diagram-project"></span> Decision Flow
+            </a>
+            <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
+            </a>
+            <a href="#sql-excel" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:table-columns"></span> SQL / Excel
+            </a>
+            <a href="#practice" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:dumbbell"></span> Practice
+            </a>
+            <a href="#mistakes" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:triangle-exclamation"></span> Common Mistakes
+            </a>
+            <a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap
+            </a>
+            <a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+              <span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson
+            </a>
+          </nav>
+        </div>
+      </aside><!-- /lesson-toc-sidebar -->
+
+      <!-- ═══════════════════════════════════════════════════════════
+           MAIN CONTENT
+           Sections flow vertically with space-y-10 gap between them.
+           Each section follows the same pattern:
+             - Card wrapper   .rounded-2xl.shadow-sm.border
+             - Card header    pink left-border stripe + icon + title
+             - Card body      white background with padding
+           ═══════════════════════════════════════════════════════════ -->
+      <main class="min-w-0 flex-1 space-y-10">
+
+        <!-- ── MOBILE NAVIGATION CARD ──────────────────────────────
+             Shown only on screens < 768px (hidden attr removed by CSS).          
+             On desktop the sticky TOC sidebar replaces this card.   
+             ──────────────────────────────────────────────────────── -->
+        <section id="lesson-nav" hidden class="block md:hidden">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:map"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">In This Lesson</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5">Jump to any section below.</p>
+              </div>
+            </div>
+            <!-- Nav grid -->
+            <div class="bg-white px-8 py-7">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+                <a href="#objective"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:bullseye"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Lesson
+                      Objective</p>
+                    <p class="text-xs text-gray-400 truncate">What you will learn</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#overview"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:binoculars"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Overview
+                    </p>
+                    <p class="text-xs text-gray-400 truncate">How variables work</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#data-types-table"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:shapes"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Common
+                      Data Types</p>
+                    <p class="text-xs text-gray-400 truncate">str, int, float, bool</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#key-ideas"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:layer-group"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Core
+                      Concepts at a Glance</p>
+                    <p class="text-xs text-gray-400 truncate">Three things to remember</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#key-concepts"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:book-open"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Key
+                      Concepts</p>
+                    <p class="text-xs text-gray-400 truncate">Deep-dive with examples</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#decision-flow"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:diagram-project"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Decision
+                      Flow</p>
+                    <p class="text-xs text-gray-400 truncate">Choosing the right type</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#code-examples"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:code"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Code
+                      Examples</p>
+                    <p class="text-xs text-gray-400 truncate">Variables, types &amp; calculations</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#sql-excel"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:table-columns"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Python
+                      vs SQL vs Excel</p>
+                    <p class="text-xs text-gray-400 truncate">Side-by-side comparison</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#practice"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:dumbbell"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Practice
+                      Exercises</p>
+                    <p class="text-xs text-gray-400 truncate">Hands-on challenges</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#mistakes"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Common
+                      Mistakes</p>
+                    <p class="text-xs text-gray-400 truncate">Errors to watch out for</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#recap"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:list-check"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Lesson
+                      Recap</p>
+                    <p class="text-xs text-gray-400 truncate">Everything at a glance</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+                <a href="#next-lesson"
+                  class="obj-card group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 no-underline">
+                  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                    <span class="iconify text-white text-sm" data-icon="fa6-solid:circle-arrow-right"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Next
+                      Lesson</p>
+                    <p class="text-xs text-gray-400 truncate">Continue your journey</p>
+                  </div>
+                  <span class="iconify text-gray-300 text-xs ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Lesson Objective ── -->
+        <section id="objective">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">By the end of this lesson you will
+                  understand the building blocks Python uses to store and work with information.</p>
+              </div>
+            </div>
+
+            <!-- Outcome cards grid -->
+            <div class="bg-white px-8 py-7">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+                <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                    <span class="iconify text-brand text-lg" data-icon="fa6-solid:box-archive"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800">Variables</p>
+                    <p class="text-xs text-gray-400">What a variable is and how to create one</p>
+                  </div>
+                </div>
+
+                <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                    <span class="iconify text-brand text-lg" data-icon="fa6-solid:floppy-disk"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800">Storing Data</p>
+                    <p class="text-xs text-gray-400">How Python stores information inside variables</p>
+                  </div>
+                </div>
+
+                <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                    <span class="iconify text-brand text-lg" data-icon="fa6-solid:shapes"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800">Data Types</p>
+                    <p class="text-xs text-gray-400">Recognise str, int, float, and bool</p>
+                  </div>
+                </div>
+
+                <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                    <span class="iconify text-brand text-lg" data-icon="fa6-solid:magnifying-glass"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="text-sm font-semibold text-gray-800">Inspecting Types</p>
+                    <p class="text-xs text-gray-400">Use <code class="font-mono text-xs">type()</code> to check any value's type</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Callout -->
+              <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">
+                  These concepts are fundamental because <strong>almost every Python program stores and manipulates
+                    data</strong>.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── Overview ── -->
+        <section id="overview">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">In programming, information must be
+                  stored so it can be used later. Python stores information using variables — a labelled container that
+                  holds a value.</p>
+              </div>
+            </div>
+
+            <div class="bg-white px-8 py-7 space-y-7">
+
+              <!-- Variable = Name + Value visual -->
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-4 text-brand">How a Variable Works</p>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <div class="flex-1 rounded-xl border-2 p-4 text-center brand-soft-panel">
+                    <span class="iconify text-3xl mb-1 text-brand" data-icon="fa6-solid:tag"></span>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Name (Label)</p>
+                    <code class="text-sm font-mono font-bold text-brand-dark">name</code>
+                  </div>
+                  <div class="flex items-center justify-center text-2xl font-bold text-gray-300 shrink-0">=</div>
+                  <div class="flex-1 rounded-xl border-2 border-gray-100 bg-gray-50 p-4 text-center">
+                    <span class="iconify text-3xl mb-1 text-brand" data-icon="fa6-solid:box"></span>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-gray-400">Value (Data)</p>
+                    <code class="text-sm font-mono font-bold text-gray-600">"Johnny"</code>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code snippet -->
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-3 text-brand">In Code</p>
+                <div class="relative mb-3 rounded-xl overflow-hidden bg-code">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                      <span class="text-xs font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">name = "Johnny"
+
+print(name) </code></pre>
+                </div>
+                <div class="rounded-xl px-5 py-3 bg-code">
+                  <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                  <pre class="font-mono text-sm text-green-400">Johnny</pre>
+                </div>
+              </div>
+
+              <!-- What Python stores -->
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-3 text-brand">Python Programs Constantly Store
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div
+                    class="obj-card flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-gray-100 bg-gray-50 text-sm text-gray-700 text-center">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-brand-soft">
+                      <span class="iconify text-lg text-brand" data-icon="fa6-solid:hashtag"></span>
+                    </div>
+                    <span class="font-semibold">Numbers</span>
+                    <code class="text-xs font-mono text-brand-dark">42 / 3.14</code>
+                  </div>
+                  <div
+                    class="obj-card flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-gray-100 bg-gray-50 text-sm text-gray-700 text-center">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-brand-soft">
+                      <span class="iconify text-lg text-brand" data-icon="fa6-solid:font"></span>
+                    </div>
+                    <span class="font-semibold">Text</span>
+                    <code class="text-xs font-mono text-brand-dark">"hello"</code>
+                  </div>
+                  <div
+                    class="obj-card flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-gray-100 bg-gray-50 text-sm text-gray-700 text-center">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-brand-soft">
+                      <span class="iconify text-lg text-brand" data-icon="fa6-solid:list"></span>
+                    </div>
+                    <span class="font-semibold">Lists</span>
+                    <code class="text-xs font-mono text-brand-dark">[1, 2, 3]</code>
+                  </div>
+                  <div
+                    class="obj-card flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-gray-100 bg-gray-50 text-sm text-gray-700 text-center">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-brand-soft">
+                      <span class="iconify text-lg text-brand" data-icon="fa6-solid:toggle-on"></span>
+                    </div>
+                    <span class="font-semibold">True/False</span>
+                    <code class="text-xs font-mono text-brand-dark">True / False</code>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Data Types Table ── -->
+        <section id="data-types-table">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:shapes"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Data Types</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Every value in Python has a type.
+                  Python automatically detects the correct type based on how you write the value.</p>
+              </div>
+            </div>
+
+            <div class="bg-white px-8 py-7">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <!-- String -->
+                <div class="obj-card flex gap-4 items-start p-5 rounded-2xl border border-gray-100 bg-gray-50">
+                  <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:font"></span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-bold text-gray-800">String</span>
+                      <code class="text-xs font-mono px-1.5 py-0.5 rounded font-semibold badge-mistake-tag">str</code>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Text surrounded by quotation marks</p>
+                    <code
+                      class="inline-block text-xs font-mono px-2.5 py-1 rounded-lg code-syn-str">&quot;Hello&quot;</code>
+                  </div>
+                </div>
+
+                <!-- Integer -->
+                <div class="obj-card flex gap-4 items-start p-5 rounded-2xl border border-gray-100 bg-gray-50">
+                  <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:hashtag"></span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-bold text-gray-800">Integer</span>
+                      <code class="text-xs font-mono px-1.5 py-0.5 rounded font-semibold badge-mistake-tag">int</code>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Whole numbers without a decimal</p>
+                    <code class="inline-block text-xs font-mono px-2.5 py-1 rounded-lg code-syn-int">10</code>
+                  </div>
+                </div>
+
+                <!-- Float -->
+                <div class="obj-card flex gap-4 items-start p-5 rounded-2xl border border-gray-100 bg-gray-50">
+                  <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:percent"></span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-bold text-gray-800">Float</span>
+                      <code class="text-xs font-mono px-1.5 py-0.5 rounded font-semibold badge-mistake-tag">float</code>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Decimal numbers</p>
+                    <code class="inline-block text-xs font-mono px-2.5 py-1 rounded-lg code-syn-float">19.99</code>
+                  </div>
+                </div>
+
+                <!-- Boolean -->
+                <div class="obj-card flex gap-4 items-start p-5 rounded-2xl border border-gray-100 bg-gray-50">
+                  <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:toggle-on"></span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="font-bold text-gray-800">Boolean</span>
+                      <code class="text-xs font-mono px-1.5 py-0.5 rounded font-semibold badge-mistake-tag">bool</code>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">True or False conditions</p>
+                    <div class="flex gap-2">
+                      <code class="inline-block text-xs font-mono px-2.5 py-1 rounded-lg code-syn-true">True</code>
+                      <code class="inline-block text-xs font-mono px-2.5 py-1 rounded-lg code-syn-false">False</code>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">
+                  Python <strong>automatically determines</strong> the correct data type for most values.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Key Idea Cards ── -->
+        <section id="key-ideas">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:layer-group"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Core Concepts at a Glance</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Three things to remember about
+                  variables and data types in Python.</p>
+              </div>
+            </div>
+
+            <div class="bg-white px-8 py-7">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                <!-- Card 1 -->
+                <div class="obj-card bg-gray-50 rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
+                  <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:box-archive"></span>
+                  </div>
+                  <h3 class="font-bold text-gray-800">Variables Store Information</h3>
+                  <p class="text-sm text-gray-600 flex-1">Variables allow Python programs to store information so it can
+                    be reused later in the program.</p>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset min-h-[7.5rem]"><code class="language-python">age = 30
+print(age)  # 30</code></pre>
+                  </div>
+                  <p class="text-sm text-gray-500">The program can now use <code
+                      class="font-mono text-brand-dark">30</code> whenever <code
+                      class="font-mono text-brand-dark">age</code> is referenced.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="obj-card bg-gray-50 rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
+                  <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:tags"></span>
+                  </div>
+                  <h3 class="font-bold text-gray-800">Data Types Describe Values</h3>
+                  <p class="text-sm text-gray-600 flex-1">Every value in Python has a data type. The type tells Python
+                    <strong>how the value should behave</strong>.</p>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset min-h-[7.5rem]"><code class="language-python">"Python"  # string
+10        # integer
+10.5      # float
+True      # boolean</code></pre>
+                  </div>
+                  <p class="text-sm text-gray-500">Numbers can be added. Text values can be combined.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="obj-card bg-gray-50 rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
+                  <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-brand-soft">
+                    <span class="iconify text-xl text-brand" data-icon="fa6-solid:wand-magic-sparkles"></span>
+                  </div>
+                  <h3 class="font-bold text-gray-800">Python Auto-Detects Types</h3>
+                  <p class="text-sm text-gray-600 flex-1">Unlike some languages, Python does not require you to declare
+                    types manually — making it easier to learn and write.</p>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset min-h-[7.5rem]"><code class="language-python">name  = "Python"
+count = 5
+price = 19.99</code></pre>
+                  </div>
+                  <p class="text-sm text-gray-500">Python automatically determines the type of each value.</p>
+                </div>
+
+              </div>
+
+              <!-- Callout -->
+              <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">
+                  Understanding these three concepts will help you <strong>read and write Python code with confidence</strong> from the very beginning.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Key Concepts ── -->
+        <section id="key-concepts">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Deep-dive into variables and every
+                  core data type Python uses — with examples for each.</p>
+              </div>
+            </div>
+            <!-- White body -->
+            <div class="bg-white px-8 py-7 space-y-10">
+
+              <!-- Variable -->
+              <div id="variable" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fdf0f7] border border-[#f5c6e0] text-xs font-semibold text-[#CB187D] uppercase tracking-wider shrink-0">
+                    <span class="iconify text-sm" data-icon="fa6-solid:cube"></span> Variable
+                  </span>
+                </div>
+                <p class="text-gray-600 mb-4">
+                  A variable is a <strong>named container that stores a value</strong>. Variables allow programs to
+                  reuse information without repeating values.
+                </p>
+                <div class="relative rounded-xl overflow-hidden bg-code">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                      <span class="text-xs font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">city = "Los Angeles"
+print(city) 
+
+price    = 20
+quantity = 3
+total    = price * quantity
+print(total) </code></pre>
+                </div>
+                <div class="rounded-xl px-5 py-3 mt-4 mb-4 bg-code">
+                  <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                  <pre class="font-mono text-sm text-green-400">Los Angeles
+60</pre>
+                </div>
+                <div class="rounded-xl p-4 flex items-start gap-3 border brand-soft-panel">
+                  <span class="iconify mt-0.5 shrink-0 text-brand" data-icon="fa6-solid:lightbulb"></span>
+                  <p class="text-sm text-gray-600">Variables allow programs to store <strong>intermediate
+                      results</strong> used in later calculations.</p>
+                </div>
+              </div>
+
+              <!-- ── SECTION TRANSITION ── -->
+              <!-- ── DATA TYPE TABS ── -->
+              <div id="data-types-tabs" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#fdf0f7] border border-[#f5c6e0] text-xs font-semibold text-[#CB187D] uppercase tracking-wider shrink-0">
+                    <span class="iconify text-sm" data-icon="fa6-solid:shapes"></span> Data Types
+                  </span>
+                </div>
+                <p class="text-gray-600 mb-4">Select a data type to explore its definition, common uses, and
+                  code example.</p>
+
+                <!-- Tab buttons -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <button class="tab-btn active" onclick="switchTab(this,'tab-string')">
+                    <span class="iconify text-xs" data-icon="fa6-solid:font"></span> String
+                  </button>
+                  <button class="tab-btn" onclick="switchTab(this,'tab-integer')">
+                    <span class="iconify text-xs" data-icon="fa6-solid:hashtag"></span> Integer
+                  </button>
+                  <button class="tab-btn" onclick="switchTab(this,'tab-float')">
+                    <span class="iconify text-xs" data-icon="fa6-solid:percent"></span> Float
+                  </button>
+                  <button class="tab-btn" onclick="switchTab(this,'tab-boolean')">
+                    <span class="iconify text-xs" data-icon="fa6-solid:toggle-on"></span> Boolean
+                  </button>
+                </div>
+
+                <!-- String panel -->
+                <div id="tab-string" class="tab-panel active">
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="badge badge-exercise">
+                      <span class="iconify" data-icon="fa6-solid:font"></span> str
+                    </span>
+                    <span class="text-gray-400 text-xs">type("Hello") → &lt;class 'str'&gt;</span>
+                  </div>
+                  <p class="text-gray-600 mb-4">A string is <strong>text surrounded by quotation marks</strong>.</p>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:user"></span>Names
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:tag"></span>Labels
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:comment"></span>Messages
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:file-lines"></span>Text Data
+                    </div>
+                  </div>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">name    = "Python"
+message = "Hello World"
+
+print(message) </code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 mt-4 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">Hello World</pre>
+                  </div>
+                </div>
+
+                <!-- Integer panel -->
+                <div id="tab-integer" class="tab-panel">
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="badge badge-exercise">
+                      <span class="iconify" data-icon="fa6-solid:hashtag"></span> int
+                    </span>
+                    <span class="text-gray-400 text-xs">type(10) → &lt;class 'int'&gt;</span>
+                  </div>
+                  <p class="text-gray-600 mb-4">An integer is a <strong>whole number without a decimal</strong>.</p>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:list-ol"></span>Counts
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:fingerprint"></span>IDs
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:layer-group"></span>Quantities
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:arrow-up-1-9"></span>Indexes
+                    </div>
+                  </div>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">users  = 100
+orders = 25
+
+print(orders) </code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 mt-4 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">25</pre>
+                  </div>
+                </div>
+
+                <!-- Float panel -->
+                <div id="tab-float" class="tab-panel">
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="badge badge-exercise">
+                      <span class="iconify" data-icon="fa6-solid:percent"></span> float
+                    </span>
+                    <span class="text-gray-400 text-xs">type(19.99) → &lt;class 'float'&gt;</span>
+                  </div>
+                  <p class="text-gray-600 mb-4">A float is a <strong>decimal number</strong>.</p>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:dollar-sign"></span>Prices
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:percent"></span>Percentages
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:ruler"></span>Measurements
+                    </div>
+                    <div
+                      class="obj-card text-center rounded-lg px-3 py-2 text-xs bg-gray-50 border border-gray-100 text-gray-600">
+                      <span class="iconify block text-xl mx-auto mb-1 text-brand" data-icon="fa6-solid:chart-line"></span>Averages
+                    </div>
+                  </div>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">price         = 19.99
+average_score = 92.5
+
+print(price) 
+print(average_score) </code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 mt-4 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">19.99
+92.5</pre>
+                  </div>
+                </div>
+
+                <!-- Boolean panel -->
+                <div id="tab-boolean" class="tab-panel">
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="badge badge-exercise">
+                      <span class="iconify" data-icon="fa6-solid:toggle-on"></span> bool
+                    </span>
+                    <span class="text-gray-400 text-xs">type(True) → &lt;class 'bool'&gt;</span>
+                  </div>
+                  <p class="text-gray-600 mb-4">A boolean represents <strong>True or False</strong>. Booleans are
+                    commonly used in program logic to control behavior.</p>
+                  <div class="flex gap-4 mb-5">
+                    <div class="flex-1 rounded-xl p-4 border text-center bg-success-soft">
+                      <span class="iconify text-3xl text-green-500 mb-1 block" data-icon="fa6-solid:circle-check"></span>
+                      <p class="text-sm font-bold text-green-700">True</p>
+                      <code class="text-xs font-mono text-green-600">is_active = True</code>
+                    </div>
+                    <div class="flex-1 rounded-xl p-4 border text-center bg-error-soft">
+                      <span class="iconify text-3xl text-red-400 mb-1 block" data-icon="fa6-solid:circle-xmark"></span>
+                      <p class="text-sm font-bold text-red-600">False</p>
+                      <code class="text-xs font-mono text-red-500">is_active = False</code>
+                    </div>
+                  </div>
+                  <div class="relative rounded-xl overflow-hidden bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">is_active    = True
+is_logged_in = True
+
+print(is_active) 
+print(is_logged_in) </code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 mt-4 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">True
+True</pre>
+                  </div>
+                </div>
+
+              </div><!-- /data-types-tabs -->
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Decision Flow ── -->
+        <section id="decision-flow">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:diagram-project"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Decision Flow</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Variables store values that programs
+                  can use in calculations or decisions. Here's how a simple program executes step by step.</p>
+              </div>
+            </div>
+            <!-- White body -->
+            <div class="bg-white px-8 py-7">
+
+              <!-- Flow diagram -->
+              <div class="flex flex-col items-center gap-0 my-2 mb-8">
+                <div class="w-full max-w-sm">
+
+                  <div class="rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-md bg-brand flex items-center justify-center gap-1.5">
+                    <span class="iconify shrink-0" data-icon="fa6-solid:box-archive"></span>
+                    Store <code class="font-mono">price = 20</code>
+                  </div>
+                  <div class="flex justify-center">
+                    <div class="w-0.5 h-8 bg-flow-line-1"></div>
+                  </div>
+
+                  <div class="rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-md bg-brand-step-2 flex items-center justify-center gap-1.5">
+                    <span class="iconify shrink-0" data-icon="fa6-solid:box-archive"></span>
+                    Store <code class="font-mono">quantity = 3</code>
+                  </div>
+                  <div class="flex justify-center">
+                    <div class="w-0.5 h-8 bg-flow-line-2"></div>
+                  </div>
+
+                  <div class="rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-md bg-brand-step-3 flex items-center justify-center gap-1.5">
+                    <span class="iconify shrink-0" data-icon="fa6-solid:calculator"></span>
+                    Calculate <code class="font-mono">total</code>
+                  </div>
+                  <div class="flex justify-center">
+                    <div class="w-0.5 h-8 bg-flow-line-3"></div>
+                  </div>
+
+                  <div class="rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-md bg-brand-dark flex items-center justify-center gap-1.5">
+                    <span class="iconify shrink-0" data-icon="fa6-solid:terminal"></span>
+                    Display result
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="relative rounded-xl overflow-hidden bg-code">
+                <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                  <div class="flex items-center gap-2">
+                    <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                    <span class="text-xs font-semibold text-gray-400">Python</span>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                    <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                  </button>
+                </div>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">price    = 20
+quantity = 3
+
+total = price * quantity
+
+print(total) </code></pre>
+              </div>
+              <div class="rounded-xl px-5 py-3 mt-4 bg-code">
+                <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                <pre class="font-mono text-sm text-green-400">60</pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Code Examples ── -->
+        <section id="code-examples">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on examples covering variable
+                  creation, type inspection, and arithmetic calculations.</p>
+              </div>
+            </div>
+            <!-- White body -->
+            <div class="bg-white px-8 py-7">
+
+              <!-- Tab buttons -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                <button class="tab-btn active" onclick="switchTab(this,'ex-tab-1')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:box-archive"></span> Creating Variables
+                </button>
+                <button class="tab-btn" onclick="switchTab(this,'ex-tab-2')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:magnifying-glass"></span> Checking Types
+                </button>
+                <button class="tab-btn" onclick="switchTab(this,'ex-tab-3')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:calculator"></span> Calculations
+                </button>
+              </div>
+
+              <!-- Example 1 panel -->
+              <div id="ex-tab-1" class="tab-panel active">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="badge badge-exercise">Example 1</span>
+                  <h3 class="font-semibold text-gray-800">Creating Variables</h3>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4 bg-code">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                      <span class="text-xs font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">name         = "Python"
+year_created = 1991
+is_popular   = True
+
+print(name) 
+print(year_created) 
+print(is_popular) </code></pre>
+                </div>
+                <div class="rounded-xl px-5 py-3 bg-code">
+                  <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                  <pre class="font-mono text-sm text-green-400">Python
+1991
+True</pre>
+                </div>
+              </div>
+
+              <!-- Example 2 panel -->
+              <div id="ex-tab-2" class="tab-panel">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="badge badge-exercise">Example 2</span>
+                  <h3 class="font-semibold text-gray-800">Checking Data Types with <code
+                      class="font-mono text-xs">type()</code></h3>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4 bg-code">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                      <span class="text-xs font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">name  = "Python"
+count = 5
+price = 19.99
+flag  = True
+
+print(type(name)) 
+print(type(count)) 
+print(type(price)) 
+print(type(flag)) </code></pre>
+                </div>
+                <div class="rounded-xl px-5 py-3 bg-code">
+                  <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                  <pre class="font-mono text-sm text-green-400">&lt;class 'str'&gt;
+&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'bool'&gt;</pre>
+                </div>
+              </div>
+
+              <!-- Example 3 panel -->
+              <div id="ex-tab-3" class="tab-panel">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="badge badge-exercise">Example 3</span>
+                  <h3 class="font-semibold text-gray-800">Using Variables in Calculations</h3>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4 bg-code">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                      <span class="text-xs font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">price    = 20
+quantity = 3
+
+total = price * quantity
+
+print(total) </code></pre>
+                </div>
+                <div class="rounded-xl px-5 py-3 bg-code">
+                  <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                  <pre class="font-mono text-sm text-green-400">60</pre>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ── SQL / Excel Comparison ── -->
+        <section id="sql-excel">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">If you already work with SQL or Excel,
+                  variables and data types will feel familiar.</p>
+              </div>
+            </div>
+            <!-- White body -->
+            <div class="bg-white px-8 py-7 space-y-5">
+
+              <!-- Platform header pills -->
+              <div class="grid grid-cols-3 gap-3 mb-4">
+                <div
+                  class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-emerald-600 text-white">
+                  <span class="iconify text-lg" data-icon="fa6-solid:table"></span> Excel
+                </div>
+                <div
+                  class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-orange-600 text-white">
+                  <span class="iconify text-lg" data-icon="fa6-solid:database"></span> SQL
+                </div>
+                <div
+                  class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-indigo-600 text-white">
+                  <span class="iconify text-lg" data-icon="fa6-brands:python"></span> Python
+                </div>
+              </div>
+
+              <!-- Comparison rows — separate cards -->
+              <div class="space-y-3">
+
+                <!-- Variable -->
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+                    <span class="iconify text-base text-gray-400" data-icon="fa6-solid:cube"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Variable</span>
+                  </div>
+                  <div class="grid grid-cols-3 divide-x divide-gray-100">
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Excel</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">cell</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">SQL</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">column value</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Python</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">variable</code>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Text -->
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+                    <span class="iconify text-base text-gray-400" data-icon="fa6-solid:font"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Text</span>
+                  </div>
+                  <div class="grid grid-cols-3 divide-x divide-gray-100">
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Excel</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">text</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">SQL</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">VARCHAR</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Python</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">string</code>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Integer -->
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+                    <span class="iconify text-base text-gray-400" data-icon="fa6-solid:hashtag"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Integer</span>
+                  </div>
+                  <div class="grid grid-cols-3 divide-x divide-gray-100">
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Excel</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">number (whole)</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">SQL</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">INT</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Python</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">integer</code>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Float -->
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+                    <span class="iconify text-base text-gray-400" data-icon="fa6-solid:percent"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Float</span>
+                  </div>
+                  <div class="grid grid-cols-3 divide-x divide-gray-100">
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Excel</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">number (decimal)</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">SQL</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">DECIMAL / FLOAT</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Python</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">float</code>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Boolean -->
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+                    <span class="iconify text-base text-gray-400" data-icon="fa6-solid:toggle-on"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Boolean</span>
+                  </div>
+                  <div class="grid grid-cols-3 divide-x divide-gray-100">
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Excel</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">TRUE / FALSE</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">SQL</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">boolean</code>
+                    </div>
+                    <div class="px-4 py-4 flex flex-col gap-1">
+                      <span class="text-xs text-gray-400 mb-1">Python</span>
+                      <code
+                        class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">True / False</code>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 items-stretch">
+                <div class="flex flex-col">
+                  <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">
+                    Excel formula
+                  </p>
+                  <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify text-green-400" data-icon="fa6-solid:table"></span>
+                        <span class="text-xs font-semibold text-gray-400">Excel</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">=A1 * B1</code></pre>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">
+                    SQL query
+                  </p>
+                  <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify text-orange-400" data-icon="fa6-solid:database"></span>
+                        <span class="text-xs font-semibold text-gray-400">SQL</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">SELECT 
+  price * quantity AS total
+FROM 
+  orders;</code></pre>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">
+                    Python equivalent
+                  </p>
+                  <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre
+                      class="overflow-x-auto flex-1 pre-reset"><code class="language-python">total = price * quantity</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">All three perform the same calculation — <strong>Python uses named variables</strong>, SQL uses column expressions, and Excel uses cell references.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Practice Exercises ── -->
+        <section id="practice" class="scroll-mt-24">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:dumbbell"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Apply what you've learned — create
+                  variables, run calculations, and inspect data types.</p>
+              </div>
+            </div>
+            <!-- White body -->
+            <div class="bg-white overflow-hidden">
+              <!-- Tab bar -->
+              <div class="flex flex-wrap gap-2 px-6 pt-5">
+                <button class="tab-btn active" onclick="switchTab(this,'pr-tab-1')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:user"></span> Personal Variables
+                </button>
+                <button class="tab-btn" onclick="switchTab(this,'pr-tab-2')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:heart-pulse"></span> Insurance Premium
+                </button>
+                <button class="tab-btn" onclick="switchTab(this,'pr-tab-3')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:magnifying-glass"></span> Inspect Types
+                </button>
+              </div>
+
+              <!-- Exercise 1 -->
+              <div id="pr-tab-1" class="tab-panel active px-6 py-5">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="badge badge-exercise">Exercise 1</span>
+                    <h3 class="font-bold text-gray-800">Personal Variables</h3>
+                  </div>
+                  <span
+                    class="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-500">
+                    <span class="iconify text-xs" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                </div>
+                <!-- Task -->
+                <div class="flex items-start gap-3 rounded-xl p-4 mb-4 task-box">
+                  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                    <p class="text-sm text-gray-600">Create variables for your name, your age, and your favorite number.
+                      Print each one.</p>
+                  </div>
+                </div>
+                <!-- Skills -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">Variables</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">Strings</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">Integers</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">print()</span>
+                </div>
+                <!-- Answer accordion -->
+                <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+                  <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+                  <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+                </button>
+                <div class="accordion-body pt-3">
+                  <div class="relative rounded-xl overflow-hidden mb-4 bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">name            = "Alex"
+age             = 28
+favorite_number = 7
+
+print(name)
+print(age)
+print(favorite_number)</code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">Alex
+28
+7</pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exercise 2 -->
+              <div id="pr-tab-2" class="tab-panel px-6 py-5">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="badge badge-exercise">Exercise 2</span>
+                    <h3 class="font-bold text-gray-800">Health Insurance Claim</h3>
+                  </div>
+                  <span
+                    class="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-500">
+                    <span class="iconify text-xs" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                </div>
+                <div class="flex items-start gap-3 rounded-xl p-4 mb-4 task-box">
+                  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                    <p class="text-sm text-gray-600">Create variables for a health insurance claim — the total billed
+                      amount and a fixed deductible — then calculate and print how much the insurance will pay.</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">Variables</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">Integers</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">Arithmetic</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">print()</span>
+                </div>
+                <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+                  <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+                  <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+                </button>
+                <div class="accordion-body pt-3">
+                  <div class="relative rounded-xl overflow-hidden mb-4 bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">claim_amount = 500
+deductible   = 100
+
+insurance_pays = claim_amount - deductible
+
+print(insurance_pays)  # 400</code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">400</pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exercise 3 -->
+              <div id="pr-tab-3" class="tab-panel px-6 py-5">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="badge badge-exercise">Exercise 3</span>
+                    <h3 class="font-bold text-gray-800">Inspect Data Types</h3>
+                  </div>
+                  <span
+                    class="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-500">
+                    <span class="iconify text-xs" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                </div>
+                <div class="flex items-start gap-3 rounded-xl p-4 mb-4 task-box">
+                  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                    <p class="text-sm text-gray-600">Use the <code
+                        class="font-mono text-xs text-brand-dark">type()</code> function on four different values — a
+                      string, integer, float, and boolean — and observe the output.</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">type()</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">str / int / float
+                    / bool</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 font-medium">print()</span>
+                </div>
+                <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+                  <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+                  <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+                </button>
+                <div class="accordion-body pt-3">
+                  <div class="relative rounded-xl overflow-hidden mb-4 bg-code">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                      <div class="flex items-center gap-2">
+                        <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+                        <span class="text-xs font-semibold text-gray-400">Python</span>
+                      </div>
+                      <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                        <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                      </button>
+                    </div>
+                    <pre class="overflow-x-auto pre-reset"><code class="language-python">print(type("Hello"))
+print(type(10))
+print(type(3.14))
+print(type(True))</code></pre>
+                  </div>
+                  <div class="rounded-xl px-5 py-3 bg-code">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-2 text-gray-400">Output</p>
+                    <pre class="font-mono text-sm text-green-400">&lt;class 'str'&gt;
+&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'bool'&gt;</pre>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Common Mistakes ── -->
+        <section id="mistakes" class="scroll-mt-24">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Avoid these frequent errors that
+                  beginners make when working with variables and data types.</p>
+              </div>
+            </div>
+            <!-- White body -->
+            <div class="bg-white px-8 py-7">
+              <!-- Tab buttons -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                <button class="tab-btn active" onclick="switchTab(this,'mk-tab-1')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:quote-left"></span> Missing Quotes
+                </button>
+                <button class="tab-btn" onclick="switchTab(this,'mk-tab-2')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:hashtag"></span> Number as String
+                </button>
+                <button class="tab-btn" onclick="switchTab(this,'mk-tab-3')">
+                  <span class="iconify text-xs" data-icon="fa6-solid:toggle-on"></span> Boolean Case
+                </button>
+              </div>
+
+              <!-- Mistake 1 panel -->
+              <div id="mk-tab-1" class="tab-panel active">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="badge badge-exercise">Mistake 1</span>
+                    <h3 class="font-semibold text-gray-800">Forgetting Quotes Around Strings</h3>
+                  </div>
+                  <span
+                    class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full badge-mistake-tag">
+                    <span class="iconify text-xs" data-icon="fa6-solid:terminal"></span> NameError
+                  </span>
+                </div>
+                <div class="rounded-2xl overflow-hidden mistake-card">
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 border-r border-red-50 bg-mistake-bad">
+                      <p
+                        class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                        <span class="iconify" data-icon="fa6-solid:xmark-circle"></span> Incorrect
+                      </p>
+                      <pre
+                        class="rounded-xl overflow-x-auto border border-red-100"><code class="language-python">name = Python</code></pre>
+                    </div>
+                    <div
+                      class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+                      <span
+                        class="w-7 h-7 rounded-full flex items-center justify-center shadow-sm bg-white mistake-arrow-ring">
+                        <span class="iconify text-xs text-brand" data-icon="fa6-solid:arrow-right"></span>
+                      </span>
+                    </div>
+                    <div class="p-5 bg-mistake-good">
+                      <p
+                        class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-green-600 mb-3">
+                        <span class="iconify" data-icon="fa6-solid:circle-check"></span> Correct
+                      </p>
+                      <pre
+                        class="rounded-xl overflow-x-auto border border-green-100"><code class="language-python">name = "Python"</code></pre>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t mistake-tip">
+                    <span class="iconify text-lg shrink-0 mt-0.5 text-orange-400" data-icon="fa6-solid:circle-info"></span>
+                    <p class="text-xs text-gray-600 leading-relaxed">Without quotes, Python treats <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">Python</code>
+                      as a variable name. Since it doesn't exist, it raises a <code
+                        class="font-mono bg-red-50 border border-red-200 px-1 py-0.5 rounded text-red-600">NameError</code>.
+                      Always wrap text values in <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">"quotes"</code>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mistake 2 panel -->
+              <div id="mk-tab-2" class="tab-panel">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="badge badge-exercise">Mistake 2</span>
+                    <h3 class="font-semibold text-gray-800">Wrapping Numbers in Quotes</h3>
+                  </div>
+                  <span
+                    class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full badge-mistake-tag">
+                    <span class="iconify text-xs" data-icon="fa6-solid:terminal"></span> TypeError
+                  </span>
+                </div>
+                <div class="rounded-2xl overflow-hidden mistake-card">
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 border-r border-red-50 bg-mistake-bad">
+                      <p
+                        class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                        <span class="iconify" data-icon="fa6-solid:xmark-circle"></span> Incorrect
+                      </p>
+                      <pre
+                        class="rounded-xl overflow-x-auto border border-red-100"><code class="language-python">age = "30"</code></pre>
+                    </div>
+                    <div
+                      class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+                      <span
+                        class="w-7 h-7 rounded-full flex items-center justify-center shadow-sm bg-white mistake-arrow-ring">
+                        <span class="iconify text-xs text-brand" data-icon="fa6-solid:arrow-right"></span>
+                      </span>
+                    </div>
+                    <div class="p-5 bg-mistake-good">
+                      <p
+                        class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-green-600 mb-3">
+                        <span class="iconify" data-icon="fa6-solid:circle-check"></span> Correct
+                      </p>
+                      <pre
+                        class="rounded-xl overflow-x-auto border border-green-100"><code class="language-python">age = 30</code></pre>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t mistake-tip">
+                    <span class="iconify text-lg shrink-0 mt-0.5 text-orange-400" data-icon="fa6-solid:circle-info"></span>
+                    <p class="text-xs text-gray-600 leading-relaxed">Quoting <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">30</code>
+                      stores it as the text <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">"30"</code>,
+                      not a number. Any arithmetic like <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">age + 5</code>
+                      will raise a <code
+                        class="font-mono bg-red-50 border border-red-200 px-1 py-0.5 rounded text-red-600">TypeError</code>
+                      at runtime.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mistake 3 panel -->
+              <div id="mk-tab-3" class="tab-panel">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="badge badge-exercise">Mistake 3</span>
+                    <h3 class="font-semibold text-gray-800">Incorrect Boolean Capitalization</h3>
+                  </div>
+                  <span
+                    class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full badge-mistake-tag">
+                    <span class="iconify text-xs" data-icon="fa6-solid:terminal"></span> NameError
+                  </span>
+                </div>
+                <div class="rounded-2xl overflow-hidden mistake-card">
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 border-r border-red-50 bg-mistake-bad">
+                      <p
+                        class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                        <span class="iconify" data-icon="fa6-solid:xmark-circle"></span> Incorrect
+                      </p>
+                      <pre
+                        class="rounded-xl overflow-x-auto border border-red-100"><code class="language-python">is_ready = true</code></pre>
+                    </div>
+                    <div
+                      class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+                      <span
+                        class="w-7 h-7 rounded-full flex items-center justify-center shadow-sm bg-white mistake-arrow-ring">
+                        <span class="iconify text-xs text-brand" data-icon="fa6-solid:arrow-right"></span>
+                      </span>
+                    </div>
+                    <div class="p-5 bg-mistake-good">
+                      <p
+                        class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-green-600 mb-3">
+                        <span class="iconify" data-icon="fa6-solid:circle-check"></span> Correct
+                      </p>
+                      <pre
+                        class="rounded-xl overflow-x-auto border border-green-100"><code class="language-python">is_ready = True</code></pre>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t mistake-tip">
+                    <span class="iconify text-lg shrink-0 mt-0.5 text-orange-400" data-icon="fa6-solid:circle-info"></span>
+                    <p class="text-xs text-gray-600 leading-relaxed">Python is case-sensitive. <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">true</code>
+                      is an undefined variable, not a boolean — raising a <code
+                        class="font-mono bg-red-50 border border-red-200 px-1 py-0.5 rounded text-red-600">NameError</code>.
+                      Python's boolean literals must always start with a capital: <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">True</code>
+                      and <code
+                        class="font-mono bg-blue-50 border border-blue-200 px-1 py-0.5 rounded text-blue-800">False</code>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Lesson Recap ── -->
+        <section id="recap" class="scroll-mt-24">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Everything you covered in this lesson
+                  at a glance.</p>
+              </div>
+            </div>
+
+            <div class="bg-white px-8 py-7">
+              <p class="text-xs font-bold uppercase tracking-widest mb-5 text-brand">In This Lesson You Learned</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+                <div class="obj-card flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="iconify mt-0.5 flex-shrink-0 text-lg text-brand" data-icon="fa6-solid:circle-check"></span>
+                  <span class="text-sm text-gray-700">Variables store values in Python using the <code
+                      class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-brand-dark">=</code> assignment
+                    operator</span>
+                </div>
+
+                <div class="obj-card flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="iconify mt-0.5 flex-shrink-0 text-lg text-brand" data-icon="fa6-solid:circle-check"></span>
+                  <span class="text-sm text-gray-700">Python supports multiple data types for different kinds of
+                    information</span>
+                </div>
+
+                <div class="obj-card flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="iconify mt-0.5 flex-shrink-0 text-lg text-brand" data-icon="fa6-solid:circle-check"></span>
+                  <span class="text-sm text-gray-700">Common types include <code
+                      class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-brand-dark">str</code>, <code
+                      class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-brand-dark">int</code>, <code
+                      class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-brand-dark">float</code>, and
+                    <code class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-brand-dark">bool</code></span>
+                </div>
+
+                <div class="obj-card flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="iconify mt-0.5 flex-shrink-0 text-lg text-brand" data-icon="fa6-solid:circle-check"></span>
+                  <span class="text-sm text-gray-700">Python automatically determines data types — no need to declare
+                    them explicitly</span>
+                </div>
+
+                <div class="obj-card flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+                  <span class="iconify mt-0.5 flex-shrink-0 text-lg text-brand" data-icon="fa6-solid:circle-check"></span>
+                  <span class="text-sm text-gray-700">The <code
+                      class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-brand-dark">type()</code> function
+                    can reveal any value's data type at runtime</span>
+                </div>
+
+              </div>
+              <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Understanding variables and data types is <strong>essential for writing every Python program</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Next Lesson ── -->
+        <section id="next-lesson" class="scroll-mt-24">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <!-- Card header -->
+            <div
+              class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+                <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Continue your Python journey with more
+                  data types and language features.</p>
+              </div>
+            </div>
+
+            <div class="bg-white px-8 py-7 space-y-6">
+
+              <!-- Lesson banner -->
+              <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+                  <span class="text-white font-bold text-lg">3</span>
+                </span>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 2 · Lesson 3</p>
+                  <h3 class="text-base font-bold text-gray-800">Additional Python Data Types</h3>
+                  <p class="text-sm text-gray-500 mt-0.5">Expand beyond the basics — tuples, sets, dictionaries, and
+                    None.</p>
+                </div>
+              </div>
+
+              <!-- What's covered -->
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:layer-group"></span>
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-gray-700">Tuples</p>
+                      <p class="text-xs text-gray-400">Immutable sequences</p>
+                    </div>
+                  </div>
+                  <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:circle-nodes"></span>
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-gray-700">Sets</p>
+                      <p class="text-xs text-gray-400">Unique value collections</p>
+                    </div>
+                  </div>
+                  <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:ban"></span>
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-gray-700">The <code class="font-mono text-xs">None</code>
+                        type</p>
+                      <p class="text-xs text-gray-400">Representing no value</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Lesson Navigation ── -->
+        <section>
+          <div class="flex flex-col sm:flex-row gap-3">
+
+            <!-- Previous lesson -->
+            <a href="#"
+              class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+              <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+              <div class="min-w-0">
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">
+                  Previous</p>
+                <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">What is
+                  Python?</p>
+              </div>
+            </a>
+
+            <!-- Back to module -->
+            <a href="#"
+              class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+              <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+              <span
+                class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All
+                Lessons</span>
+            </a>
+
+            <!-- Next lesson -->
+            <a href="#"
+              class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+              <div class="min-w-0">
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">
+                  Next</p>
+                <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">
+                  Additional Python Data Types</p>
+              </div>
+              <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+            </a>
+
+          </div>
+        </section>
+
+      </main>
+    </div><!-- /lesson-layout -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════ -->
+  <script>
+    /* ==========================================================================
+       JAVASCRIPT — Python Learning Hub: Variables & Data Types
+       Sections:
+         1. TOC Sidebar  — collapse/expand + scroll-spy active highlight
+         2. Copy Button  — clipboard API with textarea fallback
+         3. Accordions   — show/hide expandable content panels
+         4. Tabs         — switch between tab panels within a card
+         5. Init         — Prism.js syntax highlighting on DOMContentLoaded
+       ========================================================================== */
+
+    /* --------------------------------------------------------------------------
+       1. TOC SIDEBAR
+       -------------------------------------------------------------------------- */
+
+    /**
+     * Toggle the sidebar between expanded (220px) and collapsed (44px) states.
+     * Swaps the chevron icon direction and re-scans Iconify to render the new SVG.
+     */
+    function toggleToc() {
+      const sidebar = document.querySelector('.lesson-toc-sidebar');
+      const icon    = document.getElementById('toc-toggle-icon');
+      const collapsed = sidebar.classList.toggle('toc-collapsed');
+      icon.setAttribute('data-icon', collapsed ? 'fa6-solid:angles-right' : 'fa6-solid:angles-left');
+      if (window.Iconify) Iconify.scan();
+    }
+
+    /* Scroll-spy: mark the TOC link whose section is currently in the viewport */
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = [...tocLinks]
+      .map(link => document.getElementById(link.getAttribute('href').replace('#', '')))
+      .filter(Boolean); // remove any null entries if an anchor doesn't exist
+
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+
+      // Find the last section whose top edge has been scrolled past (with 120px offset)
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 120) currentId = section.id;
+      });
+
+      // Toggle the .active class on the matching TOC link
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       2. COPY BUTTON
+       -------------------------------------------------------------------------- */
+
+    /**
+     * Copy the text content of the nearest <pre> to the clipboard.
+     * Uses the modern Clipboard API where available, falls back to
+     * document.execCommand('copy') for older browsers / non-HTTPS contexts.
+     *
+     * @param {HTMLElement} btn - The copy button that was clicked.
+     */
+    function copyCode(btn) {
+      // Walk up from the button to find the code block wrapper
+      const container = btn.closest('.relative') || btn.parentElement.closest('div');
+      const pre  = container ? container.querySelector('pre') : null;
+      const text = pre ? pre.innerText : '';
+
+      /** Briefly changes the button to a green "Copied!" state, then resets. */
+      function showFeedback() {
+        const orig       = btn.innerHTML;
+        const origBg     = btn.style.background;
+        const origBorder = btn.style.borderColor;
+        const origColor  = btn.style.color;
+
+        btn.innerHTML         = '<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';
+        btn.style.background  = 'rgba(34,197,94,0.2)';
+        btn.style.borderColor = 'rgba(34,197,94,0.5)';
+        btn.style.color       = '#4ade80';
+
+        setTimeout(() => {
+          btn.innerHTML         = orig;
+          btn.style.background  = origBg;
+          btn.style.borderColor = origBorder;
+          btn.style.color       = origColor;
+        }, 2000);
+      }
+
+      /** Legacy fallback: create an off-screen textarea, select + copy, remove. */
+      function fallbackCopy() {
+        const ta        = document.createElement('textarea');
+        ta.value        = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity  = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) { /* silently ignore */ }
+        document.body.removeChild(ta);
+        showFeedback();
+      }
+
+      // Prefer the async Clipboard API (requires HTTPS / secure context)
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       3. ACCORDIONS
+       -------------------------------------------------------------------------- */
+
+    /**
+     * Toggle an accordion open or closed.
+     * The body is the next sibling element after the toggle button.
+     * Re-runs Prism highlighting on newly revealed code when opening.
+     *
+     * @param {HTMLElement} btn - The accordion toggle button.
+     */
+    function toggleAccordion(btn) {
+      const body   = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+
+      btn.classList.toggle('open',  !isOpen);
+      body.classList.toggle('open', !isOpen);
+
+      // Highlight any code inside the accordion when it is first opened
+      if (!isOpen && window.Prism) Prism.highlightAllUnder(body);
+    }
+
+    /* --------------------------------------------------------------------------
+       4. TABS
+       -------------------------------------------------------------------------- */
+
+    /**
+     * Switch to a tab panel within the nearest card container.
+     * Scopes deactivation to sibling buttons and panels so multiple independent
+     * tab groups can coexist on the same page without interfering with each other.
+     *
+     * @param {HTMLElement} btn     - The tab button that was clicked.
+     * @param {string}      panelId - The id of the panel to activate.
+     */
+    function switchTab(btn, panelId) {
+      // Find the nearest container that owns both the buttons and the panels
+      const container = btn.closest('.bg-white') || btn.closest('section') || btn.parentElement.closest('div');
+
+      // Deactivate all sibling tab buttons and panels in this container
+      container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+      // Activate the clicked button and its corresponding panel
+      btn.classList.add('active');
+      const panel = document.getElementById(panelId);
+      if (panel) {
+        panel.classList.add('active');
+        if (window.Prism) Prism.highlightAllUnder(panel);
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       5. INIT
+       -------------------------------------------------------------------------- */
+
+    // Run Prism syntax highlighting across all static code blocks once the
+    // DOM is fully parsed (Prism doesn't auto-run when loaded asynchronously).
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Prism) Prism.highlightAll();
+    });
+  </script>
+
+</div>
