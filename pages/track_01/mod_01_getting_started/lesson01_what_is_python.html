@@ -18,14 +18,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
 
   <style>
+    /* ── CSS Variables — font tokens (:root) ──────────────────────── */
     :root {
       --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
       --font-mono: 'Fira Code', monospace;
     }
 
+    /* ── Global reset — smooth scroll ──────────────────────────── */
     * { scroll-behavior: smooth; }
 
-    /* Prism overrides */
+    /* ── Prism.js — syntax highlighted code blocks ─────────────── */
     pre[class*="language-"] {
       border-radius: 0.75rem;
       font-family: var(--font-mono);
@@ -37,7 +39,7 @@
       background: #1e1e2e;
     }
 
-    /* Headings */
+    /* ── Heading resets — strip Confluence default margins ─────── */
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-body) !important;
       margin-top: 0;
@@ -49,7 +51,7 @@
     h2 { font-size: 1.25rem; font-weight: 700 !important; }
     h3 { font-size: 1rem;   font-weight: 600 !important; }
 
-    /* Brand tokens */
+    /* ── Brand utility classes ─────────────────────────────────── */
     .text-brand      { color: #CB187D; }
     .text-brand-dark { color: #CB187D; }
     .bg-brand        { background: #CB187D; }
@@ -60,28 +62,28 @@
     .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
     .pre-reset       { margin: 0; border-radius: 0; background: transparent; }
 
-    /* Key Concepts vertical tabs */
+    /* ── Key Concepts sidebar tabs  (.kc-tab / .kc-tab-active) ─── */
     .kc-tab-active { background: #fdf0f7; }
     .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
     .kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
     @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Code Examples */
+    /* ── Code Examples pill tabs   (.ce-step / .ce-step-active) ── */
     .ce-step:not(.ce-step-active):hover { background: #374151; color: #ffffff; }
     .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
-    /* Common Mistakes */
+    /* ── Common Mistakes pill tabs (.mk-step / .mk-step-active) ── */
     .mk-step:not(.mk-step-active):hover { background: #374151; color: #ffffff; }
     .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
-    /* Knowledge Check */
+    /* ── Knowledge Check quiz tabs (.qz-step / .qz-step-active) ── */
     .qz-step:not(.qz-step-active):hover { background: #374151; color: #ffffff; }
     .qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
     /* Practice Exercises */
     .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
 
-    /* Accordion show/hide */
+    /* ── Accordion — used in Overview & Key Ideas sections ─────── */
     .accordion-body      { display: none  !important; }
     .accordion-body.open { display: block !important; }
     .accordion-toggle {
@@ -97,7 +99,7 @@
     .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
     .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
 
-    /* Practice exercise tab pills */
+    /* ── Practice Exercise tabs    (.pe-step / .pe-step-active) ── */
     .pe-step:not(.pe-step-active):hover { background: #374151; color: #ffffff; }
     .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
 
@@ -105,6 +107,7 @@
        HERO — Static Gradient + Abstract Design
        ═══════════════════════════════════════════════════════ */
 
+    /* ── Hero banner — full-width gradient header ──────────────── */
     .hero-container {
       position: relative;
       border-radius: 1.25rem;
@@ -209,7 +212,7 @@
        REST OF PAGE STYLES (unchanged from converter)
        ═══════════════════════════════════════════════════════ */
 
-    /* Progress bar at page top */
+    /* ── Scroll progress bar — fixed top-of-page indicator ─────── */
     .scroll-progress {
       position: fixed;
       top: 0;
@@ -226,7 +229,7 @@
       100% { background-position: 200% 0%; }
     }
 
-    /* Layout */
+    /* ── Page layout — two-column: TOC sidebar + main content ──── */
     .lesson-layout { display: block; }
     .lesson-layout > main { overflow: hidden; }
 
@@ -264,7 +267,7 @@
       padding-left: 8px;
     }
 
-    /* Cards */
+    /* ── Objective cards — Learning Goals section grid ─────────── */
     .obj-card {
       transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease;
     }
@@ -287,7 +290,7 @@
       color: white !important;
     }
 
-    /* Tabs */
+    /* ── Generic outline tab buttons (.tab-btn / .tab-panel) ───── */
     .tab-btn {
       display: inline-flex;
       align-items: center;
@@ -316,7 +319,7 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Copy button */
+    /* ── Code block copy button (.copy-btn) ────────────────────── */
     .copy-btn {
       position: absolute;
       top: 10px;
@@ -343,7 +346,7 @@
     }
     .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2); }
 
-    /* Nav link hover */
+    /* ── Bottom lesson navigation — Previous / All Lessons / Next  */
     .lesson-nav-link:hover p,
     .lesson-nav-link:hover span,
     .lesson-nav-link:hover svg {
@@ -351,7 +354,7 @@
       transition: color 0.15s;
     }
 
-    /* Back to top button */
+    /* ── Back-to-top floating button ───────────────────────────── */
     .back-to-top {
       position: fixed;
       bottom: 2rem;
@@ -380,7 +383,7 @@
       background: #7F004C;
     }
 
-    /* Quiz */
+    /* ── Quiz answer feedback buttons (.quiz-btn.correct / .incorrect)  */
     .quiz-btn.correct {
       background: #f0fdf4;
       border-color: #22c55e;
@@ -392,7 +395,7 @@
       color: #dc2626;
     }
 
-    /* Mistake cards */
+    /* ── Card hover animations — Mistake, Flow, Recap, Overview cards  */
     .mistake-card {
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
@@ -428,7 +431,7 @@
       border-color: rgba(203, 24, 125, 0.3);
     }
 
-    /* Responsive */
+    /* ── Responsive — mobile breakpoint (<768px) ───────────────── */
     @media (max-width: 767px) {
       .lesson-toc-sidebar { float: none; display: none; }
       .lesson-layout { display: block; }
@@ -439,7 +442,7 @@
       .hero-title-main { font-size: 1.75rem !important; }
     }
 
-    /* Print */
+    /* ── Print styles — hide interactive chrome when printing ──── */
     @media print {
       .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; }
       .obj-card:hover { transform: none; box-shadow: none; }
