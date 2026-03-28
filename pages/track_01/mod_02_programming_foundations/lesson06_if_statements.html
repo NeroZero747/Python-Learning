@@ -802,7 +802,7 @@
           </span>
           <div>
             <p class="text-sm font-semibold text-gray-800">Apply conditions to real data</p>
-            <p class="text-xs text-gray-500 mt-0.5">Comparison operators let you flag high-cost claims, check member eligibility, and classify provider risk.</p>
+            <p class="text-xs text-gray-500 mt-0.5">if / elif / else lets you check ticket types, grade scores, and route decisions — all in a few readable lines of Python.</p>
           </div>
         </div>
 
@@ -842,7 +842,7 @@
       </div>
 
       <!-- Part 2 — Analogy intro paragraph -->
-      <p class="text-sm text-gray-600 leading-relaxed">Think of an if statement like a triage nurse at a hospital emergency department — she asks one rapid question about each patient and then directs them to exactly the right care pathway depending on the answer. An <strong>if / elif / else</strong> block is that nurse, and Python is the language you use to write her rules.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">Think of an if statement like a set of traffic lights at a busy junction — it reads the current conditions and gives exactly one instruction: Go, Slow, or Stop. An <strong>if / elif / else</strong> block works the same way: Python checks each condition in order and follows the first path that matches.</p>
 
       <!-- Part 3 — Analogy card grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -855,10 +855,10 @@
             </span>
             <div>
               <p class="text-sm font-bold text-gray-800 leading-tight">The if condition</p>
-              <p class="text-[10px] text-gray-400 italic leading-tight">The triage question — is this patient critical?</p>
+              <p class="text-[10px] text-gray-400 italic leading-tight">The sensor — reads whether a condition is True</p>
             </div>
           </div>
-          <p class="text-xs text-gray-500 leading-relaxed">The opening question every care pathway starts with.</p>
+          <p class="text-xs text-gray-500 leading-relaxed">The opening question Python evaluates before deciding which branch to run.</p>
         </div>
 
         <!-- Card 2 — violet accent -->
@@ -869,10 +869,10 @@
             </span>
             <div>
               <p class="text-sm font-bold text-gray-800 leading-tight">Indented code block</p>
-              <p class="text-[10px] text-gray-400 italic leading-tight">The treatment room — action taken when yes</p>
+              <p class="text-[10px] text-gray-400 italic leading-tight">The green light — the action that runs when True</p>
             </div>
           </div>
-          <p class="text-xs text-gray-500 leading-relaxed">Steps the nurse carries out along that care pathway.</p>
+          <p class="text-xs text-gray-500 leading-relaxed">Every statement inside this block runs when the condition above it is True.</p>
         </div>
 
         <!-- Card 3 — blue accent -->
@@ -938,7 +938,7 @@
             </span>
             <h3 class="text-sm font-bold text-gray-900">Conditions Always Resolve to True or False</h3>
           </div>
-          <p class="text-xs text-gray-600 leading-relaxed mb-4">Every expression inside an if statement evaluates to a Boolean — either <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">True</code> or <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">False</code>. Python uses that result to decide which branch to execute. Comparison operators like <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">&gt;</code>, <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">==</code>, and <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">!=</code> are the most common way to create conditions in healthcare reporting scripts.</p>
+          <p class="text-xs text-gray-600 leading-relaxed mb-4">Every expression inside an if statement evaluates to a Boolean — either <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">True</code> or <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">False</code>. Python uses that result to decide which branch to execute. Comparison operators like <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">&gt;</code>, <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">==</code>, and <code class="text-[11px] bg-gray-100 px-1 py-0.5 rounded font-mono">!=</code> are the most common way to express those conditions in Python scripts.</p>
           <div class="flex flex-wrap gap-2">
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Boolean</span>
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">True / False</span>
@@ -957,7 +957,7 @@
             </span>
             <h3 class="text-sm font-bold text-gray-900">elif Chains Multiple Conditions Cleanly</h3>
           </div>
-          <p class="text-xs text-gray-600 leading-relaxed mb-4">When you need more than two possible outcomes — such as routing a claim to High, Medium, or Low priority queues — elif lets you chain additional conditions without nesting one if inside another. Python checks each condition in order and executes the first branch that is True, then skips all the rest.</p>
+          <p class="text-xs text-gray-600 leading-relaxed mb-4">When you need more than two possible outcomes — such as grading a score as Distinction, Pass, or Try Again — elif lets you chain additional conditions without nesting one if inside another. Python checks each condition in order and executes the first branch that is True, then skips all the rest.</p>
           <div class="flex flex-wrap gap-2">
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">elif</span>
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Multi-branch logic</span>
@@ -1082,25 +1082,25 @@
                       <tr class="border-b border-gray-50">
                         <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-2/5">Start with keyword <code class="font-mono bg-pink-100 text-[#CB187D] border border-pink-200 px-1 rounded">if</code></td>
                         <td class="py-2 px-3 text-gray-500">
-                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">if plan == "Gold":</code> ✓
+                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">if age &gt;= 18:</code> ✓
                           &nbsp;
-                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">plan == "Gold":</code> ✗
+                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">age &gt;= 18:</code> ✗
                         </td>
                       </tr>
                       <tr class="border-b border-gray-50 bg-gray-50/50">
                         <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap">Use <code class="font-mono bg-pink-100 text-[#CB187D] border border-pink-200 px-1 rounded">==</code> to compare</td>
                         <td class="py-2 px-3 text-gray-500">
-                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">plan == "Gold"</code> ✓
+                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">age == 18</code> ✓
                           &nbsp;
-                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">plan = "Gold"</code> ✗
+                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">age = 18</code> ✗
                         </td>
                       </tr>
                       <tr class="bg-gray-50/50">
                         <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap">End line with colon <code class="font-mono bg-pink-100 text-[#CB187D] border border-pink-200 px-1 rounded">:</code></td>
                         <td class="py-2 px-3 text-gray-500">
-                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">if plan == "Gold":</code> ✓
+                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">if age &gt;= 18:</code> ✓
                           &nbsp;
-                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">if plan == "Gold"</code> ✗
+                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">if age &gt;= 18</code> ✗
                         </td>
                       </tr>
                     </tbody>
@@ -1118,11 +1118,11 @@
                       <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
                     </button>
                   </div>
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python">plan_type = "Gold"              # member's plan type
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">age = 20                        # the customer's age
 
-if plan_type == "Gold":         # condition — is this True?
-    print("Route to premium care team")  # runs only when True
-# nothing happens if plan_type is "Silver" or "Bronze"</code></pre>
+if age &gt;= 18:                   # condition — is this True?
+    print("Access granted")     # runs only when True
+# nothing happens if age is below 18</code></pre>
                 </div>
 
                 <!-- Tip callout — pink -->
@@ -1184,32 +1184,32 @@ if plan_type == "Gold":         # condition — is this True?
                       <tr class="border-b border-gray-50">
                         <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">==</code></td>
                         <td class="py-2 px-3 text-gray-500">Equal to</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">plan == "Gold" → True</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">score == 80 → True</code></td>
                       </tr>
                       <tr class="border-b border-gray-50 bg-gray-50/40">
                         <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">!=</code></td>
                         <td class="py-2 px-3 text-gray-500">Not equal to</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">plan != "Bronze" → True</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">score != 0 → True</code></td>
                       </tr>
                       <tr class="border-b border-gray-50">
                         <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">&gt;=</code></td>
                         <td class="py-2 px-3 text-gray-500">At least</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">amount >= 5000 → True</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">score >= 60 → True</code></td>
                       </tr>
                       <tr class="border-b border-gray-50 bg-gray-50/40">
                         <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">&gt;</code></td>
                         <td class="py-2 px-3 text-gray-500">Greater than</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">amount > 5000 → False</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">score > 80 → False</code></td>
                       </tr>
                       <tr class="border-b border-gray-50">
                         <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">&lt;=</code></td>
                         <td class="py-2 px-3 text-gray-500">At most</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">rate <= 0.10 → True</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">age <= 12 → True</code></td>
                       </tr>
                       <tr class="bg-gray-50/40">
                         <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">&lt;</code></td>
                         <td class="py-2 px-3 text-gray-500">Less than</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">flags < 3 → True</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">items < 5 → True</code></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1226,14 +1226,14 @@ if plan_type == "Gold":         # condition — is this True?
                       <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
                     </button>
                   </div>
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python">claim_amount = 4500             # claim submitted for review
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">score = 74                      # quiz score as a percentage
 
-if claim_amount >= 5000:        # check highest threshold first
-    print("High priority")
-elif claim_amount >= 1000:      # only reached if line above was False
-    print("Medium priority")   # ← this runs; 4500 >= 1000 is True
-elif claim_amount >= 0:         # skipped — a True branch already ran
-    print("Low priority")</code></pre>
+if score >= 80:                 # check highest threshold first
+    print("Distinction")
+elif score >= 60:               # only reached if line above was False
+    print("Pass")              # ← this runs; 74 >= 60 is True
+elif score >= 0:                # skipped — a True branch already ran
+    print("Try again")</code></pre>
                 </div>
 
                 <!-- Tip callout — violet -->
@@ -1241,7 +1241,7 @@ elif claim_amount >= 0:         # skipped — a True branch already ran
                   <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
                     <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
                   </span>
-                  <p class="text-xs text-gray-600"><strong>Order your elif thresholds from most restrictive to least.</strong> If you wrote <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">elif amount >= 0</code> first, it would match every claim and the higher thresholds would never run.</p>
+                  <p class="text-xs text-gray-600"><strong>Order your elif thresholds from most restrictive to least.</strong> If you wrote <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">elif score >= 0</code> first, it would match every score and the Distinction and Pass thresholds would never run.</p>
                 </div>
 
               </div>
@@ -1298,13 +1298,13 @@ elif claim_amount >= 0:         # skipped — a True branch already ran
                     <tbody>
                       <tr class="border-b border-gray-50">
                         <td class="py-2 px-3 font-semibold text-gray-600">Input example</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1 rounded">plan = "Bronze"</code></td>
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-700 border border-blue-200 px-1 rounded">plan = "Bronze"</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1 rounded">ticket = "Basic"</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-700 border border-blue-200 px-1 rounded">ticket = "Basic"</code></td>
                       </tr>
                       <tr class="border-b border-gray-50 bg-gray-50/40">
                         <td class="py-2 px-3 font-semibold text-gray-600">No match → output</td>
                         <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Nothing prints</span></td>
-                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Basic benefits</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Standing area</span></td>
                       </tr>
                       <tr>
                         <td class="py-2 px-3 font-semibold text-gray-600">Data safety</td>
@@ -1326,14 +1326,14 @@ elif claim_amount >= 0:         # skipped — a True branch already ran
                       <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
                     </button>
                   </div>
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python">plan_type = "Bronze"            # unexpected or minimal plan type
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">ticket_type = "Basic"           # the ticket category chosen by the customer
 
-if plan_type == "Gold":
-    print("Premium benefits")
-elif plan_type == "Silver":
-    print("Standard benefits")
+if ticket_type == "Premium":
+    print("Access all areas — VIP lounge included")
+elif ticket_type == "Standard":
+    print("Main hall access")
 else:                           # no condition — catches everything else
-    print("Basic benefits")    # ← runs for Bronze, None, typos, etc.</code></pre>
+    print("Standing area only") # ← runs for Basic, typos, unexpected values</code></pre>
                 </div>
 
                 <!-- Tip callout — blue -->
@@ -1390,7 +1390,7 @@ else:                           # no condition — catches everything else
             <div class="flex-1 rounded-xl border border-pink-100 bg-pink-50/50 overflow-hidden">
               <div class="flex items-center gap-3 px-4 py-3 border-b border-pink-100">
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#CB187D] text-white text-[11px] font-bold tracking-wider shrink-0">if</span>
-                <code class="text-xs font-mono text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-200">plan_type == "Gold"</code>
+                <code class="text-xs font-mono text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-200">ticket_type == "Premium"</code>
                 <span class="ml-auto text-[10px] text-gray-400 italic hidden sm:block">evaluated first — always</span>
               </div>
               <div class="grid grid-cols-2 divide-x divide-pink-100">
@@ -1429,7 +1429,7 @@ else:                           # no condition — catches everything else
             <div class="flex-1 rounded-xl border border-blue-100 bg-blue-50/50 overflow-hidden">
               <div class="flex items-center gap-3 px-4 py-3 border-b border-blue-100">
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-blue-500 text-white text-[11px] font-bold tracking-wider shrink-0">elif</span>
-                <code class="text-xs font-mono text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-200">plan_type == "Silver"</code>
+                <code class="text-xs font-mono text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-200">ticket_type == "Standard"</code>
                 <span class="ml-auto text-[10px] text-gray-400 italic hidden sm:block">only reached if if was False</span>
               </div>
               <div class="grid grid-cols-2 divide-x divide-blue-100">
@@ -1484,7 +1484,7 @@ else:                           # no condition — catches everything else
 
       <!-- Example walkthrough -->
       <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Example walkthrough — <code class="text-[11px] font-mono normal-case">plan_type = "Gold"</code></p>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Example walkthrough — <code class="text-[11px] font-mono normal-case">ticket_type = "Premium"</code></p>
         <div class="space-y-2">
 
           <div class="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
@@ -1493,7 +1493,7 @@ else:                           # no condition — catches everything else
             </span>
             <div class="min-w-0 flex items-center gap-2 flex-wrap">
               <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0">if</span>
-              <code class="text-xs font-mono text-gray-700">plan_type == "Gold"</code>
+              <code class="text-xs font-mono text-gray-700">ticket_type == "Premium"</code>
               <span class="text-xs text-gray-500">→ True</span>
             </div>
             <span class="ml-auto text-xs font-bold text-emerald-700 shrink-0">✓ RUNS</span>
@@ -1505,7 +1505,7 @@ else:                           # no condition — catches everything else
             </span>
             <div class="min-w-0 flex items-center gap-2 flex-wrap">
               <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-blue-400 text-white text-[10px] font-bold shrink-0">elif</span>
-              <code class="text-xs font-mono text-gray-500">plan_type == "Silver"</code>
+              <code class="text-xs font-mono text-gray-500">ticket_type == "Standard"</code>
               <span class="text-xs text-gray-400 italic">never evaluated</span>
             </div>
             <span class="ml-auto text-xs font-bold text-gray-400 shrink-0">✗ SKIPPED</span>
@@ -1536,31 +1536,31 @@ else:                           # no condition — catches everything else
             </div>
             <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
               <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-              <span class="text-[11px] font-semibold text-gray-400">member_routing.py</span>
+              <span class="text-[11px] font-semibold text-gray-400">ticket_check.py</span>
             </div>
           </div>
           <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
         </div>
         <div class="bg-code">
-          <pre class="overflow-x-auto pre-reset"><code class="language-python">plan_type = "Gold"
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">ticket_type = "Premium"
 
-if plan_type == "Gold":
-    print("Route to premium care team")   # ← This runs — condition is True
-elif plan_type == "Silver":
-    print("Route to standard care team")  # ← Skipped
+if ticket_type == "Premium":
+    print("Access all areas — VIP lounge included")  # ← This runs — condition is True
+elif ticket_type == "Standard":
+    print("Main hall access")              # ← Skipped
 else:
-    print("Route to basic care team")     # ← Skipped</code></pre>
+    print("Standing area only")           # ← Skipped</code></pre>
         </div>
         <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
           <div class="flex items-center gap-2 mb-1.5">
             <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
             <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Output</span>
           </div>
-          <div class="font-mono text-xs text-emerald-400">Route to premium care team</div>
+          <div class="font-mono text-xs text-emerald-400">Access all areas — VIP lounge included</div>
         </div>
       </div>
 
-      <p class="text-sm text-gray-600 leading-relaxed">Because <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono">plan_type == "Gold"</code> is <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono">True</code>, Python runs that block immediately and skips the elif and else entirely — they are never evaluated.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">Because <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono">ticket_type == "Premium"</code> is <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono">True</code>, Python runs that block immediately and skips the elif and else entirely — they are never evaluated.</p>
 
     </div>
   </div>
@@ -1582,36 +1582,36 @@ else:
       <!-- Tab pills -->
       <div class="flex items-center gap-2 mb-6" role="tablist">
         <button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-          <span class="iconify text-[13px]" data-icon="fa6-solid:id-card"></span>
-          <span class="ce-step-label text-xs font-bold">Member Eligibility</span>
+          <span class="iconify text-[13px]" data-icon="fa6-solid:user-check"></span>
+          <span class="ce-step-label text-xs font-bold">Age Check</span>
         </button>
         <button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-          <span class="iconify text-[13px]" data-icon="fa6-solid:file-invoice-dollar"></span>
-          <span class="ce-step-label text-xs font-bold">Claims Routing</span>
+          <span class="iconify text-[13px]" data-icon="fa6-solid:truck"></span>
+          <span class="ce-step-label text-xs font-bold">Delivery Band</span>
         </button>
         <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-          <span class="iconify text-[13px]" data-icon="fa6-solid:user-doctor"></span>
-          <span class="ce-step-label text-xs font-bold">Provider Risk</span>
+          <span class="iconify text-[13px]" data-icon="fa6-solid:star-half-stroke"></span>
+          <span class="ce-step-label text-xs font-bold">Order Rating</span>
         </button>
       </div>
 
-      <!-- Panel 0: Member Eligibility -->
+      <!-- Panel 0: Age Check -->
       <div class="ce-panel ce-panel-anim" role="tabpanel">
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-                <span class="iconify text-base" data-icon="fa6-solid:id-card"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:user-check"></span>
               </span>
               <div>
-                <h3 class="font-bold text-gray-800">Member Eligibility</h3>
+                <h3 class="font-bold text-gray-800">Age Check</h3>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
                   </span>
-                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Members</span>
                   <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">if / else</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">>=</span>
                 </div>
               </div>
             </div>
@@ -1621,7 +1621,7 @@ else:
               <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-                <p class="text-sm text-gray-600">This script stores a member's plan type as a <strong class="text-gray-800">variable</strong>, then uses an <strong class="text-gray-800">if/else</strong> statement to print the correct eligibility message — one message if the plan matches, a different one if it doesn't.</p>
+                <p class="text-sm text-gray-600">This script stores a customer's age as a <strong class="text-gray-800">variable</strong> and uses an <strong class="text-gray-800">if/else</strong> statement to print one of two messages — one when the condition is <code class="font-mono text-xs bg-gray-100 px-1 rounded">True</code>, the other when it's <code class="font-mono text-xs bg-gray-100 px-1 rounded">False</code>.</p>
               </div>
             </div>
             <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
@@ -1629,53 +1629,53 @@ else:
                 <div class="flex items-center gap-3">
                   <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
                     <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-                    <span class="text-[11px] font-semibold text-gray-400">member_eligibility.py</span>
+                    <span class="text-[11px] font-semibold text-gray-400">age_check.py</span>
                   </div>
                 </div>
                 <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
               </div>
               <div class="bg-code">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">plan_type = &quot;Gold&quot;              # store the member&apos;s plan type as a variable
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">age = 20                        # the customer's age
 
-if plan_type == &quot;Gold&quot;:        # check if the plan exactly equals &quot;Gold&quot;
-    print(&quot;Member is eligible for the premium wellness programme&quot;)
-else:                           # if the condition is False, run this block instead
-    print(&quot;Member qualifies for the standard programme only&quot;)</code></pre>
+if age &gt;= 18:                   # check if the condition is True
+    print(&quot;Access granted&quot;)     # runs only when age is 18 or above
+else:                           # runs when the condition is False
+    print(&quot;Access denied — must be 18 or over&quot;)</code></pre>
               </div>
               <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
                 <div class="flex items-center gap-2 mb-1.5">
                   <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
                   <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
-                  <span class="text-[10px] text-gray-600 font-mono">$ python member_eligibility.py</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python age_check.py</span>
                 </div>
-                <div class="font-mono text-xs text-emerald-400">Member is eligible for the premium wellness programme</div>
+                <div class="font-mono text-xs text-emerald-400">Access granted</div>
               </div>
             </div>
             <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
               <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-              <p class="text-sm text-gray-600">Change "Gold" to "Silver" on the first line and Python will automatically run the else branch instead — no other line of the script needs to change.</p>
+              <p class="text-sm text-gray-600">Change <code class="font-mono text-xs bg-gray-100 px-1 rounded">age = 20</code> to <code class="font-mono text-xs bg-gray-100 px-1 rounded">age = 16</code> and Python will automatically run the else branch instead — no other line needs to change.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Panel 1: Claims Routing -->
+      <!-- Panel 1: Delivery Band -->
       <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-                <span class="iconify text-base" data-icon="fa6-solid:file-invoice-dollar"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:truck"></span>
               </span>
               <div>
-                <h3 class="font-bold text-gray-800">Claims Routing</h3>
+                <h3 class="font-bold text-gray-800">Delivery Band</h3>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
                   </span>
-                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Claims</span>
                   <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">if / elif / else</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">&gt;=</span>
                 </div>
               </div>
             </div>
@@ -1685,7 +1685,7 @@ else:                           # if the condition is False, run this block inst
               <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-                <p class="text-sm text-gray-600">This script uses <strong class="text-gray-800">if/elif/else</strong> to route a claim to the correct review queue based on its dollar amount. Python checks each condition from top to bottom and runs the first one that is true.</p>
+                <p class="text-sm text-gray-600">This script uses <strong class="text-gray-800">if/elif/else</strong> to assign the correct delivery cost based on the basket total. Python checks each threshold from top to bottom and runs the first branch that is True.</p>
               </div>
             </div>
             <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
@@ -1693,56 +1693,55 @@ else:                           # if the condition is False, run this block inst
                 <div class="flex items-center gap-3">
                   <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
                     <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-                    <span class="text-[11px] font-semibold text-gray-400">claims_routing.py</span>
+                    <span class="text-[11px] font-semibold text-gray-400">delivery_band.py</span>
                   </div>
                 </div>
                 <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
               </div>
               <div class="bg-code">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">claim_amount = 4500            # the total dollar value of the claim
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">basket_total = 35              # the customer's basket total in pounds
 
-if claim_amount &gt;= 5000:      # check for high-value claims first
-    priority = &quot;High — route to senior reviewer&quot;
-elif claim_amount &gt;= 1000:    # if not high, check medium threshold
-    priority = &quot;Medium — route to standard queue&quot;
-else:                          # anything below $1000 is auto-approved
-    priority = &quot;Low — auto-approve&quot;
+if basket_total &gt;= 50:        # check the highest threshold first
+    delivery = &quot;Free delivery&quot;
+elif basket_total &gt;= 20:      # only reached if the line above was False
+    delivery = &quot;£2.99 standard delivery&quot;  # ← this runs; 35 &gt;= 20 is True
+else:                          # basket below £20 — highest delivery charge
+    delivery = &quot;£4.99 delivery&quot;
 
-print(priority)                # display the routing decision</code></pre>
+print(delivery)                # display the delivery cost</code></pre>
               </div>
               <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
                 <div class="flex items-center gap-2 mb-1.5">
                   <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
                   <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
-                  <span class="text-[10px] text-gray-600 font-mono">$ python claims_routing.py</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python delivery_band.py</span>
                 </div>
-                <div class="font-mono text-xs text-emerald-400">Medium — route to standard queue</div>
+                <div class="font-mono text-xs text-emerald-400">£2.99 standard delivery</div>
               </div>
             </div>
             <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
               <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-              <p class="text-sm text-gray-600">Try changing the claim amount to 5000 or 800 — Python will automatically pick a different branch each time without you needing to change anything else in the script.</p>
+              <p class="text-sm text-gray-600">Try changing the basket total to 55 or 15 — Python will automatically pick a different branch each time without you needing to change anything else in the script.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Panel 2: Provider Risk -->
+      <!-- Panel 2: Order Rating -->
       <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-                <span class="iconify text-base" data-icon="fa6-solid:user-doctor"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:star-half-stroke"></span>
               </span>
               <div>
-                <h3 class="font-bold text-gray-800">Provider Risk</h3>
+                <h3 class="font-bold text-gray-800">Order Rating</h3>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
                   </span>
-                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Providers</span>
                   <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">if / elif / else + or</span>
                 </div>
               </div>
@@ -1753,7 +1752,7 @@ print(priority)                # display the routing decision</code></pre>
               <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-                <p class="text-sm text-gray-600">This script checks two provider metrics — audit flags and complaint rate — and uses <strong class="text-gray-800">or</strong> inside each condition so that either metric alone can trigger a higher risk tier.</p>
+                <p class="text-sm text-gray-600">This script checks two delivery metrics — minutes late and number of complaints — and uses <strong class="text-gray-800">or</strong> inside each condition so that either metric alone can trigger a refund action.</p>
               </div>
             </div>
             <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
@@ -1761,36 +1760,36 @@ print(priority)                # display the routing decision</code></pre>
                 <div class="flex items-center gap-3">
                   <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
                     <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-                    <span class="text-[11px] font-semibold text-gray-400">provider_risk.py</span>
+                    <span class="text-[11px] font-semibold text-gray-400">order_rating.py</span>
                   </div>
                 </div>
                 <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
               </div>
               <div class="bg-code">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">audit_flags = 3                # number of audit flags raised against this provider
-complaint_rate = 0.08          # proportion of patients who filed a complaint
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">minutes_late = 25              # minutes after the estimated delivery time
+complaints = 2                 # complaints from this restaurant in the last week
 
-if audit_flags &gt;= 5 or complaint_rate &gt;= 0.10:   # high risk if either metric is very bad
-    risk_tier = &quot;High — flag for immediate audit&quot;
-elif audit_flags &gt;= 2 or complaint_rate &gt;= 0.05:  # medium risk if either metric is elevated
-    risk_tier = &quot;Medium — schedule quarterly review&quot;
-else:                                               # both metrics are fine — low risk
-    risk_tier = &quot;Low — standard annual review&quot;
+if minutes_late &gt;= 30 or complaints &gt;= 5:   # severe issue — either triggers full refund
+    action = &quot;Full refund issued&quot;
+elif minutes_late &gt;= 10 or complaints &gt;= 2: # minor issue — either triggers credit
+    action = &quot;10% credit added to your account&quot;  # ← this runs
+else:                                           # no issues — no action needed
+    action = &quot;Delivery on time — no action needed&quot;
 
-print(risk_tier)               # display the assigned risk tier</code></pre>
+print(action)                  # display the outcome</code></pre>
               </div>
               <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
                 <div class="flex items-center gap-2 mb-1.5">
                   <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
                   <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
-                  <span class="text-[10px] text-gray-600 font-mono">$ python provider_risk.py</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python order_rating.py</span>
                 </div>
-                <div class="font-mono text-xs text-emerald-400">Medium — schedule quarterly review</div>
+                <div class="font-mono text-xs text-emerald-400">10% credit added to your account</div>
               </div>
             </div>
             <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
               <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-              <p class="text-sm text-gray-600">Using or means a provider only needs to fail one of the two checks to be bumped into the higher tier — raise audit_flags to 5 and watch the output jump straight to High.</p>
+              <p class="text-sm text-gray-600">Using <code class="font-mono text-xs bg-gray-100 px-1 rounded">or</code> means only one of the two checks needs to be True to trigger the action — raise <code class="font-mono text-xs bg-gray-100 px-1 rounded">minutes_late</code> to 30 and watch the output jump to a full refund.</p>
             </div>
           </div>
         </div>
@@ -1918,7 +1917,7 @@ print(risk_tier)               # display the assigned risk tier</code></pre>
             <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
               <span class="iconify text-brand text-sm" data-icon="fa6-solid:code-compare"></span>
             </span>
-            <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same eligibility check, three tools</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same condition check, three tools</p>
           </div>
           <span class="flex-1 h-px bg-gray-100"></span>
         </div>
@@ -1936,12 +1935,12 @@ print(risk_tier)               # display the assigned risk tier</code></pre>
                 </div>
                 <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
               </div>
-              <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">if plan_type == &quot;Gold&quot;:
-    tier = &quot;Premium&quot;
-elif plan_type == &quot;Silver&quot;:
-    tier = &quot;Standard&quot;
+              <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">if ticket_type == &quot;Premium&quot;:
+    tier = &quot;VIP&quot;
+elif ticket_type == &quot;Standard&quot;:
+    tier = &quot;Main hall&quot;
 else:
-    tier = &quot;Basic&quot;</code></pre>
+    tier = &quot;Standing&quot;</code></pre>
             </div>
           </div>
 
@@ -1957,11 +1956,11 @@ else:
                 <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
               </div>
               <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">CASE
-  WHEN plan_type = 'Gold'
-    THEN 'Premium'
-  WHEN plan_type = 'Silver'
-    THEN 'Standard'
-  ELSE 'Basic'
+  WHEN ticket_type = 'Premium'
+    THEN 'VIP'
+  WHEN ticket_type = 'Standard'
+    THEN 'Main hall'
+  ELSE 'Standing'
 END AS tier</code></pre>
             </div>
           </div>
@@ -1977,15 +1976,15 @@ END AS tier</code></pre>
                 </div>
                 <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
               </div>
-              <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">=IF(A2="Gold","Premium",
-  IF(A2="Silver","Standard",
-    "Basic"))</code></pre>
+              <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">=IF(A2="Premium","VIP",
+  IF(A2="Standard","Main hall",
+    "Standing"))</code></pre>
             </div>
           </div>
 
         </div>
 
-        <p class="text-xs text-gray-400 mt-2">All three classify a member's plan into a benefit tier — the same result, just written in a different tool.</p>
+        <p class="text-xs text-gray-400 mt-2">All three classify a ticket type into an access tier — the same result, just written in a different tool.</p>
 
       </div>
 
@@ -2015,19 +2014,19 @@ END AS tier</code></pre>
       <div class="flex items-center gap-2 mb-6" role="tablist">
         <button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
           <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-          <span class="pe-step-label text-xs font-bold">Check Plan Tier</span>
+          <span class="pe-step-label text-xs font-bold">Check a Ticket</span>
         </button>
         <button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
           <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-          <span class="pe-step-label text-xs font-bold">Route a Claim</span>
+          <span class="pe-step-label text-xs font-bold">Grade a Score</span>
         </button>
         <button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
           <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-          <span class="pe-step-label text-xs font-bold">Rate a Provider</span>
+          <span class="pe-step-label text-xs font-bold">Book a Seat</span>
         </button>
       </div>
 
-      <!-- Panel 0: Check Plan Tier -->
+      <!-- Panel 0: Check a Ticket -->
       <div class="pe-panel pe-panel-anim" role="tabpanel">
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
@@ -2037,12 +2036,12 @@ END AS tier</code></pre>
                 <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
-                <h3 class="font-bold text-gray-800">Check Plan Tier</h3>
+                <h3 class="font-bold text-gray-800">Check a Ticket</h3>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
                   </span>
-                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Members</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Cinema</span>
                   <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">if / else</span>
                 </div>
               </div>
@@ -2053,7 +2052,7 @@ END AS tier</code></pre>
               <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-                <p class="text-sm text-gray-600">A member is enrolled on a Silver plan and your system needs to confirm their benefit tier. Set plan_type to "Silver" and write an if/else block that prints "Eligible for standard benefits" when the plan is "Silver" and "Plan type not recognised" for any other value. Your output should show "Eligible for standard benefits".</p>
+                <p class="text-sm text-gray-600">A cinema ticket scanner checks whether a ticket type is "Standard" before letting someone into the screening. Set <code class="font-mono text-xs">ticket_type</code> to <code class="font-mono text-xs">"Standard"</code> and write an <code class="font-mono text-xs">if</code>/<code class="font-mono text-xs">else</code> block that prints <code class="font-mono text-xs">"Welcome — enjoy the film!"</code> when the ticket matches and <code class="font-mono text-xs">"Ticket type not recognised"</code> for anything else. Your output should show <code class="font-mono text-xs">Welcome — enjoy the film!</code></p>
               </div>
             </div>
             <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
@@ -2066,38 +2065,38 @@ END AS tier</code></pre>
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
                       <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-                      <span class="text-[11px] font-semibold text-gray-400">plan_tier_check.py</span>
+                      <span class="text-[11px] font-semibold text-gray-400">ticket_check.py</span>
                     </div>
                   </div>
                   <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
                 </div>
                 <div class="bg-code">
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python">plan_type = &quot;Silver&quot;           # store the member&apos;s current plan type
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">ticket_type = &quot;Standard&quot;          # store the scanned ticket type
 
-if plan_type == &quot;Silver&quot;:      # check if the plan exactly matches &quot;Silver&quot;
-    print(&quot;Eligible for standard benefits&quot;)
-else:                           # any other plan type falls here
-    print(&quot;Plan type not recognised&quot;)</code></pre>
+if ticket_type == &quot;Standard&quot;:     # check whether the ticket matches exactly
+    print(&quot;Welcome — enjoy the film!&quot;)
+else:                              # any other ticket type is turned away
+    print(&quot;Ticket type not recognised&quot;)</code></pre>
                 </div>
                 <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
                   <div class="flex items-center gap-2 mb-1.5">
                     <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
                     <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
-                    <span class="text-[10px] text-gray-600 font-mono">$ python plan_tier_check.py</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ python ticket_check.py</span>
                   </div>
-                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Eligible for standard benefits</div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Welcome — enjoy the film!</div>
                 </div>
               </div>
               <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
                 <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-                <p class="text-sm text-gray-600">Real member portals use exactly this kind of condition to decide which benefits screen to show — the string must match exactly, including capitalisation, or the else branch runs instead.</p>
+                <p class="text-sm text-gray-600">Python compares strings character by character — <code class="font-mono text-xs">"standard"</code> and <code class="font-mono text-xs">"Standard"</code> are not equal because the capital letter differs. Always match the capitalisation exactly when checking strings.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Panel 1: Route a Claim -->
+      <!-- Panel 1: Grade a Score -->
       <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
@@ -2107,12 +2106,12 @@ else:                           # any other plan type falls here
                 <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
-                <h3 class="font-bold text-gray-800">Route a Claim</h3>
+                <h3 class="font-bold text-gray-800">Grade a Score</h3>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
                   </span>
-                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Claims</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Quiz</span>
                   <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">if / elif / else</span>
                 </div>
               </div>
@@ -2123,7 +2122,7 @@ else:                           # any other plan type falls here
               <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-                <p class="text-sm text-gray-600">A claim for $7,200 has come in for review and needs to be sent to the right queue. Set claim_amount to 7200 and write an if/elif/else block that prints "High priority" for claims of $5,000 or above, "Medium priority" for $1,000 or above, and "Low priority" otherwise. Your output should show "High priority".</p>
+                <p class="text-sm text-gray-600">An online quiz shows a grade label next to your final score. Set <code class="font-mono text-xs">score</code> to <code class="font-mono text-xs">74</code> and write an <code class="font-mono text-xs">if</code>/<code class="font-mono text-xs">elif</code>/<code class="font-mono text-xs">else</code> block that prints <code class="font-mono text-xs">"Distinction"</code> for 80 and above, <code class="font-mono text-xs">"Pass"</code> for 60 and above, and <code class="font-mono text-xs">"Try again"</code> for anything lower. Your output should show <code class="font-mono text-xs">Pass</code>.</p>
               </div>
             </div>
             <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
@@ -2136,40 +2135,40 @@ else:                           # any other plan type falls here
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
                       <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-                      <span class="text-[11px] font-semibold text-gray-400">claim_routing.py</span>
+                      <span class="text-[11px] font-semibold text-gray-400">grade_score.py</span>
                     </div>
                   </div>
                   <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
                 </div>
                 <div class="bg-code">
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python">claim_amount = 7200                    # the dollar value of the submitted claim
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">score = 74                       # the learner&apos;s final quiz score
 
-if claim_amount &gt;= 5000:               # high-value claims go to senior reviewers
-    print(&quot;High priority&quot;)
-elif claim_amount &gt;= 1000:             # mid-range claims join the standard queue
-    print(&quot;Medium priority&quot;)
-else:                                  # small claims are auto-approved
-    print(&quot;Low priority&quot;)</code></pre>
+if score &gt;= 80:                  # top band — distinction
+    print(&quot;Distinction&quot;)
+elif score &gt;= 60:                # middle band — pass
+    print(&quot;Pass&quot;)
+else:                            # below pass mark
+    print(&quot;Try again&quot;)</code></pre>
                 </div>
                 <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
                   <div class="flex items-center gap-2 mb-1.5">
                     <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
                     <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
-                    <span class="text-[10px] text-gray-600 font-mono">$ python claim_routing.py</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ python grade_score.py</span>
                   </div>
-                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">High priority</div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Pass</div>
                 </div>
               </div>
               <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
                 <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-                <p class="text-sm text-gray-600">In a real claims system this same logic determines which review team receives a claim — always start from the highest threshold so an expensive claim is never accidentally routed to the auto-approve queue.</p>
+                <p class="text-sm text-gray-600">Python checks each condition in order and stops at the first one that is true. Always put the highest threshold first — if you put <code class="font-mono text-xs">score &gt;= 60</code> before <code class="font-mono text-xs">score &gt;= 80</code>, every distinction would be labelled "Pass" instead.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Panel 2: Rate a Provider -->
+      <!-- Panel 2: Book a Seat -->
       <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
@@ -2179,12 +2178,12 @@ else:                                  # small claims are auto-approved
                 <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
-                <h3 class="font-bold text-gray-800">Rate a Provider</h3>
+                <h3 class="font-bold text-gray-800">Book a Seat</h3>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
                   </span>
-                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Providers</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Travel</span>
                   <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">if / elif / else + or</span>
                 </div>
               </div>
@@ -2195,7 +2194,7 @@ else:                                  # small claims are auto-approved
               <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-                <p class="text-sm text-gray-600">A provider has 4 audit flags and a complaint rate of 0.07 and needs a risk rating before their credentialing review. Set audit_flags to 4 and complaint_rate to 0.07, then write an if/elif/else block using or that prints "High" if flags are 5 or above or the rate is 0.10 or above, "Medium" if flags are 2 or above or the rate is 0.05 or above, and "Low" otherwise. Your output should show "Medium".</p>
+                <p class="text-sm text-gray-600">A train booking app checks whether a seat is available and affordable before confirming a reservation. Set <code class="font-mono text-xs">seats_left</code> to <code class="font-mono text-xs">0</code> and <code class="font-mono text-xs">price</code> to <code class="font-mono text-xs">45</code>, then write an <code class="font-mono text-xs">if</code>/<code class="font-mono text-xs">elif</code>/<code class="font-mono text-xs">else</code> block using <code class="font-mono text-xs">or</code> that prints <code class="font-mono text-xs">"Cannot book"</code> when there are no seats left or the price is above 100, <code class="font-mono text-xs">"Booking confirmed"</code> when seats are available and the price is 50 or below, and <code class="font-mono text-xs">"Confirm with customer"</code> otherwise. Your output should show <code class="font-mono text-xs">Cannot book</code>.</p>
               </div>
             </div>
             <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
@@ -2208,34 +2207,34 @@ else:                                  # small claims are auto-approved
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
                       <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-                      <span class="text-[11px] font-semibold text-gray-400">provider_rating.py</span>
+                      <span class="text-[11px] font-semibold text-gray-400">book_seat.py</span>
                     </div>
                   </div>
                   <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
                 </div>
                 <div class="bg-code">
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python">audit_flags = 4                              # number of compliance flags raised
-complaint_rate = 0.07                        # proportion of patients who complained
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">seats_left = 0                              # number of seats still available
+price = 45                                  # ticket price in pounds
 
-if audit_flags &gt;= 5 or complaint_rate &gt;= 0.10:   # either metric is very bad → High
-    print(&quot;High&quot;)
-elif audit_flags &gt;= 2 or complaint_rate &gt;= 0.05:  # either metric is elevated → Medium
-    print(&quot;Medium&quot;)
-else:                                             # both metrics are within limits → Low
-    print(&quot;Low&quot;)</code></pre>
+if seats_left == 0 or price &gt; 100:          # no seats, or too expensive → block
+    print(&quot;Cannot book&quot;)
+elif seats_left &gt; 0 and price &lt;= 50:        # seats available and price is fine → confirm
+    print(&quot;Booking confirmed&quot;)
+else:                                       # seats exist but price needs approval
+    print(&quot;Confirm with customer&quot;)</code></pre>
                 </div>
                 <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
                   <div class="flex items-center gap-2 mb-1.5">
                     <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
                     <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
-                    <span class="text-[10px] text-gray-600 font-mono">$ python provider_rating.py</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ python book_seat.py</span>
                   </div>
-                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Medium</div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Cannot book</div>
                 </div>
               </div>
               <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
                 <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-                <p class="text-sm text-gray-600">Combining two metrics with or means a provider only needs to breach one threshold to be flagged — this mirrors how real credentialing systems protect against risk from multiple directions at once.</p>
+                <p class="text-sm text-gray-600">Using <code class="font-mono text-xs">or</code> in the first condition means either problem — no seats <em>or</em> too expensive — will block the booking. This is the same pattern booking systems use to prevent reservations that can't actually be fulfilled.</p>
               </div>
             </div>
           </div>
@@ -2296,8 +2295,8 @@ else:                                             # both metrics are within limi
                 <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Incorrect
               </p>
               <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">if plan_type == "Gold"
-    print("Premium")</code></pre>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">if ticket_type == "Premium"
+    print("VIP access")</code></pre>
               </div>
             </div>
             <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
@@ -2310,8 +2309,8 @@ else:                                             # both metrics are within limi
                 <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct
               </p>
               <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">if plan_type == "Gold":
-    print("Premium")</code></pre>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">if ticket_type == "Premium":
+    print("VIP access")</code></pre>
               </div>
             </div>
           </div>
@@ -2343,8 +2342,8 @@ else:                                             # both metrics are within limi
                 <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Incorrect
               </p>
               <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">if claim_amount >= 5000:
-print("High priority")</code></pre>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">if score >= 50:
+print("You passed")</code></pre>
               </div>
             </div>
             <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
@@ -2357,8 +2356,8 @@ print("High priority")</code></pre>
                 <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct
               </p>
               <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">if claim_amount >= 5000:
-    print("High priority")</code></pre>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">if score >= 50:
+    print("You passed")</code></pre>
               </div>
             </div>
           </div>
@@ -2390,8 +2389,8 @@ print("High priority")</code></pre>
                 <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Incorrect
               </p>
               <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">if plan_type = "Gold":   # SyntaxError
-    print("Premium")</code></pre>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">if ticket_type = "Premium":   # SyntaxError
+    print("VIP access")</code></pre>
               </div>
             </div>
             <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
@@ -2404,14 +2403,14 @@ print("High priority")</code></pre>
                 <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct
               </p>
               <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-                <pre class="overflow-x-auto pre-reset"><code class="language-python">if plan_type == "Gold":  # comparison
-    print("Premium")</code></pre>
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">if ticket_type == "Premium":  # comparison
+    print("VIP access")</code></pre>
               </div>
             </div>
           </div>
           <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
             <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-            <p class="text-xs text-gray-600 leading-relaxed">Inside an if condition, always use <code class="text-[11px] font-mono bg-gray-100 px-1 py-0.5 rounded">==</code> to compare. Save the single <code class="text-[11px] font-mono bg-gray-100 px-1 py-0.5 rounded">=</code> for assignment statements such as <code class="text-[11px] font-mono bg-gray-100 px-1 py-0.5 rounded">plan_type = "Gold"</code>.</p>
+            <p class="text-xs text-gray-600 leading-relaxed">Inside an if condition, always use <code class="text-[11px] font-mono bg-gray-100 px-1 py-0.5 rounded">==</code> to compare. Save the single <code class="text-[11px] font-mono bg-gray-100 px-1 py-0.5 rounded">=</code> for assignment statements such as <code class="text-[11px] font-mono bg-gray-100 px-1 py-0.5 rounded">ticket_type = "Premium"</code>.</p>
           </div>
         </div>
       </div>
@@ -2428,106 +2427,114 @@ print("High priority")</code></pre>
       </span>
       <div class="min-w-0">
         <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How if statements power healthcare data workflows</p>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How if statements power everyday decisions in Python</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-6">
+    <div class="bg-white px-8 py-7 space-y-5">
 
-      <!-- Intro callout -->
-      <div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
-        <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:hospital"></span>
-        <p class="text-sm text-gray-700 leading-relaxed">If statements are the backbone of every healthcare data rule. Whether you are checking member eligibility, routing a claim for review, or flagging a provider for audit, you are writing conditional logic that Python evaluates one branch at a time.</p>
-      </div>
+      <!-- Intro paragraph -->
+      <p class="text-sm text-gray-600 leading-relaxed">Every app you use is making decisions in real time — and those decisions are written as if statements. A streaming service checks your subscription tier before it plays a show. A cinema sets the ticket price based on the customer's age. A courier app routes a parcel to the right delivery band based on weight. You write <code class="font-mono text-[#CB187D] text-xs">if condition:</code> once, and Python follows the right path automatically.</p>
 
-      <!-- 3 domain cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- Three scenario cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-        <div class="group rounded-xl border border-gray-100 bg-gray-50 p-5 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm transition-all duration-200">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-              <span class="iconify text-base text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:id-card"></span>
+        <!-- Card 1 — violet: Streaming -->
+        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
+          <div class="flex flex-col items-center gap-3">
+            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
+              <span class="iconify text-white text-2xl" data-icon="fa6-solid:tv"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-800 leading-snug">One account,<br>three subscription tiers</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">When a user presses play, Python checks <code class="font-mono text-violet-700 text-xs">plan_type</code> against each tier — <code class="font-mono text-violet-700 text-xs">"Basic"</code>, <code class="font-mono text-violet-700 text-xs">"Standard"</code>, or <code class="font-mono text-violet-700 text-xs">"Premium"</code> — and unlocks the right content quality. One <code class="font-mono text-violet-700 text-xs">if / elif / else</code> block handles all three paths.</p>
+            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
+              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">content_quality</code></span>
             </div>
-            <p class="text-sm font-bold text-gray-800">Members</p>
           </div>
-          <p class="text-xs text-gray-500 leading-relaxed">Check a member's plan type or enrolment status to automatically route their inquiry to the right care team or open the correct benefits workflow.</p>
         </div>
 
-        <div class="group rounded-xl border border-gray-100 bg-gray-50 p-5 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm transition-all duration-200">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-              <span class="iconify text-base text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:file-invoice-dollar"></span>
+        <!-- Card 2 — pink: Ticket pricing -->
+        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
+          <div class="flex flex-col items-center gap-3">
+            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
+              <span class="iconify text-white text-2xl" data-icon="fa6-solid:ticket"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-800 leading-snug">Six seats sold,<br>three different prices</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">A cinema checkout checks whether <code class="font-mono text-[#CB187D] text-xs">age &lt; 12</code> (child), <code class="font-mono text-[#CB187D] text-xs">age &gt;= 65</code> (senior), or neither (adult) and sets the price accordingly. Exactly one branch runs — the first condition that evaluates to <code class="font-mono text-[#CB187D] text-xs">True</code>.</p>
+            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
+              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">ticket_price</code></span>
             </div>
-            <p class="text-sm font-bold text-gray-800">Claims</p>
           </div>
-          <p class="text-xs text-gray-500 leading-relaxed">Classify claims by dollar amount into High, Medium, or Low priority tiers so high-value submissions reach a senior reviewer before the processing deadline.</p>
         </div>
 
-        <div class="group rounded-xl border border-gray-100 bg-gray-50 p-5 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm transition-all duration-200">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-              <span class="iconify text-base text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:user-doctor"></span>
+        <!-- Card 3 — emerald: Parcel routing -->
+        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
+          <div class="flex flex-col items-center gap-3">
+            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+              <span class="iconify text-white text-2xl" data-icon="fa6-solid:truck"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-800 leading-snug">A parcel packed,<br>one courier to choose</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">A logistics app checks <code class="font-mono text-emerald-700 text-xs">weight &lt;= 1</code> for standard post, <code class="font-mono text-emerald-700 text-xs">weight &lt;= 5</code> for courier, and falls back to <code class="font-mono text-emerald-700 text-xs">else</code> for freight. Python reads each condition in order and stops at the first match.</p>
+            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
+              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">"standard" / "courier" / "freight"</code></span>
             </div>
-            <p class="text-sm font-bold text-gray-800">Providers</p>
           </div>
-          <p class="text-xs text-gray-500 leading-relaxed">Evaluate a provider's audit flags and complaint rate together to assign a risk tier that determines the next credentialing review date and frequency.</p>
         </div>
 
-      </div>
+      </div><!-- /card grid -->
 
-      <!-- 4-step workflow stepper -->
-      <p class="text-sm font-semibold text-gray-700">How a typical conditional data rule runs:</p>
-      <div class="relative overflow-x-auto pb-2">
-        <div class="flex items-center gap-0 min-w-[640px]">
+      <!-- Before / After table -->
+      <div class="rounded-xl border border-gray-100 overflow-hidden">
+        <div class="grid grid-cols-2">
 
-          <div class="flex flex-col items-center shrink-0" style="width:130px;">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-              <span class="iconify text-white text-xl" data-icon="fa6-solid:database"></span>
+          <!-- Without column -->
+          <div class="border-r border-gray-100">
+            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without if statements</p>
             </div>
-            <p class="text-xs font-bold text-gray-800 mt-2 text-center">1. Load record</p>
-            <p class="text-[10px] text-gray-400 text-center mt-0.5">Retrieve member, claim, or provider data</p>
-          </div>
-
-          <div class="flex-1 flex items-center -mx-1" style="margin-top:-30px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-            <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <div class="flex flex-col items-center shrink-0" style="width:130px;">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-              <span class="iconify text-white text-xl" data-icon="fa6-solid:circle-question"></span>
+            <div class="px-4 py-4 space-y-3">
+              <div class="flex items-start gap-2.5">
+                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-xs text-gray-500 leading-relaxed">You manually look up each user's account tier and decide which content they can access — one lookup per user, easy to get wrong at scale.</p>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-xs text-gray-500 leading-relaxed">A cashier reads the customer's age, picks the price from a printed chart, and keys it in — the same manual decision for every single ticket sold.</p>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-xs text-gray-500 leading-relaxed">A warehouse worker weighs each parcel, consults a rate card, and selects a courier by hand — slow, inconsistent, and error-prone at scale.</p>
+              </div>
             </div>
-            <p class="text-xs font-bold text-gray-800 mt-2 text-center">2. Evaluate condition</p>
-            <p class="text-[10px] text-gray-400 text-center mt-0.5">Apply if / elif logic to the key field</p>
           </div>
 
-          <div class="flex-1 flex items-center -mx-1" style="margin-top:-30px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-            <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <div class="flex flex-col items-center shrink-0" style="width:130px;">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100">
-              <span class="iconify text-white text-xl" data-icon="fa6-solid:code-branch"></span>
+          <!-- With column -->
+          <div>
+            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
+              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With if statements</p>
             </div>
-            <p class="text-xs font-bold text-gray-800 mt-2 text-center">3. Branch to action</p>
-            <p class="text-[10px] text-gray-400 text-center mt-0.5">Run the first True branch; skip the rest</p>
-          </div>
-
-          <div class="flex-1 flex items-center -mx-1" style="margin-top:-30px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-            <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <div class="flex flex-col items-center shrink-0" style="width:130px;">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-              <span class="iconify text-white text-xl" data-icon="fa6-solid:file-export"></span>
+            <div class="px-4 py-4 space-y-3">
+              <div class="flex items-start gap-2.5">
+                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">if plan_type == "Premium":</strong> — Python checks once and returns the correct content quality instantly, for every user, every time.</p>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">if age &lt; 12:</strong> — Python branches to child, senior, or adult pricing in microseconds, with no chart and no human error.</p>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">if weight &lt;= 1:</strong> — Python reads the weight, picks the first matching bracket, and assigns a courier automatically — no rate card, no guesswork.</p>
+              </div>
             </div>
-            <p class="text-xs font-bold text-gray-800 mt-2 text-center">4. Output result</p>
-            <p class="text-[10px] text-gray-400 text-center mt-0.5">Print label, write tier, or trigger next step</p>
           </div>
 
         </div>
-      </div>
+      </div><!-- /before-after table -->
 
     </div>
   </div>
@@ -2549,6 +2556,7 @@ print("High priority")</code></pre>
       <!-- 2×2 recap grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+        <!-- Card 01 -->
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
             <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
@@ -2556,11 +2564,15 @@ print("High priority")</code></pre>
               <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
                 <span class="iconify text-sm" data-icon="fa6-solid:toggle-on"></span>
               </span>
-              <p class="text-sm text-gray-700 font-medium leading-relaxed">How conditional logic works — Python evaluates every condition as True or False before deciding which code block to run.</p>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">How conditional logic works</p>
+                <p class="text-[11px] text-gray-600 leading-snug">Python evaluates each condition as <code class="font-mono">True</code> or <code class="font-mono">False</code> before acting.</p>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 02 -->
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
             <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
@@ -2568,11 +2580,15 @@ print("High priority")</code></pre>
               <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
                 <span class="iconify text-sm" data-icon="fa6-solid:code-branch"></span>
               </span>
-              <p class="text-sm text-gray-700 font-medium leading-relaxed">Control flow with if — an if statement tells Python to run a specific block of code only when the condition is True.</p>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Control flow with if</p>
+                <p class="text-[11px] text-gray-600 leading-snug">Use <code class="font-mono">if</code> to run a block only when its condition is <code class="font-mono">True</code>.</p>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 03 -->
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
             <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
@@ -2580,11 +2596,15 @@ print("High priority")</code></pre>
               <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
                 <span class="iconify text-sm" data-icon="fa6-solid:sitemap"></span>
               </span>
-              <p class="text-sm text-gray-700 font-medium leading-relaxed">Add elif and else branches — adding elif and else lets you handle multiple possible outcomes inside a single logic block.</p>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Add elif and else branches</p>
+                <p class="text-[11px] text-gray-600 leading-snug"><code class="font-mono">elif</code> adds extra conditions; <code class="font-mono">else</code> catches every remaining case.</p>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- Card 04 -->
         <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
           <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
             <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
@@ -2592,7 +2612,10 @@ print("High priority")</code></pre>
               <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
                 <span class="iconify text-sm" data-icon="fa6-solid:filter"></span>
               </span>
-              <p class="text-sm text-gray-700 font-medium leading-relaxed">Apply conditions to real data — comparison operators let you flag high-cost claims, check member eligibility, and classify provider risk.</p>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Apply conditions to real data</p>
+                <p class="text-[11px] text-gray-600 leading-snug">Grade a score, price a ticket, or route a parcel — same three-branch structure.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2601,14 +2624,14 @@ print("High priority")</code></pre>
 
       <!-- Completion banner -->
       <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
-        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">✓</span>
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
         <div class="relative flex items-center gap-4">
           <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
             <span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span>
           </span>
           <div>
             <p class="text-sm font-bold text-white">Lesson Complete!</p>
-            <p class="text-xs text-white/80 mt-0.5">You've covered 4 key concepts. Ready for the knowledge check?</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 4 key concepts. Ready for the knowledge check?</p>
           </div>
         </div>
       </div>
@@ -2763,7 +2786,7 @@ print("High priority")</code></pre>
           </div>
           <div class="px-6 py-5 space-y-4">
             <div class="quiz-question" data-qid="quiz-q3">
-              <p class="text-sm font-semibold text-gray-800 mb-4">Python's comparison operators only work with numbers, so you can't use them to compare text values like a member's plan type or a claim status code.</p>
+              <p class="text-sm font-semibold text-gray-800 mb-4">Python's comparison operators only work with numbers, so you can't use them to compare text values like a ticket type or a product name.</p>
               <div class="flex gap-3">
                 <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
                   <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
