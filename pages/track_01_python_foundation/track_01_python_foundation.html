@@ -1,0 +1,1577 @@
+<!-- =============================================================
+     Track 01 — Python Foundation | Python Learning Hub
+     Track overview page: all modules and lessons at a glance.
+     ============================================================= -->
+
+<!-- ── Fonts ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" />
+
+<!-- ── Tailwind CSS (CDN) ── -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ── Iconify ── -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<style>
+
+  /* ==========================================================================
+     1. GLOBAL RESETS
+     ========================================================================== */
+  * { scroll-behavior: smooth; box-sizing: border-box; }
+
+  :root {
+    --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --brand:     #CB187D;
+    --brand-end: #e84aad;
+    --brand-dark:#7F004C;
+    --brand-soft:#fdf0f7;
+  }
+
+  /* ==========================================================================
+     2. CONFLUENCE CSS ISOLATION
+     ========================================================================== */
+
+  #hub-root,
+  #hub-root * {
+    font-family: var(--font-body) !important;
+    box-sizing: border-box !important;
+  }
+  #hub-root { font-size: 16px !important; line-height: 1.6 !important; color: #1f2937 !important; }
+
+  /* ── Text colors ── */
+  #hub-root .text-white      { color: #ffffff !important; }
+  #hub-root .text-gray-900   { color: #111827 !important; }
+  #hub-root .text-gray-800   { color: #1f2937 !important; }
+  #hub-root .text-gray-700   { color: #374151 !important; }
+  #hub-root .text-gray-600   { color: #4b5563 !important; }
+  #hub-root .text-gray-500   { color: #6b7280 !important; }
+  #hub-root .text-gray-400   { color: #9ca3af !important; }
+  #hub-root .text-gray-300   { color: #d1d5db !important; }
+
+  /* ── Font weights ── */
+  #hub-root .font-extrabold  { font-weight: 800 !important; }
+  #hub-root .font-bold       { font-weight: 700 !important; }
+  #hub-root .font-semibold   { font-weight: 600 !important; }
+  #hub-root .font-medium     { font-weight: 500 !important; }
+
+  /* ── Font sizes ── */
+  #hub-root .text-4xl  { font-size: 2.25rem  !important; line-height: 2.5rem   !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem !important; line-height: 2.25rem  !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem   !important; line-height: 2rem     !important; }
+  #hub-root .text-xl   { font-size: 1.25rem  !important; line-height: 1.75rem  !important; }
+  #hub-root .text-lg   { font-size: 1.125rem !important; line-height: 1.75rem  !important; }
+  #hub-root .text-base { font-size: 1rem     !important; line-height: 1.5rem   !important; }
+  #hub-root .text-sm   { font-size: 0.875rem !important; line-height: 1.25rem  !important; }
+  #hub-root .text-xs   { font-size: 0.75rem  !important; line-height: 1rem     !important; }
+
+  /* ── Layout ── */
+  #hub-root .flex            { display: flex !important; }
+  #hub-root .inline-flex     { display: inline-flex !important; }
+  #hub-root .grid            { display: grid !important; }
+  #hub-root .hidden          { display: none !important; }
+  #hub-root .items-center    { align-items: center !important; }
+  #hub-root .items-start     { align-items: flex-start !important; }
+  #hub-root .justify-center  { justify-content: center !important; }
+  #hub-root .justify-between { justify-content: space-between !important; }
+  #hub-root .shrink-0        { flex-shrink: 0 !important; }
+  #hub-root .min-w-0         { min-width: 0 !important; }
+  #hub-root .gap-2           { gap: 0.5rem !important; }
+  #hub-root .gap-3           { gap: 0.75rem !important; }
+  #hub-root .gap-4           { gap: 1rem !important; }
+  #hub-root .gap-6           { gap: 1.5rem !important; }
+  #hub-root .ml-auto         { margin-left: auto !important; }
+
+  /* ── Headings ── */
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important; margin-bottom: 0 !important;
+    padding: 0 !important; line-height: 1.3 !important;
+  }
+
+  /* ── Links ── */
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  /* ── Iconify ── */
+  #hub-root .iconify { vertical-align: middle; flex-shrink: 0; }
+
+  /* ==========================================================================
+     3. BRAND TOKENS
+     ========================================================================== */
+  .text-brand       { color: var(--brand); }
+  .bg-brand         { background: var(--brand); }
+  .bg-brand-soft    { background: var(--brand-soft); }
+  .bg-amber-tip     { background: #fff7ed; border-color: #fed7aa !important; }
+  .border-brand     { border-color: var(--brand) !important; }
+
+  /* ==========================================================================
+     4. HERO
+     ========================================================================== */
+  .hero-container {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    min-height: 400px;
+    background: linear-gradient(135deg, #CB187D 0%, #a31268 45%, #7F004C 100%);
+  }
+  .hero-dots {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .hero-glow {
+    position: absolute; border-radius: 50%;
+    pointer-events: none; filter: blur(80px);
+  }
+  .hero-glow-1 { width: 400px; height: 400px; top: -100px; right: -40px; background: rgba(255,255,255,0.1); }
+  .hero-glow-2 { width: 300px; height: 300px; bottom: -60px; left: 8%;  background: rgba(127,0,76,0.4); }
+  .hero-glow-line {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%);
+    opacity: 0.6;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #ffffff;
+    font-weight: 600;
+    pointer-events: none;
+    cursor: default;
+    backdrop-filter: blur(6px);
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 11px 26px; border-radius: 999px;
+    font-weight: 700; font-size: 0.875rem;
+    color: var(--brand); background: #ffffff; border: none;
+    cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease;
+    text-decoration: none;
+  }
+  .hero-cta:hover { transform: translateY(-2px); filter: brightness(0.96); }
+  .skill-dot       { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); display: inline-block; }
+  .skill-dot-active { background: #86efac; }
+
+  /* ==========================================================================
+     5. SCROLL PROGRESS
+     ========================================================================== */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--brand), var(--brand-end));
+    z-index: 9999; transition: width 0.1s linear;
+  }
+
+  /* ==========================================================================
+     6. TRACK STATS STRIP
+     ========================================================================== */
+  .stat-pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #f3f4f6;
+    font-size: 0.8rem; font-weight: 600; color: #374151;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  /* ==========================================================================
+     7. OUTCOME CARDS
+     ========================================================================== */
+  .outcome-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .outcome-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.15);
+    border-color: var(--brand) !important;
+  }
+
+  /* ==========================================================================
+     8. MODULE CARDS
+     ========================================================================== */
+  .module-card {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid #f3f4f6;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .module-card:hover {
+    box-shadow: 0 8px 32px -4px rgba(0,0,0,0.1);
+  }
+
+  /* Module header accent bar */
+  .module-bar-pink   { background: linear-gradient(90deg, #CB187D, #e84aad); }
+  .module-bar-violet { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+  .module-bar-teal   { background: linear-gradient(90deg, #0891b2, #06b6d4); }
+
+  /* Module icon badge */
+  .module-icon-pink   { background: linear-gradient(135deg, #CB187D, #e84aad); }
+  .module-icon-violet { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .module-icon-teal   { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+
+  /* ==========================================================================
+     LESSON ACCORDIONS
+     ========================================================================== */
+  .lesson-accordion {
+    border-radius: 0.875rem;
+    border: 1px solid #f3f4f6;
+    background: #f9fafb;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .lesson-accordion.active {
+    background: #ffffff;
+    box-shadow: 0 4px 16px -4px rgba(0,0,0,0.08);
+  }
+  .lesson-accordion.mod-pink.active  { border-color: #f5c6e0; }
+  .lesson-accordion.mod-violet.active{ border-color: #ddd6fe; }
+  .lesson-accordion.mod-teal.active  { border-color: #a5f3fc; }
+
+  .accordion-header {
+    display: flex; align-items: center; gap: 0.875rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease;
+  }
+  .lesson-accordion:not(.active) .accordion-header:hover { background: #f3f4f6; }
+  .lesson-accordion.active .accordion-header { background: transparent; }
+
+  .lesson-num {
+    width: 2rem; height: 2rem; border-radius: 0.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; color: #ffffff;
+    flex-shrink: 0;
+  }
+  .num-pink   { background: #CB187D; }
+  .num-violet { background: #7c3aed; }
+  .num-teal   { background: #0891b2; }
+
+  .lesson-info {
+    flex: 1; min-width: 0;
+  }
+  .lesson-category {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #9ca3af; line-height: 1.2;
+  }
+  .lesson-name {
+    font-size: 0.85rem; font-weight: 600; color: #1f2937;
+    line-height: 1.3; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .mod-pink.active  .lesson-name { color: #CB187D; }
+  .mod-violet.active .lesson-name{ color: #7c3aed; }
+  .mod-teal.active  .lesson-name { color: #0891b2; }
+
+  .lesson-badge {
+    display: none; /* hidden on mobile for space */
+  }
+  @media (min-width: 640px) {
+    .lesson-badge {
+      display: inline-flex; align-items: center;
+      padding: 2px 9px; border-radius: 999px;
+      font-size: 0.65rem; font-weight: 700;
+      background: #f3f4f6; color: #6b7280;
+      white-space: nowrap; flex-shrink: 0;
+    }
+  }
+  .lesson-time {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 2px 9px; border-radius: 999px;
+    font-size: 0.7rem; font-weight: 600;
+    background: #f3f4f6; color: #6b7280;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .accordion-chevron {
+    display: flex; align-items: center; justify-content: center;
+    width: 1.5rem; height: 1.5rem;
+    flex-shrink: 0; color: #d1d5db;
+    transition: transform 0.25s ease, color 0.2s ease;
+  }
+  .lesson-accordion.active .accordion-chevron { transform: rotate(180deg); }
+  .mod-pink.active  .accordion-chevron { color: #CB187D; }
+  .mod-violet.active .accordion-chevron{ color: #7c3aed; }
+  .mod-teal.active  .accordion-chevron { color: #0891b2; }
+
+  /* Accordion body — CSS grid trick for smooth animation */
+  .accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+  .lesson-accordion.active .accordion-body {
+    grid-template-rows: 1fr;
+  }
+  .accordion-body-inner {
+    overflow: hidden;
+    padding: 0 1rem 0 1rem;
+    transition: padding 0.3s ease;
+  }
+  .lesson-accordion.active .accordion-body-inner {
+    padding: 0 1rem 1.25rem 3.875rem;
+  }
+
+  /* Divider above body content */
+  .lesson-accordion.active .accordion-divider {
+    display: block;
+    margin-bottom: 0.875rem;
+    border-top: 1px solid #f3f4f6;
+  }
+  .accordion-divider { display: none; }
+
+  .lesson-goal {
+    font-size: 0.8rem; color: #4b5563; margin-bottom: 0.625rem;
+    line-height: 1.5;
+  }
+  .lesson-goal strong { color: #1f2937; }
+
+  .lesson-checklist {
+    list-style: none; padding: 0; margin: 0 0 0.875rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .lesson-checklist li {
+    display: flex; align-items: flex-start; gap: 0.5rem;
+    font-size: 0.78rem; color: #6b7280; line-height: 1.4;
+  }
+  .lesson-checklist li .iconify {
+    flex-shrink: 0; margin-top: 0.1rem;
+    font-size: 0.65rem; color: #a3e635;
+  }
+  .mod-pink .lesson-checklist li .iconify   { color: #CB187D; }
+  .mod-violet .lesson-checklist li .iconify { color: #7c3aed; }
+  .mod-teal .lesson-checklist li .iconify   { color: #0891b2; }
+
+  .start-lesson-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 1.125rem; border-radius: 9999px;
+    font-size: 0.75rem; font-weight: 700;
+    color: #ffffff !important; border: none; text-decoration: none;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+  .start-lesson-btn:hover { filter: brightness(0.9); transform: translateY(-1px); }
+  .mod-pink   .start-lesson-btn { background: linear-gradient(135deg, #CB187D, #e84aad); }
+  .mod-violet .start-lesson-btn { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .mod-teal   .start-lesson-btn { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+
+  /* Module CTA */
+  .module-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 20px; border-radius: 10px;
+    font-size: 0.82rem; font-weight: 700;
+    color: #ffffff; border: none; cursor: pointer;
+    transition: filter 0.15s ease, transform 0.15s ease;
+    text-decoration: none;
+  }
+  .module-cta:hover { filter: brightness(0.92); transform: translateY(-1px); }
+  .module-cta-pink   { background: linear-gradient(135deg, #CB187D, #e84aad); }
+  .module-cta-violet { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .module-cta-teal   { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+  #hub-root .module-cta { color: #ffffff !important; }
+
+  /* ==========================================================================
+     9. LEARNING PATH STEPPER
+     ========================================================================== */
+  .path-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem; flex: 1;
+  }
+  .path-node {
+    width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1rem; color: #ffffff;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 16px -4px rgba(0,0,0,0.25);
+  }
+  .path-connector {
+    flex: 1; height: 2px; margin-top: -1.75rem;
+    background: linear-gradient(90deg, #CB187D, #7c3aed);
+    opacity: 0.3;
+  }
+
+  /* ==========================================================================
+     10. BOTTOM NAV
+     ========================================================================== */
+  .nav-link-hover:hover p,
+  .nav-link-hover:hover span,
+  .nav-link-hover:hover .iconify { color: var(--brand); transition: color 0.15s; }
+  #hub-root .nav-link-hover:hover p,
+  #hub-root .nav-link-hover:hover span,
+  #hub-root .nav-link-hover:hover .iconify { color: var(--brand) !important; }
+
+  /* ==========================================================================
+     11. BACK TO TOP
+     ========================================================================== */
+  .back-to-top {
+    position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9000;
+    width: 2.75rem; height: 2.75rem; border-radius: 50%;
+    background: var(--brand); color: #fff; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 14px rgba(203,24,125,0.4);
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { transform: translateY(-3px); }
+
+  /* ==========================================================================
+     12. RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 640px) {
+    .hero-container { min-height: auto; }
+    .module-grid    { grid-template-columns: 1fr !important; }
+    .stat-strip     { flex-wrap: wrap; }
+    .path-connector { display: none; }
+    .path-row       { flex-direction: column; }
+  }
+
+  /* ==========================================================================
+     13. CONFLUENCE HUB-ROOT OVERRIDES
+     ========================================================================== */
+  #hub-root .hero-pill { color: #ffffff !important; background: rgba(255,255,255,0.15) !important; border-color: rgba(255,255,255,0.25) !important; }
+  #hub-root .stat-pill { background: #ffffff !important; color: #374151 !important; }
+  #hub-root .module-card { background: #ffffff !important; }
+  #hub-root .path-node   { color: #ffffff !important; }
+  #hub-root .module-cta  { color: #ffffff !important; }
+  #hub-root .lesson-accordion { background: #f9fafb !important; }
+  #hub-root .lesson-accordion.active { background: #ffffff !important; }
+  #hub-root .lesson-name { color: #1f2937 !important; }
+  #hub-root .mod-pink.active  .lesson-name { color: #CB187D !important; }
+  #hub-root .mod-violet.active .lesson-name{ color: #7c3aed !important; }
+  #hub-root .mod-teal.active  .lesson-name { color: #0891b2 !important; }
+  #hub-root .start-lesson-btn { color: #ffffff !important; text-decoration: none !important; }
+  #hub-root .lesson-accordion { border-color: #f3f4f6 !important; }
+  #hub-root .mod-pink.active  { border-color: #f5c6e0 !important; }
+  #hub-root .mod-violet.active{ border-color: #ddd6fe !important; }
+  #hub-root .mod-teal.active  { border-color: #a5f3fc !important; }
+
+</style>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <span class="iconify text-white text-base" data-icon="fa6-solid:chevron-up"></span>
+</button>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     ROOT WRAPPER
+     ═══════════════════════════════════════════════════════════════════ -->
+<div id="hub-root" class="bg-gray-50 min-h-screen">
+<div class="max-w-[1250px] mx-auto px-4 pt-8 pb-14 space-y-8">
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="hero-container">
+    <div class="hero-dots"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-glow-line"></div>
+
+    <div class="relative z-10 px-8 py-10 md:px-14 md:py-12">
+      <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+
+        <!-- LEFT — Track info -->
+        <div class="flex-1 min-w-0">
+
+          <!-- Badge row -->
+          <div class="flex flex-wrap items-center gap-2 mb-5">
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Track 01
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="inline-flex items-center gap-1">
+                <span class="skill-dot skill-dot-active"></span>
+                <span class="skill-dot skill-dot-active"></span>
+                <span class="skill-dot"></span>
+              </span>
+              Beginner → Intermediate
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> ~5 hours
+            </span>
+          </div>
+
+          <!-- Track label -->
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/75 mb-2">Python Learning Hub &middot; Track 01</p>
+
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mb-5">Python<br><span class="text-white/80">Foundation</span></h1>
+
+          <!-- Description -->
+          <p class="text-white/80 text-sm md:text-base leading-relaxed mb-6 max-w-xl">
+            Go from zero to confident. This track takes you through the core building blocks of Python — writing real code, understanding how programs work, and applying professional best practices used in production analytics projects.
+          </p>
+
+          <!-- Stats mini-strip -->
+          <div class="flex flex-wrap items-center gap-3 mb-7">
+            <div class="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/15">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:cubes"></span>
+              </span>
+              <div>
+                <p class="text-white font-extrabold text-lg leading-none">3</p>
+                <p class="text-white/65 text-[10px] font-semibold uppercase tracking-wide leading-none mt-0.5">Modules</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/15">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:book-open"></span>
+              </span>
+              <div>
+                <p class="text-white font-extrabold text-lg leading-none">18</p>
+                <p class="text-white/65 text-[10px] font-semibold uppercase tracking-wide leading-none mt-0.5">Lessons</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/15">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:certificate"></span>
+              </span>
+              <div>
+                <p class="text-white font-extrabold text-lg leading-none">Core</p>
+                <p class="text-white/65 text-[10px] font-semibold uppercase tracking-wide leading-none mt-0.5">Track</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="mod_02_programming_foundations/lesson01_what_is_programming.html" class="hero-cta">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Track
+            </a>
+            <a href="../../hub_home_page.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:house"></span> Back to Hub
+            </a>
+          </div>
+
+        </div>
+
+        <!-- RIGHT — Hex Python illustration -->
+        <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center hidden md:flex items-center justify-center">
+          <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-width:300px;" aria-hidden="true">
+            <defs>
+              <linearGradient id="t1hexFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/>
+              </linearGradient>
+              <linearGradient id="t1hexBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/>
+              </linearGradient>
+              <radialGradient id="t1hexGlow" cx="50%" cy="38%" r="45%">
+                <stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="t1pyGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/>
+              </radialGradient>
+              <clipPath id="t1hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+            </defs>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#t1hexFill)"/>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#t1hexGlow)"/>
+            <g clip-path="url(#t1hexClip)" opacity="1">
+              <g opacity="0.06">
+                <circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/>
+                <circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/>
+                <circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/>
+                <circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/>
+              </g>
+              <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none">
+                <path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/>
+                <circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/>
+              </g>
+              <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none">
+                <path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/>
+                <circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/>
+              </g>
+              <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none">
+                <path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/>
+                <circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/>
+              </g>
+              <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none">
+                <path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/>
+                <circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/>
+              </g>
+              <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7">
+                <text x="42" y="145">&gt;&gt;&gt; import pandas</text>
+                <text x="185" y="92">def main():</text>
+                <text x="38" y="92">class Data:</text>
+              </g>
+              <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7">
+                <text x="160" y="255">return result</text>
+                <text x="42" y="260">for i in range:</text>
+                <text x="175" y="275">print("done")</text>
+              </g>
+              <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round">
+                <polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/>
+                <polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/>
+              </g>
+              <g opacity="0.04" stroke="white" stroke-width="1" fill="none">
+                <polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/>
+                <polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/>
+                <polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/>
+                <polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/>
+              </g>
+              <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4">
+                <path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/>
+              </g>
+              <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4">
+                <path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/>
+              </g>
+              <circle cx="140" cy="145" r="55" fill="url(#t1pyGlow)"/>
+            </g>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#t1hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+            <foreignObject x="95" y="85" width="90" height="90">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
+                <span class="iconify" data-icon="logos:python" style="font-size:72px;"></span>
+              </div>
+            </foreignObject>
+            <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+            <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+            <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+            <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+            <g opacity="0.5">
+              <rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/>
+              <rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/>
+              <text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">Track 01</text>
+            </g>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WHAT YOU'LL ACHIEVE
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="outcomes">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+        <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+        </span>
+        <div class="min-w-0">
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">What You'll Achieve</h2>
+          <p class="text-sm text-gray-400 leading-snug mt-0.5">Key skills you will have by the end of this track</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-7">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:code"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Write Real Python Code</p>
+              <p class="text-xs text-gray-400">Variables, loops, functions, and data structures</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:cube"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Use Classes and Objects</p>
+              <p class="text-xs text-gray-400">Build reusable, structured data components</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:folder-tree"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Structure Real Projects</p>
+              <p class="text-xs text-gray-400">Organize modules, folders, and data files</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:bug-slash"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Read and Fix Errors</p>
+              <p class="text-xs text-gray-400">Understand tracebacks and debug confidently</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:code-branch"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Version Control with Git</p>
+              <p class="text-xs text-gray-400">Track code changes, commit, and use GitHub</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:scroll"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Add Logging to Scripts</p>
+              <p class="text-xs text-gray-400">Monitor execution and surface problems early</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">
+            This track builds on <strong>Track 00 — Getting Started</strong>. Make sure your Python environment is set up and you can run a script before beginning Module 2.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LEARNING PATH STEPPER
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="learning-path">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+        <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
+        </span>
+        <div class="min-w-0">
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Track Learning Path</h2>
+          <p class="text-sm text-gray-400 leading-snug mt-0.5">Work through each module in sequence — each one builds on the last</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+
+        <!-- Stepper -->
+        <div class="flex items-center path-row gap-0">
+
+          <div class="path-step">
+            <div class="path-node module-icon-pink">02</div>
+            <p class="text-xs font-bold text-gray-800 text-center mt-1">Programming<br>Foundations</p>
+            <p class="text-[10px] text-gray-400 text-center mt-0.5">9 lessons</p>
+          </div>
+
+          <div class="path-connector"></div>
+
+          <div class="path-step">
+            <div class="path-node module-icon-violet">03</div>
+            <p class="text-xs font-bold text-gray-800 text-center mt-1">Object-Oriented<br>Python</p>
+            <p class="text-[10px] text-gray-400 text-center mt-0.5">4 lessons</p>
+          </div>
+
+          <div class="path-connector" style="background: linear-gradient(90deg, #7c3aed, #0891b2);"></div>
+
+          <div class="path-step">
+            <div class="path-node module-icon-teal">04</div>
+            <p class="text-xs font-bold text-gray-800 text-center mt-1">Python Best<br>Practices</p>
+            <p class="text-[10px] text-gray-400 text-center mt-0.5">5 lessons</p>
+          </div>
+
+        </div>
+
+        <!-- Milestone labels -->
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="flex items-start gap-3 rounded-xl bg-[#fdf0f7] border border-pink-100 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg module-icon-pink shrink-0 mt-0.5">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:terminal"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">Module 02</p>
+              <p class="text-sm font-semibold text-gray-800 mt-0.5">Core Python Syntax</p>
+              <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Variables, data types, control flow, and functions — the essential tools of every Python program.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-xl bg-violet-50 border border-violet-100 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg module-icon-violet shrink-0 mt-0.5">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:cube"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-violet-600 uppercase tracking-wide">Module 03</p>
+              <p class="text-sm font-semibold text-gray-800 mt-0.5">Object-Oriented Design</p>
+              <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Classes, attributes, and methods — organize code around real-world data concepts.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-xl bg-cyan-50 border border-cyan-100 px-4 py-3.5">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg module-icon-teal shrink-0 mt-0.5">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:shield-halved"></span>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-cyan-600 uppercase tracking-wide">Module 04</p>
+              <p class="text-sm font-semibold text-gray-800 mt-0.5">Professional Practices</p>
+              <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Modules, project structure, Git version control, and logging — work like a professional.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MODULE 02 — PROGRAMMING FOUNDATIONS
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="module-02">
+    <div class="module-card">
+
+      <!-- Accent bar -->
+      <div class="h-1.5 module-bar-pink"></div>
+
+      <!-- Module header -->
+      <div class="flex items-center gap-5 px-7 py-5 border-b border-gray-100">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl module-icon-pink shrink-0">
+          <span class="iconify text-white text-lg" data-icon="fa6-solid:terminal"></span>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 02 &middot; 9 Lessons &middot; ~2.5 hours</p>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Programming Foundations</h2>
+          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Master the essential building blocks of Python — from variables and data types to loops, functions, and reading errors like a pro.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0 hidden sm:flex">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Beginner
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 9 lessons
+          </span>
+        </div>
+      </div>
+
+      <!-- Lessons list -->
+      <div class="px-6 py-5">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Lessons in this module</p>
+        <div class="space-y-2">
+
+          <!-- Lesson 1 -->
+          <div class="lesson-accordion mod-pink active">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">1</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Introduction</p>
+                <p class="lesson-name">What is Programming?</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 5 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Understand what programming is and how Python fits into the world of software and data work.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> What code is and how computers execute it</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> How Python differs from Excel and SQL</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Why Python is beginner-friendly and widely used</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Real-world uses for programming in data and analytics</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson01_what_is_programming.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 2 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">2</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Core Concepts</p>
+                <p class="lesson-name">Variables &amp; Data Types</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Store and manipulate data using Python's built-in types — the foundation of every script you'll ever write.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating and naming variables</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> The four core types: int, float, str, and bool</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Checking and converting between types</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Naming conventions and best practices</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson02_variables_data_types.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 3 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">3</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Core Concepts</p>
+                <p class="lesson-name">Additional Python Data Types</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 12 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Explore Python's extended built-in types beyond the four basics and learn when to reach for each one.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Tuples and when to use them instead of lists</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Sets and their role in unique value storage</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> None and its role as a placeholder</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Type comparisons and practical use cases</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson03_additional_python_data_types.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 4 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">4</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Data Structures</p>
+                <p class="lesson-name">Lists &amp; Dictionaries</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Store, access, and modify collections of data using Python's two most important container types.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating and indexing lists</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Appending, removing, and slicing</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Dictionary key-value pairs and lookups</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Iterating over collections with for loops</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson04_lists_dictionaries.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 5 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">5</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Core Concepts</p>
+                <p class="lesson-name">Operators</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Use operators to perform calculations, comparisons, and logical checks — the grammar of Python expressions.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Arithmetic operators: +, -, *, /, //, %, **</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Comparison operators: ==, !=, &lt;, &gt;, &lt;=, &gt;=</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Logical operators: and, or, not</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Operator precedence and parentheses</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson05_operators.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 6 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">6</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Control Flow</p>
+                <p class="lesson-name">If Statements</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 12 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Write conditional logic that makes decisions based on data — the key to building scripts that react to the real world.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> if, elif, and else syntax</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Nested conditions and when to avoid them</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Combining conditions with and / or</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Practical decision-making patterns in data scripts</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson06_if_statements.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 7 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">7</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Control Flow</p>
+                <p class="lesson-name">Loops</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Automate repetitive tasks by iterating over data — one of the most powerful tools in any Python programmer's toolkit.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> for loops over lists and ranges</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> while loops and stop conditions</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> break and continue statements</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Looping over dictionary keys and values</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson07_loops.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 8 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">8</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Core Concepts</p>
+                <p class="lesson-name">Functions</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 20 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Write reusable blocks of code that accept input and return output — the building block of all well-structured scripts.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Defining and calling functions with def</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Parameters, arguments, and return values</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Default argument values</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Why functions dramatically reduce code duplication</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson08_functions.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 9 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">9</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Debugging</p>
+                <p class="lesson-name">Reading &amp; Understanding Errors</p>
+              </div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Interpret Python error messages and fix bugs with confidence — a skill that separates beginners from practitioners.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Reading a traceback from bottom to top</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Common error types: SyntaxError, TypeError, NameError</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Strategies for finding and fixing bugs</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Using print() for quick debugging</li>
+                </ul>
+                <a href="mod_02_programming_foundations/lesson09_reading_understanding_errors.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Module CTA -->
+      <div class="flex items-center justify-between px-6 pb-5 gap-4">
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">variables</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">loops</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">functions</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">debugging</span>
+        </div>
+        <a href="mod_02_programming_foundations/lesson01_what_is_programming.html" class="module-cta module-cta-pink shrink-0">
+          Start Module <span class="iconify text-[11px]" data-icon="fa6-solid:arrow-right"></span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MODULE 03 — OBJECT-ORIENTED PROGRAMMING
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="module-03">
+    <div class="module-card">
+
+      <div class="h-1.5 module-bar-violet"></div>
+
+      <div class="flex items-center gap-5 px-7 py-5 border-b border-gray-100">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl module-icon-violet shrink-0">
+          <span class="iconify text-white text-lg" data-icon="fa6-solid:cube"></span>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-bold uppercase tracking-widest text-violet-600 mb-0.5">Module 03 &middot; 4 Lessons &middot; ~1 hour</p>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Object-Oriented Programming</h2>
+          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Learn to model real-world data using classes. Understand attributes, methods, and how to refactor messy scripts into clean, reusable code.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0 hidden sm:flex">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span><span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Intermediate
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 4 lessons
+          </span>
+        </div>
+      </div>
+
+      <div class="px-6 py-5">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Lessons in this module</p>
+        <div class="space-y-2">
+
+          <!-- Lesson 1 -->
+          <div class="lesson-accordion mod-violet">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-violet">1</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Introduction</p>
+                <p class="lesson-name">Why Classes Help Data Projects</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Understand the problem that classes solve and recognize the analytics scenarios where they are most valuable.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> What object-oriented programming is and why it exists</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Problems that arise with flat, procedural scripts</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> How classes group related data and behavior together</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Real analytics scenarios where classes clean up code</li>
+                </ul>
+                <a href="mod_03_object_oriented_programming/lesson01_why_classes_help_data_projects.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 2 -->
+          <div class="lesson-accordion mod-violet">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-violet">2</div>
+              <div class="lesson-info">
+                <p class="lesson-category">OOP</p>
+                <p class="lesson-name">Creating a Class</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Define a class with an <code>__init__</code> method and create multiple instances from a single blueprint.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> The class keyword and naming conventions</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> The __init__ constructor and what it does</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating and using instances of a class</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> What self represents and why it appears everywhere</li>
+                </ul>
+                <a href="mod_03_object_oriented_programming/lesson02_creating_a_class.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 3 -->
+          <div class="lesson-accordion mod-violet">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-violet">3</div>
+              <div class="lesson-info">
+                <p class="lesson-category">OOP</p>
+                <p class="lesson-name">Attributes &amp; Methods</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Add data and behavior to your classes using attributes and custom methods that operate on that data.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Instance attributes vs class attributes</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Writing and calling methods on an object</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Returning values from methods</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Keeping methods focused on a single responsibility</li>
+                </ul>
+                <a href="mod_03_object_oriented_programming/lesson03_attributes_methods.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 4 -->
+          <div class="lesson-accordion mod-violet">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-violet">4</div>
+              <div class="lesson-info">
+                <p class="lesson-category">OOP</p>
+                <p class="lesson-name">Refactoring a Script into a Class</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 20 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Convert a working procedural script into a clean class-based design that is easier to read, test, and reuse.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Identifying what data and logic belongs in a class</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Moving standalone functions into methods</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Testing the refactored class against the original</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Benefits of the class approach for readability and reuse</li>
+                </ul>
+                <a href="mod_03_object_oriented_programming/lesson04_refactoring_a_script_into_a_class.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between px-6 pb-5 gap-4">
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">classes</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">attributes</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">methods</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">refactoring</span>
+        </div>
+        <a href="mod_03_object_oriented_programming/lesson01_why_classes_help_data_projects.html" class="module-cta module-cta-violet shrink-0">
+          Start Module <span class="iconify text-[11px]" data-icon="fa6-solid:arrow-right"></span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MODULE 04 — PYTHON BEST PRACTICES
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="module-04">
+    <div class="module-card">
+
+      <div class="h-1.5 module-bar-teal"></div>
+
+      <div class="flex items-center gap-5 px-7 py-5 border-b border-gray-100">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl module-icon-teal shrink-0">
+          <span class="iconify text-white text-lg" data-icon="fa6-solid:shield-halved"></span>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-bold uppercase tracking-widest text-cyan-600 mb-0.5">Module 04 &middot; 5 Lessons &middot; ~1.5 hours</p>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Python Best Practices</h2>
+          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Write code that others can read, maintain, and extend. Covers modules, project structure, Git version control, and adding logging to your scripts.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0 hidden sm:flex">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span><span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Intermediate
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 5 lessons
+          </span>
+        </div>
+      </div>
+
+      <div class="px-6 py-5">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Lessons in this module</p>
+        <div class="space-y-2">
+
+          <!-- Lesson 1 -->
+          <div class="lesson-accordion mod-teal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-teal">1</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Modules</p>
+                <p class="lesson-name">Creating Your Own Modules</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Split code across files and import functions from your own modules — the first step toward writing properly organized projects.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> What a module is and why splitting code across files matters</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Importing functions from your own .py files</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> __init__.py and how packages work</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Avoiding circular imports</li>
+                </ul>
+                <a href="mod_04_python_best_practices/lesson01_creating_your_own_modules.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 2 -->
+          <div class="lesson-accordion mod-teal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-teal">2</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Best Practices</p>
+                <p class="lesson-name">Project Folder Structure</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Organize scripts, data, and modules into a clean, navigable project layout following the conventions used in production analytics work.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> A standard analytics project folder layout</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> modules/, data/raw/, and data/processed/ folders</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Why flat project folders become hard to manage</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Running scripts reliably from the project root</li>
+                </ul>
+                <a href="mod_04_python_best_practices/lesson02_project_folder_structure.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 3 -->
+          <div class="lesson-accordion mod-teal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-teal">3</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Version Control</p>
+                <p class="lesson-name">Introduction to Git (Simple Workflow)</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Understand what version control is and run a basic Git workflow — the professional baseline for every coding project.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> What Git is and why version control exists</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> git init, git add, and git commit</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Reading the Git status and commit log</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Why every coding project should use version control from day one</li>
+                </ul>
+                <a href="mod_04_python_best_practices/lesson03_introduction_to_git_simple_workflow.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 4 -->
+          <div class="lesson-accordion mod-teal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-teal">4</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Version Control</p>
+                <p class="lesson-name">Git in VS Code</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Use VS Code's built-in Git panel to manage source control without the terminal — ideal for building confidence before going deeper into Git.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> The Source Control panel in VS Code</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Staging, committing, and viewing diffs visually</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Connecting a project to a remote repository</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> When to use the GUI vs the terminal</li>
+                </ul>
+                <a href="mod_04_python_best_practices/lesson04_git_in_vs_code.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 5 -->
+          <div class="lesson-accordion mod-teal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-teal">5</div>
+              <div class="lesson-info">
+                <p class="lesson-category">Best Practices</p>
+                <p class="lesson-name">Logging Basics</p>
+              </div>
+              <span class="lesson-badge">Intermediate</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                <hr class="accordion-divider">
+                <p class="lesson-goal"><strong>Goal:</strong> Add structured logging to your scripts so you can monitor execution, understand what ran, and catch problems before they become incidents.</p>
+                <ul class="lesson-checklist">
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Why print() is not enough for production scripts</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> The logging module and its five log levels</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Writing logs to a file alongside the console</li>
+                  <li><span class="iconify" data-icon="fa6-solid:check"></span> Formatting log messages for readability</li>
+                </ul>
+                <a href="mod_04_python_best_practices/lesson05_logging_basics.html" class="start-lesson-btn">
+                  Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between px-6 pb-5 gap-4">
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100">modules</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100">git</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100">logging</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100">project structure</span>
+        </div>
+        <a href="mod_04_python_best_practices/lesson01_creating_your_own_modules.html" class="module-cta module-cta-teal shrink-0">
+          Start Module <span class="iconify text-[11px]" data-icon="fa6-solid:arrow-right"></span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       BOTTOM NAV — Back to Hub
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <div class="flex flex-col sm:flex-row gap-3">
+
+      <!-- Back to hub -->
+      <a href="../../hub_home_page.html" class="nav-link-hover group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+        <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+        <div class="min-w-0">
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Back to</p>
+          <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Hub Home</p>
+        </div>
+      </a>
+
+      <!-- All Lessons hub -->
+      <a href="../../hub_home_page.html" class="nav-link-hover group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+        <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Courses</span>
+      </a>
+
+      <!-- Start Track -->
+      <a href="mod_02_programming_foundations/lesson01_what_is_programming.html" class="nav-link-hover group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Begin here</p>
+          <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Start Track 01</p>
+        </div>
+        <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+      </a>
+
+    </div>
+  </section>
+
+
+</div>
+</div>
+
+<script>
+  // Accordion toggle — closes siblings in the same module card
+  function toggleAccordion(header) {
+    var item = header.closest('.lesson-accordion');
+    var isActive = item.classList.contains('active');
+
+    // Close all siblings within the same module
+    var siblings = item.parentElement.querySelectorAll('.lesson-accordion');
+    siblings.forEach(function(sib) { sib.classList.remove('active'); });
+
+    // If it wasn't already open, open it
+    if (!isActive) { item.classList.add('active'); }
+
+    // Re-scan Iconify icons revealed in the body
+    if (window.Iconify) Iconify.scan();
+  }
+
+  // Scroll progress bar
+  function updateScrollProgress() {
+    var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+
+  // Back to top button
+  function updateBackToTop() {
+    var btn = document.getElementById('back-to-top');
+    if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+  }
+
+  window.addEventListener('scroll', function() {
+    updateScrollProgress();
+    updateBackToTop();
+  });
+
+  // Ensure Iconify scans after load
+  window.addEventListener('load', function() { if (window.Iconify) Iconify.scan(); });
+</script>
