@@ -955,123 +955,402 @@
   </div>
 </section>
 
-<section id="key-concepts">
+<section id="key-concepts" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header -->
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">timeit, cProfile, line_profiler, and bottleneck patterns.</p>
+      </div>
+    </div>
+
     <div class="bg-white px-6 py-7">
       <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
         <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
-          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — ACTIVE -->
           <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Execution Time</span>
-</button>
-<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Profiling</span>
-</button>
-<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Micro vs Macro Profiling</span>
-</button>
-<button onclick="switchKcTab(3)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:cube"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Micro Profiling</span>
-</button>
-<button onclick="switchKcTab(4)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:gear"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Macro Profiling</span>
-</button>
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:stopwatch"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">timeit</span>
+          </button>
 
-        </div>
+          <!-- Tab 1 — INACTIVE -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:chart-line"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">cProfile</span>
+          </button>
+
+          <!-- Tab 2 — INACTIVE -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:magnifying-glass"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">line_profiler</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:bug"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Bottleneck Patterns</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
         <div class="flex-1 min-w-0 md:pl-5">
-          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
-  <div class="rounded-2xl border border-pink-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
-    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Execution Time</h3>
-        <span class="text-[10px] font-bold text-#CB187D uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Execution time refers to how long a program or operation takes to run.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Load data → 2 seconds
-Calculate column → 1 second
-Group data → 8 seconds</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
-  <div class="rounded-2xl border border-violet-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
-    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Profiling</h3>
-        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Profiling analyzes the performance of code.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Profiling tools show:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Which functions run
-How often they run
-How long they take</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
-  <div class="rounded-2xl border border-blue-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
-    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Micro vs Macro Profiling</h3>
-        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"></div>
-      <div class="space-y-3"></div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
-  <div class="rounded-2xl border border-emerald-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
-    <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Micro Profiling</h3>
-        <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Measures performance of <strong>small code sections</strong>.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Testing one function</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
-  <div class="rounded-2xl border border-amber-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-red-300"></div>
-    <div class="bg-gradient-to-br from-amber-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Macro Profiling</h3>
-        <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Measures performance of <strong>entire workflows</strong>.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Full data pipeline</pre></div>
-</div>
-    </div>
-  </div>
-</div>
 
-        </div>
+          <!-- ════ Panel 0 — timeit (pink) ════ -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:stopwatch"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">timeit</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Measure how long code takes to run</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> tool
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>timeit</strong> runs a code snippet many times and reports the average execution time. It is ideal for comparing two approaches. Use the <code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">timeit</code> module in scripts or the <code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">%%timeit</code> magic in Jupyter.</p>
+
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">timeit vs Manual Timing</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-100 text-pink-700 border border-pink-200 text-[10px] font-bold">timeit</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">time.time()</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Accuracy</td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Runs many iterations</span></td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Single measurement</span></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Setup</td>
+                        <td class="py-2 px-3">Automatic warmup</td>
+                        <td class="py-2 px-3">Manual start/stop</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Output</td>
+                        <td class="py-2 px-3">Mean ± std deviation</td>
+                        <td class="py-2 px-3">Single number</td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Best for</td>
+                        <td class="py-2 px-3">Comparing two approaches</td>
+                        <td class="py-2 px-3">Quick checks</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import timeit
+t = timeit.timeit(
+    "df.groupby('region').sum()",            # code to measure
+    globals=globals(), number=100)            # run 100 times
+print(f"Average: {t/100:.4f}s per run")       # mean time</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Run at least 100 iterations for stable results.</strong> A single measurement changes every time due to system load.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 1 — cProfile (violet) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:chart-line"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">cProfile</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Profile a script function by function</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> module
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>cProfile</strong> measures how many times each function is called and how long it takes. Run it on your main function to find which step consumes the most time.</p>
+
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:calculator"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">cProfile Output Columns</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-violet-500 w-12">Op</th>
+                        <th class="py-2 px-3 text-left font-bold text-violet-500">Meaning</th>
+                        <th class="py-2 px-3 text-left font-bold text-violet-500">Example</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">ncalls</code></td>
+                        <td class="py-2 px-3 text-gray-500">Times the function was called</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">150</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">tottime</code></td>
+                        <td class="py-2 px-3 text-gray-500">Time in that function only</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">0.42s</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">cumtime</code></td>
+                        <td class="py-2 px-3 text-gray-500">Time including sub-calls</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">1.35s</code></td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">filename</code></td>
+                        <td class="py-2 px-3 text-gray-500">Where the function is defined</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">script.py:12</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import cProfile
+def process():                                  # function to profile
+    df = pd.read_csv("big.csv")                 # slow step?
+    return df.groupby("region").sum()            # or this one?
+cProfile.run("process()")                        # show breakdown</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Sort results by cumulative time.</strong> Add <em>sort="cumulative"</em> to see the slowest functions first.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 2 — line_profiler (blue) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:magnifying-glass"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">line_profiler</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Measure time spent on each line</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> tool
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>line_profiler</strong> shows how long each individual line of a function takes. It is more detailed than cProfile — you see exactly which line is the bottleneck.</p>
+
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">cProfile vs line_profiler</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200 text-[10px] font-bold">cProfile</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">line_profiler</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Granularity</td>
+                        <td class="py-2 px-3">Function level</td>
+                        <td class="py-2 px-3">Line level</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Built in</td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Yes</span></td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">pip install line_profiler</span></td>
+                      </tr>
+                      <tr class="">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Use for</td>
+                        <td class="py-2 px-3">Finding slow functions</td>
+                        <td class="py-2 px-3">Finding slow lines</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">from line_profiler import profile               # pip install
+@profile                                        # mark function
+def transform(df):                              # function to profile
+    df = df.dropna()                            # how long?
+    df["total"] = df["qty"] * df["price"]       # and this?
+    return df</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Profile only the function you suspect is slow.</strong> Adding @profile to every function creates noisy output and hides the real bottleneck.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 3 — Bottleneck Patterns (emerald) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:bug"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Bottleneck Patterns</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Common causes of slow data scripts</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> reference
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>bottleneck</strong> is the single step that takes the longest. Most slow scripts have one bottleneck, not many. Fixing it often makes the entire script 10× faster.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:triangle-exclamation"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Common Bottlenecks</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Python for loops over rows</td>
+                        <td class="py-2 px-3 text-gray-500">Replace with vectorised operations</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Loading unused columns</td>
+                        <td class="py-2 px-3 text-gray-500">Use usecols= or columns= parameters</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">String operations with apply()</td>
+                        <td class="py-2 px-3 text-gray-500">Use the .str accessor instead</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Repeated file reads</td>
+                        <td class="py-2 px-3 text-gray-500">Load once and reuse the DataFrame</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># Bottleneck: loop over rows
+# for i in range(len(df)): df.loc[i,"x"] = df.loc[i,"a"]*2
+# Fix: vectorised operation
+df["x"] = df["a"] * 2                          # 100× faster</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Fix the biggest bottleneck first.</strong> If loading takes 30 seconds and processing takes 2 seconds, optimising the processing step wastes your time.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panels -->
       </div>
     </div>
   </div>
@@ -1081,177 +1360,230 @@ How long they take</pre></div>
 <section id="code-examples">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 1</span>
+  <span class="ce-step-label text-xs font-bold">Time Each Step</span>
 </button>
-<button onclick="switchCeTab(1)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 2</span>
+  <span class="ce-step-label text-xs font-bold">Profile with cProfile</span>
 </button>
-<button onclick="switchCeTab(2)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 3</span>
-</button>
-<button onclick="switchCeTab(3)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 4</span>
+  <span class="ce-step-label text-xs font-bold">Before and After</span>
 </button>
 </div>
-      <div class="ce-panel ce-panel-anim " role="tabpanel">
+<div class="ce-panel ce-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 1 — Measuring Execution Time</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Time Each Step</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Pipeline</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">time module</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">elapsed</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Python provides tools to measure runtime.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This measures how long the calculation took.</p>
-</div>
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 2 — Timing Data Processing</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script measures how long each step of a data pipeline takes. You can immediately see which step is the bottleneck.</p>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Measure processing time for a dataset.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This reveals how long the operation takes.</p>
-</div>
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 3 — Using Jupyter Timing Tools</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">In Jupyter notebooks, timing can be measured using special commands.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This displays execution time for the cell.</p>
-</div>
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 4 — Comparing Tools</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Profiling allows comparison between different approaches.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This helps determine which tool performs better for a specific task.</p>
-</div>
-    </div>
-  </div>
-</div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">time_steps.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import time
 
+start = time.time()
+df = pd.read_csv(&quot;data.csv&quot;)                   # step 1
+print(f&quot;Load: {time.time() - start:.3f}s&quot;)
+
+start = time.time()
+result = df.groupby(&quot;region&quot;)[&quot;revenue&quot;].sum()  # step 2
+print(f&quot;Group: {time.time() - start:.3f}s&quot;)</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python time_steps.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Load: 1.450s<br>Group: 0.032s</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">If loading is the slowest step, switch to Parquet &#8212; if grouping is slow, check whether the column types are correct.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Profile with cProfile</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Functions</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">cProfile</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">cumulative time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script uses <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">cProfile</code> to measure the total time spent in each function call. The output ranks functions by cumulative time.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">profile_code.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import cProfile
+
+def pipeline():
+    df = pd.read_csv(&quot;data.csv&quot;)                   # load
+    summary = df.groupby(&quot;region&quot;)[&quot;revenue&quot;].sum()  # group
+    summary.to_csv(&quot;summary.csv&quot;)                  # save
+
+cProfile.run(&quot;pipeline()&quot;, sort=&quot;cumulative&quot;)</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python profile_code.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">   ncalls  tottime  cumtime  filename:lineno(function)<br>        1    0.000    1.520  profile_code.py:4(pipeline)<br>        1    1.200    1.200  {read_csv}</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Sort by cumulative time to see which function call uses the most time &#8212; that is the first place to optimise.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Before and After</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Optimisation</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">baseline</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">comparison</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script records baseline timing, applies an optimisation, and compares the results. Documenting both numbers proves the improvement.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">before_after.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import time
+
+start = time.time()
+df_csv = pd.read_csv(&quot;data.csv&quot;, usecols=[&quot;revenue&quot;])
+csv_time = time.time() - start  # baseline: CSV
+
+start = time.time()
+df_pq = pd.read_parquet(&quot;data.parquet&quot;, columns=[&quot;revenue&quot;])
+pq_time = time.time() - start   # optimised: Parquet
+print(f&quot;CSV: {csv_time:.3f}s  Parquet: {pq_time:.3f}s&quot;)</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python before_after.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">CSV: 1.350s  Parquet: 0.072s</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Always record the baseline time before optimising &#8212; without it, you cannot prove the change was worth the effort.</p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1450,154 +1782,248 @@ WHERE year = 2024;</code></pre>
 <section id="practice">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:dumbbell"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 1</span>
+  <span class="pe-step-label text-xs font-bold">Time a Load Step</span>
 </button>
-<button onclick="switchPeTab(1)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 2</span>
+  <span class="pe-step-label text-xs font-bold">Profile a Function</span>
 </button>
-<button onclick="switchPeTab(2)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 3</span>
+  <span class="pe-step-label text-xs font-bold">Compare Approaches</span>
 </button>
 </div>
-      <div class="pe-panel pe-panel-anim " role="tabpanel">
+<div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 1 — Measure Runtime</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Time a Load Step</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Dashboards</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">time</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">bottleneck</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: range(), Arithmetic, Performance Profiling, Performance</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Write a script that loads <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">dashboard_data.csv</code> and prints how many seconds the load took. This helps identify whether the file read is the bottleneck.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
-        <div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">sum(range(1000000))</pre></div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Record the execution time.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 2 — Profile a Data Operation</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: File I/O, Performance, Lists, groupby()</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">df.groupby(&quot;region&quot;)[&quot;revenue&quot;].sum()</pre></div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Example:</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 3 — Compare Tools</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Loops, Databases, Polars, DuckDB</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Pandas
-Polars
-DuckDB</pre></div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Compare results.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">time_load_step.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import time
 
+start = time.time()                                # begin
+df = pd.read_csv(&quot;dashboard_data.csv&quot;)             # load
+elapsed = time.time() - start                      # end
+
+print(f&quot;Loaded {len(df):,} rows in {elapsed:.3f}s&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python time_load_step.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Loaded 800,000 rows in 1.342s</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">If the load step is slow, consider switching to Parquet or reading only the columns you need.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Profile a Function</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">ETL</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">cProfile</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">run()</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Write a function called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">transform</code> that loads a CSV and groups by category. Use <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">cProfile</code> to profile the function and print the top results.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">profile_etl.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import cProfile
+
+def transform():                                   # function
+    df = pd.read_csv(&quot;etl_input.csv&quot;)
+    return df.groupby(&quot;category&quot;)[&quot;value&quot;].sum()
+
+cProfile.run(&quot;transform()&quot;, sort=&quot;cumulative&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python profile_etl.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">         38 function calls in 0.842 seconds<br><br>   Ordered by: cumulative time<br>   ...</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">cProfile shows exactly how much time each function call took &#8212; focus your optimisation on the slowest lines first.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Compare Two Approaches</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Queries</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">before/after</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Time two ways to filter rows in <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">queries.csv</code>: first using a Python loop, then using vectorised boolean indexing. Print both times to show the speed difference.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">compare_filter.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import time
+
+df = pd.read_csv(&quot;queries.csv&quot;)
+
+start = time.time()
+slow = [r for _, r in df.iterrows() if r[&quot;ms&quot;] &gt; 100]  # loop
+loop_t = time.time() - start
+
+start = time.time()
+fast = df[df[&quot;ms&quot;] &gt; 100]                              # vectorised
+vec_t = time.time() - start
+
+print(f&quot;Loop: {loop_t:.3f}s  Vectorised: {vec_t:.4f}s&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python compare_filter.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Loop: 4.217s  Vectorised: 0.0085s</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Vectorised operations are often 100&#8211;1,000&#215; faster than iterrows(). Avoid Python loops on DataFrames whenever possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1605,88 +2031,210 @@ DuckDB</pre></div>
 <section id="mistakes">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls beginners hit when working with performance profiling</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 1</span>
-</button>
-<button onclick="switchMkTab(1)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 2</span>
-</button>
-<button onclick="switchMkTab(2)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 3</span>
-</button>
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+  <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Guessing Bottleneck</span>
+  </button>
+  <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Timing One Run</span>
+  </button>
+  <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Micro-Optimise</span>
+  </button>
 </div>
-      <div class="mk-panel mk-panel-anim " role="tabpanel">
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Mistake 1 — Optimizing Without Measurement</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Always measure performance before optimizing code.</p>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Optimising Code Without Profiling It First</h4>
+        <p class="text-xs text-gray-500 mt-0.5">You waste time speeding up a fast section while the real bottleneck stays slow.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Run <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">cProfile</code> or <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">%%timeit</code> before changing anything. Profiling shows where the time actually goes, not where you think it goes.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — guess and change
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df["name"] = df["name"].str.strip()     # fast — 0.01s
+# you optimised this, but the real bottleneck is below
+df = df.merge(lookup, on="id")           # slow — 12s</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — profile first
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import cProfile                            # built-in profiler
+cProfile.run('run_pipeline()')             # shows time per call
+# then fix only the slowest function</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Profiling is like an X-ray for your code. It shows you exactly which bone is broken instead of guessing from the outside.</p>
+    </div>
+
   </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
 </div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Always measure performance before optimizing code.</p></div>
-    
-  </div>
-</div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Mistake 2 — Ignoring Data Size</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Small datasets may not reveal performance problems.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Small datasets may not reveal performance problems.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Large datasets often expose inefficiencies.</p></div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Timing a Single Execution and Trusting the Result</h4>
+        <p class="text-xs text-gray-500 mt-0.5">A single run includes warm-up time and random system noise.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">One measurement is unreliable. Background processes and caching distort the result. Use <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">timeit</code> with multiple iterations for a stable average.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — single run
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import time
+start = time.time()
+df["total"] = df["qty"] * df["price"]
+print(time.time() - start)   # one noisy sample</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — multiple runs
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import timeit                                  # benchmarking tool
+t = timeit.timeit(
+    'df["total"] = df["qty"] * df["price"]',
+    globals=globals(), number=100)              # 100 runs
+print(f"Avg: {t/100:.4f}s")                     # stable average</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Large datasets often expose inefficiencies.</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Running a benchmark once is like weighing yourself right after a big meal. Multiple measurements give you the true number.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Mistake 3 — Over-Optimizing</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Some optimizations add unnecessary complexity.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Some optimizations add unnecessary complexity.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Focus on improving the biggest bottlenecks.</p></div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Micro-Optimising Fast Code While Ignoring Slow I/O</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Shaving milliseconds off an in-memory calculation while the CSV read takes 30 seconds.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Disk I/O and database queries are almost always the slowest parts of a data pipeline. Optimise those first — switch CSV reads to Parquet, add SQL indexes, or reduce columns.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — optimise the wrong part
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = pd.read_csv("huge.csv")        # 30 seconds — ignored
+df["x"] = df["a"] + df["b"]         # 0.01s — you optimised this</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — fix the slow part
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = pd.read_parquet("huge.parquet",
+    columns=["a", "b"])              # 2 seconds — 15x faster
+df["x"] = df["a"] + df["b"]          # 0.01s — already fast</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Focus on improving the biggest bottlenecks.</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Profile first, then fix the biggest number. A 30-second CSV read dwarfs every in-memory tweak you could ever make.</p>
+    </div>
+
   </div>
 </div>
 
@@ -1906,20 +2454,13 @@ DuckDB</pre></div>
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 1</span>
-</button>
-<button onclick="switchQzTab(1)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 2</span>
-</button>
-<button onclick="switchQzTab(2)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 3</span>
-</button>
+<div class="flex items-center gap-2 flex-wrap" role="tablist">
+<button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+<button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+<button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+<button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
 </div>
-      <div class="qz-panel qz-panel-anim " role="tabpanel">
+<div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
       <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
@@ -1935,7 +2476,7 @@ DuckDB</pre></div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">what performance profiling is &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">Python's timeit module lets you measure how long a specific piece of code takes to run, helping you compare the speed of different approaches.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -1965,12 +2506,12 @@ DuckDB</pre></div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q1">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how to measure execution time &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">The best way to find the slowest part of your script is to add time.sleep() calls between sections and see which pause feels the longest.</p>
         <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
           </button>
         </div>
@@ -1995,7 +2536,7 @@ DuckDB</pre></div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how to identify performance bottlenecks &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">The cProfile module shows you how many times each function was called and how much total time it consumed, making it easy to spot bottlenecks.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2009,7 +2550,36 @@ DuckDB</pre></div>
     </div>
   </div>
 </div>
-
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q3">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Once you identify a slow function, you should always optimise it immediately &#8212; the size of the performance improvement does not matter.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>

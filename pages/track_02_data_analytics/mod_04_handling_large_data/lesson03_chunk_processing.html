@@ -955,88 +955,393 @@
   </div>
 </section>
 
-<section id="key-concepts">
+<section id="key-concepts" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header -->
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">chunksize parameter, chunk iterators, and aggregating results.</p>
+      </div>
+    </div>
+
     <div class="bg-white px-6 py-7">
       <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
         <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
-          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — ACTIVE -->
           <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">What Is a Chunk?</span>
-</button>
-<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Chunk Iterators</span>
-</button>
-<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Why Chunk Processing Is Useful</span>
-</button>
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">chunksize Parameter</span>
+          </button>
 
-        </div>
+          <!-- Tab 1 — INACTIVE -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:arrows-spin"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Chunk Iterator</span>
+          </button>
+
+          <!-- Tab 2 — INACTIVE -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:calculator"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Aggregating Chunks</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:circle-question"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">When to Use Chunks</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
         <div class="flex-1 min-w-0 md:pl-5">
-          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
-  <div class="rounded-2xl border border-pink-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
-    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">What Is a Chunk?</h3>
-        <span class="text-[10px] font-bold text-#CB187D uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">A chunk is simply a <strong>subset of rows from the dataset</strong>.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Dataset size: 5,000,000 rows
-Chunk size: 10,000 rows</pre></div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">500 chunks</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
-  <div class="rounded-2xl border border-violet-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
-    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Chunk Iterators</h3>
-        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">When using chunk processing, Pandas returns an <strong>iterator</strong>.</p>
-<p class="text-xs text-gray-600 leading-relaxed">An iterator allows Python to read one portion of the dataset at a time.</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">chunks = pd.read_csv(&quot;sales_data.csv&quot;, chunksize=10000)</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
-  <div class="rounded-2xl border border-blue-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
-    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Why Chunk Processing Is Useful</h3>
-        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Chunk processing solves several common problems:</p>
-<p class="text-xs text-gray-600 leading-relaxed">This technique is widely used in ETL pipelines.</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Large CSV files
-Memory limitations
-Streaming data analysis
-Incremental calculations</pre></div>
-</div>
-    </div>
-  </div>
-</div>
 
-        </div>
+          <!-- ════ Panel 0 — chunksize Parameter (pink) ════ -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">chunksize Parameter</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Load data in small batches</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> parameter
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">The <strong>chunksize</strong> parameter tells <code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">pd.read_csv()</code> to load the file in batches instead of all at once. Each batch is a DataFrame with that many rows.</p>
+
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:gears"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">How chunksize Works</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">chunksize=10000</code></td>
+                        <td class="py-2 px-3 text-gray-500">Load 10,000 rows at a time</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Returns</td>
+                        <td class="py-2 px-3 text-gray-500">A TextFileReader iterator, not a DataFrame</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Each chunk</td>
+                        <td class="py-2 px-3 text-gray-500">A regular DataFrame you can process</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Memory</td>
+                        <td class="py-2 px-3 text-gray-500">Only one chunk lives in RAM at a time</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">reader = pd.read_csv("big.csv", chunksize=10000)
+for chunk in reader:                           # one chunk at a time
+    print(chunk.shape)                         # (10000, 8)</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Start with <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">chunksize=10000</code> and adjust.</strong> Smaller chunks use less memory but run more loops. Larger chunks are faster but need more RAM.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 1 — Chunk Iterator (violet) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:arrows-spin"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Chunk Iterator</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Loop through chunks one by one</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> concept
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>chunk iterator</strong> is the object returned by <code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">read_csv(chunksize=N)</code>. It yields one DataFrame per iteration. You cannot go backwards — each chunk is read once and then discarded.</p>
+
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">Full Load vs Chunk Iterator</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 border border-violet-200 text-[10px] font-bold">Full load</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">Chunked</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Returns</td>
+                        <td class="py-2 px-3">One DataFrame</td>
+                        <td class="py-2 px-3">An iterator of DataFrames</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Memory</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Entire file in RAM</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">One chunk in RAM</span></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Access</td>
+                        <td class="py-2 px-3">Random (any row)</td>
+                        <td class="py-2 px-3">Sequential (forward only)</td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Best for</td>
+                        <td class="py-2 px-3">Small – medium files</td>
+                        <td class="py-2 px-3">Files larger than RAM</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">reader = pd.read_csv("big.csv", chunksize=50000)
+for i, chunk in enumerate(reader):             # numbered chunks
+    print(f"Chunk {i}: {len(chunk)} rows")     # progress</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>You cannot rewind a chunk iterator.</strong> Once you loop through it, the data is gone. If you need to iterate twice, open a new reader.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 2 — Aggregating Chunks (blue) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:calculator"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Aggregating Chunks</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Combine results from all chunks</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> technique
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Aggregating chunks</strong> means computing a result across the entire file by accumulating values from each chunk. Collect partial results in a running total, then read the final value after the loop.</p>
+
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:list-check"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">Aggregation Strategies</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Sum</td>
+                        <td class="py-2 px-3 text-gray-500">Keep a running total across chunks</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Count</td>
+                        <td class="py-2 px-3 text-gray-500">Increment a counter per chunk</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Collect</td>
+                        <td class="py-2 px-3 text-gray-500">Append filtered rows to a list</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">GroupBy</td>
+                        <td class="py-2 px-3 text-gray-500">Concat partial results, groupby once at end</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">total = 0                                      # running total
+reader = pd.read_csv("big.csv", chunksize=10000)
+for chunk in reader:                           # loop all chunks
+    total += chunk["sales"].sum()              # accumulate
+print(f"Grand total: {total}")                 # final result</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>For grouped aggregations, collect partial results and concat at the end.</strong> Do not call groupby() inside the loop — it creates incomplete groups.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 3 — When to Use Chunks (emerald) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:circle-question"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">When to Use Chunks</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Decide whether chunking is necessary</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> guideline
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Use chunk processing</strong> when a file is too large to fit in memory. If read_csv() raises a MemoryError or your system freezes, switch to chunked reading. For files under 500 MB, full loading is usually fine.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Full Load vs Chunked</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200 text-[10px] font-bold">Full load</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">Chunked</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">File size</td>
+                        <td class="py-2 px-3">Under 500 MB</td>
+                        <td class="py-2 px-3">Over 500 MB</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Speed</td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Faster (single read)</span></td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Slower (loop)</span></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Complexity</td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Simple code</span></td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">More complex</span></td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Memory safety</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">May crash</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Always safe</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import os
+size_mb = os.path.getsize("data.csv") / 1e6    # file size in MB
+if size_mb > 500:                              # large file
+    reader = pd.read_csv("data.csv", chunksize=50000)
+else:
+    df = pd.read_csv("data.csv")               # load normally</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Check your available RAM before deciding.</strong> A 2 GB file fits in memory on a 16 GB machine but crashes on a 4 GB machine.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panels -->
       </div>
     </div>
   </div>
@@ -1046,177 +1351,225 @@ Incremental calculations</pre></div>
 <section id="code-examples">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 1</span>
+  <span class="ce-step-label text-xs font-bold">Read in Chunks</span>
 </button>
-<button onclick="switchCeTab(1)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 2</span>
+  <span class="ce-step-label text-xs font-bold">Filter Each Chunk</span>
 </button>
-<button onclick="switchCeTab(2)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 3</span>
-</button>
-<button onclick="switchCeTab(3)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 4</span>
+  <span class="ce-step-label text-xs font-bold">Aggregate Chunks</span>
 </button>
 </div>
-      <div class="ce-panel ce-panel-anim " role="tabpanel">
+<div class="ce-panel ce-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 1 — Reading a CSV File in Chunks</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Read in Chunks</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Logs</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">chunksize</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">iterator</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Pandas allows chunk processing using the <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">chunksize</code> parameter.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Each iteration loads 10,000 rows.</p>
-</div>
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 2 — Counting Total Rows</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script reads a large CSV in 10,000-row chunks instead of loading the entire file at once. Each chunk is a normal DataFrame.</p>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Suppose we want to count rows in a large dataset.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This method avoids loading the entire dataset.</p>
-</div>
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 3 — Aggregating Data Across Chunks</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Suppose we want total revenue.</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Each chunk contributes to the total result.</p>
-</div>
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 4 — Filtering Rows</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Suppose we only want rows where:</p>
-  </div>
-</div>
-      
-      
-      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This extracts relevant records from a large dataset.</p>
-</div>
-    </div>
-  </div>
-</div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">read_chunks.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
 
+chunks = pd.read_csv(&quot;logs.csv&quot;, chunksize=10_000)  # iterator
+
+for i, chunk in enumerate(chunks):       # loop over chunks
+    rows = len(chunk)                     # rows in this chunk
+    print(f&quot;Chunk {i}: {rows} rows&quot;)    # progress report</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python read_chunks.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Chunk 0: 10000 rows<br>Chunk 1: 10000 rows<br>Chunk 2: 4500 rows</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Start with chunksize=10_000 and increase it until memory use is comfortable &#8212; larger chunks process faster but use more RAM.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Filter Each Chunk</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Transactions</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">filter</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">append results</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script filters each chunk for rows that match a condition and collects only the matching rows. The full file never sits in memory at once.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">filter_chunks.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+results = []  # collect matching rows
+
+for chunk in pd.read_csv(&quot;txns.csv&quot;, chunksize=50_000):
+    high = chunk[chunk[&quot;amount&quot;] &gt; 1000]  # filter this chunk
+    results.append(high)                    # keep matches
+
+df = pd.concat(results, ignore_index=True)  # combine
+print(f&quot;Found {len(df)} high-value transactions&quot;)</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python filter_chunks.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Found 2,347 high-value transactions</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Filtering inside the loop keeps only the rows you need &#8212; the rest are discarded before the next chunk arrives.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Aggregate Chunks</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">running total</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">sum()</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script calculates a running total across chunks. Each chunk adds its sum to a counter, so you get the grand total without loading everything.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">agg_chunks.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+total = 0  # running total
+
+for chunk in pd.read_csv(&quot;sales.csv&quot;, chunksize=25_000):
+    total += chunk[&quot;revenue&quot;].sum()  # add this chunk&apos;s total
+
+print(f&quot;Grand total: ${total:,.2f}&quot;)</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python agg_chunks.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Grand total: $4,872,350.00</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">For simple aggregations like sum, mean, or count, accumulate a running result &#8212; there is no need to keep any rows after each chunk.</p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1416,153 +1769,244 @@ before processing.</code></pre>
 <section id="practice">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:dumbbell"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 1</span>
+  <span class="pe-step-label text-xs font-bold">Count in Chunks</span>
 </button>
-<button onclick="switchPeTab(1)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 2</span>
+  <span class="pe-step-label text-xs font-bold">Filter a Large File</span>
 </button>
-<button onclick="switchPeTab(2)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 3</span>
+  <span class="pe-step-label text-xs font-bold">Sum in Chunks</span>
 </button>
 </div>
-      <div class="pe-panel pe-panel-anim " role="tabpanel">
+<div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 1 — Print Chunk Sizes</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Count in Chunks</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Clickstream</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">chunksize</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">iteration</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Memory Optimization, Tuples, read_csv(), CSV</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Load <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">clicks.csv</code> in chunks of 50,000 rows. Count the total number of rows without loading the entire file into memory at once.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
-        <div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">chunks = pd.read_csv(&quot;sales_data.csv&quot;, chunksize=5000)</pre></div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Print the number of rows in each chunk.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 2 — Compute Average Value</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: len(), Lists, Aggregations, HTTP Methods</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">total_sum += chunk[&quot;sales&quot;].sum()
-total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">average = total_sum / total_count</pre></div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Then compute:</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 3 — Extract Rows</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: String Formatting, WHERE, Chunk Processing</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">region = &quot;West&quot;</pre></div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Combine results using <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">pd.concat</code>.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">count_chunks.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
 
+total_rows = 0  # running counter
+
+for chunk in pd.read_csv(&quot;clicks.csv&quot;, chunksize=50_000):
+    total_rows += len(chunk)  # add rows in this chunk
+
+print(f&quot;Total rows: {total_rows:,}&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python count_chunks.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Total rows: 1,250,000</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Each chunk is a regular DataFrame that gets garbage-collected after the loop moves on &#8212; memory stays flat no matter how large the file is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Filter a Large File</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Payments</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">chunk + filter</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">concat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Read <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">payments.csv</code> in 100,000-row chunks. Keep only rows where <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">status == &quot;failed&quot;</code>. Combine the results and print the count.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">filter_chunks.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+parts = []  # collect matching chunks
+
+for chunk in pd.read_csv(&quot;payments.csv&quot;, chunksize=100_000):
+    failed = chunk[chunk[&quot;status&quot;] == &quot;failed&quot;]  # filter
+    parts.append(failed)                           # keep
+
+result = pd.concat(parts, ignore_index=True)      # combine
+print(f&quot;Failed payments: {len(result):,}&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python filter_chunks.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Failed payments: 3,412</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Filter inside the loop so you only keep the tiny subset you need &#8212; the full file never sits in memory.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Sum in Chunks</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Deliveries</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">running total</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">chunksize</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Read <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">deliveries.csv</code> in 50,000-row chunks. Calculate the total weight shipped by summing the <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">weight_kg</code> column across all chunks.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">sum_chunks.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+total_weight = 0.0  # running total
+
+for chunk in pd.read_csv(&quot;deliveries.csv&quot;, chunksize=50_000):
+    total_weight += chunk[&quot;weight_kg&quot;].sum()  # add chunk sum
+
+print(f&quot;Total shipped: {total_weight:,.1f} kg&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python sum_chunks.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Total shipped: 487,320.5 kg</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">For simple aggregations (sum, count, min, max) you only need a single running variable &#8212; no need to keep any chunks in memory.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1570,89 +2014,211 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
 <section id="mistakes">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls beginners hit when working with chunk processing</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 1</span>
-</button>
-<button onclick="switchMkTab(1)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 2</span>
-</button>
-<button onclick="switchMkTab(2)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 3</span>
-</button>
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+  <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">No Chunksize</span>
+  </button>
+  <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Append in Loop</span>
+  </button>
+  <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Wrong Chunk Size</span>
+  </button>
 </div>
-      <div class="mk-panel mk-panel-anim " role="tabpanel">
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Mistake 1 — Using Large Chunk Sizes</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Very large chunks defeat the purpose.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Very large chunks defeat the purpose.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example mistake:</p>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">chunksize = 5,000,000</pre></div></div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Loading a Massive CSV Into Memory All at Once</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Python runs out of memory and crashes with a MemoryError.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Files larger than available RAM cannot be loaded in one call. Pass <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">chunksize</code> to <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">read_csv()</code> to process the file in smaller pieces.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — load all at once
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = pd.read_csv("huge_file.csv")  # MemoryError
+print(df.shape)</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — use chunksize
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">chunks = pd.read_csv("huge_file.csv",
+                     chunksize=100_000)  # 100K rows at a time
+for chunk in chunks:
+    print(chunk.shape)                    # process each piece</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Example mistake:</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Chunking is like reading a book one chapter at a time instead of memorising the entire thing before you start.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Mistake 2 — Forgetting to Aggregate Results</h4>
-    <p class="text-xs text-gray-500 mt-0.5">When computing totals across chunks, results must be accumulated manually.</p>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Growing a List in a Loop and Concatenating at the End</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Appending DataFrames inside a loop is slow and doubles memory at concat time.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Storing each chunk result in a list and calling <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">pd.concat()</code> at the end temporarily doubles memory. Aggregate each chunk independently and combine only the small summaries.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — collect all chunks
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">parts = []
+for chunk in chunks:
+    parts.append(chunk)              # stores everything
+df = pd.concat(parts)                # doubles memory</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — aggregate per chunk
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">totals = []
+for chunk in chunks:
+    summary = chunk.groupby("Region")["Sales"].sum()  # small result
+    totals.append(summary)                             # tiny piece
+final = pd.concat(totals).groupby(level=0).sum()       # combine sums</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Process each chunk down to a small result before collecting it. Storing 100 tiny summaries uses far less memory than storing 100 full chunks.</p>
+    </div>
+
   </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
 </div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">When computing totals across chunks, results must be accumulated manually.</p></div>
-    
-  </div>
-</div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Mistake 3 — Assuming Chunk Processing Is Always Fast</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Chunk processing prevents memory errors but may still be slower than optimized storage formats.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Chunk processing prevents memory errors but may still be slower than optimized storage formats.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Later lessons introduce faster solutions.</p></div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Choosing a Chunk Size That Is Too Small or Too Large</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Too small wastes time on overhead; too large triggers MemoryError.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">A chunk of 10 rows creates millions of iterations. A chunk of 10 million rows may still exceed memory. Start with 100,000–500,000 rows and adjust based on <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">memory_usage()</code>.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — too small
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">chunks = pd.read_csv("huge.csv",
+                     chunksize=10)   # millions of iterations</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — reasonable size
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">chunks = pd.read_csv("huge.csv",
+                     chunksize=200_000)  # balanced choice
+for chunk in chunks:
+    print(chunk.memory_usage(deep=True).sum())  # monitor usage</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Later lessons introduce faster solutions.</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Start at 100,000 rows. If each chunk fits comfortably in memory and the loop finishes in reasonable time, you have found a good balance.</p>
+    </div>
+
   </div>
 </div>
 
@@ -1872,20 +2438,13 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 1</span>
-</button>
-<button onclick="switchQzTab(1)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 2</span>
-</button>
-<button onclick="switchQzTab(2)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 3</span>
-</button>
+<div class="flex items-center gap-2 flex-wrap" role="tablist">
+<button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+<button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+<button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+<button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
 </div>
-      <div class="qz-panel qz-panel-anim " role="tabpanel">
+<div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
       <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
@@ -1901,7 +2460,7 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">what chunk processing is &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">Reading a very large CSV file at once can crash Python because the entire file must fit into your computer's available RAM.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -1931,12 +2490,12 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q1">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how Pandas processes large files in smaller segments &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">The chunksize parameter in pd.read_csv() splits the file into smaller CSV files on disk, which you then load one at a time.</p>
         <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
           </button>
         </div>
@@ -1961,7 +2520,7 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how to perform aggregations across chunks &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">When you iterate over chunks, each chunk is a regular DataFrame that you can filter, aggregate, or transform using normal pandas methods.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -1975,7 +2534,36 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
     </div>
   </div>
 </div>
-
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q3">
+        <p class="text-sm font-semibold text-gray-800 mb-4">After processing each chunk separately, you must re-read the original file to combine the results &#8212; there is no way to merge chunk results in memory.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>

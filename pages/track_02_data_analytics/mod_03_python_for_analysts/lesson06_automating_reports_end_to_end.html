@@ -955,209 +955,393 @@
   </div>
 </section>
 
-<section id="key-concepts">
+<section id="key-concepts" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header -->
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pipeline functions, logging, error handling, and the main() pattern.</p>
+      </div>
+    </div>
+
     <div class="bg-white px-6 py-7">
       <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
         <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
-          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — ACTIVE -->
           <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">End-to-End Reporting Pipeline</span>
-</button>
-<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Step 1 — Extract Data</span>
-</button>
-<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Step 2 — Transform Data</span>
-</button>
-<button onclick="switchKcTab(3)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:cube"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Step 3 — Generate Report</span>
-</button>
-<button onclick="switchKcTab(4)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:gear"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Step 4 — Export the Report</span>
-</button>
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:diagram-project"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Pipeline Functions</span>
+          </button>
 
-        </div>
+          <!-- Tab 1 — INACTIVE -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:clipboard-list"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Logging</span>
+          </button>
+
+          <!-- Tab 2 — INACTIVE -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:triangle-exclamation"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Error Handling</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:play"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">main() Pattern</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
         <div class="flex-1 min-w-0 md:pl-5">
-          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
-  <div class="rounded-2xl border border-pink-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
-    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">End-to-End Reporting Pipeline</h3>
-        <span class="text-[10px] font-bold text-#CB187D uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">An automated reporting pipeline usually contains four steps:</p>
-<p class="text-xs text-gray-600 leading-relaxed">Python can handle each of these steps.</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">1 Extract data
-2 Transform data
-3 Generate report
-4 Deliver report</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
-  <div class="rounded-2xl border border-violet-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
-    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Step 1 — Extract Data</h3>
-        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Data may come from:</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Database queries
-CSV files
-Excel files
-APIs</pre></div>
-<div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 
-df = pd.read_csv(&quot;sales_data.csv&quot;)</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
-  <div class="rounded-2xl border border-blue-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
-    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Step 2 — Transform Data</h3>
-        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Transformations prepare data for reporting.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Examples include:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Filtering rows
-Creating calculated columns
-Aggregating metrics
-Cleaning values</pre></div>
-<div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">df[&quot;tax&quot;] = df[&quot;sales&quot;] * 0.08</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
-  <div class="rounded-2xl border border-emerald-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
-    <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Step 3 — Generate Report</h3>
-        <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Reports usually summarize the data.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">summary = df.groupby(&quot;region&quot;)[&quot;sales&quot;].sum()</code></pre>
-</div>
-<div class="overflow-x-auto rounded-xl border border-gray-100">
-<table class="w-full text-sm">
-<thead>
-<tr class="bg-gray-50">
-  <th class="px-4 py-3 text-left font-semibold text-gray-700 text-xs uppercase tracking-wider">region</th>
-  <th class="px-4 py-3 text-left font-semibold text-gray-700 text-xs uppercase tracking-wider">sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="border-t border-gray-100 hover:bg-gray-50">
-  <td class="px-4 py-3 text-gray-600">East</td>
-  <td class="px-4 py-3 text-gray-600">300</td>
-</tr>
-<tr class="border-t border-gray-100 hover:bg-gray-50">
-  <td class="px-4 py-3 text-gray-600">West</td>
-  <td class="px-4 py-3 text-gray-600">200</td>
-</tr>
-<tr class="border-t border-gray-100 hover:bg-gray-50">
-  <td class="px-4 py-3 text-gray-600">South</td>
-  <td class="px-4 py-3 text-gray-600">400</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
-  <div class="rounded-2xl border border-amber-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-red-300"></div>
-    <div class="bg-gradient-to-br from-amber-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Step 4 — Export the Report</h3>
-        <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">The report can be exported to a file.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">summary.to_excel(&quot;weekly_sales_report.xlsx&quot;)</code></pre>
-</div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Windows Task Scheduler
-Cron jobs (Linux)
-CI/CD pipelines
-Data orchestration tools</pre></div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Run every day at 6:00 AM</pre></div>
-<div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-bash">python generate_report.py</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
+          <!-- ════ Panel 0 — Pipeline Functions (pink) ════ -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
 
-        </div>
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:diagram-project"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Pipeline Functions</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Organise code into extract, transform, load</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> pattern
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>pipeline function</strong> handles one step of the process. Split your script into extract(), transform(), and load(). Each function does one job and returns its result to the next step.</p>
+
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:list-ol"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">Pipeline Structure</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">extract()</code></td>
+                        <td class="py-2 px-3 text-gray-500">Load raw data from source → returns DataFrame</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">transform(df)</code></td>
+                        <td class="py-2 px-3 text-gray-500">Clean and reshape → returns cleaned DataFrame</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">load(df)</code></td>
+                        <td class="py-2 px-3 text-gray-500">Save the final output → writes file</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">main()</code></td>
+                        <td class="py-2 px-3 text-gray-500">Calls all three in order</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">def extract():                                 # step 1: load
+    return pd.read_csv("sales.csv")
+def transform(df):                             # step 2: clean
+    return df.dropna().reset_index(drop=True)
+def load(df):                                  # step 3: save
+    df.to_csv("report.csv", index=False)</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Each function should do one thing.</strong> If a function loads data AND cleans it, split it into two separate functions.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 1 — Logging (violet) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:clipboard-list"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Logging</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Track what your script does</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> module
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">The <strong>logging</strong> module records messages as your script runs. Use it instead of <code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">print()</code>. Log messages include timestamps and severity levels.</p>
+
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:calculator"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">Log Levels</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-violet-500 w-12">Op</th>
+                        <th class="py-2 px-3 text-left font-bold text-violet-500">Meaning</th>
+                        <th class="py-2 px-3 text-left font-bold text-violet-500">Example</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">DEBUG</code></td>
+                        <td class="py-2 px-3 text-gray-500">Detailed technical info</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">logging.debug("Loading file")</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">INFO</code></td>
+                        <td class="py-2 px-3 text-gray-500">Normal operation</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">logging.info("Loaded 500 rows")</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">WARNING</code></td>
+                        <td class="py-2 px-3 text-gray-500">Something unexpected</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">logging.warning("Empty file")</code></td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">ERROR</code></td>
+                        <td class="py-2 px-3 text-gray-500">Something failed</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-50 text-violet-700 border border-violet-200 px-1.5 py-0.5 rounded text-[10px]">logging.error("File not found")</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import logging
+logging.basicConfig(level=logging.INFO)        # show INFO and above
+logging.info("Script started")                 # log a message
+logging.warning("No data for March")           # log a warning</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Use <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">logging.info()</code> instead of <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">print()</code> in automated scripts.</strong> Log messages include timestamps and can be saved to a file for later review.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 2 — Error Handling (blue) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:triangle-exclamation"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Error Handling</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Catch problems without crashing</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> pattern
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Error handling</strong> uses <code class="font-mono bg-blue-100 text-blue-700 border border-blue-200 px-1 rounded">try</code> and <code class="font-mono bg-blue-100 text-blue-700 border border-blue-200 px-1 rounded">except</code> to catch problems. If a file is missing or data is corrupt, the script logs the error and continues instead of crashing.</p>
+
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">Without vs With Error Handling</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200 text-[10px] font-bold">No try/except</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-700 border border-green-200 text-[10px] font-bold">With try/except</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Missing file</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Script crashes</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Logs error, continues</span></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Bad data</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Traceback printed</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Handled gracefully</span></td>
+                      </tr>
+                      <tr class="">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Recovery</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Restart manually</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Skips and moves on</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">try:                                           # protect this block
+    df = pd.read_csv("sales.csv")              # may fail
+    logging.info("Loaded %d rows", len(df))    # log success
+except FileNotFoundError:                      # catch missing file
+    logging.error("sales.csv not found")       # log the error</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Catch specific exceptions, not all exceptions.</strong> Writing <em>except Exception</em> hides bugs. Use specific types like <em>FileNotFoundError</em> or <em>ValueError</em>.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 3 — main() Pattern (emerald) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:play"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">main() Pattern</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Run the full pipeline in one call</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> pattern
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">The <strong>main() pattern</strong> wraps your entire pipeline in a single function. Call it at the bottom of the script with the name guard. This makes your script importable and testable.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:star"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">main() Benefits</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Single entry point</td>
+                        <td class="py-2 px-3 text-gray-500">Run the whole pipeline with main()</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Importable</td>
+                        <td class="py-2 px-3 text-gray-500">Other scripts can import your functions</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Testable</td>
+                        <td class="py-2 px-3 text-gray-500">Call extract() or transform() separately</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Clear flow</td>
+                        <td class="py-2 px-3 text-gray-500">Read main() to see the full pipeline</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">def main():                                    # entry point
+    df = extract()                             # step 1: load
+    df = transform(df)                         # step 2: clean
+    load(df)                                   # step 3: save
+    logging.info("Pipeline complete")          # confirm
+if __name__ == "__main__":                     # guard
+    main()                                     # run it</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>The name guard prevents the pipeline from running when imported.</strong> Without it, importing your script in another file triggers the entire pipeline.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panels -->
       </div>
     </div>
   </div>
@@ -1167,221 +1351,232 @@ Data orchestration tools</pre></div>
 <section id="code-examples">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 1</span>
+  <span class="ce-step-label text-xs font-bold">Connect the Pipeline</span>
 </button>
-<button onclick="switchCeTab(1)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 2</span>
+  <span class="ce-step-label text-xs font-bold">Handle Errors</span>
 </button>
-<button onclick="switchCeTab(2)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 3</span>
-</button>
-<button onclick="switchCeTab(3)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 4</span>
+  <span class="ce-step-label text-xs font-bold">Schedule and Log</span>
 </button>
 </div>
-      <div class="ce-panel ce-panel-anim " role="tabpanel">
+<div class="ce-panel ce-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 1 — Extract Data</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Connect the Pipeline</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">functions</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">end-to-end</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_1_extract_data.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
-
-df = pd.read_csv(&quot;sales_data.csv&quot;)</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 2 — Transform Data</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_2_transform_data.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df[&quot;tax&quot;] = df[&quot;sales&quot;] * 0.08</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 3 — Generate Summary</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_3_generate_summary.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">summary = df.groupby(&quot;region&quot;)[&quot;sales&quot;].sum()</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 4 — Export Report</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">Running the script creates the report automatically.</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script chains three functions into a complete pipeline: extract data, transform it, and export the result.</p>
+        </div>
+      </div>
       <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_4_export_report.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">summary.to_excel(&quot;sales_report.xlsx&quot;)</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">pipeline.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
 
+def extract():                                 # step 1: get data
+    return pd.read_csv(&quot;sales.csv&quot;)
+
+def transform(df):                             # step 2: summarise
+    return df.groupby(&quot;region&quot;)[&quot;revenue&quot;].sum().reset_index()
+
+def export(df):                                # step 3: save
+    df.to_csv(&quot;summary.csv&quot;, index=False)
+
+export(transform(extract()))  # run all three steps</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python pipeline.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Each function does one job &#8212; if the output looks wrong, you can test each step in isolation to find the problem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Handle Errors</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">ETL</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">try/except</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">logging</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script wraps each pipeline step in a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">try/except</code> block. If a step fails, the error is logged and the script continues.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">error_handling.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import logging
+
+logging.basicConfig(filename=&quot;pipeline.log&quot;, level=logging.INFO)
+
+try:
+    df = pd.read_csv(&quot;data.csv&quot;)           # attempt to load
+    logging.info(f&quot;Loaded {len(df)} rows&quot;)  # log success
+except FileNotFoundError as e:
+    logging.error(f&quot;File missing: {e}&quot;)     # log the error</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python error_handling.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Wrap risky steps like file reads and database calls in try/except &#8212; the script logs the problem instead of crashing silently.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Schedule and Log</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Reports</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">main()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">timestamps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script adds timestamps to every log message so you know exactly when each run started and finished.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">scheduled_run.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import logging
+from datetime import datetime
+
+logging.basicConfig(filename=&quot;runs.log&quot;, level=logging.INFO,
+                    format=&quot;%(asctime)s %(message)s&quot;)
+
+logging.info(&quot;Pipeline started&quot;)
+df = pd.read_csv(&quot;report.csv&quot;)
+logging.info(f&quot;Processed {len(df)} rows&quot;)</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python scheduled_run.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Timestamped logs are essential for scheduled scripts &#8212; they let you trace exactly when a failure happened.</p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1579,197 +1774,248 @@ EXEC sp_SendReportEmail;</code></pre>
 <section id="practice">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:dumbbell"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 1</span>
+  <span class="pe-step-label text-xs font-bold">Chain Three Steps</span>
 </button>
-<button onclick="switchPeTab(1)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 2</span>
+  <span class="pe-step-label text-xs font-bold">Catch File Errors</span>
 </button>
-<button onclick="switchPeTab(2)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 3</span>
-</button>
-<button onclick="switchPeTab(3)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 4</span>
+  <span class="pe-step-label text-xs font-bold">Add Timestamps</span>
 </button>
 </div>
-      <div class="pe-panel pe-panel-anim " role="tabpanel">
+<div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 1</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Chain Three Steps</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Revenue</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">functions</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">pipeline</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Scripts, Arithmetic, Automation, Data I/O</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Write a pipeline script with three functions: extract loads <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">revenue.csv</code>, transform groups by quarter, and export saves to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">quarterly.csv</code>. Call them in order.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Create a script that loads a dataset and calculates total sales.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 2</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Automation, Data Analysis</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Generate a summary table by category.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 3</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Excel, Automation</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Export the summary results to an Excel file.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 4</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Scripts, Automation, Scheduling</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Describe how this script could be scheduled to run automatically.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">revenue_pipeline.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
 
+def extract():                                  # step 1
+    return pd.read_csv(&quot;revenue.csv&quot;)
+
+def transform(df):                              # step 2
+    return df.groupby(&quot;quarter&quot;)[&quot;amount&quot;].sum().reset_index()
+
+def export(df):                                 # step 3
+    df.to_csv(&quot;quarterly.csv&quot;, index=False)
+
+export(transform(extract()))</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python revenue_pipeline.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Each function does one job. If the output looks wrong, you can test each step in isolation to find the problem.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Catch File Errors</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Downloads</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">try/except</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">logging</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Write a script that tries to load <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">downloads.csv</code>. If the file is missing, log the error to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">pipeline.log</code> instead of crashing.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">catch_errors.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import logging
+
+logging.basicConfig(filename=&quot;pipeline.log&quot;, level=logging.INFO)
+
+try:
+    df = pd.read_csv(&quot;downloads.csv&quot;)           # load
+    logging.info(f&quot;Loaded {len(df)} rows&quot;)      # success
+except FileNotFoundError as e:
+    logging.error(f&quot;Missing file: {e}&quot;)         # log error</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python catch_errors.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Wrap risky steps like file reads in try/except &#8212; the script logs the problem instead of crashing silently.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Add Timestamps</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Audit</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">asctime</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">log format</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Write a script that loads <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">audit.csv</code> and logs a timestamped message to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">audit.log</code> showing how many rows were processed.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">timestamped_log.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import logging
+
+logging.basicConfig(filename=&quot;audit.log&quot;, level=logging.INFO,
+                    format=&quot;%(asctime)s %(message)s&quot;)
+
+df = pd.read_csv(&quot;audit.csv&quot;)                    # load data
+logging.info(f&quot;Processed {len(df)} audit records&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python timestamped_log.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Timestamped logs are essential for scheduled scripts &#8212; they let you trace exactly when each run happened.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1777,90 +2023,210 @@ EXEC sp_SendReportEmail;</code></pre>
 <section id="mistakes">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls beginners hit when working with end-to-end report automation</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 1</span>
-</button>
-<button onclick="switchMkTab(1)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 2</span>
-</button>
-<button onclick="switchMkTab(2)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 3</span>
-</button>
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+  <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">No try/except</span>
+  </button>
+  <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Email Credentials</span>
+  </button>
+  <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Stale Data Path</span>
+  </button>
 </div>
-      <div class="mk-panel mk-panel-anim " role="tabpanel">
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Running Scripts Manually Every Time</h4>
-    <p class="text-xs text-gray-500 mt-0.5">The goal of automation is to <strong>schedule scripts automatically</strong>.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">The goal of automation is to <strong>schedule scripts automatically</strong>.</p></div>
-    
-  </div>
-</div>
-<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
-  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Hardcoding File Locations</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Scripts should reference configurable file paths.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="p-5 bg-red-50/30">
-  <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Watch out
-  </p>
-  <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">data_path = &quot;data/sales.csv&quot;</code></pre>
-</div>
-</div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Running an Entire Pipeline Without Error Handling</h4>
+        <p class="text-xs text-gray-500 mt-0.5">One failure in the middle leaves the report half-finished with no notification.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Wrap the pipeline in a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">try/except</code> block so failures are caught, logged, and — if an email step exists — reported automatically.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — no error handling
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = load_data()
+summary = transform(df)
+export(summary)
+send_email(summary)   # crashes silently if transform fails</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — wrap in try/except
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">try:
+    df = load_data()                # step 1
+    summary = transform(df)          # step 2
+    export(summary)                  # step 3
+except Exception as err:
+    print(f"Pipeline failed: {err}") # log the failure</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Example:</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">An automated pipeline that fails silently is worse than no automation. The <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">except</code> block is your smoke alarm.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Ignoring Error Handling</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Scripts should handle errors such as missing files or invalid data.</p>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Storing SMTP Credentials in the Script File</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The email password is visible to anyone who can read the code or Git history.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Hard-coded SMTP passwords get committed to version control. Store them in a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">.env</code> file and load with <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">os.getenv()</code>.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — password in code
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">smtp_password = "MyS3cret!"          # exposed in source
+server.login("me@co.com", smtp_password)</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — use .env
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import os                                    # standard library
+smtp_password = os.getenv("SMTP_PASSWORD")   # from .env
+server.login("me@co.com", smtp_password)      # secret hidden</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Never type a password inside a <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">.py</code> file. Use a <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">.env</code> file — and add it to <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">.gitignore</code> immediately.</p>
+    </div>
+
   </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
 </div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Scripts should handle errors such as missing files or invalid data.</p></div>
-    
+
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Running the Pipeline on Yesterday's File Because the Path Is Hardcoded</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The export overwrites the previous report with the same stale data.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">If the input path never changes, the pipeline reprocesses old data every time. Generate the path dynamically from today's date or use the latest file in the folder.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — hardcoded path
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = pd.read_csv("data/march_extract.csv")  # stale in April</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — dynamic path
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">from glob import glob                         # pattern matcher
+files = sorted(glob("data/*_extract.csv"))    # sorted by name
+latest = files[-1]                             # pick the newest
+df = pd.read_csv(latest)                       # always fresh data</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Sort the matching files and pick the last one. As long as your naming is chronological, <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">files[-1]</code> always grabs the latest extract.</p>
+    </div>
+
   </div>
 </div>
 
@@ -2080,20 +2446,13 @@ EXEC sp_SendReportEmail;</code></pre>
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 1</span>
-</button>
-<button onclick="switchQzTab(1)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 2</span>
-</button>
-<button onclick="switchQzTab(2)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 3</span>
-</button>
+<div class="flex items-center gap-2 flex-wrap" role="tablist">
+<button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+<button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+<button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+<button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
 </div>
-      <div class="qz-panel qz-panel-anim " role="tabpanel">
+<div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
       <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
@@ -2109,7 +2468,7 @@ EXEC sp_SendReportEmail;</code></pre>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how to build an end-to-end reporting pipeline &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">An end-to-end reporting pipeline connects data extraction, transformation, summarisation, and export into a single script that runs without manual steps.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2139,12 +2498,12 @@ EXEC sp_SendReportEmail;</code></pre>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q1">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how Python automates extraction, transformation, and reporting &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">If one step in your pipeline fails, the entire script should crash immediately &#8212; adding try/except blocks hides bugs and makes debugging harder.</p>
         <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
           </button>
         </div>
@@ -2169,7 +2528,7 @@ EXEC sp_SendReportEmail;</code></pre>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how automated scripts improve reliability &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">Python's smtplib library lets your script send an email with the finished report attached, so stakeholders receive it automatically.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2183,7 +2542,36 @@ EXEC sp_SendReportEmail;</code></pre>
     </div>
   </div>
 </div>
-
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q3">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Once a script is scheduled to run daily, you no longer need logging because the scheduler keeps a complete record of every output the script produces.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>

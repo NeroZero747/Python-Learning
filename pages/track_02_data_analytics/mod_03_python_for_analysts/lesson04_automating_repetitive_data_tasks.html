@@ -955,148 +955,379 @@
   </div>
 </section>
 
-<section id="key-concepts">
+<section id="key-concepts" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header -->
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">glob(), file loops, pd.concat(), and reusable functions.</p>
+      </div>
+    </div>
+
     <div class="bg-white px-6 py-7">
       <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
         <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
-          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — ACTIVE -->
           <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Identifying Automation Opportunities</span>
-</button>
-<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Processing Files Automatically</span>
-</button>
-<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Looping Through Files</span>
-</button>
-<button onclick="switchKcTab(3)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:cube"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Combining Multiple Files</span>
-</button>
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:folder-open"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">glob()</span>
+          </button>
 
-        </div>
+          <!-- Tab 1 — INACTIVE -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:arrows-spin"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">File Loops</span>
+          </button>
+
+          <!-- Tab 2 — INACTIVE -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:object-group"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">pd.concat()</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:cube"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Reusable Functions</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
         <div class="flex-1 min-w-0 md:pl-5">
-          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
-  <div class="rounded-2xl border border-pink-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
-    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Identifying Automation Opportunities</h3>
-        <span class="text-[10px] font-bold text-#CB187D uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Tasks that should be automated usually have these characteristics:</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Repeated frequently
-Follow the same steps
-Require processing multiple files
-Require generating reports</pre></div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Daily sales report</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
-  <div class="rounded-2xl border border-violet-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
-    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Processing Files Automatically</h3>
-        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Python can scan directories to identify files.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">import os
 
-files = os.listdir(&quot;data&quot;)
+          <!-- ════ Panel 0 — glob() (pink) ════ -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
 
-print(files)</code></pre>
-</div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">sales_jan.csv
-sales_feb.csv
-sales_mar.csv</pre></div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
-  <div class="rounded-2xl border border-blue-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
-    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Looping Through Files</h3>
-        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Python loops allow scripts to process many files automatically.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">for file in files:
-    print(&quot;Processing:&quot;, file)</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
-  <div class="rounded-2xl border border-emerald-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
-    <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Combining Multiple Files</h3>
-        <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Python can combine datasets from multiple files.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 
-df1 = pd.read_csv(&quot;sales_jan.csv&quot;)
-df2 = pd.read_csv(&quot;sales_feb.csv&quot;)
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:folder-open"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">glob()</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Find files by name pattern</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> function
+                  </span>
+                </div>
 
-combined = pd.concat([df1, df2])
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>glob()</strong> searches a folder for files matching a pattern. Use <code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">*</code> to match any characters. It returns a list of file paths you can loop through.</p>
 
-print(combined.head())</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:asterisk"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">Common Glob Patterns</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">*.csv</code></td>
+                        <td class="py-2 px-3 text-gray-500">All CSV files in the folder</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">data_*.xlsx</code></td>
+                        <td class="py-2 px-3 text-gray-500">Excel files starting with data_</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">**/*.csv</code></td>
+                        <td class="py-2 px-3 text-gray-500">CSV files in all subfolders</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">sales_202?.csv</code></td>
+                        <td class="py-2 px-3 text-gray-500">sales_2020 through sales_2029</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
-        </div>
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">files = glob.glob("data/*.csv")              # all CSVs in data/
+print(len(files))                             # how many found
+print(files[0])                               # first file path</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Add <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">recursive=True</code> to search subfolders.</strong> Without it, the <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">**</code> pattern does not descend into nested directories.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 1 — File Loops (violet) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:arrows-spin"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">File Loops</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Process every file in a list</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> pattern
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>file loop</strong> iterates over a list of file paths and runs the same code on each one. Combine glob() with a for loop to process an entire folder automatically.</p>
+
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:list-ol"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">Loop Pattern Steps</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Step 1</td>
+                        <td class="py-2 px-3 text-gray-500">Find files with glob()</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Step 2</td>
+                        <td class="py-2 px-3 text-gray-500">Create an empty list for results</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Step 3</td>
+                        <td class="py-2 px-3 text-gray-500">Loop and read each file</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Step 4</td>
+                        <td class="py-2 px-3 text-gray-500">Append each DataFrame to the list</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">files = glob.glob("reports/*.csv")            # find all CSVs
+frames = []                                   # empty collector
+for f in files:                               # loop each file
+    frames.append(pd.read_csv(f))             # load and collect</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Print the file name inside the loop while developing.</strong> A quick <em>print(f)</em> shows which file caused an error if something fails.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 2 — pd.concat() (blue) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:object-group"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">pd.concat()</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Stack multiple DataFrames into one</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> function
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>pd.concat()</strong> joins a list of DataFrames into one. By default it stacks them vertically. All frames must share the same column names.</p>
+
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">concat() vs merge()</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200 text-[10px] font-bold">concat()</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">merge()</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Direction</td>
+                        <td class="py-2 px-3">Vertical — stack rows</td>
+                        <td class="py-2 px-3">Horizontal — add columns</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Input</td>
+                        <td class="py-2 px-3">List of DataFrames</td>
+                        <td class="py-2 px-3">Two DataFrames</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Match on</td>
+                        <td class="py-2 px-3">Same column names</td>
+                        <td class="py-2 px-3">A shared key column</td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Use for</td>
+                        <td class="py-2 px-3">Combining monthly files</td>
+                        <td class="py-2 px-3">Joining related tables</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">all_data = pd.concat(frames)                  # stack all frames
+all_data = pd.concat(frames, ignore_index=True)  # reset index
+print(all_data.shape)                         # total rows and cols</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Add <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">ignore_index=True</code> to reset row numbers.</strong> Without it, row numbers from each file overlap (0, 1, 2, 0, 1, 2…).</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 3 — Reusable Functions (emerald) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:cube"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Reusable Functions</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Wrap logic in a function for reuse</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> pattern
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>reusable function</strong> wraps your automation logic so you can call it with different inputs. Write the steps once inside <em>def</em>, then call the function with any folder or pattern.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:star"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Function Benefits</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Write once</td>
+                        <td class="py-2 px-3 text-gray-500">Define the logic a single time</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Call many times</td>
+                        <td class="py-2 px-3 text-gray-500">process_folder("jan/"), process_folder("feb/")</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Easy to test</td>
+                        <td class="py-2 px-3 text-gray-500">Run with a single test file first</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Easy to read</td>
+                        <td class="py-2 px-3 text-gray-500">A function name describes the intent</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">def process_folder(pattern):                  # define once
+    files = glob.glob(pattern)                # find matching files
+    frames = [pd.read_csv(f) for f in files]  # load each one
+    return pd.concat(frames, ignore_index=True)  # combine</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Name functions after what they do, not how they do it.</strong> Use <em>process_monthly_sales()</em> instead of <em>loop_and_concat()</em>.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panels -->
       </div>
     </div>
   </div>
@@ -1106,232 +1337,225 @@ print(combined.head())</code></pre>
 <section id="code-examples">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 1</span>
+  <span class="ce-step-label text-xs font-bold">Loop Over Files</span>
 </button>
-<button onclick="switchCeTab(1)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 2</span>
+  <span class="ce-step-label text-xs font-bold">Combine and Summarise</span>
 </button>
-<button onclick="switchCeTab(2)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 3</span>
-</button>
-<button onclick="switchCeTab(3)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 4</span>
+  <span class="ce-step-label text-xs font-bold">Log the Results</span>
 </button>
 </div>
-      <div class="ce-panel ce-panel-anim " role="tabpanel">
+<div class="ce-panel ce-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 1 — List Files in a Folder</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Loop Over Files</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Reports</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">glob()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">for loop</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_1_list_files_in_a_folder.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import os
-
-files = os.listdir(&quot;data&quot;)
-
-print(files)</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 2 — Loop Through Files</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_2_loop_through_files.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">for file in files:
-    print(&quot;Processing:&quot;, file)</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 3 — Load Multiple CSV Files</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_3_load_multiple_csv_files.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
-
-dataframes = []
-
-for file in files:
-    df = pd.read_csv(&quot;data/&quot; + file)
-    dataframes.append(df)</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 4 — Combine DataFrames</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">This creates a unified dataset.</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script finds all CSV files in a folder and reads each one in a loop. You process any number of files without writing a separate line for each.</p>
+        </div>
+      </div>
       <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">loop_files.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from pathlib import Path
+
+folder = Path(&quot;reports/&quot;)  # folder containing CSVs
+
+for file in folder.glob(&quot;*.csv&quot;):              # loop over CSV files
+    df = pd.read_csv(file)                      # read each file
+    print(f&quot;{file.name}: {len(df)} rows&quot;)      # show file name and size</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python loop_files.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">jan_report.csv: 120 rows<br>feb_report.csv: 145 rows</div>
+        </div>
       </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_4_combine_dataframes.py</span>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">glob("*.csv") returns every CSV in the folder &#8212; add new files and the script picks them up automatically.</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">combined = pd.concat(dataframes)
-
-print(combined.head())</code></pre>
   </div>
 </div>
-      
-      
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Combine and Summarise</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">pd.concat()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">append results</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script reads multiple files, stacks them into one DataFrame with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">pd.concat()</code>, then calculates a grand total.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">combine_files.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from pathlib import Path
+
+frames = []  # empty list to collect DataFrames
+for file in Path(&quot;sales/&quot;).glob(&quot;*.csv&quot;):  # loop over files
+    frames.append(pd.read_csv(file))         # add each to the list
+
+all_sales = pd.concat(frames, ignore_index=True)  # stack together
+print(&quot;Total revenue:&quot;, all_sales[&quot;revenue&quot;].sum())</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python combine_files.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Total revenue: 87450.0</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Collect DataFrames in a list and concat once at the end &#8212; it is much faster than appending inside the loop.</p>
+      </div>
     </div>
   </div>
 </div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Log the Results</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">ETL</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">logging</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script processes files and writes a log message for each one. When the script runs unattended, logs tell you what happened.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">log_results.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import logging
 
+logging.basicConfig(filename=&quot;etl.log&quot;, level=logging.INFO)
+
+df = pd.read_csv(&quot;data.csv&quot;)      # load the data
+row_count = len(df)                 # count rows
+logging.info(f&quot;Processed {row_count} rows&quot;)  # write to log file</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python log_results.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Logging writes to a file so you can check results later &#8212; print() output disappears as soon as the terminal closes.</p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1530,197 +1754,245 @@ one file at a time</code></pre>
 <section id="practice">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:dumbbell"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 1</span>
+  <span class="pe-step-label text-xs font-bold">Process Survey Files</span>
 </button>
-<button onclick="switchPeTab(1)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 2</span>
+  <span class="pe-step-label text-xs font-bold">Stack and Total</span>
 </button>
-<button onclick="switchPeTab(2)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 3</span>
-</button>
-<button onclick="switchPeTab(3)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 4</span>
+  <span class="pe-step-label text-xs font-bold">Log Each Step</span>
 </button>
 </div>
-      <div class="pe-panel pe-panel-anim " role="tabpanel">
+<div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 1</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Process Survey Files</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Surveys</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">glob()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">for loop</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: File I/O, Scripts, Automation</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">A folder called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">surveys/</code> contains multiple CSV files. Write a script that loops through every CSV and prints each filename with its row count.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Write a script that lists all files in a folder.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 2</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Automation, Data Analysis</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Loop through the files and print their names.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 3</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Automation, Data Analysis</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Load two CSV files and combine them.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 4</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Automation, Data I/O</p>
-  </div>
-</div>
-      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
-        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
-        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
-      </button>
-      <div class="accordion-body">
-        
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Export the combined dataset to a new CSV file.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">process_surveys.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from pathlib import Path
 
+folder = Path(&quot;surveys/&quot;)  # survey folder
+
+for file in folder.glob(&quot;*.csv&quot;):          # each CSV
+    df = pd.read_csv(file)                  # load it
+    print(f&quot;{file.name}: {len(df)} rows&quot;)  # report</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python process_surveys.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">jan_survey.csv: 95 rows<br>feb_survey.csv: 110 rows</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">glob("*.csv") finds every CSV in the folder automatically &#8212; add a new file and the script picks it up on the next run.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Stack and Total</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Receipts</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">pd.concat()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">sum()</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Read all CSV files in a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">receipts/</code> folder, stack them into one DataFrame, and print the grand total of the <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">amount</code> column.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">stack_receipts.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from pathlib import Path
+
+frames = []  # collect DataFrames
+for file in Path(&quot;receipts/&quot;).glob(&quot;*.csv&quot;):
+    frames.append(pd.read_csv(file))  # add each file
+
+all_data = pd.concat(frames, ignore_index=True)  # stack
+print(f&quot;Grand total: ${all_data[&apos;amount&apos;].sum():,.2f}&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python stack_receipts.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Grand total: $12,480.50</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Collect frames in a list and concat once at the end &#8212; it is much faster than appending row by row inside the loop.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Log Each Step</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Backups</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">logging</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Write a script that processes <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">backup.csv</code> and logs a success message to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">backup.log</code>. If the file is missing, log an error instead.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">log_backup.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import logging
+
+logging.basicConfig(filename=&quot;backup.log&quot;, level=logging.INFO)
+
+try:
+    df = pd.read_csv(&quot;backup.csv&quot;)                # load
+    logging.info(f&quot;Backed up {len(df)} rows&quot;)     # success
+except FileNotFoundError:
+    logging.error(&quot;backup.csv not found&quot;)          # failure</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python log_backup.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed"></div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Logging writes to a file so you can check results later &#8212; print() output disappears as soon as the terminal closes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1728,102 +2000,215 @@ one file at a time</code></pre>
 <section id="mistakes">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls beginners hit when working with automating data tasks</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 1</span>
-</button>
-<button onclick="switchMkTab(1)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 2</span>
-</button>
-<button onclick="switchMkTab(2)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 3</span>
-</button>
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+  <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Hardcoded Paths</span>
+  </button>
+  <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">No Error Handling</span>
+  </button>
+  <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">No Logging</span>
+  </button>
 </div>
-      <div class="mk-panel mk-panel-anim " role="tabpanel">
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Hardcoding File Names</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Scripts should dynamically read files rather than relying on fixed filenames.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="p-5 bg-red-50/30">
-  <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Watch out
-  </p>
-  <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">files = os.listdir(&quot;data&quot;)</code></pre>
-</div>
-</div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Hardcoding File Paths Instead of Using Patterns</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The script breaks the moment a new file is added or a name changes.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Listing every filename by hand is fragile. Use <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">glob.glob()</code> to match file patterns dynamically.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — manual list
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">files = ["jan.csv", "feb.csv", "mar.csv"]   # breaks in April
+for f in files:
+    df = pd.read_csv(f)</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — use glob
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">from glob import glob                    # pattern matcher
+files = glob("data/*.csv")               # finds all CSVs
+for filepath in files:                    # loop dynamically
+    df = pd.read_csv(filepath)            # handles any new file</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Example:</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed"><code class="font-mono bg-amber-100 px-1 rounded text-[11px]">glob()</code> is like telling your assistant "process every CSV in this folder" instead of handing them a handwritten list that goes stale.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Forgetting File Paths</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Files must be referenced using the correct folder path.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="p-5 bg-red-50/30">
-  <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Watch out
-  </p>
-  <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">pd.read_csv(&quot;data/sales.csv&quot;)</code></pre>
-</div>
-</div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Letting One Bad File Crash the Entire Loop</h4>
+        <p class="text-xs text-gray-500 mt-0.5">A single corrupt file stops the script before it processes the remaining files.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Without a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">try/except</code> block, one bad file raises an exception and halts everything. Wrap the loop body so the script skips failures and continues.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — crash on error
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">for filepath in files:
+    df = pd.read_csv(filepath)   # crashes on corrupt file
+    process(df)</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — skip and log
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">for filepath in files:                     # loop all files
+    try:
+        df = pd.read_csv(filepath)         # attempt read
+        process(df)                         # do the work
+    except Exception as err:
+        print(f"Skipped {filepath}: {err}") # log and continue</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Example:</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">An automation script should be like a postman — if one letterbox is jammed, skip it and deliver the rest instead of going home.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Ignoring File Formats</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Ensure the correct file format is used:</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Ensure the correct file format is used:</p>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">read_csv → CSV files
-read_excel → Excel files</pre></div></div>
-    
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Running a Script With No Output or Log Messages</h4>
+        <p class="text-xs text-gray-500 mt-0.5">When something goes wrong, there is no trail to follow — nothing tells you what ran or failed.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Silent scripts are hard to debug. Add <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">print()</code> statements (or <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">logging</code>) at key steps so you can trace what happened after the script finishes.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — silent script
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">for filepath in files:
+    df = pd.read_csv(filepath)
+    df.to_excel(filepath.replace(".csv", ".xlsx"))</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — log progress
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">for filepath in files:
+    print(f"Processing {filepath}...")       # log start
+    df = pd.read_csv(filepath)              # load
+    out = filepath.replace(".csv", ".xlsx")  # output name
+    df.to_excel(out, index=False)            # save
+print(f"Done — {len(files)} files processed") # log total</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Print statements are breadcrumbs through the forest. When something goes wrong at 2 AM, those breadcrumbs show you exactly where the script stopped.</p>
+    </div>
+
   </div>
 </div>
 
@@ -2043,20 +2428,13 @@ read_excel → Excel files</pre></div></div>
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 1</span>
-</button>
-<button onclick="switchQzTab(1)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 2</span>
-</button>
-<button onclick="switchQzTab(2)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 3</span>
-</button>
+<div class="flex items-center gap-2 flex-wrap" role="tablist">
+<button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+<button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+<button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+<button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
 </div>
-      <div class="qz-panel qz-panel-anim " role="tabpanel">
+<div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
       <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
@@ -2072,7 +2450,7 @@ read_excel → Excel files</pre></div></div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how Python automates repetitive analyst tasks &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">Tasks that involve the same steps on different files each week &#8212; like reformatting and summarising &#8212; are strong candidates for automation with Python.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2102,12 +2480,12 @@ read_excel → Excel files</pre></div></div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q1">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how to process multiple files automatically &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">To process ten CSV files in a folder, you need to write ten separate pd.read_csv() calls &#8212; there is no way to loop over files automatically.</p>
         <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
           </button>
         </div>
@@ -2132,7 +2510,7 @@ read_excel → Excel files</pre></div></div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how loops enable batch data processing &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">On Windows, you can use Task Scheduler to run a Python script automatically at a set time without manually opening the file.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2146,7 +2524,36 @@ read_excel → Excel files</pre></div></div>
     </div>
   </div>
 </div>
-
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q3">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Adding logging to an automated script is unnecessary extra work because Python automatically saves a log of every print() statement to a file.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>

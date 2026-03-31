@@ -955,110 +955,302 @@
   </div>
 </section>
 
-<section id="key-concepts">
+<section id="key-concepts" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header -->
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Connection strings, SQLAlchemy engines, and database types.</p>
+      </div>
+    </div>
+
     <div class="bg-white px-6 py-7">
       <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
         <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
-          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — ACTIVE -->
           <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Database Connection</span>
-</button>
-<button onclick="switchKcTab(1)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-code"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Running SQL Queries</span>
-</button>
-<button onclick="switchKcTab(2)" class="kc-tab  group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Connection Strings</span>
-</button>
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:link"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Connection Strings</span>
+          </button>
 
-        </div>
+          <!-- Tab 1 — INACTIVE -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:gear"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">SQLAlchemy Engine</span>
+          </button>
+
+          <!-- Tab 2 — INACTIVE -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:database"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Database Types</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
         <div class="flex-1 min-w-0 md:pl-5">
-          <div class="kc-panel kc-panel-anim " data-color="pink" role="tabpanel">
-  <div class="rounded-2xl border border-pink-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
-    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Database Connection</h3>
-        <span class="text-[10px] font-bold text-#CB187D uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Before querying data, Python must connect to the database.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">import sqlalchemy
 
-engine = sqlalchemy.create_engine(&quot;database_connection_string&quot;)</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
-  <div class="rounded-2xl border border-violet-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
-    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Running SQL Queries</h3>
-        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">Once connected, Python can run SQL queries.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl overflow-hidden bg-code">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-    <div class="flex items-center gap-2">
-      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-      <span class="text-[11px] font-semibold text-gray-400">Python</span>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_sql(&quot;SELECT * FROM sales_table&quot;, engine)</code></pre>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-<div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
-  <div class="rounded-2xl border border-blue-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
-    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5">
-      <div class="mb-3">
-        <h3 class="text-sm font-bold text-gray-900 leading-tight">Connection Strings</h3>
-        <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Definition</span>
-      </div>
-      <div class="space-y-3 mb-4"><p class="text-xs text-gray-600 leading-relaxed">A <strong>connection string</strong> tells Python how to connect to the database.</p>
-<p class="text-xs text-gray-600 leading-relaxed">Example:</p></div>
-      <div class="space-y-3"><div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">postgresql://username:password@server:5432/database</pre></div>
-<ul class="space-y-2">
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">database type</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">username</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">password</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">server location</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">database name</span></li>
-</ul>
-</div>
-    </div>
-  </div>
-</div>
+          <!-- ════ Panel 0 — Connection Strings (pink) ════ -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
 
-        </div>
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:link"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Connection Strings</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Address that locates your database</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> concept
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>connection string</strong> is a URL that tells Python where the database is and how to log in. It follows the pattern <code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">dialect://user:password@host/dbname</code>.</p>
+
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:puzzle-piece"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">Connection String Parts</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">dialect</code></td>
+                        <td class="py-2 px-3 text-gray-500">Database type — sqlite, postgresql, mysql</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">user:password</code></td>
+                        <td class="py-2 px-3 text-gray-500">Login credentials (omit for SQLite)</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">host</code></td>
+                        <td class="py-2 px-3 text-gray-500">Server address — localhost or an IP</td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">dbname</code></td>
+                        <td class="py-2 px-3 text-gray-500">Name of the database</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># SQLite — local file, no server needed
+conn = "sqlite:///company.db"
+# PostgreSQL — remote server
+conn = "postgresql://admin:secret@localhost/sales"</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>SQLite uses three slashes.</strong> <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">sqlite:///file.db</code> — two from the protocol, one for the local path.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 1 — SQLAlchemy Engine (violet) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:gear"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">SQLAlchemy Engine</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Python object that manages the connection</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> object
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed">An <strong>engine</strong> is the object SQLAlchemy uses to talk to the database. Create it once with <code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">create_engine()</code>, then reuse it for every query.</p>
+
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">Engine vs Connection</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 border border-violet-200 text-[10px] font-bold">Engine</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">Connection</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Created by</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">create_engine()</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-gray-100 text-gray-800 border border-gray-200 px-1 rounded">engine.connect()</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Lifetime</td>
+                        <td class="py-2 px-3">Whole script</td>
+                        <td class="py-2 px-3">One query block</td>
+                      </tr>
+                      <tr class="">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Reusable</td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Yes</span></td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Close after use</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine
+engine = create_engine("sqlite:///company.db")  # create once
+print(engine)                                    # Engine object</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Create the engine once at the top of your script.</strong> Pass the same <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">engine</code> variable to every <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">pd.read_sql()</code> call.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 2 — Database Types (blue) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:database"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Database Types</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">SQLite, PostgreSQL, and MySQL</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> reference
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Database types</strong> (dialects) determine the connection string format and the pip package you need. SQLite is built in. Others need a driver.</p>
+
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:calculator"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">Common Dialects</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-blue-500 w-12">Op</th>
+                        <th class="py-2 px-3 text-left font-bold text-blue-500">Meaning</th>
+                        <th class="py-2 px-3 text-left font-bold text-blue-500">Example</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">sqlite</code></td>
+                        <td class="py-2 px-3 text-gray-500">File-based, no server</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">sqlite:///data.db</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">postgresql</code></td>
+                        <td class="py-2 px-3 text-gray-500">Enterprise, full features</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">postgresql://u:p@host/db</code></td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">mysql</code></td>
+                        <td class="py-2 px-3 text-gray-500">Popular web database</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">mysql://u:p@host/db</code></td>
+                      </tr>
+                      <tr class=" bg-gray-50/40">
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">mssql</code></td>
+                        <td class="py-2 px-3 text-gray-500">Microsoft SQL Server</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">mssql://u:p@host/db</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># SQLite — no install needed
+engine = create_engine("sqlite:///local.db")
+# PostgreSQL — pip install psycopg2-binary
+engine = create_engine("postgresql://admin:pw@localhost/sales")</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Start with SQLite for learning.</strong> It needs no server, no password, and no extra install. Move to PostgreSQL when you need a shared database.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panels -->
       </div>
     </div>
   </div>
@@ -1068,246 +1260,221 @@ engine = sqlalchemy.create_engine(&quot;database_connection_string&quot;)</code>
 <section id="code-examples">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 1</span>
+  <span class="ce-step-label text-xs font-bold">Create a Connection</span>
 </button>
-<button onclick="switchCeTab(1)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 2</span>
+  <span class="ce-step-label text-xs font-bold">Load a Table</span>
 </button>
-<button onclick="switchCeTab(2)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 3</span>
-</button>
-<button onclick="switchCeTab(3)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
-  <span class="ce-step-label text-xs font-bold">Example 4</span>
+  <span class="ce-step-label text-xs font-bold">Close Safely</span>
 </button>
 </div>
-      <div class="ce-panel ce-panel-anim " role="tabpanel">
+<div class="ce-panel ce-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 1 — Connecting to a Database</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Create a Connection</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Finance</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">create_engine()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">SQLAlchemy</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">This creates a database connection.</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script builds a database <strong class="text-gray-800">connection string</strong> and creates a SQLAlchemy engine. The engine is your link between Python and the database.</p>
+        </div>
+      </div>
       <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_1_connecting_to_a_database.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import sqlalchemy
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">connect_db.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine  # database connector
 
-engine = sqlalchemy.create_engine(
-    &quot;postgresql://user:password@localhost:5432/sales_db&quot;
-)</code></pre>
-  </div>
-</div>
-      
-      
+conn_str = &quot;sqlite:///finance.db&quot;  # connection string
+engine = create_engine(conn_str)     # create the engine
+
+print(engine)  # confirm connection object exists</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python connect_db.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Engine(sqlite:///finance.db)</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">The connection string format changes for each database type &#8212; SQLite uses three slashes, PostgreSQL uses two.</p>
+      </div>
     </div>
   </div>
 </div>
 <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 2 — Running a SQL Query</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Load a Table</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Inventory</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">pd.read_sql_table()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">engine</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_2_running_a_sql_query.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
-
-query = &quot;SELECT * FROM sales_table&quot;
-
-df = pd.read_sql(query, engine)
-
-print(df.head())</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 3 — Selecting Specific Columns</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="px-6 py-5 space-y-4">
-      
-      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_3_selecting_specific_columns.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">query = &quot;&quot;&quot;
-SELECT Customer, Sales
-FROM sales_table
-&quot;&quot;&quot;
-
-df = pd.read_sql(query, engine)</code></pre>
-  </div>
-</div>
-      
-      
-    </div>
-  </div>
-</div>
-<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
-  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:code"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Example 4 — Filtering with SQL</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
-        </span>
-        
-      </div>
-    </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-    <p class="text-sm text-gray-600">This filters results before loading them into Python.</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script loads an entire database table into a DataFrame using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">pd.read_sql_table()</code>.</p>
+        </div>
+      </div>
       <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">load_table.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd                    # load pandas
+from sqlalchemy import create_engine    # database connector
+
+engine = create_engine(&quot;sqlite:///inventory.db&quot;)  # connect
+
+df = pd.read_sql_table(&quot;products&quot;, engine)  # load the table
+print(df.head())  # show first rows</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python load_table.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">   product_id  name      price<br>0           1  Widget    12.99</div>
+        </div>
       </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">example_4_filtering_with_sql.py</span>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">The table name must match exactly what is in the database &#8212; use engine.table_names() to see all available tables.</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">query = &quot;&quot;&quot;
-SELECT *
-FROM sales_table
-WHERE Sales &gt; 100
-&quot;&quot;&quot;
-
-df = pd.read_sql(query, engine)</code></pre>
   </div>
 </div>
-      
-      
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Close Safely</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Customers</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">with statement</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">context manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script uses a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">with</code> block to open and automatically close the connection, even if an error occurs.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">safe_connect.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine(&quot;sqlite:///customers.db&quot;)  # connect
+
+with engine.connect() as conn:               # auto-close on exit
+    df = pd.read_sql(&quot;SELECT * FROM customers&quot;, conn)
+print(df.shape)  # connection is already closed here</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python safe_connect.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">(1500, 6)</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Always use a with block for database connections &#8212; it guarantees cleanup even when your code hits an unexpected error.</p>
+      </div>
     </div>
   </div>
 </div>
-
     </div>
   </div>
 </section>
@@ -1504,85 +1671,95 @@ FROM sales;</code></pre>
 <section id="practice">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:dumbbell"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+<div class="flex items-center gap-2 mb-6" role="tablist">
+<button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 1</span>
+  <span class="pe-step-label text-xs font-bold">Open a Connection</span>
 </button>
-<button onclick="switchPeTab(1)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 2</span>
+  <span class="pe-step-label text-xs font-bold">Load a Full Table</span>
 </button>
-<button onclick="switchPeTab(2)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+<button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
-  <span class="pe-step-label text-xs font-bold">Exercise 3</span>
+  <span class="pe-step-label text-xs font-bold">Use a Context Manager</span>
 </button>
 </div>
-      <div class="pe-panel pe-panel-anim " role="tabpanel">
+<div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 1</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Open a Connection</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Retail</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">create_engine()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">SQLite</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Strings, SQLAlchemy, Imports, Databases</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Create a connection to a SQLite database called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">retail.db</code> using SQLAlchemy. Load the "products" table and print the row count.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
         <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">solution_1.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import sqlalchemy
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">connect_db.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from sqlalchemy import create_engine
 
-engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
-  </div>
-</div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Create a connection to a database.</p>
-</div></div>
+engine = create_engine(&quot;sqlite:///retail.db&quot;)  # connect
+df = pd.read_sql_table(&quot;products&quot;, engine)     # load table
+
+print(f&quot;Loaded {len(df)} products&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python connect_db.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Loaded 250 products</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">The connection string tells SQLAlchemy which database engine and file to use &#8212; change "sqlite" to "postgresql" for a Postgres database.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1590,58 +1767,69 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
 <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 2</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Load a Full Table</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">HR</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">read_sql_table()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">inspect</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: Tuples, SELECT, SQL Queries, Databases</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Connect to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">hr.db</code> and load the "employees" table. Print the column names and data types.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
         <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">solution_2.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_sql(&quot;SELECT * FROM sales_table&quot;, engine)</code></pre>
-  </div>
-</div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Run a SQL query.</p>
-</div></div>
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">load_table.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine(&quot;sqlite:///hr.db&quot;)       # connect
+df = pd.read_sql_table(&quot;employees&quot;, engine)    # load table
+
+print(df.dtypes)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python load_table.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">emp_id       int64<br>name        object<br>dept        object<br>salary     float64<br>dtype: object</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">read_sql_table() loads every row and column from the table. Use read_sql() with a query when you only need a subset.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1649,66 +1837,74 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
 <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
-  <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
-  <div class="relative flex items-center gap-3">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
-      <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
-    </span>
-    <div>
-      <h3 class="font-bold text-gray-800">Exercise 3</h3>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
         </span>
-        
+        <div>
+          <h3 class="font-bold text-gray-800">Use a Context Manager</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Logistics</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">with statement</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">safe close</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <div class="px-6 py-5 space-y-4">
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
-  <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
-  <div>
-    <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-    <p class="text-sm text-gray-600">Tags: SELECT, WHERE, Databases</p>
-  </div>
-</div>
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Connect to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">logistics.db</code> and load the "shipments" table using a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">with</code> block so the connection closes automatically. Print the first three rows.</p>
+        </div>
+      </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
         <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
         <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
       </button>
       <div class="accordion-body">
         <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">solution_3.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_sql(
-    &quot;SELECT * FROM sales_table WHERE Sales &gt; 100&quot;,
-    engine
-)</code></pre>
-  </div>
-</div>
-        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Filter results using SQL.</p>
-</div></div>
-      </div>
-    </div>
-  </div>
-</div>
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">safe_connect.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+from sqlalchemy import create_engine
 
+engine = create_engine(&quot;sqlite:///logistics.db&quot;)
+
+with engine.connect() as conn:                   # auto-close
+    df = pd.read_sql(&quot;SELECT * FROM shipments&quot;, conn)
+print(df.head(3))</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python safe_connect.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">   shipment_id destination  weight<br>0         3001      London    12.5<br>1         3002       Tokyo    28.0<br>2         3003      Sydney     6.2</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">A with block guarantees the connection closes even if an error occurs &#8212; this prevents resource leaks in long-running scripts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1716,111 +1912,206 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
 <section id="mistakes">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls beginners hit when working with database connections</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 1</span>
-</button>
-<button onclick="switchMkTab(1)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 2</span>
-</button>
-<button onclick="switchMkTab(2)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-  <span class="mk-step-label text-xs font-bold">Mistake 3</span>
-</button>
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+  <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Wrong Connection String</span>
+  </button>
+  <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">No Context Manager</span>
+  </button>
+  <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Missing Driver</span>
+  </button>
 </div>
-      <div class="mk-panel mk-panel-anim " role="tabpanel">
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Hardcoding Credentials</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Example:</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="p-5 bg-red-50/30">
-  <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Watch out
-  </p>
-  <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">engine = sqlalchemy.create_engine(
-&quot;postgresql://user:password@server/db&quot;
-)</code></pre>
-</div>
-</div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Using an Incorrect Connection String Format</h4>
+        <p class="text-xs text-gray-500 mt-0.5">SQLAlchemy raises an ArgumentError because it cannot parse the URL.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Each database type needs a specific URL prefix. SQLite uses <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">sqlite:///</code> (three slashes for relative path). PostgreSQL uses <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">postgresql://</code>. A wrong prefix triggers <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">ArgumentError</code>.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — wrong prefix
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">engine = create_engine("sqlite://data.db")
+# ArgumentError — missing a slash</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — correct prefix
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">from sqlalchemy import create_engine              # import first
+engine = create_engine("sqlite:///data.db")       # three slashes
+print(engine)                                      # confirms connection</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">It is better to store credentials in <strong>environment variables</strong>.</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Count the slashes: <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">sqlite:///</code> means "protocol + empty host + relative path". Two slashes is never enough for SQLite.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Pulling Too Much Data</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Example:</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="p-5 bg-red-50/30">
-  <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Watch out
-  </p>
-  <div class="relative rounded-xl overflow-hidden bg-code text-sm">
-  <pre class="overflow-x-auto pre-reset"><code class="language-python">SELECT * FROM huge_table</code></pre>
-</div>
-</div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Opening a Connection Without Closing It</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Open connections pile up and may lock the database or exhaust server resources.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Calling <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">engine.connect()</code> without a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">with</code> block leaves the connection open. Use a context manager to close it automatically.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — no close
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">conn = engine.connect()
+df = pd.read_sql("SELECT * FROM sales", conn)
+# connection stays open forever</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — use with block
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">with engine.connect() as conn:                # auto-closes
+    df = pd.read_sql("SELECT * FROM sales", conn)
+print(df.shape)                                # connection closed here</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Better approach:</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">A <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">with</code> block is like a self-closing door — you walk through, do your work, and the door shuts behind you without you remembering to close it.</p>
+    </div>
+
   </div>
 </div>
+
 <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
   <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
     <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
-  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
-    <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
-  </span>
-  <div class="min-w-0 flex-1">
-    <h4 class="font-bold text-gray-800 text-sm">Database Driver Missing</h4>
-    <p class="text-xs text-gray-500 mt-0.5">Some database connections require additional drivers.</p>
-  </div>
-  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
-    <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
-  </span>
-</div>
-    <div class="px-6 py-5 space-y-3"><p class="text-sm text-gray-600 leading-relaxed">Some database connections require additional drivers.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Examples:</p>
-<ul class="space-y-2">
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm"><code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">psycopg2</code> for PostgreSQL</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm"><code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">pyodbc</code> for SQL Server</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm"><code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">cx_Oracle</code> for Oracle</span></li>
-</ul></div>
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Forgetting to Install the Database Driver Package</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Python raises a ModuleNotFoundError or SQLAlchemy cannot find the dialect.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">SQLAlchemy needs a separate driver for each database — <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">psycopg2</code> for PostgreSQL, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">pymysql</code> for MySQL. Without the driver installed, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">create_engine()</code> fails.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — driver missing
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">engine = create_engine("postgresql://user:pw@host/db")
+# ModuleNotFoundError: No module named psycopg2</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — install driver
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># first, in terminal: pip install psycopg2-binary
+from sqlalchemy import create_engine                 # import
+engine = create_engine("postgresql://user:pw@host/db") # works now</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
-  <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-  <p class="text-xs text-gray-600 leading-relaxed">Examples:</p>
-</div>
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Check the SQLAlchemy docs for your database type. Each has a recommended driver package you need to <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">pip install</code> once.</p>
+    </div>
+
   </div>
 </div>
 
@@ -2040,20 +2331,13 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
-      <div class="flex items-center gap-2 mb-6" role="tablist"><button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 1</span>
-</button>
-<button onclick="switchQzTab(1)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 2</span>
-</button>
-<button onclick="switchQzTab(2)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
-  <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
-  <span class="qz-step-label text-xs font-bold">Question 3</span>
-</button>
+<div class="flex items-center gap-2 flex-wrap" role="tablist">
+<button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+<button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+<button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+<button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
 </div>
-      <div class="qz-panel qz-panel-anim " role="tabpanel">
+<div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
     <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
       <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
@@ -2069,7 +2353,7 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how Python connects to databases &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">A database connection string contains the database type, username, password, host, and database name &#8212; all in a single URL-format string.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2099,12 +2383,12 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q1">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how to run SQL queries using Pandas &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">You can pass a raw username and password directly to pd.read_sql() without creating a SQLAlchemy engine first.</p>
         <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
           </button>
         </div>
@@ -2129,7 +2413,7 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">how query results become DataFrames &#8212; True or False?</p>
+        <p class="text-sm font-semibold text-gray-800 mb-4">The pd.read_sql_table() function loads an entire database table into a DataFrame using a SQLAlchemy engine connection.</p>
         <div class="flex gap-3">
           <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
             <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
@@ -2143,7 +2427,36 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
     </div>
   </div>
 </div>
-
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q3">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Python automatically closes database connections when your script ends, so you never need to call .close() or use a context manager.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
