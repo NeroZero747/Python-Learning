@@ -1,0 +1,240 @@
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <!-- Tab pill row -->
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+          <span class="ce-step-label text-xs font-bold">Store Member Data</span>
+        </button>
+        <button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+          <span class="ce-step-label text-xs font-bold">Check Claim Status</span>
+        </button>
+        <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+          <span class="ce-step-label text-xs font-bold">Multiple Provider Records</span>
+        </button>
+      </div>
+
+      <!-- Panel 1: Store Member Data (Members) -->
+      <div class="ce-panel ce-panel-anim" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Store Member Data</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Members</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">__init__</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Attributes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script defines a class with three <strong class="text-gray-800">attributes</strong> and creates one object from it. Every attribute is set inside <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">__init__</code> the moment the object is created, and reading any attribute back is a single dot-access.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">member_record.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">class HealthRecord:                            # define the class -- this is the blueprint
+    def __init__(self, member_id, plan_type):  # __init__ runs the moment an object is created
+        self.member_id = member_id             # attach member_id to this specific object
+        self.plan_type = plan_type             # attach plan_type to this specific object
+        self.is_active = True                  # every new record starts active by default
+
+record = HealthRecord(&quot;M-001&quot;, &quot;Gold&quot;)         # create one object -- __init__ runs immediately
+print(record.member_id)                        # read the member_id attribute from this object
+print(record.plan_type)                        # read the plan_type attribute from this object
+print(record.is_active)                        # read the is_active attribute from this object</code></pre>
+              </div>
+              <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                  <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python member_record.py</span>
+                </div>
+                <div class="font-mono text-xs text-emerald-400 leading-relaxed">M-001<br>Gold<br>True</div>
+              </div>
+            </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Every new object you create gets its own separate copy of every attribute — change the values you pass in and you get a completely independent record.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Check Claim Status (Claims) -->
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Check Claim Status</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Claims</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Methods</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Updating Attributes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script defines a class with two <strong class="text-gray-800">methods</strong> — one that changes an attribute and one that reads it. Calling the second method before and after the first shows how a method can update an object&apos;s stored data in place.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">claim_status.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">class Claim:                                       # blueprint for one insurance claim
+    def __init__(self, claim_id, amount):          # set attributes at object creation time
+        self.claim_id = claim_id                   # store the claim reference number
+        self.amount = amount                       # store the dollar amount billed
+        self.is_approved = False                   # all new claims start as not approved
+
+    def approve(self):                             # method to approve this specific claim
+        self.is_approved = True                    # update the is_approved attribute
+
+    def status_label(self):                        # method to return a plain-English status word
+        if self.is_approved:                       # check this object&apos;s own is_approved value
+            return &quot;Approved&quot;                      # return this if the claim was approved
+        return &quot;Pending&quot;                           # return this if the claim is still waiting
+
+claim = Claim(&quot;C-4821&quot;, 350)                       # create one claim; is_approved starts False
+print(claim.status_label())                        # read status before approving
+claim.approve()                                    # call approve() -- updates the attribute
+print(claim.status_label())                        # read again -- attribute has changed</code></pre>
+              </div>
+              <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                  <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python claim_status.py</span>
+                </div>
+                <div class="font-mono text-xs text-emerald-400 leading-relaxed">Pending<br>Approved</div>
+              </div>
+            </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">A method that changes an attribute and a method that reads it work as a natural pair — this "change then read" pattern appears in almost every real Python script that manages data.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Multiple Provider Records (Providers) -->
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Multiple Provider Records</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Providers</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">One Class, Many Objects</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">List + Loop</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script creates three separate objects from the same class and stores them in a <strong class="text-gray-800">list</strong>. A loop then calls the same method on every object — showing how one blueprint can produce as many independent records as you need.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">provider_records.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">class Provider:                                    # one blueprint for any healthcare provider
+    def __init__(self, provider_id, specialty):    # set each provider&apos;s data at creation time
+        self.provider_id = provider_id             # store the unique provider ID
+        self.specialty = specialty                 # store the medical specialty
+
+    def describe(self):                            # method to print one line about this provider
+        print(self.provider_id + &quot; -- &quot; + self.specialty)  # reads this object&apos;s own attributes
+
+providers = [                                      # build a list of three separate objects
+    Provider(&quot;P-01&quot;, &quot;Cardiology&quot;),               # first object -- has its own data
+    Provider(&quot;P-02&quot;, &quot;Radiology&quot;),                # second object -- completely independent
+    Provider(&quot;P-03&quot;, &quot;Oncology&quot;),                 # third object -- same blueprint, different data
+]
+
+for provider in providers:                         # loop through every object in the list
+    provider.describe()                            # call describe() on this specific object</code></pre>
+              </div>
+              <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                  <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python provider_records.py</span>
+                </div>
+                <div class="font-mono text-xs text-emerald-400 leading-relaxed">P-01 -- Cardiology<br>P-02 -- Radiology<br>P-03 -- Oncology</div>
+              </div>
+            </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">You only write the class once — add more items to the list and the loop handles every new object automatically, with no extra code needed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>

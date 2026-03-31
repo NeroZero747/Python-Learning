@@ -1,0 +1,208 @@
+<section id="mistakes">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls beginners hit when working with attributes and methods</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <!-- Tab pill row -->
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Missing self</span>
+        </button>
+        <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Skipping self.</span>
+        </button>
+        <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Wrong Indentation</span>
+        </button>
+      </div>
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Forgetting self as the First Parameter of __init__</h4>
+              <p class="text-xs text-gray-500 mt-0.5">Without <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">self</code>, Python raises a <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">TypeError</code> the moment you try to create an object.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Every method in a class — including <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">__init__</code> — must have <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">self</code> as its first parameter; without it, Python raises <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">TypeError: __init__() takes 0 positional arguments but 1 was given</code> when you call the class. Add <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">self</code> as the first parameter of every method you write.</p>
+          </div>
+
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — self omitted
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">class Product:
+    def __init__(name, price):
+        self.name = name
+        self.price = price</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — self first
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">class Product:
+    def __init__(self, name, price):  # self is always first
+        self.name = name              # attach name to this object
+        self.price = price            # attach price to this object</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Think of <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">self</code> as the blank label Python attaches to each new object — without it, Python has no way to know which specific <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">Product</code> it's working with when you call <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">Product("Laptop", 999)</code>.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Reading a Plain Variable Name Instead of the Object's Attribute</h4>
+              <p class="text-xs text-gray-500 mt-0.5">Writing <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">name</code> inside a method instead of <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">self.name</code> raises a <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">NameError</code> because that variable doesn't exist there.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Inside a method, Python only knows about <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">self</code> and any parameters you pass in — writing <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">return name</code> raises <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">NameError: name 'name' is not defined</code> because <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">name</code> was stored on the object, not left as a loose variable. Prefix every attribute with <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">self.</code> to read it.</p>
+          </div>
+
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — plain variable
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">def describe(self):
+    return name + &quot; — $&quot; + str(price)</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — use self.
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">def describe(self):
+    return self.name + &quot; — $&quot; + str(self.price)  # read attributes via self</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Every method starts fresh with only <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">self</code> available — it's the key that unlocks all the values saved on that specific object, so always write <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">self.name</code>, never just <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">name</code>.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Defining a Method Outside the Class Body</h4>
+              <p class="text-xs text-gray-500 mt-0.5">A <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">def</code> at the top level becomes a plain function — it has no connection to the class and calling it on an object raises a <code class="text-[11px] bg-white px-1.5 py-0.5 rounded font-mono border border-gray-100">TypeError</code>.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Python uses indentation to decide what belongs inside a class — a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">def</code> that starts at the leftmost column is a standalone function with no access to <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">self</code> or any class attributes. Indent every method four spaces inside the <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">class</code> body.</p>
+          </div>
+
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — method outside class
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+def describe(self):           # ← at top level, not inside class
+    return self.name</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — indented inside class
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">class Product:
+    def __init__(self, name, price):
+        self.name = name              # stored on this object
+        self.price = price            # stored on this object
+
+    def describe(self):               # 4-space indent — inside the class
+        return self.name              # can now access self.name</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Every line inside a class — including all its methods — must be indented exactly four spaces from the <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">class</code> keyword; if a <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">def</code> lines up with <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">class</code>, it belongs to the module, not the class.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
