@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson 4 &mdash; Running SQL in Python | Python Learning Hub</title>
-  <meta name="description" content="Learn Running SQL in Python in Python. Part of the Working with Data Sources module — Track 2: Data Analysis — Python Learning Hub.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
@@ -16,188 +9,646 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
   <style>
+    /* ── CSS Variables — font tokens (:root) ──────────────────────── */
+    :root {
+      --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    /* ── Global reset — smooth scroll ──────────────────────────── */
     * { scroll-behavior: smooth; }
-    pre[class*="language-"] { border-radius: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
-    code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
-    body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #1f2937; line-height: 1.6; margin: 0; padding: 0; }
-    h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
-    h2 { font-size: 1.25rem; font-weight: 700; }
-    h3 { font-size: 1rem; font-weight: 600; }
-    .text-brand { color: #CB187D; }
-    .text-brand-dark { color: #7F004C; }
-    .bg-brand { background: #CB187D; }
-    .bg-brand-soft { background: #fdf0f7; }
+
+    /* ── Prism.js — syntax highlighted code blocks ─────────────── */
+    pre[class*="language-"] {
+      border-radius: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      margin: 0;
+      padding: 1.25rem 1.5rem;
+    }
+    code[class*="language-"], pre[class*="language-"] {
+      background: #1e1e2e;
+    }
+
+    /* ── Heading resets — strip Confluence default margins ─────── */
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 0;
+      line-height: 1.3;
+    }
+    h1 { font-weight: 800 !important; }
+    h2 { font-size: 1.25rem; font-weight: 700 !important; }
+    h3 { font-size: 1rem;   font-weight: 600 !important; }
+
+    /* ── Brand utility classes ─────────────────────────────────── */
+    .text-brand      { color: #CB187D; }
+    .text-brand-dark { color: #CB187D; }
+    .bg-brand        { background: #CB187D; }
+    .bg-brand-soft   { background: #fdf0f7; }
     .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
-    .bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
-    .bg-code { background: #1e1e2e; }
+    .bg-amber-tip    { background: #fff7ed; border: 1px solid #fed7aa; }
+    .bg-code         { background: #1e1e2e; }
     .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
-    .pre-reset { margin: 0; border-radius: 0; background: transparent; }
+    .pre-reset       { margin: 0; border-radius: 0; background: transparent; }
+
+    /* ── Key Concepts sidebar tabs  (.kc-tab / .kc-tab-active) ─── */
     .kc-tab-active { background: #fdf0f7; }
+    .kc-indicator { height: 68px; }
     .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
-    .kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+    /* ── Code Examples pill tabs   (.ce-step / .ce-step-active) ── */
+    .ce-step:not(.ce-step-active):hover,
+    /* ── Common Mistakes pill tabs (.mk-step / .mk-step-active) ── */
+    .mk-step:not(.mk-step-active):hover,
+    /* ── Knowledge Check quiz tabs (.qz-step / .qz-step-active) ── */
+    .qz-step:not(.qz-step-active):hover,
+    /* ── Practice Exercise tabs    (.pe-step / .pe-step-active) ── */
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #ffffff; }
+
+    /* Keyframe used by all tab panel fade-in animations */
     @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
-    .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
-    .mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
-    .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
-    .qz-step:not(.qz-step-active):hover { background: #374151; color: #d1d5db; }
-    .qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
-    .pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+
+    .kc-panel-anim,
+    .ce-panel-anim,
+    .mk-panel-anim,
+    .qz-panel-anim,
     .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
-    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
-    .accordion-body { display: none !important; }
+
+    .ce-step:not(.ce-step-active),
+    .mk-step:not(.mk-step-active),
+    .qz-step:not(.qz-step-active),
+    .pe-step:not(.pe-step-active) { background: #1f2937; color: #ffffff; box-shadow: none; }
+
+    .ce-step-active,
+    .mk-step-active,
+    .qz-step-active,
+    .pe-step-active {
+      background: linear-gradient(to right, #CB187D, #e84aad);
+      color: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(203, 24, 125, 0.3);
+    }
+
+    /* ─── Step tab consistent sizing ──────────────────────────── */
+    .ce-step, .mk-step, .qz-step, .pe-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    /* ── Accordion — used in Overview & Key Ideas sections ─────── */
+    .accordion-body      { display: none  !important; }
     .accordion-body.open { display: block !important; }
-    .accordion-toggle { display: flex !important; align-items: center !important; gap: 8px !important; width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important; font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important; border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important; color: #7F004C !important; line-height: 1.2 !important; text-decoration: none !important; transition: background 0.15s, border-color 0.15s !important; }
+    .accordion-toggle {
+      display: flex !important; align-items: center !important; gap: 8px !important;
+      width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important;
+      font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important;
+      border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important;
+      color: #CB187D !important; line-height: 1.2 !important; text-decoration: none !important;
+      transition: background 0.15s, border-color 0.15s !important;
+    }
     .accordion-toggle:hover { background: #f9d9ee !important; border-color: #CB187D !important; }
     .accordion-toggle.open { background: #fdf0f7 !important; border-color: #CB187D !important; border-style: solid !important; }
     .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
     .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
-    .hero-container { position: relative; border-radius: 1.25rem; overflow: hidden; min-height: 380px; background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%); }
-    .hero-dots { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px); background-size: 24px 24px; }
+
+    /* ── Task description box inside practice/example panels ───── */
+    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+
+    /* ── Hero banner — full-width gradient header ──────────────── */
+    .hero-container {
+      position: relative;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      min-height: 380px;
+      background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%);
+    }
+    .hero-dots {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
     .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
-    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255, 255, 255, 0.12); }
-    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127, 0, 76, 0.35); }
-    .hero-glow-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%); opacity: 0.7; }
-    .hero-pill { background: #ffffff; border: none; color: #7F004C; font-weight: 700; transition: transform 0.2s ease; }
-    .hero-pill:hover { transform: translateY(-1px); }
-    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D); background-size: 200% 100%; animation: scrollGradient 3s linear infinite; z-index: 9999; transition: width 0.15s; }
-    @keyframes scrollGradient { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255,255,255,0.12); }
+    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127,0,76,0.35); }
+    .hero-glow-line {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%);
+      opacity: 0.7;
+    }
+    .hero-pill { background: #ffffff; border: none; color: #CB187D; font-weight: 700; pointer-events: none; cursor: default; }
+    .hero-abstract-card {
+      position: relative; border-radius: 1rem; overflow: hidden; padding: 0.25rem;
+      opacity: 0.75; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px; padding: 11px 26px;
+      border-radius: 999px; font-weight: 700; font-size: 0.875rem; color: #CB187D;
+      background: #ffffff; border: none; cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease; text-decoration: none;
+    }
+    .hero-cta:hover { transform: translateY(-2px); filter: brightness(0.96); }
+    .stat-card { transition: background 0.2s ease; }
+    .stat-card:hover { background: rgba(255,255,255,0.15) !important; }
+
+    /* ── Scroll progress bar — fixed top-of-page indicator ─────── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0; height: 3px;
+      background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D);
+      background-size: 200% 100%;
+      animation: scrollGradient 3s linear infinite;
+      z-index: 9999; transition: width 0.15s;
+    }
+    @keyframes scrollGradient {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+
+    /* ── Page layout — two-column: TOC sidebar + main content ──── */
     .lesson-layout { display: flex; gap: 1.75rem; align-items: flex-start; }
-    .lesson-toc-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem); overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease; }
+    .lesson-toc-sidebar {
+      width: 240px; flex-shrink: 0;
+      position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem);
+      overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease;
+    }
     .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
     .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
     .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
     .lesson-toc-sidebar.toc-collapsed .toc-module-list { display: none; }
-    .toc-toggle-btn { background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D; display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border-radius: 6px; transition: background 0.15s; }
+    .toc-toggle-btn {
+      background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      border-radius: 6px; transition: background 0.15s;
+    }
     .toc-toggle-btn:hover { background: #fdf0f7; }
     .toc-link { transition: color 0.15s, padding-left 0.15s; }
     .toc-link:hover { color: #CB187D; padding-left: 4px; }
-    .toc-link.active { color: #CB187D; font-weight: 600; border-left: 3px solid #CB187D; padding-left: 8px; }
-    .obj-card { transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
-    .obj-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px -6px rgba(203, 24, 125, 0.18), 0 6px 12px -2px rgba(203, 24, 125, 0.1); border-color: #CB187D; background-color: #fdf0f7; }
+    .toc-link.active {
+      color: #CB187D; font-weight: 600;
+      border-left: 3px solid #CB187D; padding-left: 8px;
+    }
+
+    /* ── Objective cards (.obj-card) ────────────────────────────── */
+    .obj-card {
+      transition: transform 0.22s cubic-bezier(.4,0,.2,1),
+                  box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+                  border-color 0.22s ease, background-color 0.22s ease;
+    }
+    .obj-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
+      border-color: #CB187D; background-color: #fdf0f7;
+    }
     .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
     .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
     .obj-card:hover .obj-icon .iconify { color: white !important; }
-    .tab-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff; line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s; }
+    .obj-card-kt:hover { box-shadow: none; background-color: #ffffff; }
+    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; background-color: #ffffff; }
+    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; background-color: #ffffff; }
+
+    /* ── Section header components ─────────────────────────────── */
+    .section-header {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem 2rem 1.25rem 1rem;
+      background: #ffffff; border-bottom: 1px solid #f3f4f6;
+      border-left: 4px solid #CB187D;
+    }
+    .section-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
+      background: #CB187D; flex-shrink: 0;
+    }
+    .section-body { min-width: 0; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #111827; line-height: 1.3; margin: 0; }
+    .section-subtitle { font-size: 0.875rem; color: #9ca3af; line-height: 1.4; margin-top: 0.125rem; margin-bottom: 0; }
+
+    /* ── Skill dots (difficulty indicator) ─────────────────────── */
+    .skill-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #d1d5db; display: inline-block;
+    }
+    .skill-dot-active { background: #22c55e; }
+
+    /* ── Hero SVG illustration ──────────────────────────────────── */
+    .hero-svg { max-height: 320px; }
+    .hero-py-icon-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+    .hero-py-icon { font-size: 70px; filter: drop-shadow(0 0 14px rgba(255,212,59,0.25)); }
+
+    /* ── Generic outline tab buttons (.tab-btn / .tab-panel) ───── */
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff;
+      line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
     .tab-btn:hover { color: #CB187D; border-color: #CB187D; background: #fdf0f7; }
     .tab-btn.active { color: #fff; background: #CB187D; border-color: #CB187D; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-    .copy-btn { position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center; background: rgba(203, 24, 125, 0.15); border: 1px solid rgba(203, 24, 125, 0.3); color: #CB187D; border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
-    .copy-btn:hover { background: rgba(203, 24, 125, 0.3); }
-    .copy-btn-light { position: static; color: #fff; border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.1); }
-    .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2); }
-    .lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
-    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: #CB187D; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(203, 24, 125, 0.3); cursor: pointer; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none; }
+
+    /* ── Code block copy button (.copy-btn) ────────────────────── */
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center;
+      background: rgba(203,24,125,0.15); border: 1px solid rgba(203,24,125,0.3); color: #CB187D;
+      border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s; white-space: nowrap;
+    }
+    .copy-btn:hover { background: rgba(203,24,125,0.3); }
+    .copy-btn-light {
+      position: static; color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.1);
+    }
+    .copy-btn-light:hover { background: rgba(255,255,255,0.2); }
+
+    /* ── Bottom lesson navigation — Previous / All Lessons / Next  */
+    .lesson-nav-link:hover p,
+    .lesson-nav-link:hover span,
+    .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+
+    /* ── Back-to-top floating button ───────────────────────────── */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
+      border-radius: 50%; background: #CB187D; color: white;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(203,24,125,0.3); cursor: pointer;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none;
+    }
     .back-to-top.visible { opacity: 1; transform: translateY(0); }
     .back-to-top:hover { background: #7F004C; }
+
+    /* ── Quiz answer feedback buttons (.quiz-btn.correct / .incorrect)  */
     .quiz-btn.correct { background: #f0fdf4; border-color: #22c55e; color: #16a34a; }
     .quiz-btn.incorrect { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+
+    /* ── Card hover animations — Mistake, Flow, Recap, Overview cards  */
     .mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
-    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08); }
+    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08); }
     .flow-stepper .flow-step { transition: transform 0.15s ease; }
     .flow-stepper .flow-step:hover { transform: translateX(4px); }
     .recap-item { transition: transform 0.15s ease, box-shadow 0.15s ease; }
     .recap-item:hover { transform: translateX(4px); box-shadow: -4px 0 0 0 #10b981; }
     .overview-card { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
-    .overview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.12); border-color: rgba(203, 24, 125, 0.3); }
-    @media (max-width: 767px) { .lesson-toc-sidebar { display: none; } .lesson-layout { display: block; } #lesson-nav { display: block; } .hero-container { min-height: auto; } .hero-split { flex-direction: column !important; } .hero-abstract-card { margin-top: 1.5rem; } }
-    @media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; } .obj-card:hover { transform: none; box-shadow: none; } }
+    .overview-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -6px rgba(203,24,125,0.12);
+      border-color: rgba(203,24,125,0.3);
+    }
+
+    /* ── Responsive — mobile breakpoint (<768px) ───────────────── */
+    @media (max-width: 767px) {
+      .lesson-toc-sidebar { display: none; }
+      .lesson-layout { display: block; }
+      #lesson-nav { display: block; }
+      .hero-container { min-height: auto; }
+      .hero-split { flex-direction: column !important; }
+      .hero-abstract-card { margin-top: 1.5rem; }
+      .hero-title-main { font-size: 1.75rem !important; }
+    }
+
+    /* ── Print styles — hide interactive chrome when printing ──── */
+    @media print {
+      .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; }
+      .obj-card:hover { transform: none; box-shadow: none; }
+    }
+
+    /* ── Iconify icon alignment utility ─────────────────────────── */
     .iconify { vertical-align: middle; flex-shrink: 0; }
+
+  /* ============================================================
+     CONFLUENCE ISOLATION — scoped to #hub-root
+     All rules use !important to beat Confluence's element styles.
+     ============================================================ */
+
+  #hub-root,
+  #hub-root * {
+    font-family: var(--font-body) !important;
+    box-sizing: border-box !important;
+  }
+
+  #hub-root {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #1f2937 !important;
+  }
+
+  #hub-root code,
+  #hub-root pre,
+  #hub-root [class*="language-"] { font-family: var(--font-mono) !important; }
+
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important; margin-bottom: 0 !important;
+    padding: 0 !important; line-height: 1.3 !important;
+  }
+  #hub-root h1 { font-size: 1.75rem  !important; font-weight: 700 !important; }
+  #hub-root h2 { font-size: 1.25rem  !important; font-weight: 700 !important; }
+  #hub-root h3 { font-size: 1rem     !important; font-weight: 600 !important; }
+  #hub-root h4 { font-size: 0.875rem !important; font-weight: 600 !important; }
+  #hub-root h5, #hub-root h6 { font-size: 0.8rem !important; font-weight: 600 !important; }
+
+  #hub-root .font-black     { font-weight: 900 !important; }
+  #hub-root .font-extrabold { font-weight: 800 !important; }
+  #hub-root .font-bold      { font-weight: 700 !important; }
+  #hub-root .font-semibold  { font-weight: 600 !important; }
+  #hub-root .font-medium    { font-weight: 500 !important; }
+
+  #hub-root .text-4xl  { font-size: 2.25rem  !important; line-height: 2.5rem  !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem !important; line-height: 2.25rem !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem   !important; line-height: 2rem    !important; }
+  #hub-root .text-xl   { font-size: 1.25rem  !important; line-height: 1.75rem !important; }
+  #hub-root .text-lg   { font-size: 1.125rem !important; line-height: 1.75rem !important; }
+  #hub-root .text-base { font-size: 1rem     !important; line-height: 1.5rem  !important; }
+  #hub-root .text-sm   { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+  #hub-root .text-xs   { font-size: 0.75rem  !important; line-height: 1rem    !important; }
+
+  #hub-root .text-white    { color: #ffffff !important; }
+  #hub-root .text-gray-900 { color: #111827 !important; }
+  #hub-root .text-gray-800 { color: #1f2937 !important; }
+  #hub-root .text-gray-700 { color: #374151 !important; }
+  #hub-root .text-gray-600 { color: #4b5563 !important; }
+  #hub-root .text-gray-500 { color: #6b7280 !important; }
+  #hub-root .text-gray-400 { color: #9ca3af !important; }
+  #hub-root .text-gray-300 { color: #d1d5db !important; }
+
+  #hub-root .flex            { display: flex !important; }
+  #hub-root .inline-flex     { display: inline-flex !important; }
+  #hub-root .items-center    { align-items: center !important; }
+  #hub-root .items-start     { align-items: flex-start !important; }
+  #hub-root .justify-center  { justify-content: center !important; }
+  #hub-root .justify-between { justify-content: space-between !important; }
+  #hub-root .shrink-0        { flex-shrink: 0 !important; }
+  #hub-root .min-w-0         { min-width: 0 !important; }
+  #hub-root .flex-1          { flex: 1 1 0% !important; }
+  #hub-root .flex-wrap       { flex-wrap: wrap !important; }
+  #hub-root .gap-1  { gap: 0.25rem !important; }
+  #hub-root .gap-2  { gap: 0.5rem  !important; }
+  #hub-root .gap-3  { gap: 0.75rem !important; }
+  #hub-root .gap-4  { gap: 1rem    !important; }
+  #hub-root .gap-6  { gap: 1.5rem  !important; }
+  #hub-root .gap-8  { gap: 2rem    !important; }
+  #hub-root .ml-auto { margin-left: auto !important; }
+
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  #hub-root .iconify { vertical-align: middle !important; flex-shrink: 0 !important; }
+  #hub-root :not(.block) > .iconify:not(.block) {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  }
+
+  #hub-root .hero-title-main {
+    font-size: 2.25rem !important; font-weight: 800 !important;
+    line-height: 1.15 !important; margin-bottom: 2rem !important;
+  }
+  @media (min-width: 768px) {
+    #hub-root .hero-title-main { font-size: 2.5rem !important; }
+  }
+
+  /* ── Section header components ── */
+  #hub-root .section-header {
+    display: flex !important; align-items: center !important; gap: 1rem !important;
+    padding: 1.25rem 2rem 1.25rem 1rem !important; background: #ffffff !important;
+    border-bottom: 1px solid #f3f4f6 !important; border-left: 4px solid #CB187D !important;
+  }
+  #hub-root .section-icon {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    width: 2.75rem !important; height: 2.75rem !important;
+    border-radius: 0.75rem !important; background: #CB187D !important; flex-shrink: 0 !important;
+  }
+  #hub-root .section-body { min-width: 0 !important; }
+  #hub-root .section-title {
+    font-size: 1.25rem !important; font-weight: 700 !important;
+    color: #111827 !important; line-height: 1.3 !important; margin: 0 !important;
+  }
+  #hub-root .section-subtitle {
+    font-size: 0.875rem !important; color: #9ca3af !important;
+    line-height: 1.4 !important; margin-top: 0.125rem !important; margin-bottom: 0 !important;
+  }
+
+  /* ── Step tab consistent sizing (Confluence Tailwind fix) ── */
+  #hub-root .ce-step, #hub-root .mk-step,
+  #hub-root .qz-step, #hub-root .pe-step {
+    display: inline-flex !important; align-items: center !important; gap: 0.5rem !important;
+    padding: 0.375rem 1rem !important; border-radius: 9999px !important;
+    font-size: 0.75rem !important; font-weight: 700 !important;
+    line-height: 1.2 !important; white-space: nowrap !important;
+    border: none !important; cursor: pointer !important;
+  }
+
+  /* ── Skill dots ── */
+  #hub-root .skill-dot {
+    width: 6px !important; height: 6px !important; border-radius: 50% !important;
+    background: #d1d5db !important; display: inline-block !important;
+  }
+  #hub-root .skill-dot-active { background: #22c55e !important; }
+
+  /* ── Hero SVG / Python icon ── */
+  #hub-root .hero-svg { max-height: 320px !important; }
+  #hub-root .hero-py-icon-wrap {
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    width: 100% !important; height: 100% !important;
+  }
+  #hub-root .hero-py-icon { font-size: 70px !important; filter: drop-shadow(0 0 14px rgba(255,212,59,0.25)) !important; }
+
+  /* ── Tip / info boxes ── */
+  #hub-root .bg-amber-tip { background: #fff7ed !important; border: 1px solid #fed7aa !important; }
+
+  /* ── Dark pill tabs — inactive ── */
+  #hub-root .ce-step:not(.ce-step-active),
+  #hub-root .mk-step:not(.mk-step-active),
+  #hub-root .qz-step:not(.qz-step-active),
+  #hub-root .pe-step:not(.pe-step-active) {
+    background-color: #1f2937 !important; color: #ffffff !important; box-shadow: none !important;
+  }
+  /* ── Dark pill tabs — active (pink gradient) ── */
+  #hub-root .ce-step-active,
+  #hub-root .mk-step-active,
+  #hub-root .qz-step-active,
+  #hub-root .pe-step-active {
+    background: linear-gradient(to right, #CB187D, #e84aad) !important;
+    color: #ffffff !important;
+    box-shadow: 0 10px 25px -5px rgba(203,24,125,0.3) !important;
+  }
+
+  /* ── Key Concepts sidebar labels ── */
+  #hub-root .kc-tab-active .kc-tab-label { color: #111827 !important; }
+  #hub-root .kc-tab:not(.kc-tab-active) .kc-tab-label { color: #9ca3af !important; }
+
+  /* ── Background utilities ── */
+  #hub-root .bg-white    { background-color: #ffffff !important; }
+  #hub-root .bg-gray-50  { background-color: #f9fafb !important; }
+  #hub-root .bg-gray-100 { background-color: #f3f4f6 !important; }
+  #hub-root .bg-gray-800 { background-color: #1f2937 !important; }
+  #hub-root .bg-gray-900 { background-color: #111827 !important; }
+
+  /* ── Stat pill label visibility ── */
+  #hub-root .hero-pill .iconify { opacity: 0.5 !important; }
+  #hub-root .hero-pill .opacity-55 { opacity: 1 !important; }
+  #hub-root .hero-pill .opacity-50 { opacity: 1 !important; }
+  #hub-root a.hero-pill { color: #CB187D !important; }
+
+  /* ── TOC active state ── */
+  #hub-root .toc-link:hover { color: #CB187D !important; }
+  #hub-root .toc-link.active {
+    color: #CB187D !important; font-weight: 600 !important;
+    border-left: 3px solid #CB187D !important; padding-left: 8px !important;
+    background-color: #fdf0f7 !important;
+  }
+
+  /* ── Module lessons list active link ── */
+  #hub-root .mod-lesson-active {
+    background-color: #fdf0f7 !important; border-color: #CB187D !important; color: #CB187D !important;
+  }
+  #hub-root .mod-lesson-active .lesson-dot { background-color: #CB187D !important; }
+
+  /* ── Bottom nav hover ── */
+  #hub-root .lesson-nav-link:hover p,
+  #hub-root .lesson-nav-link:hover span,
+  #hub-root .lesson-nav-link:hover svg {
+    color: #CB187D !important; transition: color 0.15s !important;
+  }
   </style>
-</head>
-<body>
 
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
 <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
 </button>
 
-<div class="bg-gray-50 min-h-screen">
+<div id="hub-root" class="bg-gray-50 min-h-screen">
 
   <!-- HERO -->
   <div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
     <section class="hero-container">
-      <div class="hero-dots"></div>
-      <div class="hero-glow hero-glow-1"></div>
-      <div class="hero-glow hero-glow-2"></div>
-      <div class="hero-glow-line"></div>
-      <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
-        <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap items-center gap-2 mb-4">
-              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-                <span class="iconify text-[10px]" data-icon="fa6-solid:database"></span> Module 2
-              </span>
-              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-                <span class="inline-flex items-center gap-1"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span></span> Intermediate
-              </span>
-              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-                <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 6 min read
-              </span>
-            </div>
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 04</p>
-            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Running SQL in Python</h1>
-            <p class="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-lg">Working with Data Sources &middot; Data Analysis Track</p>
-            <div class="flex items-center gap-4 mb-5 text-sm">
-              <div class="flex items-center gap-2">
-                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
-                  <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
-                </span>
-                <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span><span class="font-extrabold">4</span><span class="font-semibold opacity-55">Goals</span></a>
-              <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span><span class="font-extrabold">4</span><span class="font-semibold opacity-55">Examples</span></a>
-              <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span><span class="font-extrabold">3</span><span class="font-semibold opacity-55">Exercises</span></a>
-              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-                <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
-                <span class="font-extrabold">4<span class="font-bold opacity-50">/6</span></span>
-                <span class="font-semibold opacity-55">Progress</span>
-              </span>
-            </div>
+  <div class="hero-dots"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow-line"></div>
+  <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+    <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+
+      <!-- LEFT COLUMN — Lesson info -->
+      <div class="flex-1 min-w-0">
+
+        <!-- Badge row -->
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:cubes"></span> Module 2
+          </span>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="inline-flex items-center gap-1">
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span>
+            </span>
+            Intermediate
+          </span>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 8 min read
+          </span>
+        </div>
+
+        <!-- Lesson number label -->
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 04</p>
+
+        <!-- Title -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Running SQL in Python</h1>
+
+        <!-- Subtitle -->
+        <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-5 max-w-prose">See how to execute SQL queries from a Python script and retrieve the results as a pandas DataFrame, combining the power of both tools in one workflow.</p>
+
+        <!-- Author & Date -->
+        <div class="flex items-center gap-4 mb-5 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+              <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+            </span>
+            <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
           </div>
-          <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
-            <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
-              <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
-  <defs>
-    <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
-    <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
-    <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
-    <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
-    <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
-  </defs>
-  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
-  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
-  <g clip-path="url(#hexClip)" opacity="1">
-    <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
-    <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
-    <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
-    <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
-    <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
-    <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
-    <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
-    <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
-    <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
-    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
-    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
-    <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
-  </g>
-  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
-  <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
-  <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
-  <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
-  <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
-  <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
-  <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
-  <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
-</svg>
-            </div>
+          <span class="text-white/30">|</span>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+              <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+            </span>
+            <span class="text-white/85 font-medium text-xs">March 30, 2026</span>
           </div>
         </div>
+
+        <!-- Stat pills -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span>
+            <span class="font-semibold opacity-55">Goals</span>
+          </a>
+          <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span>
+            <span class="font-semibold opacity-55">Examples</span>
+          </a>
+          <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
+            <span class="font-extrabold">3</span>
+            <span class="font-semibold opacity-55">Exercises</span>
+          </a>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4<span class="font-bold opacity-50">/6</span></span>
+            <span class="font-semibold opacity-55">Progress</span>
+          </span>
+        </div>
+
       </div>
-    </section>
+
+      <!-- RIGHT COLUMN — Hex graphic (locked — never edit) -->
+      <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+        <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+          <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+            <defs>
+              <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+              <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+              <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+              <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+              <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+            </defs>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+            <g clip-path="url(#hexClip)" opacity="1">
+              <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+              <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+              <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+              <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+              <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+              <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+              <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
+              <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+              <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+              <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+              <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+              <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+            </g>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+            <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+            <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+            <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+            <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+            <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+            <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
   </div>
 
   <!-- MAIN LAYOUT -->
@@ -223,9 +674,6 @@
 </a>
 <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
-</a>
-<a href="#decision-flow" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
-  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:route"></span> Decision Flow
 </a>
 <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
@@ -288,52 +736,62 @@
         <section id="objective">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
-  </div>
-</div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
+      </div>
+    </div>
     <div class="bg-white px-8 py-7">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
-  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-    <span class="iconify text-brand text-lg" data-icon="fa6-solid:bullseye"></span>
-  </span>
-  <div>
-    <p class="text-sm font-semibold text-gray-800">how to write SQL queries inside Python scripts</p>
-  </div>
-</div>
-<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
-  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-    <span class="iconify text-brand text-lg" data-icon="fa6-solid:chart-column"></span>
-  </span>
-  <div>
-    <p class="text-sm font-semibold text-gray-800">how to execute SQL queries using Pandas</p>
-  </div>
-</div>
-<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
-  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-    <span class="iconify text-brand text-lg" data-icon="fa6-solid:scale-balanced"></span>
-  </span>
-  <div>
-    <p class="text-sm font-semibold text-gray-800">how SQL and Python work together in data workflows</p>
-  </div>
-</div>
-<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
-  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-    <span class="iconify text-brand text-lg" data-icon="fa6-solid:wrench"></span>
-  </span>
-  <div>
-    <p class="text-sm font-semibold text-gray-800">how analysts use SQL to retrieve and filter data before analysis</p>
-  </div>
-</div>
-</div>
-      <div class="mt-5"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">By the end of this lesson learners will understand:</p>
-</div></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:database"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Run a SQL query</p>
+            <p class="text-xs text-gray-500 mt-0.5">The read_sql function executes any SELECT statement against a connected database and loads the result into a DataFrame.</p>
+          </div>
+        </div>
+
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:shield"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Pass safe parameters</p>
+            <p class="text-xs text-gray-500 mt-0.5">Parameterised queries pass filter values separately from the SQL text, preventing injection in your scripts.</p>
+          </div>
+        </div>
+
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:table-cells"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Load results as DataFrames</p>
+            <p class="text-xs text-gray-500 mt-0.5">Wrapping a query in read_sql delivers the result set directly into a pandas DataFrame, ready for analysis.</p>
+          </div>
+        </div>
+
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:sitemap"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Query multiple tables</p>
+            <p class="text-xs text-gray-500 mt-0.5">A single Python script can run separate queries against different tables and combine the results with a merge.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5">
+        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">This lesson lets you use your existing SQL skills from inside Python, combining query power with pandas analytics.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -341,90 +799,88 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+<div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
   <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+  <div class="relative flex items-center gap-4">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
       <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
     </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">In many analytics environments, data is stored inside <strong>databases</strong>, and SQL is used to retrieve it.</p>
+    <p class="text-base text-gray-800 leading-relaxed font-medium">Running SQL from Python lets you filter and join data in the database first — before any results load into pandas.</p>
   </div>
 </div>
-<p class="text-sm text-gray-600 leading-relaxed">Instead of running SQL in a database tool, analysts can run SQL directly from Python.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example SQL query:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:database" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">query.sql</span>
+
+<p class="text-sm text-gray-600 leading-relaxed">Think of running SQL like placing a restaurant order instead of using the buffet — you tell the kitchen exactly what you want, and they bring it ready to eat.</p>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+  <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-base" data-icon="fa6-solid:database"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">read_sql()</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The order ticket — sends SELECT, returns rows</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+    <p class="text-xs text-gray-500 leading-relaxed">The kitchen brings exactly what your query asked for.</p>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-sql">SELECT Customer, Sales
-FROM sales_table
-WHERE Sales &gt; 100</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Using Python and Pandas, we can execute the same query and load the results into a DataFrame.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+
+  <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+        <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:shield"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">Parameterised query</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The custom order — filter values passed safely</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+    <p class="text-xs text-gray-500 leading-relaxed">Your rule applied without rewriting the query each time.</p>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 
-query = &quot;&quot;&quot;
-SELECT Customer, Sales
-FROM sales_table
-WHERE Sales &gt; 100
-&quot;&quot;&quot;
-
-df = pd.read_sql(query, engine)
-
-print(df)</code></pre>
+  <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+        <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:folder"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">Organised queries</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The menu book — named SQL strings in the script</p>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 leading-relaxed">Each query stored by name so the script stays readable.</p>
   </div>
+
+  <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+        <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:stopwatch"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">Query profiling</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The kitchen timer — how long each dish takes</p>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 leading-relaxed">How long each SQL round-trip takes to return results.</p>
+  </div>
+
 </div>
-<p class="text-sm text-gray-600 leading-relaxed">Output:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Customer   Sales</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Alice      120</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Bob        200</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Maria      150</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">This approach allows analysts to:</p>
-<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"><div class="flex items-center gap-2.5 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-  <span class="iconify text-brand text-sm shrink-0" data-icon="fa6-solid:table"></span>
-  <span class="text-xs text-gray-600">use SQL for data retrieval</span>
+
+<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Running a WHERE clause in the database is far faster than loading the whole table and filtering in pandas — push filtering into SQL.</p>
 </div>
-<div class="flex items-center gap-2.5 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-  <span class="iconify text-brand text-sm shrink-0" data-icon="fa6-solid:robot"></span>
-  <span class="text-xs text-gray-600">use Python for analysis and transformation</span>
-</div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This combination is common in <strong>data engineering and analytics workflows</strong>.</p></div>
+    </div>
   </div>
 </section>
 
@@ -642,91 +1098,6 @@ WHERE Sales &gt; 100</code></pre>
   </div>
 </section>
 
-<section id="decision-flow">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Decision Flow</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A visual walkthrough of the logic and process</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <div class="relative overflow-x-auto pb-2">
-  <div class="flex items-center gap-0 min-w-[640px]"><div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:play"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Connect to database</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:magnifying-glass"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Write SQL query</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-14 h-14 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100">
-    <span class="iconify text-white text-xl -rotate-45" data-icon="fa6-solid:code-branch"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Execute query using Pandas</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:rotate-right"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Load results into DataFrame</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-emerald-300 to-gray-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-lg ring-4 ring-gray-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:flag-checkered"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Perform analysis</p>
-</div>
-</div>
-</div>
-      <p class="text-sm text-gray-600 leading-relaxed">Running SQL in Python typically follows this process:</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_sql(query, engine)</code></pre>
-  </div>
-</div>
-    </div>
-  </div>
-</section>
 
 <section id="code-examples">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
@@ -1738,64 +2109,94 @@ df = pd.read_sql(query, engine)</code></pre>
   </div>
 </section>
 
-<section id="next-lesson">
+<section id="next-lesson" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Continue your journey</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-4"><p class="text-sm text-gray-600 leading-relaxed">Next we will learn:</p>
-<p class="text-sm text-gray-600 leading-relaxed">You will learn:</p>
-<ul class="space-y-2">
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">how to insert data into a database from Python</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">how Pandas exports DataFrames to database tables</span></li>
-  <li class="flex items-start gap-2 text-gray-600"><span class="iconify text-brand mt-1 shrink-0 text-xs" data-icon="fa6-solid:check"></span><span class="text-sm">how data pipelines load processed data back into databases</span></li>
-</ul>
-<p class="text-sm text-gray-600 leading-relaxed">This is an important step for <strong>data pipelines and automated workflows</strong>.</p>
-<a href="lesson05_writing_data_back_to_a_database.html" class="lesson-nav-link group mt-5 flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 no-underline hover:border-[#CB187D] transition-colors">
-  <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-sm" data-icon="fa6-solid:arrow-right"></span>
-  </span>
-  <div class="min-w-0">
-    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors">Next: Writing Data Back to a Database</p>
-    <p class="text-xs text-gray-400">Continue your learning journey</p>
-  </div>
-  <span class="iconify text-gray-300 text-sm ml-auto shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
-</a></div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">5</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 2 &middot; Lesson 5</p>
+          <h3 class="text-base font-bold text-gray-800">Writing Data Back to a Database</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:upload"></span>
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-gray-700">Pushing a DataFrame to a Database Table</p>
+      </div>
+    </div>
+
+    <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:sliders"></span>
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-gray-700">Choosing Append, Replace, or Error Mode</p>
+      </div>
+    </div>
+
+    <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:wrench"></span>
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-gray-700">Fixing Type Mismatches Before Writing</p>
+      </div>
+    </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
+<section>
+  <div class="flex flex-col sm:flex-row gap-3">
 
-        <div class="flex flex-col sm:flex-row gap-3 mt-6"><a href="lesson03_connecting_to_databases.html" class="lesson-nav-link group flex-1 flex items-center gap-3 rounded-xl border border-gray-100 bg-white px-5 py-4 no-underline hover:border-[#CB187D] transition-colors">
-  <span class="iconify text-gray-300 text-sm shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-left"></span>
-  <div class="min-w-0">
-    <p class="text-xs text-gray-400">Previous</p>
-    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors truncate">Connecting to Databases</p>
+    <a href="lesson03_connecting_to_databases.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Connecting to Databases</p>
+      </div>
+    </a>
+
+    <a href="../../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+      <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
+    </a>
+
+    <a href="lesson05_writing_data_back_to_a_database.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Writing Data Back to a Database</p>
+      </div>
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+    </a>
+
   </div>
-</a><a href="lesson05_writing_data_back_to_a_database.html" class="lesson-nav-link group flex-1 flex items-center gap-3 rounded-xl border border-gray-100 bg-white px-5 py-4 no-underline hover:border-[#CB187D] transition-colors text-right">
-  <div class="min-w-0 ml-auto">
-    <p class="text-xs text-gray-400">Next</p>
-    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors truncate">Writing Data Back to a Database</p>
-  </div>
-  <span class="iconify text-gray-300 text-sm shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
-</a></div>
-      </main>
+</section>      </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 2 &mdash; Data Analysis &middot; Working with Data Sources
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>
@@ -1928,6 +2329,3 @@ df = pd.read_sql(query, engine)</code></pre>
 
   document.addEventListener('DOMContentLoaded', () => { if (window.Prism) Prism.highlightAll(); });
 </script>
-
-</body>
-</html>

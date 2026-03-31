@@ -1,0 +1,1776 @@
+<!-- =============================================================
+     Python Learning Hub — Home Page
+     Central navigation and overview for all tracks & resources.
+     ============================================================= -->
+
+<!-- ── Fonts ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" />
+
+<!-- ── Tailwind CSS (CDN) ── -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ── Iconify ── -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<style>
+
+  /* ==========================================================================
+     1. GLOBAL RESETS
+     ========================================================================== */
+  * { scroll-behavior: smooth; box-sizing: border-box; }
+
+  :root {
+    --font-body:  'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono:  'Fira Code', monospace;
+    --brand:      #CB187D;
+    --brand-end:  #e84aad;
+    --brand-dark: #7F004C;
+    --brand-soft: #fdf0f7;
+  }
+
+  /* ==========================================================================
+     2. CONFLUENCE CSS ISOLATION
+     ========================================================================== */
+  #hub-root,
+  #hub-root * {
+    font-family: var(--font-body) !important;
+    box-sizing: border-box !important;
+  }
+  #hub-root { font-size: 16px !important; line-height: 1.6 !important; color: #1f2937 !important; }
+
+  /* ── Text colors ── */
+  #hub-root .text-white      { color: #ffffff !important; }
+  #hub-root .text-gray-900   { color: #111827 !important; }
+  #hub-root .text-gray-800   { color: #1f2937 !important; }
+  #hub-root .text-gray-700   { color: #374151 !important; }
+  #hub-root .text-gray-600   { color: #4b5563 !important; }
+  #hub-root .text-gray-500   { color: #6b7280 !important; }
+  #hub-root .text-gray-400   { color: #9ca3af !important; }
+  #hub-root .text-gray-300   { color: #d1d5db !important; }
+
+  /* ── Font weights ── */
+  #hub-root .font-extrabold  { font-weight: 800 !important; }
+  #hub-root .font-bold       { font-weight: 700 !important; }
+  #hub-root .font-semibold   { font-weight: 600 !important; }
+  #hub-root .font-medium     { font-weight: 500 !important; }
+
+  /* ── Font sizes ── */
+  #hub-root .text-5xl  { font-size: 3rem      !important; line-height: 1 !important; }
+  #hub-root .text-4xl  { font-size: 2.25rem   !important; line-height: 2.5rem   !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem  !important; line-height: 2.25rem  !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem    !important; line-height: 2rem     !important; }
+  #hub-root .text-xl   { font-size: 1.25rem   !important; line-height: 1.75rem  !important; }
+  #hub-root .text-lg   { font-size: 1.125rem  !important; line-height: 1.75rem  !important; }
+  #hub-root .text-base { font-size: 1rem      !important; line-height: 1.5rem   !important; }
+  #hub-root .text-sm   { font-size: 0.875rem  !important; line-height: 1.25rem  !important; }
+  #hub-root .text-xs   { font-size: 0.75rem   !important; line-height: 1rem     !important; }
+
+  /* ── Layout ── */
+  #hub-root .flex            { display: flex !important; }
+  #hub-root .inline-flex     { display: inline-flex !important; }
+  #hub-root .grid            { display: grid !important; }
+  #hub-root .hidden          { display: none !important; }
+  #hub-root .items-center    { align-items: center !important; }
+  #hub-root .items-start     { align-items: flex-start !important; }
+  #hub-root .justify-center  { justify-content: center !important; }
+  #hub-root .justify-between { justify-content: space-between !important; }
+  #hub-root .shrink-0        { flex-shrink: 0 !important; }
+  #hub-root .min-w-0         { min-width: 0 !important; }
+  #hub-root .gap-1           { gap: 0.25rem !important; }
+  #hub-root .gap-2           { gap: 0.5rem  !important; }
+  #hub-root .gap-3           { gap: 0.75rem !important; }
+  #hub-root .gap-4           { gap: 1rem    !important; }
+  #hub-root .gap-6           { gap: 1.5rem  !important; }
+  #hub-root .gap-8           { gap: 2rem    !important; }
+  #hub-root .ml-auto         { margin-left: auto !important; }
+
+  /* ── Headings ── */
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important; margin-bottom: 0 !important;
+    padding: 0 !important; line-height: 1.3 !important;
+  }
+
+  /* ── Links ── */
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  /* ── Iconify ── */
+  #hub-root .iconify { vertical-align: middle; flex-shrink: 0; }
+
+  /* ==========================================================================
+     3. BRAND TOKENS
+     ========================================================================== */
+  .text-brand    { color: var(--brand); }
+  .bg-brand      { background: var(--brand); }
+  .bg-brand-soft { background: var(--brand-soft); }
+  .bg-amber-tip  { background: #fff7ed; border-color: #fed7aa !important; }
+  .border-brand  { border-color: var(--brand) !important; }
+
+  /* ==========================================================================
+     4. SCROLL PROGRESS BAR
+     ========================================================================== */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, #CB187D, #e84aad, #CB187D);
+    background-size: 200% 100%;
+    animation: scrollGradient 3s linear infinite;
+    z-index: 9999; transition: width 0.1s linear;
+  }
+  @keyframes scrollGradient { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+  /* ==========================================================================
+     5. BACK TO TOP
+     ========================================================================== */
+  .back-to-top {
+    position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9000;
+    width: 2.75rem; height: 2.75rem; border-radius: 50%;
+    background: var(--brand); color: #fff; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 14px rgba(203,24,125,0.4);
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover   { transform: translateY(-3px); }
+
+  /* ==========================================================================
+     6. HERO
+     ========================================================================== */
+  .hero-container {
+    position: relative; border-radius: 1.5rem; overflow: hidden;
+    min-height: 560px;
+    background: linear-gradient(135deg, #CB187D 0%, #a31268 45%, #7F004C 100%);
+  }
+  .hero-dots {
+    position: absolute; inset: 0; opacity: 0.07;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .hero-glow {
+    position: absolute; border-radius: 50%;
+    pointer-events: none; filter: blur(90px);
+  }
+  .hero-glow-1 { width: 500px; height: 500px; top: -140px; right: -80px; background: rgba(255,255,255,0.12); }
+  .hero-glow-2 { width: 350px; height: 350px; bottom: -80px; left: 5%;  background: rgba(127,0,76,0.5); }
+  .hero-glow-3 { width: 250px; height: 250px; top: 40%;   left: 35%;   background: rgba(203,24,125,0.18); }
+  .hero-glow-line {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%);
+    opacity: 0.7;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    color: #ffffff; font-weight: 600; pointer-events: none; cursor: default;
+    backdrop-filter: blur(6px);
+  }
+  .skill-dot       { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); display: inline-block; }
+  .skill-dot-active { background: #86efac; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 12px 28px; border-radius: 999px;
+    font-weight: 700; font-size: 0.9rem;
+    color: var(--brand); background: #ffffff; border: none;
+    cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+  .hero-cta-outline {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 12px 28px; border-radius: 999px;
+    font-weight: 700; font-size: 0.9rem;
+    color: #ffffff; background: transparent;
+    border: 2px solid rgba(255,255,255,0.4);
+    cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease;
+    text-decoration: none;
+  }
+  .hero-cta-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+  /* ── Animated floating code card ── */
+  .hero-code-card {
+    background: rgba(17,17,27,0.85); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 1rem;
+    padding: 1.25rem; min-width: 300px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px) rotate(-0.5deg); }
+    50%       { transform: translateY(-12px) rotate(0.5deg); }
+  }
+  .hero-code-font { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.7; }
+  .token-kw   { color: #c678dd; }
+  .token-fn   { color: #61afef; }
+  .token-str  { color: #98c379; }
+  .token-num  { color: #d19a66; }
+  .token-cm   { color: #5c6370; font-style: italic; }
+  .token-py   { color: #e06c75; }
+  .token-op   { color: #abb2bf; }
+
+  /* ── Stats bar ── */
+  .stat-card {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px); border-radius: 1rem;
+    padding: 1rem 1.25rem; transition: background 0.2s ease;
+  }
+  .stat-card:hover { background: rgba(255,255,255,0.18); }
+
+  /* ==========================================================================
+     7. SECTION HEADERS (shared pattern)
+     ========================================================================== */
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.25rem 2rem 1.25rem 1rem;
+    background: #ffffff; border-bottom: 1px solid #f3f4f6;
+    border-left: 4px solid #CB187D;
+  }
+  .section-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
+    background: #CB187D; flex-shrink: 0;
+  }
+  .section-title   { font-size: 1.25rem; font-weight: 700; color: #111827; }
+  .section-subtitle { font-size: 0.875rem; color: #9ca3af; }
+
+  #hub-root .section-header   { display: flex !important; align-items: center !important; gap: 1rem !important; background: #ffffff !important; border-left: 4px solid #CB187D !important; }
+  #hub-root .section-icon     { background: #CB187D !important; display: inline-flex !important; }
+  #hub-root .section-title    { color: #111827 !important; font-weight: 700 !important; }
+  #hub-root .section-subtitle { color: #9ca3af !important; }
+
+  /* ==========================================================================
+     8. TRACK CARDS
+     ========================================================================== */
+  .track-card {
+    position: relative; border-radius: 1.25rem; overflow: hidden;
+    border: 1px solid #f3f4f6; background: #ffffff;
+    transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.2s ease;
+    display: flex; flex-direction: column;
+  }
+  .track-card:hover {
+    box-shadow: 0 12px 40px -8px rgba(0,0,0,0.14);
+    transform: translateY(-3px);
+  }
+  .track-card.t00:hover { border-color: #e9d5ff; }
+  .track-card.t01:hover { border-color: #f5c6e0; }
+  .track-card.t02:hover { border-color: #bfdbfe; }
+  .track-card.t03:hover { border-color: #a5f3fc; }
+  .track-card.t04:hover { border-color: #bbf7d0; }
+  .track-card.t05:hover { border-color: #fde68a; }
+  .track-card.t06:hover { border-color: #e9d5ff; }
+
+  .track-bar-t00 { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+  .track-bar-t01 { background: linear-gradient(90deg, #CB187D, #e84aad); }
+  .track-bar-t02 { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+  .track-bar-t03 { background: linear-gradient(90deg, #0891b2, #06b6d4); }
+  .track-bar-t04 { background: linear-gradient(90deg, #059669, #10b981); }
+  .track-bar-t05 { background: linear-gradient(90deg, #d97706, #f59e0b); }
+  .track-bar-t06 { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+
+  .track-icon-t00 { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .track-icon-t01 { background: linear-gradient(135deg, #CB187D, #e84aad); }
+  .track-icon-t02 { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+  .track-icon-t03 { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+  .track-icon-t04 { background: linear-gradient(135deg, #059669, #10b981); }
+  .track-icon-t05 { background: linear-gradient(135deg, #d97706, #f59e0b); }
+  .track-icon-t06 { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+
+  .track-tag-t00 { background: #f3e8ff; color: #7c3aed; border-color: #e9d5ff; }
+  .track-tag-t01 { background: #fdf0f7; color: #CB187D;  border-color: #f5c6e0; }
+  .track-tag-t02 { background: #eff6ff; color: #2563eb;  border-color: #bfdbfe; }
+  .track-tag-t03 { background: #ecfeff; color: #0891b2;  border-color: #a5f3fc; }
+  .track-tag-t04 { background: #ecfdf5; color: #059669;  border-color: #bbf7d0; }
+  .track-tag-t05 { background: #fffbeb; color: #d97706;  border-color: #fde68a; }
+  .track-tag-t06 { background: #f3e8ff; color: #7c3aed;  border-color: #e9d5ff; }
+
+  .track-cta {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; font-weight: 700;
+    transition: gap 0.15s ease;
+  }
+  .track-cta-t00 { color: #7c3aed; }
+  .track-cta-t01 { color: #CB187D; }
+  .track-cta-t02 { color: #2563eb; }
+  .track-cta-t03 { color: #0891b2; }
+  .track-cta-t04 { color: #059669; }
+  .track-cta-t05 { color: #d97706; }
+  .track-cta-t06 { color: #7c3aed; }
+  .track-card:hover .track-cta { gap: 0.65rem; }
+
+  /* ── Lesson snippet chips inside track cards ── */
+  .lesson-chip {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.75rem; border-radius: 0.5rem;
+    background: #f9fafb; border: 1px solid #f3f4f6;
+    font-size: 0.72rem; color: #4b5563; font-weight: 500;
+    transition: background 0.15s ease;
+  }
+  .track-card:hover .lesson-chip { background: #ffffff; }
+  .chip-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+  #hub-root .track-card       { background: #ffffff !important; }
+  #hub-root .lesson-chip      { background: #f9fafb !important; }
+  #hub-root .track-card:hover .lesson-chip { background: #ffffff !important; }
+
+  /* ==========================================================================
+     9. FEATURE ROW (Why use this hub)
+     ========================================================================== */
+  .feature-card {
+    border-radius: 1.25rem; padding: 1.75rem;
+    border: 1px solid #f3f4f6; background: #ffffff;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .feature-card:hover { box-shadow: 0 8px 28px -6px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .feature-card.fc-pink:hover   { border-color: #f5c6e0; }
+  .feature-card.fc-violet:hover { border-color: #e9d5ff; }
+  .feature-card.fc-blue:hover   { border-color: #bfdbfe; }
+  .feature-card.fc-teal:hover   { border-color: #a5f3fc; }
+  .feature-card.fc-green:hover  { border-color: #bbf7d0; }
+  .feature-card.fc-amber:hover  { border-color: #fde68a; }
+  #hub-root .feature-card { background: #ffffff !important; }
+
+  /* ==========================================================================
+     10. LEARNING PATH / HOW IT WORKS STEPPER
+     ========================================================================== */
+  .path-node {
+    width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1rem; color: #ffffff;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 16px -4px rgba(0,0,0,0.25);
+  }
+  .path-connector {
+    flex: 1; height: 2px;
+    background: linear-gradient(90deg, #CB187D, #e84aad);
+    opacity: 0.3;
+  }
+  #hub-root .path-node { color: #ffffff !important; }
+
+  /* ==========================================================================
+     11. TESTIMONIAL / QUOTE CARD
+     ========================================================================== */
+  .quote-card {
+    position: relative; border-radius: 1.25rem; overflow: hidden;
+    background: linear-gradient(135deg, #fdf0f7 0%, #ffffff 60%, #fef3f9 100%);
+    border: 1px solid #f5c6e0; padding: 1.75rem;
+  }
+  #hub-root .quote-card { background: #fdf0f7 !important; border-color: #f5c6e0 !important; }
+
+  /* ==========================================================================
+     12. QUICK-START SNIPPET BOX
+     ========================================================================== */
+  .code-snippet-box {
+    border-radius: 1rem; overflow: hidden;
+    border: 1px solid #2a2a3e;
+    background: #1e1e2e;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    font-family: var(--font-mono);
+  }
+  .code-snippet-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.625rem 1rem; background: #181825;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  #hub-root .code-snippet-box { background: #1e1e2e !important; }
+
+  /* ==========================================================================
+     13. FAQ ACCORDION
+     ========================================================================== */
+  .faq-item {
+    border-radius: 0.875rem; border: 1px solid #f3f4f6;
+    background: #f9fafb; overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+  .faq-item.open { background: #ffffff; border-color: #f5c6e0; }
+  .faq-toggle {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: 1.125rem 1.25rem;
+    background: none; border: none; cursor: pointer; text-align: left;
+    font-family: var(--font-body);
+  }
+  .faq-toggle:hover { background: #f3f4f6; }
+  .faq-item.open .faq-toggle { background: transparent; }
+  .faq-body {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+  .faq-item.open .faq-body { grid-template-rows: 1fr; }
+  .faq-body-inner { overflow: hidden; padding: 0 1.25rem; transition: padding 0.3s ease; }
+  .faq-item.open .faq-body-inner { padding: 0 1.25rem 1.25rem; }
+  .faq-chevron { transition: transform 0.25s ease; color: #d1d5db; flex-shrink: 0; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); color: #CB187D; }
+  #hub-root .faq-item { background: #f9fafb !important; }
+  #hub-root .faq-item.open { background: #ffffff !important; border-color: #f5c6e0 !important; }
+
+  /* ==========================================================================
+     14. NAV HOVER
+     ========================================================================== */
+  .nav-link-hover:hover p,
+  .nav-link-hover:hover span,
+  .nav-link-hover:hover .iconify { color: var(--brand); transition: color 0.15s; }
+  #hub-root .nav-link-hover:hover p,
+  #hub-root .nav-link-hover:hover span,
+  #hub-root .nav-link-hover:hover .iconify { color: var(--brand) !important; }
+
+  /* ==========================================================================
+     15. RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .hero-container   { min-height: auto; }
+    .hero-code-card   { display: none; }
+    .path-connector   { display: none; }
+    .path-row         { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ==========================================================================
+     16. PRINT
+     ========================================================================== */
+  @media print {
+    .scroll-progress, .back-to-top { display: none; }
+  }
+
+  /* ==========================================================================
+     17. STICKY NAVBAR
+     ========================================================================== */
+  .hub-navbar {
+    position: sticky; top: 0; z-index: 8000;
+    background: rgba(255,255,255,0.94); backdrop-filter: blur(16px);
+    border-bottom: 1px solid #f3f4f6;
+    box-shadow: 0 1px 24px rgba(0,0,0,0.06);
+    padding: 0.625rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .hub-navbar .nav-logo { display: flex; align-items: center; gap: 0.625rem; }
+  .hub-navbar .nav-logo-dot {
+    width: 2rem; height: 2rem; border-radius: 0.5rem;
+    background: linear-gradient(135deg, #CB187D, #e84aad);
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .hub-navbar .nav-logo-name { font-size: 0.875rem; font-weight: 700; color: #111827; }
+  .hub-navbar .nav-links { display: flex; align-items: center; gap: 0.25rem; }
+  .hub-navbar .nav-link {
+    padding: 0.375rem 0.875rem; border-radius: 9999px;
+    font-size: 0.78rem; font-weight: 600; color: #6b7280;
+    transition: background 0.15s ease, color 0.15s ease; text-decoration: none;
+  }
+  .hub-navbar .nav-link:hover { background: #f9fafb; color: #111827; }
+  .hub-navbar .nav-link.active { background: #fdf0f7; color: #CB187D; }
+  .hub-navbar .nav-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1.125rem; border-radius: 9999px;
+    font-size: 0.78rem; font-weight: 700; color: #ffffff;
+    background: linear-gradient(135deg, #CB187D, #e84aad); text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 14px rgba(203,24,125,0.4);
+  }
+  .hub-navbar .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+  @media (max-width: 768px) { .hub-navbar .nav-links { display: none; } }
+  #hub-root .hub-navbar { background: rgba(255,255,255,0.94) !important; }
+  #hub-root .hub-navbar .nav-link.active { color: #CB187D !important; background: #fdf0f7 !important; }
+  #hub-root .hub-navbar .nav-cta { color: #ffffff !important; }
+
+  /* ==========================================================================
+     18. SCROLL REVEAL
+     ========================================================================== */
+  .animate-in {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .animate-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ==========================================================================
+     19. FEATURE CARDS — colored top bars + soft tinted bg
+     ========================================================================== */
+  .feature-card { position: relative; overflow: hidden; }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .feature-card.fc-pink   { background: linear-gradient(160deg,#fdf2f8 0%,#ffffff 50%); }
+  .feature-card.fc-violet { background: linear-gradient(160deg,#f5f3ff 0%,#ffffff 50%); }
+  .feature-card.fc-blue   { background: linear-gradient(160deg,#eff6ff 0%,#ffffff 50%); }
+  .feature-card.fc-teal   { background: linear-gradient(160deg,#ecfeff 0%,#ffffff 50%); }
+  .feature-card.fc-green  { background: linear-gradient(160deg,#ecfdf5 0%,#ffffff 50%); }
+  .feature-card.fc-amber  { background: linear-gradient(160deg,#fffbeb 0%,#ffffff 50%); }
+  .feature-card.fc-pink::before   { background: linear-gradient(90deg,#CB187D,#e84aad); }
+  .feature-card.fc-violet::before { background: linear-gradient(90deg,#7c3aed,#a855f7); }
+  .feature-card.fc-blue::before   { background: linear-gradient(90deg,#2563eb,#3b82f6); }
+  .feature-card.fc-teal::before   { background: linear-gradient(90deg,#0891b2,#06b6d4); }
+  .feature-card.fc-green::before  { background: linear-gradient(90deg,#059669,#10b981); }
+  .feature-card.fc-amber::before  { background: linear-gradient(90deg,#d97706,#f59e0b); }
+  #hub-root .feature-card.fc-pink   { background: #fdf2f8 !important; }
+  #hub-root .feature-card.fc-violet { background: #f5f3ff !important; }
+  #hub-root .feature-card.fc-blue   { background: #eff6ff !important; }
+  #hub-root .feature-card.fc-teal   { background: #ecfeff !important; }
+  #hub-root .feature-card.fc-green  { background: #ecfdf5 !important; }
+  #hub-root .feature-card.fc-amber  { background: #fffbeb !important; }
+
+  /* ==========================================================================
+     20. PATH NODES — pulsing box-shadow animation
+     ========================================================================== */
+  @keyframes pathPulse {
+    0%,100% { box-shadow: 0 4px 16px -4px rgba(0,0,0,0.3), 0 0 0 0   rgba(203,24,125,0.25); }
+    50%      { box-shadow: 0 4px 16px -4px rgba(0,0,0,0.2), 0 0 0 10px rgba(203,24,125,0.08); }
+  }
+  .path-node {
+    animation: pathPulse 2.8s ease-in-out infinite;
+    transition: transform 0.2s ease;
+    width: 4.25rem; height: 4.25rem; font-size: 1.1rem;
+  }
+  .path-node:hover { transform: scale(1.1); }
+
+  /* ==========================================================================
+     21. SKILL TAGS
+     ========================================================================== */
+  .skill-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.375rem 0.875rem; border-radius: 9999px;
+    font-size: 0.73rem; font-weight: 600;
+    border-width: 1px; border-style: solid;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: default;
+  }
+  .skill-tag:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .skill-t00 { background: #f3e8ff; color: #7c3aed; border-color: #ddd6fe; }
+  .skill-t01 { background: #fdf0f7; color: #CB187D;  border-color: #f5c6e0; }
+  .skill-t02 { background: #eff6ff; color: #2563eb;  border-color: #bfdbfe; }
+  .skill-t03 { background: #ecfeff; color: #0891b2;  border-color: #a5f3fc; }
+  .skill-t04 { background: #ecfdf5; color: #059669;  border-color: #bbf7d0; }
+  .skill-t05 { background: #fffbeb; color: #b45309;  border-color: #fde68a; }
+
+  /* ==========================================================================
+     22. TRACK CARD — gradient button CTAs
+     ========================================================================== */
+  .track-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1.125rem; border-radius: 9999px;
+    font-size: 0.75rem; font-weight: 700; color: #ffffff;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+  }
+  .track-btn:hover { opacity: 0.86; transform: translateY(-1px); }
+  .track-btn-t00 { background: linear-gradient(135deg,#7c3aed,#a855f7); box-shadow: 0 3px 14px rgba(124,58,237,0.4); }
+  .track-btn-t01 { background: linear-gradient(135deg,#CB187D,#e84aad); box-shadow: 0 3px 14px rgba(203,24,125,0.4); }
+  .track-btn-t02 { background: linear-gradient(135deg,#2563eb,#3b82f6); box-shadow: 0 3px 14px rgba(37,99,235,0.4);  }
+  .track-btn-t03 { background: linear-gradient(135deg,#0891b2,#06b6d4); box-shadow: 0 3px 14px rgba(8,145,178,0.4);  }
+  .track-btn-t04 { background: linear-gradient(135deg,#059669,#10b981); box-shadow: 0 3px 14px rgba(5,150,105,0.4);  }
+  .track-btn-t05 { background: linear-gradient(135deg,#d97706,#f59e0b); box-shadow: 0 3px 14px rgba(217,119,6,0.4);  }
+  .track-btn-t06 { background: linear-gradient(135deg,#7c3aed,#8b5cf6); box-shadow: 0 3px 14px rgba(124,58,237,0.4); }
+  #hub-root .track-btn { color: #ffffff !important; }
+
+  /* ==========================================================================
+     23. TRACK CARD — color inset glow on hover
+     ========================================================================== */
+  .track-card { transition: box-shadow 0.3s ease, transform 0.25s ease, border-color 0.25s ease; }
+  .track-card.t00:hover { box-shadow: 0 16px 48px -12px rgba(124,58,237,0.2),  0 2px 8px rgba(0,0,0,0.06); }
+  .track-card.t01:hover { box-shadow: 0 16px 48px -12px rgba(203,24,125,0.2),  0 2px 8px rgba(0,0,0,0.06); }
+  .track-card.t02:hover { box-shadow: 0 16px 48px -12px rgba(37,99,235,0.2),   0 2px 8px rgba(0,0,0,0.06); }
+  .track-card.t03:hover { box-shadow: 0 16px 48px -12px rgba(8,145,178,0.2),   0 2px 8px rgba(0,0,0,0.06); }
+  .track-card.t04:hover { box-shadow: 0 16px 48px -12px rgba(5,150,105,0.2),   0 2px 8px rgba(0,0,0,0.06); }
+  .track-card.t05:hover { box-shadow: 0 16px 48px -12px rgba(217,119,6,0.2),   0 2px 8px rgba(0,0,0,0.06); }
+  .track-card.t06:hover { box-shadow: 0 16px 48px -12px rgba(124,58,237,0.2),  0 2px 8px rgba(0,0,0,0.06); }
+
+  /* ==========================================================================
+     24. HERO SHIMMER TEXT
+     ========================================================================== */
+  .hero-shimmer-text {
+    background: linear-gradient(100deg, #fde8f5 15%, #ffffff 35%, #f9d5ec 55%, #fde8f5 75%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerText 4s linear infinite;
+  }
+  @keyframes shimmerText {
+    0%   { background-position: 200% center; }
+    100% { background-position: -100% center; }
+  }
+
+  /* ==========================================================================
+     25. TRACK BARS — slightly thicker
+     ========================================================================== */
+  .track-bar-t00, .track-bar-t01, .track-bar-t02, .track-bar-t03,
+  .track-bar-t04, .track-bar-t05, .track-bar-t06 { min-height: 5px; }
+
+</style>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <span class="iconify text-white text-base" data-icon="fa6-solid:chevron-up"></span>
+</button>
+
+<!-- ── Sticky Navbar ── -->
+<nav class="hub-navbar" id="hub-navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-dot">
+      <span class="iconify" data-icon="fa6-solid:dragon" style="color:#ffffff;font-size:0.75rem;"></span>
+    </div>
+    <span class="nav-logo-name">Python Learning Hub</span>
+  </div>
+  <div class="nav-links">
+    <a href="#about"    class="nav-link">About</a>
+    <a href="#features" class="nav-link">Why Learn Here</a>
+    <a href="#tracks"   class="nav-link">Tracks</a>
+    <a href="#skills"   class="nav-link">Skills</a>
+    <a href="#path"     class="nav-link">Learning Path</a>
+    <a href="#faq"      class="nav-link">FAQ</a>
+  </div>
+  <a href="track_00_getting_started/mod_01_getting_started/lesson01_what_is_python.html" class="nav-cta">
+    <span class="iconify" data-icon="fa6-solid:play" style="font-size:0.65rem;"></span> Start Learning
+  </a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     ROOT WRAPPER
+     ═══════════════════════════════════════════════════════════════════ -->
+<div id="hub-root" class="bg-gray-50 min-h-screen">
+<div class="max-w-[1280px] mx-auto px-4 pt-8 pb-16 space-y-10">
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="hero-container">
+    <div class="hero-dots"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-glow hero-glow-3"></div>
+    <div class="hero-glow" style="width:220px;height:220px;top:55%;left:42%;background:rgba(232,74,173,0.14);filter:blur(60px);"></div>
+    <div class="hero-glow-line"></div>
+
+    <div class="relative z-10 px-8 py-12 md:px-14 md:py-16">
+      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-14">
+
+        <!-- LEFT — Hub intro -->
+        <div class="flex-1 min-w-0">
+
+          <!-- Badge row -->
+          <div class="flex flex-wrap items-center gap-2 mb-6">
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:dragon"></span> Python Learning Hub
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="inline-flex items-center gap-1">
+                <span class="skill-dot skill-dot-active"></span>
+                <span class="skill-dot skill-dot-active"></span>
+                <span class="skill-dot skill-dot-active"></span>
+              </span>
+              All Levels
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:book-open"></span> Self-paced
+            </span>
+          </div>
+
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mb-4">
+            Your Python<br>
+            <span class="hero-shimmer-text">Learning Hub</span>
+          </h1>
+
+          <!-- Description -->
+          <p class="text-white/80 text-sm md:text-base leading-relaxed mb-7 max-w-lg">
+            A structured, self-paced curriculum taking you from your first line of Python to building production-ready data pipelines, APIs, and analytics dashboards — all in one place.
+          </p>
+
+          <!-- Stats strip -->
+          <div class="flex flex-wrap items-stretch gap-3 mb-8">
+            <div class="stat-card flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/15 shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:layer-group"></span>
+              </span>
+              <div>
+                <p class="text-white font-extrabold text-2xl leading-none">7</p>
+                <p class="text-white/65 text-[10px] font-semibold uppercase tracking-wide leading-none mt-1">Tracks</p>
+              </div>
+            </div>
+            <div class="stat-card flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/15 shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+              </span>
+              <div>
+                <p class="text-white font-extrabold text-2xl leading-none">60+</p>
+                <p class="text-white/65 text-[10px] font-semibold uppercase tracking-wide leading-none mt-1">Lessons</p>
+              </div>
+            </div>
+            <div class="stat-card flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/15 shrink-0">
+                <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <p class="text-white font-extrabold text-2xl leading-none">Real</p>
+                <p class="text-white/65 text-[10px] font-semibold uppercase tracking-wide leading-none mt-1">Code Examples</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA row -->
+          <div class="flex flex-wrap gap-3">
+            <a href="track_00_getting_started/mod_01_getting_started/lesson01_what_is_python.html" class="hero-cta">
+              <span class="iconify" data-icon="fa6-solid:play"></span> Start Learning
+            </a>
+            <a href="#tracks" class="hero-cta-outline">
+              <span class="iconify" data-icon="fa6-solid:layer-group"></span> Browse Tracks
+            </a>
+          </div>
+
+        </div>
+
+        <!-- RIGHT — Floating code card -->
+        <div class="w-full md:w-auto shrink-0 hidden md:block">
+          <div class="hero-code-card hero-code-font">
+
+            <!-- Terminal title bar -->
+            <div class="flex items-center gap-2 mb-4">
+              <div class="flex gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/70"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/70"></span>
+              </div>
+              <span class="text-[10px] text-gray-500 ml-2 font-mono">analytics_pipeline.py</span>
+            </div>
+
+            <!-- Code -->
+            <div class="space-y-0.5 text-gray-300">
+              <p><span class="token-cm"># Python Learning Hub — you'll write code like this</span></p>
+              <p><span class="token-kw">import</span> <span class="token-fn">pandas</span> <span class="token-kw">as</span> <span class="token-fn">pd</span></p>
+              <p><span class="token-kw">import</span> <span class="token-fn">logging</span></p>
+              <p>&nbsp;</p>
+              <p><span class="token-fn">logging</span><span class="token-op">.</span><span class="token-fn">basicConfig</span><span class="token-op">(</span><span class="token-fn">level</span><span class="token-op">=</span><span class="token-fn">logging</span><span class="token-op">.</span><span class="token-py">INFO</span><span class="token-op">)</span></p>
+              <p>&nbsp;</p>
+              <p><span class="token-kw">class</span> <span class="token-fn">SalesReport</span><span class="token-op">:</span></p>
+              <p>&nbsp;&nbsp;<span class="token-kw">def</span> <span class="token-fn">__init__</span><span class="token-op">(</span><span class="token-py">self</span><span class="token-op">,</span> path<span class="token-op">):</span></p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-py">self</span><span class="token-op">.</span>df <span class="token-op">=</span> pd<span class="token-op">.</span><span class="token-fn">read_csv</span><span class="token-op">(</span>path<span class="token-op">)</span></p>
+              <p>&nbsp;</p>
+              <p>&nbsp;&nbsp;<span class="token-kw">def</span> <span class="token-fn">top_products</span><span class="token-op">(</span><span class="token-py">self</span><span class="token-op">,</span> n<span class="token-op">=</span><span class="token-num">5</span><span class="token-op">):</span></p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">logging</span><span class="token-op">.</span><span class="token-fn">info</span><span class="token-op">(</span><span class="token-str">"Fetching top products"</span><span class="token-op">)</span></p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-kw">return</span> <span class="token-py">self</span><span class="token-op">.</span>df<span class="token-op">.</span><span class="token-fn">nlargest</span><span class="token-op">(</span>n<span class="token-op">,</span> <span class="token-str">"revenue"</span><span class="token-op">)</span></p>
+              <p>&nbsp;</p>
+              <p>report <span class="token-op">=</span> <span class="token-fn">SalesReport</span><span class="token-op">(</span><span class="token-str">"data/sales.csv"</span><span class="token-op">)</span></p>
+              <p><span class="token-fn">print</span><span class="token-op">(</span>report<span class="token-op">.</span><span class="token-fn">top_products</span><span class="token-op">())</span></p>
+            </div>
+
+            <!-- Output pane -->
+            <div class="mt-4 pt-4 border-t border-white/10">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                <span class="text-[10px] text-gray-500 uppercase tracking-wider">Output</span>
+              </div>
+              <p class="text-emerald-400 text-[11px]">INFO:root:Fetching top products</p>
+              <p class="text-gray-300 text-[11px]">&nbsp;&nbsp;product &nbsp;revenue</p>
+              <p class="text-gray-300 text-[11px]">0 &nbsp;Laptop &nbsp;&nbsp;48200</p>
+              <p class="text-gray-300 text-[11px]">1 &nbsp;Monitor&nbsp;&nbsp;31500</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WHAT IS THIS HUB?
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:circle-question"></span>
+        </div>
+        <div>
+          <h2 class="section-title">What Is the Python Learning Hub?</h2>
+          <p class="section-subtitle">A practical curriculum built for analysts, engineers, and data professionals</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+
+          <!-- Left — prose -->
+          <div class="space-y-5">
+            <p class="text-sm text-gray-600 leading-relaxed">
+              The Python Learning Hub is a structured, self-paced learning environment that takes you from your very first Python script all the way to building production-ready data pipelines, REST APIs, and analytics applications.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Every lesson is written for people who work with data every day — analysts, BI developers, and aspiring data engineers. You will always see <strong class="text-gray-800">why a concept matters</strong> before you learn the mechanics, with real code examples that map directly to your work.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              The curriculum is split into <strong class="text-gray-800">tracks</strong>. Each track covers a focused area of Python. You can follow them in sequence or jump directly to the track that matches your current goal.
+            </p>
+
+            <!-- amber tip -->
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">
+                <strong>No experience required for Track 00.</strong> If you can open a file and type a sentence, you have everything you need to start.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right — 3 quote cards -->
+          <div class="space-y-4">
+
+            <div class="quote-card">
+              <span class="absolute -right-2 -top-2 text-[4rem] font-black text-[#CB187D]/[0.05] leading-none select-none pointer-events-none">"</span>
+              <div class="flex items-start gap-3">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shrink-0">
+                  <span class="iconify text-sm" data-icon="fa6-solid:quote-left"></span>
+                </span>
+                <p class="text-sm text-gray-700 leading-relaxed">Every lesson teaches you how to <strong>think like a programmer</strong>, not just copy syntax.</p>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <div class="flex items-start gap-3">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shrink-0">
+                  <span class="iconify text-sm" data-icon="fa6-solid:lightbulb"></span>
+                </span>
+                <p class="text-sm text-gray-700 leading-relaxed">Concepts are explained with <strong>real-world analogies</strong> first, then backed up with working code.</p>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <div class="flex items-start gap-3">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shrink-0">
+                  <span class="iconify text-sm" data-icon="fa6-solid:wrench"></span>
+                </span>
+                <p class="text-sm text-gray-700 leading-relaxed">Every track includes <strong>practice exercises, common mistakes,</strong> and a knowledge check quiz.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WHY THIS HUB — FEATURE GRID
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="features">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:star"></span>
+        </div>
+        <div>
+          <h2 class="section-title">Why Learn Here?</h2>
+          <p class="section-subtitle">Six things that make this hub different from a textbook or YouTube playlist</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <div class="feature-card fc-pink">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] mb-4 shadow-md">
+              <span class="iconify text-white text-lg" data-icon="fa6-solid:road"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-900 mb-2">A Clear Learning Path</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Every lesson tells you exactly what you will learn, why it matters, and what comes next. No dead ends or guesswork.</p>
+          </div>
+
+          <div class="feature-card fc-violet">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 mb-4 shadow-md">
+              <span class="iconify text-white text-lg" data-icon="fa6-solid:magnifying-glass"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-900 mb-2">Analogies Before Code</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Every new concept is anchored in a real-world analogy before a single line of code appears — because understanding beats memorising.</p>
+          </div>
+
+          <div class="feature-card fc-blue">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 mb-4 shadow-md">
+              <span class="iconify text-white text-lg" data-icon="fa6-solid:code"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-900 mb-2">Real, Runnable Examples</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Every code block is production-realistic — not toy snippets. You can copy, run, and adapt examples in your own projects immediately.</p>
+          </div>
+
+          <div class="feature-card fc-teal">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-[#0891b2] to-[#06b6d4] mb-4 shadow-md">
+              <span class="iconify text-white text-lg" data-icon="fa6-solid:bug-slash"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-900 mb-2">Common Mistakes Explained</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Each lesson has a dedicated section on the most common errors beginners make — and exactly how to fix them.</p>
+          </div>
+
+          <div class="feature-card fc-green">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 mb-4 shadow-md">
+              <span class="iconify text-white text-lg" data-icon="fa6-solid:pencil"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-900 mb-2">Practice Every Lesson</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Structured exercises with worked solutions appear in every lesson so you can test your understanding before moving on.</p>
+          </div>
+
+          <div class="feature-card fc-amber">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 mb-4 shadow-md">
+              <span class="iconify text-white text-lg" data-icon="fa6-solid:briefcase"></span>
+            </span>
+            <h3 class="text-sm font-bold text-gray-900 mb-2">Analytics-First Focus</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Every track is built around the skills data analysts and engineers actually use — pandas, APIs, pipelines, SQL, and deployment.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HOW A LESSON IS STRUCTURED
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="lesson-anatomy">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:map"></span>
+        </div>
+        <div>
+          <h2 class="section-title">How Every Lesson Is Built</h2>
+          <p class="section-subtitle">A consistent structure so you always know where you are</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+          <!-- Step 1 -->
+          <div class="relative rounded-2xl overflow-hidden border border-gray-100 bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] p-5">
+            <span class="absolute -right-2 -top-2 text-[4.5rem] font-black text-[#CB187D]/[0.05] leading-none select-none pointer-events-none">01</span>
+            <div class="relative">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shrink-0 mb-3 shadow-md">
+                <span class="iconify text-sm" data-icon="fa6-solid:bullseye"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-800 mb-1.5">Objectives</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">Four clear goals that tell you exactly what you will be able to do by the end of the lesson.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 p-5">
+            <span class="absolute -right-2 -top-2 text-[4.5rem] font-black text-violet-500/[0.05] leading-none select-none pointer-events-none">02</span>
+            <div class="relative">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shrink-0 mb-3 shadow-md">
+                <span class="iconify text-sm" data-icon="fa6-solid:binoculars"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-800 mb-1.5">Overview &amp; Analogy</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">A real-world analogy that makes the new concept feel familiar before any code appears.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative rounded-2xl overflow-hidden border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-5">
+            <span class="absolute -right-2 -top-2 text-[4.5rem] font-black text-blue-500/[0.05] leading-none select-none pointer-events-none">03</span>
+            <div class="relative">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shrink-0 mb-3 shadow-md">
+                <span class="iconify text-sm" data-icon="fa6-solid:code"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-800 mb-1.5">Code Examples</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">Tabbed, runnable code blocks with real terminal output — copy any snippet into your editor immediately.</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-green-50 p-5">
+            <span class="absolute -right-2 -top-2 text-[4.5rem] font-black text-emerald-500/[0.05] leading-none select-none pointer-events-none">04</span>
+            <div class="relative">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 text-white shrink-0 mb-3 shadow-md">
+                <span class="iconify text-sm" data-icon="fa6-solid:brain"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-800 mb-1.5">Knowledge Check</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">A short interactive quiz at the end of every lesson so you can confirm the concepts stuck before moving on.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Mini lesson map -->
+        <div class="rounded-xl border border-gray-100 bg-gray-50 p-5">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Full lesson structure at a glance</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-[#fdf0f7] text-[#CB187D] border border-pink-100"><span class="iconify text-[9px]" data-icon="fa6-solid:bullseye"></span> Objectives</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-700 border border-violet-100"><span class="iconify text-[9px]" data-icon="fa6-solid:binoculars"></span> Overview</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600"><span class="iconify text-[9px]" data-icon="fa6-solid:lightbulb"></span> Key Ideas</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-100"><span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> Concepts</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100"><span class="iconify text-[9px]" data-icon="fa6-solid:code"></span> Code</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-red-50 text-red-600 border border-red-100"><span class="iconify text-[9px]" data-icon="fa6-solid:triangle-exclamation"></span> Mistakes</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-100"><span class="iconify text-[9px]" data-icon="fa6-solid:pencil"></span> Practice</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100"><span class="iconify text-[9px]" data-icon="fa6-solid:briefcase"></span> Real World</span>
+            <span class="text-gray-300 self-center">→</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100"><span class="iconify text-[9px]" data-icon="fa6-solid:brain"></span> Quiz</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       ALL TRACKS
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="tracks">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:layer-group"></span>
+        </div>
+        <div>
+          <h2 class="section-title">All Learning Tracks</h2>
+          <p class="section-subtitle">Seven tracks — start from zero or jump to the level that fits your goal</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+
+        <!-- Recommended sequence label -->
+        <div class="flex items-center gap-2 mb-6">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-[#fdf0f7] text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:arrow-right-to-bracket"></span> Recommended order shown below
+          </span>
+          <span class="text-xs text-gray-400">— you can also start at any track based on your experience</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+
+          <!-- ── TRACK 00 ── -->
+          <div class="track-card t00">
+            <div class="h-1.5 track-bar-t00"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t00 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="fa6-solid:rocket"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t00 border">Track 00</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">6 lessons · ~1 hour</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">Getting Started with Python</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">Set up your environment, install VS Code, configure virtual environments, and run your first Python script.</p>
+                </div>
+              </div>
+
+              <!-- Lesson chips -->
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> What is Python?</div>
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> Installing VS Code Extensions</div>
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> Setting Up a Virtual Environment</div>
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> Running Your First Script</div>
+              </div>
+
+              <!-- Footer -->
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-violet-50 text-violet-600 border border-violet-100"><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span> Beginner</span>
+                <a href="track_00_getting_started/mod_01_getting_started/lesson01_what_is_python.html" class="track-btn track-btn-t00">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── TRACK 01 ── -->
+          <div class="track-card t01">
+            <div class="h-1.5 track-bar-t01"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t01 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="logos:python"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t01 border">Track 01</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">17 lessons · ~5 hours</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">Python Foundation</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">Variables, loops, functions, OOP, modules, Git, and logging — every core Python concept you need before diving into data work.</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-pink-400"></span> Variables &amp; Data Types</div>
+                <div class="lesson-chip"><span class="chip-dot bg-pink-400"></span> Control Flow &amp; Functions</div>
+                <div class="lesson-chip"><span class="chip-dot bg-pink-400"></span> Object-Oriented Programming</div>
+                <div class="lesson-chip"><span class="chip-dot bg-pink-400"></span> Git, Logging &amp; Project Structure</div>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100"><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span> Beginner → Intermediate</span>
+                <a href="track_01_python_foundation/track_01_python_foundation.html" class="track-btn track-btn-t01">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── TRACK 02 ── -->
+          <div class="track-card t02">
+            <div class="h-1.5 track-bar-t02"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t02 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="fa6-solid:chart-line"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t02 border">Track 02</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">4 modules</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">Data Analytics with Python</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">pandas, data sources, analyst workflows, and handling large data sets — the toolkit every data analyst needs.</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-blue-400"></span> Data Analysis with pandas</div>
+                <div class="lesson-chip"><span class="chip-dot bg-blue-400"></span> Working with Data Sources</div>
+                <div class="lesson-chip"><span class="chip-dot bg-blue-400"></span> Python for Analysts</div>
+                <div class="lesson-chip"><span class="chip-dot bg-blue-400"></span> Handling Large Data Sets</div>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-100"><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span> Intermediate</span>
+                <a href="track_02_data_analytics/" class="track-btn track-btn-t02">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── TRACK 03 ── -->
+          <div class="track-card t03">
+            <div class="h-1.5 track-bar-t03"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t03 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="fa6-solid:database"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t03 border">Track 03</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">6 modules</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">Data Engineering</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">NoSQL, APIs, data pipelines, orchestration, large-scale processing, and CI/CD automation for engineers.</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-cyan-400"></span> NoSQL &amp; Modern Data Storage</div>
+                <div class="lesson-chip"><span class="chip-dot bg-cyan-400"></span> API Data Integration</div>
+                <div class="lesson-chip"><span class="chip-dot bg-cyan-400"></span> Data Pipelines &amp; Orchestration</div>
+                <div class="lesson-chip"><span class="chip-dot bg-cyan-400"></span> Large-Scale Processing</div>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-100"><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span> Advanced</span>
+                <a href="track_03_data_engineering/" class="track-btn track-btn-t03">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── TRACK 04 ── -->
+          <div class="track-card t04">
+            <div class="h-1.5 track-bar-t04"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t04 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="fa6-solid:laptop-code"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t04 border">Track 04</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">4 modules</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">Data Applications</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">Python automation, REST APIs, building full data applications, and deploying them with CI/CD pipelines.</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-emerald-400"></span> Python Automation</div>
+                <div class="lesson-chip"><span class="chip-dot bg-emerald-400"></span> API Data for Applications</div>
+                <div class="lesson-chip"><span class="chip-dot bg-emerald-400"></span> Building Data Applications</div>
+                <div class="lesson-chip"><span class="chip-dot bg-emerald-400"></span> Deployment &amp; CI/CD</div>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100"><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span> Advanced</span>
+                <a href="track_04_data_application/" class="track-btn track-btn-t04">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── TRACK 05 ── -->
+          <div class="track-card t05">
+            <div class="h-1.5 track-bar-t05"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t05 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="fa6-solid:table"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t05 border">Track 05</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">2 modules</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">SQL Foundation</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">SQL fundamentals and advanced analytics queries — complement your Python skills with the other language every data professional needs.</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-amber-400"></span> SQL Foundations</div>
+                <div class="lesson-chip"><span class="chip-dot bg-amber-400"></span> Advanced SQL for Data Analysis</div>
+                <div class="lesson-chip"><span class="chip-dot bg-amber-400"></span> Window Functions &amp; CTEs</div>
+                <div class="lesson-chip"><span class="chip-dot bg-amber-400"></span> Query Optimisation</div>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-100"><span class="iconify text-[8px]" data-icon="fa6-solid:star"></span> Beginner → Intermediate</span>
+                <a href="track_05_sql_foundation/" class="track-btn track-btn-t05">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ── TRACK 06 — full width ── -->
+          <div class="track-card t06 md:col-span-2 xl:col-span-1">
+            <div class="h-1.5 track-bar-t06"></div>
+            <div class="p-6 flex flex-col flex-1">
+
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl track-icon-t06 shrink-0">
+                  <span class="iconify text-white text-xl" data-icon="fa6-solid:book-bookmark"></span>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold track-tag-t06 border">Track 06</span>
+                    <span class="text-[10px] text-gray-400 font-semibold">3 reference modules</span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 leading-snug">References &amp; Handbooks</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">Professional Python practices, code quality essentials, and the Python Engineering Handbook — keep these open as you work through other tracks.</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5 mb-5 flex-1">
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> Professional Python Practices</div>
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> Code Quality Essentials</div>
+                <div class="lesson-chip"><span class="chip-dot bg-violet-400"></span> Python Engineering Handbook</div>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-violet-50 text-violet-700 border border-violet-100"><span class="iconify text-[8px]" data-icon="fa6-solid:bookmark"></span> Reference</span>
+                <a href="track_06_references/" class="track-btn track-btn-t06">
+                  Open Track <span class="iconify" data-icon="fa6-solid:arrow-right" style="font-size:10px;"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SKILLS YOU'LL MASTER
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="skills" class="animate-in">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:wand-magic-sparkles"></span>
+        </div>
+        <div>
+          <h2 class="section-title">Skills You'll Master</h2>
+          <p class="section-subtitle">Every skill below is covered in at least one lesson — with code, analogies, and a practice exercise</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8 space-y-6">
+
+        <div class="space-y-5">
+
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg track-icon-t00 shrink-0">
+                <span class="iconify text-white" data-icon="fa6-solid:rocket" style="font-size:10px;"></span>
+              </span>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-violet-600">Track 00 &mdash; Getting Started</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag skill-t00"><span class="iconify text-[9px]" data-icon="fa6-solid:terminal"></span> Python Setup</span>
+              <span class="skill-tag skill-t00"><span class="iconify text-[9px]" data-icon="fa6-solid:puzzle-piece"></span> VS Code Extensions</span>
+              <span class="skill-tag skill-t00"><span class="iconify text-[9px]" data-icon="fa6-solid:box"></span> Virtual Environments</span>
+              <span class="skill-tag skill-t00"><span class="iconify text-[9px]" data-icon="fa6-solid:cube"></span> pip &amp; Libraries</span>
+              <span class="skill-tag skill-t00"><span class="iconify text-[9px]" data-icon="fa6-solid:play"></span> Running Scripts</span>
+              <span class="skill-tag skill-t00"><span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> Jupyter Notebooks</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-50 pt-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg track-icon-t01 shrink-0">
+                <span class="iconify text-white" data-icon="logos:python" style="font-size:10px;"></span>
+              </span>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-[#CB187D]">Track 01 &mdash; Python Foundation</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:equals"></span> Variables &amp; Types</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:list"></span> Lists &amp; Dicts</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:infinity"></span> Loops</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:code-branch"></span> Control Flow</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:f"></span> Functions</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:cube"></span> Classes &amp; OOP</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:box-archive"></span> Modules &amp; Packages</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-brands:git-alt"></span> Git</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:scroll"></span> Logging</span>
+              <span class="skill-tag skill-t01"><span class="iconify text-[9px]" data-icon="fa6-solid:file-code"></span> File I/O</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-50 pt-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg track-icon-t02 shrink-0">
+                <span class="iconify text-white" data-icon="fa6-solid:chart-line" style="font-size:10px;"></span>
+              </span>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-blue-600">Track 02 &mdash; Data Analytics</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag skill-t02">pandas</span>
+              <span class="skill-tag skill-t02">DataFrames</span>
+              <span class="skill-tag skill-t02">Data Cleaning</span>
+              <span class="skill-tag skill-t02">CSV &amp; Excel</span>
+              <span class="skill-tag skill-t02">Filtering &amp; Grouping</span>
+              <span class="skill-tag skill-t02">Aggregation</span>
+              <span class="skill-tag skill-t02">Visualisation</span>
+              <span class="skill-tag skill-t02">Large Datasets</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-50 pt-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg track-icon-t03 shrink-0">
+                <span class="iconify text-white" data-icon="fa6-solid:database" style="font-size:10px;"></span>
+              </span>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-cyan-700">Track 03 &mdash; Data Engineering</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag skill-t03">NoSQL Databases</span>
+              <span class="skill-tag skill-t03">REST APIs</span>
+              <span class="skill-tag skill-t03">Data Pipelines</span>
+              <span class="skill-tag skill-t03">Orchestration</span>
+              <span class="skill-tag skill-t03">Apache Kafka</span>
+              <span class="skill-tag skill-t03">Apache Spark</span>
+              <span class="skill-tag skill-t03">Automation &amp; CI/CD</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-50 pt-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg track-icon-t04 shrink-0">
+                <span class="iconify text-white" data-icon="fa6-solid:laptop-code" style="font-size:10px;"></span>
+              </span>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Track 04 &mdash; Data Applications</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag skill-t04">Python Automation</span>
+              <span class="skill-tag skill-t04">Flask</span>
+              <span class="skill-tag skill-t04">FastAPI</span>
+              <span class="skill-tag skill-t04">Docker</span>
+              <span class="skill-tag skill-t04">Deployment</span>
+              <span class="skill-tag skill-t04">Unit Testing</span>
+              <span class="skill-tag skill-t04">CI/CD Pipelines</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-50 pt-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg track-icon-t05 shrink-0">
+                <span class="iconify text-white" data-icon="fa6-solid:table" style="font-size:10px;"></span>
+              </span>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-amber-700">Track 05 &mdash; SQL Foundation</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag skill-t05">SELECT &amp; WHERE</span>
+              <span class="skill-tag skill-t05">JOINs</span>
+              <span class="skill-tag skill-t05">GROUP BY</span>
+              <span class="skill-tag skill-t05">Window Functions</span>
+              <span class="skill-tag skill-t05">CTEs</span>
+              <span class="skill-tag skill-t05">Subqueries</span>
+              <span class="skill-tag skill-t05">Query Optimisation</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LEARNING PATH STEPPER
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="path">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:route"></span>
+        </div>
+        <div>
+          <h2 class="section-title">Recommended Learning Path</h2>
+          <p class="section-subtitle">Follow this sequence for the smoothest progression from beginner to advanced</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+
+        <div class="flex items-center gap-0 path-row overflow-x-auto pb-2">
+
+          <div class="flex flex-col items-center gap-2 flex-1 min-w-[90px]">
+            <div class="path-node track-icon-t00 text-sm">00</div>
+            <p class="text-xs font-bold text-gray-700 text-center leading-tight">Getting<br>Started</p>
+            <p class="text-[10px] text-gray-400 text-center">6 lessons</p>
+          </div>
+          <div class="path-connector"></div>
+          <div class="flex flex-col items-center gap-2 flex-1 min-w-[90px]">
+            <div class="path-node track-icon-t01 text-sm">01</div>
+            <p class="text-xs font-bold text-gray-700 text-center leading-tight">Python<br>Foundation</p>
+            <p class="text-[10px] text-gray-400 text-center">17 lessons</p>
+          </div>
+          <div class="path-connector" style="background:linear-gradient(90deg,#CB187D,#2563eb);"></div>
+          <div class="flex flex-col items-center gap-2 flex-1 min-w-[90px]">
+            <div class="path-node track-icon-t02 text-sm">02</div>
+            <p class="text-xs font-bold text-gray-700 text-center leading-tight">Data<br>Analytics</p>
+            <p class="text-[10px] text-gray-400 text-center">4 modules</p>
+          </div>
+          <div class="path-connector" style="background:linear-gradient(90deg,#2563eb,#0891b2);"></div>
+          <div class="flex flex-col items-center gap-2 flex-1 min-w-[90px]">
+            <div class="path-node track-icon-t03 text-sm">03</div>
+            <p class="text-xs font-bold text-gray-700 text-center leading-tight">Data<br>Engineering</p>
+            <p class="text-[10px] text-gray-400 text-center">6 modules</p>
+          </div>
+          <div class="path-connector" style="background:linear-gradient(90deg,#0891b2,#059669);"></div>
+          <div class="flex flex-col items-center gap-2 flex-1 min-w-[90px]">
+            <div class="path-node track-icon-t04 text-sm">04</div>
+            <p class="text-xs font-bold text-gray-700 text-center leading-tight">Data<br>Applications</p>
+            <p class="text-[10px] text-gray-400 text-center">4 modules</p>
+          </div>
+
+        </div>
+
+        <!-- Side-road note -->
+        <div class="mt-6 rounded-xl bg-amber-50 border border-amber-100 p-4 flex items-start gap-3">
+          <span class="iconify text-amber-500 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">
+            <strong>Track 05 (SQL)</strong> and <strong>Track 06 (References)</strong> can be studied at any point — they complement every other track. Most learners open Track 05 alongside Track 02.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       QUICK START — FIRST LESSON PREVIEW
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="quickstart">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:bolt"></span>
+        </div>
+        <div>
+          <h2 class="section-title">Start in 60 Seconds</h2>
+          <p class="section-subtitle">Your first lesson — no setup required to read along</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+          <!-- Left — what to expect -->
+          <div class="space-y-5">
+            <div class="rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] p-6">
+              <div class="flex items-start gap-4 mb-4">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shrink-0">
+                  <span class="iconify text-base" data-icon="fa6-solid:play"></span>
+                </span>
+                <div>
+                  <p class="text-[10px] font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Track 00 · Lesson 1</p>
+                  <h3 class="text-base font-bold text-gray-900">What is Python?</h3>
+                  <p class="text-xs text-gray-500 mt-0.5">5 min · Beginner</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                Python is a programming language — a set of instructions you write in plain English that a computer can understand and execute. In this first lesson you will learn what Python is, why it has become the world's most popular language for data work, and how it compares to tools you already use like Excel and SQL.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-700 border border-violet-100">No coding required</span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Includes quiz</span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">5 min read</span>
+              </div>
+              <a href="track_00_getting_started/mod_01_getting_started/lesson01_what_is_python.html"
+                 class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold"
+                 style="background:linear-gradient(135deg,#CB187D,#e84aad);color:#ffffff;text-decoration:none;">
+                <span class="iconify text-xs" data-icon="fa6-solid:play"></span> Go to Lesson 1
+              </a>
+            </div>
+          </div>
+
+          <!-- Right — code snippet preview -->
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Sample code from Track 01</p>
+            <div class="code-snippet-box">
+              <div class="code-snippet-header">
+                <div class="flex items-center gap-2">
+                  <span class="iconify text-yellow-400" data-icon="logos:python" style="font-size:14px;"></span>
+                  <span class="text-[11px] font-semibold text-gray-400">hello_python.py</span>
+                </div>
+                <button onclick="copySnippet(this)" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold text-gray-400 hover:text-white hover:bg-white/10 transition-colors border border-white/10">
+                  <span class="iconify text-[10px]" data-icon="fa6-regular:copy"></span> Copy
+                </button>
+              </div>
+              <div class="px-5 py-4" style="font-family:var(--font-mono);font-size:0.78rem;line-height:1.8;">
+                <p><span class="token-cm"># Your first Python script</span></p>
+                <p><span class="token-fn">name</span> <span class="token-op">=</span> <span class="token-str">"Learning Hub"</span></p>
+                <p><span class="token-fn">version</span> <span class="token-op">=</span> <span class="token-num">1</span></p>
+                <p><span class="token-fn">tracks</span> <span class="token-op">=</span> <span class="token-op">[</span><span class="token-str">"Foundation"</span><span class="token-op">,</span> <span class="token-str">"Analytics"</span><span class="token-op">,</span> <span class="token-str">"Engineering"</span><span class="token-op">]</span></p>
+                <p>&nbsp;</p>
+                <p><span class="token-kw">for</span> track <span class="token-kw">in</span> tracks<span class="token-op">:</span></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">print</span><span class="token-op">(</span><span class="token-str">f"Welcome to </span><span class="token-op">{</span>name<span class="token-op">}</span><span class="token-str"> — </span><span class="token-op">{</span>track<span class="token-op">}</span><span class="token-str">"</span><span class="token-op">)</span></p>
+                <p>&nbsp;</p>
+                <p><span class="token-cm"># Output:</span></p>
+                <p><span class="token-cm"># Welcome to Learning Hub — Foundation</span></p>
+                <p><span class="token-cm"># Welcome to Learning Hub — Analytics</span></p>
+                <p><span class="token-cm"># Welcome to Learning Hub — Engineering</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FAQ
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="faq">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+      <div class="section-header pl-4 pr-8 py-5">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:circle-question"></span>
+        </div>
+        <div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Common questions before getting started</p>
+        </div>
+      </div>
+
+      <div class="bg-white px-8 py-8 space-y-3">
+
+        <div class="faq-item open">
+          <button class="faq-toggle" onclick="toggleFaq(this)">
+            <span class="text-sm font-semibold text-gray-800">Do I need any experience before starting Track 00?</span>
+            <span class="iconify faq-chevron text-lg" data-icon="fa6-solid:chevron-down"></span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              <p class="text-sm text-gray-600 leading-relaxed">No experience is required at all. Track 00 starts from the very beginning — what Python is, why it exists, and how to install it. If you can open a browser and type, you are ready to start.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle" onclick="toggleFaq(this)">
+            <span class="text-sm font-semibold text-gray-800">Do I have to follow the tracks in order?</span>
+            <span class="iconify faq-chevron text-lg" data-icon="fa6-solid:chevron-down"></span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              <p class="text-sm text-gray-600 leading-relaxed">The tracks are designed to build on each other in order. Track 00 → 01 → 02 is the recommended sequence. However, if you already have Python basics covered, you can jump directly into Track 02 (Data Analytics) or Track 05 (SQL) without following the earlier tracks.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle" onclick="toggleFaq(this)">
+            <span class="text-sm font-semibold text-gray-800">How long does each lesson take?</span>
+            <span class="iconify faq-chevron text-lg" data-icon="fa6-solid:chevron-down"></span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              <p class="text-sm text-gray-600 leading-relaxed">Most lessons take between 10 and 20 minutes to read through. If you type along with the code examples and complete the practice exercise, expect to add another 10–15 minutes. The time estimate shown on each lesson card is for the reading portion only.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle" onclick="toggleFaq(this)">
+            <span class="text-sm font-semibold text-gray-800">What tools do I need installed?</span>
+            <span class="iconify faq-chevron text-lg" data-icon="fa6-solid:chevron-down"></span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              <p class="text-sm text-gray-600 leading-relaxed">You need Python 3.10+ and Visual Studio Code. Track 00 walks you through installing both from scratch, along with creating a virtual environment and installing libraries. Everything is free and available on Windows, Mac, and Linux.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-toggle" onclick="toggleFaq(this)">
+            <span class="text-sm font-semibold text-gray-800">Is SQL knowledge required for the data tracks?</span>
+            <span class="iconify faq-chevron text-lg" data-icon="fa6-solid:chevron-down"></span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              <p class="text-sm text-gray-600 leading-relaxed">No. The Python analytics tracks (02, 03, 04) do not require SQL knowledge. Track 05 covers SQL independently and can be taken at any point. If your role involves databases, studying Track 05 alongside Track 02 is strongly recommended.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       READY TO START — CLOSING CTA
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="cta">
+    <div class="relative rounded-2xl overflow-hidden" style="background:linear-gradient(135deg,#CB187D 0%,#a31268 45%,#7F004C 100%);">
+      <div class="hero-dots" style="opacity:0.06;"></div>
+      <div class="hero-glow" style="width:400px;height:400px;top:-120px;right:-80px;background:rgba(255,255,255,0.1);filter:blur(80px);"></div>
+      <div class="hero-glow-line"></div>
+
+      <div class="relative z-10 px-8 py-12 md:px-14 text-center">
+        <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-sm mb-5 mx-auto">
+          <span class="iconify text-white text-2xl" data-icon="fa6-solid:graduation-cap"></span>
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+          Ready to start writing Python?
+        </h2>
+        <p class="text-white/80 text-base leading-relaxed mb-8 max-w-xl mx-auto">
+          Pick up any track and work through it at your own pace. Every concept is explained, every line of code is annotated, and every lesson ends with a quiz.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="track_00_getting_started/mod_01_getting_started/lesson01_what_is_python.html" class="hero-cta">
+            <span class="iconify" data-icon="fa6-solid:rocket"></span> Begin Track 00
+          </a>
+          <a href="#tracks" class="hero-cta-outline">
+            <span class="iconify" data-icon="fa6-solid:layer-group"></span> All Tracks
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+</div>
+
+<script>
+  // ── FAQ accordion ──────────────────────────────────────────────────────────
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+    // Open this one if it was closed
+    if (!isOpen) item.classList.add('open');
+    if (window.Iconify) Iconify.scan();
+  }
+
+  // ── Copy snippet ───────────────────────────────────────────────────────────
+  function copySnippet(btn) {
+    var box  = btn.closest('.code-snippet-box');
+    var code = box.querySelector('.px-5');
+    var raw  = code ? code.innerText.replace(/^#.*\n?/gm, '').trim() : '';
+    if (!raw) { raw = code ? code.innerText.trim() : ''; }
+    navigator.clipboard.writeText(raw).then(function() {
+      btn.textContent = '✓ Copied';
+      setTimeout(function() {
+        btn.innerHTML = '<span class="iconify text-[10px]" data-icon="fa6-regular:copy"></span> Copy';
+        if (window.Iconify) Iconify.scan();
+      }, 1800);
+    }).catch(function() {});
+  }
+
+  // ── Scroll progress bar ────────────────────────────────────────────────────
+  function updateScrollProgress() {
+    var s = document.documentElement.scrollTop || document.body.scrollTop;
+    var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
+  }
+
+  // ── Back to top ────────────────────────────────────────────────────────────
+  function updateBackToTop() {
+    var btn = document.getElementById('back-to-top');
+    if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+  }
+
+  window.addEventListener('scroll', function() {
+    updateScrollProgress();
+    updateBackToTop();
+  });
+
+  // ── Iconify scan after load ────────────────────────────────────────────────
+  window.addEventListener('load', function() { if (window.Iconify) Iconify.scan(); });
+</script>
