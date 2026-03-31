@@ -887,54 +887,71 @@
 <section id="key-ideas">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-4"><div class="obj-card flex flex-col md:flex-row rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
-  <div class="px-6 py-5 flex flex-col justify-center">
-    <div class="flex items-center gap-3 mb-2.5">
-      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-rose-600 shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:terminal"></span>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Card 1 — Chunk Processing Reads Data in Pieces</h3>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+      </div>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-3">Instead of loading a dataset entirely, Python reads smaller subsets sequentially.</p>
-    
-  </div>
-  
-</div>
-<div class="obj-card flex flex-col md:flex-row rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
-  <div class="px-6 py-5 flex flex-col justify-center">
-    <div class="flex items-center gap-3 mb-2.5">
-      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:glasses"></span>
+    <div class="bg-white px-8 py-7 space-y-4">
+
+<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:compress"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Card 2 — Chunk Processing Reduces Memory Usage</h3>
+      <h3 class="text-sm font-bold text-gray-900">Pre-Aggregate Inside the Loop</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-3">Only one portion of the dataset exists in memory at a time.</p>
-    
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Summing or counting inside each chunk and collecting only the small summary rows uses almost no extra memory, compared to gathering every chunk's full rows and concatenating at the end.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Aggregate first</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Low memory</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Summary only</span>
+    </div>
   </div>
-  
 </div>
-<div class="obj-card flex flex-col md:flex-row rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
-  <div class="px-6 py-5 flex flex-col justify-center">
-    <div class="flex items-center gap-3 mb-2.5">
-      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:robot"></span>
+
+<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:list"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Card 3 — Chunk Processing Enables Large Data Analysis</h3>
+      <h3 class="text-sm font-bold text-gray-900">Pass dtype= Consistently Across Chunks</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-3">Datasets with tens of millions of rows can be analyzed on standard laptops.</p>
-    
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Without a dtype dictionary, pandas infers column types from each chunk separately and may assign int64 to one chunk and float64 to another, causing type conflicts when you concatenate.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">dtype= dict</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Consistent types</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">No conflicts</span>
+    </div>
   </div>
-  
 </div>
+
+<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:gauge-high"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Print Progress Every N Chunks</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Printing a short message every ten chunks gives you a live indicator that the script is still running on a large file and lets you estimate the total runtime without adding a progress-bar library.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Progress log</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Estimate time</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">No library</span>
+    </div>
+  </div>
 </div>
+
+    </div>
   </div>
 </section>
 
