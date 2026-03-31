@@ -1,0 +1,907 @@
+<!-- =============================================================
+     Module 11 — Python Engineering Handbook | Python Learning Hub
+     ============================================================= -->
+
+<!-- ── Fonts ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" />
+
+<!-- ── Tailwind CSS (CDN) ── -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ── Iconify ── -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<style>
+
+  /* ==========================================================================
+     1. GLOBAL RESETS
+     ========================================================================== */
+  * { scroll-behavior: smooth; }
+
+  /* ==========================================================================
+     2. CONFLUENCE CSS ISOLATION
+     ========================================================================== */
+
+  #hub-root,
+  #hub-root * {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+    box-sizing: border-box !important;
+  }
+
+  #hub-root {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #1f2937 !important;
+  }
+
+  /* ── Text colours ── */
+  #hub-root .text-white      { color: #ffffff !important; }
+  #hub-root .text-gray-900   { color: #111827 !important; }
+  #hub-root .text-gray-800   { color: #1f2937 !important; }
+  #hub-root .text-gray-700   { color: #374151 !important; }
+  #hub-root .text-gray-600   { color: #4b5563 !important; }
+  #hub-root .text-gray-500   { color: #6b7280 !important; }
+  #hub-root .text-gray-400   { color: #9ca3af !important; }
+  #hub-root .text-gray-300   { color: #d1d5db !important; }
+
+  /* ── Font weights ── */
+  #hub-root .font-bold       { font-weight: 700 !important; }
+  #hub-root .font-semibold   { font-weight: 600 !important; }
+  #hub-root .font-medium     { font-weight: 500 !important; }
+
+  /* ── Font sizes ── */
+  #hub-root .text-4xl  { font-size: 2.25rem   !important; line-height: 2.5rem    !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem  !important; line-height: 2.25rem   !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem    !important; line-height: 2rem      !important; }
+  #hub-root .text-xl   { font-size: 1.25rem   !important; line-height: 1.75rem   !important; }
+  #hub-root .text-lg   { font-size: 1.125rem  !important; line-height: 1.75rem   !important; }
+  #hub-root .text-base { font-size: 1rem      !important; line-height: 1.5rem    !important; }
+  #hub-root .text-sm   { font-size: 0.875rem  !important; line-height: 1.25rem   !important; }
+  #hub-root .text-xs   { font-size: 0.75rem   !important; line-height: 1rem      !important; }
+
+  /* ── Layout utilities ── */
+  #hub-root .flex             { display: flex !important; }
+  #hub-root .inline-flex      { display: inline-flex !important; }
+  #hub-root .items-center     { align-items: center !important; }
+  #hub-root .items-start      { align-items: flex-start !important; }
+  #hub-root .justify-center   { justify-content: center !important; }
+  #hub-root .justify-between  { justify-content: space-between !important; }
+  #hub-root .shrink-0         { flex-shrink: 0 !important; }
+  #hub-root .min-w-0          { min-width: 0 !important; }
+  #hub-root .gap-1            { gap: 0.25rem !important; }
+  #hub-root .gap-2            { gap: 0.5rem !important; }
+  #hub-root .gap-3            { gap: 0.75rem !important; }
+  #hub-root .gap-4            { gap: 1rem !important; }
+  #hub-root .gap-6            { gap: 1.5rem !important; }
+  #hub-root .gap-8            { gap: 2rem !important; }
+  #hub-root .ml-auto          { margin-left: auto !important; }
+
+  /* ── Headings ── */
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+  }
+  #hub-root h1 { font-size: 1.75rem  !important; font-weight: 700 !important; }
+  #hub-root h2 { font-size: 1.25rem  !important; font-weight: 700 !important; }
+  #hub-root h3 { font-size: 1rem     !important; font-weight: 600 !important; }
+  #hub-root h4 { font-size: 0.875rem !important; font-weight: 600 !important; }
+
+  /* ── Links ── */
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  /* ── Iconify alignment ── */
+  #hub-root .iconify {
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+  #hub-root :not(.block) > .iconify:not(.block) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ==========================================================================
+     3. MODULE HERO
+     ========================================================================== */
+
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #CB187D 0%, #7F004C 100%);
+  }
+
+  .hero-content {
+    padding: 2.75rem;
+    text-align: left;
+  }
+
+  .badge-hero        { background: #fff;    color: #1f2937; }
+  .badge-hero-yellow { background: #fbbf24; color: #1f2937; }
+  .badge-hero-blue   { background: #bfdbfe; color: #1e3a8a; }
+
+  #hub-root .hero-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .hero-meta-wrapper { padding-top: 0rem; margin-bottom: 1.25rem; }
+  .hero-meta-text    { color: rgba(255, 255, 255, 0.82); }
+  .hero-sep          { color: rgba(255, 255, 255, 0.700); margin: 0 5px; }
+  .hero-desc         { color: white; margin-bottom: 1.5rem; }
+
+  .module-number-accent {
+    position: absolute;
+    right: 2.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.08);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  @media (max-width: 767px) {
+    .module-number-accent { display: none; }
+  }
+
+  /* ==========================================================================
+     4. BRAND DESIGN TOKENS
+     ========================================================================== */
+
+  .text-brand      { color: #CB187D; }
+  .text-brand-dark { color: #7F004C; }
+  .bg-brand        { background: #CB187D; }
+  .bg-brand-dark   { background: #7F004C; }
+  .bg-brand-soft   { background: #fdf0f7; }
+  .bg-amber-tip    { background: #fff7ed; border-color: #fed7aa !important; }
+
+  /* ==========================================================================
+     5. STATS BAR
+     ========================================================================== */
+
+  .stats-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    background: #fff;
+    border: 1px solid #f3f4f6;
+  }
+  .stats-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  /* ==========================================================================
+     6. LESSON ACCORDION
+     ========================================================================== */
+
+  .lesson-accordion {
+    border: 1px solid #f3f4f6;
+    border-radius: 1rem;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .lesson-accordion.active {
+    border-color: #CB187D;
+    box-shadow: 0 4px 20px -4px rgba(203, 24, 125, 0.12);
+  }
+  .lesson-accordion:hover:not(.active) {
+    border-color: #e5e7eb;
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease;
+  }
+  .accordion-header:hover {
+    background: #fafafa;
+  }
+
+  .lesson-num {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: #CB187D;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .lesson-info { flex: 1; min-width: 0; }
+  .lesson-category {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .lesson-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.3;
+  }
+
+  .lesson-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #fdf0f7;
+    color: #CB187D;
+    white-space: nowrap;
+  }
+
+  .lesson-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #f9fafb;
+    color: #6b7280;
+    border: 1px solid #f3f4f6;
+    white-space: nowrap;
+  }
+
+  .accordion-chevron {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background: #f9fafb;
+    color: #9ca3af;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .lesson-accordion.active .accordion-chevron {
+    transform: rotate(180deg);
+    background: #fdf0f7;
+    color: #CB187D;
+  }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .lesson-accordion.active .accordion-body {
+    max-height: 500px;
+  }
+  .accordion-body-inner {
+    padding: 0 1.5rem 1.5rem 5rem;
+  }
+
+  .lesson-goal {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .lesson-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+  }
+  .lesson-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #4b5563;
+    padding: 0.3rem 0;
+  }
+  .lesson-checklist li .iconify {
+    color: #CB187D;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .start-lesson-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    background: #1f2937;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .start-lesson-btn:hover {
+    background: #CB187D;
+    transform: translateY(-1px);
+  }
+
+  /* ==========================================================================
+     7. OBJECTIVES GRID
+     ========================================================================== */
+
+  .obj-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .obj-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.15), 0 4px 8px -2px rgba(203, 24, 125, 0.06);
+    border-color: #CB187D;
+  }
+
+  /* ==========================================================================
+     8. RESPONSIVE
+     ========================================================================== */
+
+  @media (max-width: 640px) {
+    .hero-content { padding: 1.75rem; }
+    #hub-root .hero-title { font-size: 1.75rem !important; }
+    .stats-grid { grid-template-columns: 1fr !important; }
+    .accordion-header { flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .accordion-body-inner { padding: 0 1rem 1rem 1rem; }
+    .lesson-badge, .lesson-time { font-size: 0.7rem; }
+  }
+
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ROOT WRAPPER
+     ═══════════════════════════════════════════════════════════ -->
+<div id="hub-root" class="bg-gray-50 font-sans text-gray-800 leading-relaxed">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO BANNER
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-8 pb-0">
+    <section class="rounded-2xl bg-hero-gradient mb-0 relative overflow-hidden">
+      <div class="hero-content relative z-10">
+
+        <div class="flex flex-wrap items-center gap-3 mb-5">
+          <span class="badge-hero inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold">
+            <span class="iconify" data-icon="fa6-solid:cubes"></span> Module 11
+          </span>
+          <span class="badge-hero-blue inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold">
+            <span class="iconify" data-icon="fa6-solid:layer-group"></span> Advanced
+          </span>
+          <span class="badge-hero-yellow inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold">
+            <span class="iconify" data-icon="fa6-solid:book-open"></span> 7 Lessons
+          </span>
+        </div>
+
+        <h1 class="hero-title font-bold text-white">
+          Python Engineering Handbook
+        </h1>
+
+        <div class="hero-meta-wrapper">
+          <div class="hero-meta-text flex flex-wrap items-center gap-2 text-sm">
+            <span class="iconify" data-icon="mdi:user-circle" style="height: 15px; width: auto;"></span> Python Learning Hub
+            <span class="hero-sep">&bull;</span>
+            <span class="iconify" data-icon="boxicons:calendar-filled" style="height: 15px; width: auto;"></span> Updated Mar 20, 2026
+          </div>
+        </div>
+
+        <p class="hero-desc max-w-[70%]">
+          Your go-to reference for engineering best practices. From project templates and code style
+          standards to logging conventions, branch naming, security patterns, performance checklists,
+          and SQL-to-Python translation — bookmark this module and come back often.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="lesson_1_python_project_template.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-gray-800 hover:bg-gray-100 transition-colors" style="text-decoration:none;">
+            <span class="iconify" data-icon="fa6-solid:play"></span> Start Module
+          </a>
+          <a href="#" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
+            <span class="iconify" data-icon="fa6-solid:house"></span> Back to Hub
+          </a>
+        </div>
+
+      </div>
+      <span class="module-number-accent">11</span>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       STATS BAR
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-6 pb-0">
+    <div class="stats-grid grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+      <div class="stats-card">
+        <div class="stats-icon bg-brand-soft">
+          <span class="iconify text-xl text-brand" data-icon="fa6-solid:signal"></span>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-gray-800">Module Level</p>
+          <p class="text-xs text-gray-400">Advanced</p>
+        </div>
+      </div>
+
+      <div class="stats-card">
+        <div class="stats-icon bg-brand-soft">
+          <span class="iconify text-xl text-brand" data-icon="fa6-solid:clock"></span>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-gray-800">Estimated Time</p>
+          <p class="text-xs text-gray-400">~3 hours</p>
+        </div>
+      </div>
+
+      <div class="stats-card">
+        <div class="stats-icon bg-brand-soft">
+          <span class="iconify text-xl text-brand" data-icon="fa6-solid:trophy"></span>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-gray-800">Outcome</p>
+          <p class="text-xs text-gray-400">Apply team-grade engineering standards across every Python project</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="max-w-[1250px] mx-auto px-4 pt-8 pb-10 space-y-8">
+
+    <!-- ── WHAT YOU'LL LEARN ─────────────────────────────────── -->
+    <section id="objectives">
+      <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+        <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+          </span>
+          <div class="min-w-0">
+            <h2 class="text-xl font-bold text-gray-900 leading-tight">What You'll Learn</h2>
+            <p class="text-sm text-gray-400 leading-snug mt-0.5">Key outcomes for this module.</p>
+          </div>
+        </div>
+
+        <div class="bg-white px-8 py-7">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:folder-tree"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Project Templates</p>
+                <p class="text-xs text-gray-400">Standardize project structure so every codebase is organized from day one</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:pen-ruler"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Code Style Standards</p>
+                <p class="text-xs text-gray-400">Apply PEP 8 and automated formatters for consistent, readable Python</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:list"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Logging &amp; Branch Standards</p>
+                <p class="text-xs text-gray-400">Design structured logs and enforce branch naming conventions for teamwork</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:shield-halved"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Secure Credential Handling</p>
+                <p class="text-xs text-gray-400">Protect API keys and database credentials using environment variables and vault tools</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:gauge"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">Performance Checklist</p>
+                <p class="text-xs text-gray-400">Identify and fix bottlenecks before deploying data applications to production</p>
+              </div>
+            </div>
+
+            <div class="obj-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+                <span class="iconify text-brand text-lg" data-icon="fa6-solid:table-columns"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-800">SQL-to-Python Cheat Sheet</p>
+                <p class="text-xs text-gray-400">Translate common SQL patterns directly into pandas DataFrame operations</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PREREQUISITES ─────────────────────────────────────── -->
+    <section id="prerequisites">
+      <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+        <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+          </span>
+          <div class="min-w-0">
+            <h2 class="text-xl font-bold text-gray-900 leading-tight">Prerequisites</h2>
+            <p class="text-sm text-gray-400 leading-snug mt-0.5">What you should have before starting this module.</p>
+          </div>
+        </div>
+
+        <div class="bg-white px-8 py-7">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">Completed Module 10 — Automation &amp; CI/CD</p>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">Comfortable writing multi-file Python projects with modules</p>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">Familiar with Git, environment variables, and virtual environments</p>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 shrink-0">
+                <span class="iconify text-green-600 text-sm" data-icon="fa6-solid:circle-check"></span>
+              </span>
+              <p class="text-sm text-gray-700">Some experience with Pandas DataFrames and SQL queries</p>
+            </div>
+
+          </div>
+
+          <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-sm text-gray-600">
+              This module is a reference handbook — lessons can be read in any order and revisited as needed.
+              Treat it as a living guide to apply across all your Python projects.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── LEARNING PATH ─────────────────────────────────────── -->
+    <section id="lessons">
+      <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+        <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+          <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
+          </span>
+          <div class="min-w-0">
+            <h2 class="text-xl font-bold text-gray-900 leading-tight">Learning Path</h2>
+            <p class="text-sm text-gray-400 leading-snug mt-0.5">Work through each lesson in order, or jump to any reference topic you need. Click a lesson to see its details.</p>
+          </div>
+        </div>
+
+        <div class="bg-white px-6 py-6">
+          <div class="space-y-3">
+
+            <!-- Lesson 1 (expanded by default) -->
+            <div class="lesson-accordion active">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">1</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Architecture</p>
+                  <p class="lesson-name">Python Project Template</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Use standardized project structures so every Python project stays organized, maintainable, and scalable from the very first commit.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand what a Python project template is</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn how professional Python projects are structured</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover how project templates improve maintainability</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> See how teams standardize project organization across codebases</li>
+                  </ul>
+                  <a href="lesson_1_python_project_template.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 2 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">2</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Code Quality</p>
+                  <p class="lesson-name">Python Code Style Guide</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Apply consistent code style standards so Python programs remain readable and maintainable when multiple developers work on the same project.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand why code style standards matter in professional Python projects</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn what PEP 8 is and how it guides Python formatting</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover how teams enforce consistent code style</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Explore tools used to automatically format Python code</li>
+                  </ul>
+                  <a href="lesson_2_python_code_style_guide.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 3 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">3</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Observability</p>
+                  <p class="lesson-name">Logging Standards</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Design logging systems that produce consistent, useful, and searchable logs — making it easy to monitor systems and diagnose issues in production.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand why organizations define logging standards</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn how logs should be structured in professional applications</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover how logging improves monitoring and debugging</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Apply best practices for designing effective logging systems</li>
+                  </ul>
+                  <a href="lesson_3_logging_standards.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 4 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">4</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Version Control</p>
+                  <p class="lesson-name">Branch Naming Standards</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Keep repositories organized and understandable by enforcing branch naming conventions that support team collaboration and CI/CD workflows.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand why teams define branch naming standards</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn how Git branches support collaborative development</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover how branch naming improves CI/CD workflows</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Apply common branch naming conventions used in professional environments</li>
+                  </ul>
+                  <a href="lesson_4_branch_naming_standards.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 5 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">5</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Security</p>
+                  <p class="lesson-name">Secure Credential Handling</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Protect API keys and database credentials using environment variables and secrets management tools to prevent security breaches in production systems.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand why credentials must be protected in software systems</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn how developers store secrets securely</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover how environment variables are used for credentials</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Explore how secret management tools are used in production environments</li>
+                  </ul>
+                  <a href="lesson_5_secure_credential_handling.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 6 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">6</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Optimization</p>
+                  <p class="lesson-name">Performance Checklist</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Use a practical performance checklist to identify and fix bottlenecks before deploying Python applications and data pipelines to production.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn how to identify performance bottlenecks in Python programs</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand common causes of slow Python code</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover techniques for optimizing data processing</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Apply a practical performance checklist before deploying applications</li>
+                  </ul>
+                  <a href="lesson_6_performance_checklist.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lesson 7 -->
+            <div class="lesson-accordion">
+              <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="lesson-num">7</div>
+                <div class="lesson-info">
+                  <p class="lesson-category">Reference</p>
+                  <p class="lesson-name">SQL-to-Python Cheat Sheet</p>
+                </div>
+                <span class="lesson-badge">Advanced</span>
+                <span class="lesson-time">
+                  <span class="iconify" data-icon="fa6-solid:clock" style="font-size: 11px;"></span> 25 min
+                </span>
+                <div class="accordion-chevron">
+                  <span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size: 12px;"></span>
+                </div>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  <p class="lesson-goal"><strong>Goal:</strong> Translate common SQL operations directly into pandas Python code — making it easy for SQL-familiar analysts to work confidently with DataFrames.</p>
+                  <ul class="lesson-checklist">
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Understand how common SQL operations translate into Python</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Learn how pandas DataFrame operations replicate SQL queries</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Discover how analysts familiar with SQL can transition into Python data workflows</li>
+                    <li><span class="iconify" data-icon="fa6-solid:check"></span> Apply common patterns used when manipulating datasets in Python</li>
+                  </ul>
+                  <a href="lesson_7_sql_to_python_cheat_sheet.html" class="start-lesson-btn" style="text-decoration:none;">
+                    Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size: 11px;"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /space-y-3 -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MODULE NAVIGATION ─────────────────────────────────── -->
+    <section id="module-nav">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- Previous module -->
+        <a href="../mod_10_automation_ci_cd/module_automation_ci_cd.html" class="module-nav-link group rounded-2xl border border-gray-100 bg-white shadow-sm p-5 flex items-center gap-4 hover:border-[#CB187D] transition-all" style="text-decoration:none;">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-brand-soft shrink-0 transition-colors">
+            <span class="iconify text-gray-400 group-hover:text-brand text-base transition-colors" data-icon="fa6-solid:arrow-left"></span>
+          </span>
+          <div class="min-w-0">
+            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-brand transition-colors">Previous Module</p>
+            <p class="text-sm font-bold text-gray-800 group-hover:text-[#CB187D] transition-colors truncate">Module 10 — Automation &amp; CI/CD</p>
+          </div>
+        </a>
+
+        <!-- Next module -->
+        <a href="../mod_12_sql_foundations/module_sql_foundations.html" class="module-nav-link group rounded-2xl border border-gray-100 bg-white shadow-sm p-5 flex items-center gap-4 hover:border-[#CB187D] transition-all text-right" style="text-decoration:none;">
+          <div class="min-w-0 flex-1">
+            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-brand transition-colors">Next Module</p>
+            <p class="text-sm font-bold text-gray-800 group-hover:text-[#CB187D] transition-colors truncate">Module 12 — SQL Foundations</p>
+          </div>
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-brand-soft shrink-0 transition-colors">
+            <span class="iconify text-gray-400 group-hover:text-brand text-base transition-colors" data-icon="fa6-solid:arrow-right"></span>
+          </span>
+        </a>
+
+      </div>
+    </section>
+
+  </div><!-- /max-w container -->
+
+</div><!-- /#hub-root -->
+
+<!-- Accordion toggle script -->
+<script>
+function toggleAccordion(header) {
+  var item = header.closest('.lesson-accordion');
+  item.classList.toggle('active');
+}
+</script>
