@@ -1233,15 +1233,17 @@ West</pre></div>
 <section id="comparison">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="grid grid-cols-3 gap-3 mb-4">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">If you already know that saving a SQL table to CSV loses type information and produces large plain-text files, Parquet solves both problems — it preserves column types and compresses the data, so files are smaller and load faster.</p>
+      <div class="grid grid-cols-3 gap-3">
   <div class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-indigo-600 text-white">
     <span class="iconify text-lg" data-icon="fa6-brands:python"></span> Python
   </div>
@@ -1252,64 +1254,168 @@ West</pre></div>
     <span class="iconify text-lg" data-icon="fa6-solid:table"></span> Excel
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Understanding Parquet becomes clearer when compared to familiar tools.</p>
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:download"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">write to parquet</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">to_parquet()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Saves a DataFrame to a compressed binary Parquet file that preserves all column types.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">n/a — needs Python/Spark</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Most databases don't write Parquet directly — you need a Python or Spark export step.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">n/a</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel cannot save a file as Parquet format.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Excel files store data row by row.</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:file-lines"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">read parquet</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">pd.read_parquet()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Loads a Parquet file into a DataFrame, restoring all column types from its metadata.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">n/a</code>
+      <p class="text-xs text-gray-500 leading-relaxed">SQL databases don't read Parquet natively — you query the database table instead.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">n/a</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel cannot open Parquet files — they require Python, Power BI, or a BI tool.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Large Excel files become slow and difficult to open.</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:filter"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">column selection</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">columns=</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Loads only the columns you name, physically skipping all others in the file.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">SELECT col1, col2</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Returns only the named columns, but still scans the full row on disk.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">hide / select columns</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Selecting specific columns in Excel still loads the entire file into memory first.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Many modern cloud data warehouses use columnar storage internally.</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:scale-balanced"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">parquet vs csv</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">smaller and typed</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Parquet files are typically 50–80% smaller than CSV and restore types without re-parsing.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">database table</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A database table already stores typed data efficiently — Parquet is its file-level equivalent.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">xlsx format</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel's xlsx format is smaller than CSV but not as optimised for analytics as Parquet.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Examples include:</p>
+      <div>
+  <div class="flex items-center gap-3 mb-4">
+    <span class="flex-1 h-px bg-gray-100"></span>
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-sm" data-icon="fa6-solid:code-compare"></span>
+      </span>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same sales data — CSV vs Parquet</p>
+    </div>
+    <span class="flex-1 h-px bg-gray-100"></span>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Python code</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+            <span class="text-xs font-semibold text-gray-400">Python</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">df.to_parquet(&#39;sales.parquet&#39;)
+df2 = pd.read_parquet(&#39;sales.parquet&#39;)</code></pre>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">SQL query</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-orange-400" data-icon="fa6-solid:database"></span>
+            <span class="text-xs font-semibold text-gray-400">SQL</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">SELECT *
+FROM sales; -- data typed in DB</code></pre>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Excel formula</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-green-400" data-icon="fa6-solid:table"></span>
+            <span class="text-xs font-semibold text-gray-400">Excel</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">File -&gt; Save As -&gt; .xlsx
+(no Parquet option available)</code></pre>
+      </div>
+    </div>
+  </div>
+  <p class="text-xs text-gray-400 mt-2">All three persist and reload the same sales data — Parquet preserves types and is far smaller than the CSV equivalent.</p>
 </div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Snowflake
-BigQuery
-Redshift</pre></div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">These systems use columnar storage to accelerate analytical queries.</p>
+  <p class="text-sm text-gray-600">Parquet is the file version of a typed database table. If you already store data in a database to preserve types and save space, Parquet gives you the same benefits when you work with files.</p>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Pandas works well with CSV files.</p>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">However, Parquet allows Pandas to handle larger datasets more efficiently.</p>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Typical workflow:</p>
-</div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">CSV → Parquet → Analytics</pre></div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This improves both performance and storage efficiency.</p>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Tags: Performance, Parquet</p>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Time how long it takes to read:</p>
-</div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">CSV file
-Parquet file</pre></div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">You will often see faster load times with Parquet.</p>
-</div></div>
+    </div>
   </div>
 </section>
 
@@ -1512,49 +1618,102 @@ Fastparquet</pre></div></div>
 <section id="real-world">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How Parquet files is used across real-world workflows</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work as a data platform engineer. Your ETL writes 2 million transaction rows every night, your BI dashboard reads only 2 columns of a 50-column fact table, and different consumers need different file formats. Parquet handles the internal pipeline efficiently — CSV handles external sharing where anyone needs to open the file.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:file-lines"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Nightly 2-million-row<br>transaction export</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Every night your ETL writes 2 million transactions. <code class="font-mono text-violet-700">to_parquet()</code> writes a compressed, typed binary file in under 30 seconds — half the time of an equivalent CSV write.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
+      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">transactions.parquet</code></span>
+    </div>
   </div>
 </div>
-    <div class="bg-white px-8 py-7 space-y-6"><div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
-  <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
-  <p class="text-sm text-gray-700 leading-relaxed">Parquet is used extensively in modern data systems.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"><div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:building"></span>
+<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:filter"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Dashboard reads 2 of<br>50 fact table columns</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your BI dashboard queries only region and revenue from a 50-column fact table. <code class="font-mono text-[#CB187D]">pd.read_parquet(columns=["region","revenue"])</code> skips the other 48 at the file level — the read is vastly faster than CSV.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
+      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">2-column df</code></span>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Examples include:</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:briefcase"></span>
+<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:scale-balanced"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Right format for<br>each audience</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Internal analytics pipelines use Parquet for speed and size. External partner shares use CSV because anyone can open it. You pick the right tool for each audience — <code class="font-mono text-emerald-700">to_parquet()</code> or <code class="font-mono text-emerald-700">to_csv()</code> — with one line.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
+      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">format decision</code></span>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Cloud data warehouses commonly store data in Parquet format.</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-bar"></span>
+</div>
+      <div class="rounded-xl border border-gray-100 overflow-hidden">
+  <div class="grid grid-cols-2">
+    <div class="border-r border-gray-100">
+      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without Parquet</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Writing 2 million rows to CSV every night produces a large plain-text file — slow to write, slow to read, and it loses all column type information that the next step must re-infer.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Reading all 50 columns of a fact table when only 2 are needed wastes IO bandwidth, increases load time, and uses far more memory than the query actually requires.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Using only one file format for every audience means internal pipelines pay the CSV performance penalty, or external partners receive a binary file they cannot open in Excel.</p>
+</div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
+        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With Parquet</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">to_parquet()</strong> writes compressed binary in under 30 seconds — types are preserved, size is halved, and every read is faster.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">pd.read_parquet(columns=)</strong> skips 48 columns at the file level — only the 2 you requested arrive in memory.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">to_parquet()</strong> for internal speed and <strong class="text-gray-700">to_csv()</strong> for external sharing — one line each, right format for each audience.</p>
+</div>
+      </div>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Large data lakes use Parquet because it scales well for big datasets.</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:stethoscope"></span>
-  </div>
-  <span class="text-sm text-gray-700">Training datasets are often stored in Parquet to enable efficient access.</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:landmark"></span>
-  </div>
-  <span class="text-sm text-gray-700">Many pipelines convert raw CSV data into Parquet before processing.</span>
-</div>
-</div></div>
+    </div>
   </div>
 </section>
 

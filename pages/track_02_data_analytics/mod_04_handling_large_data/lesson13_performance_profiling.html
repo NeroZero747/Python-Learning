@@ -1259,15 +1259,17 @@ How long they take</pre></div>
 <section id="comparison">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="grid grid-cols-3 gap-3 mb-4">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">If you already use SQL execution plans or Excel formula auditing to find what is slow, Python profiling tools do the same thing — they measure exactly where your script spends its time so you fix the right line.</p>
+      <div class="grid grid-cols-3 gap-3">
   <div class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-indigo-600 text-white">
     <span class="iconify text-lg" data-icon="fa6-brands:python"></span> Python
   </div>
@@ -1278,53 +1280,170 @@ How long they take</pre></div>
     <span class="iconify text-lg" data-icon="fa6-solid:table"></span> Excel
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Understanding performance profiling becomes easier when comparing tools.</p>
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:stopwatch"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">measure elapsed time</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">time.time()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Records wall-clock seconds before and after a block to measure its elapsed duration.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">SET STATISTICS TIME ON</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A SQL Server setting that reports elapsed and CPU time for each statement.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">manual timer</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Starting a stopwatch manually before a calculation in Excel is not practical at scale.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Excel provides limited performance insight.</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:magnifying-glass"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">profile all functions</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">cProfile</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Runs the entire script and ranks every function call by total execution time.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">execution plan</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A SQL execution plan that ranks each operation by its share of total query cost.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Evaluate Formula</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The Excel tool that steps through a formula but cannot measure actual run time.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Users often detect slow performance through:</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:list-check"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">line-level timing</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">line_profiler</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Times each individual line inside a chosen function to find the exact slow statement.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">query hints / trace</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A SQL Server trace that exposes per-operation timing deep inside a query.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">n/a</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel has no line-level timing tool for formula evaluation.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Slow recalculation
-Unresponsive spreadsheets</pre></div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">However, Excel provides limited profiling capabilities.</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:bolt"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">fix and verify</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">benchmark before/after</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Run the same timing measurement after each fix to confirm the performance improved.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">before/after plan compare</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Comparing execution plans before and after adding an index or rewriting a query.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">before/after calc time</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Measuring workbook calculation time before and after simplifying a formula.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">SQL engines often provide execution plans.</p>
+      <div>
+  <div class="flex items-center gap-3 mb-4">
+    <span class="flex-1 h-px bg-gray-100"></span>
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-sm" data-icon="fa6-solid:code-compare"></span>
+      </span>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same slow script, three profiling approaches</p>
+    </div>
+    <span class="flex-1 h-px bg-gray-100"></span>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Python code</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+            <span class="text-xs font-semibold text-gray-400">Python</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">import cProfile
+cProfile.run(&#39;process_data(df)&#39;)
+# shows per-function time ranking</code></pre>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">SQL query</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-orange-400" data-icon="fa6-solid:database"></span>
+            <span class="text-xs font-semibold text-gray-400">SQL</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">SET STATISTICS TIME ON;
+SELECT * FROM sales
+WHERE year = 2024;</code></pre>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Excel formula</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-green-400" data-icon="fa6-solid:table"></span>
+            <span class="text-xs font-semibold text-gray-400">Excel</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">Formulas -&gt; Evaluate Formula
+(steps through logic but not timed)</code></pre>
+      </div>
+    </div>
+  </div>
+  <p class="text-xs text-gray-400 mt-2">All three help you understand where computation time is spent in the same data operation — the same goal, just measured in a different tool.</p>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Example:</p>
+  <p class="text-sm text-gray-600">Profiling in Python is the same discipline as reading a SQL execution plan — identify the expensive step, fix it, then measure again to confirm the gain. Always profile before you optimise.</p>
 </div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">EXPLAIN SELECT SUM(revenue)
-FROM sales;</pre></div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Execution plans show how queries are processed.</p>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Python profiling tools provide insights into code performance.</p>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Example workflow:</p>
-</div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Measure execution time
-Identify slow functions
-Optimize slow operations</pre></div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">This approach helps improve performance for large datasets.</p>
-</div></div>
+    </div>
   </div>
 </section>
 
@@ -1578,55 +1697,102 @@ DuckDB</pre></div>
 <section id="real-world">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How performance profiling is used across real-world workflows</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a data engineering team. Your daily pipeline runs for 45 minutes and the SLA is 5. Without profiling you're guessing which step to fix. With profiling tools you know exactly which function to look at, which line inside it to change, and whether the fix actually worked.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:stopwatch"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">45-minute pipeline<br>with a 5-minute SLA</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your pipeline misses its SLA by 40 minutes. <code class="font-mono text-violet-700">cProfile.run()</code> ranks every function by total time — it shows 38 minutes is in one function processing a lookup join. You fix that function and the pipeline drops to 4 minutes.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
+      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">per-function times</code></span>
+    </div>
   </div>
 </div>
-    <div class="bg-white px-8 py-7 space-y-6"><div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
-  <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
-  <p class="text-sm text-gray-700 leading-relaxed">Performance profiling is widely used in analytics and data engineering.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"><div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:building"></span>
+<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:magnifying-glass"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Which line inside<br>the slow function?</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">cProfile shows total function time but not which line. <code class="font-mono text-[#CB187D]">line_profiler</code> with the <code class="font-mono text-[#CB187D]">@profile</code> decorator times every line individually — you see that a Python for loop on line 47 takes 11 of the 14 minutes.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
+      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">per-line times</code></span>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Examples include:</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:briefcase"></span>
+<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:list-check"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Prove the gain<br>before closing the ticket</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your team requires before-and-after evidence in every optimisation ticket. <code class="font-mono text-emerald-700">time.time()</code> measurements taken before and after the fix give you the seconds elapsed — attached as proof the change is safe to deploy.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
+      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">before / after seconds</code></span>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Engineers measure pipeline stages to identify slow tasks.</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-bar"></span>
+</div>
+      <div class="rounded-xl border border-gray-100 overflow-hidden">
+  <div class="grid grid-cols-2">
+    <div class="border-r border-gray-100">
+      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without profiling</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Optimising a 45-minute pipeline without profiling means guessing which step is slow — you might spend a day speeding up a step that took 30 seconds while the real bottleneck remains untouched.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Knowing a function takes 14 minutes but not which line means reading through hundreds of lines of logic to find the slow part — profiling that takes minutes, not days.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Fixing a bottleneck and deploying without measuring means you don't know whether the fix helped until the next production run — and you have no evidence to share with the team.</p>
+</div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
+        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With profiling</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">cProfile.run()</strong> ranks every function by total elapsed time — the bottleneck is visible in seconds, not after days of guesswork.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">line_profiler</strong> with <strong class="text-gray-700">@profile</strong> times every line inside a function — the exact slow statement is visible without reading all the code.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">time.time()</strong> before and after the fix measures the real improvement — you have the numbers to prove the optimisation worked.</p>
+</div>
+      </div>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Profiling helps optimize training pipelines.</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:stethoscope"></span>
-  </div>
-  <span class="text-sm text-gray-700">Performance analysis ensures large transaction datasets process quickly.</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:landmark"></span>
-  </div>
-  <span class="text-sm text-gray-700">Profiling improves the performance of large-scale event processing systems.</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:users"></span>
-  </div>
-  <span class="text-sm text-gray-700">Performance profiling ensures data workflows remain efficient as datasets grow.</span>
-</div>
-</div></div>
+    </div>
   </div>
 </section>
 

@@ -1386,15 +1386,17 @@ Tablet   2400         True</div>
 <section id="comparison">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="grid grid-cols-3 gap-3 mb-4">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">If you already write calculated columns in SQL SELECT expressions or add formula columns in Excel, pandas lets you do the same — you assign a calculation to a new column name and it applies to every row at once.</p>
+      <div class="grid grid-cols-3 gap-3">
   <div class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-indigo-600 text-white">
     <span class="iconify text-lg" data-icon="fa6-brands:python"></span> Python
   </div>
@@ -1405,110 +1407,170 @@ Tablet   2400         True</div>
     <span class="iconify text-lg" data-icon="fa6-solid:table"></span> Excel
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Calculated columns exist in SQL and Excel as well.</p>
-</div>
-<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-  <div class="grid grid-cols-3 divide-x divide-gray-100">
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Python</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">df[&quot;C&quot;] = A * B</code>
-    </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">SQL</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">SELECT A*B</code>
-    </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Excel</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">=A1*B1</code>
-    </div>
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:plus"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">add a column</span>
   </div>
-</div>
-<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
   <div class="grid grid-cols-3 divide-x divide-gray-100">
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Python</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">vectorized</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">df["new"] = expr</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Assigns any expression to a new column name, adding it to every row in the DataFrame.</p>
     </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">SQL</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">computed column</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">AS alias</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A SELECT expression with an alias that creates a derived field in the result set.</p>
     </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Excel</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">drag formula</code>
-    </div>
-  </div>
-</div>
-<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-  <div class="grid grid-cols-3 divide-x divide-gray-100">
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Python</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">new column</code>
-    </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">SQL</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">alias</code>
-    </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Excel</span>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
       <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">formula column</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A new column in Excel whose cells each contain the same formula.</p>
     </div>
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Example SQL query:</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:calculator"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">arithmetic</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">+  -  *  /</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Standard operators applied to an entire column at once without writing a loop.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">arithmetic operators</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The +, -, *, / symbols used inside SQL column expressions.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">arithmetic operators</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The same +, -, *, / symbols written inside an Excel cell formula.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:database" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">query.sql</span>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:toggle-on"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">conditional value</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">np.where()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Assigns a different value to each row depending on whether a condition is true or false.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">CASE WHEN</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Returns different values for different conditions, row by row.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">=IF()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The Excel function that returns one value when true and another when false.</p>
+    </div>
+  </div>
+</div>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:trash"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">remove a column</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">drop()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Deletes one or more columns from the DataFrame.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">omit from SELECT</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Leaving a column out of the SELECT list excludes it from the result set.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">hide / delete column</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Hiding or right-click deleting a column removes it from the Excel sheet.</p>
+    </div>
+  </div>
+</div>
+      <div>
+  <div class="flex items-center gap-3 mb-4">
+    <span class="flex-1 h-px bg-gray-100"></span>
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-sm" data-icon="fa6-solid:code-compare"></span>
+      </span>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same discount calculation, three tools</p>
+    </div>
+    <span class="flex-1 h-px bg-gray-100"></span>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Python code</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+            <span class="text-xs font-semibold text-gray-400">Python</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">df["discount"] = df["price"] * 0.10
+df["final_price"] = df["price"] - df["discount"]</code></pre>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-sql">SELECT Price * Quantity AS Total_Sales
-FROM orders</code></pre>
-  </div>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Equivalent Pandas:</p>
-</div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">SQL query</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-orange-400" data-icon="fa6-solid:database"></span>
+            <span class="text-xs font-semibold text-gray-400">SQL</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">SELECT price,
+  price * 0.10 AS discount,
+  price * 0.90 AS final_price
+FROM products;</code></pre>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Excel formula</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-green-400" data-icon="fa6-solid:table"></span>
+            <span class="text-xs font-semibold text-gray-400">Excel</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">=B2*0.10         (discount in C2)
+=B2-C2           (final price in D2)</code></pre>
+      </div>
+    </div>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df[&quot;Total_Sales&quot;] = df[&quot;Price&quot;] * df[&quot;Quantity&quot;]</code></pre>
-  </div>
+  <p class="text-xs text-gray-400 mt-2">All three calculate a 10% discount and the resulting final price from the same product data — the same result, just written in a different tool.</p>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Excel equivalent:</p>
+  <p class="text-sm text-gray-600">Adding a calculated column in pandas uses the same arithmetic you already write in SQL SELECT expressions or Excel formula columns — just assign the result to a new column name.</p>
 </div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">=A2 * B2</pre></div></div>
+    </div>
   </div>
 </section>
 
@@ -1851,84 +1913,102 @@ FROM orders</code></pre>
 <section id="real-world">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-6"><div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
-  <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
-  <p class="text-sm text-gray-700 leading-relaxed">Calculated columns are widely used in analytics.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"><div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:building"></span>
-  </div>
-  <span class="text-sm text-gray-700">Examples include:</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:briefcase"></span>
-  </div>
-  <span class="text-sm text-gray-700">calculating revenue</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-bar"></span>
-  </div>
-  <span class="text-sm text-gray-700">calculating profit margins</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:stethoscope"></span>
-  </div>
-  <span class="text-sm text-gray-700">generating performance metrics</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:landmark"></span>
-  </div>
-  <span class="text-sm text-gray-700">creating derived features</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:users"></span>
-  </div>
-  <span class="text-sm text-gray-700">Example workflow:</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:server"></span>
-  </div>
-  <span class="text-sm text-gray-700">These metrics can then be used in dashboards or reports.</span>
-</div>
-</div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How calculated columns is used across real-world workflows</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a retail pricing team. Your product catalogue has 8,000 rows and you regularly need to add tax amounts, apply sale labels, and strip internal cost data before sharing prices externally. Calculated columns in pandas let you do all three in seconds — not hours.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:calculator"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Apply 15% VAT to<br>8,000 product prices</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your catalogue has 8,000 products. You add a vat_amount column by writing <code class="font-mono text-violet-700">df["vat_amount"] = df["price"] * 0.15</code> — every row is calculated at once, with no formula dragging.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
+      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">vat_amount</code></span>
+    </div>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_csv(&quot;orders.csv&quot;)
-
-df[&quot;Total&quot;] = df[&quot;Price&quot;] * df[&quot;Quantity&quot;]
-
-df[&quot;Profit&quot;] = df[&quot;Total&quot;] - df[&quot;Cost&quot;]</code></pre>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:toggle-on"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Label products as<br>sale or full price</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Each product is either on sale or full price. <code class="font-mono text-[#CB187D]">np.where()</code> writes the correct label into a new column for all 8,000 rows based on the discount flag — one line of code.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
+      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">price_label</code></span>
+    </div>
   </div>
-</div></div>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:trash"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Remove cost data<br>before sharing externally</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Before sending the price list to external partners you remove cost_price and margin. <code class="font-mono text-emerald-700">drop()</code> deletes both columns instantly — no risk of accidentally sharing sensitive data.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
+      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">partner_df</code></span>
+    </div>
+  </div>
+</div>
+</div>
+      <div class="rounded-xl border border-gray-100 overflow-hidden">
+  <div class="grid grid-cols-2">
+    <div class="border-r border-gray-100">
+      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without calculated columns</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Dragging a formula down 8,000 rows in Excel works — until someone inserts a row, breaks the formula chain, and the VAT is wrong for every product below that point.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Writing an IF formula for 8,000 rows to set a sale label is slow to build, and if the sale condition changes you have to update the formula in every cell.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Hiding columns in Excel before sharing is fragile — a recipient can simply unhide them and see your cost data.</p>
+</div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
+        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With calculated columns</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">df["vat_amount"] = df["price"] * 0.15</strong> applies the calculation to all 8,000 rows at once — no dragging, no broken formula chains.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">np.where()</strong> labels all 8,000 rows in one call — change the condition once and it applies everywhere instantly.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">drop()</strong> permanently removes the cost columns from the DataFrame — they cannot be unhidden because they no longer exist.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
   </div>
 </section>
 

@@ -1315,15 +1315,17 @@ df = pd.read_sql(query, engine)</code></pre>
 <section id="comparison">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="grid grid-cols-3 gap-3 mb-4">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">If you already connect to a database using a SQL client or an Excel ODBC connector, SQLAlchemy and <code class="font-mono">pd.read_sql()</code> do the same thing in Python — they open a connection, run a query, and return the data as a table.</p>
+      <div class="grid grid-cols-3 gap-3">
   <div class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-indigo-600 text-white">
     <span class="iconify text-lg" data-icon="fa6-brands:python"></span> Python
   </div>
@@ -1334,113 +1336,168 @@ df = pd.read_sql(query, engine)</code></pre>
     <span class="iconify text-lg" data-icon="fa6-solid:table"></span> Excel
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Working with databases in Python resembles SQL workflows.</p>
-</div>
-<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-  <div class="grid grid-cols-3 divide-x divide-gray-100">
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Python</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">SQLAlchemy</code>
-    </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">SQL</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">DB connection</code>
-    </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Excel</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Power Query</code>
-    </div>
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:plug"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">connection string</span>
   </div>
-</div>
-<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
   <div class="grid grid-cols-3 divide-x divide-gray-100">
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Python</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">read_sql()</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">connection string</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A text string that encodes the database type, host, port, name, and credentials.</p>
     </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">SQL</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">run query</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">DSN / client string</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The connection string set in a SQL client like DBeaver to identify the database.</p>
     </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Excel</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">data import</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">ODBC connection</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The connection string entered in Excel Data → Get Data → From ODBC.</p>
     </div>
   </div>
 </div>
 <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:link"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">open connection</span>
+  </div>
   <div class="grid grid-cols-3 divide-x divide-gray-100">
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Python</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">DataFrame</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">create_engine()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Creates a SQLAlchemy engine object that manages the database connection pool.</p>
     </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">SQL</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">query result table</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">client connect</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The connect action in a SQL GUI client like SSMS or DBeaver.</p>
     </div>
-    <div class="px-4 py-4 flex flex-col gap-1">
-      <span class="text-xs text-gray-400 mb-1">Excel</span>
-      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">worksheet</code>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">From ODBC</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The Excel Data ribbon option that opens an ODBC connection to a database.</p>
     </div>
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Example SQL tool workflow:</p>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:table"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">read a table</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">read_sql_table()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Loads an entire database table into a DataFrame in one call.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">SELECT * FROM table</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The simplest query that returns every row and column from a database table.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Data → From Table</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Selecting a database table in the Excel data connection wizard.</p>
+    </div>
+  </div>
 </div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:power-off"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">close connection</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">with engine.connect()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A context manager that automatically closes the connection when the block ends.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">DISCONNECT</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The command that closes an open database session in a SQL client.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Close & Load</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The Excel button that closes Power Query and loads data into the worksheet.</p>
+    </div>
+  </div>
+</div>
+      <div>
+  <div class="flex items-center gap-3 mb-4">
+    <span class="flex-1 h-px bg-gray-100"></span>
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-sm" data-icon="fa6-solid:code-compare"></span>
+      </span>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same database table, three tools</p>
+    </div>
+    <span class="flex-1 h-px bg-gray-100"></span>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Python code</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+            <span class="text-xs font-semibold text-gray-400">Python</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">engine = create_engine(conn_str)
+df = pd.read_sql_table(&#39;sales&#39;, engine)</code></pre>
       </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:database" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">query.sql</span>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">SQL query</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-orange-400" data-icon="fa6-solid:database"></span>
+            <span class="text-xs font-semibold text-gray-400">SQL</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">SELECT *
+FROM sales;</code></pre>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-sql">SELECT *
-FROM sales_table</code></pre>
-  </div>
-</div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Equivalent Python workflow:</p>
-</div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Excel formula</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-green-400" data-icon="fa6-solid:table"></span>
+            <span class="text-xs font-semibold text-gray-400">Excel</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">Data -&gt; Get Data -&gt; From ODBC
+-&gt; select sales table -&gt; Load</code></pre>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_sql(&quot;SELECT * FROM sales_table&quot;, engine)</code></pre>
-  </div>
+  <p class="text-xs text-gray-400 mt-2">All three load the same database table into a row-and-column format ready for analysis — the same result, just written in a different tool.</p>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Excel equivalent:</p>
+  <p class="text-sm text-gray-600">SQLAlchemy is just a connection manager — it gives pandas the same access to a database that a SQL client or an Excel ODBC connector gives you.</p>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
-  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Import data from database using <strong>Power Query</strong>.</p>
-</div></div>
+    </div>
   </div>
 </section>
 
@@ -1774,85 +1831,102 @@ engine = sqlalchemy.create_engine(&quot;connection_string&quot;)</code></pre>
 <section id="real-world">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-6"><div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
-  <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
-  <p class="text-sm text-gray-700 leading-relaxed">Database connections are extremely common in analytics.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"><div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:building"></span>
-  </div>
-  <span class="text-sm text-gray-700">Examples include:</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:briefcase"></span>
-  </div>
-  <span class="text-sm text-gray-700">querying data warehouses</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-bar"></span>
-  </div>
-  <span class="text-sm text-gray-700">pulling healthcare claims data</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:stethoscope"></span>
-  </div>
-  <span class="text-sm text-gray-700">retrieving sales data for dashboards</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:landmark"></span>
-  </div>
-  <span class="text-sm text-gray-700">integrating operational databases</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:users"></span>
-  </div>
-  <span class="text-sm text-gray-700">Example workflow:</span>
-</div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:server"></span>
-  </div>
-  <span class="text-sm text-gray-700">This loads claims data into a DataFrame for analysis.</span>
-</div>
-</div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How database connections is used across real-world workflows</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a business intelligence team. You need fresh database data every morning, credentials must stay out of the script, and the connection must close cleanly even if the script crashes. SQLAlchemy and pandas handle all three patterns so your pipeline is reliable and secure.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:database"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Fresh sales data<br>every morning</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your pipeline needs today's sales every morning. <code class="font-mono text-violet-700">create_engine()</code> opens the connection and <code class="font-mono text-violet-700">pd.read_sql_table()</code> loads the sales table straight into a DataFrame.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
+      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">sales_df</code></span>
+    </div>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">query = &quot;&quot;&quot;
-SELECT provider_id, total_claims
-FROM claims_table
-&quot;&quot;&quot;
-
-df = pd.read_sql(query, engine)</code></pre>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:lock"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Credentials kept<br>outside the script</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Database passwords stored in a script appear in code reviews and Git history. You load them from environment variables with <code class="font-mono text-[#CB187D]">os.getenv()</code> — the script contains no sensitive data.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
+      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">secure engine</code></span>
+    </div>
   </div>
-</div></div>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:power-off"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Connection closes<br>on every script exit</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">A script that leaves connections open degrades performance for every other user of the database. A <code class="font-mono text-emerald-700">with engine.connect()</code> block closes the connection automatically — even if the script crashes.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
+      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">auto-closed</code></span>
+    </div>
+  </div>
+</div>
+</div>
+      <div class="rounded-xl border border-gray-100 overflow-hidden">
+  <div class="grid grid-cols-2">
+    <div class="border-r border-gray-100">
+      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without database connections</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">A script that hard-codes the connection string breaks the moment the database password rotates — someone has to find every script file and update the string manually.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">A password written in a Python file gets committed to Git, appears in pull request diffs, and may end up in a shared Slack message — even if you delete it later.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">A script that doesn't close its connection leaves idle sessions open on the database server — over time this exhausts the connection pool and blocks other users.</p>
+</div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
+        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With database connections</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">create_engine()</strong> and <strong class="text-gray-700">pd.read_sql_table()</strong> load fresh data every run — the connection string lives in one place, easy to update.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">os.getenv()</strong> reads credentials at runtime — no password ever appears in a file, a code review, or a Git commit.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">A <strong class="text-gray-700">with engine.connect()</strong> block closes the connection when the block ends — no idle sessions, no connection pool exhaustion.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
   </div>
 </section>
 

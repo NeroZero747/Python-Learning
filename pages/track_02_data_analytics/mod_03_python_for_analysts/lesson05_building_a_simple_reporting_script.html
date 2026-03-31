@@ -1384,15 +1384,17 @@ print(summary)</code></pre>
 <section id="comparison">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="grid grid-cols-3 gap-3 mb-4">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:table-columns"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">If you already build reports by running SQL queries and pasting results into Excel, a Python reporting script does the same thing — it queries data, calculates summaries, and writes a formatted xlsx file, automatically.</p>
+      <div class="grid grid-cols-3 gap-3">
   <div class="flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-indigo-600 text-white">
     <span class="iconify text-lg" data-icon="fa6-brands:python"></span> Python
   </div>
@@ -1403,54 +1405,171 @@ print(summary)</code></pre>
     <span class="iconify text-lg" data-icon="fa6-solid:table"></span> Excel
   </div>
 </div>
-<div class="rounded-xl px-5 py-3 bg-gray-50 border border-gray-100"><pre class="font-mono text-sm text-gray-600 whitespace-pre-wrap">Import data
-Create formulas
-Build pivot table
-Export report</pre></div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:database" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">query.sql</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:sitemap"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">structure the script</span>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-sql">SELECT region, SUM(sales)
-FROM transactions
-GROUP BY region;</code></pre>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">load → transform → export</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Splitting the script into labelled sections keeps each step visible and easy to maintain.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">proc with sections</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Breaking a stored procedure into named comment sections for readability.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">raw / calc / report sheets</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Using separate worksheet tabs in Excel to hold raw data, calculations, and the final report.</p>
+    </div>
   </div>
 </div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:pen"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">format numbers</span>
   </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">summary = df.groupby(&quot;region&quot;)[&quot;sales&quot;].sum()</code></pre>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">.round()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Rounds numeric columns to a set number of decimal places before exporting.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">ROUND()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The SQL function that rounds a numeric value to a specified number of decimals.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">=ROUND()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">The Excel function that rounds a cell value to a set number of decimal places.</p>
+    </div>
   </div>
 </div>
-<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:layer-group"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">export multi-sheet</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">ExcelWriter</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Writes each summary DataFrame to a separately named sheet inside one xlsx file.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">n/a</code>
+      <p class="text-xs text-gray-500 leading-relaxed">SQL writes to tables — generating a multi-sheet Excel file needs external tools.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">multiple sheet tabs</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Creating separate worksheet tabs and pasting each summary manually.</p>
+    </div>
+  </div>
+</div>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:chart-bar"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">summary statistics</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">.describe()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Returns count, mean, min, max, and percentiles for every numeric column.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">aggregate SELECT</code>
+      <p class="text-xs text-gray-500 leading-relaxed">A SELECT with SUM, AVG, MIN, MAX that summarises numeric columns.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">=AVERAGE(), =MAX()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel functions that compute individual summary statistics in formula cells.</p>
+    </div>
+  </div>
+</div>
+      <div>
+  <div class="flex items-center gap-3 mb-4">
+    <span class="flex-1 h-px bg-gray-100"></span>
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-sm" data-icon="fa6-solid:code-compare"></span>
+      </span>
+      <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D]">Same monthly summary, three tools</p>
+    </div>
+    <span class="flex-1 h-px bg-gray-100"></span>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Python code</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify" data-icon="logos:python" data-width="16" data-height="16"></span>
+            <span class="text-xs font-semibold text-gray-400">Python</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-python">summary = df.groupby(&#39;month&#39;)[&#39;revenue&#39;].sum()
+summary.to_excel(&#39;report.xlsx&#39;, index=False)</code></pre>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">SQL query</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-orange-400" data-icon="fa6-solid:database"></span>
+            <span class="text-xs font-semibold text-gray-400">SQL</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-sql">SELECT month,
+  SUM(revenue) AS total
+FROM sales
+GROUP BY month;</code></pre>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 flex items-center gap-1.5">Excel formula</p>
+      <div class="relative rounded-xl overflow-hidden flex flex-col flex-1 bg-code">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-green-400" data-icon="fa6-solid:table"></span>
+            <span class="text-xs font-semibold text-gray-400">Excel</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto flex-1 pre-reset"><code class="language-text">PivotTable: rows = Month
+values = SUM of Revenue
+-&gt; paste into report sheet</code></pre>
+      </div>
+    </div>
+  </div>
+  <p class="text-xs text-gray-400 mt-2">All three produce a monthly revenue summary from the same sales data — the same result, just written in a different tool.</p>
+</div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Python allows the entire workflow to be automated.</p>
-</div></div>
+  <p class="text-sm text-gray-600">A reporting script is just a SQL query plus an Excel export step, written in Python and run without touching a keyboard. Every step you do manually in a SQL client and Excel can be automated.</p>
+</div>
+    </div>
   </div>
 </section>
 
@@ -1766,39 +1885,102 @@ df[&quot;tax&quot;] = df[&quot;sales&quot;] * 0.08</code></pre>
 <section id="real-world">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How reporting scripts is used across real-world workflows</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a sales operations team. Every month you produce an Excel report with formatted revenue figures, a multi-sheet layout, and a KPI summary on the cover. A well-structured Python reporting script produces the same output automatically — readable by your team and reproducible every run.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:sitemap"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Three-step script<br>load, calculate, export</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your report has three clear steps. Splitting them into named functions — <code class="font-mono text-violet-700">load()</code>, <code class="font-mono text-violet-700">calculate()</code>, <code class="font-mono text-violet-700">export()</code> — makes the logic visible and easy for any team member to maintain.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
+      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">report.xlsx</code></span>
+    </div>
   </div>
 </div>
-    <div class="bg-white px-8 py-7 space-y-6"><div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
-  <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
-  <p class="text-sm text-gray-700 leading-relaxed">Reporting scripts are widely used in analytics teams.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"><div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:building"></span>
+<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:pen"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">Board-ready numbers<br>in the right format</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Executives want revenue rounded to the nearest pound and dates as "April 2025". You apply <code class="font-mono text-[#CB187D]">round()</code> and <code class="font-mono text-[#CB187D]">strftime()</code> before writing — the xlsx needs no manual formatting after the script runs.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
+      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">formatted_df</code></span>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Examples include:</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:briefcase"></span>
+<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
+  <div class="flex flex-col items-center gap-3">
+    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+      <span class="iconify text-white text-2xl" data-icon="fa6-solid:chart-bar"></span>
+    </span>
+    <h3 class="text-sm font-bold text-gray-800 leading-snug">KPI summary on<br>the cover sheet</h3>
+    <p class="text-xs text-gray-500 leading-relaxed">Your report opens with total revenue, average order size, and the single largest transaction. <code class="font-mono text-emerald-700">describe()</code> and <code class="font-mono text-emerald-700">sum()</code> feed those numbers directly into the cover sheet DataFrame.</p>
+    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
+      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">kpi_summary</code></span>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Example reporting system:</span>
 </div>
-<div class="group flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
-  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
-    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-bar"></span>
+</div>
+      <div class="rounded-xl border border-gray-100 overflow-hidden">
+  <div class="grid grid-cols-2">
+    <div class="border-r border-gray-100">
+      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without reporting scripts</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">A script with all logic inline in one long block is hard to read, impossible to test in parts, and breaks in ways that are difficult to diagnose — you have to read 200 lines to find one mistake.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Formatting numbers and dates manually after the report is written means opening the Excel file every month, reformatting two columns, and saving before sending.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Calculating KPI figures manually — total revenue, average order, max transaction — means writing three separate formulas or running three separate queries before typing the numbers into the cover sheet.</p>
+</div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
+        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With reporting scripts</p>
+      </div>
+      <div class="px-4 py-4 space-y-3">
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed">Named functions — <strong class="text-gray-700">load()</strong>, <strong class="text-gray-700">calculate()</strong>, <strong class="text-gray-700">export()</strong> — make the script readable and testable independently.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">round()</strong> and <strong class="text-gray-700">strftime()</strong> format every value before writing — the xlsx is ready to send without any manual touch-up.</p>
+</div>
+        <div class="flex items-start gap-2.5">
+  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">describe()</strong> and <strong class="text-gray-700">sum()</strong> compute all KPI figures in one call — the cover sheet populates automatically every run.</p>
+</div>
+      </div>
+    </div>
   </div>
-  <span class="text-sm text-gray-700">Automation improves both <strong>efficiency and reliability</strong>.</span>
 </div>
-</div>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Daily revenue reports</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Customer performance summaries</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Inventory tracking reports</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Financial reporting pipelines</span></div>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Database Export</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Python Reporting Script</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Excel Report</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Dashboard Update</span></div></div>
+    </div>
   </div>
 </section>
 
