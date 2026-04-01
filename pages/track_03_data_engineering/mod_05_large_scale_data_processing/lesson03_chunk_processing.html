@@ -674,9 +674,6 @@
 <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
 </a>
-<a href="#decision-flow" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
-  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:route"></span> Decision Flow
-</a>
 <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
 </a>
@@ -839,38 +836,90 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
-  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
-      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
-    </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">Earlier in this module you learned that Pandas loads data <strong>entirely into memory</strong>.</p>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">import pandas as pd</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">df = pd.read_csv(&quot;sales_data.csv&quot;)</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Behind the scenes:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">CSV File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Entire dataset loaded into RAM</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">DataFrame created</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">This works perfectly for small datasets.</p>
-<p class="text-sm text-gray-600 leading-relaxed">However, problems occur when files become very large.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example dataset sizes:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">5 million rows</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">20 million rows</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">100+ million rows</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">These datasets may exceed available memory.</p>
-<p class="text-sm text-gray-600 leading-relaxed">To solve this problem, we use <strong>chunk processing</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Chunk processing means reading the dataset <strong>in smaller pieces</strong> instead of loading everything at once.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Large CSV File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 1 (10,000 rows)</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 2 (10,000 rows)</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 3 (10,000 rows)</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">...</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Each chunk is processed independently.</p>
-<p class="text-sm text-gray-600 leading-relaxed">This allows Python to analyze datasets <strong>far larger than system memory</strong>.</p></div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Chunk processing means splitting a large dataset into smaller pieces and handling each piece one at a time.</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600 leading-relaxed">Think of chunk processing like washing dishes after a big dinner party. You cannot fit every plate in the sink at once, so you wash a stack, dry it, put it away, and grab the next stack. <strong>Chunking</strong> handles a massive file the same way — one manageable batch at a time.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+            <span class="iconify text-brand text-base" data-icon="fa6-solid:layer-group"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Chunk Size</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">The stack height — how many plates per wash</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">A number that controls how many rows each batch holds.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:forward"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Iterator</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Grabbing the next stack — plate by plate</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">A loop that yields one chunk at a time from the file.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+            <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:bucket"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Accumulator</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">The drying rack — collecting results per batch</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">A list or counter gathering output across all chunks.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:chart-area"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Memory Profile</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Checking the water level — sink not overflowing</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Monitoring RAM usage to confirm chunks stay within limits.</p>
+      </div>
+
+      </div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Start with a chunk size of 10,000 rows and adjust. Smaller chunks use less memory; larger chunks run faster.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1028,75 +1077,6 @@ Incremental calculations</pre></div>
 
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="decision-flow">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Decision Flow</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A visual walkthrough of the logic and process</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <div class="relative overflow-x-auto pb-2">
-  <div class="flex items-center gap-0 min-w-[640px]"><div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:play"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Consider:</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:magnifying-glass"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Parquet</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-14 h-14 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100">
-    <span class="iconify text-white text-xl -rotate-45" data-icon="fa6-solid:code-branch"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">DuckDB</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:rotate-right"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Polars</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-emerald-300 to-gray-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-lg ring-4 ring-gray-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:flag-checkered"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Dask</p>
-</div>
-</div>
-</div>
-      <p class="text-sm text-gray-600 leading-relaxed">Use chunk processing when working with large CSV files.</p>
-<p class="text-sm text-gray-600 leading-relaxed">If dataset becomes large:</p>
-<p class="text-sm text-gray-600 leading-relaxed">For extremely large datasets:</p>
-<p class="text-sm text-gray-600 leading-relaxed">These tools are introduced later in this module.</p>
     </div>
   </div>
 </section>
@@ -1937,15 +1917,6 @@ total_count += len(chunk)</pre></div><div class="rounded-xl px-5 py-3 bg-gray-50
       </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 3 &mdash; Data Engineering &middot; Large-Scale Data Processing
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>

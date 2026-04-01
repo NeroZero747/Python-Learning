@@ -674,9 +674,6 @@
 <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
 </a>
-<a href="#decision-flow" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
-  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:route"></span> Decision Flow
-</a>
 <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
 </a>
@@ -839,34 +836,90 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
-  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
-      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
-    </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">In the previous lesson you learned about <strong>columnar storage</strong>.</p>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Parquet is one of the most widely used <strong>columnar file formats</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Many modern data systems use Parquet because it is optimized for:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Analytics</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Large datasets</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Efficient storage</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Fast query performance</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Unlike CSV files, which store rows sequentially, Parquet stores data <strong>by column</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example table:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">order_id | region | revenue</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">CSV storage:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1,West,100</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">2,East,80</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">3,West,120</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Parquet storage:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">order_id column</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">2</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">3</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">region column</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">West</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">East</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">West</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">revenue column</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">100</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">80</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">120</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">This design makes Parquet extremely efficient for analytical workloads.</p></div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Parquet is an open-source columnar file format designed for fast analytics and efficient storage of large datasets.</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600 leading-relaxed">Think of Parquet like a recipe binder with tabbed dividers. Each tab holds one type of recipe — starters, mains, desserts — and each section has a label on the spine. You flip straight to desserts without reading the whole book. <strong>Parquet</strong> indexes your data the same way.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+            <span class="iconify text-brand text-base" data-icon="fa6-solid:layer-group"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Row Groups</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Binder sections — a block of recipes per tab</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Horizontal slices that divide the file into manageable blocks.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:grip-lines-vertical"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Column Chunks</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Columns within a tab — prep time and servings</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Each column inside a row group is stored and compressed separately.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+            <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:circle-info"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Footer Metadata</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">The spine label — summary stats on the outside</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">A small footer storing schema, row counts, and min/max values.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:forward-fast"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Predicate Pushdown</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Skipping tabs — jump past recipes you will not cook</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">The reader skips row groups that cannot match your filter.</p>
+      </div>
+
+      </div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Reading a Parquet file with Pandas is one line: pd.read_parquet('file.parquet'). Add the columns= parameter to load only what you need.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1033,54 +1086,6 @@ West</pre></div>
 
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="decision-flow">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Decision Flow</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A visual walkthrough of the logic and process</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <div class="relative overflow-x-auto pb-2">
-  <div class="flex items-center gap-0 min-w-[640px]"><div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:play"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Running analytics</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:magnifying-glass"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Processing large datasets</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-14 h-14 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100">
-    <span class="iconify text-white text-xl -rotate-45" data-icon="fa6-solid:code-branch"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Building data pipelines</p>
-</div>
-</div>
-</div>
-      <p class="text-sm text-gray-600 leading-relaxed">Use Parquet when working with medium or large datasets.</p>
-<p class="text-sm text-gray-600 leading-relaxed">If dataset grows larger:</p>
-<p class="text-sm text-gray-600 leading-relaxed">Parquet is especially useful when:</p>
     </div>
   </div>
 </section>
@@ -1875,15 +1880,6 @@ Fastparquet</pre></div></div>
       </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 3 &mdash; Data Engineering &middot; Large-Scale Data Processing
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>

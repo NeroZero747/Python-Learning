@@ -671,9 +671,6 @@
 <a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:lightbulb"></span> Key Takeaways
 </a>
-<a href="#decision-flow" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
-  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:route"></span> Decision Flow
-</a>
 <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
 </a>
@@ -824,191 +821,90 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
-  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
-      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
-    </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">Small datasets are easy to process.</p>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df = pd.read_csv(&quot;sales.csv&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">But real-world data pipelines often deal with files that are:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Millions of rows</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Multiple gigabytes</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Hundreds of columns</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Trying to load extremely large files into memory can cause problems such as:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Slow performance</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Memory errors</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">System crashes</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Efficient pipelines must process data <strong>incrementally or in optimized formats</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Most computers have limited memory.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example system memory:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">8 GB RAM</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">16 GB RAM</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">32 GB RAM</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">If a dataset is larger than available memory, a standard approach like:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">pd.read_csv(&quot;large_file.csv&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">may fail.</p>
-<p class="text-sm text-gray-600 leading-relaxed">This is why pipelines use techniques designed for <strong>large-scale processing</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Several techniques are commonly used in production pipelines.</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk Processing</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Efficient File Formats</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Parallel Processing</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Database Processing</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Each method helps pipelines process data more efficiently.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Instead of loading the entire file at once, the file can be processed in <strong>smaller pieces</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Large File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 1</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 2</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 3</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Chunk 4</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Each chunk is processed individually.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Pandas allows reading files in chunks.</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+    <div class="bg-white px-8 py-7 space-y-5">
 
-chunks = pd.read_csv(&quot;large_file.csv&quot;, chunksize=10000)
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Working with large data files means reading, processing, and writing datasets that are too big to fit in memory all at once.</p>
+        </div>
+      </div>
 
-for chunk in chunks:
+      <p class="text-sm text-gray-600 leading-relaxed">Think of a large file like a baguette that is too long for your plate. You cannot eat it in one bite, so you slice it into rounds, eat each slice, and move on to the next. <strong>Chunking</strong> and <strong>streaming</strong> let Python do the same with files that exceed your computer’s memory.</p>
 
-    process(chunk)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This processes the dataset <strong>10,000 rows at a time</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Advantages:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Lower memory usage</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Better stability</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Scalable processing</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">CSV files are common but not always efficient.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Better formats include:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Parquet</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Feather</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Arrow</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">These formats are designed for <strong>fast data processing</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">df.to_parquet(&quot;data.parquet&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Benefits:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Smaller file sizes</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Faster read speeds</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Better compression</span></div>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-df = pd.read_parquet(&quot;data.parquet&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This is often <strong>much faster than CSV</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Sometimes large datasets should not be processed in Python.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Instead, pipelines can push processing into databases.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+            <span class="iconify text-brand text-base" data-icon="fa6-solid:scissors"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Chunked Reading</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Slicing the baguette — one round at a time</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Reading a set number of rows per pass through the file.</p>
       </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:database" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">query.sql</span>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:forward"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Generators</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">One slice at a time — no plate needed</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Yielding rows on demand so memory stays flat.</p>
       </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+            <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:file-zipper"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">File Formats</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Thin-sliced vs thick — format affects size</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Parquet and compressed CSVs take up less space per slice.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:bars-progress"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Progress Tracking</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Counting slices eaten — how far along?</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Logging chunk numbers or using tqdm to track progress.</p>
+      </div>
+
+      </div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Pass chunksize to pd.read_csv() and process each chunk inside a for-loop. You will use a fraction of the memory.</p>
+      </div>
+
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-sql">SELECT
-    customer_id,
-    SUM(sales)
-FROM transactions
-GROUP BY customer_id</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Databases are optimized for large-scale queries.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Some pipelines divide work across multiple processes.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Process 1</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Process 2</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Process 3</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Process 4</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Each processor handles a portion of the data.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Libraries that support parallel processing include:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Dask</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Ray</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Spark</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">These tools allow pipelines to scale across multiple CPUs or machines.</p></div>
   </div>
 </section>
 
@@ -1080,34 +976,6 @@ GROUP BY customer_id</code></pre>
 </div>
 
 </div>
-  </div>
-</section>
-
-<section id="decision-flow">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Decision Flow</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A visual walkthrough of the logic and process</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <div class="relative overflow-x-auto pb-2">
-  <div class="flex items-center gap-0 min-w-[640px]"><div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:play"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">Use distributed processing</p>
-</div>
-</div>
-</div>
-      <p class="text-sm text-gray-600 leading-relaxed">When processing large datasets:</p>
-<p class="text-sm text-gray-600 leading-relaxed">If the dataset is extremely large:</p>
-<p class="text-sm text-gray-600 leading-relaxed">Or move the processing to a <strong>database system</strong>.</p>
-    </div>
   </div>
 </section>
 
@@ -1808,15 +1676,6 @@ Huge dataset → distributed processing</pre></div>
       </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 3 &mdash; Data Engineering &middot; Data Pipelines &amp; Orchestration
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>

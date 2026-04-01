@@ -818,226 +818,90 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
-  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
-      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
-    </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">In the previous lesson you built a pipeline that:</p>
-  </div>
-</div>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Extracts a dataset</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validates file structure</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Loads raw data into a database</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">However, real-world datasets often contain errors.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Examples:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Negative prices</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Missing values</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Duplicate transactions</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Invalid customer IDs</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">If pipelines ignore these problems, incorrect data may propagate through the system.</p>
-<p class="text-sm text-gray-600 leading-relaxed">To prevent this, pipelines perform <strong>data quality checks</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">The updated pipeline will include a validation stage.</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Extract Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validate File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Data Quality Checks</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Load Valid Data</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Invalid records can be separated or flagged.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example transaction dataset:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transaction_id,customer_id,price,quantity</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1001,2001,10,2</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1002,2002,-5,1</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1003,2003,20,3</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">In this dataset:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Row 2 contains an invalid negative price</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">The pipeline must detect this issue.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Pipelines commonly validate:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Missing values</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Negative numbers</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Duplicate records</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Invalid formats</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Each rule protects data quality.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example dataset with missing values:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transaction_id,customer_id,price,quantity</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1001,2001,10,2</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1002,,15,1</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Missing customer IDs could break analytics systems.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example rule:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">if df[&quot;customer_id&quot;].isnull().any():
-    raise Exception(&quot;Missing customer IDs detected&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">The pipeline stops if invalid records are detected.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Certain fields should never contain negative numbers.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Price</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Quantity</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Revenue</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Negative values may indicate:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Data entry errors</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Corrupted files</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Incorrect system exports</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Example validation rule:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+    <div class="bg-white px-8 py-7 space-y-5">
+
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Data quality checks are automated tests inside your pipeline that verify records are complete, consistent, and within expected ranges.</p>
+        </div>
       </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+
+      <p class="text-sm text-gray-600 leading-relaxed">Think of data quality checks like the inspection station on a production line. An inspector measures each product, checks the label, and pulls anything that does not meet the standard. <strong>Quality checks</strong> in your pipeline do the same — they test every batch before it reaches the database.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+            <span class="iconify text-brand text-base" data-icon="fa6-solid:list-check"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Completeness</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">No missing parts — every field filled in</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Making sure no parts are missing from each product.</p>
       </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:equals"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Consistency</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Matching labels — dates in the same format</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Labels stamped the same way on every single product.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+            <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:ruler-combined"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Range Checks</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Within spec — measurements inside tolerance</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Measurements that fall between the minimum and maximum.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:bell"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Alerting</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">The reject buzzer — notify when something fails</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">A warning that sounds when inspection catches a defect.</p>
+      </div>
+
+      </div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Add quality checks between transform and load. That way, bad data never reaches your production tables.</p>
+      </div>
+
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">if (df[&quot;price&quot;] &lt; 0).any():
-    raise Exception(&quot;Negative price detected&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Duplicate records can distort analytics results.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example dataset:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transaction_id,customer_id,price</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1001,2001,10</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1001,2001,10</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">The pipeline should detect duplicates.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example rule:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">duplicates = df.duplicated()
-
-if duplicates.any():
-    print(&quot;Duplicate records detected&quot;)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Duplicates can either be removed or flagged.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Instead of stopping the pipeline, some systems separate invalid records.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example workflow:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Raw data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validation rules</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Valid records → pipeline continues</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Invalid records → error table</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">This allows the pipeline to continue processing good data.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example validation function:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">def data_quality_checks(df):
-
-    if df[&quot;customer_id&quot;].isnull().any():
-        raise Exception(&quot;Missing customer IDs&quot;)
-
-    if (df[&quot;price&quot;] &lt; 0).any():
-        raise Exception(&quot;Negative prices detected&quot;)
-
-    return df</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This function ensures the dataset meets quality requirements.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Below is the updated pipeline including quality checks.</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
-from sqlalchemy import create_engine
-
-
-def extract_data():
-
-    df = pd.read_csv(&quot;transactions.csv&quot;)
-
-    return df
-
-
-def validate_file(df):
-
-    if df.empty:
-        raise Exception(&quot;Dataset is empty&quot;)
-
-    return df
-
-
-def data_quality_checks(df):
-
-    if df[&quot;customer_id&quot;].isnull().any():
-        raise Exception(&quot;Missing customer IDs&quot;)
-
-    if (df[&quot;price&quot;] &lt; 0).any():
-        raise Exception(&quot;Negative prices detected&quot;)
-
-    return df
-
-
-def load_raw_data(df):
-
-    engine = create_engine(&quot;sqlite:///pipeline.db&quot;)
-
-    df.to_sql(&quot;transactions_raw&quot;, engine, if_exists=&quot;append&quot;, index=False)
-
-
-def run_pipeline():
-
-    df = extract_data()
-
-    df = validate_file(df)
-
-    df = data_quality_checks(df)
-
-    load_raw_data(df)
-
-
-if __name__ == &quot;__main__&quot;:
-
-    run_pipeline()</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This pipeline ensures only <strong>valid data is loaded</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Updated pipeline:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transactions.csv</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Extract Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validate File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Quality Checks</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Raw Database Table</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">This improves pipeline reliability.</p></div>
   </div>
 </section>
 
@@ -1754,15 +1618,6 @@ Clean dataset</pre></div>
       </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 3 &mdash; Data Engineering &middot; Data Pipelines &amp; Orchestration
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>

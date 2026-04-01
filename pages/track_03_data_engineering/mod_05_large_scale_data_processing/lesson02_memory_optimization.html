@@ -674,9 +674,6 @@
 <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
 </a>
-<a href="#decision-flow" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
-  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:route"></span> Decision Flow
-</a>
 <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
 </a>
@@ -839,55 +836,90 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
-  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
-      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
-    </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">When working with large datasets, <strong>memory usage becomes a critical factor</strong>.</p>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">Even datasets that appear small can consume large amounts of memory once loaded into Pandas.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example dataset:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">sales_data.csv</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1,000,000 rows</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">8 columns</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">After loading:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">import pandas as pd</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">df = pd.read_csv(&quot;sales_data.csv&quot;)</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">The DataFrame might consume:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">300–600 MB of RAM</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">But why?</p>
-<p class="text-sm text-gray-600 leading-relaxed">Because Pandas must store:</p>
-<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"><div class="flex items-center gap-2.5 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-  <span class="iconify text-brand text-sm shrink-0" data-icon="fa6-solid:table"></span>
-  <span class="text-xs text-gray-600">column values</span>
-</div>
-<div class="flex items-center gap-2.5 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-  <span class="iconify text-brand text-sm shrink-0" data-icon="fa6-solid:robot"></span>
-  <span class="text-xs text-gray-600">column metadata</span>
-</div>
-<div class="flex items-center gap-2.5 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-  <span class="iconify text-brand text-sm shrink-0" data-icon="fa6-solid:file-csv"></span>
-  <span class="text-xs text-gray-600">index information</span>
-</div>
-<div class="flex items-center gap-2.5 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-  <span class="iconify text-brand text-sm shrink-0" data-icon="fa6-solid:database"></span>
-  <span class="text-xs text-gray-600">object references</span>
-</div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">In addition, many datasets contain <strong>inefficient data types</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Customer IDs stored as strings</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Integer columns stored as 64-bit values</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Categorical values stored as objects</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">These inefficiencies cause memory usage to increase dramatically.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Memory optimization techniques allow analysts to:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">process larger datasets</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">improve performance</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">avoid memory crashes</span></div></div>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Memory optimisation means reducing how much of your computer’s RAM your data uses so you can process larger datasets without running out.</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600 leading-relaxed">Think of your computer’s memory like a suitcase. You have a fixed amount of space, and every item you pack takes up room. <strong>Memory optimisation</strong> is the art of rolling your clothes, using compression bags, and leaving unnecessary items at home so everything fits.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+            <span class="iconify text-brand text-base" data-icon="fa6-solid:ruler-horizontal"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Data Types</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Folded vs flat — smaller types take less space</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Rolling your clothes tight to free up room in the suitcase.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:tags"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Categoricals</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Colour-coded packing cubes — labels not copies</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Replacing repeated items with compact colour-coded tags.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+            <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:scissors"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Column Pruning</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Leaving behind what you will not wear</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Packing only the outfits you actually plan to use.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:minimize"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">In-Place Operations</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Repacking inside the case — no second bag</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Rearranging inside the same suitcase without opening another.</p>
+      </div>
+
+      </div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Run df.info(memory_usage='deep') to see exactly how much RAM each column uses. Target the biggest columns first.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1081,55 +1113,6 @@ integer references</pre></div>
 
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="decision-flow">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:route"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Decision Flow</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A visual walkthrough of the logic and process</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <div class="relative overflow-x-auto pb-2">
-  <div class="flex items-center gap-0 min-w-[640px]"><div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:play"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">convert object → category</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-    <span class="iconify text-white text-xl" data-icon="fa6-solid:magnifying-glass"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">convert large integers → smaller types</p>
-</div>
-<div class="flex-1 flex items-center -mx-1" style="margin-top:-20px;">
-  <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-  <span class="iconify text-gray-400 text-sm -ml-1" data-icon="fa6-solid:chevron-right"></span>
-</div>
-<div class="flex flex-col items-center shrink-0" style="width:120px;">
-  <div class="w-14 h-14 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100">
-    <span class="iconify text-white text-xl -rotate-45" data-icon="fa6-solid:code-branch"></span>
-  </div>
-  <p class="text-xs font-bold text-gray-800 mt-2 text-center">convert strings → categorical values</p>
-</div>
-</div>
-</div>
-      <p class="text-sm text-gray-600 leading-relaxed">Use memory optimization when working with medium or large datasets.</p>
-<p class="text-sm text-gray-600 leading-relaxed">If memory is high:</p>
-<p class="text-sm text-gray-600 leading-relaxed">Steps:</p>
-<p class="text-sm text-gray-600 leading-relaxed">This allows Pandas to handle larger datasets.</p>
     </div>
   </div>
 </section>
@@ -2009,15 +1992,6 @@ formatting</pre></div>
       </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 3 &mdash; Data Engineering &middot; Large-Scale Data Processing
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>

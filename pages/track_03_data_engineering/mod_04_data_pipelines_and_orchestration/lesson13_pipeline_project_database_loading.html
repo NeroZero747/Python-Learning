@@ -818,201 +818,90 @@
 <section id="overview">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-5"><div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
-  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
-  <div class="relative flex items-start gap-4">
-    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
-      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
-    </span>
-    <p class="text-base text-gray-800 leading-relaxed font-medium">In the previous lessons you built a pipeline that:</p>
-  </div>
-</div>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Extracts data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validates files</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Performs data quality checks</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Stores raw data</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">However, raw datasets are not ideal for analytics.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example raw dataset:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transaction_id,customer_id,price,quantity</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1001,2001,10,2</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">1002,2002,15,1</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Analytics systems often require <strong>clean and structured tables</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">This lesson adds a stage that loads <strong>cleaned data into analytics tables</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Modern pipelines often organize data into layers.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example layered architecture:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Raw Layer</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Clean Layer</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Analytics Layer</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Each layer serves a different purpose.</p>
-<p class="text-sm text-gray-600 leading-relaxed">The raw layer stores <strong>data exactly as it was received</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transactions_raw</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Benefits of storing raw data:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Historical record of data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Ability to reprocess pipelines</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Audit trail for debugging</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">The clean layer stores <strong>validated and standardized data</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example table:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transactions_clean</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">In this layer the dataset may be:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validated</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Deduplicated</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Standardized</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Clean datasets are easier to analyze.</p>
-<p class="text-sm text-gray-600 leading-relaxed">The analytics layer contains <strong>aggregated or business-ready datasets</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">daily_sales_summary</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">customer_revenue_totals</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">product_performance_metrics</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">These tables power dashboards and reports.</p>
-<p class="text-sm text-gray-600 leading-relaxed">The updated pipeline structure:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Extract Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validate File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Quality Checks</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Load Raw Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Transform Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Load Clean Data</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">The pipeline now has <strong>two database stages</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example transformation:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Calculate revenue</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Remove duplicates</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Standardize column names</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">Example Python transformation:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
       </div>
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">def transform_data(df):
+    <div class="bg-white px-8 py-7 space-y-5">
 
-    df[&quot;revenue&quot;] = df[&quot;price&quot;] * df[&quot;quantity&quot;]
-
-    df = df.drop_duplicates()
-
-    return df</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">After transformation, the clean dataset is loaded into a separate table.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Example:</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Database loading is the final stage of a pipeline, where your cleaned and validated data is written into a database table.</p>
+        </div>
       </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
+
+      <p class="text-sm text-gray-600 leading-relaxed">Think of database loading like stacking books on a library shelf. Each book has a catalogue number, and you slot it into the correct position. <strong>Loading</strong> takes your processed records and writes them into the right table, handling duplicates and conflicts along the way.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+            <span class="iconify text-brand text-base" data-icon="fa6-solid:boxes-packing"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Bulk Insert</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">An armload of books — placing many at once</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Writing thousands of rows in a single operation.</p>
       </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:arrows-rotate"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Upsert Logic</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Swap if it exists — add if it does not</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Updating existing rows and inserting new ones seamlessly.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+            <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:shield-halved"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Transaction Safety</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">All or nothing — the cart rolls back if one breaks</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Wrapping the load so partial writes never stick.</p>
+      </div>
+
+      <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+        <div class="flex items-center gap-3 mb-2.5">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:magnifying-glass-chart"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800 leading-tight">Post-Load Checks</p>
+            <p class="text-[10px] text-gray-400 italic leading-tight">Shelf audit — counting books after stacking</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 leading-relaxed">Verifying row counts and checksums after the load completes.</p>
+      </div>
+
+      </div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Use if_exists='append' for incremental loads. Combine it with an upsert pattern to avoid duplicating rows.</p>
+      </div>
+
     </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine
-
-def load_clean_data(df):
-
-    engine = create_engine(&quot;sqlite:///pipeline.db&quot;)
-
-    df.to_sql(&quot;transactions_clean&quot;, engine, if_exists=&quot;replace&quot;, index=False)</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This creates a clean analytics dataset.</p>
-<p class="text-sm text-gray-600 leading-relaxed">Below is the updated pipeline with raw and clean layers.</p>
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
-  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
-    <div class="flex items-center gap-3">
-      <div class="flex gap-1.5">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-      </div>
-      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
-        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
-        <span class="text-[11px] font-semibold text-gray-400">script.py</span>
-      </div>
-    </div>
-    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-  </div>
-  <div class="bg-code">
-    <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
-from sqlalchemy import create_engine
-
-
-def extract_data():
-
-    df = pd.read_csv(&quot;transactions.csv&quot;)
-
-    return df
-
-
-def validate_file(df):
-
-    if df.empty:
-        raise Exception(&quot;Dataset is empty&quot;)
-
-    return df
-
-
-def data_quality_checks(df):
-
-    if df[&quot;customer_id&quot;].isnull().any():
-        raise Exception(&quot;Missing customer IDs&quot;)
-
-    if (df[&quot;price&quot;] &lt; 0).any():
-        raise Exception(&quot;Negative prices detected&quot;)
-
-    return df
-
-
-def load_raw_data(df):
-
-    engine = create_engine(&quot;sqlite:///pipeline.db&quot;)
-
-    df.to_sql(&quot;transactions_raw&quot;, engine, if_exists=&quot;append&quot;, index=False)
-
-
-def transform_data(df):
-
-    df[&quot;revenue&quot;] = df[&quot;price&quot;] * df[&quot;quantity&quot;]
-
-    df = df.drop_duplicates()
-
-    return df
-
-
-def load_clean_data(df):
-
-    engine = create_engine(&quot;sqlite:///pipeline.db&quot;)
-
-    df.to_sql(&quot;transactions_clean&quot;, engine, if_exists=&quot;replace&quot;, index=False)
-
-
-def run_pipeline():
-
-    df = extract_data()
-
-    df = validate_file(df)
-
-    df = data_quality_checks(df)
-
-    load_raw_data(df)
-
-    clean_df = transform_data(df)
-
-    load_clean_data(clean_df)
-
-
-if __name__ == &quot;__main__&quot;:
-
-    run_pipeline()</code></pre>
-  </div>
-</div>
-<p class="text-sm text-gray-600 leading-relaxed">This script now supports <strong>multi-layer data processing</strong>.</p>
-<p class="text-sm text-gray-600 leading-relaxed">The complete pipeline now looks like this:</p>
-<div class="flex flex-wrap items-center gap-2 py-3"><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transactions.csv</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Extract Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Validate File</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Quality Checks</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transactions_raw</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">Transform Data</span><span class="iconify text-gray-300 text-sm" data-icon="fa6-solid:arrow-right"></span><span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-[#fdf0f7] text-[#CB187D] border border-[#f5c6e0]">transactions_clean</span></div>
-<p class="text-sm text-gray-600 leading-relaxed">This structure is widely used in production systems.</p></div>
   </div>
 </section>
 
@@ -1731,15 +1620,6 @@ Clean analytics tables</pre></div>
       </main>
     </div>
   </div>
-
-  <footer class="border-t border-gray-100 bg-white py-8">
-    <div class="max-w-[1280px] mx-auto px-4 text-center">
-      <p class="text-xs text-gray-400">
-        <span class="iconify inline text-sm mr-1" data-icon="logos:python"></span>
-        Python Learning Hub &middot; Track 3 &mdash; Data Engineering &middot; Data Pipelines &amp; Orchestration
-      </p>
-    </div>
-  </footer>
 </div>
 
 <script>
