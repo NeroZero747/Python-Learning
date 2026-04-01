@@ -17,6 +17,7 @@ This content is for people who are new to programming. Write descriptions and ti
 - **Use "you".** "This script stores your data as a variable" is clearer than "variables are used to store data".
 - **Tips should be one action.** A tip is one concrete takeaway — what to watch for, or what to try next. Not a summary of what was just shown.
 - **No filler.** Cut "it is important to note", "as you can see", "essentially", "in order to".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

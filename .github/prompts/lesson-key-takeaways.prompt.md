@@ -16,6 +16,7 @@ This content is for people who are new to programming. Write as if you're explai
 - **Be direct.** Use "you" and "your". Say what a concept *does for the reader*, not what it *is* in the abstract.
 - **Concrete over abstract.** Compare to something familiar: a formula in Excel, a column in a spreadsheet, copying a cell.
 - **No filler.** Cut "it is important", "essentially", "in order to", "as you can see".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

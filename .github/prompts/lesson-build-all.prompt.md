@@ -111,6 +111,8 @@ Apply the full instructions from each section's loaded prompt file, working thro
 
 ### Rules for every section
 
+0. **American English only.** Use American spellings throughout all generated text — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
+
 1. **One section at a time.** Do not start the next section until the current one is written and saved to `TARGET_FILE`.
 
 2. **Use the brief for values, use the sub-prompt for structure.** Before writing each section, re-read the full instructions from that section's loaded prompt file — the focus checklist below is a reminder only, not a substitute. The sub-prompt contains the exact HTML template, quality checklist, and content rules that define what the output must look like. Follow the sub-prompt template verbatim; use the brief for the content values (labels, numbers, icons).

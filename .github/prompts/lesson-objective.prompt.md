@@ -15,6 +15,7 @@ Objective cards are the first thing the reader sees. They need to be instantly c
 - **Card descriptions:** One sentence only. Say what the learner will be able to do or understand — make it concrete. 12–18 words is the sweet spot.
 - **Amber tip:** One sentence. Tell the reader why this lesson matters — connect it to a real task or outcome, not an abstract concept.
 - **No filler.** Cut "it is important", "you will learn about", "this section covers".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

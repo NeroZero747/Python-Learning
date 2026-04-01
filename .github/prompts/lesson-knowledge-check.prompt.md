@@ -16,6 +16,7 @@ Quiz statements must be easy to read and understand on the first pass. If a lear
 - **Concrete and specific.** Anchor the statement to something the reader actually did or saw in the lesson. Vague statements are bad quiz questions.
 - **The correct answer should feel obvious to an attentive reader — not a trick.** The goal is reinforcement, not a gotcha.
 - **False statements should contain a believable misconception.** Something a beginner might genuinely think is true — not something obviously wrong.
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

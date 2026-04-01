@@ -35,6 +35,7 @@ Rewrite the `#next-lesson` section and the bottom navigation bar in the target l
 - Three cards is the standard — if the next lesson only has two strong topics, combine two related ideas into one card rather than padding with a weak third.
 - Use `&amp;` instead of `&` in all card text inside HTML attributes and body text.
 - Keep each card title under 60 characters so it fits cleanly on two lines at most.
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

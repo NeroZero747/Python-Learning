@@ -17,6 +17,7 @@ This content is for people who are new to programming. Write as if you're explai
 - **Short sentences.** 15 words or fewer. One idea per sentence.
 - **No jargon without definition.** If you mention a technical term, say what it means in the same sentence.
 - **No filler.** Cut "it is important", "please note", "essentially", "in order to".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

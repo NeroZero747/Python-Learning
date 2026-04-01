@@ -46,7 +46,7 @@ Rewrite the `#decision-flow` section body in the target lesson file using the st
 
 ## Writing style
 
-Write for a smart colleague who has never written code. Use plain English, complete sentences, and "you". Keep sentences under 15 words. No filler phrases ("it is important to note", "essentially", etc.). Introduce every technical term with a brief plain-English explanation in the same sentence.
+Write for a smart colleague who has never written code. Use plain English, complete sentences, and "you". Keep sentences under 15 words. No filler phrases ("it is important to note", "essentially", etc.). Introduce every technical term with a brief plain-English explanation in the same sentence. Use American English spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

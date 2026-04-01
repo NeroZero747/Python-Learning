@@ -952,6 +952,24 @@ When a concept is likely to confuse beginners, apply these techniques in order:
 
 Write in second person ("you", "your"). Address the learner directly and use an encouraging, professional tone — not casual slang, but also not academic jargon. Contractions are fine (e.g. "you'll", "it's", "don't").
 
+### Spelling — American English
+
+Use American English spelling throughout all lesson text, code comments, filenames, and UI labels. Do not use British English variants.
+
+| British (do not use) | American (use this) |
+|---|---|
+| optimise, maximise, minimise | optimize, maximize, minimize |
+| analyse, summarise, visualise | analyze, summarize, visualize |
+| organise, recognise, customise | organize, recognize, customize |
+| colour, favour, behaviour | color, favor, behavior |
+| honour, labour, neighbour | honor, labor, neighbor |
+| centre, metre | center, meter |
+| catalogue, dialogue | catalog, dialog |
+| defence, licence (noun) | defense, license |
+| capitalisation, organisation | capitalization, organization |
+
+When in doubt, use the Merriam-Webster spelling.
+
 ---
 
 ## JavaScript Patterns

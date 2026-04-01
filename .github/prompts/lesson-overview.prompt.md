@@ -17,6 +17,7 @@ This content is for people who are new to programming. Write as if you're explai
 - **Address the reader.** Use "you" and "your" — it feels less intimidating than passive voice.
 - **Concrete over abstract.** Compare the concept to something the learner already does (writing a list, using a formula in Excel, following a recipe).
 - **No filler phrases.** Cut "it is important to note", "as you can see", "essentially", "in order to".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

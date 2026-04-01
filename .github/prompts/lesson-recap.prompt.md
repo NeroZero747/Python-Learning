@@ -16,6 +16,7 @@ The recap is the reader's moment of "I got it". Keep sentences short, confident,
 - **No jargon** unless the word was the core thing they just learned (e.g. the lesson was about `for` loops — using "loop" is fine).
 - **One idea per card.** Don't cram two points into one sentence.
 - **No filler.** Cut "it is important", "as you can see", "essentially".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

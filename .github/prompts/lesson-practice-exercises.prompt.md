@@ -17,6 +17,7 @@ This content is for people who are new to programming. Write task descriptions a
 - **No jargon without explanation.** If you use a Python term (e.g. "accumulator"), explain it in a bracket or the next sentence.
 - **Tips should be one practical takeaway.** Tell the reader what to remember or what to try — not a repeat of the task.
 - **No filler.** Cut "it is important", "please note", "essentially", "in order to".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

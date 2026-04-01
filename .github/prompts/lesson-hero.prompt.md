@@ -49,6 +49,7 @@ Each dot: `style="width:6px;height:6px;border-radius:50%;background:COLOR;displa
 - Mention the lesson topic by name and give a hint of why it matters in practice.
 - Keep it between 15 and 25 words.
 - Avoid technical jargon the learner hasn't encountered yet in the course.
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 **Good example:** "Discover how programming works — writing step-by-step instructions that tell a computer exactly what to do, and why Python makes that process simple and readable."
 

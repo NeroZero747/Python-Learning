@@ -17,6 +17,7 @@ This section bridges the gap between what the reader already knows (Excel or SQL
 - **Descriptions are comparisons, not definitions.** The reader wants to know "how is this the same as what I already do?" — not a textbook definition.
 - **Tips remind, not teach.** The closing tip should give the reader one thing to carry away — the most important bridge between the three tools.
 - **No filler.** Cut "it is important", "as you can see", "essentially", "please note".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

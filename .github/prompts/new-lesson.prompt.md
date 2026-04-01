@@ -243,6 +243,7 @@ Follow ALL rules in `.github/copilot-instructions.md`. Key requirements per sect
 - All explanation text must be **complete sentences**. No terse bullet fragments.
 - Define every new term in plain English **before** showing any code.
 - Write in **second person** ("you", "your"). Encouraging, professional tone.
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ## Script quality rules
 

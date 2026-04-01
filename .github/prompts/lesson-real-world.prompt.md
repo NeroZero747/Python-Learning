@@ -18,6 +18,7 @@ This section shows the reader why the lesson topic matters in real work. Write l
 - **No jargon** unless it was taught in this lesson.
 - **No filler.** Cut "it is important", "essentially", "in order to", "this allows for".
 - **No code blocks** anywhere in this section — all content is plain English.
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ---
 

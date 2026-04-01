@@ -28,6 +28,7 @@ This content is for people new to programming. Write like you're explaining to a
 - **Second person.** Use "you" and "your".
 - **Concrete over abstract.** "You can change the value later" beats "this allows dynamic behavior".
 - **No filler.** Cut "it is important to note that", "as you can see", "essentially", "in order to".
+- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
 
 ### Content rules per element
 
