@@ -963,11 +963,11 @@
       </span>
       <h3 class="text-sm font-bold text-gray-900">Compute Triggers Execution</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Dask builds a task graph lazily and runs nothing until you call .compute(), letting it optimise the entire chain of operations before touching the data.</p>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Dask builds a task graph lazily and runs nothing until you call .compute(), letting it optimize the entire chain of operations before touching the data.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">.compute()</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Task Graph</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Optimised</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Optimized</span>
     </div>
   </div>
 </div>
@@ -1675,7 +1675,7 @@ SELECT * FROM v_totals;</code></pre>
       </span>
       <div class="min-w-0 flex-1">
         <h4 class="font-bold text-gray-800 text-sm">Calling .compute() After Every Step Instead of Deferring Execution</h4>
-        <p class="text-xs text-gray-500 mt-0.5">Premature compute forces Dask to materialise intermediate results, wasting memory and time.</p>
+        <p class="text-xs text-gray-500 mt-0.5">Premature compute forces Dask to materialize intermediate results, wasting memory and time.</p>
       </div>
       <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
         <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
@@ -1684,7 +1684,7 @@ SELECT * FROM v_totals;</code></pre>
 
     <!-- Explanation paragraph -->
     <div class="px-6 py-5">
-      <p class="text-sm text-gray-600 leading-relaxed">Dask builds a task graph and optimises it before executing. Calling <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">.compute()</code> after every step materialises the intermediate DataFrame, which defeats lazy evaluation. Chain operations and compute once at the end.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">Dask builds a task graph and optimizes it before executing. Calling <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">.compute()</code> after every step materializes the intermediate DataFrame, which defeats lazy evaluation. Chain operations and compute once at the end.</p>
     </div>
 
     <!-- Wrong / Correct split panel -->
@@ -1695,7 +1695,7 @@ SELECT * FROM v_totals;</code></pre>
         </p>
         <div class="rounded-xl overflow-hidden bg-code">
           <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">ddf = dd.read_csv("big.csv")
-df1 = ddf[ddf["active"]].compute()   # materialises here
+df1 = ddf[ddf["active"]].compute()   # materializes here
 df2 = df1.groupby("dept")["salary"].mean()  # now pandas</code></pre>
         </div>
       </div>
