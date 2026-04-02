@@ -1367,87 +1367,107 @@ git push</code></pre>
       <!-- Block 1: Intro paragraph -->
       <p class="text-sm text-gray-600 leading-relaxed">Every time you use Git, you follow the same repeatable path known as the <strong class="text-gray-800">stage &rarr; commit &rarr; push cycle</strong>: you edit files on your computer, tell Git exactly which changes to include, save a labeled snapshot, then upload it to GitLab &mdash; just like drafting a report, marking the sections worth keeping, printing a final version, and filing it away.</p>
 
-      <!-- Block 2: Git workflow flowchart -->
-      <div class="rounded-2xl border border-gray-100 bg-gray-50 px-5 pt-4 pb-6 overflow-x-auto">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">How Git Saves Your Work &mdash; Step by Step</p>
-        <div class="flex items-start gap-0 min-w-[640px]">
+      <!-- Block 2: Git's Three Zones — vertical state card -->
+      <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
 
-          <!-- Node 1: Edit Files (pink circle) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:file-pen"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Edit<br>Files</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Your local working directory</p>
-          </div>
-
-          <!-- Arrow: pink → violet -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-            <span class="iconify text-violet-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 2: Stage Changes (violet rounded square) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:layer-group"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Stage<br>Changes</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">git add &mdash; pick what to include</p>
-          </div>
-
-          <!-- Arrow: violet → blue -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-            <span class="iconify text-blue-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 3: Commit Ready? (blue diamond) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-12 h-12 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100" style="margin-top:4px;">
-              <span class="iconify text-white text-base -rotate-45" data-icon="fa6-solid:circle-question"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-3 text-center leading-tight">Commit<br>Ready?</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">git status &mdash; review staging</p>
-          </div>
-
-          <!-- Arrow: blue → emerald -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-            <span class="iconify text-emerald-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 4: Save Snapshot (emerald rounded square) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:bookmark"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Save<br>Snapshot</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">git commit -m "message"</p>
-          </div>
-
-          <!-- Arrow: emerald → gray -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-emerald-300 to-gray-300"></div>
-            <span class="iconify text-gray-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 5: Push to Remote (gray circle) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-lg ring-4 ring-gray-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:cloud-arrow-up"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Push to<br>Remote</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">GitLab receives your commits</p>
-          </div>
-
+        <!-- Card label -->
+        <div class="px-5 pt-4 pb-3 bg-gray-50 border-b border-gray-100">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Git&#8217;s Three Zones &#8212; Where Your File Lives at Each Step</p>
         </div>
+
+        <!-- Zone 1: Working Directory -->
+        <div class="flex items-start gap-4 px-5 py-4 bg-gradient-to-r from-rose-50/70 to-white border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-rose-400 to-red-500 shrink-0 shadow-sm mt-0.5">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:file-pen"></span>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <p class="text-sm font-bold text-gray-800">Working Directory</p>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-600 border border-rose-200">Zone 1</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed mb-2.5">Your normal file system. When you edit a file here, Git notices the change but does not save a snapshot yet &#8212; the file is simply marked as &#8220;modified.&#8221;</p>
+            <span class="inline-flex items-center gap-1.5 flex-wrap">
+              <code class="text-[11px] font-mono px-2.5 py-1 rounded bg-rose-100 text-rose-700 border border-rose-200">modified: report.py</code>
+              <span class="text-[10px] text-gray-400">&larr; what git status shows</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Connector: git add -->
+        <div class="flex items-center gap-2 px-5 py-2.5 bg-gray-900 border-b border-gray-700 flex-wrap">
+          <span class="iconify text-gray-400 text-[11px]" data-icon="fa6-solid:arrow-down"></span>
+          <code class="text-[11px] font-mono text-emerald-400">git add report.py</code>
+          <span class="text-[11px] text-gray-100">&#8212; moves the file to the staging area</span>
+        </div>
+
+        <!-- Zone 2: Staging Area -->
+        <div class="flex items-start gap-4 px-5 py-4 bg-gradient-to-r from-blue-50/70 to-white border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-sm mt-0.5">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:layer-group"></span>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <p class="text-sm font-bold text-gray-800">Staging Area</p>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-600 border border-blue-200">Zone 2</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed mb-2.5">A holding zone inside Git where you choose which changes go into the next snapshot. You can stage some files and leave others out before committing.</p>
+            <span class="inline-flex items-center gap-1.5 flex-wrap">
+              <code class="text-[11px] font-mono px-2.5 py-1 rounded bg-blue-100 text-blue-700 border border-blue-200">Changes to be committed: report.py</code>
+              <span class="text-[10px] text-gray-400">&larr; what git status shows</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Connector: git commit -->
+        <div class="flex items-center gap-2 px-5 py-2.5 bg-gray-900 border-b border-gray-700 flex-wrap">
+          <span class="iconify text-gray-400 text-[11px]" data-icon="fa6-solid:arrow-down"></span>
+          <code class="text-[11px] font-mono text-emerald-400">git commit -m "Add Q1 sales report"</code>
+          <span class="text-[11px] text-gray-100">&#8212; freezes staged files into a permanent snapshot</span>
+        </div>
+
+        <!-- Zone 3: Local Repository -->
+        <div class="flex items-start gap-4 px-5 py-4 bg-gradient-to-r from-emerald-50/70 to-white border-b border-gray-100">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-sm mt-0.5">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:bookmark"></span>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <p class="text-sm font-bold text-gray-800">Local Repository</p>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-600 border border-emerald-200">Zone 3</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed mb-2.5">Your personal snapshot library stored on your own machine. Every commit lives here permanently &#8212; you can rewind to any of them at any time before pushing.</p>
+            <span class="inline-flex items-center gap-1.5 flex-wrap">
+              <code class="text-[11px] font-mono px-2.5 py-1 rounded bg-emerald-100 text-emerald-700 border border-emerald-200">commit abc1234 &#8212; &#8220;Add Q1 sales report&#8221;</code>
+              <span class="text-[10px] text-gray-400">&larr; what git log shows</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Connector: git push -->
+        <div class="flex items-center gap-2 px-5 py-2.5 bg-gray-900 border-b border-gray-700 flex-wrap">
+          <span class="iconify text-gray-400 text-[11px]" data-icon="fa6-solid:arrow-down"></span>
+          <code class="text-[11px] font-mono text-emerald-400">git push origin main</code>
+          <span class="text-[11px] text-gray-100">&#8212; uploads all local commits to GitLab</span>
+        </div>
+
+        <!-- Zone 4: Remote footer (GitLab) -->
+        <div class="flex items-center gap-4 px-5 py-3.5 bg-gray-800">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gray-700 shrink-0">
+            <span class="iconify text-gray-300 text-base" data-icon="fa6-brands:gitlab"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-semibold text-gray-200">Remote Repository (GitLab)</p>
+            <p class="text-xs text-gray-400 mt-0.5">Your team now sees all commits. One shared source of truth.</p>
+          </div>
+          <span class="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gray-700 text-gray-300 border border-gray-600">Zone 4</span>
+        </div>
+
       </div>
 
-      <!-- Block 3: Sub-heading + paragraph -->
+      <!-- Block 3: Zone rule explanation -->
       <div class="space-y-2">
-        <p class="text-sm font-semibold text-gray-800">The Stage &rarr; Commit &rarr; Push Cycle &mdash; Every Time, In That Order</p>
-        <p class="text-sm text-gray-600 leading-relaxed">After you edit a file, Git does not automatically save a version of your work. You must first run <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git add</code> to tell Git which changes to include, then <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git commit</code> to lock in a labeled snapshot, and finally <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git push</code> to upload that snapshot to GitLab. Skipping any step leaves your work either unsaved or unshared.</p>
+        <p class="text-sm font-semibold text-gray-800">One Direction &#8212; You Cannot Skip a Zone</p>
+        <p class="text-sm text-gray-600 leading-relaxed">A file always moves through the zones in order: Working Directory &rarr; Staging Area &rarr; Local Repository &rarr; Remote. Running <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git push</code> before <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git add</code> and <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git commit</code> will upload nothing new because no snapshots exist yet in Zone 3. Use <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">git status</code> any time to check which zone your changes are currently in.</p>
       </div>
 
       <!-- Block 4: Code block (Style A — dark-chrome, no terminal pane) -->
@@ -2584,101 +2604,111 @@ git push origin main               # upload so teammates can see it</code></pre>
       <!-- Intro paragraph -->
       <p class="text-sm text-gray-600 leading-relaxed">Every data team produces dozens of scripts, queries, and reports that change week after week. Without version control, a single accidental overwrite can erase hours of work — and no one can tell what changed or who changed it. Git gives every file a full edit history you can search, compare, and rewind at any point.</p>
 
-      <!-- Three scenario cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-        <!-- Card 1 — violet: git commit -->
-        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-brands:git-alt"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Your team edits<br>the same script today</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Two analysts updating the same file at once will overwrite each other's work. With <code class="font-mono text-violet-700">git commit</code>, each analyst saves a named snapshot — both versions are preserved and can be merged.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">commit hash</code></span>
-            </div>
-          </div>
+      <!-- Scenario header -->
+      <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+          <span class="iconify text-white text-sm" data-icon="fa6-brands:git-alt"></span>
+        </span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">A Data Analyst&#8217;s First Week</p>
+          <p class="text-sm font-bold text-gray-800">Five commits that tell the story of a project</p>
+          <p class="text-xs text-gray-500 mt-0.5">Below is a <code class="font-mono text-[10px]">git log --oneline</code> from a weekly sales project. Read newest to oldest.</p>
         </div>
-
-        <!-- Card 2 — pink: git log -->
-        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:clock-rotate-left"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">A report broke<br>after last week's change</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Without history, finding the broken line means reading every change made in the past week by hand. With <code class="font-mono text-[#CB187D]">git log</code>, you see exactly which commit introduced the bug — and can reverse it in one command.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">commit history</code></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 — emerald: git push -->
-        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-brands:gitlab"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Your manager wants<br>to review the code</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Emailing script files back and forth creates version chaos immediately. With <code class="font-mono text-emerald-700">git push</code>, your manager gets a single GitLab URL showing every change, comment, and approval in one place.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">remote branch</code></span>
-            </div>
-          </div>
-        </div>
-
       </div>
 
-      <!-- Before / After comparison table -->
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-        <div class="grid grid-cols-2">
+      <!-- git log terminal -->
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+            <span class="iconify text-gray-400 text-xs" data-icon="fa6-solid:terminal" data-width="12" data-height="12"></span>
+            <span class="text-[11px] font-semibold text-gray-400">git log --oneline</span>
+          </div>
+        </div>
+        <div class="bg-[#1e1e2e] px-4 py-4 space-y-3 font-mono text-xs">
 
-          <!-- Without Git column -->
-          <div class="border-r border-gray-100">
-            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without Git</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Two analysts editing the same file overwrite each other — the most recent save wins and the other's work is gone.</p>
+          <!-- Commit 1 — newest, HEAD -->
+          <div class="flex items-start gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#CB187D]/20 text-[#e84aad] border border-[#CB187D]/30 shrink-0">a4f2c1b</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-900/40 text-red-400 border border-red-800/40 shrink-0">Fix</span>
+            <span class="text-gray-300 leading-snug flex-1">correct the Q1 revenue formula in weekly_sales.py</span>
+            <span class="shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold text-blue-400 bg-blue-900/30 border border-blue-800/40">HEAD &rarr; main</span>
+          </div>
+
+          <!-- Commit 2 -->
+          <div class="flex items-start gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-900/40 text-emerald-400 border border-emerald-800/40 shrink-0">d8b1e9f</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-900/40 text-blue-400 border border-blue-800/40 shrink-0">Add</span>
+            <span class="text-gray-300 leading-snug">monthly membership summary sheet</span>
+          </div>
+
+          <!-- Commit 3 -->
+          <div class="flex items-start gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-900/40 text-emerald-400 border border-emerald-800/40 shrink-0">7c3a5d2</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-900/40 text-blue-400 border border-blue-800/40 shrink-0">Add</span>
+            <span class="text-gray-300 leading-snug">data cleaning module for raw CSV files</span>
+          </div>
+
+          <!-- Commit 4 -->
+          <div class="flex items-start gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-900/40 text-emerald-400 border border-emerald-800/40 shrink-0">1f9b6c4</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-900/40 text-red-400 border border-red-800/40 shrink-0">Fix</span>
+            <span class="text-gray-300 leading-snug">remove duplicate rows from sales import</span>
+          </div>
+
+          <!-- Commit 5 — oldest / initial -->
+          <div class="flex items-start gap-2 flex-wrap border-t border-white/5 pt-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-700/60 text-gray-400 border border-gray-600/50 shrink-0">e2d4a8c</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-gray-700/40 text-gray-400 border border-gray-600/40 shrink-0">Init</span>
+            <span class="text-gray-500 leading-snug">initial commit: project setup and raw data</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Three moments this log saved time -->
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Three Moments These Commits Saved Time</p>
+        <div class="space-y-3">
+
+          <!-- Row 1: pink — finding the bug -->
+          <div class="flex items-start gap-4 rounded-xl border border-pink-100 bg-gradient-to-r from-[#fdf0f7]/60 to-white px-5 py-4">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-sm mt-0.5">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:magnifying-glass"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1 flex-wrap">
+                <p class="text-sm font-semibold text-gray-800">Finding the broken formula on Friday afternoon</p>
+                <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-pink-100 text-[#CB187D] border border-pink-200">a4f2c1b</code>
               </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Finding which change broke a report means scanning files manually — there is no record of what changed or when.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Sharing scripts by email creates duplicate files with no way to know which version is the latest or correct one.</p>
-              </div>
+              <p class="text-xs text-gray-500 leading-relaxed">The revenue total looked wrong in the weekly report. Because every change was committed with a clear message, running <code class="font-mono text-[10px] bg-gray-100 px-1 rounded">git log</code> showed exactly which commit changed the formula &#8212; no manual file-by-file scanning needed.</p>
             </div>
           </div>
 
-          <!-- With Git column -->
-          <div>
-            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With Git</p>
+          <!-- Row 2: violet — a teammate onboards fast -->
+          <div class="flex items-start gap-4 rounded-xl border border-violet-100 bg-gradient-to-r from-violet-50/60 to-white px-5 py-4">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-sm mt-0.5">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:user-group"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1 flex-wrap">
+                <p class="text-sm font-semibold text-gray-800">A teammate joins mid-week and gets up to speed instantly</p>
+                <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-violet-100 text-violet-700 border border-violet-200">git log</code>
+              </div>
+              <p class="text-xs text-gray-500 leading-relaxed">A second analyst needed to understand what had already been built. Instead of reading every script line by line, she ran <code class="font-mono text-[10px] bg-gray-100 px-1 rounded">git log --oneline</code> and read five commit messages &#8212; the full project story in under 30 seconds.</p>
             </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">git commit</strong> gives each analyst a permanent named snapshot — no work is lost and the team can merge both versions.</p>
+          </div>
+
+          <!-- Row 3: emerald — rolling back -->
+          <div class="flex items-start gap-4 rounded-xl border border-emerald-100 bg-gradient-to-r from-emerald-50/60 to-white px-5 py-4">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-sm mt-0.5">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:rotate-left"></span>
+            </span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1 flex-wrap">
+                <p class="text-sm font-semibold text-gray-800">Rolling back to a working version in two minutes</p>
+                <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 border border-emerald-200">git checkout</code>
               </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">git log</strong> shows every change in order — you can pinpoint the exact commit that introduced the bug and reverse it.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">git push</strong> sends all commits to one GitLab URL — the team always reads from the same single source of truth.</p>
-              </div>
+              <p class="text-xs text-gray-500 leading-relaxed">A new cleaning rule accidentally broke an older report. Because the previous working state had a clean commit, the analyst could restore the exact version that worked &#8212; without losing any of the other changes that had already been committed separately.</p>
             </div>
           </div>
 

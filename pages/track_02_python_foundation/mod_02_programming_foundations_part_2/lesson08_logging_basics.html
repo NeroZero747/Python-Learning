@@ -2115,108 +2115,130 @@ logging.debug(&quot;Detail&quot;)                   # now visible</code></pre>
         <!-- Intro paragraph -->
         <p class="text-sm text-gray-600 leading-relaxed">Imagine you are part of a data team that runs automated scripts overnight. Something breaks at 2 am — and by morning, all you have is a blank screen. The logging module lets every script write a permanent, timestamped record of what it did, so you can trace exactly where things went wrong without being there to watch.</p>
 
-        <!-- Three scenario cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-          <!-- Card 1 — violet: overnight pipeline -->
-          <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-            <div class="flex flex-col items-center gap-3">
-              <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-                <span class="iconify text-white text-2xl" data-icon="fa6-solid:database"></span>
-              </span>
-              <h3 class="text-sm font-bold text-gray-800 leading-snug">An overnight pipeline<br>fails silently</h3>
-              <p class="text-xs text-gray-500 leading-relaxed">Without logs, you have no record of where a five-step ETL job stopped. You call <code class="font-mono text-violet-700">logging.info()</code> after each step so the log always shows the exact point of failure.</p>
-              <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-                <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-                <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">INFO:root: message</code></span>
-              </div>
-            </div>
+        <!-- Scenario header -->
+        <div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:file-lines"></span>
+          </span>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">An Overnight Data Pipeline Run</p>
+            <p class="text-sm font-bold text-gray-800">What the log file recorded while you were asleep</p>
+            <p class="text-xs text-gray-500 mt-0.5">Below is a real <code class="font-mono text-[10px]">analysis.log</code> file produced by a Python script using the <code class="font-mono text-[10px]">logging</code> module.</p>
           </div>
-
-          <!-- Card 2 — pink: wrong report totals -->
-          <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-            <div class="flex flex-col items-center gap-3">
-              <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-                <span class="iconify text-white text-2xl" data-icon="fa6-solid:triangle-exclamation"></span>
-              </span>
-              <h3 class="text-sm font-bold text-gray-800 leading-snug">A weekly report<br>produces wrong totals</h3>
-              <p class="text-xs text-gray-500 leading-relaxed">You add <code class="font-mono text-[#CB187D]">logging.warning()</code> calls whenever a column is blank or a price is negative. The log file pinpoints bad rows so you fix the source data, not just the output.</p>
-              <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-                <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-                <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">WARNING:root: message</code></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3 — emerald: audit trail -->
-          <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-            <div class="flex flex-col items-center gap-3">
-              <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-                <span class="iconify text-white text-2xl" data-icon="fa6-solid:file-lines"></span>
-              </span>
-              <h3 class="text-sm font-bold text-gray-800 leading-snug">A script ran<br>three days ago</h3>
-              <p class="text-xs text-gray-500 leading-relaxed">Your log file has a timestamp on every entry. You scroll to Monday and see exactly what data was loaded, what was skipped, and when the job finished — using one <code class="font-mono text-emerald-700">logging.basicConfig()</code> call.</p>
-              <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-                <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-                <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">analysis.log</code></span>
-              </div>
-            </div>
-          </div>
-
         </div>
 
-        <!-- Before / After comparison table -->
-        <div class="rounded-xl border border-gray-100 overflow-hidden">
-          <div class="grid grid-cols-2">
+        <!-- Log file viewer -->
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-gray-400 text-xs" data-icon="fa6-solid:file-lines" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">analysis.log</span>
+            </div>
+          </div>
+          <div class="bg-[#1e1e2e] px-4 py-4 space-y-2 font-mono text-[11px]">
 
-            <!-- Without column -->
-            <div class="border-r border-gray-100">
-              <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-                <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-                <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without logging</p>
-              </div>
-              <div class="px-4 py-4 space-y-3">
-                <div class="flex items-start gap-2.5">
-                  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                  <p class="text-xs text-gray-500 leading-relaxed">When the overnight pipeline fails, you have no record of which step broke — you restart the whole job blind.</p>
-                </div>
-                <div class="flex items-start gap-2.5">
-                  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                  <p class="text-xs text-gray-500 leading-relaxed">A bad data row produces a wrong total and you spend hours comparing spreadsheets to find it.</p>
-                </div>
-                <div class="flex items-start gap-2.5">
-                  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                  <p class="text-xs text-gray-500 leading-relaxed">You cannot tell whether last Monday's script used fresh data or stale data from the previous week.</p>
-                </div>
-              </div>
+            <!-- INFO: start -->
+            <div class="flex items-start gap-2 flex-wrap">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:01</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-900/40 text-blue-300 border border-blue-800/40 shrink-0">INFO</span>
+              <span class="text-gray-300">Pipeline started &#8212; loading raw_sales_jan.csv</span>
             </div>
 
-            <!-- With column -->
-            <div>
-              <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-                <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-                <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With logging</p>
-              </div>
-              <div class="px-4 py-4 space-y-3">
-                <div class="flex items-start gap-2.5">
-                  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">logging.info()</strong> writes a timestamped entry after every step, so you open the log and go straight to the failing line.</p>
-                </div>
-                <div class="flex items-start gap-2.5">
-                  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">logging.warning()</strong> flags every suspect row as it runs — you open the log and the bad row number is already there.</p>
-                </div>
-                <div class="flex items-start gap-2.5">
-                  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">logging.basicConfig()</strong> adds a timestamp to every entry, so Monday's log shows exactly when the file was loaded.</p>
-                </div>
-              </div>
+            <!-- INFO: rows loaded -->
+            <div class="flex items-start gap-2 flex-wrap">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:03</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-900/40 text-blue-300 border border-blue-800/40 shrink-0">INFO</span>
+              <span class="text-gray-300">1,247 rows loaded successfully</span>
+            </div>
+
+            <!-- WARNING: negative price -->
+            <div class="flex items-start gap-2 flex-wrap">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:04</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-900/40 text-amber-300 border border-amber-800/40 shrink-0">WARNING</span>
+              <span class="text-amber-200">Row 892: price is negative (-12.50), row skipped</span>
+            </div>
+
+            <!-- WARNING: missing id -->
+            <div class="flex items-start gap-2 flex-wrap">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:04</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-900/40 text-amber-300 border border-amber-800/40 shrink-0">WARNING</span>
+              <span class="text-amber-200">Row 1103: missing product_id, row skipped</span>
+            </div>
+
+            <!-- INFO: cleaning done -->
+            <div class="flex items-start gap-2 flex-wrap">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:07</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-900/40 text-blue-300 border border-blue-800/40 shrink-0">INFO</span>
+              <span class="text-gray-300">Cleaning complete &#8212; 1,245 rows retained, 2 skipped</span>
+            </div>
+
+            <!-- ERROR: db timeout -->
+            <div class="flex items-start gap-2 flex-wrap border-t border-white/5 pt-2">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:09</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-900/50 text-red-300 border border-red-800/50 shrink-0">ERROR</span>
+              <span class="text-red-300">Database connection failed: timeout after 30s</span>
+            </div>
+
+            <!-- ERROR: pipeline stopped -->
+            <div class="flex items-start gap-2 flex-wrap">
+              <span class="text-gray-500 shrink-0 whitespace-nowrap">2024-01-15 02:00:09</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-900/50 text-red-300 border border-red-800/50 shrink-0">ERROR</span>
+              <span class="text-red-300">Pipeline stopped &#8212; see above for details</span>
             </div>
 
           </div>
         </div>
 
-</div>
+        <!-- What each level told the team -->
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What Each Level Told the Team</p>
+          <div class="space-y-3">
+
+            <!-- INFO row — blue -->
+            <div class="flex items-start gap-4 rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50/60 to-white px-5 py-4">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-sm mt-0.5">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:circle-info"></span>
+              </span>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                  <p class="text-sm font-semibold text-gray-800">INFO &#8212; progress checkpoints that confirm everything is working</p>
+                  <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 border border-blue-200">logging.info()</code>
+                </div>
+                <p class="text-xs text-gray-500 leading-relaxed">The two <code class="font-mono text-[10px] bg-gray-100 px-1 rounded">INFO</code> lines showed that the file loaded correctly and cleaning finished. Without them, a silent success looks identical to a silent failure &#8212; you would not know if the script even started.</p>
+              </div>
+            </div>
+
+            <!-- WARNING row — amber -->
+            <div class="flex items-start gap-4 rounded-xl border border-amber-100 bg-gradient-to-r from-amber-50/60 to-white px-5 py-4">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 shrink-0 shadow-sm mt-0.5">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:triangle-exclamation"></span>
+              </span>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                  <p class="text-sm font-semibold text-gray-800">WARNING &#8212; bad data rows caught and named before they reach the report</p>
+                  <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-200">logging.warning()</code>
+                </div>
+                <p class="text-xs text-gray-500 leading-relaxed">The two <code class="font-mono text-[10px] bg-gray-100 px-1 rounded">WARNING</code> lines identified the exact row numbers with bad data. The analyst opened the log, went straight to row 892 and row 1103 in the source CSV, and fixed them in 10 minutes instead of scanning 1,247 rows manually.</p>
+              </div>
+            </div>
+
+            <!-- ERROR row — red/pink -->
+            <div class="flex items-start gap-4 rounded-xl border border-pink-100 bg-gradient-to-r from-[#fdf0f7]/60 to-white px-5 py-4">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-sm mt-0.5">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:circle-xmark"></span>
+              </span>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                  <p class="text-sm font-semibold text-gray-800">ERROR &#8212; the exact failure point without running the script again</p>
+                  <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-pink-100 text-[#CB187D] border border-pink-200">logging.error()</code>
+                </div>
+                <p class="text-xs text-gray-500 leading-relaxed">The <code class="font-mono text-[10px] bg-gray-100 px-1 rounded">ERROR</code> lines showed that the cleaning steps all passed &#8212; the problem was the database connection at the very end. That single detail cut the investigation from hours to minutes because the team knew immediately where not to look.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
   </div>
 </section>
 

@@ -2415,107 +2415,173 @@ generate_report(remove_blanks(raw_names))    # run the full pipeline</code></pre
       <!-- Intro paragraph -->
       <p class="text-sm text-gray-600 leading-relaxed">A data analytics team might run a dozen scripts spread across one flat folder — loading data, cleaning it, running calculations, and building reports all jumbled together. When a new file lands in the folder, nobody knows which script to run or whether editing one formula will break something else. A standard project layout puts each piece in a named location, so the whole team can find, update, and reuse any part of the pipeline without confusion.</p>
 
-      <!-- Three scenario cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Scenario label -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#fdf0f7] shrink-0">
+          <span class="iconify text-[#CB187D] text-sm" data-icon="fa6-solid:folder-tree"></span>
+        </span>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand">Scenario — Before and After Structuring a Data Project</p>
+      </div>
 
-        <!-- Card 1 — violet: shared modules -->
-        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:file-import"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">12 scripts in one folder —<br>which one cleans the data?</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Three analysts each have a slightly different copy of the same cleaning logic. Store it once in <code class="font-mono text-violet-700">modules/cleaning.py</code> and every analyst imports the same tested version — one edit fixes it for everyone.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">shared logic</code></span>
+      <!-- Folder explorer: Messy vs Structured -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- Before: flat/messy (red) -->
+        <div class="rounded-xl border border-red-100 overflow-hidden shadow-sm flex flex-col">
+          <div class="flex items-center gap-2 px-4 py-2.5 bg-red-50 border-b border-red-100">
+            <span class="iconify text-red-400 text-sm" data-icon="fa6-solid:circle-xmark"></span>
+            <p class="text-xs font-bold text-red-500">Before — Everything in One Folder</p>
+          </div>
+          <div class="bg-[#1e1e2e] px-4 py-4 font-mono space-y-1 flex-1">
+            <div class="flex items-center gap-2">
+              <span class="iconify text-yellow-400 text-sm" data-icon="fa6-solid:folder-open"></span>
+              <span class="text-[12px] text-gray-200 font-bold">my_project/</span>
+            </div>
+            <div class="pl-5 space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                <span class="text-[11px] text-gray-300">clean_data.py</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                <span class="text-[11px] text-gray-300">clean_data_v2.py</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                <span class="text-[11px] text-gray-300">clean_data_final.py</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-green-400 text-xs" data-icon="fa6-solid:table"></span>
+                <span class="text-[11px] text-gray-300">sales_jan.csv</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-green-400 text-xs" data-icon="fa6-solid:table"></span>
+                <span class="text-[11px] text-gray-300">sales_jan_processed.csv</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                <span class="text-[11px] text-gray-300">report.py</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                <span class="text-[11px] text-gray-300">report_final.py</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-gray-500 text-xs" data-icon="fa6-solid:file"></span>
+                <span class="text-[11px] text-gray-400 italic">notes_old.txt</span>
+              </div>
+            </div>
+            <div class="mt-3 px-3 py-2 rounded-lg bg-red-900/30 border border-red-800/40">
+              <p class="text-[10px] text-red-300 leading-relaxed">12 files, no clear entry point. Which <code class="font-mono">clean_data</code> is the real one?</p>
             </div>
           </div>
         </div>
 
-        <!-- Card 2 — pink: data folder separation -->
-        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:folder-open"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Raw file updated overnight —<br>processed output gone</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Data files and scripts in one flat folder mean a fresh download can silently overwrite a finished report. Split into <code class="font-mono text-[#CB187D]">data/raw/</code> and <code class="font-mono text-[#CB187D]">data/processed/</code> and each folder has one clear purpose — source files never touch output files.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">safe data paths</code></span>
-            </div>
+        <!-- After: structured (emerald) -->
+        <div class="rounded-xl border border-emerald-100 overflow-hidden shadow-sm flex flex-col">
+          <div class="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 border-b border-emerald-100">
+            <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:circle-check"></span>
+            <p class="text-xs font-bold text-emerald-600">After — Standard Project Layout</p>
           </div>
-        </div>
-
-        <!-- Card 3 — emerald: single entry point -->
-        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:file-code"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">New teammate joins —<br>which file runs first?</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Without a clear structure, a new team member has to read every script before finding the right starting point. Place one <code class="font-mono text-emerald-700">main.py</code> at the project root and the entry point is unmistakable — open it, run it, done.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">entry point</code></span>
+          <div class="bg-[#1e1e2e] px-4 py-4 font-mono space-y-1 flex-1">
+            <div class="flex items-center gap-2">
+              <span class="iconify text-yellow-400 text-sm" data-icon="fa6-solid:folder-open"></span>
+              <span class="text-[12px] text-gray-200 font-bold">my_project/</span>
+            </div>
+            <div class="pl-5 space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                <span class="text-[11px] text-emerald-300 font-semibold">main.py</span>
+                <span class="text-[10px] text-gray-600 italic">← entry point</span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:folder"></span>
+                <span class="text-[11px] text-gray-300 font-semibold">data/</span>
+              </div>
+              <div class="pl-5 space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="iconify text-yellow-300 text-xs" data-icon="fa6-solid:folder"></span>
+                  <span class="text-[11px] text-gray-400">raw/</span>
+                  <span class="text-[10px] text-gray-600 italic">← untouched source</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="iconify text-yellow-300 text-xs" data-icon="fa6-solid:folder"></span>
+                  <span class="text-[11px] text-gray-400">processed/</span>
+                  <span class="text-[10px] text-gray-600 italic">← outputs only</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:folder"></span>
+                <span class="text-[11px] text-gray-300 font-semibold">modules/</span>
+              </div>
+              <div class="pl-5 space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                  <span class="text-[11px] text-gray-400">cleaning.py</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                  <span class="text-[11px] text-gray-400">calculations.py</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="iconify text-yellow-400 text-xs" data-icon="fa6-solid:folder"></span>
+                <span class="text-[11px] text-gray-300 font-semibold">reports/</span>
+              </div>
+              <div class="pl-5">
+                <div class="flex items-center gap-2">
+                  <span class="iconify text-blue-400 text-xs" data-icon="logos:python"></span>
+                  <span class="text-[11px] text-gray-400">summary_report.py</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-700/40">
+              <p class="text-[10px] text-emerald-300 leading-relaxed">Every file has one home. Open <code class="font-mono">main.py</code> and run. Done.</p>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Before / After table -->
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-        <div class="grid grid-cols-2">
+      <!-- Three problem-solved rows -->
+      <div class="space-y-2">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-2">Three Problems the Structure Solves</p>
 
-          <!-- Without column -->
-          <div class="border-r border-gray-100">
-            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without project structure</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Three analysts each maintain a different copy of the same cleaning logic — one update means three files to edit, and one is always missed.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Raw and processed data share one folder — a fresh download silently overwrites a finished report.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">A new team member reads every script to find the entry point — guessing which file to run wastes time every time.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- With column -->
+        <!-- Row 1: Shared logic -->
+        <div class="flex items-start gap-3 rounded-xl border border-violet-100 bg-violet-50/40 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-100 shrink-0 mt-0.5">
+            <span class="iconify text-violet-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
           <div>
-            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With project structure</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Store the logic once in <strong class="text-gray-700">modules/cleaning.py</strong> — every analyst imports the same tested version and one edit updates everyone's result.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">data/raw/</strong> holds source files and <strong class="text-gray-700">data/processed/</strong> holds outputs — a fresh download never touches finished reports.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">main.py</strong> at the project root is the unmistakable entry point — any team member can open it and run the full pipeline immediately.</p>
-              </div>
-            </div>
+            <p class="text-xs font-bold text-violet-700 mb-0.5">Shared logic lives in <code class="font-mono text-sm">modules/</code></p>
+            <p class="text-xs text-gray-500 leading-relaxed">Three analysts all import from <code class="text-xs font-mono bg-white text-gray-700 border border-gray-200 px-1 rounded">modules/cleaning.py</code> — one edit updates everyone's output automatically, with no copies to track down.</p>
           </div>
+        </div>
 
+        <!-- Row 2: Data separation -->
+        <div class="flex items-start gap-3 rounded-xl border border-pink-100 bg-pink-50/40 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-pink-100 shrink-0 mt-0.5">
+            <span class="iconify text-pink-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <div>
+            <p class="text-xs font-bold text-pink-700 mb-0.5">Raw and processed data never mix</p>
+            <p class="text-xs text-gray-500 leading-relaxed"><code class="text-xs font-mono bg-white text-gray-700 border border-gray-200 px-1 rounded">data/raw/</code> holds untouched source files. <code class="text-xs font-mono bg-white text-gray-700 border border-gray-200 px-1 rounded">data/processed/</code> holds outputs. A fresh download can never silently overwrite a finished report.</p>
+          </div>
+        </div>
+
+        <!-- Row 3: Clear entry point -->
+        <div class="flex items-start gap-3 rounded-xl border border-emerald-100 bg-emerald-50/40 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-100 shrink-0 mt-0.5">
+            <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <div>
+            <p class="text-xs font-bold text-emerald-700 mb-0.5">One unmistakable entry point</p>
+            <p class="text-xs text-gray-500 leading-relaxed"><code class="text-xs font-mono bg-white text-gray-700 border border-gray-200 px-1 rounded">main.py</code> at the root is all a new teammate needs to find. Open it, run it, done — no reading every script to figure out which one starts the pipeline.</p>
+          </div>
         </div>
       </div>
 
+      
     </div>
   </div>
 </section>

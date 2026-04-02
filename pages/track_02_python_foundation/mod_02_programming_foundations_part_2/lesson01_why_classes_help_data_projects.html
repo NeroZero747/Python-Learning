@@ -1445,95 +1445,67 @@ print(ada.greet())                  # prints: Hi, Ada</code></pre>
 </div>
     <div class="bg-white px-8 py-7 space-y-6">
 
-      <!-- Block 1 — Intro paragraph -->
-      <p class="text-sm text-gray-600 leading-relaxed">Using a class in Python works like ordering from a menu. First someone writes the menu (the class). Then you place an order (create an object). Finally the kitchen prepares your dish (a method runs). Python follows these same three stages every time, in what programmers call <strong class="text-gray-800">define → create → use</strong>.</p>
+      <!-- Intro -->
+      <p class="text-sm text-gray-600 leading-relaxed">Every class you write follows the same three steps — <strong class="text-gray-800">define → create → use</strong>. Understanding when each step happens is the key to reading and writing any Python class with confidence.</p>
 
-      <!-- Block 2 — Flowchart -->
-      <div class="rounded-2xl border border-gray-100 bg-gray-50 px-5 pt-4 pb-6 overflow-x-auto">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Three Stages of Using a Class</p>
-        <div class="flex items-start gap-0 min-w-[640px]">
+      <!-- 3 vertical steps -->
+      <div class="space-y-3">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-1">The Three Steps, Every Time</p>
 
-          <!-- Node 1 — You Write the Class (circle, pink) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:pen-ruler"></span>
+        <!-- Step 1 — Define -->
+        <div class="flex gap-4 rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-white px-5 py-4">
+          <div class="flex flex-col items-center shrink-0" style="width:36px;">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white font-black text-sm shadow-md">1</span>
+            <div class="w-0.5 flex-1 bg-gradient-to-b from-[#e84aad]/30 to-transparent mt-2"></div>
+          </div>
+          <div class="min-w-0 flex-1 pt-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-[#CB187D] text-sm" data-icon="fa6-solid:pen-ruler"></span>
+              <p class="text-sm font-bold text-gray-800">Define the class</p>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-pink-50 text-pink-600 border border-pink-100">Nothing runs yet</span>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Write<br>the Class</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Describe the data &amp; actions</p>
+            <p class="text-xs text-gray-500 leading-relaxed mb-2">You write the blueprint — the class name, the data it stores, and the actions it can perform. Python reads this and files it away, but does not execute a single line inside.</p>
+            <code class="text-[11px] font-mono bg-pink-50 text-pink-600 border border-pink-100 px-2 py-1 rounded-lg block w-fit">class Customer:  # saved as a blueprint</code>
           </div>
+        </div>
 
-          <!-- Arrow 1 → 2 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-            <span class="iconify text-violet-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
+        <!-- Step 2 — Create -->
+        <div class="flex gap-4 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/60 via-white to-white px-5 py-4">
+          <div class="flex flex-col items-center shrink-0" style="width:36px;">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-black text-sm shadow-md">2</span>
+            <div class="w-0.5 flex-1 bg-gradient-to-b from-blue-300/30 to-transparent mt-2"></div>
           </div>
-
-          <!-- Node 2 — Python Saves the Blueprint (rounded square, violet) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:floppy-disk"></span>
+          <div class="min-w-0 flex-1 pt-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-blue-500 text-sm" data-icon="fa6-solid:cube"></span>
+              <p class="text-sm font-bold text-gray-800">Create an object</p>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100">Memory is allocated</span>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Python Saves<br>the Blueprint</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Nothing runs yet</p>
+            <p class="text-xs text-gray-500 leading-relaxed mb-2">You call the class like a function to build one real copy — called an object. Each object gets its own separate data, independent from every other object you create from the same blueprint.</p>
+            <code class="text-[11px] font-mono bg-blue-50 text-blue-700 border border-blue-100 px-2 py-1 rounded-lg block w-fit">customer = Customer()  # object created in memory</code>
           </div>
+        </div>
 
-          <!-- Arrow 2 → 3 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-            <span class="iconify text-blue-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
+        <!-- Step 3 — Use -->
+        <div class="flex gap-4 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/60 via-white to-white px-5 py-4">
+          <div class="flex flex-col items-center shrink-0" style="width:36px;">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black text-sm shadow-md">3</span>
           </div>
-
-          <!-- Node 3 — Create an Object (diamond, blue) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-12 h-12 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100" style="margin-top:4px;">
-              <span class="iconify text-white text-lg -rotate-45" data-icon="fa6-solid:cube"></span>
+          <div class="min-w-0 flex-1 pt-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:play"></span>
+              <p class="text-sm font-bold text-gray-800">Call a method</p>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">Code finally runs</span>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-3 text-center leading-tight">Create<br>an Object</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Build a copy to work with</p>
+            <p class="text-xs text-gray-500 leading-relaxed mb-2">You call a method on the object using dot notation. Only now does Python execute the code inside that method, reading and updating the object's own data.</p>
+            <code class="text-[11px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-100 px-2 py-1 rounded-lg block w-fit">customer.greeting()  # method runs now</code>
           </div>
-
-          <!-- Arrow 3 → 4 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-            <span class="iconify text-emerald-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 4 — Call a Method (rounded square, emerald) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:play"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Call<br>a Method</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Now the code runs</p>
-          </div>
-
-          <!-- Arrow 4 → 5 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-emerald-300 to-gray-300"></div>
-            <span class="iconify text-gray-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 5 — See the Result (circle, gray) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-lg ring-4 ring-gray-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:flag-checkered"></span>
-            </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">See the<br>Result</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Your data is ready</p>
-          </div>
-
         </div>
       </div>
 
-      <!-- Block 3 — Key insight sub-heading + paragraph -->
+      <!-- Code block -->
       <div class="space-y-2">
-        <p class="text-sm font-semibold text-gray-800">Writing a Class Does Not Run Any Code</p>
-        <p class="text-sm text-gray-600 leading-relaxed">This is the biggest surprise for beginners. When Python sees a class, it only saves a description — like filing a recipe card in a drawer. No data is created and no methods run. The code inside only comes alive when you create an object and call one of its methods.</p>
-      </div>
-
-      <!-- Block 4 — Code block -->
-      <div class="space-y-2">
-        <p class="text-sm text-gray-600 leading-relaxed">Follow the numbered comments to see when each line actually runs:</p>
+        <p class="text-sm text-gray-600 leading-relaxed">Follow the numbered comments below to see exactly when each line runs:</p>
         <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
             <div class="flex items-center gap-3">
@@ -1545,16 +1517,16 @@ print(ada.greet())                  # prints: Hi, Ada</code></pre>
             <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
           </div>
           <div class="bg-code">
-            <pre class="overflow-x-auto pre-reset"><code class="language-python">class Customer:                   # 1. Python saves this blueprint
-    name = "Unknown"              # 2. Default attribute — saved, not used yet
-    orders = 0                    # 3. Another default — saved, not used yet
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">class Customer:                   # 1. DEFINE — Python saves blueprint, nothing runs
+    name = "Unknown"              # 2. DEFINE — default attribute stored in blueprint
+    orders = 0                    # 3. DEFINE — another default, still just a blueprint
 
-    def greeting(self):           # 4. A method — saved, not run yet
+    def greeting(self):           # 4. DEFINE — method saved, not executed yet
         return "Hi, " + self.name
 
-customer = Customer()             # 5. NOW Python builds an object
-customer.name = "Ada"             # 6. Change this object's data
-print(customer.greeting())        # 7. Call the method — it finally runs</code></pre>
+customer = Customer()             # 5. CREATE — Python builds one object in memory
+customer.name = "Ada"             # 6. USE — set this object's name attribute
+print(customer.greeting())        # 7. USE — method runs, returns "Hi, Ada"</code></pre>
           </div>
           <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
             <div class="flex items-center gap-2 mb-1.5">
@@ -1567,72 +1539,10 @@ print(customer.greeting())        # 7. Call the method — it finally runs</code
         </div>
       </div>
 
-      <!-- Block 5 — Three concept cards -->
-      <div class="space-y-3">
-        <p class="text-xs font-bold uppercase tracking-widest text-brand">Three Steps You Will Repeat Every Time</p>
-        <p class="text-sm text-gray-600 leading-relaxed">Every class you build follows the same pattern. Learn these three steps and you can read any Python class.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-
-          <!-- Card 1 — Describe the Data (blue) -->
-          <div class="rounded-xl border border-blue-100 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
-            <div class="h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
-            <div class="px-4 py-4">
-              <div class="flex items-center gap-2.5 mb-2.5">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 shrink-0">
-                  <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:tag"></span>
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-gray-800 leading-tight">Describe the Data</p>
-                  <p class="text-[10px] text-gray-400 italic leading-tight">Pick what to remember</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Decide which pieces of information the class should store. These are called attributes. For example, a <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">Customer</code> might store <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">name</code> and <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">orders</code>.</p>
-            </div>
-          </div>
-
-          <!-- Card 2 — Describe the Actions (emerald) -->
-          <div class="rounded-xl border border-emerald-100 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
-            <div class="h-1 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
-            <div class="px-4 py-4">
-              <div class="flex items-center gap-2.5 mb-2.5">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 shrink-0">
-                  <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:gear"></span>
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-gray-800 leading-tight">Describe the Actions</p>
-                  <p class="text-[10px] text-gray-400 italic leading-tight">Pick what it can do</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Write methods — small functions inside the class that work with its data. A <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">greeting</code> method reads <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self.name</code> and returns a message.</p>
-            </div>
-          </div>
-
-          <!-- Card 3 — Build and Use (violet) -->
-          <div class="rounded-xl border border-violet-100 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-violet-200 transition-all">
-            <div class="h-1 bg-gradient-to-r from-violet-500 to-violet-400"></div>
-            <div class="px-4 py-4">
-              <div class="flex items-center gap-2.5 mb-2.5">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-violet-50 shrink-0">
-                  <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:rocket"></span>
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-gray-800 leading-tight">Build and Use</p>
-                  <p class="text-[10px] text-gray-400 italic leading-tight">Create an object, call a method</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Create an object with <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">Customer()</code>, set its data, then call a method like <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">customer.greeting()</code>. That is when the code finally runs.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Block 6 — Closing amber tip -->
+      <!-- Amber tip -->
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-        <p class="text-sm text-gray-600">If you see an error like "attribute not found", check which stage you are in. The most common mistake is trying to use data before creating an object — remember, the class is just a saved plan until you build something from it.</p>
-      </div>
-
+        <p class="text-sm text-gray-600">If you see an error like "attribute not found", check which step you are at. The most common mistake is trying to use data before creating an object — the class is just a saved plan until you call it with <code class="text-xs font-mono px-1 py-0.5 rounded bg-orange-50 text-orange-700">Customer()</code>.</p>
     </div>
   </div>
 </section>
@@ -2653,107 +2563,115 @@ print(claim.member_owes())     # call the method with ()</code></pre>
     <div class="bg-white px-8 py-7 space-y-5">
 
       <!-- Intro paragraph -->
-      <p class="text-sm text-gray-600 leading-relaxed">Imagine you manage a healthcare claims system. Every day you process member records, calculate copays, and track provider billing. A class lets you bundle each record&apos;s data and logic into one reusable object — no scattered variables, no duplicated formulas.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">Consider a healthcare claims system where you process member records, calculate copays, and track provider billing every day. A class bundles each record's data and logic into one reusable object — no scattered variables, no duplicated formulas.</p>
 
-      <!-- Three scenario cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Three scenario rows -->
+      <div class="space-y-3">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-1">Three Recurring Scenarios</p>
 
-        <!-- Card 1 — violet -->
-        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:user-group"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">2,000 members enroll<br>this quarter</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Each member has a name, plan, and status. You write a <code class="font-mono text-violet-700">Member</code> class once and create an object for every enrollee — all 2,000 share the same structure.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">member object</code></span>
+        <!-- Scenario 1 — Members (violet) -->
+        <div class="flex items-start gap-4 rounded-xl border border-violet-100 bg-gradient-to-r from-violet-50/60 to-white px-5 py-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shrink-0 shadow-md">
+            <span class="iconify text-base" data-icon="fa6-solid:user-group"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-sm font-bold text-gray-800">2,000 members enroll this quarter</p>
+              <code class="text-[11px] font-mono bg-violet-50 text-violet-700 border border-violet-100 px-2 py-0.5 rounded-lg">Member()</code>
             </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Each member has a name, plan, and status. You write the <code class="text-xs font-mono text-violet-700">Member</code> class once and create an object for every enrollee — all 2,000 share the same structure automatically.</p>
           </div>
         </div>
 
-        <!-- Card 2 — pink -->
-        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:receipt"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">800 claims arrive<br>before noon</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Every claim needs a copay calculation. You write a <code class="font-mono text-[#CB187D]">member_owes()</code> method once and call it on every claim object — the formula never drifts.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">copay_amount</code></span>
+        <!-- Scenario 2 — Claims (pink) -->
+        <div class="flex items-start gap-4 rounded-xl border border-pink-100 bg-gradient-to-r from-pink-50/60 to-white px-5 py-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 text-white shrink-0 shadow-md">
+            <span class="iconify text-base" data-icon="fa6-solid:receipt"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-sm font-bold text-gray-800">800 claims arrive before noon</p>
+              <code class="text-[11px] font-mono bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded-lg">claim.member_owes()</code>
             </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Every claim needs a copay calculation. You write the <code class="text-xs font-mono text-pink-600">member_owes()</code> method once and call it on every claim object — fix the formula in one place and all 800 recalculate correctly.</p>
           </div>
         </div>
 
-        <!-- Card 3 — emerald -->
-        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:file-invoice-dollar"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">50 providers submit<br>billing each week</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Each provider&apos;s bills need to be collected and totalled. You write a <code class="font-mono text-emerald-700">total()</code> method once and every provider object sums its own list.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">total_billed</code></span>
+        <!-- Scenario 3 — Providers (emerald) -->
+        <div class="flex items-start gap-4 rounded-xl border border-emerald-100 bg-gradient-to-r from-emerald-50/60 to-white px-5 py-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shrink-0 shadow-md">
+            <span class="iconify text-base" data-icon="fa6-solid:file-invoice-dollar"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-sm font-bold text-gray-800">50 providers submit billing each week</p>
+              <code class="text-[11px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-100 px-2 py-0.5 rounded-lg">provider.total()</code>
             </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Each provider's bills need to be collected and totalled. You write the <code class="text-xs font-mono text-emerald-700">total()</code> method once and every provider object sums its own list — no inconsistency, no repeated code.</p>
           </div>
         </div>
 
       </div>
 
-      <!-- Before / After comparison table -->
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-        <div class="grid grid-cols-2">
+      <!-- Before / After comparison cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-          <!-- Without column -->
-          <div class="border-r border-gray-100">
-            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without classes</p>
+        <!-- Without card -->
+        <div class="rounded-xl border border-red-100 overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+            <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+            <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without classes</p>
+          </div>
+          <div class="px-4 py-4 space-y-3 bg-white">
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0 mt-0.5">
+                <span class="iconify text-red-400 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Each member's data lives in separate variables — 2,000 members means thousands of loose names with no shared structure.</p>
             </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">You store each member&apos;s data in separate variables — 2,000 members means thousands of loose names with no shared structure.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">The copay formula is copy-pasted into 800 places — one typo and every claim after it is wrong.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Each provider&apos;s billing total is calculated with a different snippet — no guarantee the logic is the same.</p>
-              </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0 mt-0.5">
+                <span class="iconify text-red-400 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">The copay formula is copy-pasted into 800 places — one typo and every claim after it is wrong.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0 mt-0.5">
+                <span class="iconify text-red-400 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Each provider's billing total is calculated with a different snippet — no guarantee the logic is the same.</p>
             </div>
           </div>
-
-          <!-- With column -->
-          <div>
-            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With classes</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Write the <strong class="text-gray-700">Member</strong> class once — every enrollee object carries the same fields automatically.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Fix the copay logic in one place inside <strong class="text-gray-700">member_owes()</strong> and all 800 claims recalculate correctly.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">total()</strong> runs the exact same summing logic for every provider — no inconsistency, no repeated code.</p>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        <!-- With card -->
+        <div class="rounded-xl border border-emerald-100 overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 bg-emerald-50 border-b border-emerald-100">
+            <span class="iconify text-emerald-500 text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+            <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">With classes</p>
+          </div>
+          <div class="px-4 py-4 space-y-3 bg-white">
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0 mt-0.5">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Write the <strong class="text-gray-700">Member</strong> class once — every enrollee object carries the same fields automatically.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0 mt-0.5">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Fix the copay logic in one place inside <strong class="text-gray-700">member_owes()</strong> and all 800 claims recalculate correctly.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0 mt-0.5">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">total()</strong> runs the exact same summing logic for every provider — no inconsistency, no repeated code.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>

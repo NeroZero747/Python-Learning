@@ -1366,87 +1366,146 @@ report.run()                         # all three steps run with one call</code><
       <!-- Block 1 — Intro paragraph -->
       <p class="text-sm text-gray-600 leading-relaxed">When you refactor a script, you follow a repeatable sequence called <strong class="text-gray-800">structured reorganization</strong> — each step reshapes the code without ever changing what it outputs.</p>
 
-      <!-- Block 2 — Flowchart -->
-      <div class="rounded-2xl border border-gray-100 bg-gray-50 px-5 pt-4 pb-6 overflow-x-auto">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">How Python Reads Your Program — Top to Bottom</p>
-        <div class="flex items-start gap-0 min-w-[640px]">
+      <!-- Before vs After transformation card -->
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
 
-          <!-- Node 1 — Program Starts (circle, pink) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:play"></span>
+        <!-- Card header -->
+        <div class="px-5 py-3 bg-gradient-to-r from-[#CB187D] to-[#e84aad] flex items-center gap-3">
+          <span class="iconify text-white text-sm" data-icon="fa6-solid:arrows-rotate"></span>
+          <p class="text-sm font-bold text-white tracking-tight">The Refactoring Transformation — Same Output, Cleaner Shape</p>
+        </div>
+
+        <!-- Two columns: Before / After -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+
+          <!-- Before: loose script -->
+          <div class="px-5 py-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0">
+                <span class="iconify text-red-500 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs font-bold text-red-600 uppercase tracking-wide">Before — Loose Functions</p>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Program<br>Starts</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Python begins at line 1</p>
-          </div>
+            <div class="rounded-lg bg-code overflow-hidden">
+              <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">def load_data():
+    print("Loading data...")   # ✕ standalone
 
-          <!-- Arrow 1 — pink→violet -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-            <span class="iconify text-violet-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
+def clean_data():
+    print("Cleaning data...")  # ✕ standalone
 
-          <!-- Node 2 — Identify Functions (rounded square, violet) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:magnifying-glass"></span>
+def save_report():
+    print("Report saved!")     # ✕ standalone
+
+load_data()    # caller must know the order
+clean_data()
+save_report()</code></pre>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Identify<br>Functions</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Find functions that share one job</p>
-          </div>
-
-          <!-- Arrow 2 — violet→blue -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-            <span class="iconify text-blue-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 3 — Group into Class (diamond, blue) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-12 h-12 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100" style="margin-top:4px;">
-              <span class="iconify text-white text-lg -rotate-45" data-icon="fa6-solid:cube"></span>
+            <div class="space-y-1.5">
+              <div class="flex items-start gap-2">
+                <span class="iconify text-red-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-xs text-gray-500">Three functions with no connection to each other.</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="iconify text-red-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-xs text-gray-500">Caller must remember the order every single time.</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="iconify text-red-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-xs text-gray-500">Duplicated logic if you need a second pipeline.</p>
+              </div>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-3 text-center leading-tight">Group into<br>Class</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Write class Name: in Python</p>
           </div>
 
-          <!-- Arrow 3 — blue→emerald -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-            <span class="iconify text-emerald-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 4 — Add run() Method (rounded square, emerald) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:play"></span>
+          <!-- After: refactored class -->
+          <div class="px-5 py-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">After — Refactored Class</p>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Add run()<br>Method</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Call all steps in one go</p>
-          </div>
+            <div class="rounded-lg bg-code overflow-hidden">
+              <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">class ReportRunner:        # ✓ wrap in class
+    def load_data(self):
+        print("Loading data...")
 
-          <!-- Arrow 4 — emerald→gray -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-emerald-300 to-gray-300"></div>
-            <span class="iconify text-gray-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
+    def clean_data(self):
+        print("Cleaning data...")
 
-          <!-- Node 5 — Program Ends (circle, gray) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-lg ring-4 ring-gray-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:flag-checkered"></span>
+    def save_report(self):
+        print("Report saved!")
+
+    def run(self):         # ✓ one-line trigger
+        self.load_data()
+        self.clean_data()
+        self.save_report()</code></pre>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Program<br>Ends</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Result is shown</p>
+            <div class="space-y-1.5">
+              <div class="flex items-start gap-2">
+                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-xs text-gray-500">All three functions grouped under one named class.</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-xs text-gray-500">One call to <code class="font-mono text-xs bg-gray-100 text-gray-700 px-1 rounded">run()</code> executes all steps in order.</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-xs text-gray-500">Create a second pipeline with one extra line.</p>
+              </div>
+            </div>
           </div>
 
         </div>
+
+        <!-- Output unchanged footer -->
+        <div class="border-t border-gray-100 bg-gray-50 px-5 py-3 flex items-center gap-3">
+          <span class="iconify text-emerald-500 text-sm shrink-0" data-icon="fa6-solid:equals"></span>
+          <p class="text-xs text-gray-500 leading-relaxed">The output is <strong class="text-gray-700">identical</strong> both ways: <code class="font-mono text-xs bg-white text-gray-700 border border-gray-200 px-1.5 py-0.5 rounded">Loading data... Cleaning data... Report saved!</code> — refactoring never changes what the code produces.</p>
+        </div>
+
       </div>
 
-      <!-- Block 3 — Sub-heading + paragraph -->
+      <!-- 3-moves checklist -->
       <div class="space-y-2">
-        <p class="text-sm font-semibold text-gray-800">Refactoring Step by Step — the Default Pattern</p>
-        <p class="text-sm text-gray-600 leading-relaxed">You start by finding functions that work together — like <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono border border-gray-200">load_data</code>, <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono border border-gray-200">clean_data</code>, and <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono border border-gray-200">save_report</code>. You then write a class, indent those functions inside it, and add <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono border border-gray-200">self</code> as the first parameter to each. Finally, you add a <code class="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono border border-gray-200">run()</code> method that calls all of them in order. Every time you follow this pattern, the script produces exactly the same output as before.</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-2">The Three Moves — In This Order</p>
+
+        <!-- Move 1: write the class keyword (pink) -->
+        <div class="flex items-start gap-3 rounded-xl border border-pink-100 bg-pink-50/40 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-pink-500 text-white text-[10px] font-black shrink-0 mt-0.5">1</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-xs font-bold text-pink-700">Write the class wrapper</p>
+              <code class="text-[11px] font-mono bg-white text-pink-600 border border-pink-200 px-2 py-0.5 rounded-lg">class ReportRunner:</code>
+            </div>
+            <p class="text-xs text-gray-500">Add the class declaration above your functions and indent them inside. Python now treats them all as belonging to one named unit.</p>
+          </div>
+        </div>
+
+        <!-- Move 2: add self to each def (blue) -->
+        <div class="flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/40 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-white text-[10px] font-black shrink-0 mt-0.5">2</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-xs font-bold text-blue-700">Add <code class="font-mono">self</code> to every method</p>
+              <code class="text-[11px] font-mono bg-white text-blue-600 border border-blue-200 px-2 py-0.5 rounded-lg">def load_data(self):</code>
+            </div>
+            <p class="text-xs text-gray-500">Every function that is now a method needs <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">self</code> as its first parameter so Python can pass the object to it automatically when it is called.</p>
+          </div>
+        </div>
+
+        <!-- Move 3: add run() (emerald) -->
+        <div class="flex items-start gap-3 rounded-xl border border-emerald-100 bg-emerald-50/40 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500 text-white text-[10px] font-black shrink-0 mt-0.5">3</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-xs font-bold text-emerald-700">Add a <code class="font-mono">run()</code> coordinator</p>
+              <code class="text-[11px] font-mono bg-white text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded-lg">def run(self): ...</code>
+            </div>
+            <p class="text-xs text-gray-500">Write one method that calls all the others in order using <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">self.method()</code>. Every caller now only needs to know one thing: call <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">run()</code>.</p>
+          </div>
+        </div>
+
       </div>
 
       <!-- Block 4 — Code block with combined terminal output -->
@@ -2656,107 +2715,155 @@ report.load_data()       # call the method on it</code></pre>
       <!-- Intro paragraph -->
       <p class="text-sm text-gray-600 leading-relaxed">Every data team has reports that need to run on a schedule — loading fresh data, cleaning it, and saving the output. Without a class, that workflow is a set of loose functions you have to call in the right order every time. A class bundles the whole pipeline into one object so you can trigger all the steps with a single clean call.</p>
 
-      <!-- Three scenario cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Scenario label -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#fdf0f7] shrink-0">
+          <span class="iconify text-[#CB187D] text-sm" data-icon="fa6-solid:chart-line"></span>
+        </span>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand">Scenario — A Data Team Running Weekly Reports</p>
+      </div>
 
-        <!-- Card 1 — violet -->
-        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:chart-line"></span>
+      <!-- Pipeline roster -->
+      <div class="space-y-2">
+        <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Pipeline Roster — Before &amp; After Refactoring</p>
+
+        <!-- Row headers -->
+        <div class="grid grid-cols-[1fr_auto_auto] gap-3 px-4 pb-1">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Pipeline</p>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-red-400 w-28 text-center">Before</p>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-600 w-28 text-center">After</p>
+        </div>
+
+        <!-- Row 1: Weekly Sales Report -->
+        <div class="grid grid-cols-[1fr_auto_auto] gap-3 items-center rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-violet-50 shrink-0">
+              <span class="iconify text-violet-500 text-sm" data-icon="fa6-solid:chart-bar"></span>
             </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Your team runs<br>30 reports a week</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Each report needs the same three steps run in the same order every time. You write <code class="font-mono text-violet-700">ReportRunner</code> once, and every report runs cleanly without anyone needing to remember the sequence.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">pipeline complete</code></span>
+            <div>
+              <p class="text-xs font-bold text-gray-700">Weekly Sales Report</p>
+              <p class="text-[11px] text-gray-400">load → clean → save (3 steps)</p>
             </div>
+          </div>
+          <div class="w-28 text-center">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-50 border border-red-100 text-[11px] font-semibold text-red-500">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:list-ol"></span> 3 manual calls
+            </span>
+          </div>
+          <div class="w-28 text-center">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[11px] font-semibold text-emerald-600">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:bolt"></span> report.run()
+            </span>
           </div>
         </div>
 
-        <!-- Card 2 — pink (brand) -->
-        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:user-plus"></span>
+        <!-- Row 2: Monthly Membership Report -->
+        <div class="grid grid-cols-[1fr_auto_auto] gap-3 items-center rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-pink-50 shrink-0">
+              <span class="iconify text-pink-500 text-sm" data-icon="fa6-solid:users"></span>
             </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">A new analyst joins<br>the team tomorrow</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Without a class, they must read the whole script to learn which functions to call and in what order. They call <code class="font-mono text-[#CB187D]">report.run()</code> and the full pipeline completes — zero guesswork.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">3 steps, 1 call</code></span>
+            <div>
+              <p class="text-xs font-bold text-gray-700">Monthly Membership Report</p>
+              <p class="text-[11px] text-gray-400">fetch → filter → export (3 steps)</p>
             </div>
+          </div>
+          <div class="w-28 text-center">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-50 border border-red-100 text-[11px] font-semibold text-red-500">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:list-ol"></span> 3 manual calls
+            </span>
+          </div>
+          <div class="w-28 text-center">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[11px] font-semibold text-emerald-600">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:bolt"></span> report.run()
+            </span>
           </div>
         </div>
 
-        <!-- Card 3 — emerald -->
-        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:code-branch"></span>
+        <!-- Row 3: Inventory Restock Report -->
+        <div class="grid grid-cols-[1fr_auto_auto] gap-3 items-center rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 shrink-0">
+              <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:boxes-stacked"></span>
             </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Six pipelines share<br>the same logic</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Six different reports all need loading, cleaning, and saving. You create six <code class="font-mono text-emerald-700">ReportRunner()</code> objects — each runs independently using the exact same class with no duplicate code.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">6 objects, 1 class</code></span>
+            <div>
+              <p class="text-xs font-bold text-gray-700">Inventory Restock Report</p>
+              <p class="text-[11px] text-gray-400">read → calculate → alert (3 steps)</p>
             </div>
+          </div>
+          <div class="w-28 text-center">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-50 border border-red-100 text-[11px] font-semibold text-red-500">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:list-ol"></span> 3 manual calls
+            </span>
+          </div>
+          <div class="w-28 text-center">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[11px] font-semibold text-emerald-600">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:bolt"></span> report.run()
+            </span>
           </div>
         </div>
 
       </div>
 
-      <!-- Before / After comparison table -->
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-        <div class="grid grid-cols-2">
+      <!-- What changed: old call vs new call -->
+      <div class="space-y-3">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-1">What Actually Changed in the Code</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-          <!-- Without column -->
-          <div class="border-r border-gray-100">
-            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without a class</p>
+          <!-- Old -->
+          <div class="rounded-xl border border-red-100 overflow-hidden">
+            <div class="flex items-center gap-2 px-4 py-2.5 bg-red-50 border-b border-red-100">
+              <span class="iconify text-red-400 text-sm" data-icon="fa6-solid:circle-xmark"></span>
+              <p class="text-xs font-bold text-red-500">Old — 3 calls every time</p>
             </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Running 30 reports means calling three loose functions in the right order 30 separate times — one wrong call breaks the output.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">A new analyst has to read the whole script to discover which functions exist, what order they go in, and what each one depends on.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Six similar pipelines mean six copies of the same load/clean/save logic — one bug fix must be made in six different places.</p>
-              </div>
+            <div class="rounded-lg bg-code overflow-hidden">
+              <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">load_data()    # must remember step 1
+clean_data()   # must remember step 2
+save_report()  # must remember step 3
+# repeat for every new pipeline</code></pre>
             </div>
           </div>
 
-          <!-- With column -->
-          <div>
-            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With a class</p>
+          <!-- New -->
+          <div class="rounded-xl border border-emerald-100 overflow-hidden">
+            <div class="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 border-b border-emerald-100">
+              <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:circle-check"></span>
+              <p class="text-xs font-bold text-emerald-600">New — 1 call, always correct</p>
             </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">ReportRunner</strong> bundles all three steps — create one object per report and the sequence is always correct.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">report.run()</strong> is the only call a new analyst needs to make — the class handles the order and dependencies internally.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Fix the logic once inside <strong class="text-gray-700">ReportRunner</strong> and all six objects immediately use the corrected code.</p>
-              </div>
+            <div class="rounded-lg bg-code overflow-hidden">
+              <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">report = ReportRunner()
+report.run()   # all 3 steps, right order
+# same for every new pipeline instance</code></pre>
             </div>
           </div>
 
         </div>
       </div>
 
+      <!-- Benefit rows -->
+      <div class="space-y-2">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-2">Why This Matters</p>
+        <div class="flex items-center gap-3 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-pink-50 shrink-0">
+            <span class="iconify text-pink-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <p class="text-xs text-gray-600"><strong class="text-gray-800">No more step-order guesswork.</strong> The class encodes the correct sequence inside <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">run()</code> — every caller gets it right automatically.</p>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <p class="text-xs text-gray-600"><strong class="text-gray-800">New teammates onboard instantly.</strong> They do not need to read the whole script — one call to <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">report.run()</code> is all they need to know.</p>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <p class="text-xs text-gray-600"><strong class="text-gray-800">Fix once, fix everywhere.</strong> Edit a bug inside the class and every pipeline object that uses it picks up the fix — no hunting through 30 separate scripts.</p>
+        </div>
+      </div>
+
+      
     </div>
   </div>
 </section>

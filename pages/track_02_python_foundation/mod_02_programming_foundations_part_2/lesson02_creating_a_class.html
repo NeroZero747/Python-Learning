@@ -1269,98 +1269,92 @@ print(item.price)                     # output: 1200</code></pre>
     <div class="bg-white px-8 py-7 space-y-6">
 
       <!-- Intro -->
-      <p class="text-sm text-gray-600 leading-relaxed">Building a class follows a fixed recipe. Python reads your file from top to bottom — this is called <strong class="text-gray-800">sequential execution</strong>. You define the blueprint first, then create objects from it. Every class you write follows the same five-stage path shown below.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">A class is not built in one shot — you write it in three layers, each adding one piece of functionality. Python reads these layers from top to bottom and saves the whole blueprint before creating any objects. Understanding what each layer does makes it easy to write a class from scratch every time.</p>
 
-      <!-- Vertical step timeline -->
-      <div class="relative pl-16">
+      <!-- Build layer by layer -->
+      <div class="space-y-3">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-1">Build It Layer by Layer</p>
 
-        <!-- Continuous connector line -->
-        <div class="absolute top-6 bottom-6 bg-gradient-to-b from-pink-300 via-violet-300 via-blue-300 via-emerald-300 to-gray-300" style="left: 23px; width: 2px;"></div>
-
-        <div class="space-y-4">
-
-          <!-- Step 1 — Program Starts -->
-          <div class="relative flex items-start gap-4">
-            <div class="absolute -left-16 shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-md ring-4 ring-pink-50">
-              <span class="iconify text-white text-base" data-icon="fa6-solid:play"></span>
-            </div>
-            <div class="flex-1 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
-              <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
-                <p class="text-sm font-bold text-gray-800">Program Starts</p>
-                <span class="inline-flex items-center text-[10px] font-semibold font-mono bg-pink-50 text-pink-700 border border-pink-100 px-2.5 py-1 rounded-full whitespace-nowrap">Python reads line 1</span>
+        <!-- Layer 1 — class keyword (pink) -->
+        <div class="rounded-xl border border-pink-100 overflow-hidden">
+          <div class="flex items-center gap-3 px-4 py-3 bg-pink-50 border-b border-pink-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-pink-500 text-white text-[10px] font-black shrink-0">1</span>
+            <p class="text-xs font-bold text-pink-700 flex-1">Declare the Blueprint</p>
+            <code class="text-[11px] font-mono bg-white text-pink-600 border border-pink-200 px-2 py-0.5 rounded-lg">class Member:</code>
+          </div>
+          <div class="px-5 py-4 space-y-3">
+            <p class="text-xs text-gray-500 leading-relaxed">The <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">class</code> keyword tells Python to save a blueprint under the name you choose. The colon at the end opens the indented body where the class logic lives. Nothing runs here — Python just notes the name.</p>
+            <div class="rounded-lg overflow-hidden bg-code">
+              <div class="flex items-center gap-2 px-4 py-2 border-b border-code-sep">
+                <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                <span class="text-[11px] font-semibold text-gray-400">Python</span>
               </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Python opens your file and begins scanning from the very top. Nothing has executed yet — it's just reading the instructions.</p>
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">class Member:     # ← Layer 1: blueprint registered
+    pass          # placeholder until we add more</code></pre>
             </div>
           </div>
+        </div>
 
-          <!-- Step 2 — Define the Class -->
-          <div class="relative flex items-start gap-4">
-            <div class="absolute -left-16 shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-md ring-4 ring-violet-50">
-              <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
-            </div>
-            <div class="flex-1 rounded-xl border border-violet-100 bg-violet-50/40 px-4 py-3">
-              <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
-                <p class="text-sm font-bold text-gray-800">Define the Class</p>
-                <span class="inline-flex items-center text-[10px] font-semibold font-mono bg-violet-100 text-violet-700 border border-violet-200 px-2.5 py-1 rounded-full whitespace-nowrap">class Member:</span>
+        <!-- Layer 2 — __init__ constructor (blue) -->
+        <div class="rounded-xl border border-blue-100 overflow-hidden">
+          <div class="flex items-center gap-3 px-4 py-3 bg-blue-50 border-b border-blue-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-white text-[10px] font-black shrink-0">2</span>
+            <p class="text-xs font-bold text-blue-700 flex-1">Add the Constructor</p>
+            <code class="text-[11px] font-mono bg-white text-blue-600 border border-blue-200 px-2 py-0.5 rounded-lg">def __init__(self, ...)</code>
+          </div>
+          <div class="px-5 py-4 space-y-3">
+            <p class="text-xs text-gray-500 leading-relaxed">The <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">__init__</code> method is the setup recipe. Python saves it at this point — it does not run yet. Every time you create a new object from this class later, Python will automatically call <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">__init__</code> with the values you provide.</p>
+            <div class="rounded-lg overflow-hidden bg-code">
+              <div class="flex items-center gap-2 px-4 py-2 border-b border-code-sep">
+                <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                <span class="text-[11px] font-semibold text-gray-400">Python</span>
               </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Python saves your class as a blueprint in memory. No object is created yet — Python just learned what a <code class="font-mono text-xs">Member</code> will look like.</p>
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">class Member:
+    def __init__(self, name, age):   # ← Layer 2: setup recipe added
+        pass                         # attributes come in Layer 3</code></pre>
             </div>
           </div>
+        </div>
 
-          <!-- Step 3 — Set Up __init__ -->
-          <div class="relative flex items-start gap-4">
-            <div class="absolute -left-16 shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md ring-4 ring-blue-50">
-              <span class="iconify text-white text-base" data-icon="fa6-solid:gear"></span>
-            </div>
-            <div class="flex-1 rounded-xl border border-blue-100 bg-blue-50/40 px-4 py-3">
-              <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
-                <p class="text-sm font-bold text-gray-800">Set Up the Constructor</p>
-                <span class="inline-flex items-center text-[10px] font-semibold font-mono bg-blue-100 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full whitespace-nowrap">def __init__(self, ...)</span>
+        <!-- Layer 3 — self.attributes (violet) -->
+        <div class="rounded-xl border border-violet-100 overflow-hidden">
+          <div class="flex items-center gap-3 px-4 py-3 bg-violet-50 border-b border-violet-100">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-violet-500 text-white text-[10px] font-black shrink-0">3</span>
+            <p class="text-xs font-bold text-violet-700 flex-1">Store the Attributes</p>
+            <code class="text-[11px] font-mono bg-white text-violet-600 border border-violet-200 px-2 py-0.5 rounded-lg">self.name = name</code>
+          </div>
+          <div class="px-5 py-4 space-y-3">
+            <p class="text-xs text-gray-500 leading-relaxed">Lines like <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self.name = name</code> attach the data to the object being created. The word <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self</code> means &ldquo;this specific object&rdquo; — so each object you create keeps its own independent copy of every attribute. The class is now complete and ready to use.</p>
+            <div class="rounded-lg overflow-hidden bg-code">
+              <div class="flex items-center gap-2 px-4 py-2 border-b border-code-sep">
+                <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                <span class="text-[11px] font-semibold text-gray-400">Python</span>
               </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Python reads the <code class="font-mono text-xs">__init__</code> recipe and stores it. This method hasn't run yet — it fires automatically each time you create a new object.</p>
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">class Member:
+    def __init__(self, name, age):
+        self.name = name   # ← Layer 3: store name on this object
+        self.age  = age    # ← Layer 3: store age on this object
+# Class is complete — create objects from it below</code></pre>
             </div>
           </div>
+        </div>
 
-          <!-- Step 4 — Create an Object -->
-          <div class="relative flex items-start gap-4">
-            <div class="absolute -left-16 shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-md ring-4 ring-emerald-50">
-              <span class="iconify text-white text-base" data-icon="fa6-solid:cubes"></span>
-            </div>
-            <div class="flex-1 rounded-xl border border-emerald-100 bg-emerald-50/40 px-4 py-3">
-              <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
-                <p class="text-sm font-bold text-gray-800">Create an Object</p>
-                <span class="inline-flex items-center text-[10px] font-semibold font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full whitespace-nowrap">Member("Jane", 42)</span>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Python calls the blueprint. <code class="font-mono text-xs">__init__</code> runs automatically, stores the starting data in the new object, and hands the ready-to-use object back to you.</p>
-            </div>
-          </div>
+      </div>
 
-          <!-- Step 5 — Use the Data -->
-          <div class="relative flex items-start gap-4">
-            <div class="absolute -left-16 shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-md ring-4 ring-gray-100">
-              <span class="iconify text-white text-base" data-icon="fa6-solid:flag-checkered"></span>
-            </div>
-            <div class="flex-1 rounded-xl border border-gray-200 bg-white px-4 py-3">
-              <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
-                <p class="text-sm font-bold text-gray-800">Use the Data</p>
-                <span class="inline-flex items-center text-[10px] font-semibold font-mono bg-gray-100 text-gray-600 border border-gray-200 px-2.5 py-1 rounded-full whitespace-nowrap">member.name → "Jane"</span>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">You read the object's stored data using dot notation. Every object created from the same class holds its own independent copy of each attribute.</p>
-            </div>
-          </div>
-
+      <!-- Define First, Use Second callout -->
+      <div class="flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-5 py-4">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gray-200 shrink-0 mt-0.5">
+          <span class="iconify text-gray-600 text-base" data-icon="fa6-solid:arrow-down-1-9"></span>
+        </span>
+        <div>
+          <p class="text-sm font-bold text-gray-800 mb-1">Define First, Use Second &mdash; The Rule That Never Changes</p>
+          <p class="text-xs text-gray-500 leading-relaxed">Python reads your file from the very first line to the very last. It saves the class blueprint when it reaches the <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-200 text-gray-700">class</code> keyword, but does not create any objects. Objects only appear when Python hits a line like <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-200 text-gray-700">Member(&quot;Jane&quot;, 42)</code> later in the file. If you try to create an object before the class definition, Python raises a <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-200 text-gray-700">NameError</code> because it has not seen the blueprint yet.</p>
         </div>
       </div>
 
-      <!-- Define First, Use Second rule -->
-      <div class="rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 space-y-1.5">
-        <p class="text-sm font-semibold text-gray-800">Define First, Use Second — the Rule That Never Changes</p>
-        <p class="text-sm text-gray-600 leading-relaxed">Python reads your file from the very first line to the very last. It memorizes the class definition when it reaches the <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">class</code> keyword, but it does not create any objects yet. Objects only appear when Python reaches a line like <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">Member("Jane", 42)</code> later in the file. If you try to create an object before the class definition, Python raises an error because it has not seen the blueprint yet.</p>
-      </div>
-
-      <!-- Code block -->
+      <!-- Full code block -->
       <div class="space-y-2">
-        <p class="text-sm text-gray-600 leading-relaxed">Watch how Python moves through this file line by line — the class comes first, then the objects:</p>
+        <p class="text-sm text-gray-600 leading-relaxed">Now watch all three layers working together — the class is defined first, then two objects are created from it:</p>
         <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
             <div class="flex items-center gap-3">
@@ -1377,11 +1371,11 @@ print(item.price)                     # output: 1200</code></pre>
         self.name = name                  # step 3 — attribute assignment (runs later)
         self.age  = age                   # step 4 — second attribute (runs later)
 
-member1 = Member("Jane", 42)              # step 5 — Python runs __init__ now
-member2 = Member("Carlos", 35)            # step 6 — __init__ runs again, new object
+member1 = Member(&quot;Jane&quot;, 42)              # step 5 — Python runs __init__ now
+member2 = Member(&quot;Carlos&quot;, 35)            # step 6 — __init__ runs again, new object
 
-print(member1.name, member1.age)          # step 7 — read member1's data
-print(member2.name, member2.age)          # step 8 — read member2's data</code></pre>
+print(member1.name, member1.age)          # step 7 — read member1&apos;s data
+print(member2.name, member2.age)          # step 8 — read member2&apos;s data</code></pre>
           </div>
           <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
             <div class="flex items-center gap-2 mb-1.5">
@@ -1394,70 +1388,10 @@ print(member2.name, member2.age)          # step 8 — read member2's data</code
         </div>
       </div>
 
-      <!-- Three concept cards -->
-      <div class="space-y-3">
-        <p class="text-xs font-bold uppercase tracking-widest text-brand">The Three Parts of Every Class</p>
-        <p class="text-sm text-gray-600 leading-relaxed">Every class you write in this lesson has exactly three moving parts. Master these and you can build any simple class from scratch.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-
-          <div class="rounded-xl border border-blue-100 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
-            <div class="h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
-            <div class="px-4 py-4">
-              <div class="flex items-center gap-2.5 mb-2.5">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 shrink-0">
-                  <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:cube"></span>
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-gray-800 leading-tight">The class Keyword</p>
-                  <p class="text-[10px] text-gray-400 italic leading-tight">The blueprint declaration</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">You start every class with <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">class ClassName:</code> followed by an indented body. This line tells Python to save the blueprint so you can use it later.</p>
-            </div>
-          </div>
-
-          <div class="rounded-xl border border-emerald-100 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
-            <div class="h-1 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
-            <div class="px-4 py-4">
-              <div class="flex items-center gap-2.5 mb-2.5">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 shrink-0">
-                  <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:gear"></span>
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-gray-800 leading-tight">The Constructor</p>
-                  <p class="text-[10px] text-gray-400 italic leading-tight">The automatic setup method</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">The <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">__init__</code> method runs every time you create a new object. It receives the starting values and stores them inside the object using <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self</code>.</p>
-            </div>
-          </div>
-
-          <div class="rounded-xl border border-violet-100 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-violet-200 transition-all">
-            <div class="h-1 bg-gradient-to-r from-violet-500 to-violet-400"></div>
-            <div class="px-4 py-4">
-              <div class="flex items-center gap-2.5 mb-2.5">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-violet-50 shrink-0">
-                  <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:database"></span>
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-gray-800 leading-tight">Attributes</p>
-                  <p class="text-[10px] text-gray-400 italic leading-tight">The stored data fields</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed">Lines like <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self.name = name</code> create attributes — named variables that belong to a single object. Each object keeps its own separate copy of every attribute.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Closing amber tip -->
+      <!-- Amber tip -->
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-        <p class="text-sm text-gray-600">The class definition is just a saved plan — it does nothing until you call it. You can define a class at the top of a file and create dozens of objects from it further down, and each object will carry its own independent data.</p>
-      </div>
-
-    </div>
+        <p class="text-sm text-gray-600">The class definition is just a saved plan — it does nothing until you call it with <code class="text-xs font-mono px-1 py-0.5 rounded bg-orange-50 text-orange-700">Member()</code>. You can define a class at the top of a file and create dozens of objects from it further down, and each object carries its own independent copy of every attribute.</p>
   </div>
 </section>
 
@@ -2507,110 +2441,115 @@ print(doc_2.name, &quot;-&quot;, doc_2.patient_count, &quot;patients&quot;)  # p
     <div class="bg-white px-8 py-7 space-y-5">
 
       <!-- Intro paragraph -->
-      <p class="text-sm text-gray-600 leading-relaxed">Imagine you manage a healthcare system that tracks members, claims, and providers. Every record has the same fields — name, ID, amount, status — repeated thousands of times. A class lets you define those fields once and stamp out as many objects as you need, each carrying its own data.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">In a healthcare system you work with the same three record types every day — members, claims, and providers. Each type has fixed fields that repeat thousands of times. Once you write a class for each type, you define those fields in one place and stamp out as many objects as you need, all guaranteed to have the same structure.</p>
 
-      <!-- Three scenario cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Three scenario rows -->
+      <div class="space-y-3">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-1">One Class, Unlimited Objects</p>
 
-        <!-- Card 1 — violet -->
-        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:users"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">800 new members<br>enroll this month</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Each member needs a name, plan type, and status stored together. You define a <code class="font-mono text-violet-700">Member</code> class once and create 800 objects from it — no repeated variable blocks.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">member object</code></span>
+        <!-- Scenario 1 — Members (violet) -->
+        <div class="flex items-start gap-4 rounded-xl border border-violet-100 bg-gradient-to-r from-violet-50/60 to-white px-5 py-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shrink-0 shadow-md">
+            <span class="iconify text-base" data-icon="fa6-solid:users"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-sm font-bold text-gray-800">800 new members enroll this month</p>
+              <code class="text-[11px] font-mono bg-violet-50 text-violet-700 border border-violet-100 px-2 py-0.5 rounded-lg">Member(&quot;Jane&quot;, &quot;Gold&quot;)</code>
             </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Each member needs a name, plan type, and status stored together. You write the <code class="text-xs font-mono text-violet-700">Member</code> class once and call it 800 times — every record is guaranteed to have exactly the same three fields, nothing missing.</p>
           </div>
         </div>
 
-        <!-- Card 2 — pink -->
-        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:file-invoice-dollar"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">3,000 claims<br>arrive every week</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Every claim carries a member ID, amount, and status. You create a <code class="font-mono text-[#CB187D]">Claim</code> class to guarantee every record has exactly those three fields — nothing missing, nothing misspelled.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">claim object</code></span>
+        <!-- Scenario 2 — Claims (pink) -->
+        <div class="flex items-start gap-4 rounded-xl border border-pink-100 bg-gradient-to-r from-pink-50/60 to-white px-5 py-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 text-white shrink-0 shadow-md">
+            <span class="iconify text-base" data-icon="fa6-solid:file-invoice-dollar"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-sm font-bold text-gray-800">3,000 claims arrive every week</p>
+              <code class="text-[11px] font-mono bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded-lg">Claim(member_id, amount)</code>
             </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Every claim carries a member ID, amount, and status. The <code class="text-xs font-mono text-pink-600">Claim</code> constructor enforces the exact field names, so a typo triggers an error immediately instead of hiding silently until a report breaks.</p>
           </div>
         </div>
 
-        <!-- Card 3 — emerald -->
-        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:user-doctor"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">150 providers<br>join the network</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Each provider needs a name, specialty, and patient count. You define a <code class="font-mono text-emerald-700">Provider</code> class once and create 150 objects — every record follows the same structure automatically.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">provider object</code></span>
+        <!-- Scenario 3 — Providers (emerald) -->
+        <div class="flex items-start gap-4 rounded-xl border border-emerald-100 bg-gradient-to-r from-emerald-50/60 to-white px-5 py-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shrink-0 shadow-md">
+            <span class="iconify text-base" data-icon="fa6-solid:user-doctor"></span>
+          </span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center flex-wrap gap-2 mb-1">
+              <p class="text-sm font-bold text-gray-800">150 providers join the network</p>
+              <code class="text-[11px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-100 px-2 py-0.5 rounded-lg">Provider(name, specialty)</code>
             </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Each provider needs a name, specialty, and patient count. Define the <code class="text-xs font-mono text-emerald-700">Provider</code> class once — adding a new field later means editing one line, and every future object picks it up automatically.</p>
           </div>
         </div>
 
       </div>
 
-      <!-- Before / After comparison table -->
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-        <div class="grid grid-cols-2">
+      <!-- Before / After comparison cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-          <!-- Without column -->
-          <div class="border-r border-gray-100">
-            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without classes</p>
+        <!-- Without card -->
+        <div class="rounded-xl border border-red-100 overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
+            <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
+            <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without classes</p>
+          </div>
+          <div class="px-4 py-4 space-y-3 bg-white">
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0 mt-0.5">
+                <span class="iconify text-red-400 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Separate variables for every member's name, plan, and status — 800 members means 2,400 loose variables with no shared structure.</p>
             </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">You create separate variables for every member's name, plan, and status — 800 members means 2,400 loose variables.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">One misspelled field name in a claim means silent bugs that only surface when a report breaks.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Adding a new field to 150 provider records means editing 150 separate blocks of code by hand.</p>
-              </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0 mt-0.5">
+                <span class="iconify text-red-400 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">One misspelled field name in a claim creates a silent bug that only surfaces when a report breaks days later.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 shrink-0 mt-0.5">
+                <span class="iconify text-red-400 text-[10px]" data-icon="fa6-solid:xmark"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Adding a new field to 150 provider records means editing 150 separate code blocks by hand.</p>
             </div>
           </div>
-
-          <!-- With column -->
-          <div>
-            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With classes</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Define <strong class="text-gray-700">Member</strong> once and create 800 objects — every record is guaranteed to have the same three fields.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">The <strong class="text-gray-700">Claim</strong> constructor enforces the exact field names, so a typo triggers an error immediately instead of hiding.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Add the new field to the <strong class="text-gray-700">Provider</strong> class once and every future object includes it automatically.</p>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-    </div>
+        <!-- With card -->
+        <div class="rounded-xl border border-emerald-100 overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 bg-emerald-50 border-b border-emerald-100">
+            <span class="iconify text-emerald-500 text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
+            <p class="text-xs font-bold text-emerald-600 uppercase tracking-wide">With classes</p>
+          </div>
+          <div class="px-4 py-4 space-y-3 bg-white">
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0 mt-0.5">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Define <strong class="text-gray-700">Member</strong> once and create 800 objects — every record is guaranteed to have the same three fields.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0 mt-0.5">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">The <strong class="text-gray-700">Claim</strong> constructor enforces exact field names — a typo raises an error immediately instead of hiding.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 shrink-0 mt-0.5">
+                <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+              </span>
+              <p class="text-xs text-gray-500 leading-relaxed">Add the new field to the <strong class="text-gray-700">Provider</strong> class once and every future object includes it automatically.</p>
+            </div>
+          </div>
+        </div>
+
   </div>
 </section>
 

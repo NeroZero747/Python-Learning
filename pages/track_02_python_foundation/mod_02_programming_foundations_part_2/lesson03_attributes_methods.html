@@ -1363,87 +1363,100 @@ print(laptop.price)                    # 999.99</code></pre>
       <!-- Block 1: Intro paragraph -->
       <p class="text-sm text-gray-600 leading-relaxed">When you write your first Python class, three things happen in a strict, fixed order: you define the blueprint, you create objects from it, and then you call methods on those objects. This sequence — <strong class="text-gray-800">define → create → call</strong> — never changes, and Python reads it top to bottom, like a technician following a step-by-step protocol.</p>
 
-      <!-- Block 2: Flowchart -->
-      <div class="rounded-2xl border border-gray-100 bg-gray-50 px-5 pt-4 pb-6 overflow-x-auto">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">How Python Reads a Class — Top to Bottom</p>
-        <div class="flex items-start gap-0 min-w-[640px]">
+      <!-- Two-role split card: Attributes vs Methods -->
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
 
-          <!-- Node 1: Program Starts -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg ring-4 ring-pink-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:play"></span>
+        <!-- Card header -->
+        <div class="px-5 py-3 bg-gradient-to-r from-[#CB187D] to-[#e84aad] flex items-center gap-3">
+          <span class="iconify text-white text-sm" data-icon="fa6-solid:cube"></span>
+          <p class="text-sm font-bold text-white tracking-tight">Inside a Python Class — Two Roles, One Blueprint</p>
+        </div>
+
+        <!-- Two columns: Attributes + Methods -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+
+          <!-- Left: Attributes -->
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-pink-50 shrink-0">
+                <span class="iconify text-pink-600 text-lg" data-icon="fa6-solid:database"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800">Attributes</p>
+                <p class="text-[11px] font-semibold text-pink-600">Store data on the object</p>
+              </div>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Program<br>Starts</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Python begins at line 1</p>
-          </div>
-
-          <!-- Arrow 1 → 2 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-pink-300 to-violet-300"></div>
-            <span class="iconify text-violet-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 2: Define the Class (violet rounded square) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-violet-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:pen-to-square"></span>
+            <p class="text-xs text-gray-500 leading-relaxed">An attribute is a variable that belongs to exactly one object. You create attributes inside <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">__init__</code> by writing <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self.x = value</code> — after that, the object remembers that value forever and every method on the class can read it.</p>
+            <div class="rounded-lg overflow-hidden bg-code shadow-sm">
+              <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                <div class="flex items-center gap-2">
+                  <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                  <span class="text-[11px] font-semibold text-gray-400">Attribute definition</span>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">def __init__(self, name, price):
+    self.name     = name    # ← attribute
+    self.price    = price   # ← attribute
+    self.in_stock = True    # ← attribute (default)</code></pre>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Define<br>the Class</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">class Product:</p>
-          </div>
-
-          <!-- Arrow 2 → 3 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-violet-300 to-blue-300"></div>
-            <span class="iconify text-blue-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 3: Create an Object (blue diamond) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-12 h-12 rounded-xl rotate-45 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg ring-4 ring-blue-100" style="margin-top:4px;">
-              <span class="iconify text-white text-base -rotate-45" data-icon="fa6-solid:cube"></span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-pink-700 border border-pink-100">self.x = value</span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-pink-700 border border-pink-100">lives in __init__</span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-pink-700 border border-pink-100">one copy per object</span>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-3 text-center leading-tight">Create<br>an Object</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">__init__ runs automatically</p>
           </div>
 
-          <!-- Arrow 3 → 4 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-blue-300 to-emerald-300"></div>
-            <span class="iconify text-emerald-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 4: Call a Method (emerald rounded square) -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg ring-4 ring-emerald-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:bolt"></span>
+          <!-- Right: Methods -->
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-violet-50 shrink-0">
+                <span class="iconify text-violet-600 text-lg" data-icon="fa6-solid:bolt"></span>
+              </span>
+              <div>
+                <p class="text-sm font-bold text-gray-800">Methods</p>
+                <p class="text-[11px] font-semibold text-violet-600">Define actions on the object</p>
+              </div>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Call<br>a Method</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">reads self to do its job</p>
-          </div>
-
-          <!-- Arrow 4 → 5 -->
-          <div class="flex-1 flex items-center" style="padding-top:28px;">
-            <div class="h-0.5 flex-1 bg-gradient-to-r from-emerald-300 to-gray-300"></div>
-            <span class="iconify text-gray-300 text-xs -ml-px" data-icon="fa6-solid:chevron-right"></span>
-          </div>
-
-          <!-- Node 5: Program Ends -->
-          <div class="flex flex-col items-center shrink-0" style="width:115px;">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-lg ring-4 ring-gray-100">
-              <span class="iconify text-white text-lg" data-icon="fa6-solid:flag-checkered"></span>
+            <p class="text-xs text-gray-500 leading-relaxed">A method is a function written inside the class body. It always receives <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self</code> as its first parameter, which is Python&#39;s way of handing the method a reference to the specific object it is working on. Use <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self.x</code> inside the method to read or update any attribute.</p>
+            <div class="rounded-lg overflow-hidden bg-code shadow-sm">
+              <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                <div class="flex items-center gap-2">
+                  <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                  <span class="text-[11px] font-semibold text-gray-400">Method definition</span>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">def describe(self):       # ← method definition
+    return (              #   self gives access to
+        self.name +       #   ← reads attribute
+        " — $" +
+        str(self.price)   # ← reads attribute
+    )</code></pre>
             </div>
-            <p class="text-[10px] font-bold text-gray-800 mt-2 text-center leading-tight">Program<br>Ends</p>
-            <p class="text-[9px] text-gray-400 text-center mt-1 leading-tight">Result is shown</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-700 border border-violet-100">def name(self):</span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-700 border border-violet-100">reads attributes</span>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-700 border border-violet-100">self is automatic</span>
+            </div>
           </div>
 
         </div>
+
+        <!-- Self bridge footer -->
+        <div class="border-t border-gray-100 bg-gray-50 px-6 py-3.5 flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:link"></span>
+          </span>
+          <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-800">The bridge is <code class="font-mono text-sm text-gray-700 bg-gray-100 px-1 rounded">self</code></strong> — when you call a method, Python automatically sets <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">self</code> to the object you called it on, giving the method instant access to every attribute that object has stored.</p>
+        </div>
+
       </div>
 
-      <!-- Block 3: Sequential explanation -->
-      <div class="space-y-2">
-        <p class="text-sm font-semibold text-gray-800">Class-First Order — Python Reads the Blueprint Before Using It</p>
-        <p class="text-sm text-gray-600 leading-relaxed">Python reads your class definition the instant your file runs, before any object is created. That means the <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">class</code> block at the top of your file must exist before you can write <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">Product(...)</code> below it. If you try to create an object before defining its class, Python stops immediately with a <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">NameError</code>.</p>
+      <!-- Class-first order callout -->
+      <div class="rounded-xl border border-blue-100 bg-blue-50 p-4 flex items-start gap-3">
+        <span class="iconify text-blue-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600 leading-relaxed"><strong class="text-blue-700">Class-First Order:</strong> Python reads your entire class definition when the file runs — before any object is created. That means the <code class="text-xs font-mono px-1 py-0.5 rounded bg-white text-gray-700">class</code> block must appear above any line that calls <code class="text-xs font-mono px-1 py-0.5 rounded bg-white text-gray-700">Product(...)</code>. If you define the class after you try to use it, Python raises a <code class="text-xs font-mono px-1 py-0.5 rounded bg-white text-gray-700">NameError</code>.</p>
       </div>
 
       <!-- Block 4: Code block -->
@@ -2497,107 +2510,101 @@ def describe(self):           # ← at top level, not inside class
 
       <p class="text-sm text-gray-600 leading-relaxed">Imagine you manage an online product catalog. Every product has a name, a price, and a stock status — and you need to display, update, and check each one. Without classes, every product is a loose collection of unconnected variables. With a class, you define the structure once and Python handles every product the same way — automatically, consistently, and with no repeated code.</p>
 
-      <!-- Three scenario cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Scenario label -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#fdf0f7] shrink-0">
+          <span class="iconify text-[#CB187D] text-sm" data-icon="fa6-solid:store"></span>
+        </span>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand">Scenario — A Day Managing an Online Product Catalog</p>
+      </div>
 
-        <!-- Card 1 — violet -->
-        <div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:box-open"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Your catalog adds<br>200 new products</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Defining every product by hand means 200 sets of separate variables with no connection between them. You define <code class="font-mono text-violet-700">Product</code> once and Python creates each product object with the same consistent structure.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-violet-100 border border-violet-200">
-              <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">product object</code></span>
+      <!-- Timeline: 3 moments in the day -->
+      <div class="relative pl-5 border-l-2 border-dashed border-gray-200">
+
+        <!-- Moment 1: Morning -->
+        <div class="relative pb-5">
+          <span class="absolute -left-[0.9rem] top-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-pink-500 text-white text-[10px] font-black ring-4 ring-white z-10">1</span>
+          <div class="ml-4 rounded-xl border border-pink-100 overflow-hidden shadow-sm">
+            <div class="flex items-center gap-3 px-4 py-2.5 bg-pink-50 border-b border-pink-100">
+              <span class="iconify text-pink-500 text-sm" data-icon="fa6-solid:sun"></span>
+              <p class="text-xs font-bold text-pink-700">Morning — Stock the Catalog</p>
+            </div>
+            <div class="bg-white px-4 py-3 space-y-2">
+              <p class="text-xs text-gray-500 leading-relaxed">Your supplier sends 200 new products. Using the <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">Product</code> class, you create one object per item — each one automatically stores a name, a price, and a starting stock status, all in one place.</p>
+              <div class="rounded-lg bg-code overflow-hidden">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">laptop = Product("Laptop", 999.99)
+phone  = Product("Phone",  699.00)
+# Every object carries name, price, in_stock together</code></pre>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 2 — pink -->
-        <div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:tag"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Print a label for<br>every product in the shop</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Writing the same name-and-price string in multiple places means one change breaks all of them. You write <code class="font-mono text-[#CB187D]">describe()</code> once and call it on any product — each object uses its own data automatically.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-pink-100 border border-pink-200">
-              <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">"name — $price"</code></span>
+        <!-- Moment 2: Midday -->
+        <div class="relative pb-5">
+          <span class="absolute -left-[0.9rem] top-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-violet-500 text-white text-[10px] font-black ring-4 ring-white z-10">2</span>
+          <div class="ml-4 rounded-xl border border-violet-100 overflow-hidden shadow-sm">
+            <div class="flex items-center gap-3 px-4 py-2.5 bg-violet-50 border-b border-violet-100">
+              <span class="iconify text-violet-500 text-sm" data-icon="fa6-solid:cloud-sun"></span>
+              <p class="text-xs font-bold text-violet-700">Midday — Print Product Labels</p>
+            </div>
+            <div class="bg-white px-4 py-3 space-y-2">
+              <p class="text-xs text-gray-500 leading-relaxed">Your manager needs a formatted label for every product. You call <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">describe()</code> on each object — the method reads <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">self.name</code> and <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">self.price</code> automatically. No copy-pasting the format string.</p>
+              <div class="rounded-lg bg-code overflow-hidden">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">print(laptop.describe())  # → Laptop — $999.99
+print(phone.describe())   # → Phone — $699.0
+# One method, reads every object’s own data</code></pre>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 3 — emerald -->
-        <div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-          <div class="flex flex-col items-center gap-3">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-              <span class="iconify text-white text-2xl" data-icon="fa6-solid:magnifying-glass"></span>
-            </span>
-            <h3 class="text-sm font-bold text-gray-800 leading-snug">Check stock for<br>every product at once</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">Tracking stock as a separate list loses the connection to the product it belongs to. Reading <code class="font-mono text-emerald-700">in_stock</code> on each product object gives you the answer alongside the name and price — always in sync.</p>
-            <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200">
-              <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-              <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">True or False</code></span>
+        <!-- Moment 3: Evening -->
+        <div class="relative">
+          <span class="absolute -left-[0.9rem] top-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500 text-white text-[10px] font-black ring-4 ring-white z-10">3</span>
+          <div class="ml-4 rounded-xl border border-emerald-100 overflow-hidden shadow-sm">
+            <div class="flex items-center gap-3 px-4 py-2.5 bg-emerald-50 border-b border-emerald-100">
+              <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:moon"></span>
+              <p class="text-xs font-bold text-emerald-700">Evening — Run the Stock Report</p>
+            </div>
+            <div class="bg-white px-4 py-3 space-y-2">
+              <p class="text-xs text-gray-500 leading-relaxed">Before closing, you run a stock report. The <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">in_stock</code> attribute lives on the same object as the name and price — all three values travel together and can never fall out of sync.</p>
+              <div class="rounded-lg bg-code overflow-hidden">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">for p in catalog:
+    if p.in_stock:
+        print(p.name, "is available")
+# attributes stay together — never out of sync</code></pre>
+              </div>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Before / After table -->
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-        <div class="grid grid-cols-2">
-
-          <!-- Without column -->
-          <div class="border-r border-gray-100">
-            <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-              <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-              <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without classes</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Adding 200 products means 200 sets of disconnected variables — name, price, and stock stored separately with no link between them.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Building a product label in multiple places means one edit breaks every version — there is no single place to fix the format.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Storing stock as a separate list means it can fall out of step with the product name and price it's meant to describe.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- With column -->
-          <div>
-            <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-              <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-              <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With classes</p>
-            </div>
-            <div class="px-4 py-4 space-y-3">
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Define <strong class="text-gray-700">Product</strong> once: every new product object carries name, price, and in_stock together — structured identically, every time.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed">Write <strong class="text-gray-700">describe()</strong> once: call it on any product and it reads that object's own name and price — update the method once, every label updates.</p>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-                <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">in_stock</strong> lives on the same object as the name and price — all three values travel together and are always in sync.</p>
-              </div>
-            </div>
-          </div>
-
+      <!-- Why this works — benefit rows -->
+      <div class="space-y-2">
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-2">Why Classes Make This Work</p>
+        <div class="flex items-center gap-3 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-pink-50 shrink-0">
+            <span class="iconify text-pink-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <p class="text-xs text-gray-600"><strong class="text-gray-800">One structure, zero repetition.</strong> Define <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">Product</code> once — every object carries the same fields automatically, with no copy-pasting.</p>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-violet-50 shrink-0">
+            <span class="iconify text-violet-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <p class="text-xs text-gray-600"><strong class="text-gray-800">Methods write themselves once.</strong> Change <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">describe()</code> in one place and every object in the catalog updates automatically — no tracking down repeated format strings.</p>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-50 shrink-0">
+            <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:check"></span>
+          </span>
+          <p class="text-xs text-gray-600"><strong class="text-gray-800">Data stays together.</strong> <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">name</code>, <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">price</code>, and <code class="text-xs font-mono bg-gray-100 text-gray-700 px-1 rounded">in_stock</code> live on the same object and are always in sync — no separate lists or dictionaries to keep aligned.</p>
         </div>
       </div>
 
+      
     </div>
   </div>
 </section>
