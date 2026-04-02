@@ -951,6 +951,60 @@
   </div>
 </div>
 
+<div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:folder-tree"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Partition by Date for Incremental Loads</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Writing Parquet files partitioned by year, month, and day lets read_parquet() skip entire date folders when you filter by a date range, making daily pipeline refreshes dramatically faster.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Partitioning</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Date folders</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Incremental</span>
+    </div>
+  </div>
+</div>
+
+<div class="obj-card rounded-2xl border border-amber-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-amber-500 to-orange-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:box-archive"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Snappy Is the Safe Default Codec</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Parquet supports several compression codecs; snappy offers the best balance of read speed and file size and is supported natively by pandas, Spark, BigQuery, and Athena without any extra configuration.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">snappy</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">Codec</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">Universal support</span>
+    </div>
+  </div>
+</div>
+
+<div class="obj-card rounded-2xl border border-teal-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-teal-500 to-cyan-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:fire"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Warm Up Before Starting the Timer</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">The first call to a function is often slower because Python caches imports and compiles internally; always run the code once before starting the timer to get a stable, representative baseline.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-600 border border-teal-100">Warm-up run</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-600 border border-teal-100">Cache effect</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-600 border border-teal-100">Stable baseline</span>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </section>
@@ -2896,6 +2950,18 @@ in Excel natively</code></pre>
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
   <span class="pe-step-label text-xs font-bold">Time the Load</span>
 </button>
+<button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Time Each Step</span>
+</button>
+<button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Profile with cProfile</span>
+</button>
+<button onclick="switchPeTab(5)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Compare Two Approaches</span>
+</button>
 </div>
 <div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -3109,6 +3175,228 @@ print(f&quot;CSV: {csv_time:.3f}s  Parquet: {pq_time:.3f}s&quot;)</code></pre>
         <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
           <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
           <p class="text-sm text-gray-600">Parquet is faster to read because the file stores metadata about column types &#8212; pandas does not need to guess them row by row.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Time Each Step</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Pipeline</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">time module</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">elapsed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Time each step of a simple pipeline &#8212; loading and grouping &#8212; by wrapping each step in a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">time.time()</code> pair. Print the elapsed time for each step.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">time_steps.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import time
+
+start = time.time()
+df = pd.read_csv("data.csv")                    # step 1 — load
+print(f"Load:  {time.time() - start:.3f}s")
+
+start = time.time()
+result = df.groupby("region")["revenue"].sum()  # step 2 — group
+print(f"Group: {time.time() - start:.3f}s")</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python time_steps.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Load:  1.450s<br>Group: 0.032s</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">If loading is the slowest step, switch to Parquet &#8212; if grouping is slow, check whether your column types are correct before you start optimizing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Profile with cProfile</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Functions</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">cProfile</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">cumulative time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Wrap a three-step pipeline function in <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">cProfile.run()</code> and sort the output by cumulative time to find which function call takes the longest.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">profile_code.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import cProfile
+
+def pipeline():
+    df = pd.read_csv("data.csv")                    # load
+    summary = df.groupby("region")["revenue"].sum()  # group
+    summary.to_csv("summary.csv")                   # save
+
+cProfile.run("pipeline()", sort="cumulative")</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python profile_code.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">   ncalls  tottime  cumtime  filename:lineno(function)<br>        1    0.000    1.520  profile_code.py:4(pipeline)<br>        1    1.200    1.200  {read_csv}</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Sort by cumulative time to see which function call uses the most wall-clock time &#8212; that is the right place to start optimizing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">06</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Compare Two Approaches</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Queries</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">before/after</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Time a filter operation using both a Python for-loop and a vectorized pandas condition. Print both elapsed times and compare the results.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">compare_approaches.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+import time
+
+df = pd.read_csv("sales.csv")
+
+start = time.time()
+# Loop approach — one row at a time
+results = [row for _, row in df.iterrows() if row["category"] == "A"]
+print(f"Loop:       {time.time() - start:.4f}s")
+
+start = time.time()
+# Vectorised approach — all rows at once
+result = df[df["category"] == "A"]
+print(f"Vectorised: {time.time() - start:.4f}s")</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python compare_approaches.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Loop:       4.2120s<br>Vectorised: 0.0031s</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Always record the baseline time before optimizing &#8212; without it, you cannot prove that the change was worth the effort.</p>
         </div>
       </div>
     </div>
@@ -3545,6 +3833,10 @@ print(df.head())                      # fast and lean</code></pre>
 <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
 <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
 <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+<button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
+<button onclick="switchQzTab(5)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 6</span></button>
+<button onclick="switchQzTab(6)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 7</span></button>
+<button onclick="switchQzTab(7)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 8</span></button>
 </div>
 <div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -3666,6 +3958,126 @@ print(df.head())                      # fast and lean</code></pre>
     </div>
   </div>
 </div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Predicate pushdown allows Parquet readers to skip entire row groups that do not match a filter condition, reducing the bytes read from disk.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q6</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q5">
+        <p class="text-sm font-semibold text-gray-800 mb-4">ORC files can be read by pandas using pd.read_parquet() without any additional configuration.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q7</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q6">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Columnar files like Parquet support fast row-by-row updates the same way a relational database table does.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q8</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q7">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Profiling your code before optimizing it helps you identify the actual bottleneck rather than guessing which part is slow.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -3674,53 +4086,55 @@ print(df.head())                      # fast and lean</code></pre>
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
       <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+        <span class="iconify text-white text-base" data-icon="fa6-solid:trophy"></span>
       </span>
       <div class="min-w-0">
-        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Module Complete!</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">You have finished all 15 lessons in this module</p>
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
 
-      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
-        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
-          <span class="text-white font-bold text-lg">6</span>
-        </span>
-        <div class="min-w-0">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 4 &middot; Lesson 6</p>
-          <h3 class="text-base font-bold text-gray-800">Parquet Files</h3>
-          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-6">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-xl" data-icon="fa6-solid:graduation-cap"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-white">Python for Data Analysts &#8212; Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You have worked through all 15 lessons. Head back to the Learning Hub to explore more tracks.</p>
+          </div>
         </div>
       </div>
 
       <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Continue Learning</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
     <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:file-lines"></span>
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:house"></span>
       </span>
       <div>
-        <p class="text-sm font-semibold text-gray-700">What a Parquet File Is</p>
+        <p class="text-sm font-semibold text-gray-700"><a href="../../../hub_home_page.html" class="text-gray-700 no-underline hover:text-[#CB187D]">Return to Learning Hub</a></p>
       </div>
     </div>
 
     <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:download"></span>
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:database"></span>
       </span>
       <div>
-        <p class="text-sm font-semibold text-gray-700">Writing and Reading Parquet with pandas</p>
+        <p class="text-sm font-semibold text-gray-700">Track 04: Data Engineering</p>
       </div>
     </div>
 
     <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:scale-balanced"></span>
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:chart-line"></span>
       </span>
       <div>
-        <p class="text-sm font-semibold text-gray-700">Parquet vs. CSV: Size and Speed Comparison</p>
+        <p class="text-sm font-semibold text-gray-700">Track 05: Data Applications</p>
       </div>
     </div>
         </div>
@@ -3733,11 +4147,11 @@ print(df.head())                      # fast and lean</code></pre>
 <section>
   <div class="flex flex-col sm:flex-row gap-3">
 
-    <a href="lesson04_processing_millions_of_rows.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+    <a href="lesson14_handling_large_data.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
       <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Processing Millions of Rows</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Handling Large Data</p>
       </div>
     </a>
 
@@ -3746,13 +4160,7 @@ print(df.head())                      # fast and lean</code></pre>
       <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
     </a>
 
-    <a href="lesson06_parquet_files.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
-      <div class="min-w-0">
-        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Parquet Files</p>
-      </div>
-      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
-    </a>
+    <div class="flex-1"></div>
 
   </div>
 </section>      </main>
