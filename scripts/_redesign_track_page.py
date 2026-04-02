@@ -1,4 +1,9 @@
-<!-- =============================================================
+"""Replace track_01_python_foundation.html with the redesigned version."""
+import pathlib
+
+TARGET = pathlib.Path(r"c:\Users\nightwolf\Projects\Python-Learning\pages\track_02_python_foundation\track_01_python_foundation.html")
+
+NEW_CONTENT = r'''<!-- =============================================================
      Track 01 — Python Foundation | Python Learning Hub
      Track overview page: all modules and lessons at a glance.
      ============================================================= -->
@@ -458,7 +463,7 @@
               Beginner &rarr; Intermediate
             </span>
             <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-              <span class="iconify text-[10px]" data-icon="fa6-solid:certificate"></span> Core Track
+              <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> ~5 hours
             </span>
           </div>
 
@@ -469,7 +474,7 @@
           <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Python Foundation</h1>
 
           <!-- Description -->
-          <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-5 max-w-prose">Built for data professionals and analysts who are new to Python. No prior coding experience required &mdash; just a willingness to learn. You'll develop the hands-on skills to write, read, and structure real Python code with confidence.</p>
+          <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-5 max-w-prose">Go from zero to confident. This track takes you through the core building blocks of Python &mdash; writing real code, understanding how programs work, and applying professional best practices used in production analytics projects.</p>
 
           <!-- Author + date row -->
           <div class="flex items-center gap-4 mb-5 text-sm">
@@ -488,56 +493,72 @@
             </div>
           </div>
 
-          <!-- CTA buttons -->
-          <div class="flex flex-wrap items-center gap-3 mt-2">
-            <a href="mod_01_programming_foundations_part_1/lesson01_what_is_programming.html" class="hero-cta">
-              <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Track
-            </a>
-            <a href="../../hub_home_page.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
-              <span class="iconify text-[10px]" data-icon="fa6-solid:house"></span> Back to Hub
-            </a>
+          <!-- Stat pills -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:cubes" style="opacity:0.5;"></span>
+              <span class="font-extrabold">2</span><span class="font-semibold opacity-55">Modules</span>
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:book-open" style="opacity:0.5;"></span>
+              <span class="font-extrabold">17</span><span class="font-semibold opacity-55">Lessons</span>
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:certificate" style="opacity:0.5;"></span>
+              <span class="font-extrabold">Core</span><span class="font-semibold opacity-55">Track</span>
+            </span>
           </div>
 
         </div>
 
         <!-- RIGHT — Hex Python SVG -->
-          <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
-            <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
-              <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
-                <defs>
-                  <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
-                  <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
-                  <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
-                  <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
-                  <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
-                </defs>
-                <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
-                <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
-                <g clip-path="url(#hexClip)" opacity="1">
-                  <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
-                  <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
-                  <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
-                  <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
-                  <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
-                  <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
-                  <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
-                  <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
-                  <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
-                  <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
-                  <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
-                  <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
-                </g>
-                <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
-                <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
-                <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
-                <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
-                <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
-                <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
-                <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
-                <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
-              </svg>
-            </div>
+        <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center hidden md:flex items-center justify-center">
+          <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+            <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+              <defs>
+                <linearGradient id="t1hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+                <linearGradient id="t1hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+                <radialGradient id="t1hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+                <radialGradient id="t1pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+                <clipPath id="t1hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+              </defs>
+              <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#t1hexFill)"/>
+              <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#t1hexGlow)"/>
+              <g clip-path="url(#t1hexClip)" opacity="1">
+                <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+                <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+                <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+                <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+                <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+                <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+                <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
+                <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+                <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+                <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+                <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+                <circle cx="140" cy="145" r="55" fill="url(#t1pyGlow)"/>
+              </g>
+              <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#t1hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+              <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+              <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+              <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+              <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+              <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+              <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+              <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">Track 01</text></g>
+            </svg>
           </div>
+        </div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-wrap items-center gap-3 mt-6">
+        <a href="mod_01_programming_foundations_part_1/lesson01_what_is_programming.html" class="hero-cta">
+          <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Track
+        </a>
+        <a href="../../hub_home_page.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
+          <span class="iconify text-[10px]" data-icon="fa6-solid:house"></span> Back to Hub
+        </a>
       </div>
     </div>
   </section>
@@ -557,51 +578,41 @@
           <p class="text-sm text-gray-400 leading-snug mt-0.5">Everything this track covers in two modules</p>
         </div>
       </div>
-      <div class="bg-white px-8 py-5">
-        <div class="rounded-xl border border-gray-100 bg-gray-50 overflow-hidden">
-          <div class="flex flex-col sm:flex-row sm:divide-x divide-gray-100">
+      <div class="bg-white px-8 py-7">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
 
-            <div class="flex items-center gap-3 flex-1 px-5 py-4">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
-                <span class="iconify text-brand text-base" data-icon="fa6-solid:cubes"></span>
-              </span>
-              <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">2</p>
-                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Modules</p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
-                <span class="iconify text-brand text-base" data-icon="fa6-solid:book-open"></span>
-              </span>
-              <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">17</p>
-                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Lessons</p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
-                <span class="iconify text-brand text-base" data-icon="fa6-regular:clock"></span>
-              </span>
-              <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">~5h</p>
-                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Duration</p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
-                <span class="iconify text-brand text-base" data-icon="fa6-solid:certificate"></span>
-              </span>
-              <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">Core</p>
-                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Track Type</p>
-              </div>
-            </div>
-
+          <div class="stat-card rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#fdf0f7] mx-auto mb-2">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:cubes"></span>
+            </span>
+            <p class="text-2xl font-extrabold text-gray-900">2</p>
+            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wide mt-0.5">Modules</p>
           </div>
+
+          <div class="stat-card rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#fdf0f7] mx-auto mb-2">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:book-open"></span>
+            </span>
+            <p class="text-2xl font-extrabold text-gray-900">17</p>
+            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wide mt-0.5">Lessons</p>
+          </div>
+
+          <div class="stat-card rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#fdf0f7] mx-auto mb-2">
+              <span class="iconify text-brand text-lg" data-icon="fa6-regular:clock"></span>
+            </span>
+            <p class="text-2xl font-extrabold text-gray-900">~5h</p>
+            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wide mt-0.5">Duration</p>
+          </div>
+
+          <div class="stat-card rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#fdf0f7] mx-auto mb-2">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:certificate"></span>
+            </span>
+            <p class="text-2xl font-extrabold text-gray-900">Core</p>
+            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wide mt-0.5">Track Type</p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -690,7 +701,7 @@
         <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
           <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
           <p class="text-sm text-gray-600">
-            This track builds on <strong>Getting Started</strong>. Make sure your Python environment is set up and you can run a script before beginning Module 1.
+            This track builds on <strong>Track 00 &mdash; Getting Started</strong>. Make sure your Python environment is set up and you can run a script before beginning Module 1.
           </p>
         </div>
       </div>
@@ -1228,7 +1239,31 @@
   </section>
 
 
-
+  <!-- ================================================================
+       BOTTOM NAV
+       ================================================================ -->
+  <section>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <a href="../../hub_home_page.html" class="nav-link-hover group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+        <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+        <div class="min-w-0">
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Back to</p>
+          <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Hub Home</p>
+        </div>
+      </a>
+      <a href="../../hub_home_page.html" class="nav-link-hover group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+        <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Courses</span>
+      </a>
+      <a href="mod_01_programming_foundations_part_1/lesson01_what_is_programming.html" class="nav-link-hover group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Begin here</p>
+          <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Start Track 01</p>
+        </div>
+        <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+      </a>
+    </div>
+  </section>
 
 
 </div>
@@ -1265,3 +1300,9 @@
 
   window.addEventListener('load', function() { if (window.Iconify) Iconify.scan(); });
 </script>
+'''
+
+TARGET.write_text(NEW_CONTENT, encoding='utf-8')
+print(f"✅ Redesigned track page written to {TARGET}")
+print(f"   File size: {TARGET.stat().st_size:,} bytes")
+print(f"   Lines: {len(NEW_CONTENT.splitlines()):,}")

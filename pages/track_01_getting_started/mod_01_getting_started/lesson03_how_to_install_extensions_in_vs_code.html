@@ -335,7 +335,12 @@
     color: #CB187D !important;
     transition: color 0.15s !important;
   }
-  </style>
+
+    /* ── Optional Extensions accordion toggle ── */
+    .opt-chevron { transition: transform 0.2s !important; }
+    .optional-toggle.open .opt-chevron { transform: rotate(180deg) !important; }
+    .optional-toggle { background: none; border: none; font-family: inherit; }
+    </style>
 
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
 <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -453,9 +458,6 @@
 </a>
 <a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview
-</a>
-<a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
-  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:layer-group"></span> Key Takeaways
 </a>
 <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
   <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
@@ -655,76 +657,6 @@
       <!-- Closing note -->
       <p class="text-sm text-gray-600 leading-relaxed">Extensions are free, installed in seconds through the VS Code Extensions panel, and can be enabled or disabled at any time. You don&rsquo;t need to install hundreds &mdash; start with these four and your environment is production-ready.</p>
 
-    </div>
-  </div>
-</section>
-
-<section id="key-ideas">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-    <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
-  </span>
-  <div class="min-w-0">
-    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
-    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
-  </div>
-</div>
-    <div class="bg-white px-8 py-7 space-y-4">
-<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span>
-      </span>
-      <h3 class="text-sm font-bold text-gray-900">VS Code Is Extensible by Design</h3>
-    </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">VS Code ships as a lightweight text editor. Extensions are what give it language-specific capabilities &mdash; without any extensions, it has no idea what Python even is.</p>
-    <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Syntax highlighting</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Code completion</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Debugger</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Auto-formatting</span>
-    </div>
-  </div>
-</div>
-<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
-        <span class="iconify text-white text-sm" data-icon="fa6-brands:python"></span>
-      </span>
-      <h3 class="text-sm font-bold text-gray-900">The Python Extension Is Non-Negotiable</h3>
-    </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">The <strong>Python extension by Microsoft</strong> is the single most important extension. Without it, you cannot run Python scripts, use the debugger, or get code suggestions in VS Code.</p>
-    <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Run Python scripts</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Debugger support</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Code suggestions</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Install it first</span>
-    </div>
-  </div>
-</div>
-<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:star"></span>
-      </span>
-      <h3 class="text-sm font-bold text-gray-900">Start with the Essential Four</h3>
-    </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">You don&rsquo;t need hundreds of extensions &mdash; just four get you fully productive for Python development. Install more later as your workflow demands.</p>
-    <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Python</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Pylance</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Jupyter</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Black Formatter</span>
-    </div>
-  </div>
-</div>
     </div>
   </div>
 </section>
@@ -1109,21 +1041,25 @@ result = greet(42)   # Pylance: Argument of type "int"
 
       <!-- Optional Extensions -->
       <div class="rounded-2xl border border-dashed border-gray-200 overflow-hidden">
-        <!-- Header -->
-        <div class="flex items-center justify-between gap-4 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+        <!-- Header — accordion toggle -->
+        <button type="button" class="optional-toggle w-full flex items-center justify-between gap-4 px-5 py-3.5 bg-gray-50 border-b border-gray-100 text-left cursor-pointer"
+          onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
           <div class="flex items-center gap-3 min-w-0">
             <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gray-100 shrink-0">
               <span class="iconify text-gray-500 text-xs" data-icon="fa6-solid:wand-magic-sparkles"></span>
             </span>
-            <div class="min-w-0">
+            <div class="min-w-0 text-left">
               <p class="text-sm font-bold text-gray-800">Optional Extensions</p>
               <p class="text-xs text-gray-400">Expand your setup as your workflow grows &mdash; none required to get started</p>
             </div>
           </div>
-          <span class="text-[10px] font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full shrink-0">23 extensions</span>
-        </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="text-[10px] font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">23 extensions</span>
+            <span class="iconify opt-chevron text-gray-400 text-xs" data-icon="fa6-solid:chevron-down"></span>
+          </div>
+        </button>
         <!-- Body -->
-        <div class="px-5 py-5 bg-white space-y-5">
+        <div class="accordion-body px-5 py-5 bg-white space-y-5">
 
           <!-- Code Quality -->
           <div>
