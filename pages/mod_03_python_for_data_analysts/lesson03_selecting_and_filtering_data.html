@@ -967,6 +967,60 @@
   </div>
 </div>
 
+<div class="obj-card obj-card-kt rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-400 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:copy"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Filters Return a New DataFrame</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">When you apply a filter, pandas creates a fresh DataFrame containing only the matching rows — your original <code class="text-xs bg-gray-100 px-1 rounded font-mono">df</code> remains completely unchanged.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">new DataFrame</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">original unchanged</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">boolean result</span>
+    </div>
+  </div>
+</div>
+
+<div class="obj-card obj-card-kt rounded-2xl border border-amber-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-amber-500 to-yellow-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-400 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:list-check"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">isin() Replaces Long OR Chains</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">Instead of chaining multiple <code class="text-xs bg-gray-100 px-1 rounded font-mono">==</code> comparisons with <code class="text-xs bg-gray-100 px-1 rounded font-mono">|</code>, use <code class="text-xs bg-gray-100 px-1 rounded font-mono">.isin(['A', 'B', 'C'])</code> to match any value in a list — just like SQL's <code class="text-xs bg-gray-100 px-1 rounded font-mono">IN</code> operator.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">isin()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">list matching</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">SQL IN</span>
+    </div>
+  </div>
+</div>
+
+<div class="obj-card obj-card-kt rounded-2xl border border-teal-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-teal-500 to-cyan-400"></div>
+  <div class="px-6 py-5">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-400 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Check for Nulls Before Filtering</h3>
+    </div>
+    <p class="text-xs text-gray-600 leading-relaxed mb-4">A null value in a filter column silently fails — rows where the column is <code class="text-xs bg-gray-100 px-1 rounded font-mono">NaN</code> will never match any condition, so always check for missing values before filtering.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-600 border border-teal-100">NaN</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-600 border border-teal-100">dropna()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-teal-50 text-teal-600 border border-teal-100">missing values</span>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </section>
@@ -2155,6 +2209,18 @@ LIMIT 5;</code></pre>
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
   <span class="pe-step-label text-xs font-bold">Rename a Column</span>
 </button>
+<button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Filter by Price</span>
+</button>
+<button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Two Conditions</span>
+</button>
+<button onclick="switchPeTab(5)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Filter with a List</span>
+</button>
 </div>
 <div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2358,6 +2424,198 @@ print(df.columns.tolist())                     # confirm the change</code></pre>
         <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
           <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
           <p class="text-sm text-gray-600">Clear column names save time later &#8212; you will type them in every filter, groupby, and merge for the rest of the analysis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span>
+        <div>
+          <h3 class="font-bold text-gray-800">Filter by Price</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Boolean filter</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Comparison</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">You have a file called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">groceries.csv</code> with columns <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">name</code> and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">price</code>. Filter the rows where price is above $5 and print how many items match.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">filter_price.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+df = pd.read_csv(&quot;groceries.csv&quot;)
+expensive = df[df[&quot;price&quot;] &gt; 5]  # boolean filter
+print(f&quot;Items over $5: {len(expensive)}&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python filter_price.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Items over $5: 18</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">The expression inside the outer brackets (<code class="text-xs font-mono px-1 rounded bg-gray-100">df[&quot;price&quot;] &gt; 5</code>) produces a Series of <code class="text-xs font-mono px-1 rounded bg-gray-100">True</code>/<code class="text-xs font-mono px-1 rounded bg-gray-100">False</code> values — pandas keeps only the rows where the result is <code class="text-xs font-mono px-1 rounded bg-gray-100">True</code>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span>
+        <div>
+          <h3 class="font-bold text-gray-800">Two Conditions</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">&amp; operator</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Combined filters</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Load <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">staff.csv</code> with columns <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">name</code>, <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">department</code>, and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">salary</code>. Find employees in &quot;Engineering&quot; earning more than 70,000 and print their names.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">two_filters.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+df = pd.read_csv(&quot;staff.csv&quot;)
+result = df[
+    (df[&quot;department&quot;] == &quot;Engineering&quot;) &amp;  # condition 1
+    (df[&quot;salary&quot;] &gt; 70000)               # condition 2
+]
+print(result[&quot;name&quot;].tolist())</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python two_filters.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">[&apos;Alice&apos;, &apos;Carlos&apos;]</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Each condition must be wrapped in its own parentheses. Using Python's <code class="text-xs font-mono px-1 rounded bg-gray-100">and</code> keyword instead of <code class="text-xs font-mono px-1 rounded bg-gray-100">&amp;</code> will raise a <code class="text-xs font-mono px-1 rounded bg-gray-100">ValueError</code>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">06</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span>
+        <div>
+          <h3 class="font-bold text-gray-800">Filter with a List</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">isin()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">SQL IN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Load <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">shipments.csv</code>. Keep only the rows where <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">status</code> is <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">&quot;Delivered&quot;</code> or <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">&quot;In Transit&quot;</code> using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">.isin()</code>. Print the number of matching rows.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">filter_isin.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+df = pd.read_csv(&quot;shipments.csv&quot;)
+active = df[df[&quot;status&quot;].isin([&quot;Delivered&quot;, &quot;In Transit&quot;])]  # isin()
+print(f&quot;Matching rows: {len(active)}&quot;)</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python filter_isin.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">Matching rows: 64</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600"><code class="text-xs font-mono px-1 rounded bg-gray-100">.isin()</code> is far cleaner than writing <code class="text-xs font-mono px-1 rounded bg-gray-100">(df[&quot;status&quot;] == &quot;Delivered&quot;) | (df[&quot;status&quot;] == &quot;In Transit&quot;)</code> — the list form scales easily as you add more values.</p>
         </div>
       </div>
     </div>
@@ -2787,6 +3045,10 @@ print(name.head())        # displays the column</code></pre>
 <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
 <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
 <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+<button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
+<button onclick="switchQzTab(5)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 6</span></button>
+<button onclick="switchQzTab(6)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 7</span></button>
+<button onclick="switchQzTab(7)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 8</span></button>
 </div>
 <div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2908,6 +3170,90 @@ print(name.head())        # displays the column</code></pre>
     </div>
   </div>
 </div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+        <div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4">
+        <p class="text-sm font-semibold text-gray-800 mb-4">You can filter a DataFrame by writing a condition inside square brackets, such as <code class="text-xs bg-gray-100 px-1 rounded font-mono">df[df['price'] &gt; 100]</code>, to get only the rows that match.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q6</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+        <div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q5">
+        <p class="text-sm font-semibold text-gray-800 mb-4">When combining two filter conditions in pandas, you use the Python keywords <code class="text-xs bg-gray-100 px-1 rounded font-mono">and</code> and <code class="text-xs bg-gray-100 px-1 rounded font-mono">or</code> between them, just like in a regular if statement.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q7</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+        <div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q6">
+        <p class="text-sm font-semibold text-gray-800 mb-4">The <code class="text-xs bg-gray-100 px-1 rounded font-mono">.isin()</code> method lets you filter rows where a column value matches any item in a list, similar to SQL's <code class="text-xs bg-gray-100 px-1 rounded font-mono">IN</code> operator.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q8</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+        <div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q7">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Calling <code class="text-xs bg-gray-100 px-1 rounded font-mono">df.dropna()</code> permanently removes missing rows from your original DataFrame, even if you do not assign the result to a variable.</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -2927,11 +3273,11 @@ print(name.head())        # displays the column</code></pre>
 
       <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
         <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
-          <span class="text-white font-bold text-lg">5</span>
+          <span class="text-white font-bold text-lg">4</span>
         </span>
         <div class="min-w-0">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 5</p>
-          <h3 class="text-base font-bold text-gray-800">Filtering Rows</h3>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 4</p>
+          <h3 class="text-base font-bold text-gray-800">Transforming Data</h3>
           <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
         </div>
       </div>
@@ -2941,29 +3287,21 @@ print(name.head())        # displays the column</code></pre>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
     <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:filter"></span>
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:calculator"></span>
       </span>
-      <div>
-        <p class="text-sm font-semibold text-gray-700">Filtering Rows by a Condition</p>
-      </div>
+      <div><p class="text-sm font-semibold text-gray-700">Creating calculated columns</p></div>
     </div>
-
     <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:code-branch"></span>
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:pen"></span>
       </span>
-      <div>
-        <p class="text-sm font-semibold text-gray-700">Combining Multiple Filter Conditions</p>
-      </div>
+      <div><p class="text-sm font-semibold text-gray-700">Renaming and reordering columns</p></div>
     </div>
-
     <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:circle-xmark"></span>
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:broom"></span>
       </span>
-      <div>
-        <p class="text-sm font-semibold text-gray-700">Removing Rows with Missing Values</p>
-      </div>
+      <div><p class="text-sm font-semibold text-gray-700">Cleaning and formatting values</p></div>
     </div>
         </div>
       </div>
@@ -2975,11 +3313,11 @@ print(name.head())        # displays the column</code></pre>
 <section>
   <div class="flex flex-col sm:flex-row gap-3">
 
-    <a href="lesson03_reading_data_csv_excel.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+    <a href="lesson02_reading_files_csv_excel_json.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
       <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Reading Data (CSV / Excel)</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Reading Files (CSV, Excel &amp; JSON)</p>
       </div>
     </a>
 
@@ -2988,10 +3326,10 @@ print(name.head())        # displays the column</code></pre>
       <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
     </a>
 
-    <a href="lesson05_filtering_rows.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+    <a href="lesson04_transforming_data.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Filtering Rows</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Transforming Data</p>
       </div>
       <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
     </a>
