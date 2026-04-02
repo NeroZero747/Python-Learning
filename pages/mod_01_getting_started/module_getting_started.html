@@ -1,0 +1,905 @@
+<!-- =============================================================
+     Module 1 — Getting Started | Python Learning Hub
+     ============================================================= -->
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" />
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Iconify -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<style>
+  /* ==========================================================================
+     1. GLOBAL RESETS & VARIABLES
+     ========================================================================== */
+  * { scroll-behavior: smooth; box-sizing: border-box; }
+
+  :root {
+    --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Fira Code', monospace;
+    --brand:     #CB187D;
+    --brand-end: #e84aad;
+    --brand-dark:#7F004C;
+    --brand-soft:#fdf0f7;
+  }
+
+  /* ==========================================================================
+     2. BRAND TOKENS
+     ========================================================================== */
+  .text-brand       { color: var(--brand); }
+  .bg-brand         { background: var(--brand); }
+  .bg-brand-soft    { background: var(--brand-soft); }
+  .bg-amber-tip     { background: #fff7ed; border-color: #fed7aa !important; }
+  .border-brand     { border-color: var(--brand) !important; }
+
+  /* ==========================================================================
+     3. HERO
+     ========================================================================== */
+  .hero-container {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    min-height: 380px;
+    background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%);
+  }
+  .hero-dots {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+  .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255,255,255,0.12); }
+  .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127,0,76,0.35); }
+  .hero-glow-line {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%);
+    opacity: 0.7;
+  }
+  .hero-pill {
+    background: #ffffff; border: none; color: #CB187D;
+    font-weight: 700; pointer-events: none; cursor: default;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 11px 26px; border-radius: 999px;
+    font-weight: 700; font-size: 0.875rem;
+    color: var(--brand); background: #ffffff; border: none;
+    cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease;
+    text-decoration: none;
+  }
+  .hero-cta:hover { transform: translateY(-2px); filter: brightness(0.96); }
+  .hero-abstract-card {
+    position: relative; border-radius: 1rem; overflow: hidden; padding: 0.25rem;
+    opacity: 0.75; display: flex; align-items: center; justify-content: center;
+  }
+  .skill-dot       { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); display: inline-block; }
+  .skill-dot-active { background: #22c55e; }
+
+  /* ==========================================================================
+     4. SCROLL PROGRESS
+     ========================================================================== */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--brand), #6366f1, var(--brand));
+    background-size: 200% 100%;
+    animation: scrollGradient 3s linear infinite;
+    z-index: 9999; transition: width 0.15s;
+  }
+  @keyframes scrollGradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  /* ==========================================================================
+     5. SECTION HEADER
+     ========================================================================== */
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.25rem 2rem 1.25rem 1rem;
+    background: #ffffff;
+    border-bottom: 1px solid #f3f4f6;
+    border-left: 4px solid var(--brand);
+  }
+  .section-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
+    background: var(--brand); flex-shrink: 0;
+  }
+
+  /* ==========================================================================
+     6. OUTCOME / STAT CARDS
+     ========================================================================== */
+  .outcome-card {
+    transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease;
+  }
+  .outcome-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
+    border-color: #CB187D; background-color: #ffffff;
+  }
+  .outcome-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+  .outcome-card:hover .outcome-icon { transform: scale(1.1); background-color: #CB187D; }
+  .outcome-card:hover .outcome-icon .iconify { color: white !important; }
+  .stat-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(203, 24, 125, 0.12);
+    border-color: #f5c6e0 !important;
+  }
+
+  /* ==========================================================================
+     7. MODULE CARD
+     ========================================================================== */
+  .module-card {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid #f3f4f6;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .module-card:hover {
+    box-shadow: 0 8px 32px -4px rgba(0,0,0,0.1);
+  }
+  .module-bar-pink { background: linear-gradient(90deg, #CB187D, #e84aad); }
+  .module-icon-pink { background: linear-gradient(135deg, #CB187D, #e84aad); }
+
+  /* ==========================================================================
+     8. LESSON ACCORDIONS
+     ========================================================================== */
+  .lesson-accordion {
+    border-radius: 0.875rem;
+    border: 1px solid #f3f4f6;
+    background: #f9fafb;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .lesson-accordion.active {
+    background: #ffffff;
+    box-shadow: 0 4px 16px -4px rgba(0,0,0,0.08);
+  }
+  .lesson-accordion.mod-pink.active { border-color: #f5c6e0; }
+
+  .accordion-header {
+    display: flex; align-items: center; gap: 0.875rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer; user-select: none;
+    transition: background 0.15s ease;
+  }
+  .lesson-accordion:not(.active) .accordion-header:hover { background: #f3f4f6; }
+  .lesson-accordion.active .accordion-header { background: transparent; }
+
+  .lesson-num {
+    width: 2rem; height: 2rem; border-radius: 0.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; color: #ffffff; flex-shrink: 0;
+  }
+  .num-pink { background: #CB187D; }
+
+  .lesson-info { flex: 1; min-width: 0; }
+  .lesson-category {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #9ca3af; line-height: 1.2;
+  }
+  .lesson-name {
+    font-size: 0.85rem; font-weight: 600; color: #1f2937;
+    line-height: 1.3; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .mod-pink.active .lesson-name { color: #CB187D; }
+
+  .lesson-badge { display: none; }
+  @media (min-width: 640px) {
+    .lesson-badge {
+      display: inline-flex; align-items: center;
+      padding: 2px 9px; border-radius: 999px;
+      font-size: 0.65rem; font-weight: 700;
+      background: #f3f4f6; color: #6b7280;
+      white-space: nowrap; flex-shrink: 0;
+    }
+  }
+  .lesson-time {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 2px 9px; border-radius: 999px;
+    font-size: 0.7rem; font-weight: 600;
+    background: #f3f4f6; color: #6b7280;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .accordion-chevron {
+    display: flex; align-items: center; justify-content: center;
+    width: 1.5rem; height: 1.5rem; flex-shrink: 0; color: #d1d5db;
+    transition: transform 0.25s ease, color 0.2s ease;
+  }
+  .lesson-accordion.active .accordion-chevron { transform: rotate(180deg); }
+  .mod-pink.active .accordion-chevron { color: #CB187D; }
+
+  .accordion-body {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+  .lesson-accordion.active .accordion-body { grid-template-rows: 1fr; }
+  .accordion-body-inner {
+    overflow: hidden; padding: 0 1rem 0 1rem;
+    transition: padding 0.3s ease;
+  }
+  .lesson-accordion.active .accordion-body-inner {
+    padding: 0 1rem 1.25rem 3.875rem;
+  }
+  .lesson-accordion.active .accordion-divider {
+    display: block; margin-bottom: 0.875rem;
+    border-top: 1px solid #f3f4f6;
+  }
+  .accordion-divider { display: none; }
+
+  .lesson-goal { font-size: 0.8rem; color: #4b5563; margin-bottom: 0.625rem; line-height: 1.5; }
+  .lesson-goal strong { color: #1f2937; }
+  .lesson-checklist {
+    list-style: none; padding: 0; margin: 0 0 0.875rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .lesson-checklist li {
+    display: flex; align-items: flex-start; gap: 0.5rem;
+    font-size: 0.78rem; color: #6b7280; line-height: 1.4;
+  }
+  .lesson-checklist li .iconify {
+    flex-shrink: 0; margin-top: 0.1rem; font-size: 0.65rem;
+  }
+  .mod-pink .lesson-checklist li .iconify { color: #CB187D; }
+
+  .start-lesson-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 1.125rem; border-radius: 9999px;
+    font-size: 0.75rem; font-weight: 700;
+    color: #ffffff !important; border: none; text-decoration: none;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+  .start-lesson-btn:hover { filter: brightness(0.9); transform: translateY(-1px); }
+  .mod-pink .start-lesson-btn { background: linear-gradient(135deg, #CB187D, #e84aad); }
+
+  .module-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 20px; border-radius: 10px;
+    font-size: 0.82rem; font-weight: 700;
+    color: #ffffff; border: none; cursor: pointer;
+    transition: filter 0.15s ease, transform 0.15s ease;
+    text-decoration: none;
+  }
+  .module-cta:hover { filter: brightness(0.92); transform: translateY(-1px); }
+  .module-cta-pink { background: linear-gradient(135deg, #CB187D, #e84aad); }
+
+  /* ==========================================================================
+     9. BOTTOM NAV
+     ========================================================================== */
+  .nav-link-hover:hover p,
+  .nav-link-hover:hover span,
+  .nav-link-hover:hover .iconify { color: var(--brand); transition: color 0.15s; }
+
+  /* ==========================================================================
+     10. BACK TO TOP
+     ========================================================================== */
+  .back-to-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 9000;
+    width: 2.75rem; height: 2.75rem; border-radius: 50%;
+    background: var(--brand); color: #fff; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 14px rgba(203,24,125,0.4);
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { transform: translateY(-3px); }
+
+  /* ==========================================================================
+     11. RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 640px) {
+    .hero-container { min-height: auto; }
+    .hero-split { flex-direction: column !important; }
+    .hero-abstract-card { margin-top: 1.5rem; }
+  }
+
+  /* ==========================================================================
+     12. PRINT
+     ========================================================================== */
+  @media print {
+    .back-to-top, .scroll-progress, .hero-container { display: none; }
+    .outcome-card:hover, .stat-card:hover { transform: none; box-shadow: none; }
+  }
+
+  /* ==========================================================================
+     13. ICONIFY
+     ========================================================================== */
+  .iconify { vertical-align: middle; flex-shrink: 0; }
+
+  /* ==========================================================================
+     14. CONFLUENCE HUB-ROOT OVERRIDES
+     ========================================================================== */
+  #hub-root,
+  #hub-root * {
+    font-family: var(--font-body) !important;
+    box-sizing: border-box !important;
+  }
+  #hub-root { font-size: 16px !important; line-height: 1.6 !important; color: #1f2937 !important; }
+
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important; margin-bottom: 0 !important;
+    padding: 0 !important; line-height: 1.3 !important;
+  }
+
+  #hub-root .text-white      { color: #ffffff !important; }
+  #hub-root .text-gray-900   { color: #111827 !important; }
+  #hub-root .text-gray-800   { color: #1f2937 !important; }
+  #hub-root .text-gray-700   { color: #374151 !important; }
+  #hub-root .text-gray-600   { color: #4b5563 !important; }
+  #hub-root .text-gray-500   { color: #6b7280 !important; }
+  #hub-root .text-gray-400   { color: #9ca3af !important; }
+  #hub-root .text-gray-300   { color: #d1d5db !important; }
+
+  #hub-root .font-extrabold  { font-weight: 800 !important; }
+  #hub-root .font-bold       { font-weight: 700 !important; }
+  #hub-root .font-semibold   { font-weight: 600 !important; }
+  #hub-root .font-medium     { font-weight: 500 !important; }
+
+  #hub-root .text-4xl  { font-size: 2.25rem  !important; line-height: 2.5rem  !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem !important; line-height: 2.25rem !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem   !important; line-height: 2rem    !important; }
+  #hub-root .text-xl   { font-size: 1.25rem  !important; line-height: 1.75rem !important; }
+  #hub-root .text-lg   { font-size: 1.125rem !important; line-height: 1.75rem !important; }
+  #hub-root .text-base { font-size: 1rem     !important; line-height: 1.5rem  !important; }
+  #hub-root .text-sm   { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+  #hub-root .text-xs   { font-size: 0.75rem  !important; line-height: 1rem    !important; }
+
+  #hub-root .flex            { display: flex !important; }
+  #hub-root .inline-flex     { display: inline-flex !important; }
+  #hub-root .grid            { display: grid !important; }
+  #hub-root .hidden          { display: none !important; }
+  #hub-root .items-center    { align-items: center !important; }
+  #hub-root .items-start     { align-items: flex-start !important; }
+  #hub-root .justify-center  { justify-content: center !important; }
+  #hub-root .justify-between { justify-content: space-between !important; }
+  #hub-root .shrink-0        { flex-shrink: 0 !important; }
+  #hub-root .min-w-0         { min-width: 0 !important; }
+  #hub-root .gap-2           { gap: 0.5rem !important; }
+  #hub-root .gap-3           { gap: 0.75rem !important; }
+  #hub-root .gap-4           { gap: 1rem !important; }
+  #hub-root .gap-6           { gap: 1.5rem !important; }
+  #hub-root .ml-auto         { margin-left: auto !important; }
+
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  #hub-root .hero-pill { color: #CB187D !important; background: #ffffff !important; border: none !important; }
+  #hub-root .hero-pill .opacity-55 { opacity: 1 !important; }
+  #hub-root .hero-pill .opacity-50 { opacity: 1 !important; }
+  #hub-root .module-card { background: #ffffff !important; }
+  #hub-root .module-cta  { color: #ffffff !important; }
+  #hub-root .lesson-accordion { background: #f9fafb !important; }
+  #hub-root .lesson-accordion.active { background: #ffffff !important; }
+  #hub-root .lesson-name { color: #1f2937 !important; }
+  #hub-root .mod-pink.active .lesson-name { color: #CB187D !important; }
+  #hub-root .start-lesson-btn { color: #ffffff !important; text-decoration: none !important; }
+  #hub-root .lesson-accordion { border-color: #f3f4f6 !important; }
+  #hub-root .mod-pink.active  { border-color: #f5c6e0 !important; }
+  #hub-root .nav-link-hover:hover p,
+  #hub-root .nav-link-hover:hover span,
+  #hub-root .nav-link-hover:hover .iconify { color: var(--brand) !important; }
+  #hub-root .section-header {
+    display: flex !important; align-items: center !important;
+    gap: 1rem !important; padding: 1.25rem 2rem 1.25rem 1rem !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    border-left: 4px solid #CB187D !important;
+  }
+  #hub-root .section-icon {
+    display: inline-flex !important; align-items: center !important;
+    justify-content: center !important;
+    width: 2.75rem !important; height: 2.75rem !important;
+    border-radius: 0.75rem !important; background: #CB187D !important;
+    flex-shrink: 0 !important;
+  }
+</style>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <span class="iconify text-white text-base" data-icon="fa6-solid:chevron-up"></span>
+</button>
+
+<!-- ================================================================
+     ROOT WRAPPER
+     ================================================================ -->
+<div id="hub-root" class="bg-gray-50 min-h-screen">
+<div class="max-w-[1280px] mx-auto px-4 pt-5 pb-14 space-y-8">
+
+
+  <!-- ================================================================
+       HERO
+       ================================================================ -->
+  <section class="hero-container">
+    <div class="hero-dots"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-glow-line"></div>
+    <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+      <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+        <div class="flex-1 min-w-0">
+
+          <!-- Badge pills -->
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:cubes"></span> Module 1
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="inline-flex items-center gap-1">
+                <span class="skill-dot skill-dot-active"></span>
+                <span class="skill-dot"></span>
+                <span class="skill-dot"></span>
+              </span>
+              Beginner
+            </span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+              <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> ~1h
+            </span>
+          </div>
+
+          <!-- Label -->
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Python Learning Hub &middot; Module 1</p>
+
+          <!-- Title -->
+          <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Getting Started</h1>
+
+          <!-- Description -->
+          <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-5 max-w-prose">Set up your Python environment and learn the fundamentals &mdash; from what Python is and how to install it, to writing and running your first script or notebook. No prior experience needed.</p>
+
+          <!-- Author + date row -->
+          <div class="flex items-center gap-4 mb-5 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+              </span>
+              <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+            </div>
+            <span class="text-white/30">|</span>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+              </span>
+              <span class="text-white/85 font-medium text-xs">March 24, 2026</span>
+            </div>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-wrap items-center gap-3 mt-2">
+            <a href="lesson01_what_is_python.html" class="hero-cta">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Module
+            </a>
+            <a href="../hub_home_page.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:house"></span> Back to Hub
+            </a>
+          </div>
+
+        </div>
+
+        <!-- RIGHT — Hex Python SVG -->
+        <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+          <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+            <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+              <defs>
+                <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+                <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+                <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+                <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+                <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+              </defs>
+              <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+              <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+              <g clip-path="url(#hexClip)" opacity="1">
+                <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+                <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+                <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+                <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+                <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+                <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import python</text><text x="185" y="92">python --version</text><text x="38" y="92">pip install ...</text></g>
+                <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">venv activate</text><text x="42" y="260">code . --new-window</text><text x="175" y="275">print("hello")</text></g>
+                <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+                <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+                <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+                <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+                <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+              </g>
+              <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+              <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+              <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+              <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+              <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+              <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+              <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+              <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       MODULE AT A GLANCE
+       ================================================================ -->
+  <section id="at-a-glance">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:chart-pie"></span>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Module at a Glance</h2>
+          <p class="text-sm text-gray-400 leading-snug mt-0.5">Everything this module covers across 6 lessons</p>
+        </div>
+      </div>
+      <div class="bg-white px-8 py-5">
+        <div class="rounded-xl border border-gray-100 bg-gray-50 overflow-hidden">
+          <div class="flex flex-col sm:flex-row sm:divide-x divide-gray-100">
+
+            <div class="flex items-center gap-3 flex-1 px-5 py-4">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:book-open"></span>
+              </span>
+              <div>
+                <p class="text-xl font-extrabold text-gray-900 leading-none">6</p>
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Lessons</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-regular:clock"></span>
+              </span>
+              <div>
+                <p class="text-xl font-extrabold text-gray-900 leading-none">~1h</p>
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Duration</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:layer-group"></span>
+              </span>
+              <div>
+                <p class="text-xl font-extrabold text-gray-900 leading-none">6</p>
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Topics</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:star"></span>
+              </span>
+              <div>
+                <p class="text-sm font-extrabold text-gray-900 leading-none">Beginner</p>
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Start Level</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       WHAT YOU'LL ACHIEVE
+       ================================================================ -->
+  <section id="outcomes">
+    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+      <div class="section-header">
+        <div class="section-icon">
+          <span class="iconify text-white text-xl" data-icon="fa6-solid:bullseye"></span>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">What You'll Achieve</h2>
+          <p class="text-sm text-gray-400 leading-snug mt-0.5">Key skills you will have by the end of this module</p>
+        </div>
+      </div>
+      <div class="bg-white px-8 py-7">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:lightbulb"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Understand Python</p>
+              <p class="text-xs text-gray-400">What it is, why it matters, and where it's used</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:download"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Set Up Your Tools</p>
+              <p class="text-xs text-gray-400">Request access, install Python and VS Code</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:puzzle-piece"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Configure Extensions</p>
+              <p class="text-xs text-gray-400">Install must-have VS Code extensions for Python</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:folder-tree"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Create Virtual Environments</p>
+              <p class="text-xs text-gray-400">Isolate project dependencies with venv</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:box-open"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Manage Packages with pip</p>
+              <p class="text-xs text-gray-400">Install and manage libraries using pip</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:play"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Run Scripts &amp; Notebooks</p>
+              <p class="text-xs text-gray-400">Execute .py files and Jupyter Notebooks</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">
+            This is the <strong>first module</strong> in the learning path &mdash; no prior experience is required. Complete this module before moving on to Module 2: Python Foundation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       MODULE 1 — GETTING STARTED
+       ================================================================ -->
+  <section id="module-01">
+    <div class="module-card">
+      <div class="h-1.5 module-bar-pink"></div>
+      <div class="flex items-center gap-5 px-7 py-5 border-b border-gray-100">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl module-icon-pink shrink-0">
+          <span class="iconify text-white text-lg" data-icon="fa6-solid:rocket"></span>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; 6 Lessons &middot; ~1 hour</p>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Getting Started</h2>
+          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Set up your Python environment from scratch &mdash; install the tools, configure your editor, create a virtual environment, add packages, and run your first code.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0 hidden sm:flex">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Beginner
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
+            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 6 lessons
+          </span>
+        </div>
+      </div>
+
+      <div class="px-6 py-5">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Lessons in this module</p>
+        <div class="space-y-2">
+
+          <!-- L1 -->
+          <div class="lesson-accordion mod-pink active">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">1</div>
+              <div class="lesson-info"><p class="lesson-category">Introduction</p><p class="lesson-name">What is Python?</p></div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 5 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
+              <p class="lesson-goal"><strong>Goal:</strong> Understand what Python is, why it's popular, and how it fits into the world of data analysis, automation, and application development.</p>
+              <ul class="lesson-checklist">
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> What Python is and why it matters</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> How Python compares to tools like Excel and SQL</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Common use cases for Python in the workplace</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Why Python is a great first programming language</li>
+              </ul>
+              <a href="lesson01_what_is_python.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+            </div></div>
+          </div>
+
+          <!-- L2 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">2</div>
+              <div class="lesson-info"><p class="lesson-category">Setup</p><p class="lesson-name">How to Request Access &amp; Software</p></div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
+              <p class="lesson-goal"><strong>Goal:</strong> Learn what tools and software you need for Python development and how to request or install them in your organization.</p>
+              <ul class="lesson-checklist">
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Required software for Python development</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> How to request access through your organization</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Installing Python and VS Code</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Verifying your setup is ready to use</li>
+              </ul>
+              <a href="lesson02_how_to_request_access_software.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+            </div></div>
+          </div>
+
+          <!-- L3 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">3</div>
+              <div class="lesson-info"><p class="lesson-category">Setup</p><p class="lesson-name">How to Install Extensions in VS Code</p></div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 8 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
+              <p class="lesson-goal"><strong>Goal:</strong> Install and configure the essential VS Code extensions that transform the editor into a full Python development environment.</p>
+              <ul class="lesson-checklist">
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Must-have extensions for Python in VS Code</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> How to find and install extensions from the marketplace</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Configuring extensions for your workflow</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Recommended extensions for productivity</li>
+              </ul>
+              <a href="lesson03_how_to_install_extensions_in_vs_code.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+            </div></div>
+          </div>
+
+          <!-- L4 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">4</div>
+              <div class="lesson-info"><p class="lesson-category">Environment</p><p class="lesson-name">How to Setup a Virtual Environment</p></div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
+              <p class="lesson-goal"><strong>Goal:</strong> Create and manage virtual environments to isolate project dependencies and avoid version conflicts between projects.</p>
+              <ul class="lesson-checklist">
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> What virtual environments are and why they matter</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating a virtual environment with venv</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Activating and deactivating environments</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Selecting the interpreter in VS Code</li>
+              </ul>
+              <a href="lesson04_how_to_setup_a_virtual_environment.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+            </div></div>
+          </div>
+
+          <!-- L5 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">5</div>
+              <div class="lesson-info"><p class="lesson-category">Environment</p><p class="lesson-name">How to Install Libraries</p></div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 8 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
+              <p class="lesson-goal"><strong>Goal:</strong> Install and manage Python libraries using pip to extend your project's functionality with third-party packages.</p>
+              <ul class="lesson-checklist">
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> What pip is and how package management works</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Installing packages from PyPI</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Using requirements.txt for reproducibility</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Checking installed packages and versions</li>
+              </ul>
+              <a href="lesson05_how_to_install_libraries_in_a_virtual_environment.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+            </div></div>
+          </div>
+
+          <!-- L6 -->
+          <div class="lesson-accordion mod-pink">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <div class="lesson-num num-pink">6</div>
+              <div class="lesson-info"><p class="lesson-category">Workflow</p><p class="lesson-name">How to Run a Notebook or Script</p></div>
+              <span class="lesson-badge">Beginner</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
+              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
+            </div>
+            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
+              <p class="lesson-goal"><strong>Goal:</strong> Execute Python code using both scripts and Jupyter Notebooks and understand when to use each approach in your workflow.</p>
+              <ul class="lesson-checklist">
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Running .py scripts from the terminal and VS Code</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating and running Jupyter Notebooks</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Differences between scripts and notebooks</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> When to use each approach for different tasks</li>
+              </ul>
+              <a href="lesson06_how_to_run_a_python_notebook_or_script.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+            </div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="border-t border-gray-100 px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400 self-center mr-1">Topics</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Python basics</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">VS Code</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">extensions</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">venv</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">pip</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">notebooks</span>
+        </div>
+        <a href="lesson01_what_is_python.html" class="module-cta module-cta-pink shrink-0 self-end sm:self-auto">
+          Start Module <span class="iconify text-[11px]" data-icon="fa6-solid:arrow-right"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+</div>
+</div>
+
+<script>
+  // Accordion toggle — only one open at a time
+  function toggleAccordion(header) {
+    var item = header.closest('.lesson-accordion');
+    var isActive = item.classList.contains('active');
+    var siblings = item.parentElement.querySelectorAll('.lesson-accordion');
+    siblings.forEach(function(sib) { sib.classList.remove('active'); });
+    if (!isActive) { item.classList.add('active'); }
+    if (window.Iconify) Iconify.scan();
+  }
+
+  // Scroll progress bar
+  function updateScrollProgress() {
+    var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+
+  // Back to top button
+  function updateBackToTop() {
+    var btn = document.getElementById('back-to-top');
+    if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+  }
+
+  window.addEventListener('scroll', function() {
+    updateScrollProgress();
+    updateBackToTop();
+  });
+
+  window.addEventListener('load', function() { if (window.Iconify) Iconify.scan(); });
+</script>

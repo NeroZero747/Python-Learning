@@ -116,13 +116,16 @@
      6. OUTCOME / STAT CARDS
      ========================================================================== */
   .outcome-card {
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease;
   }
   .outcome-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.15);
-    border-color: var(--brand) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
+    border-color: #CB187D; background-color: #ffffff;
   }
+  .outcome-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+  .outcome-card:hover .outcome-icon { transform: scale(1.1); background-color: #CB187D; }
+  .outcome-card:hover .outcome-icon .iconify { color: white !important; }
   .stat-card {
     transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   }
@@ -447,7 +450,7 @@
           <!-- Badge pills -->
           <div class="flex flex-wrap items-center gap-2 mb-4">
             <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Track 01
+              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Module 01
             </span>
             <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
               <span class="inline-flex items-center gap-1">
@@ -458,12 +461,12 @@
               Beginner &rarr; Intermediate
             </span>
             <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
-              <span class="iconify text-[10px]" data-icon="fa6-solid:certificate"></span> Core Track
+              <span class="iconify text-[10px]" data-icon="fa6-solid:certificate"></span> Core Module
             </span>
           </div>
 
           <!-- Label -->
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Python Learning Hub &middot; Track 01</p>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Python Learning Hub &middot; Module 01</p>
 
           <!-- Title -->
           <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Python Foundation</h1>
@@ -490,8 +493,8 @@
 
           <!-- CTA buttons -->
           <div class="flex flex-wrap items-center gap-3 mt-2">
-            <a href="mod_01_programming_foundations_part_1/lesson01_what_is_programming.html" class="hero-cta">
-              <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Track
+            <a href="mod_01_python_foundations/lesson01_what_is_programming.html" class="hero-cta">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:play"></span> Start Module
             </a>
             <a href="../../hub_home_page.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors" style="text-decoration:none;">
               <span class="iconify text-[10px]" data-icon="fa6-solid:house"></span> Back to Hub
@@ -553,8 +556,8 @@
           <span class="iconify text-white text-xl" data-icon="fa6-solid:chart-pie"></span>
         </div>
         <div>
-          <h2 class="text-xl font-bold text-gray-900 leading-tight">Track at a Glance</h2>
-          <p class="text-sm text-gray-400 leading-snug mt-0.5">Everything this track covers in two modules</p>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Module at a Glance</h2>
+          <p class="text-sm text-gray-400 leading-snug mt-0.5">Everything this module covers across 15 lessons</p>
         </div>
       </div>
       <div class="bg-white px-8 py-5">
@@ -563,20 +566,10 @@
 
             <div class="flex items-center gap-3 flex-1 px-5 py-4">
               <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
-                <span class="iconify text-brand text-base" data-icon="fa6-solid:cubes"></span>
-              </span>
-              <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">2</p>
-                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Modules</p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
                 <span class="iconify text-brand text-base" data-icon="fa6-solid:book-open"></span>
               </span>
               <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">17</p>
+                <p class="text-xl font-extrabold text-gray-900 leading-none">15</p>
                 <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Lessons</p>
               </div>
             </div>
@@ -586,18 +579,28 @@
                 <span class="iconify text-brand text-base" data-icon="fa6-regular:clock"></span>
               </span>
               <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">~5h</p>
+                <p class="text-xl font-extrabold text-gray-900 leading-none">~4.5h</p>
                 <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Duration</p>
               </div>
             </div>
 
             <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
               <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
-                <span class="iconify text-brand text-base" data-icon="fa6-solid:certificate"></span>
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:layer-group"></span>
               </span>
               <div>
-                <p class="text-xl font-extrabold text-gray-900 leading-none">Core</p>
-                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Track Type</p>
+                <p class="text-xl font-extrabold text-gray-900 leading-none">9</p>
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Topics</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-1 px-5 py-4 border-t sm:border-t-0 border-gray-100">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+                <span class="iconify text-brand text-base" data-icon="fa6-solid:star"></span>
+              </span>
+              <div>
+                <p class="text-sm font-extrabold text-gray-900 leading-none">Beginner</p>
+                <p class="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Start Level</p>
               </div>
             </div>
 
@@ -619,69 +622,99 @@
         </div>
         <div>
           <h2 class="text-xl font-bold text-gray-900 leading-tight">What You'll Achieve</h2>
-          <p class="text-sm text-gray-400 leading-snug mt-0.5">Key skills you will have by the end of this track</p>
+          <p class="text-sm text-gray-400 leading-snug mt-0.5">Key skills you will have by the end of this module</p>
         </div>
       </div>
       <div class="bg-white px-8 py-7">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 
           <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
               <span class="iconify text-brand text-lg" data-icon="fa6-solid:code"></span>
             </span>
             <div class="min-w-0">
-              <p class="text-sm font-semibold text-gray-800">Write Real Python Code</p>
-              <p class="text-xs text-gray-400">Variables, loops, functions, and data structures</p>
+              <p class="text-sm font-semibold text-gray-800">Write Python from Scratch</p>
+              <p class="text-xs text-gray-400">Variables, syntax, types, and running scripts</p>
             </div>
           </div>
 
           <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-              <span class="iconify text-brand text-lg" data-icon="fa6-solid:cube"></span>
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:database"></span>
             </span>
             <div class="min-w-0">
-              <p class="text-sm font-semibold text-gray-800">Use Classes and Objects</p>
-              <p class="text-xs text-gray-400">Build reusable, structured data components</p>
+              <p class="text-sm font-semibold text-gray-800">Use All Python Data Types</p>
+              <p class="text-xs text-gray-400">int, float, str, bool, tuple, set, and None</p>
             </div>
           </div>
 
           <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-              <span class="iconify text-brand text-lg" data-icon="fa6-solid:folder-tree"></span>
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:list"></span>
             </span>
             <div class="min-w-0">
-              <p class="text-sm font-semibold text-gray-800">Structure Real Projects</p>
-              <p class="text-xs text-gray-400">Organize modules, folders, and data files</p>
+              <p class="text-sm font-semibold text-gray-800">Store &amp; Query Collections</p>
+              <p class="text-xs text-gray-400">Lists, dictionaries, indexing, and slicing</p>
             </div>
           </div>
 
           <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:code-branch"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Apply Logic &amp; Control Flow</p>
+              <p class="text-xs text-gray-400">Operators, if/elif/else, loops, and conditions</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:rotate"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Automate with Loops</p>
+              <p class="text-xs text-gray-400">for, while, break, continue, and iteration</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:puzzle-piece"></span>
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-gray-800">Build Reusable Functions</p>
+              <p class="text-xs text-gray-400">def, parameters, default args, and return values</p>
+            </div>
+          </div>
+
+          <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
               <span class="iconify text-brand text-lg" data-icon="fa6-solid:bug-slash"></span>
             </span>
             <div class="min-w-0">
               <p class="text-sm font-semibold text-gray-800">Read and Fix Errors</p>
-              <p class="text-xs text-gray-400">Understand tracebacks and debug confidently</p>
+              <p class="text-xs text-gray-400">Tracebacks, SyntaxError, TypeError, NameError</p>
             </div>
           </div>
 
           <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-              <span class="iconify text-brand text-lg" data-icon="fa6-solid:code-branch"></span>
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:cube"></span>
             </span>
             <div class="min-w-0">
-              <p class="text-sm font-semibold text-gray-800">Version Control with Git</p>
-              <p class="text-xs text-gray-400">Track code changes, commit, and use GitHub</p>
+              <p class="text-sm font-semibold text-gray-800">Model Data with Classes</p>
+              <p class="text-xs text-gray-400">__init__, attributes, methods, and objects</p>
             </div>
           </div>
 
           <div class="outcome-card flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
-              <span class="iconify text-brand text-lg" data-icon="fa6-solid:scroll"></span>
+            <span class="outcome-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+              <span class="iconify text-brand text-lg" data-icon="fa6-solid:folder-tree"></span>
             </span>
             <div class="min-w-0">
-              <p class="text-sm font-semibold text-gray-800">Add Logging to Scripts</p>
-              <p class="text-xs text-gray-400">Monitor execution and surface problems early</p>
+              <p class="text-sm font-semibold text-gray-800">Build Production-Ready Scripts</p>
+              <p class="text-xs text-gray-400">Modules, Git version control, and logging</p>
             </div>
           </div>
 
@@ -690,87 +723,8 @@
         <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
           <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
           <p class="text-sm text-gray-600">
-            This track builds on <strong>Getting Started</strong>. Make sure your Python environment is set up and you can run a script before beginning Module 1.
+            This module builds on <strong>Getting Started</strong>. Make sure your Python environment is set up and you can run a script before beginning Lesson 1.
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ================================================================
-       MODULE OVERVIEW — side-by-side summary cards
-       ================================================================ -->
-  <section id="module-overview">
-    <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-      <div class="section-header">
-        <div class="section-icon">
-          <span class="iconify text-white text-xl" data-icon="fa6-solid:sitemap"></span>
-        </div>
-        <div>
-          <h2 class="text-xl font-bold text-gray-900 leading-tight">Module Overview</h2>
-          <p class="text-sm text-gray-400 leading-snug mt-0.5">Two modules, taken in sequence &mdash; each one builds on the last</p>
-        </div>
-      </div>
-      <div class="bg-white px-8 py-7">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-          <!-- Module 01 summary -->
-          <a href="#module-01" class="block rounded-2xl border border-gray-100 overflow-hidden hover:border-[#f5c6e0] hover:shadow-lg transition-all duration-200" style="text-decoration:none;">
-            <div class="h-1.5 module-bar-pink"></div>
-            <div class="px-5 py-5">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl module-icon-pink shrink-0">
-                  <span class="iconify text-white text-base" data-icon="fa6-solid:terminal"></span>
-                </span>
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-[#CB187D]">Module 01</p>
-                  <p class="text-sm font-bold text-gray-900">Programming Foundations Part 1</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed mb-3">Variables, data types, control flow, functions, and debugging &mdash; the essential tools of every Python program.</p>
-              <div class="flex items-center gap-3">
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
-                  <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 9 lessons
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
-                  <span class="iconify text-[9px]" data-icon="fa6-regular:clock"></span> ~2.5 hours
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-500">
-                  <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Beginner
-                </span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Module 02 summary -->
-          <a href="#module-02" class="block rounded-2xl border border-gray-100 overflow-hidden hover:border-violet-200 hover:shadow-lg transition-all duration-200" style="text-decoration:none;">
-            <div class="h-1.5 module-bar-violet"></div>
-            <div class="px-5 py-5">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl module-icon-violet shrink-0">
-                  <span class="iconify text-white text-base" data-icon="fa6-solid:cube"></span>
-                </span>
-                <div>
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-violet-600">Module 02</p>
-                  <p class="text-sm font-bold text-gray-900">Programming Foundations Part 2</p>
-                </div>
-              </div>
-              <p class="text-xs text-gray-500 leading-relaxed mb-3">Classes, attributes, methods, project structure, Git version control, and logging &mdash; write code like a professional.</p>
-              <div class="flex items-center gap-3">
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">
-                  <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 8 lessons
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">
-                  <span class="iconify text-[9px]" data-icon="fa6-regular:clock"></span> ~2 hours
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-500">
-                  <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Intermediate
-                </span>
-              </div>
-            </div>
-          </a>
-
         </div>
       </div>
     </div>
@@ -788,16 +742,16 @@
           <span class="iconify text-white text-lg" data-icon="fa6-solid:terminal"></span>
         </span>
         <div class="min-w-0 flex-1">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 01 &middot; 9 Lessons &middot; ~2.5 hours</p>
-          <h2 class="text-xl font-bold text-gray-900 leading-tight">Programming Foundations Part 1</h2>
-          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Master the essential building blocks of Python &mdash; from variables and data types to loops, functions, and reading errors like a pro.</p>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 01 &middot; 15 Lessons &middot; ~4.5 hours</p>
+          <h2 class="text-xl font-bold text-gray-900 leading-tight">Programming Foundations</h2>
+          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Master Python from first principles &mdash; variables, data types, loops, functions, classes, modules, version control, and logging.</p>
         </div>
         <div class="flex flex-wrap items-center gap-2 shrink-0 hidden sm:flex">
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
             <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Beginner
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
-            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 9 lessons
+            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 15 lessons
           </span>
         </div>
       </div>
@@ -823,7 +777,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Why Python is beginner-friendly and widely used</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Real-world uses for programming in data and analytics</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson01_what_is_programming.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson01_what_is_programming.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -844,7 +798,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Checking and converting between types</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Naming conventions and best practices</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson02_variables_data_types.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson02_variables_data_types.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -865,7 +819,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> None and its role as a placeholder</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Type comparisons and practical use cases</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson03_additional_python_data_types.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson03_additional_python_data_types.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -886,7 +840,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Dictionary key-value pairs and lookups</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Iterating over collections with for loops</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson04_lists_dictionaries.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson04_lists_dictionaries.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -907,7 +861,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Logical operators: and, or, not</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Operator precedence and parentheses</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson05_operators.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson05_operators.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -928,7 +882,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Combining conditions with and / or</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Practical decision-making patterns in data scripts</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson06_if_statements.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson06_if_statements.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -949,7 +903,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> break and continue statements</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Looping over dictionary keys and values</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson07_loops.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson07_loops.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -970,7 +924,7 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Default argument values</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Why functions dramatically reduce code duplication</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson08_functions.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson08_functions.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
@@ -991,103 +945,34 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Strategies for finding and fixing bugs</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Using print() for quick debugging</li>
               </ul>
-              <a href="mod_01_programming_foundations_part_1/lesson09_reading_understanding_errors.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson09_reading_understanding_errors.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
-          </div>
 
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between px-6 pb-5 gap-4">
-        <div class="flex flex-wrap gap-2">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">variables</span>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">loops</span>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">functions</span>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">debugging</span>
-        </div>
-        <a href="mod_01_programming_foundations_part_1/lesson01_what_is_programming.html" class="module-cta module-cta-pink shrink-0">
-          Start Module <span class="iconify text-[11px]" data-icon="fa6-solid:arrow-right"></span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ================================================================
-       MODULE 02 — PROGRAMMING FOUNDATIONS PART 2
-       ================================================================ -->
-  <section id="module-02">
-    <div class="module-card">
-      <div class="h-1.5 module-bar-violet"></div>
-      <div class="flex items-center gap-5 px-7 py-5 border-b border-gray-100">
-        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl module-icon-violet shrink-0">
-          <span class="iconify text-white text-lg" data-icon="fa6-solid:cube"></span>
-        </span>
-        <div class="min-w-0 flex-1">
-          <p class="text-xs font-bold uppercase tracking-widest text-violet-600 mb-0.5">Module 02 &middot; 8 Lessons &middot; ~2 hours</p>
-          <h2 class="text-xl font-bold text-gray-900 leading-tight">Programming Foundations Part 2</h2>
-          <p class="text-sm text-gray-500 mt-1 leading-relaxed">Build on your Python basics with object-oriented programming, custom modules, project structure, Git version control, and logging.</p>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 shrink-0 hidden sm:flex">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">
-            <span class="iconify text-[9px]" data-icon="fa6-solid:star"></span><span class="iconify text-[9px]" data-icon="fa6-solid:star"></span> Intermediate
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
-            <span class="iconify text-[9px]" data-icon="fa6-solid:book-open"></span> 8 lessons
-          </span>
-        </div>
-      </div>
-
-      <div class="px-6 py-5">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Lessons in this module</p>
-        <div class="space-y-2">
-
-          <!-- L1 -->
-          <div class="lesson-accordion mod-violet">
+          <!-- L10 -->
+          <div class="lesson-accordion mod-pink">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">1</div>
-              <div class="lesson-info"><p class="lesson-category">Introduction</p><p class="lesson-name">Why Classes Help Data Projects</p></div>
-              <span class="lesson-badge">Intermediate</span>
-              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 10 min</span>
-              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
-            </div>
-            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
-              <p class="lesson-goal"><strong>Goal:</strong> Understand the problem that classes solve and recognize the analytics scenarios where they are most valuable.</p>
-              <ul class="lesson-checklist">
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> What object-oriented programming is and why it exists</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> Problems that arise with flat, procedural scripts</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> How classes group related data and behavior together</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> Real analytics scenarios where classes clean up code</li>
-              </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson01_why_classes_help_data_projects.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
-            </div></div>
-          </div>
-
-          <!-- L2 -->
-          <div class="lesson-accordion mod-violet">
-            <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">2</div>
-              <div class="lesson-info"><p class="lesson-category">OOP</p><p class="lesson-name">Creating a Class</p></div>
+              <div class="lesson-num num-pink">10</div>
+              <div class="lesson-info"><p class="lesson-category">OOP</p><p class="lesson-name">Introduction to Classes</p></div>
               <span class="lesson-badge">Intermediate</span>
               <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
               <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
             </div>
             <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
-              <p class="lesson-goal"><strong>Goal:</strong> Define a class with an <code>__init__</code> method and create multiple instances from a single blueprint.</p>
+              <p class="lesson-goal"><strong>Goal:</strong> Understand why classes exist, define your first class with <code>__init__</code>, and create objects from a blueprint.</p>
               <ul class="lesson-checklist">
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> The class keyword and naming conventions</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> The __init__ constructor and what it does</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating and using instances of a class</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> What self represents and why it appears everywhere</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Why classes exist and what problems they solve</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> The class keyword and the __init__ constructor</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> What self represents and how it works</li>
+                <li><span class="iconify" data-icon="fa6-solid:check"></span> Creating multiple objects from one class</li>
               </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson02_creating_a_class.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson10_introduction_to_classes.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
-          <!-- L3 -->
-          <div class="lesson-accordion mod-violet">
+          <!-- L11 -->
+          <div class="lesson-accordion mod-pink">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">3</div>
+              <div class="lesson-num num-pink">11</div>
               <div class="lesson-info"><p class="lesson-category">OOP</p><p class="lesson-name">Attributes &amp; Methods</p></div>
               <span class="lesson-badge">Intermediate</span>
               <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
@@ -1101,14 +986,14 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Returning values from methods</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Keeping methods focused on a single responsibility</li>
               </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson03_attributes_methods.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson11_attributes_methods.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
-          <!-- L4 -->
-          <div class="lesson-accordion mod-violet">
+          <!-- L12 -->
+          <div class="lesson-accordion mod-pink">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">4</div>
+              <div class="lesson-num num-pink">12</div>
               <div class="lesson-info"><p class="lesson-category">OOP</p><p class="lesson-name">Refactoring a Script into a Class</p></div>
               <span class="lesson-badge">Intermediate</span>
               <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 20 min</span>
@@ -1122,56 +1007,35 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Testing the refactored class against the original</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Benefits of the class approach for readability and reuse</li>
               </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson04_refactoring_a_script_into_a_class.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson12_refactoring_a_script_into_a_class.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
-          <!-- L5 -->
-          <div class="lesson-accordion mod-violet">
+          <!-- L13 -->
+          <div class="lesson-accordion mod-pink">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">5</div>
-              <div class="lesson-info"><p class="lesson-category">Modules</p><p class="lesson-name">Creating Your Own Modules</p></div>
+              <div class="lesson-num num-pink">13</div>
+              <div class="lesson-info"><p class="lesson-category">Modules</p><p class="lesson-name">Modules &amp; Project Structure</p></div>
               <span class="lesson-badge">Intermediate</span>
-              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
+              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 20 min</span>
               <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
             </div>
             <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
-              <p class="lesson-goal"><strong>Goal:</strong> Split code across files and import functions from your own modules &mdash; the first step toward writing properly organized projects.</p>
+              <p class="lesson-goal"><strong>Goal:</strong> Split code across files, import from your own modules, and organize a project folder following real-world analytics conventions.</p>
               <ul class="lesson-checklist">
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> What a module is and why splitting code across files matters</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Importing functions from your own .py files</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> __init__.py and how packages work</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> Avoiding circular imports</li>
-              </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson05_creating_your_own_modules.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
-            </div></div>
-          </div>
-
-          <!-- L6 -->
-          <div class="lesson-accordion mod-violet">
-            <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">6</div>
-              <div class="lesson-info"><p class="lesson-category">Best Practices</p><p class="lesson-name">Project Folder Structure</p></div>
-              <span class="lesson-badge">Intermediate</span>
-              <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
-              <div class="accordion-chevron"><span class="iconify" data-icon="fa6-solid:chevron-down" style="font-size:12px;"></span></div>
-            </div>
-            <div class="accordion-body"><div class="accordion-body-inner"><hr class="accordion-divider">
-              <p class="lesson-goal"><strong>Goal:</strong> Organize scripts, data, and modules into a clean, navigable project layout following the conventions used in production analytics work.</p>
-              <ul class="lesson-checklist">
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> A standard analytics project folder layout</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> modules/, data/raw/, and data/processed/ folders</li>
-                <li><span class="iconify" data-icon="fa6-solid:check"></span> Why flat project folders become hard to manage</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Running scripts reliably from the project root</li>
               </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson06_project_folder_structure.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson13_modules_and_project_structure.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
-          <!-- L7 -->
-          <div class="lesson-accordion mod-violet">
+          <!-- L14 -->
+          <div class="lesson-accordion mod-pink">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">7</div>
+              <div class="lesson-num num-pink">14</div>
               <div class="lesson-info"><p class="lesson-category">Version Control</p><p class="lesson-name">Introduction to Git (Simple Workflow)</p></div>
               <span class="lesson-badge">Intermediate</span>
               <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
@@ -1185,14 +1049,14 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Reading the Git status and commit log</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Why every coding project should use version control from day one</li>
               </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson07_introduction_to_git_simple_workflow.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson14_introduction_to_git_simple_workflow.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
-          <!-- L8 -->
-          <div class="lesson-accordion mod-violet">
+          <!-- L15 -->
+          <div class="lesson-accordion mod-pink">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-              <div class="lesson-num num-violet">8</div>
+              <div class="lesson-num num-pink">15</div>
               <div class="lesson-info"><p class="lesson-category">Best Practices</p><p class="lesson-name">Logging Basics</p></div>
               <span class="lesson-badge">Intermediate</span>
               <span class="lesson-time"><span class="iconify" data-icon="fa6-solid:clock" style="font-size:10px;"></span> 15 min</span>
@@ -1206,29 +1070,30 @@
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Writing logs to a file alongside the console</li>
                 <li><span class="iconify" data-icon="fa6-solid:check"></span> Formatting log messages for readability</li>
               </ul>
-              <a href="mod_02_programming_foundations_part_2/lesson08_logging_basics.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
+              <a href="mod_01_python_foundations/lesson15_logging_basics.html" class="start-lesson-btn">Start Lesson <span class="iconify" data-icon="fa6-solid:play" style="font-size:10px;"></span></a>
             </div></div>
           </div>
 
         </div>
       </div>
 
-      <div class="flex items-center justify-between px-6 pb-5 gap-4">
-        <div class="flex flex-wrap gap-2">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">classes</span>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">modules</span>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">git</span>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">logging</span>
+      <div class="border-t border-gray-100 px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400 self-center mr-1">Topics</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">variables</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">loops</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">functions</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">classes</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">modules</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">git</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">logging</span>
         </div>
-        <a href="mod_02_programming_foundations_part_2/lesson01_why_classes_help_data_projects.html" class="module-cta module-cta-violet shrink-0">
+        <a href="mod_01_python_foundations/lesson01_what_is_programming.html" class="module-cta module-cta-pink shrink-0 self-end sm:self-auto">
           Start Module <span class="iconify text-[11px]" data-icon="fa6-solid:arrow-right"></span>
         </a>
       </div>
     </div>
   </section>
-
-
-
 
 
 </div>
