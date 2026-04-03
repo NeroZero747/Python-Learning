@@ -491,7 +491,7 @@ Apply the same fix to the `#hub-root` block:
 
 ## Completion Checklist
 
-After all 11 checks, confirm the following counts are consistent:
+After all checks, confirm the following counts are consistent:
 
 | Item | Should equal |
 |---|---|
@@ -507,6 +507,7 @@ After all 11 checks, confirm the following counts are consistent:
 | Practice Exercise tabs | Up to 5 — one per objective |
 | Knowledge Check tabs | Up to 5 — one per objective |
 | Cross-section uniqueness | No two sections repeat the same sentence or explanation; each section stays within its intended role |
+| HTML structural integrity | Every `<section>` has balanced div nesting (depth 0); `<main>` overall depth is 0; no orphaned closing tags |
 
 Do not close the task until all counts are consistent.
 
@@ -580,3 +581,77 @@ Use this table as the reference for what each section is *allowed* to do. If con
    - If a Recap card copies an Objective card description word for word: rewrite the recap as a past-tense achievement sentence (e.g. "You learned that `pd.read_csv()` loads any CSV file into a DataFrame in one line.").
    - If a Knowledge Check question only tests recall ("What does `pd.read_csv()` do?"): replace it with an application question ("Your CSV uses tabs as separators. Which call loads it correctly?").
 5. **Do not remove correct, non-duplicate content** just because the same *topic* appears in multiple sections — the goal is unique *framing*, not unique *topics*. Every section can reference `pd.read_csv()` as long as each section says something different about it.
+
+---
+
+### Check 14 — HTML structural integrity (div/tag nesting balance)
+
+**Goal:** Every `<section>` must have perfectly balanced opening and closing tags so that the `<main>` flex layout — and therefore the TOC sidebar — is never broken by orphaned `</div>`, `</span>`, or other stray closing tags. A single unmatched `</div>` inside any section can close the `<main>` container early, pushing all subsequent sections outside the sidebar layout.
+
+#### Why this matters
+
+When a section has more closing `</div>` tags than opening `<div` tags, the extra closings bubble up and close ancestor containers (`<main>`, `.lesson-layout`, or even `#hub-root`). The visible symptom is that sections after the broken one render full-width below the sidebar instead of beside it, and the TOC scroll-spy stops highlighting. This is extremely hard to diagnose visually because the broken section itself often looks fine — the damage only shows up downstream.
+
+#### 14a — Per-section div depth check
+
+For every `<section id="...">` through its matching `</section>`, count:
+- **Opens:** every `<div` occurrence (including self-closing edge cases, though those are rare in this project)
+- **Closes:** every `</div>` occurrence
+
+The difference (opens − closes) must be **exactly 0** for each section. If it is negative, the section has orphaned `</div>` tags that will close ancestor elements. If it is positive, the section has unclosed `<div>` tags that will swallow subsequent content.
+
+**How to scan (pseudocode):**
+```
+For each <section id="NAME"> … </section> block:
+  depth = 0
+  For each line in the block:
+    depth += count of '<div' on this line
+    depth -= count of '</div>' on this line
+    if depth < 0:
+      FLAG: line N has depth < 0 — orphaned </div>
+  if depth != 0:
+    FLAG: section "NAME" ends with depth = {depth}
+```
+
+#### 14b — Main element overall balance
+
+From the `<main` opening tag to the `</main>` closing tag, run the same depth counter. The final depth must be **exactly 0**. This catches imbalances that span across section boundaries (e.g., a section that opens a div but leaves it to be closed by the next section).
+
+#### 14c — Orphaned closing tags (non-div)
+
+Scan the entire file for stray closing tags that have no matching opener nearby:
+- `</span>` not preceded by a `<span` on the same line or within the enclosing element
+- `</p>` appearing after the content div is already closed
+- `</a>` without a matching `<a` in scope
+
+These are harder to detect reliably, so focus on the most common pattern: a `</span>` or `</div>` sitting on its own line at an indentation level that doesn't match its surroundings. If found, trace back to the nearest opening tag and determine whether the closer is orphaned or the opener is missing.
+
+#### 14d — Common corruption patterns to watch for
+
+These are specific patterns that have caused real breakages in lesson files:
+
+1. **Collapsed divider rows in `#comparison`** — The row divider between comparison rows uses a `<div class="flex items-center gap-3 mb-4">` with nested icon `<span>` elements and flanking `<span class="flex-1 h-px bg-gray-100">` decorators. If this structure is collapsed to just `<div>` followed by a stray `</span>`, it creates a −2 depth imbalance. **Fix:** Restore the full divider pattern:
+   ```html
+   <div class="flex items-center gap-3 mb-4">
+     <span class="flex-1 h-px bg-gray-100"></span>
+     <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+       <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span>
+     </span>
+     <span class="flex-1 h-px bg-gray-100"></span>
+   </div>
+   ```
+
+2. **Amber tip boxes placed outside their wrapper** — A `bg-amber-tip` div that sits after the section body's closing `</div>` but before `</section>` adds an extra nesting level that throws off downstream depth. **Fix:** Move the amber tip inside the section body div.
+
+3. **Extra `</div>` after accordion or tab panel content** — When content is added to an accordion body or tab panel, an accidental extra `</div>` can close the panel wrapper, the section body, or even `<main>`. **Fix:** Count the div opens inside the panel and ensure the closes match exactly.
+
+#### 14e — How to fix an imbalance
+
+1. Identify the **first line where depth goes negative** — that line (or the line immediately before it) has the orphaned closer.
+2. Compare the surrounding HTML structure against the canonical templates in `copilot-instructions.md` (section shells, code block styles, comparison rows, accordion patterns).
+3. Restore the correct structure from the template. Do not simply delete the orphaned tag — the opener may be the part that's missing.
+4. After fixing, re-run the depth counter for that section and for `<main>` overall to confirm both are 0.
+
+#### When to run this check
+
+Run Check 14 **after all other checks are complete** — structural edits from Checks 1–13 can introduce nesting errors. This check serves as a final validation gate.
