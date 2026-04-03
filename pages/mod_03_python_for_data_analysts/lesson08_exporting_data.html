@@ -199,14 +199,12 @@
 
     /* ── Objective cards (.obj-card) ────────────────────────────── */
     .obj-card {
-      transition: transform 0.22s cubic-bezier(.4,0,.2,1),
-                  box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+      transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1),
                   border-color 0.22s ease, background-color 0.22s ease;
     }
     .obj-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
-      border-color: #CB187D; background-color: #fdf0f7;
+      box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08);
+      border-color: #f5c6e0; background-color: #ffffff;
     }
     .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
     .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
@@ -214,6 +212,8 @@
     .obj-card-kt:hover { box-shadow: none; background-color: #ffffff; }
     .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; background-color: #ffffff; }
     .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; background-color: #ffffff; }
+    #key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+    #key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
 
     /* ── Section header components ─────────────────────────────── */
     .section-header {
@@ -515,6 +515,29 @@
   #hub-root .lesson-nav-link:hover svg {
     color: #CB187D !important; transition: color 0.15s !important;
   }
+
+  /* ── Obj-card hover (Confluence) ── */
+  #hub-root .obj-card:hover {
+    border-color: #f5c6e0 !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+    background-color: #ffffff !important;
+  }
+  #hub-root .obj-card:hover .obj-icon {
+    background: #CB187D !important;
+  }
+  #hub-root .obj-card:hover .obj-icon .iconify {
+    color: #ffffff !important;
+  }
+
+  /* ── Key Takeaway cards — keep border gray and icon gradient on hover ── */
+  #hub-root #key-ideas .obj-card:hover {
+    border-color: #f3f4f6 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+  }
+  #hub-root #key-ideas .obj-card:hover .obj-icon {
+    background: revert !important;
+  }
   </style>
 
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
@@ -590,12 +613,12 @@
           </a>
           <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Examples</span>
           </a>
           <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Exercises</span>
           </a>
           <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
@@ -869,7 +892,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The plain-text print — saves every row as CSV</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The finished report printed as a comma-separated file.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You call <code class="font-mono">df.to_csv("file.csv", index=False)</code> and pandas writes every row and column to a plain-text file that Excel, Google Sheets, or any database import tool can open immediately. It accepts optional parameters like <code class="font-mono">sep=";"</code> for European-style delimiters and <code class="font-mono">encoding="utf-8-sig"</code> to keep special characters intact when the file is opened in Excel.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
@@ -882,7 +905,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The spreadsheet print — creates an xlsx file</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The report delivered as a formatted Excel workbook.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You call <code class="font-mono">df.to_excel("file.xlsx", index=False)</code> and pandas creates a real <code class="font-mono">.xlsx</code> workbook with typed columns, so numbers stay as numbers and dates stay as dates. You need the <code class="font-mono">openpyxl</code> package installed, and you can pass <code class="font-mono">sheet_name="Summary"</code> to label the worksheet tab instead of the default "Sheet1".</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
@@ -895,7 +918,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The multi-sheet print — several tabs at once</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">Multiple DataFrames printed to named sheets in one file.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You use <code class="font-mono">pd.ExcelWriter("file.xlsx")</code> as a context manager and call <code class="font-mono">to_excel()</code> multiple times inside it, each with a different <code class="font-mono">sheet_name</code>. This lets you bundle several DataFrames — for example revenue, costs, and headcount — into one workbook that stakeholders can navigate with sheet tabs.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
@@ -908,14 +931,14 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The row-number switch — include or exclude it</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The setting that controls whether row numbers appear.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">By default, both <code class="font-mono">to_csv()</code> and <code class="font-mono">to_excel()</code> write the DataFrame's numeric index as a first column — a column of 0, 1, 2, … that most recipients don't need. Setting <code class="font-mono">index=False</code> removes it, giving you a clean file with only data columns.</p>
   </div>
 
 </div>
 
 <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">Set the index parameter to False almost every time — the row number column pandas adds by default is rarely expected.</p>
+  <p class="text-sm text-gray-600">Exporting data is the final step that turns your analysis into something other people can act on &#8212; master these methods and you become the person who delivers clean, ready-to-use files.</p>
 </div>
     </div>
   </div>
@@ -932,18 +955,19 @@
         <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-4">
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:font"></span>
       </span>
       <h3 class="text-sm font-bold text-gray-900">Encoding Protects Special Characters</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Setting encoding='utf-8-sig' when writing a CSV ensures Excel displays accented characters and currency symbols correctly — without it, non-ASCII text appears as garbled symbols.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Setting <code class="font-mono">encoding='utf-8-sig'</code> when writing a CSV ensures Excel displays accented characters and currency symbols correctly. Without it, non-ASCII text appears as garbled symbols, which is a common complaint from international teams.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">utf-8-sig</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">encoding=</span>
@@ -952,42 +976,61 @@
   </div>
 </div>
 
-<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:sliders"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">ExcelWriter Enables Formatting</h3>
+      <h3 class="text-sm font-bold text-gray-900">ExcelWriter Unlocks Multi-Sheet Workbooks</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Wrapping to_excel() in an ExcelWriter context manager gives access to the openpyxl engine, which lets you set column widths, freeze rows, and apply number formats programmatically.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">One script run can replace 30 minutes of manual sheet creation, pasting, and header formatting that analysts repeat every reporting cycle. Automating multi-sheet workbooks also eliminates copy-paste errors that creep in when you build board packs by hand.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">ExcelWriter</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">openpyxl</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Formatting</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Multi-sheet</span>
     </div>
   </div>
 </div>
 
-<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:calendar"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Stamp Exports with Today's Date</h3>
+      <h3 class="text-sm font-bold text-gray-900">Timestamp Filenames Prevent Silent Overwrites</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Appending the current date to an export filename — report_2026-03-30.xlsx — prevents recipients from accidentally overwriting a previous version and creates an automatic archive trail.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Calling <code class="font-mono">to_csv()</code> on the same filename a second time silently replaces the old file with no undo. Adding the current date to the filename — <code class="font-mono">report_2026-03-30.csv</code> — creates an automatic archive trail so you can always recover yesterday's version.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Date stamp</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Versioning</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Archive</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">f-string</span>
     </div>
   </div>
 </div>
 
+<div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:table-columns"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Exporting Fewer Columns Keeps Files Clean</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Selecting only the columns your recipient needs with <code class="font-mono">df[cols].to_csv()</code> before exporting avoids sharing internal fields like IDs or raw scores. A 50-column dump overwhelms stakeholders — a 5-column extract gets read.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">df[cols]</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">columns=</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Subset</span>
+    </div>
+  </div>
+</div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1036,6 +1079,12 @@
           <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:table-columns"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Exporting Columns</span>
+          </button>
+
+          <!-- Tab 4 — INACTIVE -->
+          <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:layer-group"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Multi-Sheet &amp; Append</span>
           </button>
 
         </div><!-- /sidebar -->
@@ -1347,7 +1396,92 @@ print(df[cols].shape)                       # confirm column count</code></pre>
                   <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
                     <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
                   </span>
-                  <p class="text-xs text-gray-600"><strong>Export only what the recipient needs.</strong> A 50-column file is overwhelming. Select the relevant columns with <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">df[cols]</code> before exporting.</p>
+                  <p class="text-xs text-gray-600"><strong>Watch out for sensitive fields.</strong> Internal IDs, salary figures, or raw scores can slip into exports if you don't filter columns first. Always review the column list before sharing a file outside your team.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ Panel 4 — Multi-Sheet & Append (orange) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="orange" role="tabpanel">
+            <div class="rounded-2xl border border-orange-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-300"></div>
+              <div class="bg-gradient-to-br from-orange-50/60 to-white p-5 space-y-4">
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:layer-group"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Multi-Sheet &amp; Append</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Write multiple sheets or append to an existing file</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-600 border-orange-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> technique
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>ExcelWriter</strong> is a context manager that keeps a workbook open while you write multiple DataFrames to separate sheets. You can also open an existing file in <code class="font-mono bg-orange-100 text-orange-700 border border-orange-200 px-1 rounded">mode='a'</code> to add a new sheet without deleting the sheets already there.</p>
+
+                <div class="rounded-xl overflow-hidden border border-orange-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-orange-50 to-amber-50 border-b border-orange-100">
+                    <span class="iconify text-orange-500 text-xs" data-icon="fa6-solid:sliders"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-orange-500">Key Parameters</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-orange-100 text-orange-700 border border-orange-200 px-1 rounded">path</code></td>
+                        <td class="py-2 px-3 text-gray-500">Output .xlsx filename</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-orange-100 text-orange-700 border border-orange-200 px-1 rounded">mode='a'</code></td>
+                        <td class="py-2 px-3 text-gray-500">Append — adds sheets to an existing file</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-orange-100 text-orange-700 border border-orange-200 px-1 rounded">if_sheet_exists</code></td>
+                        <td class="py-2 px-3 text-gray-500"><code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">error</code> (default), <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">replace</code>, or <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">overlay</code></td>
+                      </tr>
+                      <tr class=" bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-orange-100 text-orange-700 border border-orange-200 px-1 rounded">engine='openpyxl'</code></td>
+                        <td class="py-2 px-3 text-gray-500">Required for append mode</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># Write two DataFrames to separate sheets in one file
+with pd.ExcelWriter("board_pack.xlsx") as writer:
+    revenue.to_excel(writer, sheet_name="Revenue", index=False)
+    costs.to_excel(writer, sheet_name="Costs", index=False)
+
+# Append a new sheet to an existing workbook
+with pd.ExcelWriter("board_pack.xlsx",
+                     mode="a",                    # append mode
+                     engine="openpyxl",           # required for append
+                     if_sheet_exists="error"      # prevent overwrite
+                     ) as writer:
+    headcount.to_excel(writer, sheet_name="People", index=False)</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-orange-50 border border-orange-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-orange-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Always use the <code class="font-mono bg-orange-200 text-orange-800 border border-orange-300 px-1 rounded">with</code> statement.</strong> ExcelWriter needs to close the file properly to write valid Excel data. If you skip the context manager and the script crashes, the file may be corrupted.</p>
                 </div>
 
               </div>
@@ -1385,6 +1519,14 @@ print(df[cols].shape)                       # confirm column count</code></pre>
 <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
   <span class="ce-step-label text-xs font-bold">Export Selected Columns</span>
+</button>
+<button onclick="switchCeTab(3)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+  <span class="ce-step-label text-xs font-bold">Multi-Sheet Excel</span>
+</button>
+<button onclick="switchCeTab(4)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+  <span class="ce-step-label text-xs font-bold">Append to CSV</span>
 </button>
 </div>
 <div class="ce-panel ce-panel-anim" role="tabpanel">
@@ -1445,7 +1587,7 @@ print(&quot;Saved&quot;, len(df), &quot;rows to output.csv&quot;)  # confirm</co
       </div>
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-        <p class="text-sm text-gray-600">Always set index=False unless you specifically need the row numbers &#8212; most people opening the file in Excel will not want them.</p>
+        <p class="text-sm text-gray-600">After saving, do a quick sanity check: reload the file with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-100 text-gray-700">pd.read_csv("output.csv")</code> and verify the shape and first few rows match what you expect.</p>
       </div>
     </div>
   </div>
@@ -1541,7 +1683,7 @@ print(&quot;Excel file saved&quot;)</code></pre>
         <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
-          <p class="text-sm text-gray-600">This script picks only the columns you need, then exports them. This keeps the output file small and focused.</p>
+          <p class="text-sm text-gray-600">This script selects three contact columns &#8212; name, email, and city &#8212; from a wider customer dataset and writes only those to the output CSV, leaving internal IDs and scores behind.</p>
         </div>
       </div>
       <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
@@ -1576,6 +1718,146 @@ print(&quot;Exported&quot;, len(keep), &quot;columns&quot;)  # confirm</code></p
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
         <p class="text-sm text-gray-600">Select your columns before exporting &#8212; sending a 20-column file when people only need three wastes everyone&apos;s time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multi-Sheet Excel</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:seedling"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">ExcelWriter</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">multi-sheet</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">context manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script uses <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">ExcelWriter</code> to write two DataFrames into separate sheets inside a single workbook. The <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">with</code> statement ensures the file is saved and closed automatically.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">multi_sheet.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+sales = pd.read_csv(&quot;sales.csv&quot;)       # first dataset
+returns = pd.read_csv(&quot;returns.csv&quot;)   # second dataset
+
+# Write both DataFrames to one workbook
+with pd.ExcelWriter(&quot;report.xlsx&quot;) as writer:   # open workbook
+    sales.to_excel(writer,                       # write first sheet
+                   sheet_name=&quot;Sales&quot;,
+                   index=False)
+    returns.to_excel(writer,                     # write second sheet
+                     sheet_name=&quot;Returns&quot;,
+                     index=False)
+
+print(&quot;Two sheets saved to report.xlsx&quot;)  # confirm</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python multi_sheet.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Two sheets saved to report.xlsx</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Always use the <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-100 text-gray-700">with</code> statement with ExcelWriter &#8212; it guarantees the workbook is saved and closed even if an error occurs midway.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Append to CSV</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:seedling"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">mode=&quot;a&quot;</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">header=False</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">append</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script appends new rows to an existing CSV without overwriting it. Setting <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">mode=&quot;a&quot;</code> opens the file in append mode, and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">header=False</code> prevents writing the column names a second time.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">append_csv.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+new_rows = pd.read_csv(&quot;daily_log.csv&quot;)  # today&#39;s new data
+
+# Append rows to the existing file (don&#39;t overwrite)
+new_rows.to_csv(&quot;master_log.csv&quot;,
+                mode=&quot;a&quot;,           # append, not overwrite
+                header=False,        # skip column headers
+                index=False)         # skip index column
+
+print(&quot;Appended&quot;, len(new_rows), &quot;rows&quot;)  # confirm</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python append_csv.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Appended 42 rows</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">If you forget <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-100 text-gray-700">header=False</code> when appending, you will get a duplicate header row in the middle of your data that breaks downstream reads.</p>
       </div>
     </div>
   </div>
@@ -1680,6 +1962,31 @@ print(&quot;Exported&quot;, len(keep), &quot;columns&quot;)  # confirm</code></p
       <span class="text-xs text-gray-400">Excel</span>
       <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">no row numbers</code>
       <p class="text-xs text-gray-500 leading-relaxed">Row numbers are part of Excel's grid, not part of the data when saved.</p>
+    </div>
+  </div>
+</div>
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:table-columns"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">select columns</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">df[cols].to_csv()</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Filters the DataFrame to a list of columns before writing so only those columns appear in the file.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">SELECT col1, col2 …</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Names the columns explicitly in the SELECT clause instead of using SELECT *.</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">hide / delete columns</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Hide or delete unwanted columns before saving the workbook to keep the file clean.</p>
     </div>
   </div>
 </div>
@@ -1797,6 +2104,14 @@ FROM sales;</code></pre>
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
   <span class="pe-step-label text-xs font-bold">Export a Subset</span>
 </button>
+<button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Build a Board Pack</span>
+</button>
+<button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Safe Daily Append</span>
+</button>
 </div>
 <div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -1862,7 +2177,7 @@ print(f&quot;Saved {len(top)} rows&quot;)</code></pre>
         </div>
         <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
           <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-          <p class="text-sm text-gray-600">Always set index=False when saving &#8212; without it, pandas adds an extra numbered column that clutters the output file.</p>
+          <p class="text-sm text-gray-600">Compare <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-100 text-gray-700">df.shape</code> before and after the round-trip to make sure no rows or columns were lost during the save.</p>
         </div>
       </div>
     </div>
@@ -2007,6 +2322,144 @@ print(f&quot;Exported {len(contacts)} contacts&quot;)</code></pre>
     </div>
   </div>
 </div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Build a Board Pack</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:seedling"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">ExcelWriter</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">multi-sheet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Your company needs a quarterly board pack as a single Excel file. Write three DataFrames &#8212; <strong>Revenue</strong>, <strong>Expenses</strong>, and <strong>Headcount</strong> &#8212; to three named sheets in one workbook using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">ExcelWriter</code>.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-100">
+        <button class="accordion-toggle w-full flex items-center justify-between px-5 py-3.5 bg-[#fdf0f7] hover:bg-pink-50 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
+          <span class="flex items-center gap-2 text-sm font-bold text-brand"><span class="iconify" data-icon="fa6-solid:lightbulb"></span> Show Solution</span>
+          <span class="iconify accordion-chevron text-brand text-sm transition-transform duration-200" data-icon="fa6-solid:chevron-down"></span>
+        </button>
+        <div class="accordion-body">
+          <div class="px-5 py-4 space-y-3">
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">board_pack.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+revenue  = pd.read_csv(&quot;revenue_q3.csv&quot;)     # Q3 revenue
+expenses = pd.read_csv(&quot;expenses_q3.csv&quot;)    # Q3 expenses
+heads    = pd.read_csv(&quot;headcount_q3.csv&quot;)   # Q3 headcount
+
+with pd.ExcelWriter(&quot;board_pack_q3.xlsx&quot;) as writer:
+    revenue.to_excel(writer, sheet_name=&quot;Revenue&quot;, index=False)
+    expenses.to_excel(writer, sheet_name=&quot;Expenses&quot;, index=False)
+    heads.to_excel(writer, sheet_name=&quot;Headcount&quot;, index=False)
+
+print(&quot;Board pack saved with 3 sheets&quot;)</code></pre>
+              </div>
+            </div>
+            <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Each <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-100 text-gray-700">to_excel()</code> call inside the <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-100 text-gray-700">with</code> block adds a new sheet to the same workbook &#8212; you can add as many as you need.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Safe Daily Append</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:seedling"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">mode=&quot;a&quot;</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">header=False</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Your daily pipeline produces a small CSV of new transactions. Append today&#39;s rows to the master <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">transactions.csv</code> without overwriting the existing data and without writing a duplicate header row.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-100">
+        <button class="accordion-toggle w-full flex items-center justify-between px-5 py-3.5 bg-[#fdf0f7] hover:bg-pink-50 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
+          <span class="flex items-center gap-2 text-sm font-bold text-brand"><span class="iconify" data-icon="fa6-solid:lightbulb"></span> Show Solution</span>
+          <span class="iconify accordion-chevron text-brand text-sm transition-transform duration-200" data-icon="fa6-solid:chevron-down"></span>
+        </button>
+        <div class="accordion-body">
+          <div class="px-5 py-4 space-y-3">
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">daily_append.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+today = pd.read_csv(&quot;today_transactions.csv&quot;)  # new rows
+
+today.to_csv(&quot;transactions.csv&quot;,
+             mode=&quot;a&quot;,        # append to end of file
+             header=False,     # skip header (already exists)
+             index=False)      # skip index column
+
+print(&quot;Appended&quot;, len(today), &quot;rows to master file&quot;)</code></pre>
+              </div>
+            </div>
+            <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Run this script once each day and the master file grows by one batch of rows &#8212; no data is ever lost because nothing is overwritten.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -2037,6 +2490,14 @@ print(f&quot;Exported {len(contacts)} contacts&quot;)</code></pre>
     <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
     <span class="mk-step-label text-xs font-bold">Wrong Extension</span>
   </button>
+  <button onclick="switchMkTab(3)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Missing openpyxl</span>
+  </button>
+  <button onclick="switchMkTab(4)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Garbled Characters</span>
+  </button>
 </div>
 
       <div class="mk-panel mk-panel-anim" role="tabpanel">
@@ -2058,7 +2519,7 @@ print(f&quot;Exported {len(contacts)} contacts&quot;)</code></pre>
 
     <!-- Explanation paragraph -->
     <div class="px-6 py-5">
-      <p class="text-sm text-gray-600 leading-relaxed">By default, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">to_csv()</code> writes the DataFrame index as the first column. Pass <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">index=False</code> to exclude it.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">You open the exported CSV in Excel and notice an unnamed column of numbers (0, 1, 2 …) in column A. Recipients will ask "what is this?" because the index has no column header and no business meaning.</p>
     </div>
 
     <!-- Wrong / Correct split panel -->
@@ -2115,7 +2576,7 @@ print("Saved without index column")    # confirm</code></pre>
 
     <!-- Explanation paragraph -->
     <div class="px-6 py-5">
-      <p class="text-sm text-gray-600 leading-relaxed"><code class="font-mono bg-gray-100 px-1 rounded text-[11px]">to_csv()</code> overwrites the target file instantly. There is no undo. Check if the file exists before writing, or include a date in the filename.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">You run your script a second time and discover yesterday's export is gone &#8212; <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">to_csv()</code> replaced it without asking. There is no confirmation prompt and no recycle bin recovery, so the old data is permanently lost.</p>
     </div>
 
     <!-- Wrong / Correct split panel -->
@@ -2211,6 +2672,108 @@ print("Excel file saved")        # confirm</code></pre>
       <p class="text-xs text-gray-600 leading-relaxed">Match the function to your audience: <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">to_csv()</code> for data pipelines, <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">to_excel()</code> for colleagues who live in Excel.</p>
     </div>
 
+  </div>
+</div>
+
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Forgetting to Install openpyxl Before Writing Excel</h4>
+        <p class="text-xs text-gray-500 mt-0.5">to_excel() raises a ModuleNotFoundError with no helpful message about what to install.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Pandas does not ship with the <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">openpyxl</code> engine by default, so <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">to_excel()</code> fails the first time you try it in a fresh environment. The fix is a single pip install before your script runs.</p>
+    </div>
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — missing dependency
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># openpyxl not installed
+df.to_excel("report.xlsx")  # ModuleNotFoundError</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — install first
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-bash">pip install openpyxl          # one-time install</code></pre>
+        </div>
+        <div class="rounded-xl overflow-hidden bg-code mt-2">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df.to_excel("report.xlsx", index=False)  # works now
+print("Excel file saved")</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Add <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">openpyxl</code> to your project's <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">requirements.txt</code> so it gets installed automatically when anyone sets up the environment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Garbled Special Characters in CSV Opened in Excel</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Accented names and currency symbols appear as question marks or boxes in Excel.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Excel on Windows assumes a CSV is encoded in the system's local code page, not UTF-8. If you write plain <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">utf-8</code>, accented characters like <strong>ñ</strong> or <strong>€</strong> get mangled when the file is opened. Use <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">utf-8-sig</code> to add a byte order mark (BOM) that tells Excel to read UTF-8 correctly.</p>
+    </div>
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — default encoding
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df.to_csv("intl.csv", index=False)  # Excel shows Ã© instead of é</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — use utf-8-sig
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df.to_csv("intl.csv",
+          index=False,
+          encoding="utf-8-sig")  # BOM tells Excel to use UTF-8
+print("Saved with BOM encoding")</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">If your data only contains plain ASCII (A-Z, 0-9), the default encoding is fine. Use <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">utf-8-sig</code> whenever the data might contain names, currencies, or characters from non-English languages.</p>
+    </div>
   </div>
 </div>
 
@@ -2435,6 +2998,7 @@ print("Excel file saved")        # confirm</code></pre>
 <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
 <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
 <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+<button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
 </div>
 <div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2556,6 +3120,38 @@ print("Excel file saved")        # confirm</code></pre>
     </div>
   </div>
 </div>
+
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4">
+        <p class="text-sm font-semibold text-gray-800 mb-4">When appending rows to an existing CSV with <code class="font-mono bg-gray-100 px-1 rounded text-xs">mode=&quot;a&quot;</code>, you should set <code class="font-mono bg-gray-100 px-1 rounded text-xs">header=False</code> to avoid writing a duplicate header row. &#8212; True or False?</p>
+        <div class="flex gap-3">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </section>

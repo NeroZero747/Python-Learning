@@ -199,21 +199,18 @@
 
     /* ── Objective cards (.obj-card) ────────────────────────────── */
     .obj-card {
-      transition: transform 0.22s cubic-bezier(.4,0,.2,1),
-                  box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+      transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1),
                   border-color 0.22s ease, background-color 0.22s ease;
     }
     .obj-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
-      border-color: #CB187D; background-color: #fdf0f7;
+      box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08);
+      border-color: #f5c6e0; background-color: #ffffff;
     }
     .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
     .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
     .obj-card:hover .obj-icon .iconify { color: white !important; }
-    .obj-card-kt:hover { box-shadow: none; background-color: #ffffff; }
-    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; background-color: #ffffff; }
-    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; background-color: #ffffff; }
+    #key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+    #key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
 
     /* ── Section header components ─────────────────────────────── */
     .section-header {
@@ -515,6 +512,28 @@
   #hub-root .lesson-nav-link:hover svg {
     color: #CB187D !important; transition: color 0.15s !important;
   }
+
+  /* ── Obj-card hover (Confluence) ── */
+  #hub-root .obj-card:hover {
+    border-color: #f5c6e0 !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+    background-color: #ffffff !important;
+  }
+  #hub-root .obj-card:hover .obj-icon {
+    background: #CB187D !important;
+  }
+  #hub-root .obj-card:hover .obj-icon .iconify {
+    color: #ffffff !important;
+  }
+  /* ── Key Takeaway cards — keep border gray and icon gradient on hover ── */
+  #hub-root #key-ideas .obj-card:hover {
+    border-color: #f3f4f6 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+  }
+  #hub-root #key-ideas .obj-card:hover .obj-icon {
+    background: revert !important;
+  }
   </style>
 
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
@@ -590,12 +609,12 @@
           </a>
           <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Examples</span>
           </a>
           <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Exercises</span>
           </a>
           <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
@@ -869,7 +888,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The blank-field scanner — marks every empty cell</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">Which survey fields were left unanswered.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You call <code class="font-mono">df.isna()</code> to get a True/False mask of every cell in the DataFrame, then chain <code class="font-mono">.sum()</code> to count the gaps per column. This is the first step in any data-cleaning workflow because it tells you exactly which columns need attention before you run any calculations.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
@@ -882,7 +901,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The discard pile — removes forms with blanks</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">Forms thrown out because of one empty field.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You call <code class="font-mono">df.dropna()</code> to remove any row (or column) that contains at least one NaN, or pass <code class="font-mono">subset=["col"]</code> to delete only rows where a specific column is blank. This is the fastest cleanup option when very few rows are affected, but it permanently removes data so you should always check how many rows you are about to lose.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
@@ -895,7 +914,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The best-guess pen — writes into every blank</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">A replacement value written into each empty cell.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You call <code class="font-mono">df.fillna(value)</code> to replace every NaN with a constant, the column mean, or even the previous row's value via forward-fill. This lets you keep all your rows instead of deleting them, which is essential when a large percentage of data is missing and dropping would shrink your dataset too much.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
@@ -908,7 +927,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The estimation rule — how to pick the fill value</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The logic used to choose what value to write in.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">Your choice between dropping and filling depends on how much data is missing and what type the column holds — numeric columns usually benefit from the mean or median, while categorical columns are better filled with the most frequent value (mode). Choosing the wrong strategy can bias your results, so you should always check the missing percentage with <code class="font-mono">isna().mean()</code> before deciding.</p>
   </div>
 
 </div>
@@ -932,62 +951,82 @@
         <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-4">
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:eye-slash"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">NaN Hides Inside Numeric Columns</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">A single NaN in a numeric column silently turns the result of <code class="font-mono bg-pink-100 text-pink-700 px-1 rounded">sum()</code> or <code class="font-mono bg-pink-100 text-pink-700 px-1 rounded">mean()</code> into NaN — the entire aggregate disappears without an error message. Running <code class="font-mono bg-pink-100 text-pink-700 px-1 rounded">isna().sum()</code> immediately after loading any file is the fastest way to spot these invisible gaps before they corrupt your results.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">isna()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Silent failure</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Detection</span>
+    </div>
+  </div>
+</div>
+
+<div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:grip-horizontal"></span>
       </span>
       <h3 class="text-sm font-bold text-gray-900">dropna() Removes Whole Rows by Default</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Without any arguments, dropna() removes every row that contains at least one null value anywhere — even a single missing field in an unrelated column deletes the entire record.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Without a <code class="font-mono bg-violet-100 text-violet-700 px-1 rounded">subset=</code> parameter, bare <code class="font-mono bg-violet-100 text-violet-700 px-1 rounded">dropna()</code> deletes every row that has even one NaN in any column — a single blank "notes" field removes the entire record, including its valid data. Always pass a list of critical columns so you only drop rows where the blanks actually matter.</p>
     <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">dropna()</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">axis=</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Row removal</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">dropna()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">subset=</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Row loss</span>
     </div>
   </div>
 </div>
 
-<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+<div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:forward"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Forward-Fill Works for Time Series</h3>
+      <h3 class="text-sm font-bold text-gray-900">Forward-Fill Is Built for Ordered Data</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">ffill() copies the last known value into the gap below it, which is the correct imputation strategy for sensor readings, prices, or any metric where yesterday's value is the best estimate for today.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">For time-series data such as stock prices or daily sensor readings, <code class="font-mono bg-blue-100 text-blue-700 px-1 rounded">ffill()</code> copies the last known value into the gap — the most reasonable estimate when data arrives in chronological order. Using the column mean instead would inject an artificial "average day" into the middle of a trend, distorting any time-based analysis.</p>
     <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">ffill()</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Time series</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Imputation</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">ffill()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Time series</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Ordered data</span>
     </div>
   </div>
 </div>
 
-<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:file-pen"></span>
+<div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:route"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Document Every Fill Decision</h3>
+      <h3 class="text-sm font-bold text-gray-900">The Right Strategy Depends on Why Data Is Missing</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Recording why you chose mean, zero, or forward-fill in a script comment or log entry creates an audit trail that lets the next analyst understand your data transformation without guesswork.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Filling a salary column with zero makes every employee look unpaid and pulls your averages down; filling it with the column mean hides the fact that data is incomplete. Checking the percentage of missing values first — under 5% favors dropping, above 5% favors filling — prevents both data loss and data fabrication.</p>
     <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Audit trail</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Documentation</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Reproducible</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Strategy</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">% missing</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Bias risk</span>
     </div>
   </div>
 </div>
 
+      </div>
     </div>
   </div>
 </section>
@@ -1391,6 +1430,14 @@ print(pct)                          # decide based on percentage
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
   <span class="ce-step-label text-xs font-bold">Fill Missing Values</span>
 </button>
+<button onclick="switchCeTab(3)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+  <span class="ce-step-label text-xs font-bold">Forward-Fill a Series</span>
+</button>
+<button onclick="switchCeTab(4)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+  <span class="ce-step-label text-xs font-bold">Strategy by Percentage</span>
+</button>
 </div>
 <div class="ce-panel ce-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -1580,6 +1627,140 @@ print(df[&quot;score&quot;].isna().sum())  # confirm: should be 0</code></pre>
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
         <p class="text-sm text-gray-600">Filling with the mean works well for normally distributed numbers &#8212; for skewed data, consider using the median instead.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Forward-Fill a Time Series</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Prices</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">ffill()</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script fills gaps in a daily price column by carrying the last known price forward — the standard approach for ordered time-series data.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">forward_fill.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv("prices.csv")   # daily stock prices
+print(df["close"].isna().sum())   # 4 missing trading days
+
+df["close"] = df["close"].ffill()  # carry last known price forward
+print(df["close"].isna().sum())    # 0 — all gaps filled</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python forward_fill.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">4<br>0</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">ffill() only works when your data is sorted chronologically. If the first row is NaN, ffill() leaves it as NaN because there is no previous value to copy.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Choose Strategy by Percentage</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Employees</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">isna().mean()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Decision</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script calculates the percentage of missing values per column and applies a different strategy based on that percentage — drop when &lt; 5%, fill when &ge; 5%.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">strategy_check.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv("employees.csv")       # load employee data
+pct = df.isna().mean() * 100            # % missing per column
+print(pct.round(1))                      # display percentages
+
+# Drop columns with very few gaps
+df = df.dropna(subset=["employee_id"])   # < 1% missing — safe to drop
+
+# Fill columns with many gaps
+median_salary = df["salary"].median()    # robust central value
+df["salary"] = df["salary"].fillna(median_salary)  # 18% missing — fill
+
+print(df.isna().sum())  # confirm cleanup</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python strategy_check.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">employee_id     0.8<br>name            0.0<br>salary         18.2<br>department      3.1<br>dtype: float64<br><br>employee_id    0<br>name           0<br>salary         0<br>department     0<br>dtype: int64</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">The 5% threshold is a practical guideline, not a hard rule. Always consider the column's business importance — a primary key column should never be filled, even if 20% is missing.</p>
       </div>
     </div>
   </div>
@@ -1801,6 +1982,14 @@ FROM employees;</code></pre>
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
   <span class="pe-step-label text-xs font-bold">Fill the Gaps</span>
 </button>
+<button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Forward-Fill Prices</span>
+</button>
+<button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Pick Drop vs Fill</span>
+</button>
 </div>
 <div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2010,6 +2199,134 @@ print(df.head())</code></pre>
     </div>
   </div>
 </div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Forward-Fill Prices</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Intermediate
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">You have a CSV of daily stock prices with gaps on non-trading days. Use <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">ffill()</code> to carry the last known price forward, then verify that no NaN values remain.</p>
+        </div>
+      </div>
+      <div>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full flex items-center justify-between px-5 py-3 rounded-xl bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:from-[#CB187D] hover:to-[#e84aad] transition-all duration-300 shadow-md">
+          <span class="flex items-center gap-2"><span class="iconify text-sm" data-icon="fa6-solid:eye"></span><span class="text-sm font-bold">Show Solution</span></span>
+          <span class="iconify text-xs" data-icon="fa6-solid:chevron-down"></span>
+        </button>
+        <div class="hidden mt-3">
+          <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                  <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                  <span class="text-[11px] font-semibold text-gray-400">ffill_prices.py</span>
+                </div>
+              </div>
+              <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+            </div>
+            <div class="bg-code">
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv("prices.csv")          # daily stock prices
+print(df["close"].isna().sum())          # count gaps
+
+df["close"] = df["close"].ffill()        # carry last price forward
+print(df["close"].isna().sum())          # should print 0</code></pre>
+            </div>
+          </div>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-sm text-gray-600">If the very first row is NaN, ffill() cannot fill it because there is no previous value. Sort your data by date before calling ffill().</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Pick Drop vs Fill</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group"></span> Intermediate
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">You have a customer dataset with missing values in several columns. Calculate the percentage of missing values per column with <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">isna().mean() * 100</code>, then apply <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">dropna()</code> to columns under 5% and <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">fillna()</code> to the rest.</p>
+        </div>
+      </div>
+      <div>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full flex items-center justify-between px-5 py-3 rounded-xl bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:from-[#CB187D] hover:to-[#e84aad] transition-all duration-300 shadow-md">
+          <span class="flex items-center gap-2"><span class="iconify text-sm" data-icon="fa6-solid:eye"></span><span class="text-sm font-bold">Show Solution</span></span>
+          <span class="iconify text-xs" data-icon="fa6-solid:chevron-down"></span>
+        </button>
+        <div class="hidden mt-3">
+          <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                  <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                  <span class="text-[11px] font-semibold text-gray-400">pick_strategy.py</span>
+                </div>
+              </div>
+              <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+            </div>
+            <div class="bg-code">
+              <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv("customers.csv")        # customer data
+pct = df.isna().mean() * 100             # % missing per column
+print(pct.round(1))                       # review percentages
+
+# Drop rows where 'email' is missing (only 2% gaps)
+df = df.dropna(subset=["email"])
+
+# Fill 'age' with the median (15% missing — too many to drop)
+df["age"] = df["age"].fillna(df["age"].median())
+
+print(df.isna().sum())  # verify cleanup</code></pre>
+            </div>
+          </div>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+            <p class="text-sm text-gray-600">Always check the percentage of missing values before choosing a strategy. Dropping rows from a column with 20% gaps would remove one fifth of your dataset.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -2039,6 +2356,14 @@ print(df.head())</code></pre>
   <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
     <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
     <span class="mk-step-label text-xs font-bold">fillna() Not Saved</span>
+  </button>
+  <button onclick="switchMkTab(3)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Zero Fills Bias</span>
+  </button>
+  <button onclick="switchMkTab(4)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Aggregating With NaN</span>
   </button>
 </div>
 
@@ -2216,6 +2541,105 @@ print(df["Age"].isnull().sum())    # 0 — no more blanks</code></pre>
   </div>
 </div>
 
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Filling Every Column With Zero</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Zero is not always a neutral value — it pulls averages down and turns missing salaries into "unpaid."</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Writing <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">df.fillna(0)</code> on the whole DataFrame converts every blank into zero, regardless of what the column represents. A missing salary becomes $0, dragging the team's average salary down and inflating the count of low earners.</p>
+    </div>
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — blanket zero fill
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = df.fillna(0)          # salary blanks → 0
+print(df["salary"].mean())  # average drops sharply</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — column-specific fill
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df["salary"] = df["salary"].fillna(df["salary"].median())
+print(df["salary"].mean())  # realistic average</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Choose a fill value that makes sense for each column: median for skewed numbers, mode for categories, and zero only when zero genuinely means "none" (e.g. quantity sold).</p>
+    </div>
+  </div>
+</div>
+
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Aggregating Before Checking for NaN</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Pandas silently skips NaN in sum() and mean() — your totals look fine but are actually incomplete.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">By default, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">df.sum()</code> and <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">df.mean()</code> skip NaN rows without any warning. The result looks valid but is calculated from fewer rows than you expect, silently under-counting totals or averaging over a smaller sample.</p>
+    </div>
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — aggregate blindly
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">total = df["revenue"].sum()   # skips NaN silently
+print(f"Total: ${total:,.0f}")  # looks right, but low</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — check first
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">print(df["revenue"].isna().sum())  # 12 missing
+df["revenue"] = df["revenue"].fillna(0)
+total = df["revenue"].sum()  # now includes all rows</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Always run <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">isna().sum()</code> on a column before using <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">sum()</code> or <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">mean()</code>. If any values are missing, handle them first so your totals reflect the full dataset.</p>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </section>
@@ -2228,96 +2652,136 @@ print(df["Age"].isnull().sum())    # 0 — no more blanks</code></pre>
       </span>
       <div class="min-w-0">
         <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How missing data is used across real-world workflows</p>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">See what a messy CRM export looks like before and after handling missing data</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a customer data team. Your CRM export has 80,000 records but many email addresses, postcodes, and income figures are blank. Before any analysis runs, you need to know where the gaps are, decide what to do with them, and act — so that missing values don't silently corrupt your results.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:circle-question"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">80,000 customer records<br>with unknown gaps</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Your CRM export has 80,000 rows but unknown numbers of missing emails and postcodes. <code class="font-mono text-violet-700">isnull().sum()</code> counts the gaps in every column in one call — no scrolling, no manual counting.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
-      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">null_counts</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:minus"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Remove incomplete<br>survey responses</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Respondents who skipped age or income cannot be used in demographic analysis. <code class="font-mono text-[#CB187D]">dropna(subset=["age","income"])</code> removes only those rows — respondents who answered everything pass through.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
-      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">clean_responses</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:fill"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Fill missing region<br>before the report runs</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">A blank region column breaks the regional report. <code class="font-mono text-emerald-700">fillna(df["region"].mode()[0])</code> replaces every gap with the most common region — the report runs without errors.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
-      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">filled_df</code></span>
-    </div>
-  </div>
-</div>
-</div>
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-  <div class="grid grid-cols-2">
-    <div class="border-r border-gray-100">
-      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without missing data handling</p>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <p class="text-sm text-gray-600 leading-relaxed">Your CRM export has 12,000 customer rows. Some emails are blank, several income fields say "N/A", and a handful of regions are missing entirely. Here is what the raw data looks like — and what it becomes after three targeted cleanup steps.</p>
+
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">CRM Customer Table — Before vs After</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Before panel -->
+          <div class="rounded-2xl border border-red-100 overflow-hidden shadow-sm">
+            <div class="flex items-center gap-2 px-4 py-2.5 bg-red-50 border-b border-red-100">
+              <span class="iconify text-red-400 text-sm" data-icon="fa6-solid:circle-xmark"></span>
+              <p class="text-xs font-bold text-red-500">Before: Raw CRM Export</p>
+            </div>
+            <div class="px-4 py-3 overflow-x-auto">
+              <table class="w-full text-[11px] font-mono border-collapse">
+                <thead>
+                  <tr class="border-b border-gray-100">
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Name</th>
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Email</th>
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Region</th>
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Income</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Alice</td>
+                    <td class="px-2 py-1.5 text-red-400">NaN</td>
+                    <td class="px-2 py-1.5 text-gray-500">West</td>
+                    <td class="px-2 py-1.5 text-gray-500">72000</td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Bob</td>
+                    <td class="px-2 py-1.5 text-gray-500">bob@co.com</td>
+                    <td class="px-2 py-1.5 text-red-400">NaN</td>
+                    <td class="px-2 py-1.5 text-red-400">NaN</td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Carol</td>
+                    <td class="px-2 py-1.5 text-gray-500">carol@inc.io</td>
+                    <td class="px-2 py-1.5 text-gray-500">East</td>
+                    <td class="px-2 py-1.5 text-gray-500">54000</td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Dan</td>
+                    <td class="px-2 py-1.5 text-red-400">NaN</td>
+                    <td class="px-2 py-1.5 text-red-400">NaN</td>
+                    <td class="px-2 py-1.5 text-gray-500">91000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="px-4 pb-3 space-y-1.5">
+              <div class="flex items-start gap-2">
+                <span class="iconify text-red-400 text-[11px] shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-[11px] text-red-500">2 of 4 emails are blank — you cannot send campaigns to these customers</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="iconify text-red-400 text-[11px] shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
+                <p class="text-[11px] text-red-500">Missing regions cause blank rows in any regional summary report</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- After panel -->
+          <div class="rounded-2xl border border-emerald-100 overflow-hidden shadow-sm">
+            <div class="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 border-b border-emerald-100">
+              <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:circle-check"></span>
+              <p class="text-xs font-bold text-emerald-600">After: Cleaned with dropna + fillna</p>
+            </div>
+            <div class="px-4 py-3 overflow-x-auto">
+              <table class="w-full text-[11px] font-mono border-collapse">
+                <thead>
+                  <tr class="border-b border-gray-100">
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Name</th>
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Email</th>
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Region</th>
+                    <th class="px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase">Income</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Alice</td>
+                    <td class="px-2 py-1.5 text-emerald-600 font-semibold">dropped</td>
+                    <td class="px-2 py-1.5 text-gray-500">West</td>
+                    <td class="px-2 py-1.5 text-gray-500">72000</td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Bob</td>
+                    <td class="px-2 py-1.5 text-gray-500">bob@co.com</td>
+                    <td class="px-2 py-1.5 text-emerald-600 font-semibold">West</td>
+                    <td class="px-2 py-1.5 text-emerald-600 font-semibold">0</td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Carol</td>
+                    <td class="px-2 py-1.5 text-gray-500">carol@inc.io</td>
+                    <td class="px-2 py-1.5 text-gray-500">East</td>
+                    <td class="px-2 py-1.5 text-gray-500">54000</td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1.5 text-gray-500">Dan</td>
+                    <td class="px-2 py-1.5 text-emerald-600 font-semibold">dropped</td>
+                    <td class="px-2 py-1.5 text-emerald-600 font-semibold">West</td>
+                    <td class="px-2 py-1.5 text-gray-500">91000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="px-4 pb-3 space-y-1.5">
+              <div class="flex items-start gap-2">
+                <span class="iconify text-emerald-500 text-[11px] shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-[11px] text-emerald-600"><code class="font-mono">dropna(subset=["email"])</code> flagged 2 rows with no email for removal</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="iconify text-emerald-500 text-[11px] shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
+                <p class="text-[11px] text-emerald-600"><code class="font-mono">fillna({"region":"West", "income":0})</code> replaced every remaining gap with a safe default</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Counting blank cells across 80,000 rows and 20 columns in Excel means writing a COUNTBLANK for each column — 20 formulas before you even know the scale of the problem.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Filtering out rows with missing age or income in Excel means setting multiple AutoFilter conditions — and you must remember to do it every time the file is refreshed.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">A missing region value causes a blank row in the pivot table — you only notice after the report has been sent to stakeholders.</p>
-</div>
+
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Always decide <strong>per column</strong> whether to drop or fill. Emails cannot be guessed, so you drop those rows. Regions and incomes have sensible defaults, so you fill them.</p>
       </div>
-    </div>
-    <div>
-      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With missing data handling</p>
-      </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">isnull().sum()</strong> counts gaps across every column in one line — you see the full picture before touching the data.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">dropna(subset=)</strong> removes only incomplete rows and runs automatically every time the script executes — no manual filter needed.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">fillna()</strong> fills every gap before the report logic runs — blank region values never reach the output.</p>
-</div>
-      </div>
-    </div>
-  </div>
-</div>
+
     </div>
   </div>
 </section>
@@ -2437,6 +2901,7 @@ print(df["Age"].isnull().sum())    # 0 — no more blanks</code></pre>
 <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
 <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
 <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+<button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
 </div>
 <div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2558,6 +3023,42 @@ print(df["Age"].isnull().sum())    # 0 — no more blanks</code></pre>
     </div>
   </div>
 </div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Pick the best answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4">
+        <p class="text-sm font-semibold text-gray-800 mb-4">A &ldquo;salary&rdquo; column has 22% missing values. Which approach avoids losing nearly a quarter of your dataset?</p>
+        <div class="grid gap-2">
+          <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            A. <code class="text-xs bg-gray-100 px-1 py-0.5 rounded font-mono">df.dropna(subset=["salary"])</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+            B. <code class="text-xs bg-gray-100 px-1 py-0.5 rounded font-mono">df["salary"].fillna(df["salary"].median())</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            C. <code class="text-xs bg-gray-100 px-1 py-0.5 rounded font-mono">df["salary"].fillna(0)</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            D. Delete the entire &ldquo;salary&rdquo; column
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -2577,10 +3078,10 @@ print(df["Age"].isnull().sum())    # 0 — no more blanks</code></pre>
 
       <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
         <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
-          <span class="text-white font-bold text-lg">10</span>
+          <span class="text-white font-bold text-lg">8</span>
         </span>
         <div class="min-w-0">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 10</p>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 8</p>
           <h3 class="text-base font-bold text-gray-800">Exporting Data</h3>
           <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
         </div>
@@ -2625,20 +3126,20 @@ print(df["Age"].isnull().sum())    # 0 — no more blanks</code></pre>
 <section>
   <div class="flex flex-col sm:flex-row gap-3">
 
-    <a href="lesson08_joining_data_merge.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+    <a href="lesson06_joining_and_merging_data.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
       <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Joining Data (Merge)</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Joining and Merging Data</p>
       </div>
     </a>
 
-    <a href="../../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+    <a href="../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
       <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
       <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
     </a>
 
-    <a href="lesson10_exporting_data.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+    <a href="lesson08_exporting_data.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
         <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Exporting Data</p>

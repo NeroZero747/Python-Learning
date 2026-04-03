@@ -199,21 +199,18 @@
 
     /* ── Objective cards (.obj-card) ────────────────────────────── */
     .obj-card {
-      transition: transform 0.22s cubic-bezier(.4,0,.2,1),
-                  box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+      transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1),
                   border-color 0.22s ease, background-color 0.22s ease;
     }
     .obj-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
-      border-color: #CB187D; background-color: #fdf0f7;
+      box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08);
+      border-color: #f5c6e0; background-color: #ffffff;
     }
     .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
     .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
     .obj-card:hover .obj-icon .iconify { color: white !important; }
-    .obj-card-kt:hover { box-shadow: none; background-color: #ffffff; }
-    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; background-color: #ffffff; }
-    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; background-color: #ffffff; }
+    #key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+    #key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
 
     /* ── Section header components ─────────────────────────────── */
     .section-header {
@@ -515,6 +512,29 @@
   #hub-root .lesson-nav-link:hover svg {
     color: #CB187D !important; transition: color 0.15s !important;
   }
+
+  /* ── Objective card hover ── */
+  #hub-root .obj-card:hover {
+    border-color: #f5c6e0 !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+    background-color: #ffffff !important;
+  }
+  #hub-root .obj-card:hover .obj-icon {
+    background: #CB187D !important;
+  }
+  #hub-root .obj-card:hover .obj-icon .iconify {
+    color: #ffffff !important;
+  }
+
+  /* ── Key Takeaway cards — keep border gray and icon gradient on hover ── */
+  #hub-root #key-ideas .obj-card:hover {
+    border-color: #f3f4f6 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+  }
+  #hub-root #key-ideas .obj-card:hover .obj-icon {
+    background: revert !important;
+  }
   </style>
 
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
@@ -590,12 +610,12 @@
           </a>
           <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Examples</span>
           </a>
           <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Exercises</span>
           </a>
           <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
@@ -869,7 +889,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The formula bar — writes the new column in</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The new column appears on the right of the sheet.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">Assigning any expression to <code class="font-mono">df["new_col"]</code> creates that column instantly across every row in the DataFrame. If a column with that name already exists, pandas silently overwrites it — so always use a distinct name when you need to keep the original values.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
@@ -882,7 +902,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The formula symbols — run across every row</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The same operators you use in any spreadsheet formula.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">You can use <code class="font-mono">+</code>, <code class="font-mono">-</code>, <code class="font-mono">*</code>, and <code class="font-mono">/</code> directly between DataFrame columns to compute a result for every row in a single expression — no loop needed. Pandas hands the calculation to compiled C code, making it 50 to 100 times faster than iterating row by row in Python.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
@@ -895,7 +915,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The IF formula — different result per condition</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">Two possible values assigned based on a row rule.</p>
+    <p class="text-xs text-gray-500 leading-relaxed"><code class="font-mono">np.where(condition, value_if_true, value_if_false)</code> works exactly like Excel's <code class="font-mono">=IF()</code> — you write the rule once and pandas applies the correct label to every row at once. Import NumPy as <code class="font-mono">import numpy as np</code> before using it.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
@@ -908,7 +928,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The delete column — removes it for good</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The unwanted column erased from the spreadsheet.</p>
+    <p class="text-xs text-gray-500 leading-relaxed"><code class="font-mono">df.drop(columns=["name"])</code> removes the column and returns a new DataFrame — the original <code class="font-mono">df</code> is unchanged unless you reassign it. Use <code class="font-mono">columns=</code> rather than <code class="font-mono">axis=1</code> to make the intent explicit and avoid accidentally dropping rows.</p>
   </div>
 
 </div>
@@ -932,62 +952,82 @@
         <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-4">
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md obj-icon">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Column Assignment Silently Overwrites Existing Data</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Assigning to <code class="font-mono">df["col"]</code> either creates a new column or permanently overwrites it — no error or warning is raised if the column already exists. If you later need both the original and the derived value, always write the result to a different column name.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">df["col"] = ...</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Overwrite risk</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">New column name</span>
+    </div>
+  </div>
+</div>
+
+<div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md obj-icon">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:bolt"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">All Rows Update Simultaneously</h3>
+      <h3 class="text-sm font-bold text-gray-900">Column Arithmetic Skips the Loop Entirely</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">A pandas calculated column is applied to the whole DataFrame by compiled C code in one pass — typically 50 to 100 times faster than a Python for-loop that processes one row at a time.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Writing <code class="font-mono">df["A"] * df["B"]</code> runs the multiplication in compiled C code across all rows at once — there is no Python loop happening under the hood. If you replace this with a Python <code class="font-mono">for</code> loop over rows, expect your script to be 50 to 100 times slower on any real-world dataset.</p>
     <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Vectorised</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">C engine</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">No for-loop</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Vectorized</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">C engine</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">No for-loop</span>
     </div>
   </div>
 </div>
 
-<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+<div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md obj-icon">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:code-branch"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">np.where() Replaces Row-by-Row if/else</h3>
+      <h3 class="text-sm font-bold text-gray-900">np.where() Is the Vectorized IF Function for Columns</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Writing np.where(condition, value_if_true, value_if_false) in one line replaces a for-loop with an if/else inside it, which is 100 times faster on large DataFrames.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Just as Excel's <code class="font-mono">=IF()</code> fills a cell, <code class="font-mono">np.where(condition, true_val, false_val)</code> fills an entire DataFrame column in one call. Forgetting <code class="font-mono">import numpy as np</code> before calling it is the most common setup error — nothing will work without that import.</p>
     <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">np.where()</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Conditional</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Performance</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">np.where()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Conditional labeling</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Excel IF equivalent</span>
     </div>
   </div>
 </div>
 
-<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
-  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
-        <span class="iconify text-white text-sm" data-icon="fa6-solid:tag"></span>
+<div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md obj-icon">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:trash"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-900">Name Columns Descriptively</h3>
+      <h3 class="text-sm font-bold text-gray-900">drop() Returns a Copy — You Must Reassign the Result</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Using a name like revenue_per_unit instead of col_1 means every filter, group-by, and export that references that column is self-documenting and readable by anyone who opens the script.</p>
+    <p class="text-sm text-gray-600 leading-relaxed"><code class="font-mono">df.drop(columns=["col"])</code> does not change <code class="font-mono">df</code> — it returns a new DataFrame with the column missing. If you forget to write <code class="font-mono">df = df.drop(...)</code>, your script continues with the column still present, silently producing the wrong output with no error raised.</p>
     <div class="flex flex-wrap gap-2">
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Naming</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Readability</span>
-      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Self-documenting</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">drop()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Reassign required</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Silent failure</span>
     </div>
   </div>
 </div>
 
+      </div>
     </div>
   </div>
 </section>
@@ -1030,6 +1070,12 @@
           <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:wand-magic-sparkles"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Transformations</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:trash"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Dropping Columns</span>
           </button>
 
         </div><!-- /sidebar -->
@@ -1284,6 +1330,78 @@ df["Region"] = df["Region"].str.upper()      # UPPERCASE text</code></pre>
             </div>
           </div>
 
+          <!-- ════ Panel 3 — Dropping Columns (emerald) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:trash"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Dropping Columns</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Remove unwanted columns from a DataFrame</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> method
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>drop()</strong> removes one or more columns from a DataFrame and returns a new DataFrame with those columns gone. You must reassign the result: <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">df = df.drop(columns=[...])</code> — without the reassignment, the original <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">df</code> is unchanged.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:list-check"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">drop() Parameters</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">columns=[...]</code></td>
+                        <td class="py-2 px-3 text-gray-500">List of column names to remove (preferred over axis=1)</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">inplace=True</code></td>
+                        <td class="py-2 px-3 text-gray-500">Modify df directly — no reassignment needed (use with caution)</td>
+                      </tr>
+                      <tr class="">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">errors="ignore"</code></td>
+                        <td class="py-2 px-3 text-gray-500">Skip columns that do not exist instead of raising a KeyError</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">df = df.drop(columns=["temp_id"])           # remove one — must reassign
+df = df.drop(columns=["cost", "margin"])    # remove multiple at once
+print(df.columns.tolist())                   # confirm columns are gone</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Always reassign the result.</strong> <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">df.drop(columns=[...])</code> does not modify <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">df</code> in place. Without writing <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">df = ...</code>, the column silently stays in the DataFrame.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div><!-- /panels -->
       </div>
     </div>
@@ -1315,6 +1433,14 @@ df["Region"] = df["Region"].str.upper()      # UPPERCASE text</code></pre>
 <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
   <span class="ce-step-label text-xs font-bold">Drop a Column</span>
+</button>
+<button onclick="switchCeTab(3)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+  <span class="ce-step-label text-xs font-bold">Vectorised Math</span>
+</button>
+<button onclick="switchCeTab(4)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+  <span class="ce-step-label text-xs font-bold">Transformations</span>
 </button>
 </div>
 <div class="ce-panel ce-panel-anim" role="tabpanel">
@@ -1505,6 +1631,138 @@ print(df.columns.tolist())           # after: column is gone</code></pre>
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
         <p class="text-sm text-gray-600">Use columns= instead of axis=1 &#8212; it makes the code easier to read and harder to get wrong.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Vectorised Math</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">arithmetic</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">multiple columns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script derives three new columns from a sales DataFrame in a single step each, using column arithmetic to compute revenue, margin, and margin percentage without any loops.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">vectorised_math.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv(&quot;sales.csv&quot;)  # load sales data
+
+df[&quot;revenue&quot;]    = df[&quot;qty&quot;] * df[&quot;price&quot;]              # multiply two columns
+df[&quot;margin&quot;]     = df[&quot;revenue&quot;] - df[&quot;cost&quot;]           # subtract columns
+df[&quot;margin_pct&quot;] = (df[&quot;margin&quot;] / df[&quot;revenue&quot;] * 100).round(1)  # derive percentage
+
+print(df[[&quot;product&quot;, &quot;revenue&quot;, &quot;margin&quot;, &quot;margin_pct&quot;]].head())</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python vectorised_math.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">  product  revenue  margin  margin_pct<br>0  Laptop    999.0   249.0        24.9<br>1   Mouse     50.0    18.0        36.0</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Build derived columns step by step &#8212; each new column can immediately be referenced in the next calculation, keeping your code readable.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Transformations</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Employees</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">str.strip()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">str.upper()</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+          <p class="text-sm text-gray-600">This script standardizes a text column by stripping whitespace, converts a category column to uppercase, and rounds a numeric column to the nearest integer &#8212; all by overwriting each column in place.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">transformations.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv(&quot;employees.csv&quot;)  # load employee data
+
+df[&quot;name&quot;]   = df[&quot;name&quot;].str.strip()              # remove leading/trailing spaces
+df[&quot;region&quot;] = df[&quot;region&quot;].str.upper()            # standardize to uppercase
+df[&quot;salary&quot;] = df[&quot;salary&quot;].round(0).astype(int)   # round to nearest integer
+
+print(df[[&quot;name&quot;, &quot;region&quot;, &quot;salary&quot;]].head())</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python transformations.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">    name  region  salary<br>0  Alice    EAST   55000<br>1    Bob    WEST   42000</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">String methods like <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">str.strip()</code> and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">str.upper()</code> apply to every value in a column at once &#8212; access them through the <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">.str</code> accessor on any text column.</p>
       </div>
     </div>
   </div>
@@ -1729,6 +1987,14 @@ FROM products;</code></pre>
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
   <span class="pe-step-label text-xs font-bold">Drop a Column</span>
 </button>
+<button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Revenue and Margin</span>
+</button>
+<button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+  <span class="pe-step-label text-xs font-bold">Clean Column Values</span>
+</button>
 </div>
 <div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -1938,6 +2204,148 @@ print(df.columns.tolist())                # confirm</code></pre>
     </div>
   </div>
 </div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Revenue and Margin</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">arithmetic</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">multiple columns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Load <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">sales.csv</code> with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">qty</code>, <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">price</code>, and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">cost</code> columns. Add a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">revenue</code> column (qty &times; price) and a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">margin_pct</code> column ((revenue &#8722; cost) &#247; revenue &times; 100, rounded to 1 decimal). Print the first 3 rows showing product, revenue, and margin_pct.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">revenue_margin.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv(&quot;sales.csv&quot;)  # load sales data
+
+df[&quot;revenue&quot;]    = df[&quot;qty&quot;] * df[&quot;price&quot;]                                    # revenue per product
+df[&quot;margin_pct&quot;] = ((df[&quot;revenue&quot;] - df[&quot;cost&quot;]) / df[&quot;revenue&quot;] * 100).round(1)  # margin %
+
+print(df[[&quot;product&quot;, &quot;revenue&quot;, &quot;margin_pct&quot;]].head(3))</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python revenue_margin.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">  product  revenue  margin_pct<br>0  Laptop    999.0        24.9<br>1   Mouse     50.0        36.0<br>2  Webcam     79.0        41.8</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Create <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">revenue</code> first so you can reference it immediately when computing <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">margin_pct</code> &#8212; each new column becomes available for the next calculation right away.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Clean Column Values</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Employees</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">str.strip()</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">str.upper()</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <p class="text-sm text-gray-600">Load <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">employees.csv</code> with messy <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">name</code> and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">region</code> columns. Strip leading and trailing spaces from <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">name</code>, convert <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">region</code> to uppercase, and print the first 3 rows.</p>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">clean_columns.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd  # load pandas
+
+df = pd.read_csv(&quot;employees.csv&quot;)  # load employee data
+
+df[&quot;name&quot;]   = df[&quot;name&quot;].str.strip()   # remove whitespace from names
+df[&quot;region&quot;] = df[&quot;region&quot;].str.upper() # standardize region to uppercase
+
+print(df[[&quot;name&quot;, &quot;region&quot;]].head(3))</code></pre>
+          </div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ python clean_columns.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">    name  region<br>0  Alice    EAST<br>1    Bob    WEST<br>2  Carol   NORTH</div>
+          </div>
+        </div>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">Use the <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">.str</code> accessor on any text column to apply string methods like <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">strip()</code> and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">upper()</code> across the entire column at once.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1967,6 +2375,14 @@ print(df.columns.tolist())                # confirm</code></pre>
   <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
     <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
     <span class="mk-step-label text-xs font-bold">Overwriting Data</span>
+  </button>
+  <button onclick="switchMkTab(3)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Forgetting to Reassign</span>
+  </button>
+  <button onclick="switchMkTab(4)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Loop Instead of Columns</span>
   </button>
 </div>
 
@@ -2143,6 +2559,121 @@ print(df[["Price", "Price_With_Tax"]])      # both columns visible</code></pre>
   </div>
 </div>
 
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Forgetting to Reassign After drop()</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The column appears removed, but df is actually unchanged — no error is raised.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed"><code class="font-mono bg-gray-100 px-1 rounded text-[11px]">drop()</code> returns a <em>new</em> DataFrame — it does not modify the original. If you call it without reassigning (<code class="font-mono bg-gray-100 px-1 rounded text-[11px]">df = df.drop(...)</code>), the discarded result is thrown away and the column silently remains in <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">df</code>.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — result discarded
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df.drop(columns=["temp_id"])  # column still in df!</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — reassign result
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = df.drop(columns=["temp_id"])  # now actually removed</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Always write <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">df = df.drop(...)</code>. If you want to avoid the reassignment, use <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">df.drop(..., inplace=True)</code> — but the explicit reassignment style is clearer and easier to debug.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+
+    <!-- Card header -->
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Using a Python Loop Instead of Column Operations</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The result is correct but the loop is 50–100× slower than a vectorized expression.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+        <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+      </span>
+    </div>
+
+    <!-- Explanation paragraph -->
+    <div class="px-6 py-5">
+      <p class="text-sm text-gray-600 leading-relaxed">Beginners often write a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">for</code> loop to calculate a column value row by row because it feels natural. The output is correct, but pandas can do the same work in compiled C code in a single expression — making the loop approach orders of magnitude slower on large datasets.</p>
+    </div>
+
+    <!-- Wrong / Correct split panel -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — slow row loop
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">totals = []
+for _, row in df.iterrows():
+    totals.append(row["qty"] * row["price"])
+df["total"] = totals  # works but very slow</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — vectorized
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df["total"] = df["qty"] * df["price"]  # 100x faster</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber tip footer -->
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Whenever you find yourself writing <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">for row in df.iterrows()</code> to compute a column value, stop — there is almost always a vectorized equivalent that is a single line of column arithmetic.</p>
+    </div>
+
+  </div>
+</div>
+
     </div>
   </div>
 </section>
@@ -2155,95 +2686,126 @@ print(df[["Price", "Price_With_Tax"]])      # both columns visible</code></pre>
       </span>
       <div class="min-w-0">
         <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How calculated columns is used across real-world workflows</p>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How column transformations power a real product-pricing pipeline</p>
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-5">
-      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a retail pricing team. Your product catalog has 8,000 rows and you regularly need to add tax amounts, apply sale labels, and strip internal cost data before sharing prices externally. Calculated columns in pandas let you do all three in seconds — not hours.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:calculator"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Apply 15% VAT to<br>8,000 product prices</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Your catalog has 8,000 products. You add a vat_amount column by writing <code class="font-mono text-violet-700">df["vat_amount"] = df["price"] * 0.15</code> — every row is calculated at once, with no formula dragging.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
-      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">vat_amount</code></span>
+      <p class="text-sm text-gray-600 leading-relaxed">Your pricing team receives a raw product catalog every Monday morning — 8,000 rows with base prices, discount flags, and internal cost figures. Before the list reaches external partners by noon, five transformations must happen in order. Here is that ticket.</p>
+
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <!-- Ticket header -->
+  <div class="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-100">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-xs" data-icon="fa6-solid:ticket"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold text-gray-800">PRICE-2026-041 &middot; Weekly Catalog Cleanup</p>
+        <p class="text-[10px] text-gray-400">Assigned to: Pricing Analytics &middot; Due: Monday 12:00 PM</p>
+      </div>
+    </div>
+    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">In Progress</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3">
+    <!-- Tasks column (spans 2) -->
+    <div class="md:col-span-2 px-5 py-4 space-y-3 border-r border-gray-100">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Sub-tasks</p>
+
+      <div class="flex items-start gap-3">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+          <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-gray-700">Calculate VAT for every product</p>
+          <p class="text-[11px] text-gray-400 leading-snug">Multiply the base price by 0.15 and store the result in a new <code class="font-mono text-violet-600">vat_amount</code> column — all 8,000 rows update at once.</p>
+        </div>
+        <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-violet-50 text-violet-600 border border-violet-100 shrink-0 whitespace-nowrap">df["price"] * 0.15</code>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+          <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-gray-700">Add a price-with-tax total</p>
+          <p class="text-[11px] text-gray-400 leading-snug">Sum the base price and the new VAT column into <code class="font-mono text-pink-600">total_price</code> so partners see one final number.</p>
+        </div>
+        <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-pink-50 text-pink-600 border border-pink-100 shrink-0 whitespace-nowrap">col_a + col_b</code>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+          <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-gray-700">Label each row "Sale" or "Full Price"</p>
+          <p class="text-[11px] text-gray-400 leading-snug">Use a conditional to check the discount flag and write the correct label into a new <code class="font-mono text-blue-600">price_label</code> column.</p>
+        </div>
+        <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-100 shrink-0 whitespace-nowrap">np.where()</code>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+          <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-gray-700">Rename columns for the partner schema</p>
+          <p class="text-[11px] text-gray-400 leading-snug">The partner system expects <code class="font-mono text-emerald-600">item_name</code> instead of <code class="font-mono text-emerald-600">product</code>. You rename both columns in one call.</p>
+        </div>
+        <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-600 border border-emerald-100 shrink-0 whitespace-nowrap">.rename()</code>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+          <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-gray-700">Drop internal cost columns before export</p>
+          <p class="text-[11px] text-gray-400 leading-snug">Remove <code class="font-mono text-amber-600">cost_price</code> and <code class="font-mono text-amber-600">margin</code> so partners never see your margin data.</p>
+        </div>
+        <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-50 text-amber-600 border border-amber-100 shrink-0 whitespace-nowrap">.drop()</code>
+      </div>
+
+    </div>
+
+    <!-- Side column: data availability -->
+    <div class="px-4 py-4 space-y-4">
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Data available</p>
+        <div class="space-y-1.5">
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:check"></span> products.csv
+          </span>
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:check"></span> 8,000 rows
+          </span>
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:check"></span> price + cost_price
+          </span>
+        </div>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Needed output</p>
+        <div class="space-y-1.5">
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:arrow-right-from-bracket"></span> partner_prices.csv
+          </span>
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:arrow-right-from-bracket"></span> total_price column
+          </span>
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:arrow-right-from-bracket"></span> no cost data
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:toggle-on"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Label products as<br>sale or full price</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Each product is either on sale or full price. <code class="font-mono text-[#CB187D]">np.where()</code> writes the correct label into a new column for all 8,000 rows based on the discount flag — one line of code.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
-      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">price_label</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:trash"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Remove cost data<br>before sharing externally</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Before sending the price list to external partners you remove cost_price and margin. <code class="font-mono text-emerald-700">drop()</code> deletes both columns instantly — no risk of accidentally sharing sensitive data.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
-      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">partner_df</code></span>
-    </div>
-  </div>
-</div>
-</div>
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-  <div class="grid grid-cols-2">
-    <div class="border-r border-gray-100">
-      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without calculated columns</p>
-      </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Dragging a formula down 8,000 rows in Excel works — until someone inserts a row, breaks the formula chain, and the VAT is wrong for every product below that point.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Writing an IF formula for 8,000 rows to set a sale label is slow to build, and if the sale condition changes you have to update the formula in every cell.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Hiding columns in Excel before sharing is fragile — a recipient can simply unhide them and see your cost data.</p>
-</div>
-      </div>
-    </div>
-    <div>
-      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With calculated columns</p>
-      </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">df["vat_amount"] = df["price"] * 0.15</strong> applies the calculation to all 8,000 rows at once — no dragging, no broken formula chains.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">np.where()</strong> labels all 8,000 rows in one call — change the condition once and it applies everywhere instantly.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">drop()</strong> permanently removes the cost columns from the DataFrame — they cannot be unhidden because they no longer exist.</p>
-</div>
-      </div>
-    </div>
-  </div>
+
+<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Every step in this ticket uses a column transformation you learned in this lesson. In practice these five lines run in under a second — the same work takes 20 minutes of manual formula editing in a spreadsheet.</p>
 </div>
     </div>
   </div>
@@ -2364,6 +2926,7 @@ print(df[["Price", "Price_With_Tax"]])      # both columns visible</code></pre>
 <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
 <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
 <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+<button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
 </div>
 <div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2374,20 +2937,26 @@ print(df[["Price", "Price_With_Tax"]])      # both columns visible</code></pre>
           <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
         </span>
         <div>
-          <h3 class="font-bold text-gray-800">True or False</h3>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
           <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
         </div>
       </div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">You can create a new column by assigning a calculation to a new column name, such as df['total'] = df['price'] * df['quantity'].</p>
-        <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+        <p class="text-sm font-semibold text-gray-800 mb-4">Which statement correctly creates a new column called <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">total</code> by multiplying <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">price</code> by <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">quantity</code>?</p>
+        <div class="flex flex-col gap-2">
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">A</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">for row in df: df[&quot;total&quot;] = row[&quot;price&quot;] * row[&quot;quantity&quot;]</code>
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="font-bold text-gray-400 mr-2">B</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;total&quot;] = df[&quot;price&quot;] * df[&quot;quantity&quot;]</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">C</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df.total = price * quantity</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">D</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;total&quot;] = sum(df[&quot;price&quot;] * df[&quot;quantity&quot;])</code>
           </button>
         </div>
         <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
@@ -2434,20 +3003,26 @@ print(df[["Price", "Price_With_Tax"]])      # both columns visible</code></pre>
           <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
         </span>
         <div>
-          <h3 class="font-bold text-gray-800">True or False</h3>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
           <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
         </div>
       </div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">The np.where() function lets you set column values based on a condition, choosing one value when true and another when false.</p>
-        <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+        <p class="text-sm font-semibold text-gray-800 mb-4">Your <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">orders</code> DataFrame has a <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">total</code> column. Which call labels each row <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">"Large"</code> when total &gt; 100, and <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">"Small"</code> otherwise?</p>
+        <div class="flex flex-col gap-2">
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">A</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;size&quot;] = df[df[&quot;total&quot;] &gt; 100][&quot;Large&quot;]</code>
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="font-bold text-gray-400 mr-2">B</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;size&quot;] = np.where(df[&quot;total&quot;] &gt; 100, &quot;Large&quot;, &quot;Small&quot;)</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">C</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;size&quot;] = if df[&quot;total&quot;] &gt; 100 then &quot;Large&quot; else &quot;Small&quot;</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">D</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;size&quot;] = df[&quot;total&quot;].apply(lambda x: &quot;Large&quot; if x &gt; 100)</code>
           </button>
         </div>
         <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
@@ -2485,20 +3060,42 @@ print(df[["Price", "Price_With_Tax"]])      # both columns visible</code></pre>
     </div>
   </div>
 </div>
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4">
+        <p class="text-sm font-semibold text-gray-800 mb-4">You want to remove the <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100 text-gray-700">temp_id</code> column from your DataFrame and keep the result. Which statement does this correctly?</p>
+        <div class="flex flex-col gap-2">
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">A</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df[&quot;temp_id&quot;].drop()</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">B</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df.drop(&quot;temp_id&quot;)</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, true)">
+            <span class="font-bold text-gray-400 mr-2">C</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">df = df.drop(columns=[&quot;temp_id&quot;])</code>
+          </button>
+          <button class="quiz-btn w-full text-left px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">
+            <span class="font-bold text-gray-400 mr-2">D</span> <code class="text-xs font-mono px-1 py-0.5 rounded bg-gray-100">del df.columns[&quot;temp_id&quot;]</code>
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
     </div>
   </div>
-</section>
-
-<section id="next-lesson" class="scroll-mt-24">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
-      </span>
-      <div class="min-w-0">
-        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
-      </div>
+</div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
 

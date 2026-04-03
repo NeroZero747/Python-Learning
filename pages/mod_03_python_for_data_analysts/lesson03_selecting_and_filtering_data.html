@@ -612,12 +612,12 @@
           </a>
           <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
-            <span class="font-extrabold">6</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Examples</span>
           </a>
           <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
-            <span class="font-extrabold">6</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Exercises</span>
           </a>
           <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
@@ -1784,7 +1784,7 @@ if "salary" in df.columns:
 
                 <div class="rounded-xl p-3 flex items-start gap-2.5 bg-orange-50 border border-orange-100">
                   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-                  <p class="text-xs text-gray-600"><strong>Check before you select.</strong> Always inspect <code class="bg-gray-100 px-1 rounded font-mono text-[11px]">df.columns</code> on a new dataset before writing column-selection code. A single trailing space or unexpected capitalisation in a column name will cause a <code class="bg-gray-100 px-1 rounded font-mono text-[11px]">KeyError</code> that is hard to spot otherwise.</p>
+                  <p class="text-xs text-gray-600"><strong>Check before you select.</strong> Always inspect <code class="bg-gray-100 px-1 rounded font-mono text-[11px]">df.columns</code> on a new dataset before writing column-selection code. A single trailing space or unexpected capitalization in a column name will cause a <code class="bg-gray-100 px-1 rounded font-mono text-[11px]">KeyError</code> that is hard to spot otherwise.</p>
                 </div>
               </div>
             </div>
@@ -2838,7 +2838,7 @@ print(result[&quot;name&quot;].tolist())</code></pre>
   </button>
   <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
     <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
-    <span class="mk-step-label text-xs font-bold">Misspelt Name</span>
+    <span class="mk-step-label text-xs font-bold">Misspelled Name</span>
   </button>
   <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
     <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
@@ -3381,20 +3381,26 @@ mask = (df["Age"] > 30) & (df["Region"] == "UK")</code></pre>
           <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
         </span>
         <div>
-          <h3 class="font-bold text-gray-800">True or False</h3>
-          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+          <h3 class="font-bold text-gray-800">Choose the correct answer</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the one correct option</p>
         </div>
       </div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q0">
-        <p class="text-sm font-semibold text-gray-800 mb-4">You can select a single column from a DataFrame using square-bracket notation, such as df['column_name'], which returns a Series.</p>
-        <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+        <p class="text-sm font-semibold text-gray-800 mb-4">Your DataFrame <code class="text-xs bg-gray-100 px-1 rounded font-mono">df</code> has columns <code class="text-xs bg-gray-100 px-1 rounded font-mono">name</code>, <code class="text-xs bg-gray-100 px-1 rounded font-mono">age</code>, and <code class="text-xs bg-gray-100 px-1 rounded font-mono">salary</code>. Which line of code extracts only the <code class="text-xs bg-gray-100 px-1 rounded font-mono">salary</code> column as a one-dimensional Series?</p>
+        <div class="flex flex-col gap-2">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">
+            A) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df[["salary"]]</code>
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, true)">
+            B) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df["salary"]</code>
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">
+            C) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df.select("salary")</code>
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">
+            D) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df.column("salary")</code>
           </button>
         </div>
         <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
@@ -3441,20 +3447,26 @@ mask = (df["Age"] > 30) & (df["Region"] == "UK")</code></pre>
           <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
         </span>
         <div>
-          <h3 class="font-bold text-gray-800">True or False</h3>
-          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+          <h3 class="font-bold text-gray-800">Choose the correct answer</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the one correct option</p>
         </div>
       </div>
     </div>
     <div class="px-6 py-5 space-y-4">
       <div class="quiz-question" data-qid="quiz-q2">
-        <p class="text-sm font-semibold text-gray-800 mb-4">The df.rename() method lets you change column names by passing a dictionary that maps old names to new names.</p>
-        <div class="flex gap-3">
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+        <p class="text-sm font-semibold text-gray-800 mb-4">You want to rename only the <code class="text-xs bg-gray-100 px-1 rounded font-mono">empid</code> column to <code class="text-xs bg-gray-100 px-1 rounded font-mono">Employee ID</code> while keeping all other columns unchanged. Which code does this correctly?</p>
+        <div class="flex flex-col gap-2">
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">
+            A) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df.columns = {"empid": "Employee ID"}</code>
           </button>
-          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
-            <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, true)">
+            B) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df = df.rename(columns={"empid": "Employee ID"})</code>
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">
+            C) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df = df.rename({"empid": "Employee ID"})</code>
+          </button>
+          <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">
+            D) <code class="font-mono text-xs bg-gray-100 px-1 rounded">df["empid"] = "Employee ID"</code>
           </button>
         </div>
         <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>

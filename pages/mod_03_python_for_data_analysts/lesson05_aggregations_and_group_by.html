@@ -199,21 +199,21 @@
 
     /* ── Objective cards (.obj-card) ────────────────────────────── */
     .obj-card {
-      transition: transform 0.22s cubic-bezier(.4,0,.2,1),
-                  box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+      transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1),
                   border-color 0.22s ease, background-color 0.22s ease;
     }
     .obj-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
-      border-color: #CB187D; background-color: #fdf0f7;
+      box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08);
+      border-color: #f5c6e0; background-color: #ffffff;
     }
     .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
     .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
     .obj-card:hover .obj-icon .iconify { color: white !important; }
-    .obj-card-kt:hover { box-shadow: none; background-color: #ffffff; }
-    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; background-color: #ffffff; }
-    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; background-color: #ffffff; }
+    .obj-card-kt:hover { border-color: #f3f4f6; box-shadow: none; background-color: #ffffff; }
+    .obj-card-violet:hover { border-color: #f3f4f6; box-shadow: none; background-color: #ffffff; }
+    .obj-card-blue:hover { border-color: #f3f4f6; box-shadow: none; background-color: #ffffff; }
+    #key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+    #key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
 
     /* ── Section header components ─────────────────────────────── */
     .section-header {
@@ -316,7 +316,7 @@
     /* ── Print styles — hide interactive chrome when printing ──── */
     @media print {
       .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; }
-      .obj-card:hover { transform: none; box-shadow: none; }
+      .obj-card:hover { box-shadow: none; }
     }
 
     /* ── Iconify icon alignment utility ─────────────────────────── */
@@ -515,6 +515,28 @@
   #hub-root .lesson-nav-link:hover svg {
     color: #CB187D !important; transition: color 0.15s !important;
   }
+
+  /* ── Obj-card hover — soft neutral on all cards ── */
+  #hub-root .obj-card:hover {
+    border-color: #f5c6e0 !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+    background-color: #ffffff !important;
+  }
+  #hub-root .obj-card:hover .obj-icon {
+    background: #CB187D !important;
+  }
+  #hub-root .obj-card:hover .obj-icon .iconify {
+    color: #ffffff !important;
+  }
+  /* ── Key Takeaway cards — keep border gray and icon gradient on hover ── */
+  #hub-root #key-ideas .obj-card:hover {
+    border-color: #f3f4f6 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important;
+  }
+  #hub-root #key-ideas .obj-card:hover .obj-icon {
+    background: revert !important;
+  }
   </style>
 
 <div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
@@ -590,12 +612,12 @@
           </a>
           <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Examples</span>
           </a>
           <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
             <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
-            <span class="font-extrabold">3</span>
+            <span class="font-extrabold">5</span>
             <span class="font-semibold opacity-55">Exercises</span>
           </a>
           <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
@@ -857,7 +879,7 @@
 
 <p class="text-sm text-gray-600 leading-relaxed">Think of groupby like an accountant's summary ledger — you split rows by department, then add one subtotal line for each group.</p>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
     <div class="flex items-center gap-3 mb-2.5">
@@ -869,7 +891,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The tab divider — splits rows into groups</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">Each category gets its own section in the ledger.</p>
+    <p class="text-xs text-gray-500 leading-relaxed"><code class="font-mono">groupby("column")</code> scans your DataFrame and sorts rows into separate buckets based on the unique values in that column — one bucket per category. You then apply an aggregation function to each bucket, exactly the way SQL's <code class="font-mono">GROUP BY</code> clause works before a <code class="font-mono">SELECT SUM(...)</code>.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
@@ -882,7 +904,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The subtotal row — one number per group</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The aggregated value that represents each section.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">After grouping, aggregation functions like <code class="font-mono">.sum()</code>, <code class="font-mono">.mean()</code>, and <code class="font-mono">.count()</code> each collapse the rows in a bucket into a single representative value. You pick the function that matches what your stakeholder wants — a revenue total, an average score, or a headcount — and pandas returns one row per group.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
@@ -895,7 +917,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The multi-column total — several at once</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">Multiple calculations run on each group together.</p>
+    <p class="text-xs text-gray-500 leading-relaxed"><code class="font-mono">.agg()</code> lets you pass a dictionary of named calculations — such as <code class="font-mono">total_revenue=("Revenue", "sum")</code> — so pandas computes multiple statistics across all groups in one call. This is the equivalent of writing several <code class="font-mono">SUM()</code>, <code class="font-mono">AVG()</code>, and <code class="font-mono">COUNT()</code> columns in a single SQL query alongside <code class="font-mono">GROUP BY</code>.</p>
   </div>
 
   <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
@@ -908,7 +930,7 @@
         <p class="text-[10px] text-gray-400 italic leading-tight">The ledger flatten — groups become plain rows</p>
       </div>
     </div>
-    <p class="text-xs text-gray-500 leading-relaxed">The grouped result turned back into a normal table.</p>
+    <p class="text-xs text-gray-500 leading-relaxed">After a groupby, the grouped column lives in the DataFrame's index rather than as a regular column, which means you cannot select it with <code class="font-mono">df["region"]</code> or join on it without first calling <code class="font-mono">.reset_index()</code>. That method promotes the index back to a plain column and reassigns a clean numeric index so the result behaves like any other DataFrame.</p>
   </div>
 
 </div>
@@ -932,18 +954,19 @@
         <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-4">
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:database"></span>
       </span>
       <h3 class="text-sm font-bold text-gray-900">Group Once, Aggregate Many Times</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Assigning the result of groupby() to a variable lets you apply multiple different aggregation functions — sum, mean, count — without re-scanning the full DataFrame each time.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Assigning the result of <code class="font-mono text-xs bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">groupby()</code> to a variable lets you apply multiple aggregation functions — <code class="font-mono text-xs bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">sum</code>, <code class="font-mono text-xs bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">mean</code>, <code class="font-mono text-xs bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">count</code> — without re-scanning the full DataFrame each time. This is the same pattern you use in SQL when you write <code class="font-mono text-xs bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">GROUP BY region</code> once and then select multiple aggregate columns.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Reuse groups</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Multiple aggs</span>
@@ -952,16 +975,16 @@
   </div>
 </div>
 
-<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:tag"></span>
       </span>
       <h3 class="text-sm font-bold text-gray-900">Named agg() Prevents Column Clashes</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Passing a dictionary to agg() with explicit output column names — such as {'sales': 'total_sales'} — prevents duplicate column names that break downstream joins and exports.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">When you pass named tuples to <code class="font-mono text-xs bg-violet-50 text-violet-700 border border-violet-100 px-1 rounded">agg()</code> — such as <code class="font-mono text-xs bg-violet-50 text-violet-700 border border-violet-100 px-1 rounded">total_sales=("Sales", "sum")</code> — the output column is named <code class="font-mono text-xs bg-violet-50 text-violet-700 border border-violet-100 px-1 rounded">total_sales</code> instead of a cryptic multi-level index. Without this pattern, downstream joins and <code class="font-mono text-xs bg-violet-50 text-violet-700 border border-violet-100 px-1 rounded">to_csv()</code> exports produce columns named with tuples, which break most downstream tools.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">agg()</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Named output</span>
@@ -970,16 +993,16 @@
   </div>
 </div>
 
-<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+<div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
   <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
-  <div class="px-6 py-5">
-    <div class="flex items-center gap-3 mb-3">
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
       <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
         <span class="iconify text-white text-sm" data-icon="fa6-solid:arrow-down-wide-short"></span>
       </span>
       <h3 class="text-sm font-bold text-gray-900">Sort Totals Before Exporting</h3>
     </div>
-    <p class="text-xs text-gray-600 leading-relaxed mb-4">Chaining sort_values() after a groupby result produces a report where the largest or most recent group appears first, so recipients do not need to sort the data themselves in Excel.</p>
+    <p class="text-sm text-gray-600 leading-relaxed">Chaining <code class="font-mono text-xs bg-blue-50 text-blue-700 border border-blue-100 px-1 rounded">sort_values()</code> after a groupby result produces a report where the largest or most recent group appears first, so your stakeholders do not need to sort the file themselves in Excel. If you skip this step, the output rows arrive in the alphabetical order of the group keys, which is rarely the order a business audience expects.</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">sort_values()</span>
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Report order</span>
@@ -988,6 +1011,25 @@
   </div>
 </div>
 
+<div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:rotate"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">The Index Must Be Reset Before You Can Join or Export</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">After a <code class="font-mono text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 px-1 rounded">groupby()</code> operation the grouped column becomes the DataFrame's index, not a regular column — so trying to select it with <code class="font-mono text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 px-1 rounded">df["region"]</code> raises a <code class="font-mono text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 px-1 rounded">KeyError</code>. Calling <code class="font-mono text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 px-1 rounded">reset_index()</code> immediately after the aggregation promotes the index back to a plain column so you can merge, filter, and export it like any other column.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">reset_index()</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">KeyError fix</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Join-ready</span>
+    </div>
+  </div>
+</div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1030,6 +1072,12 @@
           <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:bars-staggered"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Multiple Aggregations</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:rotate"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">reset_index()</span>
           </button>
 
         </div><!-- /sidebar -->
@@ -1294,6 +1342,84 @@ print(summary.head())</code></pre>
             </div>
           </div>
 
+          <!-- ════ Panel 3 — reset_index() (emerald) ════ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:rotate"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">reset_index()</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Flatten grouped results back to columns</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> method
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>reset_index()</strong> converts the grouped column from the DataFrame index back into a regular column with a fresh 0-based integer index. After a <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">.sum()</code> or <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">.agg()</code>, the grouping key lives in the index — which means you cannot use it in a <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">merge()</code>, a column filter, or a <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">to_csv()</code> export without calling <code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">reset_index()</code> first.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:rotate"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Before and After reset_index()</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-emerald-500">State</th>
+                        <th class="py-2 px-3 text-left font-bold text-emerald-500">Index column</th>
+                        <th class="py-2 px-3 text-left font-bold text-emerald-500">Can filter?</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700">After groupby</td>
+                        <td class="py-2 px-3 text-gray-500">Group key is the index</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-red-50 text-red-600 border border-red-100 px-1 rounded text-[10px]">KeyError</code></td>
+                      </tr>
+                      <tr class="bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-700">After reset_index()</td>
+                        <td class="py-2 px-3 text-gray-500">Group key is a plain column</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-emerald-50 text-emerald-600 border border-emerald-100 px-1 rounded text-[10px]">✓ works</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">totals = df.groupby("region")["sales"].sum()   # region is now the index
+totals = totals.reset_index()                   # region becomes a column
+totals.columns = ["region", "total_sales"]      # rename for clarity
+print(totals["region"])                         # now works — no KeyError</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Always call reset_index() before merging or exporting.</strong> It takes one extra line and prevents the <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">KeyError</code> that catches nearly every beginner after their first groupby.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div><!-- /panels -->
       </div>
     </div>
@@ -1325,6 +1451,14 @@ print(summary.head())</code></pre>
 <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
   <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
   <span class="ce-step-label text-xs font-bold">Reset the Index</span>
+</button>
+<button onclick="switchCeTab(3)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:layer-group"></span>
+  <span class="ce-step-label text-xs font-bold">Group by Multiple Columns</span>
+</button>
+<button onclick="switchCeTab(4)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:arrow-down-wide-short"></span>
+  <span class="ce-step-label text-xs font-bold">Sort Grouped Results</span>
 </button>
 </div>
 <div class="ce-panel ce-panel-anim" role="tabpanel">
@@ -1516,6 +1650,158 @@ print(avg_sal)</code></pre>
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
         <p class="text-sm text-gray-600">Call reset_index() whenever you want to save or merge your grouped results &#8212; most pandas operations expect a clean numeric index.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:layer-group"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Group by Multiple Columns</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:fire"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Multi-level</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">You can pass a list of column names to <code class="font-mono">groupby()</code> to create sub-groups — one group for every unique combination of values across those columns. This is equivalent to <code class="font-mono">GROUP BY region, product</code> in SQL and produces a row for each region-and-product pair.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">multi_group.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+            <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+          </button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+data = {
+    "region":  ["East", "East", "West", "West", "East"],
+    "product": ["Laptop", "Phone", "Laptop", "Phone", "Laptop"],
+    "sales":   [1200, 800, 950, 700, 1100],
+}
+df = pd.DataFrame(data)
+
+# Group by two columns — produces one row per region + product pair
+result = df.groupby(["region", "product"])["sales"].sum().reset_index()
+result.columns = ["region", "product", "total_sales"]
+
+print(result)
+#    region product  total_sales
+# 0    East  Laptop         2300
+# 1    East   Phone          800
+# 2    West  Laptop          950
+# 3    West   Phone          700</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Output</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python multi_group.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre">  region product  total_sales
+0   East  Laptop         2300
+1   East   Phone          800
+2   West  Laptop          950
+3   West   Phone          700</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">When you group by multiple columns, pandas creates a multi-level index. Always call <code class="font-mono">reset_index()</code> afterwards so each combination becomes a plain row you can filter or export.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:arrow-down-wide-short"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Sort Grouped Results</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sort</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Top-N</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">After grouping and aggregating, you can chain <code class="font-mono">sort_values()</code> to rank the results — for example, to find the top-performing regions or the products with the lowest average sales. Setting <code class="font-mono">ascending=False</code> puts the largest values first, which is the most common reporting order.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">sort_grouped.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+            <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+          </button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+data = {
+    "region": ["East", "West", "North", "East", "West", "North"],
+    "sales":  [1200, 800, 1500, 900, 1100, 600],
+}
+df = pd.DataFrame(data)
+
+# Group, aggregate, then sort highest-to-lowest
+result = (
+    df.groupby("region")["sales"]
+    .sum()
+    .reset_index()
+    .sort_values("sales", ascending=False)
+)
+print(result)
+# region  sales
+# North    2100
+# East     2100
+# West     1900</code></pre>
+        </div>
+        <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Output</span>
+            <span class="text-[10px] text-gray-600 font-mono">$ python sort_grouped.py</span>
+          </div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre">  region  sales
+2  North    2100
+0   East    2100
+1   West    1900</div>
+        </div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Always sort <em>after</em> reset_index() so you are sorting on a regular column, not on the group index. Chain the whole operation — groupby → sum → reset_index → sort_values — in one expression for clean, readable code.</p>
       </div>
     </div>
   </div>
@@ -1739,6 +2025,14 @@ values = SUM of Revenue</code></pre>
   <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
   <span class="pe-step-label text-xs font-bold">Count by Value</span>
 </button>
+<button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:arrow-down-wide-short"></span>
+  <span class="pe-step-label text-xs font-bold">Sort and Top N</span>
+</button>
+<button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+  <span class="iconify text-[13px]" data-icon="fa6-solid:rotate"></span>
+  <span class="pe-step-label text-xs font-bold">Reset and Rename</span>
+</button>
 </div>
 <div class="pe-panel pe-panel-anim" role="tabpanel">
   <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -1949,6 +2243,169 @@ print(counts)</code></pre>
     </div>
   </div>
 </div>
+
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:arrow-down-wide-short"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Sort and Select Top N</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:fire"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sort</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Top-N</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="task-box rounded-xl p-4 space-y-2">
+        <p class="text-sm font-bold text-gray-800">Your task</p>
+        <p class="text-sm text-gray-600">Using the sales DataFrame below, group by <code class="font-mono">region</code>, sum the <code class="font-mono">sales</code> column, sort the totals from highest to lowest, and use <code class="font-mono">.head(2)</code> to extract only the top 2 regions. Print the result.</p>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">starter.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+            <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+          </button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+data = {
+    "region": ["East", "West", "North", "East", "West", "North"],
+    "sales":  [1200, 800, 1500, 900, 1100, 600],
+}
+df = pd.DataFrame(data)
+
+# TODO: group by region, sum sales, sort descending, keep top 2
+</code></pre>
+        </div>
+      </div>
+      <details class="rounded-xl border border-gray-100 overflow-hidden">
+        <summary class="px-5 py-3 bg-gray-50 text-sm font-semibold text-gray-700 cursor-pointer hover:bg-gray-100 transition-colors">Show Solution</summary>
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3 mx-4 mb-4">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">solution.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+              <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+            </button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">top2 = (
+    df.groupby("region")["sales"]
+    .sum()
+    .reset_index()
+    .sort_values("sales", ascending=False)
+    .head(2)
+)
+print(top2)
+# region  sales
+# North    2100
+# East     2100</code></pre>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:rotate"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Reset Index and Rename Columns</h3>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:fire"></span> Intermediate
+            </span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">reset_index</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Rename</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="task-box rounded-xl p-4 space-y-2">
+        <p class="text-sm font-bold text-gray-800">Your task</p>
+        <p class="text-sm text-gray-600">Group the DataFrame below by <code class="font-mono">department</code>, count the number of employees in each department using <code class="font-mono">size()</code>, call <code class="font-mono">reset_index()</code>, and rename the columns to <code class="font-mono">department</code> and <code class="font-mono">headcount</code>. Print the final result.</p>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+              <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+              <span class="text-[11px] font-semibold text-gray-400">starter.py</span>
+            </div>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+            <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+          </button>
+        </div>
+        <div class="bg-code">
+          <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+data = {
+    "name":       ["Alice", "Bob", "Carol", "Dave", "Eve"],
+    "department": ["Sales", "IT", "Sales", "HR", "IT"],
+    "salary":     [55000, 72000, 61000, 48000, 69000],
+}
+df = pd.DataFrame(data)
+
+# TODO: group by department, count rows, reset index, rename columns
+</code></pre>
+        </div>
+      </div>
+      <details class="rounded-xl border border-gray-100 overflow-hidden">
+        <summary class="px-5 py-3 bg-gray-50 text-sm font-semibold text-gray-700 cursor-pointer hover:bg-gray-100 transition-colors">Show Solution</summary>
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3 mx-4 mb-4">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                <span class="text-[11px] font-semibold text-gray-400">solution.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+              <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+            </button>
+          </div>
+          <div class="bg-code">
+            <pre class="overflow-x-auto pre-reset"><code class="language-python">result = df.groupby("department").size().reset_index()
+result.columns = ["department", "headcount"]
+print(result)
+#   department  headcount
+# 0         HR          1
+# 1         IT          2
+# 2      Sales          2</code></pre>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -1978,6 +2435,14 @@ print(counts)</code></pre>
   <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
     <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
     <span class="mk-step-label text-xs font-bold">Lost Columns</span>
+  </button>
+  <button onclick="switchMkTab(3)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">Forgetting reset_index()</span>
+  </button>
+  <button onclick="switchMkTab(4)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+    <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+    <span class="mk-step-label text-xs font-bold">NaN in Group Key</span>
   </button>
 </div>
 
@@ -2156,6 +2621,98 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
   </div>
 </div>
 
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Forgetting reset_index() Before Accessing Columns</h4>
+        <p class="text-xs text-gray-400 mt-0.5">The grouped key is in the index — not in the columns</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-600 shrink-0">KeyError</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — group key is in index
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">result = df.groupby("region")["sales"].sum()
+# region is now the index, not a column
+print(result["region"])  # KeyError!</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — call reset_index() first
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">result = df.groupby("region")["sales"].sum().reset_index()
+# region is now a proper column
+print(result["region"])  # works!</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">After any <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">groupby()</code> aggregation, the grouping column moves into the index. You must call <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">reset_index()</code> before you can select, merge, or export that column by name.</p>
+    </div>
+  </div>
+</div>
+
+<div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Grouping on a Column That Contains NaN Values</h4>
+        <p class="text-xs text-gray-400 mt-0.5">NaN values form their own hidden group — rows disappear silently</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-600 shrink-0">Silent bug</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+      <div class="p-5 bg-red-50/30">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — NaN rows vanish silently
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import numpy as np
+df["region"] = df["region"].replace("East", np.nan)
+result = df.groupby("region")["sales"].sum()
+# East rows are silently excluded — NaN is dropped by default</code></pre>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+        <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+          <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+        </span>
+      </div>
+      <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+        <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — fill NaN before grouping
+        </p>
+        <div class="rounded-xl overflow-hidden bg-code">
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df["region"] = df["region"].fillna("Unknown")
+result = df.groupby("region")["sales"].sum()
+# Unknown now appears as its own group — no rows lost</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">pandas drops NaN group keys by default. Before calling <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">groupby()</code>, always check <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">df["region"].isna().sum()</code> and fill missing values so that no rows are silently excluded from the totals.</p>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -2168,96 +2725,93 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
       </span>
       <div class="min-w-0">
         <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How groupby aggregations is used across real-world workflows</p>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">See how three industries use groupby to turn raw rows into executive summaries</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a sales reporting team. Your transaction table has 200,000 rows and your stakeholders want summaries by region, by product category, and by week — with five different metrics each. Pandas groupby aggregations collapse all of that into a few lines of code.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:object-group"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Sales across<br>12 regions</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Your 200,000-row transaction table spans 12 regions. <code class="font-mono text-violet-700">groupby("region").sum()</code> collapses it to 12 summary rows — one per region — in a single call.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
-      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">regional_totals</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:chart-column"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Average order value<br>per product category</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Your CFO needs the average order value for each of 30 product categories. <code class="font-mono text-[#CB187D]">groupby("category")["amount"].mean()</code> computes all 30 averages at once.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
-      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">avg_by_category</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:sliders"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Weekly KPI pack<br>with five metrics</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">The Monday report needs total revenue, order count, average order size, max, and min per region. <code class="font-mono text-emerald-700">.agg()</code> computes all five in one grouped call.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
-      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">kpi_df</code></span>
-    </div>
-  </div>
-</div>
-</div>
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-  <div class="grid grid-cols-2">
-    <div class="border-r border-gray-100">
-      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without groupby</p>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <p class="text-sm text-gray-600 leading-relaxed">Your company's transaction table has 300,000 rows. Your stakeholders do not want 300,000 rows — they want one number per region, one average per department, one total per branch. Pandas <code class="font-mono text-gray-700">groupby()</code> collapses raw data into those summaries, and every industry relies on the same pattern.</p>
+
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Industry Spotlight</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <!-- Healthcare -->
+          <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+            <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-100">
+              <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 shrink-0">
+                <span class="iconify text-white text-xs" data-icon="fa6-solid:heart-pulse"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold text-gray-800">Healthcare</p>
+                <p class="text-[10px] text-gray-400">patient_visits.csv — 85,000 rows</p>
+              </div>
+            </div>
+            <div class="px-4 py-4 space-y-2.5">
+              <p class="text-xs text-gray-600 leading-relaxed">A hospital operations team groups 85,000 patient visits by department to find the average wait time and total visit count for each unit.</p>
+              <div class="flex items-center gap-2">
+                <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100">groupby("dept").agg({"wait_min":"mean", "id":"count"})</code>
+              </div>
+              <p class="text-[11px] text-emerald-600 font-semibold leading-snug">&#x2192; Identifies the two departments that need extra staffing on Mondays</p>
+            </div>
+          </div>
+
+          <!-- Retail -->
+          <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+            <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-100">
+              <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0">
+                <span class="iconify text-white text-xs" data-icon="fa6-solid:cart-shopping"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold text-gray-800">Retail</p>
+                <p class="text-[10px] text-gray-400">orders_2025.csv — 150,000 rows</p>
+              </div>
+            </div>
+            <div class="px-4 py-4 space-y-2.5">
+              <p class="text-xs text-gray-600 leading-relaxed">An e-commerce analyst groups 150,000 orders by product category and sums the revenue column to find which categories drive the most quarterly income.</p>
+              <div class="flex items-center gap-2">
+                <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100">groupby("category")["revenue"].sum()</code>
+              </div>
+              <p class="text-[11px] text-emerald-600 font-semibold leading-snug">&#x2192; Reveals that 5 of 30 categories generate 80% of total revenue</p>
+            </div>
+          </div>
+
+          <!-- Finance -->
+          <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+            <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-100">
+              <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0">
+                <span class="iconify text-white text-xs" data-icon="fa6-solid:building-columns"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold text-gray-800">Finance</p>
+                <p class="text-[10px] text-gray-400">branch_transactions.csv — 300,000 rows</p>
+              </div>
+            </div>
+            <div class="px-4 py-4 space-y-2.5">
+              <p class="text-xs text-gray-600 leading-relaxed">A bank operations team groups 300,000 transactions by branch and aggregates the transaction count and total dollar volume for each location.</p>
+              <div class="flex items-center gap-2">
+                <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100">groupby("branch").agg({"txn_id":"count", "amount":"sum"})</code>
+              </div>
+              <p class="text-[11px] text-emerald-600 font-semibold leading-snug">&#x2192; Pinpoints three branches that need more tellers during peak months</p>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Building a regional summary from 200,000 rows in Excel means creating a pivot table — and rebuilding it manually every time the source data refreshes.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Calculating average order value for 30 categories means writing AVERAGEIF for each category — 30 separate formulas that break when a new category appears.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">Producing five metrics per region in Excel requires five separate pivot tables or 60 SUMIF/AVERAGEIF formulas across the report sheet.</p>
-</div>
+
+      <!-- Shared pattern banner -->
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-4">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[3rem] font-black text-white/10 leading-none select-none pointer-events-none">&#x221E;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-base" data-icon="fa6-solid:share-nodes"></span>
+          </span>
+          <div>
+            <p class="text-xs font-bold text-white uppercase tracking-widest mb-0.5">The common thread</p>
+            <p class="text-sm text-white/90">Every industry groups raw rows by a category column and collapses thousands of records into one summary number per group — that is the core of <code class="font-mono text-white">groupby()</code>.</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With groupby</p>
-      </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">groupby().sum()</strong> collapses 200,000 rows to 12 regional summaries in milliseconds — and updates automatically when rerun.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">groupby().mean()</strong> calculates the average for every category simultaneously — new categories appear in the output automatically.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">.agg()</strong> computes all five metrics in one call — one line replaces five pivot tables.</p>
-</div>
-      </div>
-    </div>
-  </div>
-</div>
+
     </div>
   </div>
 </section>
@@ -2377,6 +2931,7 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
 <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
 <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
 <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+<button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
 </div>
 <div class="qz-panel qz-panel-anim" role="tabpanel">
   <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
@@ -2498,6 +3053,43 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
     </div>
   </div>
 </div>
+
+<div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the best answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Your CSV has 80,000 rows and a <code class="font-mono">region</code> column. Which line correctly groups by region and counts how many rows are in each group?</p>
+        <div class="flex flex-col gap-3">
+          <button class="quiz-btn text-left px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)">
+            A) <code class="font-mono">df.groupby("region").sum()</code>
+          </button>
+          <button class="quiz-btn text-left px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+            B) <code class="font-mono">df["region"].sum()</code>
+          </button>
+          <button class="quiz-btn text-left px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+            C) <code class="font-mono">df.groupby("region")["region"].count()</code>
+          </button>
+          <button class="quiz-btn text-left px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+            D) <code class="font-mono">df.groupby("region").size().reset_index(name="count")</code>
+          </button>
+        </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -2517,11 +3109,11 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
 
       <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
         <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
-          <span class="text-white font-bold text-lg">8</span>
+          <span class="text-white font-bold text-lg">6</span>
         </span>
         <div class="min-w-0">
-          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 1 &middot; Lesson 8</p>
-          <h3 class="text-base font-bold text-gray-800">Joining Data (Merge)</h3>
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 3 &middot; Lesson 6</p>
+          <h3 class="text-base font-bold text-gray-800">Joining and Merging Data</h3>
           <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
         </div>
       </div>
@@ -2565,11 +3157,11 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
 <section>
   <div class="flex flex-col sm:flex-row gap-3">
 
-    <a href="lesson06_creating_calculated_columns.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+    <a href="lesson04_transforming_data.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
       <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Creating Calculated Columns</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Transforming Data</p>
       </div>
     </a>
 
@@ -2578,10 +3170,10 @@ print(summary.columns.tolist())                   # [Region, Sales]</code></pre>
       <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
     </a>
 
-    <a href="lesson08_joining_data_merge.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+    <a href="lesson06_joining_and_merging_data.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
-        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Joining Data (Merge)</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Joining and Merging Data</p>
       </div>
       <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
     </a>

@@ -72,7 +72,7 @@ For **every existing overview card**, check all content requirements below. If a
 1. **Icon** — A `data-icon` attribute is present and references a real Iconify icon that visually represents the concept.
 2. **Bold title** — The card has a `text-sm font-bold` title that states the concept name clearly (e.g. `read_csv()`, `DataFrame`, `Series`).
 3. **Italic analogy subtitle** — A `text-[10px] text-gray-400 italic` line connects the concept to the analogy introduced in the overview intro paragraph. The subtitle must say what the real-world item *does*, not just name it (e.g. `"The pantry — stocked with 500,000+ libraries"`).
-4. **Explanation paragraph** — A `text-xs text-gray-500 leading-relaxed` paragraph containing **a max of 2 complete sentences** that:
+4. **Explanation paragraph** — A `text-xs text-gray-500 leading-relaxed` paragraph containing ** a single complete sentence** that:
    - Define the concept in plain English (what it is)
    - Explain what a learner uses it *for* in practice (why it matters)
    - Give one concrete detail — a parameter name, a return type, a common pattern, or a comparison to something familiar (Excel/SQL) that makes the concept tangible
@@ -135,7 +135,7 @@ Each card follows this pattern:
       </span>
       <h3 class="text-sm font-bold text-gray-900">Insight assertion heading</h3>
     </div>
-    <p class="text-sm text-gray-600 leading-relaxed">a max of 2 complete sentences...</p>
+    <p class="text-sm text-gray-600 leading-relaxed">a single complete sentence...</p>
     <div class="flex flex-wrap gap-2">
       <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[COLOR]-50 text-[COLOR]-600 border border-[COLOR]-100">Keyword</span>
     </div>
