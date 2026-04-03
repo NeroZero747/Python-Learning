@@ -982,7 +982,7 @@
 
 <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
   <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-  <p class="text-sm text-gray-600">SQLAlchemy supports PostgreSQL, MySQL, SQL Server, and SQLite — the same connection code works across all of them.</p>
+  <p class="text-sm text-gray-600">SQLAlchemy supports SQL Server, Oracle, Snowflake, and Teradata — the same connection code works across all of them.</p>
 </div>
     </div>
   </div>
@@ -1206,11 +1206,11 @@
                     <tbody>
                       <tr class=" border-b border-gray-50">
                         <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">dialect</code></td>
-                        <td class="py-2 px-3 text-gray-500">Database type — sqlite, postgresql, mysql</td>
+                        <td class="py-2 px-3 text-gray-500">Database type — mssql, oracle, snowflake</td>
                       </tr>
                       <tr class=" border-b border-gray-50 bg-gray-50/50">
                         <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">user:password</code></td>
-                        <td class="py-2 px-3 text-gray-500">Login credentials (omit for SQLite)</td>
+                        <td class="py-2 px-3 text-gray-500">Login credentials</td>
                       </tr>
                       <tr class=" border-b border-gray-50">
                         <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-pink-100 text-pink-700 border border-pink-200 px-1 rounded">host</code></td>
@@ -1234,17 +1234,17 @@
                       <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
                     </button>
                   </div>
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># SQLite — local file, no server needed
-conn = "sqlite:///company.db"
-# PostgreSQL — remote server
-conn = "postgresql://admin:secret@localhost/sales"</code></pre>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># SQL Server — uses pyodbc driver
+conn = "mssql+pyodbc://admin:pw@sqlserver01/company?driver=ODBC+Driver+18+for+SQL+Server"
+# Oracle — uses oracledb driver
+conn = "oracle+oracledb://admin:pw@oracle01:1521/sales"</code></pre>
                 </div>
 
                 <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
                   <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
                     <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
                   </span>
-                  <p class="text-xs text-gray-600"><strong>SQLite uses three slashes.</strong> <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">sqlite:///file.db</code> — two from the protocol, one for the local path.</p>
+                  <p class="text-xs text-gray-600"><strong>Always include the driver parameter for SQL Server.</strong> The <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">?driver=</code> part tells SQLAlchemy which ODBC driver is installed on your machine.</p>
                 </div>
 
               </div>
@@ -1319,7 +1319,7 @@ conn = "postgresql://admin:secret@localhost/sales"</code></pre>
                     </button>
                   </div>
                   <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine
-engine = create_engine("sqlite:///company.db")  # create once
+engine = create_engine("mssql+pyodbc://admin:pw@sqlserver01/company?driver=ODBC+Driver+18+for+SQL+Server")
 print(engine)                                    # Engine object</code></pre>
                 </div>
 
@@ -1348,7 +1348,7 @@ print(engine)                                    # Engine object</code></pre>
                     </span>
                     <div>
                       <h3 class="text-sm font-bold text-gray-900 leading-tight">Database Types</h3>
-                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">SQLite, PostgreSQL, and MySQL</p>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">SQL Server, Oracle, Snowflake, and Teradata</p>
                     </div>
                   </div>
                   <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border-blue-200 shadow-sm">
@@ -1356,7 +1356,7 @@ print(engine)                                    # Engine object</code></pre>
                   </span>
                 </div>
 
-                <p class="text-xs text-gray-600 leading-relaxed"><strong>Database types</strong> (dialects) determine the connection string format and the pip package you need. SQLite is built in. Others need a driver.</p>
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Database types</strong> (dialects) determine the connection string format and the pip package you need. Each database needs its own driver package.</p>
 
                 <div class="rounded-xl overflow-hidden border border-blue-100">
                   <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
@@ -1366,31 +1366,36 @@ print(engine)                                    # Engine object</code></pre>
                   <table class="w-full text-xs border-collapse bg-white">
                     <thead>
                       <tr class="border-b border-gray-50">
-                        <th class="py-2 px-3 text-left font-bold text-blue-500 w-12">Op</th>
-                        <th class="py-2 px-3 text-left font-bold text-blue-500">Meaning</th>
-                        <th class="py-2 px-3 text-left font-bold text-blue-500">Example</th>
+                        <th class="py-2 px-3 text-left font-bold text-blue-500">Dialect</th>
+                        <th class="py-2 px-3 text-left font-bold text-blue-500">Database</th>
+                        <th class="py-2 px-3 text-left font-bold text-blue-500">pip install</th>
+                        <th class="py-2 px-3 text-left font-bold text-blue-500">Connection String</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr class=" border-b border-gray-50">
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">sqlite</code></td>
-                        <td class="py-2 px-3 text-gray-500">File-based, no server</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">sqlite:///data.db</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">mssql+pyodbc</code></td>
+                        <td class="py-2 px-3 text-gray-500">SQL Server</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded text-[10px]">pyodbc</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">mssql+pyodbc://u:p@host/db</code></td>
                       </tr>
                       <tr class=" border-b border-gray-50 bg-gray-50/40">
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">postgresql</code></td>
-                        <td class="py-2 px-3 text-gray-500">Enterprise, full features</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">postgresql://u:p@host/db</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">oracle+oracledb</code></td>
+                        <td class="py-2 px-3 text-gray-500">Oracle</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded text-[10px]">oracledb</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">oracle+oracledb://u:p@host/db</code></td>
                       </tr>
                       <tr class=" border-b border-gray-50">
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">mysql</code></td>
-                        <td class="py-2 px-3 text-gray-500">Popular web database</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">mysql://u:p@host/db</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">snowflake</code></td>
+                        <td class="py-2 px-3 text-gray-500">Snowflake</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded text-[10px]">snowflake-sqlalchemy</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">snowflake://u:p@acct/db</code></td>
                       </tr>
                       <tr class=" bg-gray-50/40">
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">mssql</code></td>
-                        <td class="py-2 px-3 text-gray-500">Microsoft SQL Server</td>
-                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">mssql://u:p@host/db</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1.5 py-0.5 rounded-full text-[11px] font-bold">teradatasql</code></td>
+                        <td class="py-2 px-3 text-gray-500">Teradata</td>
+                        <td class="py-2 px-3"><code class="font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded text-[10px]">teradatasqlalchemy</code></td>
+                        <td class="py-2 px-3"><code class="font-mono bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded text-[10px]">teradatasql://u:p@host/db</code></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1406,17 +1411,24 @@ print(engine)                                    # Engine object</code></pre>
                       <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
                     </button>
                   </div>
-                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># SQLite — no install needed
-engine = create_engine("sqlite:///local.db")
-# PostgreSQL — pip install psycopg2-binary
-engine = create_engine("postgresql://admin:pw@localhost/sales")</code></pre>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># SQL Server — pip install pyodbc
+engine = create_engine("mssql+pyodbc://admin:pw@sqlserver01/sales?driver=ODBC+Driver+18+for+SQL+Server")
+
+# Oracle — pip install oracledb
+engine = create_engine("oracle+oracledb://admin:pw@oracle01:1521/sales")
+
+# Snowflake — pip install snowflake-sqlalchemy
+engine = create_engine("snowflake://admin:pw@acct123/analytics")
+
+# Teradata — pip install teradatasqlalchemy
+engine = create_engine("teradatasql://admin:pw@teradata01/warehouse")</code></pre>
                 </div>
 
                 <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
                   <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
                     <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
                   </span>
-                  <p class="text-xs text-gray-600"><strong>Start with SQLite for learning.</strong> It needs no server, no password, and no extra install. Move to PostgreSQL when you need a shared database.</p>
+                  <p class="text-xs text-gray-600"><strong>Install the driver first, then connect.</strong> Run <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">pip install pyodbc</code>, <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">oracledb</code>, <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">snowflake-sqlalchemy</code>, or <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">teradatasqlalchemy</code> depending on your database, then use the same <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">create_engine()</code> pattern.</p>
                 </div>
 
               </div>
@@ -1747,7 +1759,7 @@ df = pd.read_sql(query, engine, params={"dept": "Sales"})# value passed safely</
         <div class="bg-code">
           <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine  # database connector
 
-conn_str = &quot;sqlite:///finance.db&quot;  # connection string
+conn_str = &quot;mssql+pyodbc://admin:pw@sqlserver01/finance?driver=ODBC+Driver+18+for+SQL+Server&quot;
 engine = create_engine(conn_str)     # create the engine
 
 print(engine)  # confirm connection object exists</code></pre>
@@ -1758,12 +1770,12 @@ print(engine)  # confirm connection object exists</code></pre>
             <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
             <span class="text-[10px] text-gray-600 font-mono">$ python connect_db.py</span>
           </div>
-          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Engine(sqlite:///finance.db)</div>
+          <div class="font-mono text-xs text-emerald-400 leading-relaxed">Engine(mssql+pyodbc://admin:***@sqlserver01/finance)</div>
         </div>
       </div>
       <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
         <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-        <p class="text-sm text-gray-600">The connection string format changes for each database type &#8212; SQLite uses three slashes, PostgreSQL uses two.</p>
+        <p class="text-sm text-gray-600">The connection string format changes for each database type &#8212; SQL Server uses <code class="text-xs font-mono px-1 rounded bg-gray-100">mssql+pyodbc://</code> and requires a <code class="text-xs font-mono px-1 rounded bg-gray-100">?driver=</code> parameter.</p>
       </div>
     </div>
   </div>
@@ -1811,7 +1823,7 @@ print(engine)  # confirm connection object exists</code></pre>
           <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd                    # load pandas
 from sqlalchemy import create_engine    # database connector
 
-engine = create_engine(&quot;sqlite:///inventory.db&quot;)  # connect
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/inventory?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 
 df = pd.read_sql_table(&quot;products&quot;, engine)  # load the table
 print(df.head())  # show first rows</code></pre>
@@ -1875,7 +1887,7 @@ print(df.head())  # show first rows</code></pre>
           <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine(&quot;sqlite:///customers.db&quot;)  # connect
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/customers?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 
 with engine.connect() as conn:               # auto-close on exit
     df = pd.read_sql(&quot;SELECT * FROM customers&quot;, conn)
@@ -1940,7 +1952,7 @@ print(df.shape)  # connection is already closed here</code></pre>
           <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine(&quot;sqlite:///shop.db&quot;)  # open database
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/shop?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 
 query = &quot;SELECT name, price FROM products WHERE price &gt; 50&quot;  # SQL filter
 df = pd.read_sql(query, engine)  # run query, get DataFrame
@@ -2005,7 +2017,7 @@ print(df)                        # display filtered results</code></pre>
           <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 from sqlalchemy import create_engine, text  # text() wraps raw SQL
 
-engine = create_engine(&quot;sqlite:///orders.db&quot;)  # open database
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/orders?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 
 query = text(&quot;SELECT * FROM orders WHERE total &gt; :min_total&quot;)  # :placeholder
 df = pd.read_sql(query, engine, params={&quot;min_total&quot;: 100})   # fill placeholder
@@ -2320,7 +2332,7 @@ FROM sales;</code></pre>
             </span>
             <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Retail</span>
             <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">create_engine()</span>
-            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">SQLite</span>
+            <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">SQL Server</span>
           </div>
         </div>
       </div>
@@ -2330,7 +2342,7 @@ FROM sales;</code></pre>
         <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
-          <p class="text-sm text-gray-600">Create a connection to a SQLite database called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">retail.db</code> using SQLAlchemy. Load the "products" table and print the row count.</p>
+          <p class="text-sm text-gray-600">Create a connection to a SQL Server database called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">retail</code> using SQLAlchemy. Load the &quot;products&quot; table and print the row count.</p>
         </div>
       </div>
       <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
@@ -2352,7 +2364,7 @@ FROM sales;</code></pre>
             <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine(&quot;sqlite:///retail.db&quot;)  # connect
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/retail?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 df = pd.read_sql_table(&quot;products&quot;, engine)     # load table
 
 print(f&quot;Loaded {len(df)} products&quot;)</code></pre>
@@ -2368,7 +2380,7 @@ print(f&quot;Loaded {len(df)} products&quot;)</code></pre>
         </div>
         <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
           <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
-          <p class="text-sm text-gray-600">The connection string tells SQLAlchemy which database engine and file to use &#8212; change "sqlite" to "postgresql" for a Postgres database.</p>
+          <p class="text-sm text-gray-600">The connection string tells SQLAlchemy which database type to use &#8212; change <code class="text-xs font-mono px-1 rounded bg-gray-100">mssql+pyodbc</code> to <code class="text-xs font-mono px-1 rounded bg-gray-100">oracle+oracledb</code> for an Oracle database.</p>
         </div>
       </div>
     </div>
@@ -2422,7 +2434,7 @@ print(f&quot;Loaded {len(df)} products&quot;)</code></pre>
             <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine(&quot;sqlite:///hr.db&quot;)       # connect
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/hr?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 df = pd.read_sql_table(&quot;employees&quot;, engine)    # load table
 
 print(df.dtypes)</code></pre>
@@ -2492,7 +2504,7 @@ print(df.dtypes)</code></pre>
             <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine(&quot;sqlite:///logistics.db&quot;)
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/logistics?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 
 with engine.connect() as conn:                   # auto-close
     df = pd.read_sql(&quot;SELECT * FROM shipments&quot;, conn)
@@ -2558,7 +2570,7 @@ print(df.head(3))</code></pre>
             <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine
 import pandas as pd
 
-engine = create_engine(&quot;sqlite:///warehouse.db&quot;)
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/warehouse?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 
 query = &quot;SELECT * FROM inventory WHERE quantity &lt; 10&quot;
 df = pd.read_sql(query, engine)  # WHERE clause in SQL
@@ -2624,7 +2636,7 @@ print(df)</code></pre>
             <pre class="overflow-x-auto pre-reset"><code class="language-python">from sqlalchemy import create_engine, text
 import pandas as pd
 
-engine = create_engine(&quot;sqlite:///clients.db&quot;)
+engine = create_engine(&quot;mssql+pyodbc://admin:pw@sqlserver01/clients?driver=ODBC+Driver+18+for+SQL+Server&quot;)
 city = &quot;Berlin&quot;       # variable &#x2014; never insert with f-string
 
 query = text(&quot;SELECT * FROM clients WHERE city = :city&quot;)
@@ -2708,18 +2720,18 @@ print(df)</code></pre>
 
     <!-- Explanation paragraph -->
     <div class="px-6 py-5">
-      <p class="text-sm text-gray-600 leading-relaxed">Each database type needs a specific URL prefix. SQLite uses <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">sqlite:///</code> (three slashes for relative path). PostgreSQL uses <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">postgresql://</code>. A wrong prefix triggers <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">ArgumentError</code>.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">Each database type needs its own URL prefix and driver. SQL Server uses <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">mssql+pyodbc://</code> and requires a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">?driver=</code> parameter. Omitting the driver triggers <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">ArgumentError</code>.</p>
     </div>
 
     <!-- Wrong / Correct split panel -->
     <div class="relative grid grid-cols-1 sm:grid-cols-2">
       <div class="p-5 bg-red-50/30">
         <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
-          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — wrong prefix
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — missing driver param
         </p>
         <div class="rounded-xl overflow-hidden bg-code">
-          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">engine = create_engine("sqlite://data.db")
-# ArgumentError — missing a slash</code></pre>
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">engine = create_engine("mssql+pyodbc://admin:pw@server/sales")
+# ArgumentError — missing ?driver= parameter</code></pre>
         </div>
       </div>
       <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
@@ -2729,12 +2741,13 @@ print(df)</code></pre>
       </div>
       <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
         <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
-          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — correct prefix
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — include driver
         </p>
         <div class="rounded-xl overflow-hidden bg-code">
-          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">from sqlalchemy import create_engine              # import first
-engine = create_engine("sqlite:///data.db")       # three slashes
-print(engine)                                      # confirms connection</code></pre>
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">from sqlalchemy import create_engine                               # import first
+engine = create_engine("mssql+pyodbc://admin:pw@server/sales"     # dialect + driver
+                       "?driver=ODBC+Driver+18+for+SQL+Server")   # driver param
+print(engine)                                                      # confirms connection</code></pre>
         </div>
       </div>
     </div>
@@ -2742,7 +2755,7 @@ print(engine)                                      # confirms connection</code><
     <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
       <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-      <p class="text-xs text-gray-600 leading-relaxed">Count the slashes: <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">sqlite:///</code> means "protocol + empty host + relative path". Two slashes is never enough for SQLite.</p>
+      <p class="text-xs text-gray-600 leading-relaxed">Always add the <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">?driver=</code> parameter for SQL Server. Run <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">pyodbc.drivers()</code> in Python to see which drivers are installed on your machine.</p>
     </div>
 
   </div>
@@ -2827,7 +2840,7 @@ print(df.shape)                                # connection closed here</code></
 
     <!-- Explanation paragraph -->
     <div class="px-6 py-5">
-      <p class="text-sm text-gray-600 leading-relaxed">SQLAlchemy needs a separate driver for each database — <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">psycopg2</code> for PostgreSQL, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">pymysql</code> for MySQL. Without the driver installed, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">create_engine()</code> fails.</p>
+      <p class="text-sm text-gray-600 leading-relaxed">SQLAlchemy needs a separate driver for each database — <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">pyodbc</code> for SQL Server, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">oracledb</code> for Oracle. Without the driver installed, <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">create_engine()</code> fails.</p>
     </div>
 
     <!-- Wrong / Correct split panel -->
@@ -2837,8 +2850,8 @@ print(df.shape)                                # connection closed here</code></
           <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — driver missing
         </p>
         <div class="rounded-xl overflow-hidden bg-code">
-          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">engine = create_engine("postgresql://user:pw@host/db")
-# ModuleNotFoundError: No module named psycopg2</code></pre>
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">engine = create_engine("mssql+pyodbc://admin:pw@server/sales?driver=ODBC+Driver+18+for+SQL+Server")
+# ModuleNotFoundError: No module named pyodbc</code></pre>
         </div>
       </div>
       <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
@@ -2851,9 +2864,10 @@ print(df.shape)                                # connection closed here</code></
           <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — install driver
         </p>
         <div class="rounded-xl overflow-hidden bg-code">
-          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># first, in terminal: pip install psycopg2-binary
-from sqlalchemy import create_engine                 # import
-engine = create_engine("postgresql://user:pw@host/db") # works now</code></pre>
+          <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># first, in terminal: pip install pyodbc
+from sqlalchemy import create_engine                                               # import
+engine = create_engine("mssql+pyodbc://admin:pw@server/sales"                     # connect
+                       "?driver=ODBC+Driver+18+for+SQL+Server")                   # works now</code></pre>
         </div>
       </div>
     </div>
@@ -2861,7 +2875,7 @@ engine = create_engine("postgresql://user:pw@host/db") # works now</code></pre>
     <!-- Amber tip footer -->
     <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
       <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
-      <p class="text-xs text-gray-600 leading-relaxed">Check the SQLAlchemy docs for your database type. Each has a recommended driver package you need to <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">pip install</code> once.</p>
+      <p class="text-xs text-gray-600 leading-relaxed">Check the SQLAlchemy docs for your database type. SQL Server needs <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">pip install pyodbc</code>, Oracle needs <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">pip install oracledb</code>.</p>
     </div>
 
   </div>
@@ -2980,96 +2994,121 @@ print(df.shape)                              # (500, cols)</code></pre>
       </span>
       <div class="min-w-0">
         <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How database connections is used across real-world workflows</p>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Three database sources your team connects to every day</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <p class="text-sm text-gray-600 leading-relaxed">Imagine you work on a business intelligence team. You need fresh database data every morning, credentials must stay out of the script, and the connection must close cleanly even if the script crashes. SQLAlchemy and pandas handle all three patterns so your pipeline is reliable and secure.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="relative rounded-2xl overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-purple-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:database"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Fresh sales data<br>every morning</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Your pipeline needs today's sales every morning. <code class="font-mono text-violet-700">create_engine()</code> opens the connection and <code class="font-mono text-violet-700">pd.read_sql_table()</code> loads the sales table straight into a DataFrame.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-violet-100 border-violet-200">
-      <span class="iconify text-violet-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-violet-700">returns <code class="font-mono">sales_df</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-pink-100 bg-gradient-to-br from-pink-50 via-white to-rose-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-lg shadow-pink-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:lock"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Credentials kept<br>outside the script</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">Database passwords stored in a script appear in code reviews and Git history. You load them from environment variables with <code class="font-mono text-[#CB187D]">os.getenv()</code> — the script contains no sensitive data.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-pink-100 border-pink-200">
-      <span class="iconify text-[#CB187D] text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-[#CB187D]">returns <code class="font-mono">secure engine</code></span>
-    </div>
-  </div>
-</div>
-<div class="relative rounded-2xl overflow-hidden border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 px-6 py-6 text-center">
-  <div class="flex flex-col items-center gap-3">
-    <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
-      <span class="iconify text-white text-2xl" data-icon="fa6-solid:power-off"></span>
-    </span>
-    <h3 class="text-sm font-bold text-gray-800 leading-snug">Connection closes<br>on every script exit</h3>
-    <p class="text-xs text-gray-500 leading-relaxed">A script that leaves connections open degrades performance for every other user of the database. A <code class="font-mono text-emerald-700">with engine.connect()</code> block closes the connection automatically — even if the script crashes.</p>
-    <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full border bg-emerald-100 border-emerald-200">
-      <span class="iconify text-emerald-700 text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-      <span class="text-[11px] font-semibold text-emerald-700">returns <code class="font-mono">auto-closed</code></span>
-    </div>
-  </div>
-</div>
-</div>
-      <div class="rounded-xl border border-gray-100 overflow-hidden">
-  <div class="grid grid-cols-2">
-    <div class="border-r border-gray-100">
-      <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
-        <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
-        <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without database connections</p>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <p class="text-sm text-gray-600 leading-relaxed">Your analytics team pulls data from three different databases every morning. Each one uses a different engine, a different driver, and a different connection string format. SQLAlchemy handles all three with the same <code class="font-mono text-gray-700">create_engine()</code> pattern — you just swap the prefix.</p>
+
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Your Daily Data Sources</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <!-- Card 1 — SQL Server (blue) -->
+          <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-[#1f2937]">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-blue-400 text-xs" data-icon="fa6-solid:database"></span>
+                <span class="text-[10px] font-bold text-gray-300 uppercase tracking-wider">sales_db</span>
+              </div>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-800/40">SQL Server</span>
+            </div>
+            <div class="bg-white px-4 py-4 space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-gray-300 text-[11px]" data-icon="fa6-solid:building"></span>
+                <span class="text-[11px] text-gray-400">From: CRM team · 80,000 orders/day</span>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">You pull yesterday's orders every morning so the dashboard shows up-to-date revenue by region.</p>
+              <div class="rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
+                <p class="text-[10px] font-semibold text-amber-700 leading-snug">&#9888; Gotcha: The <code class="font-mono text-amber-800">?driver=</code> parameter is required — omitting it triggers an ArgumentError before the query even runs.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] text-gray-400">Loaded with:</span>
+                <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-100">pd.read_sql_table("orders", engine)</code>
+              </div>
+              <p class="text-[11px] text-gray-500 leading-snug"><span class="font-semibold text-gray-700">Unlocks:</span> Daily revenue dashboard with region breakdowns</p>
+            </div>
+          </div>
+
+          <!-- Card 2 — Oracle (violet) -->
+          <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-[#1f2937]">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-violet-400 text-xs" data-icon="fa6-solid:server"></span>
+                <span class="text-[10px] font-bold text-gray-300 uppercase tracking-wider">hr_db</span>
+              </div>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-900/40 text-violet-300 border border-violet-800/40">Oracle</span>
+            </div>
+            <div class="bg-white px-4 py-4 space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-gray-300 text-[11px]" data-icon="fa6-solid:users"></span>
+                <span class="text-[11px] text-gray-400">From: HR system · 12 regional offices</span>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">You query the employee table with a WHERE clause to find headcount by department for the quarterly review.</p>
+              <div class="rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
+                <p class="text-[10px] font-semibold text-amber-700 leading-snug">&#9888; Gotcha: Oracle uses <code class="font-mono text-amber-800">oracledb</code> as its driver — install it first or <code class="font-mono text-amber-800">create_engine()</code> fails silently with a dialect error.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] text-gray-400">Loaded with:</span>
+                <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700 border border-violet-100">pd.read_sql(query, engine)</code>
+              </div>
+              <p class="text-[11px] text-gray-500 leading-snug"><span class="font-semibold text-gray-700">Unlocks:</span> Headcount-by-department report for leadership</p>
+            </div>
+          </div>
+
+          <!-- Card 3 — Snowflake (emerald) -->
+          <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-[#1f2937]">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-emerald-400 text-xs" data-icon="fa6-solid:snowflake"></span>
+                <span class="text-[10px] font-bold text-gray-300 uppercase tracking-wider">analytics_wh</span>
+              </div>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-800/40">Snowflake</span>
+            </div>
+            <div class="bg-white px-4 py-4 space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="iconify text-gray-300 text-[11px]" data-icon="fa6-solid:cloud"></span>
+                <span class="text-[11px] text-gray-400">From: Cloud warehouse · 2 million events/day</span>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">You run a parameterized query to pull last week's web analytics events filtered by campaign ID.</p>
+              <div class="rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
+                <p class="text-[10px] font-semibold text-amber-700 leading-snug">&#9888; Gotcha: Snowflake connection strings use your <code class="font-mono text-amber-800">account identifier</code> instead of a hostname — check your Snowflake console for the correct value.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] text-gray-400">Loaded with:</span>
+                <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">pd.read_sql(text(query), engine, params={})</code>
+              </div>
+              <p class="text-[11px] text-gray-500 leading-snug"><span class="font-semibold text-gray-700">Unlocks:</span> Campaign performance DataFrame for the marketing team</p>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">A script that hard-codes the connection string breaks the moment the database password rotates — someone has to find every script file and update the string manually.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">A password written in a Python file gets committed to Git, appears in pull request diffs, and may end up in a shared Slack message — even if you delete it later.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">A script that doesn't close its connection leaves idle sessions open on the database server — over time this exhausts the connection pool and blocks other users.</p>
-</div>
+
+      <!-- 2-step habit block -->
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">Two Habits That Prevent Every Connection Bug</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex items-start gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4 hover:border-[#f5c6e0] transition-colors">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-black shadow-md shrink-0 mt-0.5">1</span>
+            <div>
+              <p class="text-sm font-bold text-gray-800 mb-1">Always use a with block</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Wrap every <code class="font-mono text-gray-600">engine.connect()</code> call inside a <code class="font-mono text-gray-600">with</code> statement. The connection closes automatically when the block ends — even if your script hits an unexpected error halfway through.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4 hover:border-[#f5c6e0] transition-colors">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-black shadow-md shrink-0 mt-0.5">2</span>
+            <div>
+              <p class="text-sm font-bold text-gray-800 mb-1">Keep credentials out of your script</p>
+              <p class="text-xs text-gray-500 leading-relaxed">Store database passwords in environment variables or a <code class="font-mono text-gray-600">.env</code> file. Use <code class="font-mono text-gray-600">os.getenv()</code> at runtime so no sensitive data appears in your code, your Git history, or a pull request review.</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">The same <code class="font-mono text-gray-700">create_engine()</code> + <code class="font-mono text-gray-700">pd.read_sql()</code> pattern works across SQL Server, Oracle, Snowflake, and Teradata — you only change the connection string prefix and driver.</p>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
-        <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
-        <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With database connections</p>
-      </div>
-      <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">create_engine()</strong> and <strong class="text-gray-700">pd.read_sql_table()</strong> load fresh data every run — the connection string lives in one place, easy to update.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-700">os.getenv()</strong> reads credentials at runtime — no password ever appears in a file, a code review, or a Git commit.</p>
-</div>
-        <div class="flex items-start gap-2.5">
-  <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-  <p class="text-xs text-gray-500 leading-relaxed">A <strong class="text-gray-700">with engine.connect()</strong> block closes the connection when the block ends — no idle sessions, no connection pool exhaustion.</p>
-</div>
-      </div>
-    </div>
-  </div>
-</div>
     </div>
   </div>
 </section>
