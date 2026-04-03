@@ -1,260 +1,531 @@
 ---
-mode: "agent"
-description: "Write or rewrite the #real-world section for a lesson HTML file — intro paragraph, three large scenario cards, and a two-column before/after comparison table. No code blocks."
+mode: agent
+description: "Redesign the #real-world section of a lesson. Scans all other lessons first to identify which layout types are already in use, then selects one from the catalog that has NOT been used yet. Every lesson gets a structurally unique section — same topic content, different visual presentation."
 ---
 
-Rewrite the `#real-world` section body in the target lesson file using the structure and rules below. The design — intro paragraph, three large scenario cards, and a before/after comparison table — stays the same every lesson; only the content changes.
-
----
-
-## Writing Style — apply to all text you write
-
-This section shows the reader why the lesson topic matters in real work. Write like you're pointing at a real task on someone's desk and saying "this is where Python helps you."
-
-- **Be specific.** Name real quantities, data types, and actions — not vague capabilities.
-- **Human scale.** Lead with relatable numbers or situations ("500 orders", "200 products", "a 10% sale") so the reader feels the weight of the problem before seeing the solution.
-- **Use "you".** "You write the function once" is clearer than "the function is written once".
-- **One idea per sentence.** 15 words or fewer per sentence. No compound justifications.
-- **No jargon** unless it was taught in this lesson.
-- **No filler.** Cut "it is important", "essentially", "in order to", "this allows for".
-- **No code blocks** anywhere in this section — all content is plain English.
-- **American English only.** Use American spellings throughout — e.g. "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
+Redesign the `#real-world` section of `TARGET_FILE`. The layout you choose **must be different** from every other lesson's real-world section. Follow the steps below in order.
 
 ---
 
----
-
-## Inputs (fill in before running)
+## Required Input
 
 | Variable | Value |
 |---|---|
-| `TARGET_FILE` | Path to the lesson HTML file |
-| `TOPIC` | The Python concept this lesson teaches (e.g. `variables`, `conditions`, `loops`, `functions`) |
-| `DOMAIN` | The real-world setting for the three scenario cards (e.g. `an online shop`, `a data team`, `a payroll system`). Pick something universally familiar — avoid sports, music, or domain-specific jargon. |
-| `INTRO_TEXT` | 2–3 sentence intro paragraph. Set the scene using `DOMAIN`, name the repeated pain the learner faces without `TOPIC`, and end with one sentence on how `TOPIC` solves it. |
-| `CARD1_ICON` | Iconify icon for scenario card 1 (e.g. `fa6-solid:receipt`) |
-| `CARD1_COLOR` | Tailwind color token for card 1 — one of: `violet`, `pink`, `emerald`, `blue`, `amber` |
-| `CARD1_HEADLINE` | Short human-scale headline for card 1 (e.g. `Your shop gets 500 orders today`) — 6–10 words, no verb "is/are" |
-| `CARD1_BODY` | 2 plain sentences. Sentence 1: the problem at scale. Sentence 2: how the function (or concept) solves it with one verb of action. |
-| `CARD1_FUNCTION` | The Python function or variable name featured in card 1 (e.g. `calculate_total()`) |
-| `CARD1_RETURNS` | What the function returns or produces shown in the pill (e.g. `order_total`, `True or False`) |
-| `CARD2_ICON` | Iconify icon for scenario card 2 |
-| `CARD2_COLOR` | Tailwind color token for card 2 |
-| `CARD2_HEADLINE` | Short human-scale headline for card 2 |
-| `CARD2_BODY` | 2 plain sentences matching the card 1 pattern |
-| `CARD2_FUNCTION` | Python function or concept name for card 2 |
-| `CARD2_RETURNS` | Return value or result for card 2 pill |
-| `CARD3_ICON` | Iconify icon for scenario card 3 |
-| `CARD3_COLOR` | Tailwind color token for card 3 |
-| `CARD3_HEADLINE` | Short human-scale headline for card 3 |
-| `CARD3_BODY` | 2 plain sentences matching the card 1 pattern |
-| `CARD3_FUNCTION` | Python function or concept name for card 3 |
-| `CARD3_RETURNS` | Return value or result for card 3 pill |
-| `WITHOUT_ROW1` | One sentence for the "Without functions" column, row 1 — describe the manual pain at the scale stated in `CARD1_HEADLINE`. |
-| `WITHOUT_ROW2` | One sentence for the "Without functions" column, row 2 — describe the error/fragility risk tied to card 2. |
-| `WITHOUT_ROW3` | One sentence for the "Without functions" column, row 3 — describe the inconsistency risk tied to card 3. |
-| `WITH_ROW1` | One sentence for the "With functions" column, row 1 — state how `CARD1_FUNCTION` eliminates the pain. Bold the function name using `<strong class="text-gray-700">`. |
-| `WITH_ROW2` | One sentence for the "With functions" column, row 2 — state how `CARD2_FUNCTION` eliminates the error risk. Bold the function name. |
-| `WITH_ROW3` | One sentence for the "With functions" column, row 3 — state how `CARD3_FUNCTION` eliminates the inconsistency. Bold the function name. |
-
-> Card colors should visually differ from one another. A good default set is violet → pink → emerald. Never repeat the same color across cards.
+| `TARGET_FILE` | Absolute path to the lesson HTML file to update |
 
 ---
 
-## Section shell (keep unchanged)
+## Step 1 — Audit existing layouts
 
-Always preserve the outer section shell exactly — do **not** change the section `id`, the header icon (`fa6-solid:briefcase`), or the header title ("Real-World Use"). Only replace the `<div class="bg-white px-8 py-7 space-y-5">` body contents. Update the subtitle to match the lesson topic.
+Before writing anything, scan every other lesson file in the same folder as `TARGET_FILE` and identify which layout type each one uses. Map them against the **Layout Catalog** in Step 2.
 
-```html
-<section id="real-world">
-  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
-      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
-        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
-      </span>
-      <div class="min-w-0">
-        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How TOPIC is used across real-world workflows</p>
-      </div>
-    </div>
-    <div class="bg-white px-8 py-7 space-y-5">
-      <!-- INTRO + SCENARIO CARDS + BEFORE/AFTER TABLE GO HERE -->
-    </div>
-  </div>
-</section>
-```
+Build a table like this (fill in from your scan):
+
+| Lesson | Layout used |
+|---|---|
+| lesson01 | metric-cards |
+| lesson02 | inbox-gotcha |
+| lesson03 | ? |
+| … | … |
 
 ---
 
-## Intro paragraph
+## Step 2 — Layout Catalog
 
-A single `<p>` tag. 2–3 sentences maximum. Set the scene, name the scale of the problem, end with how the lesson concept solves it.
-
-```html
-<p class="text-sm text-gray-600 leading-relaxed">INTRO_TEXT</p>
-```
+Each entry has a **slug** (used for tracking), a **description** of its visual identity, and the **HTML pattern** to use. Pick the first unused slug for `TARGET_FILE`.
 
 ---
 
-## Three scenario cards
+### Layout A — `metric-cards`
 
-A 3-column grid of centered cards. Each card has a large gradient icon badge, a human-scale headline, 2 plain sentences, and a "returns" pill at the bottom. Use a different color per card.
-
-**Color token reference** — drives gradient, border, background, and pill classes:
-
-| Token | Card border | Card background | Icon gradient from | Icon gradient to | Icon shadow | Pill bg | Pill border | Pill text |
-|---|---|---|---|---|---|---|---|---|
-| `violet` | `border-violet-100` | `from-violet-50 via-white to-purple-50` | `from-violet-500` | `to-purple-600` | `shadow-violet-200` | `bg-violet-100` | `border-violet-200` | `text-violet-700` |
-| `pink` (brand) | `border-pink-100` | `from-pink-50 via-white to-rose-50` | `from-[#CB187D]` | `to-[#e84aad]` | `shadow-pink-200` | `bg-pink-100` | `border-pink-200` | `text-[#CB187D]` |
-| `emerald` | `border-emerald-100` | `from-emerald-50 via-white to-teal-50` | `from-emerald-500` | `to-teal-600` | `shadow-emerald-200` | `bg-emerald-100` | `border-emerald-200` | `text-emerald-700` |
-| `blue` | `border-blue-100` | `from-blue-50 via-white to-indigo-50` | `from-blue-500` | `to-indigo-600` | `shadow-blue-200` | `bg-blue-100` | `border-blue-200` | `text-blue-700` |
-| `amber` | `border-amber-100` | `from-amber-50 via-white to-orange-50` | `from-amber-400` | `to-orange-500` | `shadow-amber-200` | `bg-amber-100` | `border-amber-200` | `text-amber-700` |
+**Visual:** 3 large centered gradient icon cards + a 2-column before/after table below.
+**Best for:** concepts where you want to show the output of a function (a return value or result) across 3 scenarios.
 
 ```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-  <!-- Card 1 — CARD1_COLOR -->
-  <div class="relative rounded-2xl overflow-hidden border CARD1_BORDER bg-gradient-to-br CARD1_BG px-6 py-6 text-center">
+  <!-- Card — repeat 3x, each with a different color token -->
+  <div class="relative rounded-2xl overflow-hidden border BORDER bg-gradient-to-br BG px-6 py-6 text-center">
     <div class="flex flex-col items-center gap-3">
-      <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br CARD1_ICON_FROM CARD1_ICON_TO shadow-lg CARD1_SHADOW">
-        <span class="iconify text-white text-2xl" data-icon="CARD1_ICON"></span>
+      <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ICON_FROM ICON_TO shadow-lg SHADOW">
+        <span class="iconify text-white text-2xl" data-icon="ICON"></span>
       </span>
-      <h3 class="text-sm font-bold text-gray-800 leading-snug">CARD1_HEADLINE</h3>
-      <p class="text-xs text-gray-500 leading-relaxed">CARD1_BODY — use inline <code class="font-mono CARD1_CODE_COLOR">CARD1_FUNCTION</code> in the text.</p>
-      <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full CARD1_PILL_BG CARD1_PILL_BORDER">
-        <span class="iconify CARD1_PILL_TEXT text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
-        <span class="text-[11px] font-semibold CARD1_PILL_TEXT">returns <code class="font-mono">CARD1_RETURNS</code></span>
+      <h3 class="text-sm font-bold text-gray-800 leading-snug">HEADLINE</h3>
+      <p class="text-xs text-gray-500 leading-relaxed">BODY — mention <code class="font-mono CODE_COLOR">function()</code> inline.</p>
+      <div class="flex items-center gap-1.5 mt-1 px-3 py-1.5 rounded-full PILL_BG PILL_BORDER">
+        <span class="iconify PILL_TEXT text-[11px]" data-icon="fa6-solid:arrow-right-from-bracket"></span>
+        <span class="text-[11px] font-semibold PILL_TEXT">returns <code class="font-mono">RETURN_VALUE</code></span>
       </div>
     </div>
   </div>
 
-  <!-- Card 2 — CARD2_COLOR (repeat structure above) -->
-
-  <!-- Card 3 — CARD3_COLOR (repeat structure above) -->
-
 </div>
-```
 
-**Headline rules:**
-- Use a real number or quantity ("500 orders", "200 products") to communicate scale.
-- Write it as two short lines — break after the scale number using `<br>` so the card stays balanced.
-- Never start with "You" — lead with the situation, not the person.
-
-**Body text rules:**
-- Sentence 1: state the problem at scale (what would have to happen manually or repeatedly).
-- Sentence 2: state how writing the function once solves it — name the function in `<code>` inline.
-
-**Pill rules:**
-- The `returns` pill shows what the function produces — use the actual Python value or variable name (`order_total`, `True` or `False`, `sale_price`).
-- Use `<code class="font-mono">` around the return value inside the pill span.
-
----
-
-## Before/After comparison table
-
-A two-column grid inside a `rounded-xl` border container. Left column = "Without [TOPIC]" (red header, ✗ bullets). Right column = "With [TOPIC]" (pink header, ✓ bullets). Each column has exactly 3 rows — one per scenario card above.
-
-```html
+<!-- Before/after table -->
 <div class="rounded-xl border border-gray-100 overflow-hidden">
   <div class="grid grid-cols-2">
-
-    <!-- Without column -->
     <div class="border-r border-gray-100">
       <div class="flex items-center gap-2 px-4 py-3 bg-red-50 border-b border-red-100">
         <span class="iconify text-red-400 text-sm shrink-0" data-icon="fa6-solid:circle-xmark"></span>
         <p class="text-xs font-bold text-red-500 uppercase tracking-wide">Without TOPIC</p>
       </div>
       <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-          <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-          <p class="text-xs text-gray-500 leading-relaxed">WITHOUT_ROW1</p>
-        </div>
-        <div class="flex items-start gap-2.5">
-          <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-          <p class="text-xs text-gray-500 leading-relaxed">WITHOUT_ROW2</p>
-        </div>
-        <div class="flex items-start gap-2.5">
-          <span class="iconify text-red-300 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:xmark"></span>
-          <p class="text-xs text-gray-500 leading-relaxed">WITHOUT_ROW3</p>
-        </div>
+        <!-- 3 rows: flex items-start gap-2.5 + iconify xmark + text-xs text-gray-500 -->
       </div>
     </div>
-
-    <!-- With column -->
     <div>
       <div class="flex items-center gap-2 px-4 py-3 bg-[#fdf0f7] border-b border-[#f5c6e0]">
         <span class="iconify text-[#CB187D] text-sm shrink-0" data-icon="fa6-solid:circle-check"></span>
         <p class="text-xs font-bold text-[#CB187D] uppercase tracking-wide">With TOPIC</p>
       </div>
       <div class="px-4 py-4 space-y-3">
-        <div class="flex items-start gap-2.5">
-          <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-          <p class="text-xs text-gray-500 leading-relaxed">WITH_ROW1</p>
+        <!-- 3 rows: flex items-start gap-2.5 + iconify check emerald + text-xs text-gray-500 -->
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**Color token reference** (use a different one per card):
+
+| Token | Border | BG | Icon from | Icon to | Shadow | Pill bg | Pill border | Pill text |
+|---|---|---|---|---|---|---|---|---|
+| violet | `border-violet-100` | `from-violet-50 via-white to-purple-50` | `from-violet-500` | `to-purple-600` | `shadow-violet-200` | `bg-violet-100` | `border-violet-200` | `text-violet-700` |
+| pink | `border-pink-100` | `from-pink-50 via-white to-rose-50` | `from-[#CB187D]` | `to-[#e84aad]` | `shadow-pink-200` | `bg-pink-100` | `border-pink-200` | `text-[#CB187D]` |
+| emerald | `border-emerald-100` | `from-emerald-50 via-white to-teal-50` | `from-emerald-500` | `to-teal-600` | `shadow-emerald-200` | `bg-emerald-100` | `border-emerald-200` | `text-emerald-700` |
+| blue | `border-blue-100` | `from-blue-50 via-white to-indigo-50` | `from-blue-500` | `to-indigo-600` | `shadow-blue-200` | `bg-blue-100` | `border-blue-200` | `text-blue-700` |
+| amber | `border-amber-100` | `from-amber-50 via-white to-orange-50` | `from-amber-400` | `to-orange-500` | `shadow-amber-200` | `bg-amber-100` | `border-amber-200` | `text-amber-700` |
+
+---
+
+### Layout B — `inbox-gotcha`
+
+**Visual:** 3 file/ticket inbox cards with a dark IDE-style header bar per card showing a filename and type badge. Each card has a source system label, description, amber gotcha box, a "Loaded with:" code badge, and an "Unlocks:" line. Below: 2 wide numbered habit cards + amber tip.
+**Best for:** lessons about loading or importing data where files have real-world quirks and silent failure modes.
+
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">GRID_LABEL</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- One card per file type — repeat 3x -->
+    <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="flex items-center justify-between px-4 py-2.5 bg-[#1f2937]">
+        <div class="flex items-center gap-2">
+          <span class="iconify text-COLOR-400 text-xs" data-icon="ICON"></span>
+          <span class="text-[10px] font-bold text-gray-300 uppercase tracking-wider">FILENAME</span>
         </div>
-        <div class="flex items-start gap-2.5">
-          <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-          <p class="text-xs text-gray-500 leading-relaxed">WITH_ROW2</p>
+        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-COLOR-900/40 text-COLOR-300 border border-COLOR-800/40">TYPE_BADGE</span>
+      </div>
+      <div class="bg-white px-4 py-4 space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="iconify text-gray-300 text-[11px]" data-icon="SYSTEM_ICON"></span>
+          <span class="text-[11px] text-gray-400">From: SOURCE_SYSTEM</span>
         </div>
-        <div class="flex items-start gap-2.5">
-          <span class="iconify text-emerald-400 text-sm shrink-0 mt-0.5" data-icon="fa6-solid:check"></span>
-          <p class="text-xs text-gray-500 leading-relaxed">WITH_ROW3</p>
+        <p class="text-xs text-gray-600 leading-relaxed">FILE_DESCRIPTION</p>
+        <div class="rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
+          <p class="text-[10px] font-semibold text-amber-700 leading-snug">&#9888; Gotcha: GOTCHA_TEXT</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[10px] text-gray-400">Loaded with:</span>
+          <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-COLOR-50 text-COLOR-700 border border-COLOR-100">FUNCTION_CALL</code>
+        </div>
+        <p class="text-[11px] text-gray-500 leading-snug"><span class="font-semibold text-gray-700">Unlocks:</span> UNLOCKS_TEXT</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 2-step habit block -->
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">HABIT_LABEL</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="flex items-start gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4 hover:border-[#f5c6e0] transition-colors">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-black shadow-md shrink-0 mt-0.5">1</span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 mb-1">STEP1_TITLE</p>
+        <p class="text-xs text-gray-500 leading-relaxed">STEP1_BODY</p>
+      </div>
+    </div>
+    <div class="flex items-start gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4 hover:border-[#f5c6e0] transition-colors">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-black shadow-md shrink-0 mt-0.5">2</span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 mb-1">STEP2_TITLE</p>
+        <p class="text-xs text-gray-500 leading-relaxed">STEP2_BODY</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+    <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+    <p class="text-sm text-gray-600">TIP_TEXT</p>
+  </div>
+</div>
+```
+
+---
+
+### Layout C — `day-in-the-life`
+
+**Visual:** A horizontal (or 2×2 on mobile) timeline of 4 micro-events during a single work day. Each event is a card with a time stamp, a short task title, and 2 sentences showing exactly where the lesson concept is used. A closing amber tip wraps up the narrative.
+**Best for:** lessons whose concept appears at multiple distinct points in a single analysis workflow (filtering, joining, transforming, aggregating).
+
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">TIMELINE_LABEL</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+    <!-- One event card per time slot — repeat 4x -->
+    <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+      <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+      <div class="px-4 py-4">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0">
+            <span class="iconify text-white text-xs" data-icon="ICON"></span>
+          </span>
+          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">TIME</span>
+        </div>
+        <p class="text-xs font-bold text-gray-800 mb-1.5">TASK_TITLE</p>
+        <p class="text-xs text-gray-500 leading-relaxed mb-3">TASK_BODY — name the concept inline.</p>
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-50 text-[#CB187D] border border-pink-100">CONCEPT_BADGE</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">TIP_TEXT</p>
+</div>
+```
+
+Use four different accent colors for the top bar across the four cards (pink → violet → blue → emerald).
+
+---
+
+### Layout D — `roles-board`
+
+**Visual:** 3 role/persona cards styled like "team member profile" tiles. Each card has a job title, department tag, a description of their specific daily task, the exact code they'd run, and what it returns them. A closing "What every role shares" row below the grid ties it together.
+**Best for:** lessons where different job roles on the same team use the same concept for different things (e.g. analysts, coordinators, managers all filtering or joining data differently).
+
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">ROLES_LABEL</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- Role card — repeat 3x with different accent colors -->
+    <div class="rounded-2xl border BORDER bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="h-1 bg-gradient-to-r ACCENT_FROM ACCENT_TO"></div>
+      <div class="px-5 py-5 space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ACCENT_FROM ACCENT_TO shrink-0 shadow-md">
+            <span class="iconify text-white text-base" data-icon="ICON"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-gray-800">JOB_TITLE</p>
+            <p class="text-xs text-gray-400">DEPARTMENT</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-600 leading-relaxed">TASK_DESCRIPTION — mention the concept and the exact call they use.</p>
+        <div class="rounded-lg bg-gray-50 border border-gray-100 px-3 py-2">
+          <p class="text-[10px] font-mono text-gray-500">returns <span class="RETURN_COLOR font-bold">RETURN_VAR</span></p>
         </div>
       </div>
     </div>
 
   </div>
 </div>
+
+<!-- Shared insight row -->
+<div class="rounded-xl border border-gray-100 bg-gray-50 px-5 py-4 flex items-start gap-4">
+  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+    <span class="iconify text-white text-sm" data-icon="fa6-solid:users"></span>
+  </span>
+  <div>
+    <p class="text-sm font-bold text-gray-800 mb-1">SHARED_INSIGHT_TITLE</p>
+    <p class="text-xs text-gray-500 leading-relaxed">SHARED_INSIGHT_BODY</p>
+  </div>
+</div>
 ```
 
-**Before/after content rules:**
-- Row N in the "Without" column must pair directly with row N in the "With" column — same card, same concept, flipped perspective.
-- "Without" rows describe the manual burden, fragility, or inconsistency at scale.
-- "With" rows describe the single action that eliminates it — always bold (`<strong class="text-gray-700">`) the function or concept name.
-- Each row is one sentence only. No trailing justifications or compound clauses.
-- The "Without TOPIC" header label uses the plain English name of the concept (e.g. `Without functions`, `Without loops`, `Without conditions`).
-- Same rule for the "With TOPIC" header.
+---
+
+### Layout E — `task-ticket`
+
+**Visual:** One large "work order / task ticket" card that looks like an internal Jira/Confluence ticket, listing 4–5 sub-tasks, each with a status badge (Done ✓), the function used, and the result. A side column shows "Data Available" vs "Data Needed" as two stacked pills.
+**Best for:** lessons about data transformation, aggregation, or reporting where the reader can see a realistic end-to-end mini-project being completed step by step.
+
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
+<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <!-- Ticket header -->
+  <div class="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-100">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-xs" data-icon="fa6-solid:ticket"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold text-gray-800">TICKET_TITLE</p>
+        <p class="text-[10px] text-gray-400">Assigned to: DATA_TEAM · Due: TODAY</p>
+      </div>
+    </div>
+    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">In Progress</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3">
+    <!-- Tasks column (spans 2) -->
+    <div class="md:col-span-2 px-5 py-4 space-y-3 border-r border-gray-100">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Sub-tasks</p>
+
+      <!-- One sub-task row — repeat 4–5x -->
+      <div class="flex items-start gap-3">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+          <span class="iconify text-emerald-500 text-[10px]" data-icon="fa6-solid:check"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-gray-700">SUBTASK_TITLE</p>
+          <p class="text-[11px] text-gray-400 leading-snug">SUBTASK_DETAIL — name the function/concept.</p>
+        </div>
+        <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600 border border-indigo-100 shrink-0 whitespace-nowrap">FUNCTION</code>
+      </div>
+
+    </div>
+
+    <!-- Side column: data availability -->
+    <div class="px-4 py-4 space-y-4">
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Data available</p>
+        <div class="space-y-1.5">
+          <!-- 2–3 pills: bg-emerald-50 text-emerald-700 border-emerald-100 -->
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:check"></span> DATA_SOURCE
+          </span>
+        </div>
+      </div>
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Needed output</p>
+        <div class="space-y-1.5">
+          <!-- 2–3 pills: bg-pink-50 text-[#CB187D] border-pink-100 -->
+          <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:arrow-right-from-bracket"></span> OUTPUT_NAME
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">TIP_TEXT</p>
+</div>
+```
 
 ---
 
-## Completion checklist
+### Layout F — `industry-spotlight`
 
-- [ ] Outer section shell (`id="real-world"`, briefcase header icon, title) is unchanged
-- [ ] Body wrapper uses `space-y-5`
-- [ ] Intro paragraph is 2–3 sentences, no code, names the `DOMAIN` and the scale
-- [ ] Three scenario cards — different color each, centered layout, `w-14 h-14` icon badge, headline has `<br>` between scale and situation, body names the function in `<code>`
-- [ ] Returns pill at the bottom of each card with `fa6-solid:arrow-right-from-bracket` icon
-- [ ] Before/after table has exactly 3 rows each side, rows pair 1:1 with the cards above
-- [ ] "Without" header is red (`bg-red-50`, `text-red-500`), "With" header is pink (`bg-[#fdf0f7]`, `text-[#CB187D]`)
-- [ ] Function names bolded with `<strong class="text-gray-700">` in the "With" column
-- [ ] No code blocks anywhere in the section
+**Visual:** 3 industry cards (e.g. healthcare, retail, finance) each showing a specific named dataset, the exact operation performed, and what it produces — framed as "what this means for the business". Below: a pink horizontal "shared pattern" banner that names the one common thread across all three industries.
+**Best for:** lessons covering broadly applicable concepts (joins, exports, missing data, groupby) where showing diverse industries reinforces universality.
+
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">SPOTLIGHT_LABEL</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- Industry card — repeat 3x -->
+    <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-100">
+        <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br ACCENT_FROM ACCENT_TO shrink-0">
+          <span class="iconify text-white text-xs" data-icon="INDUSTRY_ICON"></span>
+        </span>
+        <div>
+          <p class="text-xs font-bold text-gray-800">INDUSTRY_NAME</p>
+          <p class="text-[10px] text-gray-400">DATASET_NAME</p>
+        </div>
+      </div>
+      <div class="px-4 py-4 space-y-2.5">
+        <p class="text-xs text-gray-600 leading-relaxed">SCENARIO — what the analyst does with the concept on this dataset.</p>
+        <div class="flex items-center gap-2">
+          <code class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100">FUNCTION_CALL</code>
+        </div>
+        <p class="text-[11px] text-emerald-600 font-semibold leading-snug">&#x2192; BUSINESS_OUTCOME</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Shared pattern banner -->
+<div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-4">
+  <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[3rem] font-black text-white/10 leading-none select-none pointer-events-none">&#x221E;</span>
+  <div class="relative flex items-center gap-4">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+      <span class="iconify text-white text-base" data-icon="fa6-solid:share-nodes"></span>
+    </span>
+    <div>
+      <p class="text-xs font-bold text-white uppercase tracking-widest mb-0.5">The common thread</p>
+      <p class="text-sm text-white/90">SHARED_PATTERN_TEXT</p>
+    </div>
+  </div>
+</div>
+```
 
 ---
 
-## Reference example (lesson08_functions.html)
+### Layout G — `checklist-scenario`
 
-**TOPIC:** `functions`  
-**DOMAIN:** `an online shop`
+**Visual:** A single realistic analysis task shown as a numbered checklist of 5 steps. Each step has a checkbox (always ticked ✓), the exact line of Python used, and one sentence of plain English explaining what that line produces. Below: a 2-column "what you needed" vs "what you got" mini summary grid.
+**Best for:** lessons that are naturally sequential (handling missing data, exporting, writing to databases) where the steps must be done in order.
 
-**Intro:** "Imagine you run an online shop. Every day you need to calculate totals, apply discounts, and check what's in stock. A function lets you write that rule once and reuse it for every single product or order — no copy-pasting, no mistakes."
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
 
-**Card 1 (violet) — `fa6-solid:receipt`**
-- Headline: "Your shop gets / 500 orders today"
-- Body: "You write `calculate_total()` once, pass in the quantity and price, and call it for every order — done in seconds."
-- Returns pill: `order_total`
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">CHECKLIST_LABEL</p>
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm divide-y divide-gray-100">
 
-**Card 2 (pink) — `fa6-solid:tag`**
-- Headline: "A 10% sale / starts tonight"
-- Body: "You write `apply_discount()` once. Every product's sale price is calculated the same way — no editing each row by hand."
-- Returns pill: `sale_price`
+    <!-- One checklist row — repeat 5x, alternating bg-white and bg-gray-50/50 -->
+    <div class="flex items-start gap-4 px-5 py-4 bg-white hover:bg-[#fdf0f7]/30 transition-colors">
+      <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-50 border border-emerald-100 shrink-0 mt-0.5">
+        <span class="iconify text-emerald-500 text-[11px]" data-icon="fa6-solid:check"></span>
+      </span>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1">
+          <p class="text-xs font-bold text-gray-800">STEP_TITLE</p>
+          <code class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600 border border-indigo-100">FUNCTION</code>
+        </div>
+        <p class="text-[11px] text-gray-500 leading-snug">STEP_RESULT — one plain sentence.</p>
+      </div>
+    </div>
 
-**Card 3 (emerald) — `fa6-solid:boxes-stacked`**
-- Headline: "200 products, / one stock check"
-- Body: "You write `is_in_stock()` once. It checks each product's stock level and tells you yes or no — for all 200 products at once."
-- Returns pill: `True or False`
+  </div>
+</div>
 
-**Before/After rows:**
-| Row | Without functions | With functions |
-|---|---|---|
-| 1 | You manually calculate the total for every single order — 500 orders means 500 calculations done by hand. | Write **calculate_total()** once. Call it for every order — all 500 are processed the same way in seconds. |
-| 2 | One typo in the discount formula means every price on the site is wrong — and you have to fix each one separately. | Fix the discount logic in one place inside **apply_discount()** and every price on the site updates instantly. |
-| 3 | Checking 200 products for stock means repeating the same logic 200 times with no guarantee it's consistent. | **is_in_stock()** runs the exact same check every time — no inconsistency, no guesswork, no repeated logic. |
+<!-- Summary grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  <div class="rounded-xl border border-red-100 bg-red-50 px-4 py-3">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-red-400 mb-2">You started with</p>
+    <!-- 2–3 items: flex items-center gap-2 + iconify xmark red + text-xs text-gray-600 -->
+  </div>
+  <div class="rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-600 mb-2">You ended with</p>
+    <!-- 2–3 items: flex items-center gap-2 + iconify check emerald + text-xs text-gray-600 -->
+  </div>
+</div>
+```
+
+---
+
+### Layout H — `data-before-after`
+
+**Visual:** Two wide panels side by side — left panel shows a mocked "before" DataFrame (a simple 4-row HTML table with a raw/messy/incomplete state), right panel shows the "after" DataFrame (cleaned, transformed, or enriched). Annotations beside each panel call out the specific change made. Below: a single amber tip.
+**Best for:** lessons where the transformation of data is the point and a visual table diff makes it instantly obvious what changed (transforming data, handling missing data, parquet/performance).
+
+```html
+<p class="text-sm text-gray-600 leading-relaxed">INTRO</p>
+
+<div>
+  <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">BEFORE_AFTER_LABEL</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <!-- Before panel -->
+    <div class="rounded-2xl border border-red-100 overflow-hidden shadow-sm">
+      <div class="flex items-center gap-2 px-4 py-2.5 bg-red-50 border-b border-red-100">
+        <span class="iconify text-red-400 text-sm" data-icon="fa6-solid:circle-xmark"></span>
+        <p class="text-xs font-bold text-red-500">Before: BEFORE_LABEL</p>
+      </div>
+      <div class="px-4 py-3 overflow-x-auto">
+        <table class="w-full text-[11px] font-mono border-collapse">
+          <thead>
+            <tr class="border-b border-gray-100">
+              <!-- TH: px-2 py-1 text-left text-[10px] font-bold text-gray-400 uppercase -->
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-50">
+            <!-- 4 rows: TD px-2 py-1.5 text-gray-500 — mark bad cells with text-red-400 -->
+          </tbody>
+        </table>
+      </div>
+      <div class="px-4 pb-3 space-y-1.5">
+        <!-- 2 annotations: flex items-start gap-2 + iconify xmark red text-[11px] + text-[11px] text-red-500 -->
+      </div>
+    </div>
+
+    <!-- After panel -->
+    <div class="rounded-2xl border border-emerald-100 overflow-hidden shadow-sm">
+      <div class="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 border-b border-emerald-100">
+        <span class="iconify text-emerald-500 text-sm" data-icon="fa6-solid:circle-check"></span>
+        <p class="text-xs font-bold text-emerald-600">After: AFTER_LABEL</p>
+      </div>
+      <div class="px-4 py-3 overflow-x-auto">
+        <table class="w-full text-[11px] font-mono border-collapse">
+          <thead>
+            <tr class="border-b border-gray-100">
+              <!-- same TH structure -->
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-50">
+            <!-- 4 rows — mark fixed cells with text-emerald-600 font-semibold -->
+          </tbody>
+        </table>
+      </div>
+      <div class="px-4 pb-3 space-y-1.5">
+        <!-- 2 annotations: iconify check emerald + text-[11px] text-emerald-600 -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">TIP_TEXT</p>
+</div>
+```
+
+---
+
+## Step 3 — Selection rules
+
+1. Build the audit table from Step 1.
+2. Find the **first layout slug in the catalog** (A → B → C → D → E → F → G → H) that is **not already used** by another lesson.
+3. Use that layout for `TARGET_FILE`. Do not use a layout marked as already in use, even if you think it would suit the topic better.
+4. If all 8 layouts are already used, cycle back to A and pick the one used least frequently.
+
+---
+
+## Step 4 — Write the content
+
+Fill every placeholder in the chosen layout template with content specific to `TARGET_FILE`'s lesson topic. Follow these writing rules for all text:
+
+- **Be specific.** Name real quantities, data types, and actions — not vague capabilities.
+- **Human scale.** Lead with relatable numbers ("500 orders", "12 regional offices") so the reader feels the weight of the problem before seeing the solution.
+- **Use "you".** "You write the function once" is clearer than "the function is written once".
+- **One idea per sentence.** Keep prose sentences under 20 words.
+- **No jargon** unless it was taught in this lesson.
+- **American English only.** "optimize" not "optimise", "color" not "colour", "analyze" not "analyse".
+- **No code blocks** in prose — all syntax appears only in `<code class="font-mono">` inline spans or in the explicit code areas defined by the chosen layout.
+
+---
+
+## Step 5 — Apply the change
+
+1. Read `TARGET_FILE`.
+2. Locate the `#real-world` section. Find the opening `<div class="bg-white px-8 py-7` and its matching closing `</div>` just before `</section>`.
+3. Replace the entire body contents (everything inside `<div class="bg-white px-8 py-7 space-y-N">`) with the new layout HTML.
+4. Keep the outer section shell unchanged — the section `id`, the header icon (`fa6-solid:briefcase`), and the "Real-World Use" title must not change. Update only the subtitle `line-clamp-1` text to match the lesson topic.
+5. Write the file and verify the change by re-reading the section to confirm it starts and ends correctly.
+

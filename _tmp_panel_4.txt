@@ -1,0 +1,82 @@
+<div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:file-import"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Loading JSON Files</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Read JSON into Python</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> function
+                  </span>
+                </div>
+
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>json.load()</strong> reads a JSON file and converts it into a Python dictionary or list. Open the file first with <code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">open()</code>, then pass the file object to <code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">json.load()</code>.</p>
+
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">load() vs loads()</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-gray-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 border border-violet-200 text-[10px] font-bold">json.load()</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[10px] font-bold">json.loads()</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class=" border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Input</td>
+                        <td class="py-2 px-3">File object</td>
+                        <td class="py-2 px-3">String</td>
+                      </tr>
+                      <tr class=" border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Reads from</td>
+                        <td class="py-2 px-3">A .json file on disk</td>
+                        <td class="py-2 px-3">A text string in code</td>
+                      </tr>
+                      <tr class="">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Common use</td>
+                        <td class="py-2 px-3">Loading saved data</td>
+                        <td class="py-2 px-3">Parsing API responses</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import json
+with open("data.json", "r") as f:   # open the file
+    data = json.load(f)              # parse JSON to dict
+print(type(data))                    # &lt;class 'dict'&gt;</code></pre>
+                </div>
+
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Use <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">with open()</code> to open files.</strong> It closes the file automatically when the block ends, even if an error occurs.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
