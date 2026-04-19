@@ -1067,6 +1067,11 @@
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:arrows-rotate"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Schema Drift</span>
           </button>
+
+          <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:gavel"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Governance</span>
+          </button>
         </div>
 
         <!-- Panels -->
@@ -1400,6 +1405,88 @@ def validate_schema(df):
                   </span>
                   <p class="text-xs text-gray-600"><strong>Store EXPECTED in a config file, not in the code.</strong> When a new column is added intentionally, update the config rather than editing the function &mdash; this keeps every schema change auditable and reviewable.</p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ Panel 4 — Governance (amber) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
+            <div class="rounded-2xl border border-amber-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300"></div>
+              <div class="bg-gradient-to-br from-amber-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:gavel"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Data Governance</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Policies, compliance, and data ownership</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 border border-amber-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:shield-halved"></span> Policy
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Data governance</strong> is the set of policies and procedures an organization uses to manage data quality, security, ownership, and lifecycle. Good governance means every dataset has an owner, every transformation is documented, and every access request follows a defined approval process.</p>
+
+                <!-- Widget: regulation table -->
+                <div class="rounded-xl overflow-hidden border border-amber-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100">
+                    <span class="iconify text-amber-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-amber-500">Key Regulations</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-amber-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/4">Regulation</th>
+                        <th class="py-2 px-3 text-left font-bold text-gray-400">Scope</th>
+                        <th class="py-2 px-3 text-left font-bold text-gray-400">Key requirement</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">GDPR</td>
+                        <td class="py-2 px-3 text-gray-500">EU residents' personal data</td>
+                        <td class="py-2 px-3 text-gray-500">Right to deletion, consent tracking, breach notification within 72 hours</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">CCPA</td>
+                        <td class="py-2 px-3 text-gray-500">California consumers</td>
+                        <td class="py-2 px-3 text-gray-500">Right to know what data is collected, right to opt out of data sales</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-3 font-semibold text-gray-600">HIPAA</td>
+                        <td class="py-2 px-3 text-gray-500">US healthcare data</td>
+                        <td class="py-2 px-3 text-gray-500">Encryption at rest and in transit, audit logs, minimum necessary access</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Governance pillars -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50/60 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:list-check"></span>
+                  </span>
+                  <div class="text-xs text-gray-600 space-y-1">
+                    <p class="font-bold text-gray-700">Four pillars of data governance</p>
+                    <p><strong>Ownership</strong> — every table has an assigned team or individual responsible for its accuracy. <strong>Lineage</strong> — you can trace any row back to the pipeline and source that created it. <strong>Access control</strong> — role-based permissions ensure only authorized users can read or modify sensitive data. <strong>Retention</strong> — data has a defined lifecycle, and expired records are archived or deleted per policy.</p>
+                  </div>
+                </div>
+
+                <!-- Tip (amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Governance is not just a legal checkbox.</strong> When every dataset has clear ownership and lineage, debugging a broken dashboard takes minutes instead of hours because you know exactly which pipeline produced the data and who to contact.</p>
+                </div>
+
               </div>
             </div>
           </div>

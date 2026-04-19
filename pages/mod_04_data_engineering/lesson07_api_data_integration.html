@@ -1023,6 +1023,11 @@
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:rotate"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Resilience</span>
           </button>
+
+          <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:vault"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Secrets Mgmt</span>
+          </button>
         </div>
 
         <!-- ── Panels ── -->
@@ -1366,6 +1371,94 @@ print(f"Collected {len(all_records)} total records")</code></pre>
                   </span>
                   <p class="text-xs text-gray-600"><strong>Log each page number inside the <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">while</code> loop.</strong> If the script fails midway through 200 pages, you'll know exactly which page to resume from instead of restarting from page 1 and duplicating data.</p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ Panel 4 — Secrets Management (amber) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
+            <div class="rounded-2xl border border-amber-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300"></div>
+              <div class="bg-gradient-to-br from-amber-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:vault"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Secrets Management</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Keep credentials out of your code</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 border border-amber-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:shield-halved"></span> Security
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Secrets management</strong> is the practice of storing API keys, database passwords, and tokens outside your source code so they are never accidentally committed to Git or exposed in logs. Environment variables are the simplest approach, but production teams use dedicated secrets managers that handle encryption, rotation, and access control automatically.</p>
+
+                <!-- Widget: maturity ladder -->
+                <div class="rounded-xl overflow-hidden border border-amber-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100">
+                    <span class="iconify text-amber-500 text-xs" data-icon="fa6-solid:stairs"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-amber-500">Secrets Maturity Ladder</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-red-600 whitespace-nowrap w-1/4">✗ Hardcoded</td>
+                        <td class="py-2 px-3 text-gray-500">Key written directly in Python file — leaked the moment you push to GitHub.</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-amber-600 whitespace-nowrap">○ .env file</td>
+                        <td class="py-2 px-3 text-gray-500">Stored in a local <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">.env</code> file and loaded with <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">python-dotenv</code>. Add <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">.env</code> to <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">.gitignore</code>.</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-emerald-600 whitespace-nowrap">● Env variable</td>
+                        <td class="py-2 px-3 text-gray-500">Set in CI/CD secrets or server config. Read with <code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">os.environ["KEY"]</code>.</td>
+                      </tr>
+                      <tr class="bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-emerald-700 whitespace-nowrap">✓ Secrets manager</td>
+                        <td class="py-2 px-3 text-gray-500">AWS Secrets Manager, Azure Key Vault, or HashiCorp Vault — encrypted, audited, auto-rotated.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import os
+from dotenv import load_dotenv   # pip install python-dotenv
+
+load_dotenv()                    # reads .env file into os.environ
+
+api_key = os.environ["API_KEY"]  # crashes if missing — fail fast
+db_pass = os.environ["DB_PASS"]  # never print these in logs
+
+# Use the key in a request header
+headers = {"Authorization": f"Bearer {api_key}"}</code></pre>
+                </div>
+
+                <!-- Tip (amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Rotate keys regularly and use the narrowest permissions possible.</strong> If an API key only needs read access, do not grant write access. If a credential leaks, a narrow scope limits the damage.</p>
+                </div>
+
               </div>
             </div>
           </div>

@@ -1324,6 +1324,28 @@ git push origin develop
 git revert HEAD --no-edit &amp;&amp; git push origin main</code></pre>
                 </div>
 
+                <!-- Fault tolerance patterns callout -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50/60 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-600 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:shield-halved"></span>
+                  </span>
+                  <div class="text-xs text-gray-600 space-y-1">
+                    <p class="font-bold text-gray-700">Fault tolerance patterns for production pipelines</p>
+                    <p><strong>Exponential backoff</strong> &mdash; when a step fails (e.g., an API returns 503), wait 1 second, then 2, then 4, doubling each time before retrying. This prevents overwhelming a struggling service. <strong>Dead letter queue</strong> &mdash; rows or events that fail processing are routed to a separate table or topic instead of crashing the entire batch. You can inspect and reprocess them later. <strong>Circuit breaker</strong> &mdash; after N consecutive failures, the pipeline stops retrying and raises an alert immediately rather than burning through all retries on a service that is clearly down.</p>
+                  </div>
+                </div>
+
+                <!-- Replication and redundancy callout -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50/60 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:clone"></span>
+                  </span>
+                  <div class="text-xs text-gray-600 space-y-1">
+                    <p class="font-bold text-gray-700">Redundancy and failover</p>
+                    <p>Critical pipelines run on at least two machines or cloud regions so that a hardware failure does not halt data delivery. <strong>Data replication</strong> keeps copies of processed output in a second storage location. <strong>Automatic failover</strong> switches traffic to the backup if the primary goes down &mdash; cloud schedulers and container orchestrators (like Kubernetes) handle this for you.</p>
+                  </div>
+                </div>
+
                 <!-- Tip (emerald) -->
                 <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
                   <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">

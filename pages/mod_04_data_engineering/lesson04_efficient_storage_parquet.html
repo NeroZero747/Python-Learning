@@ -994,6 +994,11 @@
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:scale-balanced"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">When to Convert</span>
           </button>
+
+          <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:folder-tree"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Partitioning</span>
+          </button>
         </div><!-- /sidebar -->
 
         <!-- ── Panels ── -->
@@ -1370,6 +1375,104 @@ df[df["region"] == "EMEA"].to_csv(            # human-readable for Excel
               </div>
             </div>
           </div><!-- /panel 3 -->
+
+          <!-- ═══ Panel 4 — Partitioning (amber) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
+            <div class="rounded-2xl border border-amber-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300"></div>
+              <div class="bg-gradient-to-br from-amber-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:folder-tree"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Partitioning</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Split files by column values for faster queries</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 border border-amber-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Performance
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Partitioning</strong> splits a large Parquet dataset into separate folders based on the values of one or more columns — typically a date column like <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">year</code> or <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">month</code>. When you query only one month, the engine skips every other folder entirely. This is called <strong>partition pruning</strong>, and it can reduce read time by orders of magnitude on large datasets.</p>
+
+                <!-- Widget: partitioning strategies -->
+                <div class="rounded-xl overflow-hidden border border-amber-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100">
+                    <span class="iconify text-amber-500 text-xs" data-icon="fa6-solid:sitemap"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-amber-500">Common Partitioning Strategies</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-amber-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/4">Strategy</th>
+                        <th class="py-2 px-3 text-left font-bold text-gray-400">How it works</th>
+                        <th class="py-2 px-3 text-left font-bold text-gray-400">Best for</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Date-based</td>
+                        <td class="py-2 px-3 text-gray-500">Folder per year/month/day</td>
+                        <td class="py-2 px-3 text-gray-500">Time-series data, logs</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Categorical</td>
+                        <td class="py-2 px-3 text-gray-500">Folder per region or category</td>
+                        <td class="py-2 px-3 text-gray-500">Sales by region, products</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-3 font-semibold text-gray-600">Hash-based</td>
+                        <td class="py-2 px-3 text-gray-500">Distribute rows evenly across N buckets</td>
+                        <td class="py-2 px-3 text-gray-500">Even load distribution (Spark)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)">
+                      <span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy
+                    </button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import pandas as pd
+
+df = pd.read_csv("sales_2024.csv")         # 12 months of data
+df["month"] = pd.to_datetime(df["date"]).dt.to_period("M")
+
+# Write partitioned Parquet — one folder per month
+df.to_parquet(
+    "sales_partitioned/",
+    partition_cols=["month"],               # creates month=2024-01/ etc.
+    index=False
+)
+
+# Read only January — engine skips 11 other folders
+jan = pd.read_parquet("sales_partitioned/", filters=[("month", "==", "2024-01")])</code></pre>
+                </div>
+
+                <!-- Tip (amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Pick a column your queries filter on most.</strong> Partitioning by a column nobody filters on adds folder overhead with no speed benefit. Date columns are the safest default because most analytics queries filter by time range.</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /panel 4 -->
 
         </div><!-- /panels -->
       </div>

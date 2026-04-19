@@ -1156,6 +1156,29 @@ while True:
     schedule.run_pending()  # check and fire due jobs
     time.sleep(60)          # sleep 60 seconds between checks</code></pre>
       </div>
+
+      <!-- Streaming architecture callout -->
+      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50/60 border border-blue-100">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:bolt"></span>
+        </span>
+        <div class="text-xs text-gray-600 space-y-1">
+          <p class="font-bold text-gray-700">How streaming works (conceptual)</p>
+          <p>A <strong>producer</strong> (your app or sensor) publishes events to a <strong>topic</strong> in a message broker like Apache Kafka. A <strong>consumer</strong> service reads events from the topic in real time and runs your transform logic on each one. Frameworks like Apache Flink and Spark Structured Streaming let you write windowed aggregations (e.g., "count orders per minute") without managing low-level consumer code yourself.</p>
+        </div>
+      </div>
+
+      <!-- Orchestration tools -->
+      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-indigo-50/60 border border-indigo-100">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-indigo-500 shrink-0 mt-0.5">
+          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:diagram-project"></span>
+        </span>
+        <div class="text-xs text-gray-600 space-y-1">
+          <p class="font-bold text-gray-700">Pipeline orchestration tools</p>
+          <p>In production, teams schedule and monitor batch pipelines with orchestration platforms: <strong>Apache Airflow</strong> (open-source, Python-native DAGs), <strong>AWS Data Pipeline</strong>, or <strong>Prefect</strong>. These tools handle retries, dependency ordering, and alerting so your pipeline does not silently fail overnight.</p>
+        </div>
+      </div>
+
       <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
         <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-orange-400 shrink-0 mt-0.5">
           <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>

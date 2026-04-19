@@ -1012,6 +1012,25 @@
   </div>
 </div>
 
+<div class="obj-card rounded-2xl border border-cyan-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-cyan-500 to-sky-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-sky-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:server"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Hadoop Proved Large-Scale Processing Was Possible</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Apache Hadoop showed that you could spread a dataset across hundreds of cheap machines and process it in parallel instead of buying one giant server. Its HDFS file system and MapReduce programming model became the foundation for every distributed framework that followed — including Apache Spark, which replaced MapReduce for most workloads because it processes data in memory rather than writing to disk after every step.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-600 border border-cyan-100">Hadoop</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-600 border border-cyan-100">HDFS</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-600 border border-cyan-100">MapReduce</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-600 border border-cyan-100">Spark</span>
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   </div>
@@ -1061,6 +1080,12 @@
           <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
             <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:clipboard-check"></span></span>
             <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Data Quality</span>
+          </button>
+
+          <!-- Tab 4 -->
+          <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:water"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Data Lake</span>
           </button>
 
         </div><!-- /sidebar -->
@@ -1425,6 +1450,93 @@ print(f"✓ {len(df)} rows, 0 nulls, 0 dupes") # all checks passed</code></pre>
                     <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
                   </span>
                   <p class="text-xs text-gray-600"><strong>Silent data loss is the worst kind of bug.</strong> No error appears — the pipeline runs fine, but the output is wrong. Always check row counts after every step.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ Panel 4 — Data Lake (amber/orange) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
+            <div class="rounded-2xl border border-amber-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300"></div>
+              <div class="bg-gradient-to-br from-amber-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:water"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Data Lake</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Raw storage for every data format</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 border border-amber-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Storage
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>data lake</strong> is a storage system that holds raw data in its original format — CSV files, JSON logs, images, or Parquet — until you need it. Unlike a data warehouse, which stores cleaned, structured data, a lake accepts everything first and lets you decide how to process it later.</p>
+
+                <!-- Widget: comparison-table (lake vs warehouse) -->
+                <div class="rounded-xl overflow-hidden border border-amber-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100">
+                    <span class="iconify text-amber-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-amber-500">Data Lake vs Data Warehouse</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-amber-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200 text-[10px] font-bold">Data Lake</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200 text-[10px] font-bold">Data Warehouse</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Data format</td>
+                        <td class="py-2 px-3 text-gray-500">Any (CSV, JSON, Parquet, images)</td>
+                        <td class="py-2 px-3 text-gray-500">Structured tables only</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Schema</td>
+                        <td class="py-2 px-3 text-gray-500">Schema-on-read (decide later)</td>
+                        <td class="py-2 px-3 text-gray-500">Schema-on-write (decide first)</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Best for</td>
+                        <td class="py-2 px-3 text-gray-500">ML, exploration, raw archives</td>
+                        <td class="py-2 px-3 text-gray-500">BI dashboards, SQL reports</td>
+                      </tr>
+                      <tr class="bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Examples</td>
+                        <td class="py-2 px-3 text-gray-500">S3, Azure Data Lake, GCS</td>
+                        <td class="py-2 px-3 text-gray-500">Snowflake, BigQuery, Redshift</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Layered architecture callout -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50/60 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:layer-group"></span>
+                  </span>
+                  <div class="text-xs text-gray-600 space-y-1">
+                    <p class="font-bold text-gray-700">Bronze → Silver → Gold layers</p>
+                    <p>Modern data lakes organize files into three tiers: <strong>Bronze</strong> (raw, untouched ingestion), <strong>Silver</strong> (cleaned and deduplicated), and <strong>Gold</strong> (aggregated, business-ready). Each tier has its own folder, and pipelines promote data from one layer to the next.</p>
+                  </div>
+                </div>
+
+                <!-- Tip (amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Many companies use both.</strong> Raw data lands in a lake first, then a pipeline loads the cleaned version into a warehouse for analysts. You do not have to choose one or the other — they complement each other.</p>
                 </div>
 
               </div>

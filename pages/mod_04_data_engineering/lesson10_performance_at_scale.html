@@ -994,6 +994,10 @@
   <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:list-check"></span></span>
   <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Best Practices</span>
 </button>
+<button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:bolt"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Indexing</span>
+</button>
   </div>
   <div class="flex-1 min-w-0 md:pl-5">
 
@@ -1285,6 +1289,109 @@ df.to_sql("orders", engine, chunksize=10_000)      # 5. batch writes prevent DB 
         </span>
         <p class="text-xs text-gray-600"><strong>Start with item one, not the easiest.</strong> <code class="font-mono bg-emerald-200 border border-emerald-300 text-emerald-800 px-1.5 py-0.5 rounded text-[10px]">Parquet</code> + <code class="font-mono bg-emerald-200 border border-emerald-300 text-emerald-800 px-1.5 py-0.5 rounded text-[10px]">columns=</code> reduce data volume first, so every step below them — dtype casts, transforms, and DB loads — automatically handles a smaller dataset and benefits too.</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Panel 4 — Indexing (amber) ═══ -->
+<div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
+  <div class="rounded-2xl border border-amber-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300"></div>
+    <div class="bg-gradient-to-br from-amber-50/60 to-white p-5 space-y-4">
+
+      <!-- Header row -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-md shrink-0">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:bolt"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">Database Indexing</h3>
+            <p class="text-[10px] text-gray-400 leading-none mt-0.5">Speed up queries by reducing rows scanned</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 border border-amber-200 shadow-sm">
+          <span class="iconify text-[10px]" data-icon="fa6-solid:database"></span> SQL
+        </span>
+      </div>
+
+      <!-- Definition -->
+      <p class="text-xs text-gray-600 leading-relaxed">An <strong>index</strong> is a data structure the database maintains alongside your table that lets it find matching rows without scanning every single row. Think of it like a book's index &mdash; instead of reading every page to find "pandas," you flip to the index, find the page number, and jump straight there. Without an index, a query on a 100-million-row table performs a full table scan; with one, it may touch only a few hundred rows.</p>
+
+      <!-- Widget: index types table -->
+      <div class="rounded-xl overflow-hidden border border-amber-100">
+        <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100">
+          <span class="iconify text-amber-500 text-xs" data-icon="fa6-solid:table-list"></span>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-amber-500">Common Index Types</p>
+        </div>
+        <table class="w-full text-xs border-collapse bg-white">
+          <thead>
+            <tr class="border-b border-amber-50">
+              <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/4">Type</th>
+              <th class="py-2 px-3 text-left font-bold text-gray-400">How it works</th>
+              <th class="py-2 px-3 text-left font-bold text-gray-400">Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50">
+              <td class="py-2 px-3 font-semibold text-gray-600">Single-column (B-tree)</td>
+              <td class="py-2 px-3 text-gray-500">Sorted tree on one column &mdash; database walks the tree to find matching values</td>
+              <td class="py-2 px-3 text-gray-500">WHERE clauses on a single column (e.g., <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">WHERE user_id = 42</code>)</td>
+            </tr>
+            <tr class="border-b border-gray-50 bg-gray-50/40">
+              <td class="py-2 px-3 font-semibold text-gray-600">Composite</td>
+              <td class="py-2 px-3 text-gray-500">B-tree on multiple columns &mdash; column order matters (leftmost column used first)</td>
+              <td class="py-2 px-3 text-gray-500">Queries that filter on two or more columns together (e.g., <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">WHERE region = 'US' AND date &gt; '2024-01-01'</code>)</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-semibold text-gray-600">Bitmap</td>
+              <td class="py-2 px-3 text-gray-500">Bit array per distinct value &mdash; fast OR/AND operations across low-cardinality columns</td>
+              <td class="py-2 px-3 text-gray-500">Columns with few distinct values (e.g., status, region, boolean flags)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Code block (Style B — SQL) -->
+      <div class="rounded-xl overflow-hidden bg-code shadow-md">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+          <div class="flex items-center gap-2">
+            <span class="iconify text-gray-400" data-icon="fa6-solid:database" data-width="14" data-height="14"></span>
+            <span class="text-[11px] font-semibold text-gray-400">SQL</span>
+          </div>
+          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+        </div>
+        <pre class="overflow-x-auto pre-reset"><code class="language-sql">-- Single-column index: speeds up lookups by user_id
+CREATE INDEX idx_orders_user ON orders (user_id);
+
+-- Composite index: covers queries filtering region + date together
+CREATE INDEX idx_orders_region_date ON orders (region, order_date);
+
+-- Check how the database will execute a query (execution plan)
+EXPLAIN ANALYZE
+SELECT * FROM orders WHERE region = 'US' AND order_date > '2024-01-01';
+-- Look for "Index Scan" (good) vs "Seq Scan" (full table scan — slow)</code></pre>
+      </div>
+
+      <!-- When indexes hurt callout -->
+      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-red-50/60 border border-red-100">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-red-500 shrink-0 mt-0.5">
+          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+        </span>
+        <div class="text-xs text-gray-600 space-y-1">
+          <p class="font-bold text-gray-700">When indexes hurt performance</p>
+          <p>Every index must be updated on every INSERT, UPDATE, and DELETE. A table with ten indexes makes writes ten times more expensive. Only index columns that appear frequently in WHERE, JOIN, and ORDER BY clauses &mdash; and drop indexes you no longer use.</p>
+        </div>
+      </div>
+
+      <!-- Tip (amber) -->
+      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+        </span>
+        <p class="text-xs text-gray-600"><strong>Always read the execution plan before adding an index.</strong> Run <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">EXPLAIN ANALYZE</code> on your slow query first &mdash; the plan shows whether the database is doing a sequential scan. If it is, adding an index on the filtered column usually fixes it. If it already uses an index, the bottleneck is elsewhere.</p>
+      </div>
+
     </div>
   </div>
 </div>
