@@ -596,7 +596,7 @@
           </a>
           <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
             <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
-            <span class="font-extrabold">2<span class="font-bold opacity-50">/10</span></span>
+            <span class="font-extrabold">2<span class="font-bold opacity-50">/13</span></span>
             <span class="font-semibold opacity-55">Progress</span>
           </span>
         </div>
@@ -716,6 +716,18 @@
 <a href="lesson10_performance_at_scale.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
   <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
   <span class="truncate">10. Performance at Scale</span>
+</a>
+<a href="lesson11_distributed_processing_spark.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">11. Distributed Processing: Spark</span>
+</a>
+<a href="lesson12_data_warehouses_and_lakes.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">12. Data Warehouses &amp; Lakes</span>
+</a>
+<a href="lesson13_data_modeling_fundamentals.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">13. Data Modeling Fundamentals</span>
 </a>
             </div>
           </div>
@@ -952,297 +964,427 @@
   </div>
 </section>
 
-<section id="key-concepts">
+<section id="key-concepts" class="scroll-mt-24">
   <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header — icon is always fa6-solid:book-open -->
     <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
       <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
         <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
       </span>
       <div class="min-w-0">
         <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
-        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">ETL vs ELT, design principles, batch vs streaming, and modular code.</p>
       </div>
     </div>
-    <div class="bg-white px-8 py-7 space-y-6">
-<div class="flex flex-col md:flex-row gap-0">
-  <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
-    <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
-    <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:right-left"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">ETL vs ELT</span>
-</button>
-<button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Design Principles</span>
-</button>
-<button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:clock"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Batch vs Streaming</span>
-</button>
-<button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
-  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:cubes"></span></span>
-  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Modular Code</span>
-</button>
-  </div>
-  <div class="flex-1 min-w-0 md:pl-5">
-    <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
-  <div class="rounded-2xl border border-pink-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
-    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
-            <span class="iconify text-white text-sm" data-icon="fa6-solid:right-left"></span>
-          </span>
-          <div>
-            <h3 class="text-sm font-bold text-gray-900 leading-tight">ETL vs ELT</h3>
-            <p class="text-[10px] text-gray-400 leading-none mt-0.5">Two pipeline architectures</p>
-          </div>
-        </div>
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border border-pink-200 shadow-sm">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Core
-        </span>
-      </div>
-      <p class="text-xs text-gray-600 leading-relaxed"><strong>ETL</strong> transforms data before loading it to the destination, so the destination only ever sees validated records. <strong>ELT</strong> loads raw data first, then transforms it inside the warehouse using SQL or dbt. Use ETL when your destination has a rigid schema or when PII must be masked before storage; use ELT when your warehouse is powerful enough to handle transforms cheaply.</p>
-      <div class="rounded-xl overflow-hidden bg-code shadow-md">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-          <div class="flex items-center gap-2">
-            <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-            <span class="text-[11px] font-semibold text-gray-400">Python</span>
-          </div>
-          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-        </div>
-        <pre class="overflow-x-auto pre-reset"><code class="language-python"># ETL pattern — transform BEFORE load
-raw   = extract("sales.csv")
-clean = transform(raw)          # Python cleans the data
-load(clean, "warehouse_table")  # only clean rows reach the warehouse
 
-# ELT pattern — transform AFTER load
-raw = extract("sales.csv")
-load_raw(raw, "raw_table")      # raw rows go straight in
-transform_in_warehouse()        # SQL/dbt cleans inside the warehouse</code></pre>
-      </div>
-      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-orange-400 shrink-0 mt-0.5">
-          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
-        </span>
-        <p class="text-xs text-gray-600"><strong>ELT is increasingly the default for cloud warehouses.</strong> Snowflake and BigQuery can run SQL transforms across billions of rows faster than Python can, and keeping raw data means you can re-run transformations when requirements change without re-extracting from the source.</p>
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
-  <div class="rounded-2xl border border-violet-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
-    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
-            <span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span>
-          </span>
-          <div>
-            <h3 class="text-sm font-bold text-gray-900 leading-tight">Pipeline Design Principles</h3>
-            <p class="text-[10px] text-gray-400 leading-none mt-0.5">Five rules for production pipelines</p>
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — ACTIVE (pink) -->
+          <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:right-left"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">ETL vs ELT</span>
+          </button>
+
+          <!-- Tab 1 — INACTIVE (violet) -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:puzzle-piece"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Design Principles</span>
+          </button>
+
+          <!-- Tab 2 — INACTIVE (blue) -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:clock"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Batch vs Streaming</span>
+          </button>
+
+          <!-- Tab 3 — INACTIVE (emerald) -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:cubes"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Modular Code</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
+        <div class="flex-1 min-w-0 md:pl-5">
+
+          <!-- ═══ Panel 0 — ETL vs ELT (pink) ═══ -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:right-left"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">ETL vs ELT</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Two pipeline architectures</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Core
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>ETL (Extract-Transform-Load)</strong> cleans data before storing it. <strong>ELT (Extract-Load-Transform)</strong> stores raw data first, then transforms it inside the warehouse. ETL keeps your destination clean. ELT lets you re-run transforms when rules change.</p>
+
+                <!-- Widget: comparison-table -->
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">ETL vs ELT</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-pink-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-100 text-pink-700 border border-pink-200 text-[10px] font-bold">ETL</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200 text-[10px] font-bold">ELT</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Transform step</td>
+                        <td class="py-2 px-3 text-gray-500">Before load (Python)</td>
+                        <td class="py-2 px-3 text-gray-500">After load (SQL / dbt)</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Raw data kept?</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">No</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Yes</span></td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Re-run transforms</td>
+                        <td class="py-2 px-3 text-gray-500">Must re-extract</td>
+                        <td class="py-2 px-3 text-gray-500">Just re-query</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-3 font-semibold text-gray-600">Best for</td>
+                        <td class="py-2 px-3 text-gray-500">Strict schemas, PII</td>
+                        <td class="py-2 px-3 text-gray-500">Cloud warehouses</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># ETL — transform BEFORE load
+raw   = extract("sales.csv")       # pull from source
+clean = transform(raw)             # Python cleans the data
+load(clean, "warehouse_table")     # only clean rows arrive
+
+# ELT — transform AFTER load
+raw = extract("sales.csv")         # pull from source
+load_raw(raw, "raw_table")         # raw rows go straight in
+transform_in_warehouse()           # SQL cleans inside the warehouse</code></pre>
+                </div>
+
+                <!-- Tip (pink — never amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>ELT is the default for cloud warehouses.</strong> Snowflake and BigQuery transform billions of rows faster than Python can. Keeping raw data lets you <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">re-run</code> transforms when business rules change.</p>
+                </div>
+
+              </div>
+            </div>
           </div>
-        </div>
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border border-violet-200 shadow-sm">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:list-check"></span> Principles
-        </span>
-      </div>
-      <p class="text-xs text-gray-600 leading-relaxed">Five principles make a pipeline production-ready. Violating any one of them means a pipeline that works on your laptop but fails silently or unpredictably in scheduled production runs.</p>
-      <div class="rounded-xl overflow-hidden border border-violet-100">
-        <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
-          <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:list-check"></span>
-          <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">Production Checklist</p>
-        </div>
-        <table class="w-full text-xs border-collapse bg-white">
-          <thead>
-            <tr class="border-b border-violet-50">
-              <th class="py-2 px-3 text-left font-bold text-gray-400 text-[10px] uppercase w-1/3">Principle</th>
-              <th class="py-2 px-3 text-left font-bold text-gray-400 text-[10px] uppercase">Why it matters</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-b border-gray-50"><td class="py-2 px-3 font-semibold text-gray-700">Idempotency</td><td class="py-2 px-3 text-gray-500">Safe to re-run after a failure</td></tr>
-            <tr class="border-b border-gray-50 bg-gray-50/40"><td class="py-2 px-3 font-semibold text-gray-700">Modularity</td><td class="py-2 px-3 text-gray-500">Each function is testable alone</td></tr>
-            <tr class="border-b border-gray-50"><td class="py-2 px-3 font-semibold text-gray-700">Observability</td><td class="py-2 px-3 text-gray-500">Know exactly where a failure occurred</td></tr>
-            <tr class="border-b border-gray-50 bg-gray-50/40"><td class="py-2 px-3 font-semibold text-gray-700">Fail-fast</td><td class="py-2 px-3 text-gray-500">Catch bad data before it spreads downstream</td></tr>
-            <tr><td class="py-2 px-3 font-semibold text-gray-700">Backfill-ready</td><td class="py-2 px-3 text-gray-500">Can re-process historical data on demand</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="rounded-xl overflow-hidden bg-code shadow-md">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-          <div class="flex items-center gap-2">
-            <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-            <span class="text-[11px] font-semibold text-gray-400">Python</span>
-          </div>
-          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-        </div>
-        <pre class="overflow-x-auto pre-reset"><code class="language-python">def load(df, table, engine):
-    # if_exists="replace" makes this idempotent: re-runs produce
-    # the same result rather than appending duplicate rows
+
+          <!-- ═══ Panel 1 — Design Principles (violet) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Design Principles</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Five rules for production pipelines</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Principles
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Production-ready pipelines</strong> follow five design rules. Break any one and your pipeline may work locally but fail silently in production.</p>
+
+                <!-- Widget: rules-table -->
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:list-check"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">Production Checklist</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">Idempotency</code></td>
+                        <td class="py-2 px-3 text-gray-500">Safe to re-run after a crash</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">Modularity</code></td>
+                        <td class="py-2 px-3 text-gray-500">Each function is testable alone</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">Observability</code></td>
+                        <td class="py-2 px-3 text-gray-500">You know exactly where a failure occurred</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">Fail-fast</code></td>
+                        <td class="py-2 px-3 text-gray-500">Bad data is caught before it spreads</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-violet-100 text-violet-700 border border-violet-200 px-1 rounded">Backfill-ready</code></td>
+                        <td class="py-2 px-3 text-gray-500">Can re-process old data on demand</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">def load(df, table, engine):
+    # "replace" makes this idempotent — re-runs won't duplicate rows
     df.to_sql(table, engine, if_exists="replace", index=False)
-    # observability: always log row count after loading
+    # observability — always log how many rows you wrote
     print(f"Loaded {len(df):,} rows into '{table}'")</code></pre>
-      </div>
-      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-orange-400 shrink-0 mt-0.5">
-          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
-        </span>
-        <p class="text-xs text-gray-600"><strong>Log the row count at every step.</strong> Print the row count after extract, after transform, and after load &mdash; a sudden drop in rows between steps is the fastest way to spot a silent data loss bug.</p>
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
-  <div class="rounded-2xl border border-blue-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
-    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
-            <span class="iconify text-white text-sm" data-icon="fa6-solid:clock"></span>
-          </span>
-          <div>
-            <h3 class="text-sm font-bold text-gray-900 leading-tight">Batch vs Streaming</h3>
-            <p class="text-[10px] text-gray-400 leading-none mt-0.5">Two execution models</p>
+                </div>
+
+                <!-- Tip (violet — never amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Log the row count at every step.</strong> Print counts after extract, transform, and load. A sudden drop between steps is the fastest way to spot <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">silent data loss</code>.</p>
+                </div>
+
+              </div>
+            </div>
           </div>
-        </div>
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border border-blue-200 shadow-sm">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Patterns
-        </span>
-      </div>
-      <p class="text-xs text-gray-600 leading-relaxed"><strong>Batch</strong> pipelines run on a schedule (e.g., nightly at 2 AM), processing all new records since the previous run in one job. <strong>Streaming</strong> pipelines process events as they arrive using message queues like Apache Kafka, which is necessary for real-time use cases but adds significant infrastructure complexity.</p>
-      <div class="rounded-xl overflow-hidden border border-blue-100">
-        <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
-          <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
-          <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">Batch vs Streaming</p>
-        </div>
-        <table class="w-full text-xs border-collapse bg-white">
-          <thead><tr class="border-b border-blue-50">
-            <th class="py-2 px-3 text-left font-bold text-gray-400 text-[10px] w-1/4"></th>
-            <th class="py-2 px-3 text-left"><span class="inline-flex items-center px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold">Batch</span></th>
-            <th class="py-2 px-3 text-left"><span class="inline-flex items-center px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-[10px] font-bold">Streaming</span></th>
-          </tr></thead>
-          <tbody>
-            <tr class="border-b border-gray-50"><td class="py-2 px-3 font-semibold text-gray-600">Trigger</td><td class="py-2 px-3 text-gray-500">Schedule (cron)</td><td class="py-2 px-3 text-gray-500">New event arrives</td></tr>
-            <tr class="border-b border-gray-50 bg-gray-50/40"><td class="py-2 px-3 font-semibold text-gray-600">Latency</td><td class="py-2 px-3 text-gray-500">Minutes to hours</td><td class="py-2 px-3 text-gray-500">Milliseconds to seconds</td></tr>
-            <tr class="border-b border-gray-50"><td class="py-2 px-3 font-semibold text-gray-600">Complexity</td><td class="py-2 px-3 text-gray-500">Low</td><td class="py-2 px-3 text-gray-500">High (Kafka, Flink)</td></tr>
-            <tr><td class="py-2 px-3 font-semibold text-gray-600">Use case</td><td class="py-2 px-3 text-gray-500">Nightly reports</td><td class="py-2 px-3 text-gray-500">Fraud detection</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="rounded-xl overflow-hidden bg-code shadow-md">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-          <div class="flex items-center gap-2">
-            <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-            <span class="text-[11px] font-semibold text-gray-400">Python</span>
+
+          <!-- ═══ Panel 2 — Batch vs Streaming (blue) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:clock"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Batch vs Streaming</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Two execution models</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Patterns
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Batch pipelines</strong> run on a schedule and process all new records in one job. <strong>Streaming pipelines</strong> process events the instant they arrive. Most teams start with batch because it is simpler to build and debug.</p>
+
+                <!-- Widget: comparison-table -->
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">Batch vs Streaming</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-blue-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200 text-[10px] font-bold">Batch</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200 text-[10px] font-bold">Streaming</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Trigger</td>
+                        <td class="py-2 px-3 text-gray-500">Schedule (cron)</td>
+                        <td class="py-2 px-3 text-gray-500">New event arrives</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Latency</td>
+                        <td class="py-2 px-3 text-gray-500">Minutes to hours</td>
+                        <td class="py-2 px-3 text-gray-500">Milliseconds to seconds</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Complexity</td>
+                        <td class="py-2 px-3 text-gray-500">Low</td>
+                        <td class="py-2 px-3 text-gray-500">High (Kafka, Flink)</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-3 font-semibold text-gray-600">Use case</td>
+                        <td class="py-2 px-3 text-gray-500">Nightly reports</td>
+                        <td class="py-2 px-3 text-gray-500">Fraud detection</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import schedule, time
+
+def run_batch():
+    raw   = extract("sales.csv")        # pull latest records
+    clean = transform(raw)              # clean and reshape
+    load(clean, "clean_sales", engine)  # write to warehouse
+
+# run the pipeline every day at 2 AM
+schedule.every().day.at("02:00").do(run_batch)</code></pre>
+                </div>
+
+                <!-- Tip (blue — never amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Start with batch.</strong> If stakeholders say "daily is fine," a nightly job is far simpler than a 24/7 <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">streaming</code> pipeline. Add streaming only when latency matters.</p>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-        </div>
-        <pre class="overflow-x-auto pre-reset"><code class="language-python">import schedule, time
 
-def run_batch_pipeline():
-    """Runs the full ETL job — called once per schedule tick."""
-    raw   = extract("sales.csv")          # pull latest records
-    clean = transform(raw)                # clean and reshape
-    load(clean, "clean_sales", engine)    # write to warehouse
+          <!-- ═══ Panel 3 — Modular Code (emerald) ═══ -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
 
-# Schedule the batch pipeline to run at 2 AM every day
-schedule.every().day.at("02:00").do(run_batch_pipeline)
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:cubes"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Modular Code</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">One function per pipeline stage</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Best Practice
+                  </span>
+                </div>
 
-while True:
-    schedule.run_pending()  # check and fire due jobs
-    time.sleep(60)          # sleep 60 seconds between checks</code></pre>
-      </div>
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>modular pipeline</strong> splits each stage into its own function. You write one function for extract, one for transform, and one for load. Each function can be tested and debugged on its own.</p>
 
-      <!-- Streaming architecture callout -->
-      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50/60 border border-blue-100">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
-          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:bolt"></span>
-        </span>
-        <div class="text-xs text-gray-600 space-y-1">
-          <p class="font-bold text-gray-700">How streaming works (conceptual)</p>
-          <p>A <strong>producer</strong> (your app or sensor) publishes events to a <strong>topic</strong> in a message broker like Apache Kafka. A <strong>consumer</strong> service reads events from the topic in real time and runs your transform logic on each one. Frameworks like Apache Flink and Spark Structured Streaming let you write windowed aggregations (e.g., "count orders per minute") without managing low-level consumer code yourself.</p>
-        </div>
-      </div>
+                <!-- Widget: rules-table (function → responsibility) -->
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:cubes"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Function Roles</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">extract()</code></td>
+                        <td class="py-2 px-3 text-gray-500">Reads data from the source</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">transform()</code></td>
+                        <td class="py-2 px-3 text-gray-500">Cleans and reshapes the data</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">load()</code></td>
+                        <td class="py-2 px-3 text-gray-500">Writes results to the destination</td>
+                      </tr>
+                      <tr class="bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-emerald-100 text-emerald-700 border border-emerald-200 px-1 rounded">run()</code></td>
+                        <td class="py-2 px-3 text-gray-500">Calls all three in order</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
-      <!-- Orchestration tools -->
-      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-indigo-50/60 border border-indigo-100">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-indigo-500 shrink-0 mt-0.5">
-          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:diagram-project"></span>
-        </span>
-        <div class="text-xs text-gray-600 space-y-1">
-          <p class="font-bold text-gray-700">Pipeline orchestration tools</p>
-          <p>In production, teams schedule and monitor batch pipelines with orchestration platforms: <strong>Apache Airflow</strong> (open-source, Python-native DAGs), <strong>AWS Data Pipeline</strong>, or <strong>Prefect</strong>. These tools handle retries, dependency ordering, and alerting so your pipeline does not silently fail overnight.</p>
-        </div>
-      </div>
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">def extract(path):
+    return pd.read_csv(path)            # reads the source file
 
-      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-orange-400 shrink-0 mt-0.5">
-          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
-        </span>
-        <p class="text-xs text-gray-600"><strong>Start with batch and measure freshness requirements before adding streaming.</strong> If stakeholders say "daily is fine," a nightly batch job is far simpler to build, maintain, and debug than a streaming pipeline that runs 24 hours a day.</p>
-      </div>
-    </div>
-  </div>
-</div>
-    <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
-  <div class="rounded-2xl border border-emerald-100 overflow-hidden">
-    <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
-    <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
-            <span class="iconify text-white text-sm" data-icon="fa6-solid:cubes"></span>
-          </span>
-          <div>
-            <h3 class="text-sm font-bold text-gray-900 leading-tight">Modular Pipeline Code</h3>
-            <p class="text-[10px] text-gray-400 leading-none mt-0.5">One function per stage</p>
-          </div>
-        </div>
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border border-emerald-200 shadow-sm">
-          <span class="iconify text-[10px]" data-icon="fa6-solid:code"></span> Best Practice
-        </span>
-      </div>
-      <p class="text-xs text-gray-600 leading-relaxed">A <strong>modular pipeline</strong> splits each stage &mdash; extract, transform, and load &mdash; into a separate function. Each function accepts a clear input, produces a clear output, and can be called and tested independently.</p>
-      <div class="rounded-xl overflow-hidden bg-code shadow-md">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
-          <div class="flex items-center gap-2">
-            <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
-            <span class="text-[11px] font-semibold text-gray-400">Python</span>
-          </div>
-          <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
-        </div>
-        <pre class="overflow-x-auto pre-reset"><code class="language-python">def extract(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)           # single responsibility
-
-def transform(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.dropna(subset=["order_id"])
+def transform(df):
+    df = df.dropna(subset=["order_id"]) # drops incomplete rows
     df["total"] = df["qty"] * df["price"]
-    return df                           # returns clean DataFrame
+    return df                           # returns clean data
 
-def load(df: pd.DataFrame, engine) -> None:
+def load(df, engine):
     df.to_sql("orders", engine, if_exists="replace", index=False)
-    print(f"Loaded {len(df):,} rows")   # confirms write
+    print(f"Loaded {len(df):,} rows")   # confirms the write
 
-# Orchestrate from a single run() function
 def run():
     engine = create_engine("sqlite:///dw.db")
     load(transform(extract("raw.csv")), engine)</code></pre>
+                </div>
+
+                <!-- Tip (emerald — never amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Test each function on its own.</strong> Call <code class="font-mono bg-emerald-200 text-emerald-800 border border-emerald-300 px-1 rounded">transform(sample_df)</code> in a notebook first. Verify your logic before running the full pipeline on millions of rows.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panels -->
       </div>
-      <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
-        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-orange-400 shrink-0 mt-0.5">
-          <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
-        </span>
-        <p class="text-xs text-gray-600"><strong>Test each function separately.</strong> Call <code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">transform(sample_df)</code> in a notebook to verify your cleaning logic before running the full pipeline on millions of rows.</p>
-      </div>
-    </div>
-  </div>
-</div>
-  </div>
-</div>
     </div>
   </div>
 </section>
