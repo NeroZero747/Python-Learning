@@ -1,0 +1,2614 @@
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+    <style>
+    /* ── CSS Variables — font tokens (:root) ──────────────────────── */
+    :root {
+      --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    /* ── Global reset — smooth scroll ──────────────────────────── */
+    * { scroll-behavior: smooth; }
+
+    /* ── Prism.js — syntax highlighted code blocks ─────────────── */
+    pre[class*="language-"] {
+      border-radius: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      margin: 0;
+      padding: 1.25rem 1.5rem;
+    }
+    code[class*="language-"], pre[class*="language-"] {
+      background: #1e1e2e;
+    }
+
+    /* ── Heading resets — strip Confluence default margins ─────── */
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 0;
+      line-height: 1.3;
+    }
+    h1 { font-weight: 800 !important; }
+    h2 { font-size: 1.25rem; font-weight: 700 !important; }
+    h3 { font-size: 1rem;   font-weight: 600 !important; }
+
+    /* ── Brand utility classes ─────────────────────────────────── */
+    .text-brand      { color: #CB187D; }
+    .text-brand-dark { color: #CB187D; }
+    .bg-brand        { background: #CB187D; }
+    .bg-brand-soft   { background: #fdf0f7; }
+    .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+    .bg-amber-tip    { background: #fff7ed; border: 1px solid #fed7aa; }
+    .bg-code         { background: #1e1e2e; }
+    .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
+    .pre-reset       { margin: 0; border-radius: 0; background: transparent; }
+
+    /* ── Key Concepts sidebar tabs  (.kc-tab / .kc-tab-active) ─── */
+    .kc-tab-active { background: #fdf0f7; }
+    .kc-indicator { height: 68px; }
+    .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+
+    /* ── Code Examples pill tabs   (.ce-step / .ce-step-active) ── */
+    .ce-step:not(.ce-step-active):hover,
+    /* ── Common Mistakes pill tabs (.mk-step / .mk-step-active) ── */
+    .mk-step:not(.mk-step-active):hover,
+    /* ── Knowledge Check quiz tabs (.qz-step / .qz-step-active) ── */
+    .qz-step:not(.qz-step-active):hover,
+    /* ── Practice Exercise tabs    (.pe-step / .pe-step-active) ── */
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #ffffff; }
+
+    /* Keyframe used by all tab panel fade-in animations */
+    @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .kc-panel-anim,
+    .ce-panel-anim,
+    .mk-panel-anim,
+    .qz-panel-anim,
+    .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+    .ce-step:not(.ce-step-active),
+    .mk-step:not(.mk-step-active),
+    .qz-step:not(.qz-step-active),
+    .pe-step:not(.pe-step-active) { background: #1f2937; color: #ffffff; box-shadow: none; }
+
+    .ce-step-active,
+    .mk-step-active,
+    .qz-step-active,
+    .pe-step-active {
+      background: linear-gradient(to right, #CB187D, #e84aad);
+      color: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(203, 24, 125, 0.3);
+    }
+
+    /* ─── Step tab consistent sizing ──────────────────────────── */
+    .ce-step, .mk-step, .qz-step, .pe-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    /* ── Accordion — used in Overview & Key Ideas sections ─────── */
+    .accordion-body      { display: none  !important; }
+    .accordion-body.open { display: block !important; }
+    .accordion-toggle {
+      display: flex !important; align-items: center !important; gap: 8px !important;
+      width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important;
+      font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important;
+      border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important;
+      color: #CB187D !important; line-height: 1.2 !important; text-decoration: none !important;
+      transition: background 0.15s, border-color 0.15s !important;
+    }
+    .accordion-toggle:hover { background: #f9d9ee !important; border-color: #CB187D !important; }
+    .accordion-toggle.open { background: #fdf0f7 !important; border-color: #CB187D !important; border-style: solid !important; }
+    .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
+    .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
+
+    /* ── Task description box inside practice/example panels ───── */
+    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+
+    /* ── Hero banner — full-width gradient header ──────────────── */
+    .hero-container {
+      position: relative;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      min-height: 380px;
+      background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%);
+    }
+    .hero-dots {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255,255,255,0.12); }
+    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127,0,76,0.35); }
+    .hero-glow-line {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%);
+      opacity: 0.7;
+    }
+    .hero-pill { background: #ffffff; border: none; color: #CB187D; font-weight: 700; pointer-events: none; cursor: default; }
+    .hero-abstract-card {
+      position: relative; border-radius: 1rem; overflow: hidden; padding: 0.25rem;
+      opacity: 0.75; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px; padding: 11px 26px;
+      border-radius: 999px; font-weight: 700; font-size: 0.875rem; color: #CB187D;
+      background: #ffffff; border: none; cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease; text-decoration: none;
+    }
+    .hero-cta:hover { transform: translateY(-2px); filter: brightness(0.96); }
+    .stat-card { transition: background 0.2s ease; }
+    .stat-card:hover { background: rgba(255,255,255,0.15) !important; }
+
+    /* ── Scroll progress bar — fixed top-of-page indicator ─────── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0; height: 3px;
+      background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D);
+      background-size: 200% 100%;
+      animation: scrollGradient 3s linear infinite;
+      z-index: 9999; transition: width 0.15s;
+    }
+    @keyframes scrollGradient {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+
+    /* ── Page layout — two-column: TOC sidebar + main content ──── */
+    .lesson-layout { display: flex; gap: 1.75rem; align-items: flex-start; }
+    .lesson-toc-sidebar {
+      width: 240px; flex-shrink: 0;
+      position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem);
+      overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease;
+    }
+    .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
+    .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-module-list { display: none; }
+    .toc-toggle-btn {
+      background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      border-radius: 6px; transition: background 0.15s;
+    }
+    .toc-toggle-btn:hover { background: #fdf0f7; }
+    .toc-link { transition: color 0.15s, padding-left 0.15s; }
+    .toc-link:hover { color: #CB187D; padding-left: 4px; }
+    .toc-link.active {
+      color: #CB187D; font-weight: 600;
+      border-left: 3px solid #CB187D; padding-left: 8px;
+    }
+
+    /* ── Objective cards (.obj-card) ────────────────────────────── */
+    .obj-card {
+      transition: transform 0.22s cubic-bezier(.4,0,.2,1),
+                  box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+                  border-color 0.22s ease, background-color 0.22s ease;
+    }
+    .obj-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px -6px rgba(203,24,125,0.18), 0 6px 12px -2px rgba(203,24,125,0.1);
+      border-color: #CB187D; background-color: #fdf0f7;
+    }
+    .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+    .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+    .obj-card:hover .obj-icon .iconify { color: white !important; }
+    .obj-card-kt:hover { box-shadow: none; background-color: #ffffff; }
+    .obj-card-violet:hover { border-color: #8b5cf6; box-shadow: none; background-color: #ffffff; }
+    .obj-card-blue:hover { border-color: #3b82f6; box-shadow: none; background-color: #ffffff; }
+    .obj-card-emerald:hover { border-color: #059669; box-shadow: none; background-color: #ffffff; }
+
+    /* ── Section header components ─────────────────────────────── */
+    .section-header {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem 2rem 1.25rem 1rem;
+      background: #ffffff; border-bottom: 1px solid #f3f4f6;
+      border-left: 4px solid #CB187D;
+    }
+    .section-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
+      background: #CB187D; flex-shrink: 0;
+    }
+    .section-body { min-width: 0; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #111827; line-height: 1.3; margin: 0; }
+    .section-subtitle { font-size: 0.875rem; color: #9ca3af; line-height: 1.4; margin-top: 0.125rem; margin-bottom: 0; }
+
+    /* ── Skill dots (difficulty indicator) ─────────────────────── */
+    .skill-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #d1d5db; display: inline-block;
+    }
+    .skill-dot-active { background: #22c55e; }
+
+    /* ── Hero SVG illustration ──────────────────────────────────── */
+    .hero-svg { max-height: 320px; }
+    .hero-py-icon-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+    .hero-py-icon { font-size: 70px; filter: drop-shadow(0 0 14px rgba(255,212,59,0.25)); }
+
+    /* ── Generic outline tab buttons (.tab-btn / .tab-panel) ───── */
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff;
+      line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover { color: #CB187D; border-color: #CB187D; background: #fdf0f7; }
+    .tab-btn.active { color: #fff; background: #CB187D; border-color: #CB187D; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Code block copy button (.copy-btn) ────────────────────── */
+    .copy-btn {
+      position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center;
+      background: rgba(203,24,125,0.15); border: 1px solid rgba(203,24,125,0.3); color: #CB187D;
+      border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s; white-space: nowrap;
+    }
+    .copy-btn:hover { background: rgba(203,24,125,0.3); }
+    .copy-btn-light {
+      position: static; color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.1);
+    }
+    .copy-btn-light:hover { background: rgba(255,255,255,0.2); }
+
+    /* ── Bottom lesson navigation — Previous / All Lessons / Next  */
+    .lesson-nav-link:hover p,
+    .lesson-nav-link:hover span,
+    .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+
+    /* ── Back-to-top floating button ───────────────────────────── */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
+      border-radius: 50%; background: #CB187D; color: white;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(203,24,125,0.3); cursor: pointer;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #7F004C; }
+
+    /* ── Quiz answer feedback buttons (.quiz-btn.correct / .incorrect)  */
+    .quiz-btn.correct { background: #f0fdf4; border-color: #22c55e; color: #16a34a; }
+    .quiz-btn.incorrect { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+
+    /* ── Card hover animations — Mistake, Flow, Recap, Overview cards  */
+    .mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08); }
+    .flow-stepper .flow-step { transition: transform 0.15s ease; }
+    .flow-stepper .flow-step:hover { transform: translateX(4px); }
+    .recap-item { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .recap-item:hover { transform: translateX(4px); box-shadow: -4px 0 0 0 #10b981; }
+    .overview-card { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+    .overview-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -6px rgba(203,24,125,0.12);
+      border-color: rgba(203,24,125,0.3);
+    }
+
+    /* ── Responsive — mobile breakpoint (<768px) ───────────────── */
+    @media (max-width: 767px) {
+      .lesson-toc-sidebar { display: none; }
+      .lesson-layout { display: block; }
+      #lesson-nav { display: block; }
+      .hero-container { min-height: auto; }
+      .hero-split { flex-direction: column !important; }
+      .hero-abstract-card { margin-top: 1.5rem; }
+      .hero-title-main { font-size: 1.75rem !important; }
+    }
+
+    /* ── Print styles — hide interactive chrome when printing ──── */
+    @media print {
+      .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; }
+      .obj-card:hover { transform: none; box-shadow: none; }
+    }
+
+    /* ── Iconify icon alignment utility ─────────────────────────── */
+    .iconify { vertical-align: middle; flex-shrink: 0; }
+
+  /* ============================================================
+     CONFLUENCE ISOLATION — scoped to #hub-root
+     All rules use !important to beat Confluence's element styles.
+     ============================================================ */
+
+  #hub-root,
+  #hub-root * {
+    font-family: var(--font-body) !important;
+    box-sizing: border-box !important;
+  }
+
+  #hub-root {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #1f2937 !important;
+  }
+
+  #hub-root code,
+  #hub-root pre,
+  #hub-root [class*="language-"] { font-family: var(--font-mono) !important; }
+
+  #hub-root h1, #hub-root h2, #hub-root h3,
+  #hub-root h4, #hub-root h5, #hub-root h6 {
+    margin-top: 0 !important; margin-bottom: 0 !important;
+    padding: 0 !important; line-height: 1.3 !important;
+  }
+  #hub-root h1 { font-size: 1.75rem  !important; font-weight: 700 !important; }
+  #hub-root h2 { font-size: 1.25rem  !important; font-weight: 700 !important; }
+  #hub-root h3 { font-size: 1rem     !important; font-weight: 600 !important; }
+  #hub-root h4 { font-size: 0.875rem !important; font-weight: 600 !important; }
+  #hub-root h5, #hub-root h6 { font-size: 0.8rem !important; font-weight: 600 !important; }
+
+  #hub-root .font-black     { font-weight: 900 !important; }
+  #hub-root .font-extrabold { font-weight: 800 !important; }
+  #hub-root .font-bold      { font-weight: 700 !important; }
+  #hub-root .font-semibold  { font-weight: 600 !important; }
+  #hub-root .font-medium    { font-weight: 500 !important; }
+
+  #hub-root .text-4xl  { font-size: 2.25rem  !important; line-height: 2.5rem  !important; }
+  #hub-root .text-3xl  { font-size: 1.875rem !important; line-height: 2.25rem !important; }
+  #hub-root .text-2xl  { font-size: 1.5rem   !important; line-height: 2rem    !important; }
+  #hub-root .text-xl   { font-size: 1.25rem  !important; line-height: 1.75rem !important; }
+  #hub-root .text-lg   { font-size: 1.125rem !important; line-height: 1.75rem !important; }
+  #hub-root .text-base { font-size: 1rem     !important; line-height: 1.5rem  !important; }
+  #hub-root .text-sm   { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+  #hub-root .text-xs   { font-size: 0.75rem  !important; line-height: 1rem    !important; }
+
+  #hub-root .text-white    { color: #ffffff !important; }
+  #hub-root .text-gray-900 { color: #111827 !important; }
+  #hub-root .text-gray-800 { color: #1f2937 !important; }
+  #hub-root .text-gray-700 { color: #374151 !important; }
+  #hub-root .text-gray-600 { color: #4b5563 !important; }
+  #hub-root .text-gray-500 { color: #6b7280 !important; }
+  #hub-root .text-gray-400 { color: #9ca3af !important; }
+  #hub-root .text-gray-300 { color: #d1d5db !important; }
+
+  #hub-root .flex            { display: flex !important; }
+  #hub-root .inline-flex     { display: inline-flex !important; }
+  #hub-root .items-center    { align-items: center !important; }
+  #hub-root .items-start     { align-items: flex-start !important; }
+  #hub-root .justify-center  { justify-content: center !important; }
+  #hub-root .justify-between { justify-content: space-between !important; }
+  #hub-root .shrink-0        { flex-shrink: 0 !important; }
+  #hub-root .min-w-0         { min-width: 0 !important; }
+  #hub-root .flex-1          { flex: 1 1 0% !important; }
+  #hub-root .flex-wrap       { flex-wrap: wrap !important; }
+  #hub-root .gap-1  { gap: 0.25rem !important; }
+  #hub-root .gap-2  { gap: 0.5rem  !important; }
+  #hub-root .gap-3  { gap: 0.75rem !important; }
+  #hub-root .gap-4  { gap: 1rem    !important; }
+  #hub-root .gap-6  { gap: 1.5rem  !important; }
+  #hub-root .gap-8  { gap: 2rem    !important; }
+  #hub-root .ml-auto { margin-left: auto !important; }
+
+  #hub-root a       { text-decoration: none !important; }
+  #hub-root a:hover { text-decoration: none !important; }
+
+  #hub-root .iconify { vertical-align: middle !important; flex-shrink: 0 !important; }
+  #hub-root :not(.block) > .iconify:not(.block) {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  }
+
+  #hub-root .hero-title-main {
+    font-size: 2.25rem !important; font-weight: 800 !important;
+    line-height: 1.15 !important; margin-bottom: 2rem !important;
+  }
+  @media (min-width: 768px) {
+    #hub-root .hero-title-main { font-size: 2.5rem !important; }
+  }
+
+  /* ── Section header components ── */
+  #hub-root .section-header {
+    display: flex !important; align-items: center !important; gap: 1rem !important;
+    padding: 1.25rem 2rem 1.25rem 1rem !important; background: #ffffff !important;
+    border-bottom: 1px solid #f3f4f6 !important; border-left: 4px solid #CB187D !important;
+  }
+  #hub-root .section-icon {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    width: 2.75rem !important; height: 2.75rem !important;
+    border-radius: 0.75rem !important; background: #CB187D !important; flex-shrink: 0 !important;
+  }
+  #hub-root .section-body { min-width: 0 !important; }
+  #hub-root .section-title {
+    font-size: 1.25rem !important; font-weight: 700 !important;
+    color: #111827 !important; line-height: 1.3 !important; margin: 0 !important;
+  }
+  #hub-root .section-subtitle {
+    font-size: 0.875rem !important; color: #9ca3af !important;
+    line-height: 1.4 !important; margin-top: 0.125rem !important; margin-bottom: 0 !important;
+  }
+
+  /* ── Step tab consistent sizing (Confluence Tailwind fix) ── */
+  #hub-root .ce-step, #hub-root .mk-step,
+  #hub-root .qz-step, #hub-root .pe-step {
+    display: inline-flex !important; align-items: center !important; gap: 0.5rem !important;
+    padding: 0.375rem 1rem !important; border-radius: 9999px !important;
+    font-size: 0.75rem !important; font-weight: 700 !important;
+    line-height: 1.2 !important; white-space: nowrap !important;
+    border: none !important; cursor: pointer !important;
+  }
+
+  /* ── Skill dots ── */
+  #hub-root .skill-dot {
+    width: 6px !important; height: 6px !important; border-radius: 50% !important;
+    background: #d1d5db !important; display: inline-block !important;
+  }
+  #hub-root .skill-dot-active { background: #22c55e !important; }
+
+  /* ── Hero SVG / Python icon ── */
+  #hub-root .hero-svg { max-height: 320px !important; }
+  #hub-root .hero-py-icon-wrap {
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    width: 100% !important; height: 100% !important;
+  }
+  #hub-root .hero-py-icon { font-size: 70px !important; filter: drop-shadow(0 0 14px rgba(255,212,59,0.25)) !important; }
+
+  /* ── Tip / info boxes ── */
+  #hub-root .bg-amber-tip { background: #fff7ed !important; border: 1px solid #fed7aa !important; }
+
+  /* ── Dark pill tabs — inactive ── */
+  #hub-root .ce-step:not(.ce-step-active),
+  #hub-root .mk-step:not(.mk-step-active),
+  #hub-root .qz-step:not(.qz-step-active),
+  #hub-root .pe-step:not(.pe-step-active) {
+    background-color: #1f2937 !important; color: #ffffff !important; box-shadow: none !important;
+  }
+  /* ── Dark pill tabs — active (pink gradient) ── */
+  #hub-root .ce-step-active,
+  #hub-root .mk-step-active,
+  #hub-root .qz-step-active,
+  #hub-root .pe-step-active {
+    background: linear-gradient(to right, #CB187D, #e84aad) !important;
+    color: #ffffff !important;
+    box-shadow: 0 10px 25px -5px rgba(203,24,125,0.3) !important;
+  }
+
+  /* ── Key Concepts sidebar labels ── */
+  #hub-root .kc-tab-active .kc-tab-label { color: #111827 !important; }
+  #hub-root .kc-tab:not(.kc-tab-active) .kc-tab-label { color: #9ca3af !important; }
+
+  /* ── Background utilities ── */
+  #hub-root .bg-white    { background-color: #ffffff !important; }
+  #hub-root .bg-gray-50  { background-color: #f9fafb !important; }
+  #hub-root .bg-gray-100 { background-color: #f3f4f6 !important; }
+  #hub-root .bg-gray-800 { background-color: #1f2937 !important; }
+  #hub-root .bg-gray-900 { background-color: #111827 !important; }
+
+  /* ── Stat pill label visibility ── */
+  #hub-root .hero-pill .iconify { opacity: 0.5 !important; }
+  #hub-root .hero-pill .opacity-55 { opacity: 1 !important; }
+  #hub-root .hero-pill .opacity-50 { opacity: 1 !important; }
+  #hub-root a.hero-pill { color: #CB187D !important; }
+
+  /* ── TOC active state ── */
+  #hub-root .toc-link:hover { color: #CB187D !important; }
+  #hub-root .toc-link.active {
+    color: #CB187D !important; font-weight: 600 !important;
+    border-left: 3px solid #CB187D !important; padding-left: 8px !important;
+    background-color: #fdf0f7 !important;
+  }
+
+  /* ── Module lessons list active link ── */
+  #hub-root .mod-lesson-active {
+    background-color: #fdf0f7 !important; border-color: #CB187D !important; color: #CB187D !important;
+  }
+  #hub-root .mod-lesson-active .lesson-dot { background-color: #CB187D !important; }
+
+  /* ── Bottom nav hover ── */
+  #hub-root .lesson-nav-link:hover p,
+  #hub-root .lesson-nav-link:hover span,
+  #hub-root .lesson-nav-link:hover svg {
+    color: #CB187D !important; transition: color 0.15s !important;
+  }
+  </style>
+
+<div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div id="hub-root" class="bg-gray-50 min-h-screen">
+
+  <!-- HERO -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+    <section class="hero-container">
+  <div class="hero-dots"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow-line"></div>
+  <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+    <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+      <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:rocket"></span> Module 4
+          </span>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="inline-flex items-center gap-1">
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+            </span>
+            Advanced
+          </span>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 14 min
+          </span>
+        </div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 09</p>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Pipeline Automation &amp; Deployment</h1>
+        <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-5 max-w-prose">Schedule pipelines with cron, deploy through CI/CD, and add monitoring so failures wake you up.</p>
+        <div class="flex items-center gap-4 mb-5 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+              <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+            </span>
+            <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+          </div>
+          <span class="text-white/30">|</span>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+              <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+            </span>
+            <span class="text-white/85 font-medium text-xs">March 31, 2026</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span><span class="font-semibold opacity-55">Goals</span>
+          </a>
+          <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span><span class="font-semibold opacity-55">Examples</span>
+          </a>
+          <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
+            <span class="font-extrabold">3</span><span class="font-semibold opacity-55">Exercises</span>
+          </a>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
+            <span class="font-extrabold">9<span class="font-bold opacity-50">/10</span></span>
+            <span class="font-semibold opacity-55">Progress</span>
+          </span>
+        </div>
+      </div>
+      <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+        <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+          <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+            <defs>
+              <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+              <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+              <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+              <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+              <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+            </defs>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+            <g clip-path="url(#hexClip)" opacity="1">
+              <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/></g>
+              <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+            </g>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+            <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+            <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+            <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+            <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+    <div class="lesson-layout">
+      <aside class="lesson-toc-sidebar">
+        <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+          <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+            <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+            <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+              <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+            </button>
+          </div>
+          <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+            <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective
+</a>
+<a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview
+</a>
+<a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:lightbulb"></span> Key Takeaways
+</a>
+<a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
+</a>
+<a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
+</a>
+<a href="#practice" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:dumbbell"></span> Practice Exercises
+</a>
+<a href="#mistakes" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:triangle-exclamation"></span> Common Mistakes
+</a>
+<a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap
+</a>
+<a href="#knowledge-check" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:brain"></span> Knowledge Check
+</a>
+<a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson
+</a>
+          </nav>
+          <div class="toc-module-list px-3 py-3">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+            <div class="space-y-1">
+<a href="lesson01_what_is_data_engineering.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">1. What Is Data Engineering?</span>
+</a>
+<a href="lesson02_etl_elt_pipeline_thinking.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">2. ETL, ELT &amp; Pipeline Thinking</span>
+</a>
+<a href="lesson03_working_with_large_datasets.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">3. Working with Large Datasets</span>
+</a>
+<a href="lesson04_efficient_storage_parquet.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">4. Efficient Storage: Parquet</span>
+</a>
+<a href="lesson05_faster_dataframes_polars_duckdb.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">5. Polars &amp; DuckDB</span>
+</a>
+<a href="lesson06_nosql_when_tables_arent_enough.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">6. NoSQL Databases</span>
+</a>
+<a href="lesson07_api_data_integration.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">7. API Data Integration</span>
+</a>
+<a href="lesson08_data_quality_validation.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">8. Data Quality &amp; Validation</span>
+</a>
+<a href="lesson09_pipeline_automation_deployment.html" class="mod-lesson-active flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors">
+  <span class="lesson-dot w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span>
+  <span class="truncate">9. Automation &amp; Deployment</span>
+</a>
+<a href="lesson10_performance_at_scale.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">10. Performance at Scale</span>
+</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="min-w-0 flex-1 space-y-10">
+<section id="objective">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+    <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+      <span class="iconify text-brand text-lg" data-icon="fa6-solid:clock"></span>
+    </span>
+    <div>
+      <p class="text-sm font-semibold text-gray-800">Schedule pipelines</p>
+      <p class="text-xs text-gray-500 mt-0.5">Use cron syntax and Python schedulers to run pipelines automatically.</p>
+    </div>
+  </div>
+  <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+    <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+      <span class="iconify text-brand text-lg" data-icon="fa6-solid:code-branch"></span>
+    </span>
+    <div>
+      <p class="text-sm font-semibold text-gray-800">CI/CD basics</p>
+      <p class="text-xs text-gray-500 mt-0.5">Understand pipeline YAML and how to add data jobs to a CI/CD workflow.</p>
+    </div>
+  </div>
+  <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+    <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+      <span class="iconify text-brand text-lg" data-icon="fa6-solid:server"></span>
+    </span>
+    <div>
+      <p class="text-sm font-semibold text-gray-800">Deployment workflow</p>
+      <p class="text-xs text-gray-500 mt-0.5">Move a pipeline from local through staging to production.</p>
+    </div>
+  </div>
+  <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+    <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+      <span class="iconify text-brand text-lg" data-icon="fa6-solid:chart-line"></span>
+    </span>
+    <div>
+      <p class="text-sm font-semibold text-gray-800">Monitoring &amp; alerting</p>
+      <p class="text-xs text-gray-500 mt-0.5">Log metrics, set up health checks, and understand what to alert on.</p>
+    </div>
+  </div>
+</div>
+<div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">This lesson shows you how to take a working pipeline and turn it into a production-grade automated job.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+<div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+  <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+  <div class="relative flex items-center gap-4">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
+      <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+    </span>
+    <p class="text-base text-gray-800 leading-relaxed font-medium">Writing a pipeline that works on your laptop is step one. Making it run reliably every night &mdash; without you touching it &mdash; is the real engineering challenge.</p>
+  </div>
+</div>
+<p class="text-sm text-gray-600 leading-relaxed">Think of a production pipeline like running a daily newspaper. The press runs automatically at the same time every night, and an alarm sounds if a machine jams. The <strong>scheduler</strong> is the clock that starts the press. <strong>CI/CD</strong> is the quality control process. <strong>Monitoring</strong> is the night editor&rsquo;s phone.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+        <span class="iconify text-brand text-base" data-icon="fa6-solid:clock"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">Scheduler (cron)</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The clock that starts the press at 2 AM</p>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 leading-relaxed">A cron expression is a five-field string — minute, hour, day-of-month, month, day-of-week — that tells a scheduler exactly when to fire. Every cloud platform (Airflow, Kubernetes CronJob, GitHub Actions) uses this same syntax, so learning cron once works everywhere.</p>
+  </div>
+<div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-violet-100 hover:bg-violet-50/30 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-violet-50 shrink-0">
+        <span class="iconify text-violet-500 text-base" data-icon="fa6-solid:code-branch"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">CI/CD Pipeline</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">Quality control before print</p>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 leading-relaxed">Every time you push code, the CI server automatically runs your full test suite. If all tests pass, the CD step deploys the new version to the right environment — no manual copy-pasting, no forgotten steps, and a full git-history audit trail.</p>
+  </div>
+<div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-blue-50 shrink-0">
+        <span class="iconify text-blue-500 text-base" data-icon="fa6-solid:flask-vial"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">Staging Environment</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The proof copy checked before the full run</p>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 leading-relaxed">Staging uses the same code, database schema, and configuration as production but with separate data. You validate every change in staging before authorising it to go live — so a bad deploy never corrupts real records.</p>
+  </div>
+<div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+    <div class="flex items-center gap-3 mb-2.5">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-emerald-50 shrink-0">
+        <span class="iconify text-emerald-500 text-base" data-icon="fa6-solid:bell"></span>
+      </span>
+      <div>
+        <p class="text-sm font-bold text-gray-800 leading-tight">Monitoring</p>
+        <p class="text-[10px] text-gray-400 italic leading-tight">The night editor&rsquo;s phone &mdash; rings when something breaks</p>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 leading-relaxed">Structured logs give you a timestamped, searchable record of every pipeline run, row count, and error. A health-check endpoint lets your monitoring system ask "did this job succeed?" on a schedule — and alert you the moment a run is late, empty, or failed.</p>
+  </div>
+</div>
+<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Automation takes a pipeline from &ldquo;I run it manually&rdquo; to &ldquo;it runs itself, and I hear about it only when something goes wrong.&rdquo;</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="key-ideas">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="obj-card obj-card-kt rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:clock"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Cron Is the Universal Scheduler</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">A cron expression is a five-field string — minute, hour, day-of-month, month, day-of-week — that tells a scheduler exactly when to fire. Every cloud platform (Airflow, Kubernetes CronJob, GitHub Actions, GitLab CI) uses this same syntax, so cron is a skill you write once and use everywhere.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Cron</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Schedule</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">0 2 * * *</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-violet rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:code-branch"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">CI/CD Brings Engineering Discipline</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Every git push to your main branch triggers the CI server to run your full test suite automatically. If all tests pass, the CD stage deploys the new version — no manual copying, no forgotten steps, and a full audit trail of exactly what changed and when.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Git push</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">CI tests</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">CD deploy</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-blue rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:shield-halved"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Environments Separate Risk</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Staging is an exact mirror of production — same code, same database schema, different data — so you can validate a change works before it touches real records. If a deploy breaks production, a single <code>git revert</code> and push rolls it back in under a minute.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Staging</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Production</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Rollback</span>
+    </div>
+  </div>
+</div>
+<div class="obj-card obj-card-emerald rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:chart-line"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Monitoring Closes the Loop</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Structured logs give you a timestamped, searchable record of every pipeline run, row count, and error. A health-check endpoint lets your monitoring system poll "did the job succeed?" on a schedule — and send you an alert the moment a run is late, empty, or failed.</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Logging</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Health checks</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Alerting</span>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="key-concepts" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+
+    <!-- Section header -->
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Cron syntax, Python scheduling, CI/CD config, deployment workflow, and monitoring.</p>
+      </div>
+    </div>
+
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+
+        <!-- ── Sidebar ── -->
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full transition-all duration-300" style="height:68px;background:#CB187D;"></div>
+
+          <!-- Tab 0 — active -->
+          <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#CB187D;color:#fff;box-shadow:0 2px 8px rgba(203,24,125,0.25)"><span class="iconify text-[11px]" data-icon="fa6-solid:clock"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Cron Syntax</span>
+          </button>
+
+          <!-- Tab 1 — inactive -->
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:terminal"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Python Scheduler</span>
+          </button>
+
+          <!-- Tab 2 — inactive -->
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:code-branch"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">CI/CD YAML</span>
+          </button>
+
+          <!-- Tab 3 — inactive -->
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:server"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Deployment Workflow</span>
+          </button>
+
+          <!-- Tab 4 — inactive -->
+          <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200" style="background:#f3f4f6;color:#9ca3af"><span class="iconify text-[11px]" data-icon="fa6-solid:chart-line"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Monitoring &amp; Alerting</span>
+          </button>
+
+        </div><!-- /sidebar -->
+
+        <!-- ── Panels ── -->
+        <div class="flex-1 min-w-0 md:pl-5">
+
+          <!-- ── Panel 0 — Cron Syntax (pink) ── -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:clock"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Cron Syntax</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Five fields that define when a job fires</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D] border border-pink-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:clock"></span> Syntax
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>cron expression</strong> is a five-field string that tells the scheduler exactly when to run a job. The fields are, in order: <code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">minute</code> <code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">hour</code> <code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">day-of-month</code> <code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">month</code> <code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">day-of-week</code>. Every cloud scheduler — Airflow, Kubernetes, GitHub Actions — reads this exact format.</p>
+
+                <!-- Widget: rules-table — cron field reference -->
+                <div class="rounded-xl overflow-hidden border border-pink-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-50 to-rose-50 border-b border-pink-100">
+                    <span class="iconify text-pink-500 text-xs" data-icon="fa6-solid:table-list"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-pink-500">Common Cron Patterns</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/3"><code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">0 2 * * *</code></td>
+                        <td class="py-2 px-3 text-gray-500">Every day at 02:00</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">0 */6 * * *</code></td>
+                        <td class="py-2 px-3 text-gray-500">Every 6 hours</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">0 2 * * 1</code></td>
+                        <td class="py-2 px-3 text-gray-500">Every Monday at 02:00</td>
+                      </tr>
+                      <tr class="bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-pink-100 text-pink-800 border border-pink-200 px-1 rounded">*/15 * * * *</code></td>
+                        <td class="py-2 px-3 text-gray-500">Every 15 minutes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify text-gray-400" data-icon="fa6-solid:terminal" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Bash</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-bash"># Cron format: minute hour day-of-month month day-of-week
+0  2  *  *  *   # Run at 02:00 every night
+0  2  *  *  1   # Run at 02:00 on Monday only
+*/30 * * * *    # Run every 30 minutes</code></pre>
+                </div>
+
+                <!-- Tip (pink) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-pink-50 border border-pink-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#CB187D] shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Always validate your cron expression</strong> before deploying. Use an online cron validator — it translates the expression into plain English so you can confirm it fires at the right time. <code class="font-mono bg-pink-200 text-pink-800 border border-pink-300 px-1 rounded">0 2 * * 1</code> means Monday at 02:00, not every minute on Monday.</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /panel 0 -->
+
+          <!-- ── Panel 1 — Python Scheduler (violet) ── -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:terminal"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Python Scheduler</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Schedule Python functions with APScheduler</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 border border-violet-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:cube"></span> Library
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>APScheduler</strong> is a Python library that lets you schedule functions inside your application. It uses the same cron syntax you already know. The <code class="font-mono bg-violet-100 text-violet-800 border border-violet-200 px-1 rounded">BlockingScheduler</code> keeps the process running and fires your function at the scheduled time every day.</p>
+
+                <!-- Widget: comparison-table — APScheduler vs OS cron -->
+                <div class="rounded-xl overflow-hidden border border-violet-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-violet-50 to-purple-50 border-b border-violet-100">
+                    <span class="iconify text-violet-500 text-xs" data-icon="fa6-solid:scale-balanced"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-violet-500">APScheduler vs OS Cron</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <thead>
+                      <tr class="border-b border-violet-50">
+                        <th class="py-2 px-3 text-left font-bold text-gray-400 w-1/3"></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 border border-violet-200 text-[10px] font-bold">APScheduler</span></th>
+                        <th class="py-2 px-3 text-left"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-200 text-[10px] font-bold">OS Cron</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Lives in</td>
+                        <td class="py-2 px-3 text-gray-500">Your Python app</td>
+                        <td class="py-2 px-3 text-gray-500">The server OS</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/40">
+                        <td class="py-2 px-3 font-semibold text-gray-600">Separate daemon?</td>
+                        <td class="py-2 px-3"><span class="text-red-400 font-bold">✗</span> <span class="text-gray-400">Not needed</span></td>
+                        <td class="py-2 px-3"><span class="text-green-500 font-bold">✓</span> <span class="text-gray-400">Yes, crond</span></td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-3 font-semibold text-gray-600">Best for</td>
+                        <td class="py-2 px-3 text-gray-500">Bundled scheduling logic</td>
+                        <td class="py-2 px-3 text-gray-500">Server-level tasks</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">from apscheduler.schedulers.blocking import BlockingScheduler
+import orders_pipeline                       # your pipeline module
+
+scheduler = BlockingScheduler()
+
+@scheduler.scheduled_job("cron", hour=2, minute=0)
+def run_nightly():
+    orders_pipeline.run()                    # runs every night at 02:00
+
+scheduler.start()                            # keeps the process alive</code></pre>
+                </div>
+
+                <!-- Tip (violet) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-violet-50 border border-violet-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-violet-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>APScheduler is great for short pipelines on a single server.</strong> For longer-running or multi-step workflows, consider a dedicated orchestrator like Apache Airflow. Both use <code class="font-mono bg-violet-200 text-violet-800 border border-violet-300 px-1 rounded">cron</code> syntax, so everything you learned here still applies.</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /panel 1 -->
+
+          <!-- ── Panel 2 — CI/CD YAML (blue) ── -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:code-branch"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">CI/CD YAML</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Pipeline-as-code using GitLab CI</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600 border border-blue-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:file-code"></span> Config
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>CI/CD YAML file</strong> describes your pipeline stages in code stored alongside your source. Every <code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1 rounded">git push</code> triggers the file automatically. The <code class="font-mono bg-blue-100 text-blue-800 border border-blue-200 px-1 rounded">when: manual</code> flag adds a human approval step before production changes go live.</p>
+
+                <!-- Widget: comparison-strip — GitLab CI vs GitHub Actions -->
+                <div class="rounded-xl overflow-hidden border border-blue-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+                    <span class="iconify text-blue-500 text-xs" data-icon="fa6-solid:arrows-left-right"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-blue-500">GitLab CI vs GitHub Actions</p>
+                  </div>
+                  <div class="flex gap-0 bg-white">
+                    <div class="flex-1 flex flex-col items-center justify-center px-3 py-3 border-r border-blue-50">
+                      <code class="text-sm font-mono font-bold text-blue-700 bg-blue-100 border border-blue-200 px-2 py-0.5 rounded mb-1">.gitlab-ci.yml</code>
+                      <span class="text-[10px] font-semibold text-blue-600 bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-full">GitLab CI</span>
+                    </div>
+                    <div class="flex items-center justify-center px-3 text-blue-300 text-base font-black">=</div>
+                    <div class="flex-1 flex flex-col items-center justify-center px-3 py-3 border-r border-blue-50">
+                      <code class="text-sm font-mono font-bold text-blue-700 bg-blue-100 border border-blue-200 px-2 py-0.5 rounded mb-1">.github/workflows/*.yml</code>
+                      <span class="text-[10px] font-semibold text-blue-600 bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-full">GitHub Actions</span>
+                    </div>
+                    <div class="flex items-center justify-center px-3 text-blue-300 text-base font-black">&rarr;</div>
+                    <div class="flex-1 flex flex-col items-center justify-center px-3 py-3">
+                      <span class="iconify text-xl text-green-500 mb-1" data-icon="fa6-solid:circle-check"></span>
+                      <span class="text-[10px] font-bold text-green-700 bg-green-100 border border-green-200 px-2 py-0.5 rounded-full">Same concept</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Code block (Style B — Bash for YAML) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify text-gray-400" data-icon="fa6-solid:terminal" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Bash</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-bash"># .gitlab-ci.yml — stored at the root of your repo
+stages: [test, deploy]
+
+test-pipeline:
+  stage: test                     # runs on every push
+  script:
+    - pip install -r requirements.txt
+    - pytest tests/ -v            # blocks deploy if any test fails
+
+deploy-production:
+  stage: deploy
+  when: manual                    # requires a click to promote to prod
+  script:
+    - python orders_pipeline.py
+  variables:
+    DB_URL: $PROD_DB_URL          # secret injected by CI/CD settings</code></pre>
+                </div>
+
+                <!-- Tip (blue) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-blue-50 border border-blue-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Never put secrets in your YAML file.</strong> Store database passwords and API keys as CI/CD variables in your platform's settings panel. Reference them in your YAML as <code class="font-mono bg-blue-200 text-blue-800 border border-blue-300 px-1 rounded">$VARIABLE_NAME</code>. The CI runner injects them at runtime — they never appear in your code history.</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /panel 2 -->
+
+          <!-- ── Panel 3 — Deployment Workflow (emerald) ── -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:server"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Deployment Workflow</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">develop → staging → production</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border border-emerald-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:diagram-project"></span> Pattern
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed">A <strong>deployment workflow</strong> is a fixed sequence of steps that every code change must pass through before reaching production. You push to <code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">develop</code>, CI tests run, then the change promotes to <code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">staging</code>, and only after sign-off does it go to <code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">production</code>. This keeps bad code away from live data.</p>
+
+                <!-- Widget: rules-table — workflow stages -->
+                <div class="rounded-xl overflow-hidden border border-emerald-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-100">
+                    <span class="iconify text-emerald-500 text-xs" data-icon="fa6-solid:list-check"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Deployment Stages</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/3"><code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">develop</code></td>
+                        <td class="py-2 px-3 text-gray-500">Push here — triggers CI tests automatically</td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">staging</code></td>
+                        <td class="py-2 px-3 text-gray-500">Runs full pipeline on copy of production data</td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">production</code></td>
+                        <td class="py-2 px-3 text-gray-500">Promoted manually after staging sign-off</td>
+                      </tr>
+                      <tr class="bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap"><code class="font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 rounded">git revert</code></td>
+                        <td class="py-2 px-3 text-gray-500">Rolls back production in under 30 seconds</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B — Bash) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify text-gray-400" data-icon="fa6-solid:terminal" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Bash</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-bash"># Step 1: push to develop — CI runs tests automatically
+git add . &amp;&amp; git commit -m "fix: handle null region"
+git push origin develop
+
+# Step 2: after CI passes, merge to main (deploys to staging)
+# Step 3: validate on staging, then approve production deploy
+
+# If production breaks — rollback in 30 seconds:
+git revert HEAD --no-edit &amp;&amp; git push origin main</code></pre>
+                </div>
+
+                <!-- Tip (emerald) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-emerald-50 border border-emerald-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:lightbulb"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Let staging run at least one full scheduled cycle</strong> before you promote to production. A silent data error caught in staging is far cheaper to fix than one discovered after a production run has written wrong data to your dashboards. One day of delay saves hours of cleanup.</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /panel 3 -->
+
+          <!-- ── Panel 4 — Monitoring & Alerting (amber) ── -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="amber" role="tabpanel">
+            <div class="rounded-2xl border border-amber-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-amber-500 via-orange-400 to-red-300"></div>
+              <div class="bg-gradient-to-br from-amber-50/60 to-white p-5 space-y-4">
+
+                <!-- Header row -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 shadow-md shrink-0">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:chart-line"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Monitoring &amp; Alerting</h3>
+                      <p class="text-[10px] text-gray-400 leading-none mt-0.5">Log runs, check health, alert on failure</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600 border border-amber-200 shadow-sm">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:bell"></span> Pattern
+                  </span>
+                </div>
+
+                <!-- Definition -->
+                <p class="text-xs text-gray-600 leading-relaxed"><strong>Monitoring</strong> is how you know your pipeline ran, succeeded, and loaded the expected number of rows. You write a status file after every run. A <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">/health</code> endpoint reads that file and returns <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">200 OK</code> or <code class="font-mono bg-amber-100 text-amber-800 border border-amber-200 px-1 rounded">503</code> depending on whether the last run was recent and successful.</p>
+
+                <!-- Widget: rules-table — monitoring checklist -->
+                <div class="rounded-xl overflow-hidden border border-amber-100">
+                  <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100">
+                    <span class="iconify text-amber-500 text-xs" data-icon="fa6-solid:list-check"></span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-amber-500">Monitoring Checklist</p>
+                  </div>
+                  <table class="w-full text-xs border-collapse bg-white">
+                    <tbody>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap w-1/2">Structured logging</td>
+                        <td class="py-2 px-3 text-gray-500">
+                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">timestamp + level + message</code>
+                        </td>
+                      </tr>
+                      <tr class="border-b border-gray-50 bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap">Row-count check</td>
+                        <td class="py-2 px-3 text-gray-500">
+                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">alert if rows == 0</code>
+                        </td>
+                      </tr>
+                      <tr class="border-b border-gray-50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap">Exit code</td>
+                        <td class="py-2 px-3 text-gray-500">
+                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">sys.exit(0)</code> success &nbsp;
+                          <code class="font-mono bg-red-100 text-red-700 border border-red-200 px-1.5 py-0.5 rounded-full text-[10px]">sys.exit(1)</code> failure
+                        </td>
+                      </tr>
+                      <tr class="bg-gray-50/50">
+                        <td class="py-2 px-3 font-semibold text-gray-700 whitespace-nowrap">Stale check</td>
+                        <td class="py-2 px-3 text-gray-500">
+                          <code class="font-mono bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full text-[10px]">alert if last_run &gt; 25 h ago</code>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Code block (Style B — Python) -->
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import json
+from datetime import datetime
+
+def write_status(status: str, rows: int) -&gt; None:
+    with open("pipeline_status.json", "w") as f:
+        json.dump({
+            "status":      status,                   # "success" or "failure"
+            "rows_loaded": rows,                     # alert if this is 0
+            "last_run":    datetime.now().isoformat() # used by /health endpoint
+        }, f)</code></pre>
+                </div>
+
+                <!-- Tip (amber) -->
+                <div class="rounded-xl p-3 flex items-start gap-2.5 bg-amber-50 border border-amber-100">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500 shrink-0 mt-0.5">
+                    <span class="iconify text-white text-[10px]" data-icon="fa6-solid:triangle-exclamation"></span>
+                  </span>
+                  <p class="text-xs text-gray-600"><strong>Row-count monitoring is just as important as error monitoring.</strong> A pipeline that loads zero rows and exits with <code class="font-mono bg-amber-200 text-amber-800 border border-amber-300 px-1 rounded">sys.exit(0)</code> looks healthy to the scheduler but is silently broken. Always alert on unexpectedly low row counts, not only on exceptions.</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- /panel 4 -->
+
+        </div><!-- /panels -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="code-examples">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+          <span class="ce-step-label text-xs font-bold">Log a Pipeline Step</span>
+        </button>
+        <button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+          <span class="ce-step-label text-xs font-bold">Write a Run Log</span>
+        </button>
+        <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:code"></span>
+          <span class="ce-step-label text-xs font-bold">Chain Two Steps</span>
+        </button>
+      </div>
+
+      <!-- Panel 1: Log a Pipeline Step -->
+      <div class="ce-panel ce-panel-anim" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Log a Pipeline Step</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Orders</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">datetime</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">print()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script records when a pipeline step starts and finishes using <strong class="text-gray-800">variables</strong> and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">print()</code>. You can see the step name, the row count, and the elapsed time — all in two lines of output.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">log_step.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">from datetime import datetime              # import datetime to track timing
+step_name = &quot;load_orders&quot;                 # the name of the pipeline step we are running
+start_time = datetime.now()               # record the exact time this step began
+print(&quot;START:&quot;, step_name, start_time.strftime(&quot;%H:%M:%S&quot;))  # log the start message
+rows_loaded = 320                          # number of rows this step processed
+end_time = datetime.now()                 # record when the step finished
+elapsed = (end_time - start_time).seconds # calculate how many seconds it took
+print(&quot;DONE:&quot;, step_name, rows_loaded, &quot;rows in&quot;, elapsed, &quot;seconds&quot;)  # log result</code></pre>
+              </div>
+              <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                  <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python log_step.py</span>
+                </div>
+                <div class="font-mono text-xs text-emerald-400 leading-relaxed">START: load_orders 09:14:22<br>DONE: load_orders 320 rows in 0 seconds</div>
+              </div>
+            </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Every real pipeline logs the same information — step name, row count, and timestamp — so you can trace exactly what ran and when.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Write a Run Log -->
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Write a Run Log</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">datetime</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">File I/O</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script appends a pipeline result to a text file each time it runs. Because it uses <strong class="text-gray-800">append mode</strong>, every run adds a new line without overwriting the previous ones.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">write_run_log.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">from datetime import datetime                   # import datetime for timestamps
+step_name = &quot;load_sales&quot;                       # the name of the pipeline step
+rows_loaded = 1420                              # how many rows this step processed
+run_time = datetime.now().strftime(&quot;%H:%M:%S&quot;) # format the current time as text
+log_line = f&quot;{run_time} | {step_name} | {rows_loaded} rows | success&quot;  # build the log entry
+with open(&quot;run_log.txt&quot;, &quot;a&quot;) as f:           # open the log file in append mode
+    f.write(log_line + &quot;\n&quot;)                   # write this entry as a new line
+print(&quot;Logged:&quot;, log_line)                     # confirm the entry was saved</code></pre>
+              </div>
+              <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                  <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python write_run_log.py</span>
+                </div>
+                <div class="font-mono text-xs text-emerald-400 leading-relaxed">Logged: 09:14:25 | load_sales | 1420 rows | success</div>
+              </div>
+            </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Append mode keeps a full history of every pipeline run in a single file — check the last few lines to see what ran most recently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Chain Two Steps -->
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Chain Two Steps</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Products</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Functions</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sequential Flow</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script defines two <strong class="text-gray-800">functions</strong> and calls them in order — the output of the first step goes straight into the second. This is the core pattern of every data pipeline.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">pipeline_steps.py</span>
+                  </div>
+                </div>
+                <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+              </div>
+              <div class="bg-code">
+                <pre class="overflow-x-auto pre-reset"><code class="language-python">def extract():                        # step 1: return a list of product names
+    return [&quot;Widget A&quot;, &quot;Widget B&quot;, &quot;Widget C&quot;]
+def summarize(products):              # step 2: count how many products loaded
+    return len(products)              # return the total as a single number
+
+raw_data = extract()                  # run step 1 - get the raw product list
+total = summarize(raw_data)           # run step 2 - count the products
+print(&quot;Pipeline complete:&quot;, total, &quot;products loaded&quot;)  # show the final count</code></pre>
+              </div>
+              <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                  <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                  <span class="text-[10px] text-gray-600 font-mono">$ python pipeline_steps.py</span>
+                </div>
+                <div class="font-mono text-xs text-emerald-400 leading-relaxed">Pipeline complete: 3 products loaded</div>
+              </div>
+            </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Add more functions between <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">extract()</code> and <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">summarize()</code> to add more processing steps to your pipeline.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on tasks to reinforce the concepts</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Log a Step</span>
+        </button>
+        <button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Save Run Status</span>
+        </button>
+        <button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Chain Two Steps</span>
+        </button>
+      </div>
+
+      <!-- Panel 1: Log a Step -->
+      <div class="pe-panel pe-panel-anim" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Log a Step</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Pipelines</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">datetime</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">print()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">You are writing a log message for a pipeline step called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">load_customers</code> that processed 540 rows. Store the step name, row count, and current time as variables. Build a single log line that combines all three, then print it. Your output should look like: <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">09:14:22 | load_customers | 540 rows | success</code>.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">log_step.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">from datetime import datetime                        # import datetime to get the current time
+step_name = &quot;load_customers&quot;                        # the name of the pipeline step
+rows_loaded = 540                                    # number of rows this step processed
+run_time = datetime.now().strftime(&quot;%H:%M:%S&quot;)      # format the current time as text
+log_line = run_time + &quot; | &quot; + step_name + &quot; | &quot; + str(rows_loaded) + &quot; rows | success&quot;
+print(log_line)                                      # print the complete log line</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ python log_step.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">09:14:22 | load_customers | 540 rows | success</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Logging the step name and row count on every run means you can open the log file the next morning and see exactly which step ran, how much data it handled, and whether it succeeded — without needing to re-run anything.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Save Run Status -->
+      <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Save Run Status</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Reports</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">File I/O</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Append Mode</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">Your team wants a permanent record of every time the sales report pipeline runs. Write a script that stores a step name (<code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">generate_sales_report</code>), a row count (1280), and a status (<code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">success</code>) as variables. Build one log line from those three values, then append it to a file called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">pipeline_log.txt</code> and print a confirmation message.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">save_run_status.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">step_name = &quot;generate_sales_report&quot;     # the name of the pipeline step
+row_count = 1280                         # how many rows the step processed
+status = &quot;success&quot;                       # the outcome of this run
+log_entry = step_name + &quot; | &quot; + str(row_count) + &quot; rows | &quot; + status  # combine all three values
+with open(&quot;pipeline_log.txt&quot;, &quot;a&quot;) as log_file:  # open the file in append mode
+    log_file.write(log_entry + &quot;
+&quot;)    # write the entry and start a new line
+print(&quot;Written:&quot;, log_entry)             # confirm the entry was saved</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ python save_run_status.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Written: generate_sales_report | 1280 rows | success</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Append mode adds a new line each time the script runs without overwriting the previous ones — open <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">pipeline_log.txt</code> after a few runs and you will see a full history of every execution at a glance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Chain Two Steps -->
+      <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Chain Two Steps</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner
+                  </span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Products</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Functions</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sequential Flow</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">Write two functions: one called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">get_products</code> that returns a list of three product names, and one called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">count_items</code> that takes a list and returns how many items are in it. Call <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">get_products</code> first, pass its result straight into <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">count_items</code>, and print the total. Your output should be: <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">Total products loaded: 3</code>.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">chain_steps.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">def get_products():                              # step 1: return a list of product names
+    return [&quot;Widget A&quot;, &quot;Widget B&quot;, &quot;Widget C&quot;]  # three products to load
+
+def count_items(product_list):                   # step 2: count how many items are in the list
+    return len(product_list)                     # return the total as a number
+
+product_data = get_products()                    # run step 1 and store the result
+total_items = count_items(product_data)          # pass the result into step 2
+print(&quot;Total products loaded:&quot;, total_items)     # print the final count</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ python chain_steps.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">Total products loaded: 3</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Every real pipeline works exactly like this — the output of one function becomes the input of the next. Add a <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">transform</code> function between the two and you already have a three-step extract-transform-load pipeline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mistakes">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Pitfalls to avoid</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">No Log on Failure</span>
+        </button>
+        <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Missing Exit Code</span>
+        </button>
+        <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Relative File Paths</span>
+        </button>
+      </div>
+
+      <!-- Mistake 1: No Log on Failure -->
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Printing the Error Without Saving It to a Log</h4>
+              <p class="text-xs text-gray-500 mt-0.5">A <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">print()</code> call inside <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">except</code> disappears in a scheduled job — the failure leaves no trace.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">When a cron job catches an exception and only calls <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">print()</code>, the message goes to stdout and is immediately discarded — nothing is written to disk. Write the error to a file using <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">open("pipeline.log", "a")</code> so there is a permanent record every time the job fails.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — error silently discarded
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">try:
+    run_pipeline()
+except Exception as e:
+    print(&quot;Error:&quot;, e)</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — write error to a log file
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">try:
+    run_pipeline()                          # run the pipeline step
+except Exception as error_message:
+    with open(&quot;pipeline.log&quot;, &quot;a&quot;) as f:   # open the log in append mode
+        f.write(&quot;ERROR: &quot; + str(error_message) + &quot;
+&quot;)  # save the error</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Think of this like a doctor keeping patient notes — a conversation that isn't written down never happened. Always write errors to a file so you can look back at what went wrong the next morning.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mistake 2: Missing Exit Code -->
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Catching an Error but Not Exiting with a Failure Code</h4>
+              <p class="text-xs text-gray-500 mt-0.5">Without <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">sys.exit(1)</code>, the scheduler sees exit code 0 and marks the job as successful even when it failed.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Every program exits with a number — 0 means success, anything else means failure. Catching an exception and not calling <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">sys.exit(1)</code> leaves the exit code at 0, so cron, Airflow, or any other scheduler reports the job as passed. Add <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">sys.exit(1)</code> inside the <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">except</code> block to signal the failure.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — scheduler reports success
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">try:
+    run_pipeline()
+except Exception as error_message:
+    print(&quot;Failed:&quot;, error_message)
+    # exit code stays at 0 — job appears to succeed</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — signal failure with exit code 1
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import sys                                  # needed to call sys.exit()
+try:
+    run_pipeline()                          # run the pipeline step
+except Exception as error_message:
+    print(&quot;Failed:&quot;, error_message)         # log the reason
+    sys.exit(1)                             # tell the scheduler it failed</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Exit codes are how programs talk to their environment — <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">0</code> is a green light, <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">1</code> is a red light. Without the red light, no alert fires and the broken job runs again tomorrow.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mistake 3: Relative File Paths -->
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Using a Relative Path That Works Locally but Fails in a Scheduled Job</h4>
+              <p class="text-xs text-gray-500 mt-0.5">Cron starts from the system root — a path like <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">"data/orders.csv"</code> resolves to the wrong folder and raises a <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">FileNotFoundError</code>.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Python resolves a relative path like <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">"data/orders.csv"</code> from the current working directory — which is your project folder in a terminal but the system root in cron. Use <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">os.path.dirname(os.path.abspath(__file__))</code> to get the folder the script lives in, then build every path from there.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — path breaks under cron
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import pandas as pd
+# relative path works in your terminal, fails in cron
+orders = pd.read_csv(&quot;data/orders.csv&quot;)</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — path built from script location
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import os, pandas as pd
+script_folder = os.path.dirname(os.path.abspath(__file__))  # folder this script lives in
+data_path = os.path.join(script_folder, &quot;data&quot;, &quot;orders.csv&quot;)  # build the full path
+orders = pd.read_csv(data_path)                              # always resolves correctly</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Think of <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">__file__</code> as the script's own home address — building every path from it means the script finds its files no matter which directory it is launched from.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Summary of what you learned</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Card 01 -->
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+                <span class="iconify text-sm" data-icon="fa6-solid:clock"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Schedule pipelines</p>
+                <p class="text-[11px] text-gray-600 leading-snug">You can write a cron expression to run any pipeline automatically at a set time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 02 -->
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+                <span class="iconify text-sm" data-icon="fa6-solid:code-branch"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">CI/CD basics</p>
+                <p class="text-[11px] text-gray-600 leading-snug">A CI/CD YAML file runs your tests and deploys your code every time you push a change.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 03 -->
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+                <span class="iconify text-sm" data-icon="fa6-solid:server"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Deployment workflow</p>
+                <p class="text-[11px] text-gray-600 leading-snug">Every code change moves through local, staging, and production before going live.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 04 -->
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+                <span class="iconify text-sm" data-icon="fa6-solid:chart-line"></span>
+              </span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Monitoring &amp; alerting</p>
+                <p class="text-[11px] text-gray-600 leading-snug">Structured logs and a health check endpoint tell you exactly when and why a job failed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-white">Lesson Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 4 key concepts. Ready for the knowledge check?</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="knowledge-check">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:brain"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Knowledge Check</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Test your understanding</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <!-- Pill tabs -->
+      <div class="flex flex-wrap items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
+          <span class="qz-step-label text-xs font-bold">Question 1</span>
+        </button>
+        <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
+          <span class="qz-step-label text-xs font-bold">Question 2</span>
+        </button>
+        <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
+          <span class="qz-step-label text-xs font-bold">Question 3</span>
+        </button>
+        <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
+          <span class="qz-step-label text-xs font-bold">Question 4</span>
+        </button>
+        <button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span>
+          <span class="qz-step-label text-xs font-bold">Question 5</span>
+        </button>
+      </div>
+
+      <!-- Q1 — Scheduling (multiple choice, application) -->
+      <div class="qz-panel qz-panel-anim" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Select the one correct answer</p>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q0">
+              <p class="text-sm font-semibold text-gray-800 mb-4">Your pipeline must run automatically at 6:00 AM every day. Which cron expression is correct?</p>
+              <div class="flex flex-col gap-2">
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)"><code class="font-mono">0 6 * * *</code></button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)"><code class="font-mono">6 0 * * *</code></button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)"><code class="font-mono">* 6 * * *</code></button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)"><code class="font-mono">0 6 0 * *</code></button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 — CI/CD (multiple choice, application) -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q2</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Select the one correct answer</p>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q1">
+              <p class="text-sm font-semibold text-gray-800 mb-4">Your CI/CD pipeline runs successfully, but the data job crashes at runtime because <code class="font-mono text-xs bg-gray-100 px-1 rounded">pandas</code> is not installed on the server. Which part of your workflow is missing?</p>
+              <div class="flex flex-col gap-2">
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">A <code class="font-mono text-xs">pip install -r requirements.txt</code> step in the YAML workflow</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">A cron expression to schedule the run</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">A staging environment variable</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">A health check endpoint</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 — Deployment workflow (multiple choice, application) -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q3</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Select the one correct answer</p>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q2">
+              <p class="text-sm font-semibold text-gray-800 mb-4">You fix a bug in your ETL script and push it straight to the production server. The next morning the daily report is empty. Which deployment practice would have caught this before it reached production?</p>
+              <div class="flex flex-col gap-2">
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">Validating the fix on a staging environment with production-like data first</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">Adding a cron expression to retry the pipeline automatically</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">Using <code class="font-mono text-xs">sys.exit(1)</code> at the end of the script</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">Writing structured logs to a <code class="font-mono text-xs">.txt</code> file</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 — Monitoring (True/False, common-mistake) -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">True or False</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q3">
+              <p class="text-sm font-semibold text-gray-800 mb-4">A pipeline that loads zero rows from a source file can still exit with code <code class="font-mono text-xs bg-gray-100 px-1 rounded">0</code> (success), making row-count checks in your monitoring just as important as catching exceptions.</p>
+              <div class="flex gap-3">
+                <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">
+                  <span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True
+                </button>
+                <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">
+                  <span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False
+                </button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q5 — Cross-concept application (multiple choice) -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Select the one correct answer</p>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q4">
+              <p class="text-sm font-semibold text-gray-800 mb-4">Your automated pipeline runs at 3 AM, completes without throwing any Python exception, and exits normally — but the dashboard is empty the next morning. What is the most likely cause?</p>
+              <div class="flex flex-col gap-2">
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">The pipeline loaded zero rows and exited with code <code class="font-mono text-xs">0</code>, which no alert was watching for</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">The cron expression was using the wrong timezone and ran at the wrong time</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">The CI/CD YAML file was missing a <code class="font-mono text-xs">run:</code> step</button>
+                <button class="quiz-btn text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)">The staging environment deployed to production too early</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="next-lesson" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">10</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 4 &middot; Lesson 10</p>
+          <h3 class="text-base font-bold text-gray-800">Performance at Scale</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:stopwatch"></span>
+            </span>
+            <div><p class="text-sm font-semibold text-gray-700">Pipeline Profiling</p></div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:microchip"></span>
+            </span>
+            <div><p class="text-sm font-semibold text-gray-700">Parallel Processing</p></div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0">
+              <span class="iconify text-white text-sm" data-icon="fa6-solid:list-check"></span>
+            </span>
+            <div><p class="text-sm font-semibold text-gray-700">Best Practices Checklist</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <a href="lesson08_data_quality_validation.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Data Quality &amp; Validation</p>
+      </div>
+    </a>
+    <a href="../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+      <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
+    </a>
+    <a href="lesson10_performance_at_scale.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Performance at Scale</p>
+      </div>
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+    </a>
+  </div>
+</section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleToc() {
+    const sidebar = document.querySelector('.lesson-toc-sidebar');
+    const icon = document.getElementById('toc-toggle-icon');
+    const collapsed = sidebar.classList.toggle('toc-collapsed');
+    icon.setAttribute('data-icon', collapsed ? 'fa6-solid:angles-right' : 'fa6-solid:angles-left');
+    if (window.Iconify) Iconify.scan();
+  }
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = [...tocLinks].map(link => document.getElementById(link.getAttribute('href').replace('#', ''))).filter(Boolean);
+  function updateScrollSpy() {
+    let currentId = '';
+    sections.forEach(section => { if (window.scrollY >= section.offsetTop - 120) currentId = section.id; });
+    tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + currentId); });
+  }
+  function updateScrollProgress() {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+  function updateBackToTop() { document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400); }
+  window.addEventListener('scroll', () => { updateScrollSpy(); updateScrollProgress(); updateBackToTop(); });
+
+  function copyCode(btn) {
+    const container = btn.closest('.relative') || btn.parentElement.closest('div');
+    const pre = container ? container.querySelector('pre') : null;
+    const text = pre ? pre.innerText : '';
+    function showFeedback() {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';
+      btn.style.background = 'rgba(34,197,94,0.2)'; btn.style.borderColor = 'rgba(34,197,94,0.5)'; btn.style.color = '#4ade80';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; }, 2000);
+    }
+    function fallbackCopy() {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); showFeedback();
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy); } else { fallbackCopy(); }
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    if (!isOpen && window.Prism) Prism.highlightAllUnder(body);
+  }
+
+  function switchTab(btn, panelId) {
+    const container = btn.closest('.bg-white') || btn.closest('section') || btn.parentElement.closest('div');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById(panelId);
+    if (panel) { panel.classList.add('active'); if (window.Prism) Prism.highlightAllUnder(panel); }
+  }
+
+  const kcColors = [
+    { num: '#CB187D', numShadow: 'rgba(203,24,125,0.25)', activeBg: '#fdf0f7' },
+    { num: '#7c3aed', numShadow: 'rgba(124,58,237,0.25)', activeBg: '#f5f3ff' },
+    { num: '#2563eb', numShadow: 'rgba(37,99,235,0.25)',  activeBg: '#eff6ff' },
+    { num: '#059669', numShadow: 'rgba(5,150,105,0.25)',  activeBg: '#ecfdf5' },
+    { num: '#d97706', numShadow: 'rgba(217,119,6,0.25)',  activeBg: '#fffbeb' },
+    { num: '#0891b2', numShadow: 'rgba(8,145,178,0.25)',  activeBg: '#ecfeff' }
+  ];
+  function switchKcTab(idx) {
+    const c = kcColors[idx % kcColors.length];
+    const tabs = document.querySelectorAll('.kc-tab');
+    const panels = document.querySelectorAll('.kc-panel');
+    const indicator = document.querySelector('.kc-indicator');
+    tabs.forEach((t, i) => {
+      const num = t.querySelector('.kc-tab-num');
+      const label = t.querySelector('.kc-tab-label');
+      if (i === idx) {
+        t.classList.add('kc-tab-active'); t.style.background = c.activeBg;
+        if (num) { num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
+        if (label) { label.style.color = '#111827'; }
+      } else {
+        t.classList.remove('kc-tab-active'); t.style.background = '';
+        if (num) { num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
+        if (label) { label.style.color = '#9ca3af'; }
+      }
+    });
+    if (indicator && tabs[idx]) { indicator.style.top = tabs[idx].offsetTop + 'px'; indicator.style.height = tabs[idx].offsetHeight + 'px'; indicator.style.background = c.num; }
+    panels.forEach((p, i) => { if (i === idx) { p.classList.remove('hidden'); p.classList.remove('kc-panel-anim'); void p.offsetWidth; p.classList.add('kc-panel-anim'); } else { p.classList.add('hidden'); } });
+    const visible = panels[idx]; if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+
+  function _switchDarkPills(prefix, idx) {
+    document.querySelectorAll('.' + prefix + '-step').forEach((s, i) => {
+      if (i === idx) {
+        s.classList.add(prefix + '-step-active');
+        s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)'; s.style.color = '#fff';
+        s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
+      } else {
+        s.classList.remove(prefix + '-step-active');
+        s.style.background = '#1f2937'; s.style.color = '#9ca3af'; s.style.boxShadow = 'none';
+      }
+    });
+    document.querySelectorAll('.' + prefix + '-panel').forEach((p, i) => {
+      if (i === idx) { p.classList.remove('hidden'); p.classList.remove(prefix + '-panel-anim'); void p.offsetWidth; p.classList.add(prefix + '-panel-anim'); }
+      else { p.classList.add('hidden'); }
+    });
+    const visible = document.querySelectorAll('.' + prefix + '-panel:not(.hidden)')[0];
+    if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+  function switchCeTab(idx) { _switchDarkPills('ce', idx); }
+  function switchMkTab(idx) { _switchDarkPills('mk', idx); }
+  function switchPeTab(idx) { _switchDarkPills('pe', idx); }
+  function switchQzTab(idx) { _switchDarkPills('qz', idx); }
+
+  function checkQuiz(btn, answer) {
+    const question = btn.closest('.quiz-question');
+    const feedback = question.querySelector('.quiz-feedback');
+    const buttons = question.querySelectorAll('.quiz-btn');
+    buttons.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
+    if (answer === true) {
+      btn.classList.add('correct'); btn.style.opacity = '1';
+      feedback.textContent = '\u2713 Correct! This is a key concept from the lesson.';
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-green-600';
+    } else {
+      btn.classList.add('incorrect'); btn.style.opacity = '1';
+      feedback.textContent = '\u2717 Not quite \u2014 review the lesson recap above for a refresher.';
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-red-500';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => { if (window.Prism) Prism.highlightAll(); });
+</script>
