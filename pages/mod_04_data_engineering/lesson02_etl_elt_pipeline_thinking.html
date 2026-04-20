@@ -1849,7 +1849,7 @@ while True:
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
         <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
         <div class="flex-1">
-          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Tasks</p>
+          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Task</p>
           <ol class="space-y-1.5 text-sm text-gray-600 list-decimal pl-4">
             <li>Write an <code>extract(filepath)</code> function that reads <code>orders.csv</code> and prints how many rows were loaded.</li>
             <li>Complete the <code>transform(df)</code> function: drop nulls in <code>customer_id</code> and <code>total</code>, parse <code>order_date</code> as datetime, remove rows where <code>total &lt; 0</code>, and add a <code>tax</code> column equal to <code>total * 0.1</code>.</li>
@@ -1858,15 +1858,15 @@ while True:
           </ol>
         </div>
       </div>
-      <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-[#fdf0f7] hover:border-[#f5c6e0] transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div class="flex items-center gap-2">
-          <span class="iconify text-brand" data-icon="fa6-solid:eye"></span>
-          Show Solution
-        </div>
-        <span class="iconify accordion-chevron text-gray-400 text-xs" data-icon="fa6-solid:chevron-down"></span>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
       </button>
       <div class="accordion-body">
-        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
             <div class="flex items-center gap-3">
               <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -1907,7 +1907,13 @@ def run():
 run()</code></pre>
           </div>
         </div>
-        <p class="text-xs text-gray-500 mt-3 italic">Why this matters: splitting extract, transform, and load into separate functions means that if the load step fails at midnight, you fix and rerun only that one function without re-downloading or re-cleaning all the data — critical when your source is a slow API or a multi-gigabyte CSV file.</p>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+          <p class="text-sm text-gray-600">Splitting extract, transform, and load into separate functions means that if the load step fails at midnight, you fix and rerun only that one function without re-downloading or re-cleaning all the data — critical when your source is a slow API or a multi-gigabyte CSV file.</p>
+
+        </div>
       </div>
     </div>
   </div>
@@ -1932,7 +1938,7 @@ run()</code></pre>
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
         <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
         <div class="flex-1">
-          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Tasks</p>
+          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Task</p>
           <ol class="space-y-1.5 text-sm text-gray-600 list-decimal pl-4">
             <li>For each pipeline script in the solution, add a comment at the top labelling it as either <code>ETL</code> or <code>ELT</code>.</li>
             <li>On the line that performs (or skips) the transformation, add a comment stating <em>where</em> the transform runs &mdash; in Python or inside the warehouse.</li>
@@ -1940,15 +1946,15 @@ run()</code></pre>
           </ol>
         </div>
       </div>
-      <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-[#fdf0f7] hover:border-[#f5c6e0] transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div class="flex items-center gap-2">
-          <span class="iconify text-brand" data-icon="fa6-solid:eye"></span>
-          Show Solution
-        </div>
-        <span class="iconify accordion-chevron text-gray-400 text-xs" data-icon="fa6-solid:chevron-down"></span>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
       </button>
       <div class="accordion-body">
-        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
             <div class="flex items-center gap-3">
               <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -1985,7 +1991,13 @@ raw.to_sql(&quot;events_raw&quot;, engine_b, if_exists=&quot;replace&quot;, inde
 # SELECT quantity * unit_price AS revenue FROM events_raw  &larr; warehouse runs this (ELT)</code></pre>
           </div>
         </div>
-        <p class="text-xs text-gray-500 mt-3 italic">Why this matters: knowing which pattern a pipeline uses tells you immediately where to look when the output is wrong &mdash; if it is ETL and the numbers are off, the bug is in your Python transform; if it is ELT and the numbers are off, the bug is in your SQL model or dbt macro.</p>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+          <p class="text-sm text-gray-600">Knowing which pattern a pipeline uses tells you immediately where to look when the output is wrong &mdash; if it is ETL and the numbers are off, the bug is in your Python transform; if it is ELT and the numbers are off, the bug is in your SQL model or dbt macro.</p>
+
+        </div>
       </div>
     </div>
   </div>
@@ -2010,7 +2022,7 @@ raw.to_sql(&quot;events_raw&quot;, engine_b, if_exists=&quot;replace&quot;, inde
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
         <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
         <div class="flex-1">
-          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Tasks</p>
+          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Task</p>
           <ol class="space-y-1.5 text-sm text-gray-600 list-decimal pl-4">
             <li>Open the solution and read the buggy pipeline. Trace what happens to the <code>sales</code> table if you call <code>run()</code> three times in a row, then write one comment in the code explaining the problem.</li>
             <li>Fix the <code>load()</code> function so the pipeline is idempotent &mdash; running it any number of times must produce exactly the same result in the database.</li>
@@ -2018,15 +2030,15 @@ raw.to_sql(&quot;events_raw&quot;, engine_b, if_exists=&quot;replace&quot;, inde
           </ol>
         </div>
       </div>
-      <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-[#fdf0f7] hover:border-[#f5c6e0] transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div class="flex items-center gap-2">
-          <span class="iconify text-brand" data-icon="fa6-solid:eye"></span>
-          Show Solution
-        </div>
-        <span class="iconify accordion-chevron text-gray-400 text-xs" data-icon="fa6-solid:chevron-down"></span>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
       </button>
       <div class="accordion-body">
-        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
             <div class="flex items-center gap-3">
               <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2070,7 +2082,13 @@ def run():
 run()</code></pre>
           </div>
         </div>
-        <p class="text-xs text-gray-500 mt-3 italic">Why this matters: a pipeline that silently appends duplicate rows on every re-run raises no error and produces plausible-looking totals until someone audits the data days later; the 20% guard makes suspicious data loss loud and immediate, so failures are caught in seconds rather than discovered in a board report.</p>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+          <p class="text-sm text-gray-600">A pipeline that silently appends duplicate rows on every re-run raises no error and produces plausible-looking totals until someone audits the data days later; the 20% guard makes suspicious data loss loud and immediate, so failures are caught in seconds rather than discovered in a board report.</p>
+
+        </div>
       </div>
     </div>
   </div>
@@ -2095,7 +2113,7 @@ run()</code></pre>
       <div class="flex items-start gap-3 rounded-xl p-4 task-box">
         <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
         <div class="flex-1">
-          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Tasks</p>
+          <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Your Task</p>
           <ol class="space-y-1.5 text-sm text-gray-600 list-decimal pl-4">
             <li>Open the solution and read the batch pipeline. Identify the single line that makes it batch rather than streaming, and add a comment on that line explaining why.</li>
             <li>Write a <code>simulate_stream(filepath)</code> generator function that reads the CSV once but <code>yield</code>s one row as a <code>dict</code> at a time, simulating a Kafka or Pub/Sub message stream.</li>
@@ -2103,15 +2121,15 @@ run()</code></pre>
           </ol>
         </div>
       </div>
-      <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-[#fdf0f7] hover:border-[#f5c6e0] transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div class="flex items-center gap-2">
-          <span class="iconify text-brand" data-icon="fa6-solid:eye"></span>
-          Show Solution
-        </div>
-        <span class="iconify accordion-chevron text-gray-400 text-xs" data-icon="fa6-solid:chevron-down"></span>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
       </button>
       <div class="accordion-body">
-        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
             <div class="flex items-center gap-3">
               <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2159,7 +2177,13 @@ def process_stream(generator):
 process_stream(simulate_stream(&quot;orders.csv&quot;))</code></pre>
           </div>
         </div>
-        <p class="text-xs text-gray-500 mt-3 italic">Why this matters: real streaming pipelines (Kafka, Pub/Sub, Kinesis) deliver one event at a time and never give you a complete batch to load into a DataFrame &mdash; understanding Python generators prepares you to handle live data sources where you must process each record immediately rather than accumulating everything before acting.</p>
+        <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+          <p class="text-sm text-gray-600">Real streaming pipelines (Kafka, Pub/Sub, Kinesis) deliver one event at a time and never give you a complete batch to load into a DataFrame &mdash; understanding Python generators prepares you to handle live data sources where you must process each record immediately rather than accumulating everything before acting.</p>
+
+        </div>
       </div>
     </div>
   </div>

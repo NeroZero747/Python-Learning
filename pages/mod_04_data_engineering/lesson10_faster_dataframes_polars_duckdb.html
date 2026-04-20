@@ -1965,7 +1965,7 @@ JOIN 'customers.csv' AS c
       </div>
     </div>
     <div class="bg-white px-8 py-7 space-y-6">
-<div class="flex flex-wrap items-center gap-2 mb-6" role="tablist">
+<div class="flex items-center gap-2 mb-6" role="tablist">
   <button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Exercise 1</span></button>
   <button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Exercise 2</span></button>
   <button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Exercise 3</span></button>
@@ -1988,21 +1988,24 @@ JOIN 'customers.csv' AS c
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Tasks</p>
           <ol class="list-decimal list-inside space-y-1.5 text-sm text-gray-600">
-            <li>Import <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">polars as pl</code> at the top of your script.</li>
-            <li>Call <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pl.scan_csv("orders.csv")</code> — do not use <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pl.read_csv()</code> here.</li>
-            <li>Chain <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.filter(pl.col("status") == "shipped")</code> to keep only shipped orders.</li>
-            <li>Chain <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.group_by("product_category").agg(...)</code> to sum revenue and count order IDs.</li>
-            <li>Sort by revenue descending, call <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.collect()</code>, and print the result.</li>
+            <li>Import <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">polars as pl</code> at the top of your script.</li>
+            <li>Call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pl.scan_csv("orders.csv")</code> — do not use <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pl.read_csv()</code> here.</li>
+            <li>Chain <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.filter(pl.col("status") == "shipped")</code> to keep only shipped orders.</li>
+            <li>Chain <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.group_by("product_category").agg(...)</code> to sum revenue and count order IDs.</li>
+            <li>Sort by revenue descending, call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.collect()</code>, and print the result.</li>
           </ol>
         </div>
       </div>
       <div>
-        <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-          <span class="flex items-center gap-2"><span class="iconify text-brand" data-icon="fa6-solid:eye"></span> Show Solution</span>
-          <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+        <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+          <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+          <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
         </button>
         <div class="accordion-body">
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
   <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2029,7 +2032,13 @@ result = (
 print(result)</code></pre>
   </div>
 </div>
-          <p class="text-xs text-gray-500 mt-3 px-1"><strong>Why this matters:</strong> This pattern &mdash; scan, filter, aggregate, sort, collect &mdash; is the Polars equivalent of a filtered SQL GROUP BY query, and it is the most common pipeline you will write on large sales or log datasets.</p>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+            <p class="text-sm text-gray-600">This pattern &mdash; scan, filter, aggregate, sort, collect &mdash; is the Polars equivalent of a filtered SQL GROUP BY query, and it is the most common pipeline you will write on large sales or log datasets.</p>
+
+          </div>
         </div>
       </div>
     </div>
@@ -2051,21 +2060,24 @@ print(result)</code></pre>
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Tasks</p>
           <ol class="list-decimal list-inside space-y-1.5 text-sm text-gray-600">
-            <li>Import <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">duckdb</code> and open a connection with <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">con = duckdb.connect()</code>.</li>
-            <li>Write a SQL query that selects <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">region</code> and <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">SUM(revenue)</code> from <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">'sales.parquet'</code>.</li>
-            <li>Add a <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">WHERE year &gt;= 2024</code> clause to restrict to recent rows.</li>
-            <li>Add <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">GROUP BY region ORDER BY total DESC LIMIT 5</code> to get the top 5.</li>
-            <li>Call <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.fetchdf()</code> and print the returned pandas DataFrame.</li>
+            <li>Import <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">duckdb</code> and open a connection with <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">con = duckdb.connect()</code>.</li>
+            <li>Write a SQL query that selects <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">region</code> and <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">SUM(revenue)</code> from <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">'sales.parquet'</code>.</li>
+            <li>Add a <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">WHERE year &gt;= 2024</code> clause to restrict to recent rows.</li>
+            <li>Add <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">GROUP BY region ORDER BY total DESC LIMIT 5</code> to get the top 5.</li>
+            <li>Call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.fetchdf()</code> and print the returned pandas DataFrame.</li>
           </ol>
         </div>
       </div>
       <div>
-        <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-          <span class="flex items-center gap-2"><span class="iconify text-brand" data-icon="fa6-solid:eye"></span> Show Solution</span>
-          <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+        <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+          <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+          <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
         </button>
         <div class="accordion-body">
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
   <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2093,7 +2105,13 @@ result = con.execute("""
 print(result)</code></pre>
   </div>
 </div>
-          <p class="text-xs text-gray-500 mt-3 px-1"><strong>Why this matters:</strong> This two-line pattern replaces loading an entire Parquet file into pandas memory just to answer a single aggregation question — for a 5 GB file that means the difference between a 30-second load and a 2-second query.</p>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+            <p class="text-sm text-gray-600">This two-line pattern replaces loading an entire Parquet file into pandas memory just to answer a single aggregation question — for a 5 GB file that means the difference between a 30-second load and a 2-second query.</p>
+
+          </div>
         </div>
       </div>
     </div>
@@ -2115,20 +2133,23 @@ print(result)</code></pre>
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Tasks</p>
           <ol class="list-decimal list-inside space-y-1.5 text-sm text-gray-600">
-            <li>Import <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pandas as pd</code>, <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">polars as pl</code>, and <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">time</code>.</li>
-            <li>Write a pandas version: read <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">large_data.csv</code>, filter <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">score &gt; 75</code>, mean of <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">value</code> grouped by <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">category</code>. Wrap it in <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">time.perf_counter()</code> calls.</li>
-            <li>Write the same query in Polars lazy mode: <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">scan_csv()</code> → <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.filter()</code> → <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.group_by().agg()</code> → <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.collect()</code>. Time that too.</li>
-            <li>Compute the speedup as <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pd_time / pl_time</code> and print both times plus the ratio.</li>
+            <li>Import <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pandas as pd</code>, <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">polars as pl</code>, and <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">time</code>.</li>
+            <li>Write a pandas version: read <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">large_data.csv</code>, filter <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">score &gt; 75</code>, mean of <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">value</code> grouped by <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">category</code>. Wrap it in <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">time.perf_counter()</code> calls.</li>
+            <li>Write the same query in Polars lazy mode: <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">scan_csv()</code> → <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.filter()</code> → <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.group_by().agg()</code> → <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.collect()</code>. Time that too.</li>
+            <li>Compute the speedup as <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pd_time / pl_time</code> and print both times plus the ratio.</li>
           </ol>
         </div>
       </div>
       <div>
-        <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-          <span class="flex items-center gap-2"><span class="iconify text-brand" data-icon="fa6-solid:eye"></span> Show Solution</span>
-          <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+        <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+          <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+          <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
         </button>
         <div class="accordion-body">
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
   <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2167,7 +2188,13 @@ print(f"Polars : {pl_time:.2f}s")
 print(f"Speedup: {pd_time / pl_time:.1f}x")</code></pre>
   </div>
 </div>
-          <p class="text-xs text-gray-500 mt-3 px-1"><strong>Why this matters:</strong> Running this benchmark on your own machine makes the performance difference tangible and gives you a data-backed argument for adopting Polars the next time a pandas pipeline starts slowing down a daily report.</p>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+            <p class="text-sm text-gray-600">Running this benchmark on your own machine makes the performance difference tangible and gives you a data-backed argument for adopting Polars the next time a pandas pipeline starts slowing down a daily report.</p>
+
+          </div>
         </div>
       </div>
     </div>
@@ -2189,21 +2216,24 @@ print(f"Speedup: {pd_time / pl_time:.1f}x")</code></pre>
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Tasks</p>
           <ol class="list-decimal list-inside space-y-1.5 text-sm text-gray-600">
-            <li>Import <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">polars as pl</code> and run a lazy scan + filter on any CSV file.</li>
-            <li>Call <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.collect()</code> and assign the result to <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">polars_df</code>.</li>
-            <li>Print <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">type(polars_df)</code> and confirm it shows <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">polars.DataFrame</code>.</li>
-            <li>Call <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">polars_df.to_pandas()</code> and assign to <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pandas_df</code>.</li>
-            <li>Print <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">type(pandas_df)</code> and <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pandas_df.head()</code> to verify the conversion.</li>
+            <li>Import <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">polars as pl</code> and run a lazy scan + filter on any CSV file.</li>
+            <li>Call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.collect()</code> and assign the result to <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">polars_df</code>.</li>
+            <li>Print <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">type(polars_df)</code> and confirm it shows <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">polars.DataFrame</code>.</li>
+            <li>Call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">polars_df.to_pandas()</code> and assign to <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pandas_df</code>.</li>
+            <li>Print <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">type(pandas_df)</code> and <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pandas_df.head()</code> to verify the conversion.</li>
           </ol>
         </div>
       </div>
       <div>
-        <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-          <span class="flex items-center gap-2"><span class="iconify text-brand" data-icon="fa6-solid:eye"></span> Show Solution</span>
-          <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+        <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+          <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+          <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
         </button>
         <div class="accordion-body">
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
   <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2232,7 +2262,13 @@ print(type(pandas_df))   # <class 'pandas.core.frame.DataFrame'>
 print(pandas_df.head())</code></pre>
   </div>
 </div>
-          <p class="text-xs text-gray-500 mt-3 px-1"><strong>Why this matters:</strong> Many downstream tools (Matplotlib, Seaborn, scikit-learn) only accept pandas DataFrames, so knowing how to bridge Polars output back to pandas lets you use the right tool for each stage of your pipeline.</p>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+            <p class="text-sm text-gray-600">Many downstream tools (Matplotlib, Seaborn, scikit-learn) only accept pandas DataFrames, so knowing how to bridge Polars output back to pandas lets you use the right tool for each stage of your pipeline.</p>
+
+          </div>
         </div>
       </div>
     </div>
@@ -2254,21 +2290,24 @@ print(pandas_df.head())</code></pre>
         <div>
           <p class="text-xs font-bold uppercase tracking-widest mb-2 text-brand">Tasks</p>
           <ol class="list-decimal list-inside space-y-1.5 text-sm text-gray-600">
-            <li>Import <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">pandas as pd</code> and <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">duckdb</code>.</li>
-            <li>Create a small sample DataFrame called <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">df</code> with columns <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">region</code> and <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">revenue</code>.</li>
-            <li>Open a DuckDB connection with <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">con = duckdb.connect()</code>.</li>
-            <li>Write a SQL query that references <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">df</code> by name directly in the <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">FROM</code> clause — no export or file needed.</li>
-            <li>Call <code class="font-mono text-xs bg-[#fdf0f7] px-1 rounded">.fetchdf()</code> and print the grouped result to confirm DuckDB read the in-memory DataFrame.</li>
+            <li>Import <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pandas as pd</code> and <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">duckdb</code>.</li>
+            <li>Create a small sample DataFrame called <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">df</code> with columns <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">region</code> and <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">revenue</code>.</li>
+            <li>Open a DuckDB connection with <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">con = duckdb.connect()</code>.</li>
+            <li>Write a SQL query that references <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">df</code> by name directly in the <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">FROM</code> clause — no export or file needed.</li>
+            <li>Call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.fetchdf()</code> and print the grouped result to confirm DuckDB read the in-memory DataFrame.</li>
           </ol>
         </div>
       </div>
       <div>
-        <button class="accordion-toggle w-full flex items-center justify-between rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-          <span class="flex items-center gap-2"><span class="iconify text-brand" data-icon="fa6-solid:eye"></span> Show Solution</span>
-          <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+        <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+          <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+          <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
         </button>
         <div class="accordion-body">
-<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-3">
+<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
   <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2303,7 +2342,13 @@ result = con.execute("""
 print(result)</code></pre>
   </div>
 </div>
-          <p class="text-xs text-gray-500 mt-3 px-1"><strong>Why this matters:</strong> Being able to run SQL directly against a pandas DataFrame in memory means you can use whichever mental model fits the problem best — Python code for transformations and SQL for ad-hoc aggregations — without ever writing the data to disk.</p>
+          <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+            <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+            <p class="text-sm text-gray-600">Being able to run SQL directly against a pandas DataFrame in memory means you can use whichever mental model fits the problem best — Python code for transformations and SQL for ad-hoc aggregations — without ever writing the data to disk.</p>
+
+          </div>
         </div>
       </div>
     </div>

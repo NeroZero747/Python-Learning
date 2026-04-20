@@ -1699,7 +1699,7 @@ df["tier"] = np.where(df["amount"] >= 1000, "Premium", "Standard")</code></pre>
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
-                <span class="iconify text-base" data-icon="fa6-solid:memory"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
                 <h3 class="font-bold text-gray-800">Profile Your DataFrame's Memory</h3>
@@ -1713,23 +1713,26 @@ df["tier"] = np.where(df["amount"] >= 1000, "Premium", "Standard")</code></pre>
               <div class="space-y-2">
                 <p class="text-xs font-bold uppercase tracking-widest text-brand">Tasks</p>
                 <ol class="space-y-1.5 list-none pl-0">
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Load <code class="font-mono text-xs">"sales_data.csv"</code> and call <code class="font-mono text-xs">df.memory_usage(deep=True)</code> to see how many bytes each column uses.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>Divide the total by <code class="font-mono text-xs">1024 ** 2</code> to convert bytes to megabytes and print the result.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Find the single most expensive column by calling <code class="font-mono text-xs">.idxmax()</code> on the memory usage result.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Print <code class="font-mono text-xs">df.dtypes</code> side by side with the memory report and note which dtype is responsible for the highest memory cost.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Load <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"sales_data.csv"</code> and call <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">df.memory_usage(deep=True)</code> to see how many bytes each column uses.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>Divide the total by <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">1024 ** 2</code> to convert bytes to megabytes and print the result.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Find the single most expensive column by calling <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.idxmax()</code> on the memory usage result.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Print <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">df.dtypes</code> side by side with the memory report and note which dtype is responsible for the highest memory cost.</span></li>
                 </ol>
               </div>
             </div>
 
-            <button class="accordion-toggle w-full flex items-center justify-between text-xs font-semibold text-gray-500 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-              <span class="flex items-center gap-2">
-                <span class="iconify text-[#CB187D]" data-icon="fa6-solid:eye"></span>
-                Show Solution
-              </span>
-              <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
+
             </button>
             <div class="accordion-body">
-              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-1">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
                 <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -1762,9 +1765,13 @@ print("\nDtype report:")
 print(df.dtypes)</code></pre>
                 </div>
               </div>
-              <p class="text-xs text-gray-500 mt-3 px-1">
-                <strong class="text-gray-700">Why this matters:</strong> Before you optimize a single column, you need to know which ones are actually worth targeting — <code class="font-mono text-[10px]">memory_usage(deep=True)</code> gives you that map in seconds, so you spend time on the columns causing 80% of the problem rather than guessing.
-              </p>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+                <p class="text-sm text-gray-600">Before you optimize a single column, you need to know which ones are actually worth targeting — <code class="font-mono text-[10px]">memory_usage(deep=True)</code> gives you that map in seconds, so you spend time on the columns causing 80% of the problem rather than guessing.</p>
+
+              </div>
             </div>
           </div>
         </div>
@@ -1777,7 +1784,7 @@ print(df.dtypes)</code></pre>
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
-                <span class="iconify text-base" data-icon="fa6-solid:compress"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
                 <h3 class="font-bold text-gray-800">Downcast a DataFrame's Dtypes</h3>
@@ -1791,23 +1798,26 @@ print(df.dtypes)</code></pre>
               <div class="space-y-2">
                 <p class="text-xs font-bold uppercase tracking-widest text-brand">Tasks</p>
                 <ol class="space-y-1.5 list-none pl-0">
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Measure and print the DataFrame's starting size in MB using <code class="font-mono text-xs">memory_usage(deep=True)</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>Loop over all <code class="font-mono text-xs">int64</code> columns and downcast each one using <code class="font-mono text-xs">pd.to_numeric(col, downcast="integer")</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Do the same for <code class="font-mono text-xs">float64</code> columns using <code class="font-mono text-xs">downcast="float"</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Convert the <code class="font-mono text-xs">"region"</code> and <code class="font-mono text-xs">"status"</code> columns to <code class="font-mono text-xs">category</code> dtype, then print the final size and the MB saved.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Measure and print the DataFrame's starting size in MB using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">memory_usage(deep=True)</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>Loop over all <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">int64</code> columns and downcast each one using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pd.to_numeric(col, downcast="integer")</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Do the same for <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">float64</code> columns using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">downcast="float"</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Convert the <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"region"</code> and <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"status"</code> columns to <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">category</code> dtype, then print the final size and the MB saved.</span></li>
                 </ol>
               </div>
             </div>
 
-            <button class="accordion-toggle w-full flex items-center justify-between text-xs font-semibold text-gray-500 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-              <span class="flex items-center gap-2">
-                <span class="iconify text-[#CB187D]" data-icon="fa6-solid:eye"></span>
-                Show Solution
-              </span>
-              <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
+
             </button>
             <div class="accordion-body">
-              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-1">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
                 <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -1850,9 +1860,13 @@ print(f"After:  {after_mb:.1f} MB  |  Saved: {before_mb - after_mb:.1f} MB")
 print(df.dtypes)</code></pre>
                 </div>
               </div>
-              <p class="text-xs text-gray-500 mt-3 px-1">
-                <strong class="text-gray-700">Why this matters:</strong> On a real 500 MB production file this same pattern routinely cuts memory to under 100 MB — often the difference between an analysis that crashes and one that runs. The fix takes under 10 lines and never changes the data values, only the internal storage format.
-              </p>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+                <p class="text-sm text-gray-600">On a real 500 MB production file this same pattern routinely cuts memory to under 100 MB — often the difference between an analysis that crashes and one that runs. The fix takes under 10 lines and never changes the data values, only the internal storage format.</p>
+
+              </div>
             </div>
           </div>
         </div>
@@ -1865,7 +1879,7 @@ print(df.dtypes)</code></pre>
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
-                <span class="iconify text-base" data-icon="fa6-solid:layer-group"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
                 <h3 class="font-bold text-gray-800">Count Rows Without Loading the Full File</h3>
@@ -1879,23 +1893,26 @@ print(df.dtypes)</code></pre>
               <div class="space-y-2">
                 <p class="text-xs font-bold uppercase tracking-widest text-brand">Tasks</p>
                 <ol class="space-y-1.5 list-none pl-0">
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Create a chunk iterator by calling <code class="font-mono text-xs">pd.read_csv("large_sales.csv", chunksize=100_000)</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>For each chunk, filter the rows where <code class="font-mono text-xs">amount &gt; 1000</code> using a boolean condition.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Create a chunk iterator by calling <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pd.read_csv("large_sales.csv", chunksize=100_000)</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>For each chunk, filter the rows where <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">amount &gt; 1000</code> using a boolean condition.</span></li>
                   <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Accumulate the count of qualifying rows from each chunk into a running total.</span></li>
                   <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Print the final count formatted with a thousands separator — note that the full file was never held in RAM at once.</span></li>
                 </ol>
               </div>
             </div>
 
-            <button class="accordion-toggle w-full flex items-center justify-between text-xs font-semibold text-gray-500 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-              <span class="flex items-center gap-2">
-                <span class="iconify text-[#CB187D]" data-icon="fa6-solid:eye"></span>
-                Show Solution
-              </span>
-              <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
+
             </button>
             <div class="accordion-body">
-              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-1">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
                 <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -1924,9 +1941,13 @@ print(f"Rows with amount > 1000: {total_count:,}")
 # Every row was visited exactly once — one chunk at a time</code></pre>
                 </div>
               </div>
-              <p class="text-xs text-gray-500 mt-3 px-1">
-                <strong class="text-gray-700">Why this matters:</strong> This is the standard pattern for summarizing a file that is larger than available RAM — the file can be 10 GB and the machine can have 4 GB of RAM and the script will still finish correctly because it only holds one batch of 100,000 rows at a time.
-              </p>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+                <p class="text-sm text-gray-600">This is the standard pattern for summarizing a file that is larger than available RAM — the file can be 10 GB and the machine can have 4 GB of RAM and the script will still finish correctly because it only holds one batch of 100,000 rows at a time.</p>
+
+              </div>
             </div>
           </div>
         </div>
@@ -1939,7 +1960,7 @@ print(f"Rows with amount > 1000: {total_count:,}")
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
-                <span class="iconify text-base" data-icon="fa6-solid:bolt"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
                 <h3 class="font-bold text-gray-800">Replace a Slow Loop with a Vectorized Operation</h3>
@@ -1953,23 +1974,26 @@ print(f"Rows with amount > 1000: {total_count:,}")
               <div class="space-y-2">
                 <p class="text-xs font-bold uppercase tracking-widest text-brand">Tasks</p>
                 <ol class="space-y-1.5 list-none pl-0">
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Run the provided <code class="font-mono text-xs">iterrows()</code> loop on a DataFrame with 200,000 rows and record how long it takes.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>Rewrite the grade assignment using <code class="font-mono text-xs">np.where(condition, "Pass", "Fail")</code> and time that too.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Verify both methods produce the same result by comparing the two <code class="font-mono text-xs">"grade"</code> columns using <code class="font-mono text-xs">.equals()</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Calculate and print the speedup ratio: <code class="font-mono text-xs">loop_time / vectorized_time</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Run the provided <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">iterrows()</code> loop on a DataFrame with 200,000 rows and record how long it takes.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>Rewrite the grade assignment using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">np.where(condition, "Pass", "Fail")</code> and time that too.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Verify both methods produce the same result by comparing the two <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"grade"</code> columns using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.equals()</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Calculate and print the speedup ratio: <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">loop_time / vectorized_time</code>.</span></li>
                 </ol>
               </div>
             </div>
 
-            <button class="accordion-toggle w-full flex items-center justify-between text-xs font-semibold text-gray-500 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-              <span class="flex items-center gap-2">
-                <span class="iconify text-[#CB187D]" data-icon="fa6-solid:eye"></span>
-                Show Solution
-              </span>
-              <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
+
             </button>
             <div class="accordion-body">
-              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-1">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
                 <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2006,9 +2030,13 @@ print(f"Results match: {df_slow['grade'].equals(df_fast['grade'])}")
 print(f"Speedup: {loop_time / vec_time:.0f}x faster")</code></pre>
                 </div>
               </div>
-              <p class="text-xs text-gray-500 mt-3 px-1">
-                <strong class="text-gray-700">Why this matters:</strong> At 200,000 rows you will typically see 30–100x speedups — and the ratio grows with row count. The vectorized version also uses less memory because pandas doesn't need to create a Python object for every row, so it wins on both time and space on large datasets.
-              </p>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+                <p class="text-sm text-gray-600">At 200,000 rows you will typically see 30–100x speedups — and the ratio grows with row count. The vectorized version also uses less memory because pandas doesn't need to create a Python object for every row, so it wins on both time and space on large datasets.</p>
+
+              </div>
             </div>
           </div>
         </div>
@@ -2021,7 +2049,7 @@ print(f"Speedup: {loop_time / vec_time:.0f}x faster")</code></pre>
             <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
             <div class="relative flex items-center gap-3">
               <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0">
-                <span class="iconify text-base" data-icon="fa6-solid:diagram-project"></span>
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
               </span>
               <div>
                 <h3 class="font-bold text-gray-800">Build a Chunked Aggregation Pipeline</h3>
@@ -2035,23 +2063,26 @@ print(f"Speedup: {loop_time / vec_time:.0f}x faster")</code></pre>
               <div class="space-y-2">
                 <p class="text-xs font-bold uppercase tracking-widest text-brand">Tasks</p>
                 <ol class="space-y-1.5 list-none pl-0">
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Open <code class="font-mono text-xs">"transactions.csv"</code> using <code class="font-mono text-xs">pd.read_csv(chunksize=100_000)</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>For each chunk, filter for rows where <code class="font-mono text-xs">status == "Approved"</code>, then group by <code class="font-mono text-xs">"region"</code> and sum <code class="font-mono text-xs">"amount"</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Append each partial result to a list, then combine all of them using <code class="font-mono text-xs">pd.concat()</code>.</span></li>
-                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Run a second <code class="font-mono text-xs">.groupby().sum()</code> on the combined result to merge the partial sums, then print the final region totals sorted in descending order.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">1</span><span>Open <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"transactions.csv"</code> using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pd.read_csv(chunksize=100_000)</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">2</span><span>For each chunk, filter for rows where <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">status == "Approved"</code>, then group by <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"region"</code> and sum <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">"amount"</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">3</span><span>Append each partial result to a list, then combine all of them using <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">pd.concat()</code>.</span></li>
+                  <li class="text-sm text-gray-600 flex gap-2"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#CB187D] text-white text-[10px] font-bold shrink-0 mt-0.5">4</span><span>Run a second <code class="font-mono text-[11px] bg-pink-50 text-[#CB187D] border border-pink-100 px-1 rounded">.groupby().sum()</code> on the combined result to merge the partial sums, then print the final region totals sorted in descending order.</span></li>
                 </ol>
               </div>
             </div>
 
-            <button class="accordion-toggle w-full flex items-center justify-between text-xs font-semibold text-gray-500 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors" onclick="this.nextElementSibling.classList.toggle('open')">
-              <span class="flex items-center gap-2">
-                <span class="iconify text-[#CB187D]" data-icon="fa6-solid:eye"></span>
-                Show Solution
-              </span>
-              <span class="iconify accordion-chevron text-gray-400" data-icon="fa6-solid:chevron-down"></span>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+
+
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+
+
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+
+
             </button>
             <div class="accordion-body">
-              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg mt-1">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
                 <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
                   <div class="flex items-center gap-3">
                     <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
@@ -2086,9 +2117,13 @@ final = combined.groupby(level=0).sum()
 print(final.sort_values(ascending=False))</code></pre>
                 </div>
               </div>
-              <p class="text-xs text-gray-500 mt-3 px-1">
-                <strong class="text-gray-700">Why this matters:</strong> The two-pass pattern (partial aggregation per chunk, then a final merge) is the foundational idea behind distributed computing tools like Apache Spark — they spread the partial aggregation across many machines and merge at the end. Understanding this pattern in pandas means you already understand the logic at the heart of big-data frameworks.
-              </p>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+
+                <p class="text-sm text-gray-600">The two-pass pattern (partial aggregation per chunk, then a final merge) is the foundational idea behind distributed computing tools like Apache Spark — they spread the partial aggregation across many machines and merge at the end. Understanding this pattern in pandas means you already understand the logic at the heart of big-data frameworks.</p>
+
+              </div>
             </div>
           </div>
         </div>
