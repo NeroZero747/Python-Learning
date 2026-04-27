@@ -1,0 +1,2346 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+
+<style>
+/* ── CSS Variables — font tokens (:root) ──────────────────── */
+:root { --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; --font-mono: 'Fira Code', monospace; }
+
+/* ── Global reset — smooth scroll ─────────────────────────── */
+* { scroll-behavior: smooth; }
+
+/* ── Prism.js — syntax highlighted code blocks ────────────── */
+pre[class*="language-"] { border-radius: 0.75rem; font-family: var(--font-mono); font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
+code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
+
+/* ── Heading resets — strip Confluence default margins ────── */
+h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
+
+/* ── Brand utility classes ────────────────────────────────── */
+.text-brand { color: #CB187D; }
+.bg-brand   { background: #CB187D; }
+.bg-brand-soft { background: #fdf0f7; }
+.brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+.bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
+.bg-code { background: #1e1e2e; }
+.border-code-sep { border-color: rgba(255,255,255,0.08); }
+.pre-reset { margin: 0; border-radius: 0; background: transparent; }
+
+/* ── Key Concepts sidebar tabs (.kc-tab / .kc-tab-active) ── */
+.kc-tab-active { background: #fdf0f7; }
+.kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+.kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+@keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Code Examples pill tabs (.ce-step / .ce-step-active) ── */
+.ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
+.ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+/* ── Common Mistakes pill tabs (.mk-step / .mk-step-active) */
+.mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
+.mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+/* ── Knowledge Check quiz tabs (.qz-step / .qz-step-active) */
+.qz-step:not(.qz-step-active):hover { background: #374151; color: #d1d5db; }
+.qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+/* ── Practice Exercise tabs (.pe-step / .pe-step-active) ── */
+.pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+.pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+.task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+
+/* ── Accordion — used in Overview & Key Ideas sections ──── */
+.accordion-body { display: none !important; }
+.accordion-body.open { display: block !important; }
+.accordion-toggle { display:flex !important; align-items:center !important; gap:8px !important; width:100% !important; padding:10px 16px !important; border-radius:10px !important; font-size:0.8rem !important; font-weight:600 !important; cursor:pointer !important; border:2px dashed #f5c6e0 !important; background:#fdf0f7 !important; color:#7F004C !important; line-height:1.2 !important; text-decoration:none !important; transition:background 0.15s, border-color 0.15s !important; }
+.accordion-toggle:hover { background:#f9d9ee !important; border-color:#CB187D !important; }
+.accordion-toggle.open { background:#fdf0f7 !important; border-color:#CB187D !important; border-style:solid !important; }
+.accordion-chevron { margin-left:auto !important; transition:transform 0.2s !important; }
+.accordion-toggle.open .accordion-chevron { transform:rotate(180deg) !important; }
+
+/* ── Hero banner — full-width gradient header ─────────────── */
+.hero-container { position:relative; border-radius:1.25rem; overflow:hidden; min-height:380px; background:linear-gradient(135deg,#CB187D 0%,#CB187D 40%,#a31268 65%,#7F004C 100%); }
+.hero-dots { position:absolute; inset:0; opacity:0.06; background-image:radial-gradient(circle,rgba(255,255,255,0.7) 1px,transparent 1px); background-size:24px 24px; }
+.hero-glow { position:absolute; border-radius:50%; pointer-events:none; filter:blur(70px); }
+.hero-pill { pointer-events:none; cursor:default; background:#ffffff; border:none; color:#7F004C; font-weight:700; }
+
+/* ── Scroll progress bar — fixed top-of-page indicator ───── */
+.scroll-progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,#CB187D,#6366f1,#CB187D); background-size:200% 100%; animation:scrollGradient 3s linear infinite; z-index:9999; transition:width 0.15s; }
+@keyframes scrollGradient { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
+
+/* ── Page layout — two-column: TOC sidebar + main content ── */
+.lesson-layout { display:flex; gap:1.75rem; align-items:flex-start; }
+.lesson-toc-sidebar { width:240px; flex-shrink:0; position:sticky; top:1.5rem; max-height:calc(100vh - 2rem); overflow-y:auto; transition:width 0.25s ease, opacity 0.25s ease; }
+.lesson-toc-sidebar.toc-collapsed { width:44px; overflow:hidden; }
+.lesson-toc-sidebar.toc-collapsed .toc-body { display:none; }
+.lesson-toc-sidebar.toc-collapsed .toc-header-label { display:none; }
+.lesson-toc-sidebar.toc-collapsed .toc-module-list { display:none; }
+.toc-toggle-btn { background:none; border:none; cursor:pointer; padding:2px; color:#CB187D; display:flex; align-items:center; justify-content:center; position:absolute; right:8px; top:50%; transform:translateY(-50%); border-radius:6px; transition:background 0.15s; }
+.toc-toggle-btn:hover { background:#fdf0f7; }
+.toc-link { transition: color 0.15s, padding-left 0.15s; }
+.toc-link:hover { color:#CB187D; padding-left:4px; }
+.toc-link.active { color:#CB187D; font-weight:600; border-left:3px solid #CB187D; padding-left:8px; }
+
+/* ── Objective cards (.obj-card) ──────────────────────────── */
+.obj-card { transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
+.obj-card:hover { box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); border-color: #f5c6e0; background-color: #ffffff; }
+.obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+.obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+.obj-card:hover .obj-icon .iconify { color: white !important; }
+#key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+#key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
+
+/* ── Generic outline tab buttons (.tab-btn / .tab-panel) ── */
+.tab-btn { display:inline-flex; align-items:center; gap:6px; padding:7px 18px; font-size:0.82rem; font-weight:600; cursor:pointer; border:1.5px solid #e5e7eb; border-radius:999px; color:#6b7280; background:#fff; line-height:1.2; transition:color 0.15s, background 0.15s, border-color 0.15s; }
+.tab-btn:hover { color:#CB187D; border-color:#CB187D; background:#fdf0f7; }
+.tab-btn.active { color:#fff; background:#CB187D; border-color:#CB187D; }
+.tab-panel { display:none; } .tab-panel.active { display:block; }
+
+/* ── Code block copy button (.copy-btn) ───────────────────── */
+.copy-btn { position:absolute; top:10px; right:12px; display:inline-flex; align-items:center; background:rgba(203,24,125,0.15); border:1px solid rgba(203,24,125,0.3); color:#CB187D; border-radius:6px; padding:3px 8px; font-size:0.65rem; font-weight:600; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+.copy-btn:hover { background:rgba(203,24,125,0.3); }
+.copy-btn-light { position:static; color:#fff; border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.1); }
+.copy-btn-light:hover { background:rgba(255,255,255,0.2); }
+
+/* ── Bottom lesson navigation — Previous / All Lessons / Next */
+.lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color:#CB187D; transition:color 0.15s; }
+
+/* ── Back-to-top floating button ──────────────────────────── */
+.back-to-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; border-radius:50%; background:#CB187D; color:white; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(203,24,125,0.3); cursor:pointer; opacity:0; transform:translateY(10px); transition:opacity 0.3s, transform 0.3s; z-index:50; border:none; }
+.back-to-top.visible { opacity:1; transform:translateY(0); }
+.back-to-top:hover { background:#7F004C; }
+
+/* ── Quiz answer feedback buttons (.quiz-btn.correct / .incorrect) */
+.quiz-btn.correct { background:#f0fdf4; border-color:#22c55e; color:#16a34a; }
+.quiz-btn.incorrect { background:#fef2f2; border-color:#ef4444; color:#dc2626; }
+
+/* ── Card hover animations — Mistake, Flow, Recap, Overview cards */
+.mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08); }
+
+/* ── Responsive — mobile breakpoint (<768px) ──────────────── */
+@media (max-width: 767px) { .lesson-toc-sidebar { display:none; } .lesson-layout { display:block; } .hero-container { min-height:auto; } .hero-split { flex-direction:column !important; } }
+
+/* ── Print styles — hide interactive chrome when printing ─── */
+@media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display:none; } .obj-card:hover { transform:none; box-shadow:none; } }
+
+/* ── Iconify icon alignment utility ───────────────────────── */
+.iconify { vertical-align: middle; flex-shrink: 0; }
+
+/* ═══ Confluence Hub-Root Isolation Block ═══════════════════ */
+#hub-root a.hero-pill { color: #CB187D !important; }
+#hub-root .hero-pill .opacity-55 { opacity: 1 !important; }
+#hub-root .hero-pill .opacity-50 { opacity: 1 !important; }
+#hub-root .toc-link:hover { color: #CB187D !important; }
+#hub-root .toc-link.active { color: #CB187D !important; font-weight: 600 !important; border-left: 3px solid #CB187D !important; padding-left: 8px !important; background-color: #fdf0f7 !important; }
+#hub-root .mod-lesson-active { background-color: #fdf0f7 !important; border-color: #CB187D !important; color: #CB187D !important; }
+#hub-root .mod-lesson-active .lesson-dot { background-color: #CB187D !important; }
+#hub-root .ce-step, #hub-root .mk-step, #hub-root .qz-step, #hub-root .pe-step { display:inline-flex !important; align-items:center !important; gap:0.5rem !important; padding:0.375rem 1rem !important; border-radius:9999px !important; font-size:0.75rem !important; font-weight:700 !important; line-height:1.2 !important; white-space:nowrap !important; border:none !important; cursor:pointer !important; }
+#hub-root .ce-step:not(.ce-step-active), #hub-root .mk-step:not(.mk-step-active), #hub-root .qz-step:not(.qz-step-active), #hub-root .pe-step:not(.pe-step-active) { background-color:#1f2937 !important; color:#ffffff !important; box-shadow:none !important; }
+#hub-root .ce-step-active, #hub-root .mk-step-active, #hub-root .qz-step-active, #hub-root .pe-step-active { background:linear-gradient(to right,#CB187D,#e84aad) !important; color:#ffffff !important; box-shadow:0 10px 25px -5px rgba(203,24,125,0.3) !important; }
+#hub-root .obj-card:hover { border-color: #f5c6e0 !important; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important; background-color: #ffffff !important; }
+#hub-root .obj-card:hover .obj-icon { background: #CB187D !important; }
+#hub-root .obj-card:hover .obj-icon .iconify { color: #ffffff !important; }
+/* ── Key Takeaway cards — keep border gray and icon gradient on hover ── */
+#hub-root #key-ideas .obj-card:hover { border-color: #f3f4f6 !important; background-color: #ffffff !important; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important; }
+#hub-root #key-ideas .obj-card:hover .obj-icon { background: revert !important; }
+#hub-root .section-header { display:flex !important; align-items:center !important; gap:1rem !important; padding:1.25rem 2rem 1.25rem 1rem !important; background:#ffffff !important; border-bottom:1px solid #f3f4f6 !important; border-left:4px solid #CB187D !important; }
+#hub-root .section-icon { display:inline-flex !important; align-items:center !important; justify-content:center !important; width:2.75rem !important; height:2.75rem !important; border-radius:0.75rem !important; background:#CB187D !important; flex-shrink:0 !important; }
+#hub-root .section-title { font-size:1.25rem !important; font-weight:700 !important; color:#111827 !important; }
+#hub-root .section-subtitle { font-size:0.875rem !important; color:#9ca3af !important; }
+#hub-root .lesson-nav-link:hover p, #hub-root .lesson-nav-link:hover span, #hub-root .lesson-nav-link:hover svg { color: #CB187D !important; transition: color 0.15s !important; }
+</style>
+
+<div class="scroll-progress" id="scroll-progress" style="width:0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div id="hub-root" class="bg-gray-50 min-h-screen">
+
+<!-- HERO -->
+<div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+  <section class="hero-container">
+    <div class="hero-dots"></div>
+    <div class="hero-glow" style="width:350px;height:350px;top:-80px;right:0;background:rgba(255,255,255,0.12);"></div>
+    <div class="hero-glow" style="width:280px;height:280px;bottom:-50px;left:5%;background:rgba(127,0,76,0.35);"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#f5c6e0 30%,#CB187D 50%,#f5c6e0 70%,transparent 100%);opacity:0.7;"></div>
+    <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+      <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-solid:window-maximize"></span> Module 5</span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="inline-flex items-center gap-1"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span></span> Intermediate</span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 5 min read</span>
+          </div>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 05</p>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Deploying Data Applications</h1>
+          <p class="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-lg">Building Data Applications &middot; Data Applications Track</p>
+          <div class="flex items-center gap-4 mb-5 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+              </span>
+              <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span><span class="font-extrabold">5</span><span class="font-semibold opacity-55">Goals</span></a>
+            <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span><span class="font-extrabold">5</span><span class="font-semibold opacity-55">Examples</span></a>
+            <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span><span class="font-extrabold">5</span><span class="font-semibold opacity-55">Exercises</span></a>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span><span class="font-extrabold">5/7</span><span class="font-semibold opacity-55">Progress</span></span>
+          </div>
+        </div>
+        <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+          <div style="padding:0.25rem;opacity:0.75;">
+            <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+  <defs>
+    <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+    <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+    <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+    <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+  </defs>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+  <g clip-path="url(#hexClip)" opacity="1">
+    <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/></g>
+    <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+    <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+    <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+  </g>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+  <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+  <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+  <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+  <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+</svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+  <div class="lesson-layout">
+    <aside class="lesson-toc-sidebar">
+      <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+        <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+          <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+          <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+            <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+          </button>
+        </div>
+        <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+          <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective</a>
+<a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview</a>
+<a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:lightbulb"></span> Key Takeaways</a>
+<a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts</a>
+<a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples</a>
+<a href="#comparison" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:scale-balanced"></span> SQL / Excel Comparison</a>
+<a href="#practice" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:pencil"></span> Practice Exercises</a>
+<a href="#mistakes" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:triangle-exclamation"></span> Common Mistakes</a>
+<a href="#real-world" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:briefcase"></span> Real-World Use</a>
+<a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap</a>
+<a href="#knowledge-check" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:brain"></span> Knowledge Check</a>
+<a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson</a>
+        </nav>
+        <div class="toc-module-list px-3 py-3">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+          <div class="space-y-1">
+            <a href="lesson01_why_build_data_apps.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">1. Why Build Data Apps?</span></a>
+<a href="lesson02_introduction_to_streamlit.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">2. Introduction to Streamlit</span></a>
+<a href="lesson03_interactive_filters.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">3. Interactive Filters</span></a>
+<a href="lesson04_exporting_data.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">4. Exporting Data</span></a>
+<a href="lesson05_deploying_data_applications.html" class="mod-lesson-active flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors"><span class="lesson-dot w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span><span class="truncate">5. Deploying Data Applications</span></a>
+<a href="lesson06_shiny_for_python.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">6. Shiny for Python</span></a>
+<a href="lesson07_streamlit_vs_shiny.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">7. Streamlit vs Shiny</span></a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="min-w-0 flex-1 space-y-10">
+
+<section id="objective">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:cloud-arrow-up"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Understand application hosting</p>
+    <p class="text-xs text-gray-500 mt-0.5">Explain what it means to deploy a Streamlit app so other people can reach it through a URL</p>
+  </div>
+</div><div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:file-lines"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Create a requirements file</p>
+    <p class="text-xs text-gray-500 mt-0.5">Write a requirements.txt that lists every Python package your app needs to run on a remote server</p>
+  </div>
+</div><div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:server"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Compare deployment environments</p>
+    <p class="text-xs text-gray-500 mt-0.5">Distinguish between Streamlit Community Cloud, Docker containers, and internal company servers</p>
+  </div>
+</div><div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:arrows-spin"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Describe a CI/CD pipeline</p>
+    <p class="text-xs text-gray-500 mt-0.5">Outline how automated testing and deployment push code from your laptop to a live server safely</p>
+  </div>
+</div><div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="fa6-solid:lock"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">Manage secrets and environment variables</p>
+    <p class="text-xs text-gray-500 mt-0.5">Store sensitive values like API keys outside your code so they stay safe in production</p>
+  </div>
+</div>
+      </div>
+      <div class="mt-5">
+        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">This lesson covers <strong>5 key concepts</strong> for deploying data applications &mdash; hosting, requirements files, deployment environments, CI/CD pipelines, and secrets management.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level introduction to deploying data applications</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-start gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">Deploying an application means putting your finished Streamlit dashboard on a server so that anyone with the link can open it in their browser, without needing Python installed on their own machine.</p>
+        </div>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">Think of deployment like opening a restaurant: you have been perfecting recipes in your home kitchen (your laptop), and now you need a real restaurant space, a supply chain for ingredients, a menu that lists every dish, and a way to keep the kitchen running smoothly every day. Each deployment concept maps to one part of that restaurant.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+  <div class="flex items-center gap-3 mb-2.5">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+      <span class="iconify text-brand text-base" data-icon="fa6-solid:cloud-arrow-up"></span>
+    </span>
+    <div>
+      <p class="text-sm font-bold text-gray-800 leading-tight">Application Hosting</p>
+      <p class="text-[10px] text-gray-400 italic leading-tight">The restaurant building &mdash; a public space customers can walk into</p>
+    </div>
+  </div>
+  <p class="text-xs text-gray-500 leading-relaxed">Hosting means placing your app on a computer (a server) that is always on and connected to the internet. When you deploy to Streamlit Community Cloud, you are renting a small restaurant space for free &mdash; anyone with the URL can visit and use your dashboard.</p>
+</div><div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+  <div class="flex items-center gap-3 mb-2.5">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+      <span class="iconify text-brand text-base" data-icon="fa6-solid:file-lines"></span>
+    </span>
+    <div>
+      <p class="text-sm font-bold text-gray-800 leading-tight">Requirements File</p>
+      <p class="text-[10px] text-gray-400 italic leading-tight">The supply list &mdash; every ingredient the kitchen needs to open</p>
+    </div>
+  </div>
+  <p class="text-xs text-gray-500 leading-relaxed">A requirements.txt file tells the server exactly which Python packages to install. Without it the server has no idea what libraries your code imports, just like a kitchen that opens without stocking its pantry. Each line names one package and optionally pins a version.</p>
+</div><div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+  <div class="flex items-center gap-3 mb-2.5">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+      <span class="iconify text-brand text-base" data-icon="fa6-solid:server"></span>
+    </span>
+    <div>
+      <p class="text-sm font-bold text-gray-800 leading-tight">Deployment Environments</p>
+      <p class="text-[10px] text-gray-400 italic leading-tight">The franchise model &mdash; different locations with different rules</p>
+    </div>
+  </div>
+  <p class="text-xs text-gray-500 leading-relaxed">Streamlit Community Cloud is a small free location, a Docker container is a portable food truck you can park anywhere, and an internal company server is a private cafeteria behind a badge door. Each environment has its own trade-offs in cost, control, and security.</p>
+</div><div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+  <div class="flex items-center gap-3 mb-2.5">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+      <span class="iconify text-brand text-base" data-icon="fa6-solid:arrows-spin"></span>
+    </span>
+    <div>
+      <p class="text-sm font-bold text-gray-800 leading-tight">CI/CD Pipelines</p>
+      <p class="text-[10px] text-gray-400 italic leading-tight">The daily delivery truck &mdash; automated restocking without closing the kitchen</p>
+    </div>
+  </div>
+  <p class="text-xs text-gray-500 leading-relaxed">Continuous Integration and Continuous Deployment (CI/CD) means that every time you push code to GitHub, automated tests run and, if they pass, the new version goes live automatically. You never have to manually log in and restart the server.</p>
+</div><div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+  <div class="flex items-center gap-3 mb-2.5">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+      <span class="iconify text-brand text-base" data-icon="fa6-solid:lock"></span>
+    </span>
+    <div>
+      <p class="text-sm font-bold text-gray-800 leading-tight">Secrets Management</p>
+      <p class="text-[10px] text-gray-400 italic leading-tight">The safe in the back office &mdash; keeps cash and keys away from the dining room</p>
+    </div>
+  </div>
+  <p class="text-xs text-gray-500 leading-relaxed">API keys, database passwords, and tokens must never appear in your source code. Secrets management stores them as environment variables that your app reads at runtime. If someone sees your code on GitHub, they see variable names but not the actual values.</p>
+</div>
+      </div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Even if you are not a DevOps engineer, understanding deployment basics lets you hand off your work cleanly &mdash; or ship a quick prototype yourself on Streamlit Community Cloud in under five minutes.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="key-ideas">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="obj-card rounded-2xl border border-pink-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:cloud-arrow-up"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Hosting Makes Your App Public</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Running streamlit run app.py on your laptop only works for you. Deploying to a server gives your app a permanent URL that anyone on the internet (or your company network) can open in a browser without installing Python.</p>
+    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">server</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">URL</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">public access</span></div>
+  </div>
+</div><div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:file-lines"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">requirements.txt Is Mandatory</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Every remote server starts with a bare Python installation. Your requirements.txt file tells it which packages to install. If a package is missing from the list, your app crashes on the server even though it runs perfectly on your laptop.</p>
+    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">requirements.txt</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">pip freeze</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">version pinning</span></div>
+  </div>
+</div><div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:server"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Choose the Right Environment</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Streamlit Community Cloud is free and beginner-friendly but limited in resources. Docker containers give you full control and portability. Internal company servers offer security but require IT support. Pick the one that matches your audience and budget.</p>
+    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Streamlit Cloud</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Docker</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">on-premise</span></div>
+  </div>
+</div><div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:arrows-spin"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">CI/CD Removes Manual Steps</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Without CI/CD, deploying means manually copying files, restarting servers, and hoping nothing breaks. A CI/CD pipeline runs your tests automatically on every push and only deploys the new version if all tests pass &mdash; no human intervention needed.</p>
+    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">GitHub Actions</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">automated tests</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">push to deploy</span></div>
+  </div>
+</div><div class="obj-card rounded-2xl border border-amber-100 bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r from-amber-500 to-orange-400"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="fa6-solid:lock"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">Never Hard-Code Secrets</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">Pasting an API key directly into your Python file means anyone who reads the code can steal it. Environment variables and platform secret stores keep credentials out of your source code and out of version control.</p>
+    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">env variables</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">st.secrets</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">.gitignore</span></div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="key-concepts">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
+  </div>
+</div>
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+          <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:cloud-arrow-up"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Streamlit Cloud Deploy</span>
+</button><button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-lines"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">requirements.txt</span>
+</button><button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:box-open"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Docker Basics</span>
+</button><button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:arrows-spin"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">CI/CD with GitHub Actions</span>
+</button><button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:lock"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Secrets & Env Variables</span>
+</button>
+        </div>
+        <div class="flex-1 min-w-0 md:pl-5">
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+  <div class="rounded-2xl border border-pink-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+    <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:cloud-arrow-up"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">Streamlit Cloud Deploy</h3>
+            <p class="text-[10px] text-gray-400 mt-0.5">Concept 1 of 5</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D]">Free Tier</span>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">Streamlit Community Cloud connects directly to your GitHub repository. When you push a commit, the platform pulls the latest code, installs the packages listed in requirements.txt, and starts the app at a public URL. You do not need to configure a server or write any deployment scripts.</p>
+      <div class="rounded-xl overflow-hidden bg-code shadow-md">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+    <div class="flex items-center gap-2">
+      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <pre class="overflow-x-auto pre-reset"><code class="language-python"># 1. Push your project to GitHub with these files:
+#    app.py              ← your Streamlit code
+#    requirements.txt    ← package list
+#
+# 2. Go to share.streamlit.io
+# 3. Click &quot;New app&quot; → pick your repo, branch, and file
+# 4. Click &quot;Deploy&quot; — Streamlit builds and launches the app
+#
+# Your app is now live at:
+#   https://YOUR-USERNAME-YOUR-REPO.streamlit.app</code></pre>
+</div>
+      <table class="w-full text-left mt-3"><thead><tr class="bg-pink-50"><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-[#CB187D] rounded-tl-lg">Parameter</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-[#CB187D]">Type</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-[#CB187D] rounded-tr-lg">Description</th></tr></thead><tbody><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-pink-50 text-pink-700">Repository</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">GitHub URL</td><td class="py-2 align-top text-xs text-gray-600">The public or private repo that contains app.py</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-pink-50 text-pink-700">Branch</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">string</td><td class="py-2 align-top text-xs text-gray-600">The Git branch to deploy from (usually main)</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-pink-50 text-pink-700">Main file</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">path</td><td class="py-2 align-top text-xs text-gray-600">The entry-point Python file (e.g. app.py)</td></tr></tbody></table>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Streamlit Community Cloud watches your repo. Every time you push to the selected branch, the app redeploys automatically &mdash; no manual restart needed.</p>
+</div>
+    </div>
+  </div>
+</div><div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+  <div class="rounded-2xl border border-violet-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+    <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:file-lines"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">requirements.txt</h3>
+            <p class="text-[10px] text-gray-400 mt-0.5">Concept 2 of 5</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600">Essential</span>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">A requirements.txt file is a plain-text list of Python packages your app needs. The server reads this file during deployment and runs pip install for every line. Pinning versions (e.g. pandas==2.2.0) prevents surprise breakages when a library releases a new version.</p>
+      <div class="rounded-xl overflow-hidden bg-code shadow-md">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+    <div class="flex items-center gap-2">
+      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <pre class="overflow-x-auto pre-reset"><code class="language-python"># requirements.txt — one package per line
+streamlit==1.45.0
+pandas==2.2.0
+openpyxl==3.1.2
+plotly==5.22.0
+python-dotenv==1.1.0
+
+# Generate automatically from your environment:
+# pip freeze &gt; requirements.txt
+#
+# Or list only the packages you actually import:
+# pip install pipreqs
+# pipreqs . --force</code></pre>
+</div>
+      <table class="w-full text-left mt-3"><thead><tr class="bg-violet-50"><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-violet-600 rounded-tl-lg">Parameter</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-violet-600">Type</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-violet-600 rounded-tr-lg">Description</th></tr></thead><tbody><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700">package==version</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">pinned</td><td class="py-2 align-top text-xs text-gray-600">Installs exactly that version &mdash; safest for production</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700">package>=version</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">minimum</td><td class="py-2 align-top text-xs text-gray-600">Installs that version or newer &mdash; allows updates</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700">package</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">unpinned</td><td class="py-2 align-top text-xs text-gray-600">Installs the latest version &mdash; convenient but risky</td></tr></tbody></table>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Run pip freeze > requirements.txt to capture every package in your current environment, but review the list and remove packages your app does not actually import.</p>
+</div>
+    </div>
+  </div>
+</div><div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+  <div class="rounded-2xl border border-blue-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+    <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:box-open"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">Docker Basics</h3>
+            <p class="text-[10px] text-gray-400 mt-0.5">Concept 3 of 5</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600">Portable</span>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">A Docker container packages your app, its dependencies, and a lightweight operating system into a single image that runs identically on any machine. You write a Dockerfile that describes the build steps, then anyone with Docker installed can start your app with one command.</p>
+      <div class="rounded-xl overflow-hidden bg-code shadow-md">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+    <div class="flex items-center gap-2">
+      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <pre class="overflow-x-auto pre-reset"><code class="language-python"># Dockerfile — build instructions for the container
+FROM python:3.12-slim
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy requirements first (Docker caches this layer)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your project files
+COPY . .
+
+# Expose the port Streamlit uses
+EXPOSE 8501
+
+# Start the app when the container launches
+CMD [&quot;streamlit&quot;, &quot;run&quot;, &quot;app.py&quot;, &quot;--server.port=8501&quot;]</code></pre>
+</div>
+      <table class="w-full text-left mt-3"><thead><tr class="bg-blue-50"><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-blue-600 rounded-tl-lg">Parameter</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-blue-600">Type</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-blue-600 rounded-tr-lg">Description</th></tr></thead><tbody><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">FROM</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">image</td><td class="py-2 align-top text-xs text-gray-600">The base image to start from (e.g. python:3.12-slim)</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">WORKDIR</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">path</td><td class="py-2 align-top text-xs text-gray-600">The directory inside the container where commands run</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">COPY</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">src dest</td><td class="py-2 align-top text-xs text-gray-600">Copies files from your machine into the container</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">RUN</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">command</td><td class="py-2 align-top text-xs text-gray-600">Executes a shell command during the build (e.g. pip install)</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">CMD</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">command</td><td class="py-2 align-top text-xs text-gray-600">The default command that runs when the container starts</td></tr></tbody></table>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Docker containers are the standard way to deploy apps in large companies. Even if you start on Streamlit Cloud, learning Docker prepares you for enterprise deployment.</p>
+</div>
+    </div>
+  </div>
+</div><div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+  <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+    <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:arrows-spin"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">CI/CD with GitHub Actions</h3>
+            <p class="text-[10px] text-gray-400 mt-0.5">Concept 4 of 5</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600">Automation</span>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">GitHub Actions lets you define workflows that run automatically when you push code. A typical CI/CD workflow has two stages: first it installs dependencies and runs tests, then &mdash; if the tests pass &mdash; it deploys the new version. The workflow is defined in a YAML file inside your repository.</p>
+      <div class="rounded-xl overflow-hidden bg-code shadow-md">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+    <div class="flex items-center gap-2">
+      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <pre class="overflow-x-auto pre-reset"><code class="language-python"># .github/workflows/deploy.yml
+name: Test and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: &quot;3.12&quot;
+      - run: pip install -r requirements.txt
+      - run: python -m pytest tests/
+
+  deploy:
+    needs: test            # Only runs if tests pass
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo &quot;Deploying to production server...&quot;
+      # Add your deployment commands here</code></pre>
+</div>
+      <table class="w-full text-left mt-3"><thead><tr class="bg-emerald-50"><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-emerald-600 rounded-tl-lg">Parameter</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-emerald-600">Type</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-emerald-600 rounded-tr-lg">Description</th></tr></thead><tbody><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700">on: push</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">trigger</td><td class="py-2 align-top text-xs text-gray-600">Runs the workflow every time code is pushed to the branch</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700">jobs: test</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">job</td><td class="py-2 align-top text-xs text-gray-600">Installs dependencies and runs pytest to catch bugs early</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700">needs: test</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">depends</td><td class="py-2 align-top text-xs text-gray-600">The deploy job waits for the test job to succeed first</td></tr></tbody></table>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">You do not need CI/CD for a personal prototype, but any app that multiple people rely on should have automated tests that run before every deployment.</p>
+</div>
+    </div>
+  </div>
+</div><div class="kc-panel kc-panel-anim hidden" data-color="orange" role="tabpanel">
+  <div class="rounded-2xl border border-orange-100 overflow-hidden">
+    <div class="h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-300"></div>
+    <div class="bg-gradient-to-br from-orange-50/60 to-white p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 shrink-0 shadow-md">
+            <span class="iconify text-white text-sm" data-icon="fa6-solid:lock"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">Secrets & Env Variables</h3>
+            <p class="text-[10px] text-gray-400 mt-0.5">Concept 5 of 5</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-600">Security</span>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">Sensitive values like API keys and database passwords must never appear in your source code. Instead, store them as environment variables or in a platform-specific secrets manager. Your Python code reads these values at runtime using os.environ or st.secrets, so the actual credentials stay hidden.</p>
+      <div class="rounded-xl overflow-hidden bg-code shadow-md">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+    <div class="flex items-center gap-2">
+      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <pre class="overflow-x-auto pre-reset"><code class="language-python">import os
+import streamlit as st
+
+# ── Option 1: os.environ (works everywhere) ──────────
+api_key = os.environ.get(&quot;API_KEY&quot;)
+if not api_key:
+    st.error(&quot;API_KEY environment variable is not set.&quot;)
+    st.stop()
+
+# ── Option 2: st.secrets (Streamlit Cloud only) ──────
+# Create a file at .streamlit/secrets.toml:
+#   API_KEY = &quot;your-key-here&quot;
+#   DB_HOST = &quot;db.example.com&quot;
+#
+# Then read it in Python:
+api_key = st.secrets[&quot;API_KEY&quot;]
+db_host = st.secrets[&quot;DB_HOST&quot;]
+
+# ── Keep secrets out of Git ──────────────────────────
+# Add these lines to .gitignore:
+#   .streamlit/secrets.toml
+#   .env</code></pre>
+</div>
+      <table class="w-full text-left mt-3"><thead><tr class="bg-orange-50"><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-orange-600 rounded-tl-lg">Parameter</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-orange-600">Type</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider text-orange-600 rounded-tr-lg">Description</th></tr></thead><tbody><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-orange-50 text-orange-700">os.environ</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">dict-like</td><td class="py-2 align-top text-xs text-gray-600">Reads environment variables set on the server or in a .env file</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-orange-50 text-orange-700">st.secrets</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">dict-like</td><td class="py-2 align-top text-xs text-gray-600">Reads from .streamlit/secrets.toml or the Streamlit Cloud secrets UI</td></tr><tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-orange-50 text-orange-700">.gitignore</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">file</td><td class="py-2 align-top text-xs text-gray-600">Tells Git to never track files that contain secrets</td></tr></tbody></table>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Before every git push, search your code for hard-coded strings that look like keys or passwords. If you find one, move it to an environment variable immediately.</p>
+</div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="code-examples">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        <button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Deploy to Streamlit Cloud</span></button><button onclick="switchCeTab(1)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Write requirements.txt</span></button><button onclick="switchCeTab(2)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Build a Docker Image</span></button><button onclick="switchCeTab(3)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">GitHub Actions Workflow</span></button><button onclick="switchCeTab(4)" class="ce-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Read Secrets at Runtime</span></button>
+      </div>
+      <div class="ce-panel ce-panel-anim" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Example 1 &mdash; Deploy to Streamlit Cloud</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">This example shows the minimal file structure you need to deploy a Streamlit app to the free Community Cloud. The key is having a requirements.txt alongside your app.py so the server knows which packages to install.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">deploy_to_streamlit_cloud.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># app.py — a minimal Streamlit dashboard
+import streamlit as st
+import pandas as pd
+
+st.set_page_config(page_title=&quot;Sales Dashboard&quot;, layout=&quot;wide&quot;)
+st.title(&quot;Sales Dashboard&quot;)
+
+# Load data from a CSV bundled with the repo
+df = pd.read_csv(&quot;data/sales.csv&quot;)
+
+# Show a summary metric
+total = df[&quot;revenue&quot;].sum()
+st.metric(&quot;Total Revenue&quot;, f&quot;${total:,.0f}&quot;)
+
+# Display an interactive table
+st.dataframe(df, use_container_width=True)</code></pre>
+  </div>
+  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+    <div class="flex items-center gap-2 mb-1.5">
+      <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+      <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+      <span class="text-[10px] text-gray-600 font-mono">$ streamlit run app.py</span>
+    </div>
+    <div class="font-mono text-xs text-emerald-400 leading-relaxed">You can now view your Streamlit app in your browser.
+Local URL: http://localhost:8501
+Network URL: http://192.168.1.10:8501</div>
+  </div>
+</div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">After confirming the app works locally, push the entire folder to GitHub and connect it on share.streamlit.io. The cloud version uses the exact same command under the hood.</p>
+</div>
+    </div>
+  </div>
+</div><div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Example 2 &mdash; Write requirements.txt</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">This example demonstrates two ways to generate a requirements.txt file: the quick-and-dirty pip freeze approach and the cleaner pipreqs approach that only lists packages your code actually imports.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">write_requirements.txt.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># Method 1 — capture everything in the environment
+# (includes packages you may not need)
+# Run in your terminal:
+# pip freeze &gt; requirements.txt
+
+# Method 2 — scan imports and list only what you use
+# pip install pipreqs
+# pipreqs . --force
+
+# Method 3 — write it by hand (most control)
+# requirements.txt contents:
+# streamlit==1.45.0
+# pandas==2.2.0
+# openpyxl==3.1.2
+# plotly==5.22.0
+
+# Verify the file works by installing into a fresh env:
+import subprocess, sys
+
+def test_requirements():
+    &quot;&quot;&quot;Install requirements in the current env to verify.&quot;&quot;&quot;
+    result = subprocess.run(
+        [sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;,
+         &quot;-r&quot;, &quot;requirements.txt&quot;, &quot;--dry-run&quot;],
+        capture_output=True, text=True
+    )
+    if result.returncode == 0:
+        print(&quot;All packages resolved successfully.&quot;)
+    else:
+        print(&quot;Error:&quot;, result.stderr)
+
+test_requirements()</code></pre>
+  </div>
+  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+    <div class="flex items-center gap-2 mb-1.5">
+      <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+      <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+      <span class="text-[10px] text-gray-600 font-mono">$ python verify_requirements.py</span>
+    </div>
+    <div class="font-mono text-xs text-emerald-400 leading-relaxed">All packages resolved successfully.</div>
+  </div>
+</div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Pin exact versions (pandas==2.2.0) for production apps. Use >= only when you intentionally want automatic updates.</p>
+</div>
+    </div>
+  </div>
+</div><div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Example 3 &mdash; Build a Docker Image</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">This example walks through creating a Dockerfile for a Streamlit app and building it into a container image. Once built, the image can run on any machine that has Docker installed &mdash; no Python setup required.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">build_a_docker_image.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># Dockerfile — place this in your project root
+FROM python:3.12-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Install dependencies first (cached by Docker)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code
+COPY . .
+
+# Expose the Streamlit default port
+EXPOSE 8501
+
+# Health check — verify the app responds
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+# Launch the app
+CMD [&quot;streamlit&quot;, &quot;run&quot;, &quot;app.py&quot;, \
+     &quot;--server.port=8501&quot;, \
+     &quot;--server.address=0.0.0.0&quot;]</code></pre>
+  </div>
+  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+    <div class="flex items-center gap-2 mb-1.5">
+      <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+      <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+      <span class="text-[10px] text-gray-600 font-mono">$ docker build -t sales-dashboard . && docker run -p 8501:8501 sales-dashboard</span>
+    </div>
+    <div class="font-mono text-xs text-emerald-400 leading-relaxed">Successfully built a]3f2e1d
+Successfully tagged sales-dashboard:latest
+
+  You can now view your Streamlit app in your browser.
+  URL: http://0.0.0.0:8501</div>
+  </div>
+</div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">The --server.address=0.0.0.0 flag is critical. Without it, Streamlit only listens on localhost inside the container, so the port mapping cannot reach it.</p>
+</div>
+    </div>
+  </div>
+</div><div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Example 4 &mdash; GitHub Actions Workflow</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">This example creates a CI/CD pipeline that automatically tests your code on every push to the main branch. If the tests pass, a second job runs your deployment commands. The file lives at .github/workflows/deploy.yml inside your repository.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">github_actions_workflow.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># .github/workflows/deploy.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: &quot;3.12&quot;
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: python -m pytest tests/ -v
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Deploy to server
+        env:
+          DEPLOY_KEY: ${{ &quot;secrets.DEPLOY_KEY&quot; }}
+        run: |
+          echo &quot;Deploying to production...&quot;
+          # Replace with your actual deploy command</code></pre>
+  </div>
+  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+    <div class="flex items-center gap-2 mb-1.5">
+      <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+      <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+      <span class="text-[10px] text-gray-600 font-mono">$ git push origin main</span>
+    </div>
+    <div class="font-mono text-xs text-emerald-400 leading-relaxed">remote: CI/CD Pipeline #42 — test: ✓ passed (3 tests)
+remote: CI/CD Pipeline #42 — deploy: ✓ deployed to production
+To github.com:user/sales-dashboard.git
+   a1b2c3d..d4e5f6g  main -> main</div>
+  </div>
+</div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Store deployment credentials in GitHub Settings → Secrets → Actions. The workflow reads them as environment variables without ever printing them in logs.</p>
+</div>
+    </div>
+  </div>
+</div><div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Example 5 &mdash; Read Secrets at Runtime</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">This example shows how to read sensitive configuration values from environment variables and from Streamlit's built-in secrets manager. Both approaches keep credentials out of your source code and out of version control.</p>
+      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">read_secrets_at_runtime.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python">import os
+import streamlit as st
+
+# ── Read secrets from environment variables ──────────
+# Set these on your server or in a .env file
+DB_HOST = os.environ.get(&quot;DB_HOST&quot;, &quot;localhost&quot;)
+DB_PORT = os.environ.get(&quot;DB_PORT&quot;, &quot;5432&quot;)
+API_KEY = os.environ.get(&quot;API_KEY&quot;)
+
+if not API_KEY:
+    st.error(&quot;Missing API_KEY — set it as an env variable.&quot;)
+    st.stop()
+
+st.success(f&quot;Connected to {DB_HOST}:{DB_PORT}&quot;)
+
+# ── Streamlit secrets (Cloud or local .toml file) ────
+# .streamlit/secrets.toml:
+#   [database]
+#   host = &quot;db.example.com&quot;
+#   port = 5432
+#   password = &quot;s3cur3-p@ss&quot;
+
+db = st.secrets[&quot;database&quot;]
+st.write(f&quot;Database host: {db[&#x27;host&#x27;]}&quot;)
+
+# ── .gitignore — keep secrets out of Git ─────────────
+# Add these lines to .gitignore:
+#   .env
+#   .streamlit/secrets.toml</code></pre>
+  </div>
+  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+    <div class="flex items-center gap-2 mb-1.5">
+      <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+      <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+      <span class="text-[10px] text-gray-600 font-mono">$ API_KEY=abc123 streamlit run app.py</span>
+    </div>
+    <div class="font-mono text-xs text-emerald-400 leading-relaxed">  You can now view your Streamlit app in your browser.
+  Local URL: http://localhost:8501
+  ✅ Connected to localhost:5432</div>
+  </div>
+</div>
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">On Streamlit Community Cloud, paste your secrets into the app settings UI instead of uploading a secrets.toml file. The platform encrypts them at rest.</p>
+</div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="comparison">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:scale-balanced"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How deployment compares across Python, SQL, and Excel</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-5">
+      <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:cloud-arrow-up"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Application Hosting</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">streamlit run app.py</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Starts a local server you can share via a public URL after deployment</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">N/A</code>
+      <p class="text-xs text-gray-500 leading-relaxed">SQL databases are always running on a server &mdash; no separate deploy step</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">File &rarr; Share &rarr; OneDrive</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel files are shared via cloud storage links, not deployed as apps</p>
+    </div>
+  </div>
+</div><div class="flex items-center gap-3 mb-4">
+  <span class="flex-1 h-px bg-gray-100"></span>
+  <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+    <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span>
+  </span>
+  <span class="flex-1 h-px bg-gray-100"></span>
+</div><div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:file-lines"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Dependency List</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">pip freeze &gt; requirements.txt</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Captures every Python package and version into a text file</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">N/A</code>
+      <p class="text-xs text-gray-500 leading-relaxed">SQL has no package manager &mdash; the database engine provides all functions</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">N/A</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel has no external dependencies &mdash; all features are built in</p>
+    </div>
+  </div>
+</div><div class="flex items-center gap-3 mb-4">
+  <span class="flex-1 h-px bg-gray-100"></span>
+  <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+    <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span>
+  </span>
+  <span class="flex-1 h-px bg-gray-100"></span>
+</div><div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:box-open"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Containerization</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">docker build -t app .</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Packages the app + OS + packages into a portable image</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">docker pull postgres:16</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Database servers also run in containers in production</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">N/A</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel is a desktop application that cannot be containerized</p>
+    </div>
+  </div>
+</div><div class="flex items-center gap-3 mb-4">
+  <span class="flex-1 h-px bg-gray-100"></span>
+  <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+    <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span>
+  </span>
+  <span class="flex-1 h-px bg-gray-100"></span>
+</div><div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:arrows-spin"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Automated Deploy</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">git push &rarr; GitHub Actions</code>
+      <p class="text-xs text-gray-500 leading-relaxed">CI/CD pipelines test code and deploy automatically on every push</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">Flyway / Liquibase</code>
+      <p class="text-xs text-gray-500 leading-relaxed">SQL migration tools version-control and auto-apply schema changes</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Power Automate</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel workflows can be automated with Microsoft Power Automate</p>
+    </div>
+  </div>
+</div><div class="flex items-center gap-3 mb-4">
+  <span class="flex-1 h-px bg-gray-100"></span>
+  <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+    <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span>
+  </span>
+  <span class="flex-1 h-px bg-gray-100"></span>
+</div><div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:lock"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Secrets Management</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">os.environ[&quot;KEY&quot;]</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Reads credentials from environment variables at runtime</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">pg_hba.conf / IAM roles</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Database access is controlled by config files or cloud IAM policies</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">File &rarr; Protect Workbook</code>
+      <p class="text-xs text-gray-500 leading-relaxed">Excel offers password protection but not environment-variable secrets</p>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        <button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Create requirements.txt</span></button><button onclick="switchPeTab(1)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Write a Dockerfile</span></button><button onclick="switchPeTab(2)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Add a GitHub Actions Workflow</span></button><button onclick="switchPeTab(3)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Store Secrets Safely</span></button><button onclick="switchPeTab(4)" class="pe-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Deploy on Streamlit Cloud</span></button>
+      </div>
+      <div class="pe-panel pe-panel-anim" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Exercise 1 &mdash; Create requirements.txt</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <ol class="list-decimal list-inside space-y-1"><li class="text-sm text-gray-600">Create a new file called <code>requirements.txt</code> in your project root.</li><li class="text-sm text-gray-600">List the four packages your app imports: <code>streamlit</code>, <code>pandas</code>, <code>openpyxl</code>, and <code>plotly</code>.</li><li class="text-sm text-gray-600">Pin each package to an exact version using the <code>==</code> syntax.</li><li class="text-sm text-gray-600">Run <code>pip install -r requirements.txt --dry-run</code> to verify all packages resolve.</li></ol>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">solution_1.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># requirements.txt
+streamlit==1.45.0
+pandas==2.2.0
+openpyxl==3.1.2
+plotly==5.22.0
+
+# Verify in your terminal:
+# pip install -r requirements.txt --dry-run</code></pre>
+  </div>
+</div>
+        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Pinning exact versions ensures the server installs the same packages you tested locally. A missing or mismatched version is the number-one cause of &ldquo;works on my machine&rdquo; deployment failures.</p>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div><div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Exercise 2 &mdash; Write a Dockerfile</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <ol class="list-decimal list-inside space-y-1"><li class="text-sm text-gray-600">Create a file called <code>Dockerfile</code> (no extension) in your project root.</li><li class="text-sm text-gray-600">Use <code>python:3.12-slim</code> as the base image.</li><li class="text-sm text-gray-600">Copy <code>requirements.txt</code> first and run <code>pip install</code> before copying the rest of the code.</li><li class="text-sm text-gray-600">Expose port <code>8501</code> and set the CMD to launch <code>streamlit run app.py</code>.</li></ol>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">solution_2.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># Dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+EXPOSE 8501
+CMD [&quot;streamlit&quot;, &quot;run&quot;, &quot;app.py&quot;, &quot;--server.port=8501&quot;, &quot;--server.address=0.0.0.0&quot;]</code></pre>
+  </div>
+</div>
+        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Copying requirements.txt separately lets Docker cache the pip install layer. If you only change app.py, Docker skips the install step entirely &mdash; builds finish in seconds instead of minutes.</p>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div><div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Exercise 3 &mdash; Add a GitHub Actions Workflow</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <ol class="list-decimal list-inside space-y-1"><li class="text-sm text-gray-600">Create the folder <code>.github/workflows/</code> in your project.</li><li class="text-sm text-gray-600">Create a file called <code>ci.yml</code> inside that folder.</li><li class="text-sm text-gray-600">Define a <code>test</code> job that installs dependencies and runs <code>pytest</code>.</li><li class="text-sm text-gray-600">Trigger the workflow on every push to the <code>main</code> branch.</li></ol>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">solution_3.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># .github/workflows/ci.yml
+name: Run Tests
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: &quot;3.12&quot;
+      - run: pip install -r requirements.txt
+      - run: python -m pytest tests/ -v</code></pre>
+  </div>
+</div>
+        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Automated tests catch bugs before they reach production. If a test fails, the workflow stops and the broken code never gets deployed.</p>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div><div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Exercise 4 &mdash; Store Secrets Safely</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <ol class="list-decimal list-inside space-y-1"><li class="text-sm text-gray-600">Create a <code>.streamlit/secrets.toml</code> file with a fake API key.</li><li class="text-sm text-gray-600">Read the key in your app using <code>st.secrets["API_KEY"]</code>.</li><li class="text-sm text-gray-600">Add <code>.streamlit/secrets.toml</code> to your <code>.gitignore</code> file.</li><li class="text-sm text-gray-600">Verify that <code>git status</code> does not list the secrets file.</li></ol>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">solution_4.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># .streamlit/secrets.toml
+API_KEY = &quot;sk-test-abc123def456&quot;
+
+# app.py
+import streamlit as st
+
+api_key = st.secrets[&quot;API_KEY&quot;]
+st.write(f&quot;Key loaded: {api_key[:8]}...&quot;)  # Show only a prefix
+
+# .gitignore — add this line:
+# .streamlit/secrets.toml</code></pre>
+  </div>
+</div>
+        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Adding the secrets file to .gitignore prevents it from being committed to Git. Even if you accidentally run git add, Git will skip ignored files.</p>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div><div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Exercise 5 &mdash; Deploy on Streamlit Cloud</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <ol class="list-decimal list-inside space-y-1"><li class="text-sm text-gray-600">Push your project (app.py + requirements.txt + data/) to a public GitHub repository.</li><li class="text-sm text-gray-600">Go to <a href='https://share.streamlit.io' class='text-brand font-semibold'>share.streamlit.io</a> and sign in with GitHub.</li><li class="text-sm text-gray-600">Click <strong>New app</strong>, select your repo, branch, and main file.</li><li class="text-sm text-gray-600">Wait for the build to finish and open the public URL in a new tab.</li></ol>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">solution_5.py</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-python"># Step-by-step commands to push to GitHub:
+
+# 1. Initialize a Git repo (skip if already done)
+# git init
+
+# 2. Add all project files
+# git add app.py requirements.txt data/
+
+# 3. Commit
+# git commit -m &quot;Initial deploy&quot;
+
+# 4. Create a GitHub repo and push
+# git remote add origin https://github.com/YOUR-USER/YOUR-REPO.git
+# git push -u origin main
+
+# 5. Go to share.streamlit.io → New app → Deploy
+# Your app is live at:
+#   https://YOUR-USER-YOUR-REPO.streamlit.app</code></pre>
+  </div>
+</div>
+        <div class="mt-3"><div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">Streamlit Community Cloud is the fastest way to share a dashboard publicly. The entire deploy process takes under five minutes and costs nothing.</p>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="mistakes">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Forgetting requirements.txt</span></button><button onclick="switchMkTab(1)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Hard-coding API keys in source code</span></button><button onclick="switchMkTab(2)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Using pip freeze without review</span></button><button onclick="switchMkTab(3)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Not exposing the correct port in Docker</span></button><button onclick="switchMkTab(4)" class="mk-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Skipping tests in the CI/CD pipeline</span></button>
+      </div>
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Forgetting requirements.txt</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The app runs locally because packages are already installed, so the developer forgets the server needs a list.</p>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-bold text-red-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:xmark"></span> Wrong</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Project structure — missing requirements.txt
+# my_app/
+#   app.py
+#   data/sales.csv
+#
+# Deploy to Streamlit Cloud → ERROR:
+# ModuleNotFoundError: No module named &#x27;plotly&#x27;</code></pre>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-emerald-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:check"></span> Correct</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Project structure — with requirements.txt
+# my_app/
+#   app.py
+#   requirements.txt   ← lists all packages
+#   data/sales.csv
+#
+# requirements.txt:
+# streamlit==1.45.0
+# pandas==2.2.0
+# plotly==5.22.0</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Always create a requirements.txt before deploying. Run pip freeze > requirements.txt or use pipreqs to scan your imports.</p>
+    </div>
+  </div>
+</div><div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Hard-coding API keys in source code</h4>
+        <p class="text-xs text-gray-500 mt-0.5">During development it is quick to paste a key directly into the script, and the developer forgets to remove it before pushing to GitHub.</p>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-bold text-red-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:xmark"></span> Wrong</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import requests
+
+# Secret is visible to anyone who reads the code
+API_KEY = &quot;sk-live-abc123def456ghi789&quot;
+response = requests.get(
+    &quot;https://api.example.com/data&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {API_KEY}&quot;}
+)</code></pre>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-emerald-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:check"></span> Correct</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">import os
+import requests
+
+# Secret is read from the environment at runtime
+API_KEY = os.environ.get(&quot;API_KEY&quot;)
+if not API_KEY:
+    raise SystemExit(&quot;Set the API_KEY env variable.&quot;)
+
+response = requests.get(
+    &quot;https://api.example.com/data&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {API_KEY}&quot;}
+)</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Store secrets in environment variables or in .streamlit/secrets.toml and add those files to .gitignore so they never enter version control.</p>
+    </div>
+  </div>
+</div><div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Using pip freeze without review</h4>
+        <p class="text-xs text-gray-500 mt-0.5">pip freeze lists every package in the environment, including ones unrelated to the project, making the file bloated and fragile.</p>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-bold text-red-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:xmark"></span> Wrong</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># requirements.txt generated by pip freeze
+# Contains 87 packages including unrelated ones:
+streamlit==1.45.0
+pandas==2.2.0
+black==24.3.0          # ← code formatter, not needed at runtime
+mypy==1.9.0            # ← type checker, not needed at runtime
+jupyter==1.0.0         # ← notebook, not needed at runtime
+# ... 82 more lines</code></pre>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-emerald-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:check"></span> Correct</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># requirements.txt — only packages the app imports
+streamlit==1.45.0
+pandas==2.2.0
+openpyxl==3.1.2
+plotly==5.22.0
+python-dotenv==1.1.0</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Use pipreqs to scan your code and list only imported packages, or write the file by hand. Fewer packages mean faster builds and fewer version conflicts.</p>
+    </div>
+  </div>
+</div><div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Not exposing the correct port in Docker</h4>
+        <p class="text-xs text-gray-500 mt-0.5">The developer forgets that Streamlit defaults to port 8501 and either omits the EXPOSE line or maps the wrong port.</p>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-bold text-red-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:xmark"></span> Wrong</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Dockerfile — wrong port
+FROM python:3.12-slim
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+EXPOSE 5000   # ← Streamlit does not use 5000
+CMD [&quot;streamlit&quot;, &quot;run&quot;, &quot;app.py&quot;]</code></pre>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-emerald-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:check"></span> Correct</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Dockerfile — correct port
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8501
+CMD [&quot;streamlit&quot;, &quot;run&quot;, &quot;app.py&quot;, \
+     &quot;--server.port=8501&quot;, \
+     &quot;--server.address=0.0.0.0&quot;]</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Always EXPOSE 8501 and pass --server.port=8501 --server.address=0.0.0.0 in the CMD. The address flag ensures the container accepts connections from outside.</p>
+    </div>
+  </div>
+</div><div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">Skipping tests in the CI/CD pipeline</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Adding a test step feels like extra work, so the developer deploys directly on every push without validation.</p>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-bold text-red-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:xmark"></span> Wrong</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># .github/workflows/deploy.yml — no tests
+name: Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo &quot;Deploying...&quot;
+      # Deploys broken code if a bug slipped in</code></pre>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-emerald-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:check"></span> Correct</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># .github/workflows/deploy.yml — with tests
+name: Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: &quot;3.12&quot;
+      - run: pip install -r requirements.txt
+      - run: python -m pytest tests/ -v
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo &quot;Deploying...&quot;
+      # Only runs if all tests pass</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">Always add a test job before the deploy job and use needs: test so deployment is blocked when tests fail.</p>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="real-world">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
+        <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
+        <p class="text-sm text-gray-700 leading-relaxed">Deployment is the bridge between building a dashboard on your laptop and sharing it with the world &mdash; every data app that reaches an audience beyond one person goes through some form of deployment.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-line"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">Sales Dashboards</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Deploy a Streamlit dashboard that shows live revenue metrics so the entire sales team can check numbers from any browser.</p>
+  </div>
+</div><div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:hospital"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">Healthcare Monitoring</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Host a patient data dashboard on an internal server behind a VPN so clinicians can view trends without installing Python.</p>
+  </div>
+</div><div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:graduation-cap"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">Academic Research</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Share interactive visualizations of research data via Streamlit Cloud so peer reviewers can explore results directly.</p>
+  </div>
+</div><div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:building"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">Corporate Reporting</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Run a weekly KPI dashboard inside a Docker container on the company Kubernetes cluster for enterprise-grade reliability.</p>
+  </div>
+</div><div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:robot"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">ML Model Demos</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Deploy a machine-learning inference app so stakeholders can upload data and see predictions live in a web browser.</p>
+  </div>
+</div><div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:earth-americas"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">Open Data Portals</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Publish a public Streamlit app that lets anyone explore government or NGO datasets without downloading raw files.</p>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A quick summary of what you learned</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:cloud-arrow-up"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Application Hosting</p>
+        <p class="text-[11px] text-gray-600 leading-snug">You learned that deploying means placing your app on an always-on server so anyone with the URL can use it without installing Python.</p>
+      </div>
+    </div>
+  </div>
+</div><div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:file-lines"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Requirements File</p>
+        <p class="text-[11px] text-gray-600 leading-snug">You learned that requirements.txt lists every package your app needs and that the server runs pip install from this file during deployment.</p>
+      </div>
+    </div>
+  </div>
+</div><div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:server"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Deployment Options</p>
+        <p class="text-[11px] text-gray-600 leading-snug">You learned the trade-offs between Streamlit Community Cloud, Docker containers, and internal company servers.</p>
+      </div>
+    </div>
+  </div>
+</div><div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:arrows-spin"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">CI/CD Pipelines</p>
+        <p class="text-[11px] text-gray-600 leading-snug">You learned that CI/CD automates testing and deployment so broken code never reaches production.</p>
+      </div>
+    </div>
+  </div>
+</div><div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="fa6-solid:lock"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Secrets Management</p>
+        <p class="text-[11px] text-gray-600 leading-snug">You learned to store API keys and passwords in environment variables or st.secrets instead of hard-coding them in your source code.</p>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-white">Lesson Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 5 key concepts. Ready for the knowledge check?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="knowledge-check">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:brain"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Knowledge Check</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Test your understanding before moving on</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        <button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button><button onclick="switchQzTab(1)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button><button onclick="switchQzTab(2)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button><button onclick="switchQzTab(3)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button><button onclick="switchQzTab(4)" class="qz-step  flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
+      </div>
+      <div class="qz-panel qz-panel-anim" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q0" data-fb-correct="Correct! Without requirements.txt the server cannot install your packages and the app will crash." data-fb-wrong="Not quite — requirements.txt is mandatory. Without it the server has no way to know which packages to install.">
+        <p class="text-sm font-semibold text-gray-800 mb-4">A requirements.txt file is optional when deploying to Streamlit Community Cloud.</p>
+        <div class="flex gap-3">
+            <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+            <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+          </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div><div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q2</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q1" data-fb-correct="Correct! pipreqs scans your import statements and lists only the packages you use." data-fb-wrong="Not quite — pip freeze captures every package in the environment, not just the ones your code imports. pipreqs . --force scans imports only.">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Which command generates a requirements.txt that lists only the packages your code actually imports?</p>
+        <div class="grid gap-2"><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">pip freeze &gt; requirements.txt</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">pipreqs . --force</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">pip list &gt; requirements.txt</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">python -m pip export</button></div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div><div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q3</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">True or False</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q2" data-fb-correct="Correct! EXPOSE is documentation only. You still need -p 8501:8501 in the docker run command to map the port." data-fb-wrong="Not quite — EXPOSE is a hint for documentation. You must use -p 8501:8501 when running the container to actually map the port.">
+        <p class="text-sm font-semibold text-gray-800 mb-4">In a Dockerfile, the EXPOSE instruction automatically makes the port accessible from outside the container.</p>
+        <div class="flex gap-3">
+            <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+            <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+          </div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div><div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q3" data-fb-correct="Correct! Streamlit Cloud encrypts secrets and makes them available via st.secrets at runtime." data-fb-wrong="Not quite — secrets should go in the Streamlit Cloud secrets manager, never in source code or public files.">
+        <p class="text-sm font-semibold text-gray-800 mb-4">Where should you store API keys for a Streamlit app deployed to Streamlit Community Cloud?</p>
+        <div class="grid gap-2"><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">Directly in the Python source code</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">In a public GitHub repository README</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">In the Streamlit Cloud secrets manager</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">In a comment inside requirements.txt</button></div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div><div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Multiple Choice</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q4" data-fb-correct="Correct! The needs keyword creates a dependency — deploy waits for test to succeed before starting." data-fb-wrong="Not quite — needs: test means the deploy job will not start until the test job finishes successfully.">
+        <p class="text-sm font-semibold text-gray-800 mb-4">In a GitHub Actions workflow, what does <code>needs: test</code> do on the deploy job?</p>
+        <div class="grid gap-2"><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">It runs the deploy and test jobs at the same time</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">It skips the test job entirely</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)">It ensures the deploy job only runs after the test job passes</button><button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-colors" onclick="checkQuiz(this, false)">It merges the test and deploy jobs into one step</button></div>
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="next-lesson" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+  <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+    <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+  </span>
+  <div class="min-w-0">
+    <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+    <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+  </div>
+</div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">6</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 5 &middot; Lesson 6</p>
+          <h3 class="text-base font-bold text-gray-800">Shiny for Python</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:leaf"></span></span>
+  <div><p class="text-sm font-semibold text-gray-700">Shiny for Python Basics</p></div>
+</div><div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:sliders"></span></span>
+  <div><p class="text-sm font-semibold text-gray-700">Reactive UI Components</p></div>
+</div><div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:code-compare"></span></span>
+  <div><p class="text-sm font-semibold text-gray-700">Shiny vs Streamlit Architecture</p></div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <a href="lesson04_exporting_data.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Exporting Data</p>
+      </div>
+    </a>
+    <a href="../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+      <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
+    </a>
+    <a href="lesson06_shiny_for_python.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Shiny for Python</p>
+      </div>
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+    </a>
+  </div>
+</section>
+
+    </main>
+  </div>
+</div>
+
+</div>
+
+<script>
+function toggleToc(){const s=document.querySelector('.lesson-toc-sidebar'),i=document.getElementById('toc-toggle-icon'),c=s.classList.toggle('toc-collapsed');i.setAttribute('data-icon',c?'fa6-solid:angles-right':'fa6-solid:angles-left');if(window.Iconify)Iconify.scan();}
+const tocLinks=document.querySelectorAll('.toc-link');const sections=[...tocLinks].map(l=>document.getElementById(l.getAttribute('href').replace('#',''))).filter(Boolean);
+function updateScrollSpy(){let id='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)id=s.id;});tocLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}
+function updateScrollProgress(){const w=document.documentElement.scrollTop||document.body.scrollTop;const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;document.getElementById('scroll-progress').style.width=(h>0?(w/h)*100:0)+'%';}
+function updateBackToTop(){document.getElementById('back-to-top').classList.toggle('visible',window.scrollY>400);}
+window.addEventListener('scroll',()=>{updateScrollSpy();updateScrollProgress();updateBackToTop();});
+function copyCode(btn){const c=btn.closest('.relative')||btn.parentElement.closest('div');const pre=c?c.querySelector('pre'):null;const text=pre?pre.innerText:'';function fb(){const o=btn.innerHTML;btn.innerHTML='<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';btn.style.background='rgba(34,197,94,0.2)';btn.style.borderColor='rgba(34,197,94,0.5)';btn.style.color='#4ade80';setTimeout(()=>{btn.innerHTML=o;btn.style.background='';btn.style.borderColor='';btn.style.color='';},2000);}function fc(){const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);fb();}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(fb).catch(fc);}else{fc();}}
+function toggleAccordion(btn){const b=btn.nextElementSibling;const o=b.classList.contains('open');btn.classList.toggle('open',!o);b.classList.toggle('open',!o);if(!o&&window.Prism)Prism.highlightAllUnder(b);}
+const kcColors=[{num:'#CB187D',numShadow:'rgba(203,24,125,0.25)',activeBg:'#fdf0f7'},{num:'#7c3aed',numShadow:'rgba(124,58,237,0.25)',activeBg:'#f5f3ff'},{num:'#2563eb',numShadow:'rgba(37,99,235,0.25)',activeBg:'#eff6ff'},{num:'#059669',numShadow:'rgba(5,150,105,0.25)',activeBg:'#ecfdf5'},{num:'#c74905',numShadow:'rgba(199,73,5,0.25)',activeBg:'#ffddb3'}];
+function switchKcTab(idx){const c=kcColors[idx%kcColors.length];const tabs=document.querySelectorAll('.kc-tab');const panels=document.querySelectorAll('.kc-panel');const ind=document.querySelector('.kc-indicator');tabs.forEach((t,i)=>{const n=t.querySelector('.kc-tab-num'),l=t.querySelector('.kc-tab-label');if(i===idx){t.classList.add('kc-tab-active');t.style.background=c.activeBg;if(n){n.style.background=c.num;n.style.color='#fff';n.style.boxShadow='0 2px 8px '+c.numShadow;}if(l)l.style.color='#111827';}else{t.classList.remove('kc-tab-active');t.style.background='';if(n){n.style.background='#f3f4f6';n.style.color='#9ca3af';n.style.boxShadow='none';}if(l)l.style.color='#9ca3af';}});if(ind&&tabs[idx]){ind.style.top=tabs[idx].offsetTop+'px';ind.style.height=tabs[idx].offsetHeight+'px';ind.style.background=c.num;}panels.forEach((p,i)=>{if(i===idx){p.classList.remove('hidden');p.classList.remove('kc-panel-anim');void p.offsetWidth;p.classList.add('kc-panel-anim');}else{p.classList.add('hidden');}});const v=panels[idx];if(v&&window.Prism)Prism.highlightAllUnder(v);}
+function _switchDarkPills(pfx,idx){document.querySelectorAll('.'+pfx+'-step').forEach((s,i)=>{if(i===idx){s.classList.add(pfx+'-step-active');s.style.background='linear-gradient(to right,#CB187D,#e84aad)';s.style.color='#fff';s.style.boxShadow='0 10px 25px -5px rgba(203,24,125,0.3)';}else{s.classList.remove(pfx+'-step-active');s.style.background='#1f2937';s.style.color='#9ca3af';s.style.boxShadow='none';}});document.querySelectorAll('.'+pfx+'-panel').forEach((p,i)=>{if(i===idx){p.classList.remove('hidden');p.classList.remove(pfx+'-panel-anim');void p.offsetWidth;p.classList.add(pfx+'-panel-anim');}else{p.classList.add('hidden');}});const v=document.querySelectorAll('.'+pfx+'-panel:not(.hidden)')[0];if(v&&window.Prism)Prism.highlightAllUnder(v);}
+function switchCeTab(i){_switchDarkPills('ce',i);}
+function switchMkTab(i){_switchDarkPills('mk',i);}
+function switchPeTab(i){_switchDarkPills('pe',i);}
+function switchQzTab(i){_switchDarkPills('qz',i);}
+function checkQuiz(btn,answer){const q=btn.closest('.quiz-question');const fb=q.querySelector('.quiz-feedback');const btns=q.querySelectorAll('.quiz-btn');const fbC=q.getAttribute('data-fb-correct');const fbW=q.getAttribute('data-fb-wrong');btns.forEach(b=>{b.disabled=true;b.style.opacity='0.6';});if(answer===true){btn.classList.add('correct');btn.style.opacity='1';fb.textContent=fbC||'\u2713 Correct!';fb.className='quiz-feedback mt-2 text-sm font-medium text-green-600';}else{btn.classList.add('incorrect');btn.style.opacity='1';fb.textContent=fbW||'\u2717 Not quite \u2014 review the lesson above.';fb.className='quiz-feedback mt-2 text-sm font-medium text-red-500';}}
+document.addEventListener('DOMContentLoaded',()=>{if(window.Prism)Prism.highlightAll();});
+</script>

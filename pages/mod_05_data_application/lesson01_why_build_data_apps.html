@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 &mdash; Why Build Data Apps? | Python Learning Hub</title>
+  <meta name="description" content="Learn Why Build Data Apps? in Python. Part of the Building Data Applications module — Track 4: Data Applications — Python Learning Hub.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+  <style>
+    * { scroll-behavior: smooth; }
+    pre[class*="language-"] { border-radius: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
+    code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
+    body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #1f2937; line-height: 1.6; margin: 0; padding: 0; }
+    h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
+    h2 { font-size: 1.25rem; font-weight: 700; }
+    h3 { font-size: 1rem; font-weight: 600; }
+    .text-brand { color: #CB187D; }
+    .text-brand-dark { color: #7F004C; }
+    .bg-brand { background: #CB187D; }
+    .bg-brand-soft { background: #fdf0f7; }
+    .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+    .bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
+    .bg-code { background: #1e1e2e; }
+    .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
+    .pre-reset { margin: 0; border-radius: 0; background: transparent; }
+    .kc-tab-active { background: #fdf0f7; }
+    .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+    .kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .ce-step:not(.ce-step-active):hover { background: #374151; color: #ffffff; }
+    .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .mk-step:not(.mk-step-active):hover { background: #374151; color: #ffffff; }
+    .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .qz-step:not(.qz-step-active):hover { background: #374151; color: #ffffff; }
+    .qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #ffffff; }
+    .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+    .accordion-body { display: none !important; }
+    .accordion-body.open { display: block !important; }
+    .accordion-toggle { display: flex !important; align-items: center !important; gap: 8px !important; width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important; font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important; border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important; color: #7F004C !important; line-height: 1.2 !important; text-decoration: none !important; transition: background 0.15s, border-color 0.15s !important; }
+    .accordion-toggle:hover { background: #f9d9ee !important; border-color: #CB187D !important; }
+    .accordion-toggle.open { background: #fdf0f7 !important; border-color: #CB187D !important; border-style: solid !important; }
+    .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
+    .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
+    .hero-container { position: relative; border-radius: 1.25rem; overflow: hidden; min-height: 380px; background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%); }
+    .hero-dots { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px); background-size: 24px 24px; }
+    .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255, 255, 255, 0.12); }
+    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127, 0, 76, 0.35); }
+    .hero-glow-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%); opacity: 0.7; }
+    .hero-pill { background: #ffffff; border: none; color: #7F004C; font-weight: 700; transition: transform 0.2s ease; }
+    .hero-pill:hover { transform: translateY(-1px); }
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D); background-size: 200% 100%; animation: scrollGradient 3s linear infinite; z-index: 9999; transition: width 0.15s; }
+    @keyframes scrollGradient { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+    .lesson-layout { display: flex; gap: 1.75rem; align-items: flex-start; }
+    .lesson-toc-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem); overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease; }
+    .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
+    .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-module-list { display: none; }
+    .toc-toggle-btn { background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D; display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border-radius: 6px; transition: background 0.15s; }
+    .toc-toggle-btn:hover { background: #fdf0f7; }
+    .toc-link { transition: color 0.15s, padding-left 0.15s; }
+    .toc-link:hover { color: #CB187D; padding-left: 4px; }
+    .toc-link.active { color: #CB187D; font-weight: 600; border-left: 3px solid #CB187D; padding-left: 8px; }
+    .obj-card { transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
+    .obj-card:hover { box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); border-color: #f5c6e0; background-color: #ffffff; }
+    .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+    .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+    .obj-card:hover .obj-icon .iconify { color: white !important; }
+    #key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+    #key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
+    .tab-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff; line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s; }
+    .tab-btn:hover { color: #CB187D; border-color: #CB187D; background: #fdf0f7; }
+    .tab-btn.active { color: #fff; background: #CB187D; border-color: #CB187D; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .copy-btn { position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center; background: rgba(203, 24, 125, 0.15); border: 1px solid rgba(203, 24, 125, 0.3); color: #CB187D; border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .copy-btn:hover { background: rgba(203, 24, 125, 0.3); }
+    .copy-btn-light { position: static; color: #fff; border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.1); }
+    .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2); }
+    .lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: #CB187D; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(203, 24, 125, 0.3); cursor: pointer; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none; }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #7F004C; }
+    .quiz-btn.correct { background: #f0fdf4; border-color: #22c55e; color: #16a34a; }
+    .quiz-btn.incorrect { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+    .mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08); }
+    .flow-stepper .flow-step { transition: transform 0.15s ease; }
+    .flow-stepper .flow-step:hover { transform: translateX(4px); }
+    .recap-item { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .recap-item:hover { transform: translateX(4px); box-shadow: -4px 0 0 0 #10b981; }
+    .overview-card { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+    .overview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.12); border-color: rgba(203, 24, 125, 0.3); }
+    @media (max-width: 767px) { .lesson-toc-sidebar { display: none; } .lesson-layout { display: block; } #lesson-nav { display: block; } .hero-container { min-height: auto; } .hero-split { flex-direction: column !important; } .hero-abstract-card { margin-top: 1.5rem; } }
+    @media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; } .obj-card:hover { transform: none; box-shadow: none; } }
+    .iconify { vertical-align: middle; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div class="bg-gray-50 min-h-screen">
+
+  <!-- HERO -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+    <section class="hero-container">
+  <div class="hero-dots"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow-line"></div>
+  <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+    <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+
+      <!-- LEFT COLUMN — Lesson info -->
+      <div class="flex-1 min-w-0">
+
+        <!-- Badge row -->
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:star"></span> Module 5
+          </span>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="inline-flex items-center gap-1">
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span>
+            </span>
+            Intermediate
+          </span>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 5 min read
+          </span>
+        </div>
+
+        <!-- Lesson number label -->
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 01</p>
+
+        <!-- Title -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Why Build Data Apps?</h1>
+
+        <!-- Subtitle -->
+        <p class="text-white/80 text-sm md:text-base leading-relaxed mt-4 mb-5 max-w-prose">Discover why data applications turn analysis into action by letting users explore results, answer questions quickly, and make better day-to-day decisions.</p>
+
+        <!-- Author & Date -->
+        <div class="flex items-center gap-4 mb-5 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+              <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+            </span>
+            <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+          </div>
+          <span class="text-white/30">|</span>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+              <span class="iconify text-white text-[10px]" data-icon="fa6-regular:calendar"></span>
+            </span>
+            <span class="text-white/85 font-medium text-xs">April 23, 2026</span>
+          </div>
+        </div>
+
+        <!-- Stat pills -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span>
+            <span class="font-semibold opacity-55">Goals</span>
+          </a>
+          <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span>
+            <span class="font-semibold opacity-55">Examples</span>
+          </a>
+          <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span>
+            <span class="font-extrabold">4</span>
+            <span class="font-semibold opacity-55">Exercises</span>
+          </a>
+          <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs">
+            <span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span>
+            <span class="font-extrabold">1<span class="font-bold opacity-50">/7</span></span>
+            <span class="font-semibold opacity-55">Progress</span>
+          </span>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN — Hex graphic (locked — never edit) -->
+      <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+        <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+          <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+            <defs>
+              <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+              <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+              <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+              <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+              <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+            </defs>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+            <g clip-path="url(#hexClip)" opacity="1">
+              <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+              <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+              <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+              <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+              <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+              <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+              <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
+              <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+              <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+              <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+              <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+              <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+            </g>
+            <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+            <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+            <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+            <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+            <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+            <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+            <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+    <div class="lesson-layout">
+      <aside class="lesson-toc-sidebar">
+        <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+          <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+            <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+            <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+              <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+            </button>
+          </div>
+          <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+            <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective
+</a>
+<a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview
+</a>
+<a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:lightbulb"></span> Key Takeaways
+</a>
+<a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts
+</a>
+<a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples
+</a>
+<a href="#practice" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:dumbbell"></span> Practice Exercises
+</a>
+<a href="#mistakes" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:triangle-exclamation"></span> Common Mistakes
+</a>
+<a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap
+</a>
+<a href="#knowledge-check" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:brain"></span> Knowledge Check
+</a>
+<a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline">
+  <span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson
+</a>
+
+          </nav>
+          <div class="toc-module-list px-3 py-3">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+            <div class="space-y-1"><a href="lesson01_why_build_data_apps.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span>
+  <span class="truncate">1. Why Build Data Apps?</span>
+</a>
+<a href="lesson02_introduction_to_streamlit.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">2. Introduction to Streamlit</span>
+</a>
+<a href="lesson03_interactive_filters.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">3. Interactive Filters</span>
+</a>
+<a href="lesson04_exporting_data.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">4. Exporting Data</span>
+</a>
+<a href="lesson05_deploying_data_applications.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">5. Deploying Data Applications</span>
+</a>
+<a href="lesson06_shiny_for_python.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">6. Shiny for Python</span>
+</a>
+<a href="lesson07_streamlit_vs_shiny.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors">
+  <span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span>
+  <span class="truncate">7. Streamlit vs Shiny</span>
+</a>
+</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="min-w-0 flex-1 space-y-10">
+        <section id="objective">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">What you will learn in this lesson</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:window-maximize"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Define what a data application is</p>
+            <p class="text-xs text-gray-500 mt-0.5">Understand how data apps differ from static files and reports</p>
+          </div>
+        </div>
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:chart-column"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Explain why organizations choose data apps over static reports</p>
+            <p class="text-xs text-gray-500 mt-0.5">Identify the limitations of emailing spreadsheets and PDFs</p>
+          </div>
+        </div>
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:arrows-spin"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Describe how data apps streamline analytics workflows</p>
+            <p class="text-xs text-gray-500 mt-0.5">See how self-service tools eliminate repetitive analyst requests</p>
+          </div>
+        </div>
+        <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+          <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+            <span class="iconify text-brand text-lg" data-icon="fa6-solid:wrench"></span>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Identify common Python frameworks for building data apps</p>
+            <p class="text-xs text-gray-500 mt-0.5">Compare Streamlit, Dash, Shiny for Python, and Panel</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5">
+        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+          <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+          <p class="text-sm text-gray-600">This lesson introduces <strong>data applications</strong> as a concept before you write any code &mdash; you will build your first Streamlit app in Lesson 2.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level look at data applications and why they matter</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-5">
+
+      <!-- Part 1 — Hook quote -->
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-start gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">A data application is a web-based tool that lets users interact with live data through filters, charts, and tables &mdash; no coding or SQL required.</p>
+        </div>
+      </div>
+
+      <!-- Part 2 — Analogy intro -->
+      <p class="text-sm text-gray-600 leading-relaxed">Think of a data application like a self-service ordering kiosk at a fast-food restaurant. A static report is like reading a printed menu on the wall &mdash; you can see the options, but you cannot customize your order or watch the total update in real time. A data application gives you a touchscreen where you tap categories, add items, see your running total change instantly, and send the order straight to the kitchen.</p>
+
+      <!-- Part 3 — Analogy card grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 transition-colors">
+          <div class="flex items-center gap-3 mb-2.5">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+              <span class="iconify text-brand text-base" data-icon="fa6-solid:window-maximize"></span>
+            </span>
+            <div>
+              <p class="text-sm font-bold text-gray-800 leading-tight">Data Application</p>
+              <p class="text-[10px] text-gray-400 italic leading-tight">The touchscreen kiosk &mdash; a self-service interface for your data</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 leading-relaxed">A data application is a web page backed by live data that lets users filter rows, generate charts, and download results on their own. You open it in a browser, interact with widgets like dropdowns and sliders, and the page updates instantly without anyone rewriting a query or resending a file.</p>
+        </div>
+        <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 transition-colors">
+          <div class="flex items-center gap-3 mb-2.5">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+              <span class="iconify text-brand text-base" data-icon="fa6-solid:file-lines"></span>
+            </span>
+            <div>
+              <p class="text-sm font-bold text-gray-800 leading-tight">Static Reports</p>
+              <p class="text-[10px] text-gray-400 italic leading-tight">The printed menu &mdash; fixed information that cannot answer new questions</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 leading-relaxed">A static report is a snapshot of data frozen at the moment it was exported &mdash; an Excel file, a PDF, or an emailed spreadsheet. The moment a stakeholder asks &ldquo;What about Q3?&rdquo; or &ldquo;Filter by the West region,&rdquo; someone has to rerun the query, rebuild the file, and send it again.</p>
+        </div>
+        <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 transition-colors">
+          <div class="flex items-center gap-3 mb-2.5">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+              <span class="iconify text-brand text-base" data-icon="fa6-solid:arrows-spin"></span>
+            </span>
+            <div>
+              <p class="text-sm font-bold text-gray-800 leading-tight">Interactive Analytics</p>
+              <p class="text-[10px] text-gray-400 italic leading-tight">The customization screen &mdash; tap to filter, sort, and explore instantly</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 leading-relaxed">Interactive analytics means the user can change what they see without waiting for an analyst. You select a region from a dropdown, drag a date slider, or click a chart bar to drill down &mdash; and the dashboard recalculates on the fly, freeing analysts from repetitive ad-hoc requests.</p>
+        </div>
+        <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 transition-colors">
+          <div class="flex items-center gap-3 mb-2.5">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+              <span class="iconify text-brand text-base" data-icon="fa6-solid:wrench"></span>
+            </span>
+            <div>
+              <p class="text-sm font-bold text-gray-800 leading-tight">Python Frameworks</p>
+              <p class="text-[10px] text-gray-400 italic leading-tight">The kiosk software &mdash; Streamlit, Dash, and Shiny power the screen</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 leading-relaxed">Python frameworks like Streamlit, Dash, Shiny for Python, and Panel let you build a full data app using only Python &mdash; no HTML, CSS, or JavaScript required. You write a regular Python script, and the framework turns it into a web page with widgets, charts, and tables that anyone can use in a browser.</p>
+        </div>
+      </div>
+
+      <!-- Part 4 — Closing tip -->
+      <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+        <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+        <p class="text-sm text-gray-600">Even if you never build a data app yourself, understanding what they are helps you communicate requirements to developers and evaluate which tool fits your team&rsquo;s needs.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="key-ideas">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- Card 0 — pink -->
+        <div class="obj-card rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+          <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+          <div class="px-5 py-5 space-y-3 bg-white">
+            <div class="flex items-center gap-3">
+              <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:clock-rotate-left"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-900">Static Reports Become Stale the Moment They Are Exported</h3>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">A static report captures data at a single point in time, so any question about the latest numbers requires someone to re-run the query and re-send the file. A data application stays connected to the source, which means charts and tables always reflect the most recent data without any manual refresh.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Real-time Data</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">Self-Service</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">No Re-export</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 1 — violet -->
+        <div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+          <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+          <div class="px-5 py-5 space-y-3 bg-white">
+            <div class="flex items-center gap-3">
+              <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:users"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-900">Self-Service Tools Eliminate Repeated Analyst Requests</h3>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">Without a data app, every &ldquo;Can you filter by region?&rdquo; or &ldquo;Show me Q3 numbers&rdquo; request lands on an analyst&rsquo;s desk, creating a backlog that delays decisions. When users can apply their own filters and drill-downs, analysts are freed to focus on deeper, more strategic analysis.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Filter Widgets</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Ad-Hoc Queries</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">Analyst Time</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 — blue -->
+        <div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+          <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+          <div class="px-5 py-5 space-y-3 bg-white">
+            <div class="flex items-center gap-3">
+              <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:wand-magic-sparkles"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-900">Python Frameworks Turn Scripts into Web Pages</h3>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">Streamlit, Dash, Shiny for Python, and Panel all convert a standard Python script into a browser-based interface &mdash; you do not need to learn HTML, CSS, or JavaScript. This means the same person who writes pandas code to clean data can also build the front-end that stakeholders use to explore it.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Streamlit</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Dash</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Shiny</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">Panel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 — emerald -->
+        <div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+          <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+          <div class="px-5 py-5 space-y-3 bg-white">
+            <div class="flex items-center gap-3">
+              <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+                <span class="iconify text-white text-sm" data-icon="fa6-solid:handshake"></span>
+              </span>
+              <h3 class="text-sm font-bold text-gray-900">Data Apps Bridge the Gap Between Data Teams and Business Users</h3>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">Business users often cannot write SQL or Python, so they depend on analysts to answer every data question. A data application gives those users a point-and-click interface to explore data themselves, which shortens the feedback loop from &ldquo;days waiting for a report&rdquo; to &ldquo;seconds clicking a filter.&rdquo;</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Business Users</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Point-and-Click</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Decision Speed</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="key-concepts">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and how they work in practice</p>
+      </div>
+    </div>
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+          <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:window-maximize"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Data Applications</span>
+          </button>
+          <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:file-lines"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Static vs Interactive</span>
+          </button>
+          <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:arrows-spin"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Interactive Analytics</span>
+          </button>
+          <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+            <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:wrench"></span></span>
+            <span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Python Frameworks</span>
+          </button>
+        </div>
+        <div class="flex-1 min-w-0 md:pl-5">
+
+          <!-- KC Panel 0 — pink: Data Applications -->
+          <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+            <div class="rounded-2xl border border-pink-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+              <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:window-maximize"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Data Applications</h3>
+                      <p class="text-[10px] text-gray-400">Web-based interactive data tools</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-[#CB187D]">Core Concept</span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">A data application is a web-based tool that connects directly to a data source and renders an interactive interface &mdash; tables, charts, and filter widgets &mdash; in the user&rsquo;s browser. Unlike a static file that you email or share on a drive, a data app stays live: when the underlying data changes, the app reflects those changes the next time a user opens it.</p>
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st  # Framework that turns this script into a web app
+import pandas as pd      # Data manipulation library
+
+# Load data from a CSV file into a DataFrame
+data = pd.read_csv("sales.csv")
+
+# Render a title at the top of the web page
+st.title("Sales Dashboard")
+
+# Display the DataFrame as a scrollable, sortable table
+st.dataframe(data)</code></pre>
+                </div>
+                <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                  <p class="text-sm text-gray-600">Streamlit re-runs your entire script from top to bottom every time a user interacts with a widget, so keep heavy data loading behind <code class="font-mono text-xs bg-pink-50 text-[#CB187D] px-1 py-0.5 rounded">@st.cache_data</code> to avoid slow reloads.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KC Panel 1 — violet: Static vs Interactive -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+            <div class="rounded-2xl border border-violet-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+              <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:file-lines"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Static Reports vs Data Apps</h3>
+                      <p class="text-[10px] text-gray-400">Why fixed snapshots fall short</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600">Comparison</span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">A static report is a fixed snapshot &mdash; an Excel file, a PDF, or an emailed CSV &mdash; that captures data at the moment it was generated. A data application, by contrast, queries the source each time a user opens it and lets them filter, sort, and drill down without re-exporting anything.</p>
+                <div class="rounded-xl border border-violet-100 overflow-hidden">
+                  <table class="w-full text-sm">
+                    <thead><tr class="bg-violet-50 text-violet-600">
+                      <th class="px-4 py-2 text-left text-xs font-bold">Feature</th>
+                      <th class="px-4 py-2 text-left text-xs font-bold">Static Report</th>
+                      <th class="px-4 py-2 text-left text-xs font-bold">Data App</th>
+                    </tr></thead>
+                    <tbody class="text-xs text-gray-600">
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Data freshness</td><td class="px-4 py-2">Frozen at export time</td><td class="px-4 py-2">Live or near-live</td></tr>
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Filtering</td><td class="px-4 py-2">Re-run query manually</td><td class="px-4 py-2">Click a dropdown</td></tr>
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Sharing</td><td class="px-4 py-2">Email / shared drive</td><td class="px-4 py-2">URL link</td></tr>
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">User skill needed</td><td class="px-4 py-2">Open a file</td><td class="px-4 py-2">Open a browser</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                  <p class="text-sm text-gray-600">Static reports are still useful when you need a permanent record (an audit trail or a board-deck PDF). The goal is not to eliminate them but to stop using them as the only way stakeholders access data.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KC Panel 2 — blue: Interactive Analytics -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+            <div class="rounded-2xl border border-blue-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+              <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:arrows-spin"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Interactive Analytics</h3>
+                      <p class="text-[10px] text-gray-400">Filters, widgets, and real-time updates</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600">Workflow</span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">Interactive analytics means users can change what they see &mdash; filtering rows, selecting date ranges, or clicking chart elements &mdash; and the display updates instantly without anyone rewriting code. In Streamlit, every widget (dropdown, slider, checkbox) is a single function call that returns the user&rsquo;s current selection.</p>
+                <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+                    <div class="flex items-center gap-2">
+                      <span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">Python</span>
+                    </div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python"># Create a dropdown widget populated from the data itself
+region = st.selectbox("Region", data["region"].unique())
+
+# Filter the DataFrame to matching rows
+filtered = data[data["region"] == region]
+
+# Render a bar chart of sales by product for the selected region
+st.bar_chart(filtered.set_index("product")["sales"])</code></pre>
+                </div>
+                <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                  <p class="text-sm text-gray-600">Always populate dropdown options from the data itself (<code class="font-mono text-xs bg-blue-50 text-blue-700 px-1 py-0.5 rounded">data["region"].unique()</code>) rather than hard-coding a list &mdash; this way the filter stays correct even when new categories appear in the dataset.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KC Panel 3 — emerald: Python Frameworks -->
+          <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+            <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+              <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md">
+                      <span class="iconify text-white text-sm" data-icon="fa6-solid:wrench"></span>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-gray-900 leading-tight">Python Data App Frameworks</h3>
+                      <p class="text-[10px] text-gray-400">Choosing the right tool for the job</p>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600">Tooling</span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">Several Python frameworks let you build data applications without writing any HTML, CSS, or JavaScript. Each framework has a different philosophy: Streamlit uses a top-to-bottom script model, Dash uses a callback model inspired by React, Shiny for Python uses a reactive model borrowed from R, and Panel integrates tightly with the HoloViz ecosystem.</p>
+                <div class="rounded-xl border border-emerald-100 overflow-hidden">
+                  <table class="w-full text-sm">
+                    <thead><tr class="bg-emerald-50 text-emerald-600">
+                      <th class="px-4 py-2 text-left text-xs font-bold">Framework</th>
+                      <th class="px-4 py-2 text-left text-xs font-bold">Model</th>
+                      <th class="px-4 py-2 text-left text-xs font-bold">Best For</th>
+                    </tr></thead>
+                    <tbody class="text-xs text-gray-600">
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Streamlit</td><td class="px-4 py-2">Script (top-to-bottom)</td><td class="px-4 py-2">Fast prototyping, simple dashboards</td></tr>
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Dash</td><td class="px-4 py-2">Callbacks (Plotly-based)</td><td class="px-4 py-2">Complex multi-page apps</td></tr>
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Shiny for Python</td><td class="px-4 py-2">Reactive (R-style)</td><td class="px-4 py-2">Teams familiar with R Shiny</td></tr>
+                      <tr class="border-t border-gray-100"><td class="px-4 py-2 font-medium">Panel</td><td class="px-4 py-2">Widget-based (HoloViz)</td><td class="px-4 py-2">Scientific / notebook-first workflows</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                  <p class="text-sm text-gray-600">If you are new to data apps, start with Streamlit &mdash; its script-based model is the easiest to learn, and you can have a working prototype running in your browser in under 30 minutes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="code-examples">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Basic App</span></button>
+        <button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Add Filter</span></button>
+        <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Add Chart</span></button>
+        <button onclick="switchCeTab(3)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Export Data</span></button>
+      </div>
+
+      <div class="ce-panel ce-panel-anim" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:code"></span></span>
+              <div>
+                <h3 class="font-bold text-gray-800">Basic App</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.title()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.dataframe()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script loads a CSV into a <strong class="text-gray-800">DataFrame</strong> and passes it to <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.dataframe()</code>, which renders it as a scrollable table in the browser. Running <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">streamlit run</code> starts a local web server and opens the app automatically.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">basic_app.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st    # Import the Streamlit framework
+import pandas as pd        # Import pandas for data handling
+
+# Load sales data from a CSV file into a DataFrame
+data = pd.read_csv("sales.csv")
+
+# Display the app title in the browser
+st.title("Sales Dashboard")
+
+# Show the first 10 rows as a scrollable table
+st.dataframe(data.head(10))</code></pre></div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ streamlit run basic_app.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">  You can now view your Streamlit app in your browser.<br>  Local URL: http://localhost:8501</div>
+          </div>
+        </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">Streamlit launches a local web server and opens a browser tab automatically. Every time you save the script, the page refreshes to show your changes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:code"></span></span>
+              <div>
+                <h3 class="font-bold text-gray-800">Add Filter</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.selectbox()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">DataFrames</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script adds a dropdown using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.selectbox()</code>, then filters the <strong class="text-gray-800">DataFrame</strong> to show only rows matching the chosen region. Streamlit reruns the whole script each time the user changes the selection.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">filter_app.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+data = pd.read_csv("sales.csv")
+st.title("Sales Dashboard")
+
+# Create a dropdown that lists every unique region from the dataset
+region = st.selectbox("Select Region", data["region"].unique())
+
+# Filter the DataFrame to only rows matching the selected region
+filtered = data[data["region"] == region]
+
+# Display the filtered results as a table
+st.dataframe(filtered)</code></pre></div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ streamlit run filter_app.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">  You can now view your Streamlit app in your browser.<br>  Local URL: http://localhost:8501</div>
+          </div>
+        </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">When the user selects a different region, Streamlit re-runs the script from top to bottom and the table shows only matching rows &mdash; no page reload required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:code"></span></span>
+              <div>
+                <h3 class="font-bold text-gray-800">Add Chart</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.bar_chart()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.metric()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script draws a bar chart with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.bar_chart()</code> and shows the region total as a metric card with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.metric()</code>. Both components update automatically when the region filter changes.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">chart_app.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+data = pd.read_csv("sales.csv")
+st.title("Sales Dashboard")
+
+region = st.selectbox("Select Region", data["region"].unique())
+filtered = data[data["region"] == region]
+
+# Display a bar chart of sales by product for the selected region
+st.bar_chart(filtered.set_index("product")["sales"])
+
+# Show a metric card with the total sales value
+st.metric("Total Sales", f"${filtered['sales'].sum():,.0f}")</code></pre></div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ streamlit run chart_app.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">  You can now view your Streamlit app in your browser.<br>  Local URL: http://localhost:8501</div>
+          </div>
+        </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">The chart and metric update automatically when the user picks a different region. This is the core benefit of a data app &mdash; stakeholders explore the data themselves instead of waiting for a new export.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:code"></span></span>
+              <div>
+                <h3 class="font-bold text-gray-800">Export Data</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.download_button()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">CSV</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">What This Does</p>
+                <p class="text-sm text-gray-600">This script adds a download button using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.download_button()</code> that converts the filtered <strong class="text-gray-800">DataFrame</strong> to a CSV file the user can save to their computer. One line of code replaces an entire analyst workflow.</p>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                    <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                    <span class="text-[11px] font-semibold text-gray-400">export_app.py</span>
+              </div>
+            </div>
+            <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+          </div>
+          <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+data = pd.read_csv("sales.csv")
+st.title("Sales Dashboard")
+
+region = st.selectbox("Select Region", data["region"].unique())
+filtered = data[data["region"] == region]
+st.dataframe(filtered)
+
+# Add a download button that exports the filtered data as CSV
+st.download_button(
+    label="Download Filtered Data",         # Button text
+    data=filtered.to_csv(index=False),      # Convert DataFrame to CSV string
+    file_name="filtered_sales.csv",         # Default filename for download
+    mime="text/csv"                         # File type
+)</code></pre></div>
+          <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+              <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+              <span class="text-[10px] text-gray-600 font-mono">$ streamlit run export_app.py</span>
+            </div>
+            <div class="font-mono text-xs text-emerald-400 leading-relaxed">  You can now view your Streamlit app in your browser.<br>  Local URL: http://localhost:8501</div>
+          </div>
+        </div>
+            <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+              <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+              <p class="text-sm text-gray-600">The download button lets users export exactly the filtered subset they need. This replaces the old workflow of asking an analyst to rerun a query and email the results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Create App</span>
+        </button>
+        <button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Load Data</span>
+        </button>
+        <button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Add Filter</span>
+        </button>
+        <button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span>
+          <span class="pe-step-label text-xs font-bold">Chart + Export</span>
+        </button>
+      </div>
+
+      <div class="pe-panel pe-panel-anim" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Create App</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">General</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.title()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.write()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">Create a file called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">app.py</code> and build the simplest possible Streamlit app. Import Streamlit, add a title using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.title()</code>, and add a welcome message using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.write()</code>. Run it with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">streamlit run app.py</code> — a browser tab should open showing your title and message.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">app.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st           # import the Streamlit library
+st.title("My First Data App")    # display the app title in the browser
+st.write("Welcome to my app")    # add a message below the title</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ streamlit run app.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">You can now view your Streamlit app in your browser.<br>Local URL: http://localhost:8501</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Every Streamlit app starts with <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">import streamlit as st</code>. The alias <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st</code> is a community convention — using it makes your code instantly recognizable to other Python developers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Load Data</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">pd.read_csv()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.dataframe()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">Your team has a sales file called <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">sales.csv</code>. Load it into a DataFrame using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">pd.read_csv()</code> and display it as a scrollable table using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.dataframe()</code>. Add a line below the table that shows the total number of rows in the dataset.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">load_data.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st                    # import Streamlit
+import pandas as pd                       # import pandas for data handling
+sales_data = pd.read_csv("sales.csv")     # load the CSV file into a DataFrame
+st.title("Sales Dashboard")               # set the app title
+st.dataframe(sales_data)                  # display the table in the browser
+st.write(f"Total rows: {len(sales_data)}") # show row count below the table</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ streamlit run load_data.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">You can now view your Streamlit app in your browser.<br>Local URL: http://localhost:8501</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600"><code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.dataframe()</code> renders the table as a scrollable, sortable grid. Users can click column headers to sort without you writing any extra code.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Add Filter</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.selectbox()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">DataFrames</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">Add a region filter to the sales dashboard. Use <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.selectbox()</code> to create a dropdown — populate its options from <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">data["region"].unique()</code> so new regions appear automatically. Filter the DataFrame and display only the matching rows.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">filter_app.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st                         # import Streamlit
+import pandas as pd                            # import pandas
+data = pd.read_csv("sales.csv")                # load the sales data
+st.title("Sales Dashboard")                    # set the app title
+region = st.selectbox("Region", data["region"].unique())  # dropdown filter
+filtered = data[data["region"] == region]      # keep only matching rows
+st.dataframe(filtered)                         # display the filtered table</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ streamlit run filter_app.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">You can now view your Streamlit app in your browser.<br>Local URL: http://localhost:8501</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Using <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">data["region"].unique()</code> means the dropdown updates itself if new regions are added to the CSV — you never need to edit the code to add options manually.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+                <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+              </span>
+              <div>
+                <h3 class="font-bold text-gray-800">Chart + Export</h3>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200"><span class="iconify text-[10px]" data-icon="fa6-solid:fire"></span> Intermediate</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">Sales</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.bar_chart()</span>
+                  <span class="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-medium">st.download_button()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+              <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+                <p class="text-sm text-gray-600">Build on the filtered dashboard by adding a bar chart and a download button. Use <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.bar_chart()</code> to show sales by product for the chosen region. Then add <code class="text-xs font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-700">st.download_button()</code> so users can save the filtered data as a CSV file.</p>
+              </div>
+            </div>
+            <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+              <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Answer
+              <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                  <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+                      <span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span>
+                      <span class="text-[11px] font-semibold text-gray-400">export_app.py</span>
+                    </div>
+                  </div>
+                  <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                </div>
+                <div class="bg-code">
+                  <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st                                   # import Streamlit
+import pandas as pd                                      # import pandas
+data = pd.read_csv("sales.csv")                          # load the data
+region = st.selectbox("Region", data["region"].unique()) # dropdown filter
+filtered = data[data["region"] == region]                # filter the data
+st.bar_chart(filtered.set_index("product")["sales"])     # bar chart by product
+st.download_button("Download CSV", filtered.to_csv())    # export as CSV file</code></pre>
+                </div>
+                <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+                    <span class="text-[10px] text-gray-600 font-mono">$ streamlit run export_app.py</span>
+                  </div>
+                  <div class="font-mono text-xs text-emerald-400 leading-relaxed">You can now view your Streamlit app in your browser.<br>Local URL: http://localhost:8501</div>
+                </div>
+              </div>
+              <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+                <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+                <p class="text-sm text-gray-600">Combining a filter, a chart, and a download button gives you a complete self-service dashboard. Stakeholders can explore the data and export exactly what they need — without asking anyone for a new report.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="mistakes">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Hardcoded Filters</span>
+        </button>
+        <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Lost Filter Result</span>
+        </button>
+        <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Skipping Cache</span>
+        </button>
+        <button onclick="switchMkTab(3)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab">
+          <span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span>
+          <span class="mk-step-label text-xs font-bold">Too Much Data</span>
+        </button>
+      </div>
+
+      <div class="mk-panel mk-panel-anim" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Hardcoding Filter Options Instead of Reading from Data</h4>
+              <p class="text-xs text-gray-500 mt-0.5">A fixed option list breaks immediately when the dataset adds a new category.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Passing a hand-typed list like <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">["East", "West"]</code> to <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">st.selectbox()</code> means any new region added to the CSV is silently ignored. Pass <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">data[&quot;region&quot;].unique()</code> instead — Streamlit reads the options directly from the current data every time the app loads.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — fixed list
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Options are fixed — new regions won&apos;t appear
+region = st.selectbox(&quot;Region&quot;, [&quot;East&quot;, &quot;West&quot;, &quot;North&quot;])</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — read from data
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Options come from the data — always current
+region = st.selectbox(&quot;Region&quot;, data[&quot;region&quot;].unique())</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Think of it like a formula in a spreadsheet cell: reading from <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">data[&quot;region&quot;].unique()</code> means the dropdown maintains itself as the data grows, just like a formula recalculates when you add rows.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Filtering the DataFrame Without Storing the Result</h4>
+              <p class="text-xs text-gray-500 mt-0.5">The filter expression runs but its output is immediately discarded, so the table shows all rows.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Writing <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">data[data[&quot;region&quot;] == region]</code> without an assignment evaluates the filter and throws the result away — Python does not modify <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">data</code> in place. Assign the filtered rows to a new variable like <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">filtered</code>, then pass that variable to <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">st.dataframe()</code>.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — result discarded
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Filter runs but result is never saved
+data[data[&quot;region&quot;] == region]
+st.dataframe(data)  # still shows all rows</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — assign then display
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Save the filtered rows to a variable
+filtered = data[data[&quot;region&quot;] == region]
+st.dataframe(filtered)  # shows only matching rows</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">This is a silent bug — no error is raised, but the filter has no visible effect. Any time you filter a DataFrame in Streamlit, always check that the result is assigned to a variable before you display it.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Loading Data on Every Interaction Without Caching</h4>
+              <p class="text-xs text-gray-500 mt-0.5">Streamlit reruns the whole script on each widget change, so an uncached CSV load repeats every time.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed">Without <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">@st.cache_data</code>, Streamlit re-reads the file from disk on every dropdown change or button click. Wrapping the load function in <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">@st.cache_data</code> stores the result after the first load and returns the cached copy on all subsequent reruns.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — re-reads every time
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Reads the CSV on every widget interaction
+data = pd.read_csv(&quot;sales.csv&quot;)</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — cached after first load
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">@st.cache_data              # cache the result
+def load_data():
+    return pd.read_csv(&quot;sales.csv&quot;)
+
+data = load_data()           # only reads once</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">Think of <code class="font-mono bg-amber-100 px-1 rounded text-[11px]">@st.cache_data</code> like saving a query result to a temp file. The first run does the work; every run after that reads the saved result — your app stays fast regardless of how many times users change the filters.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+        <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+              <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-gray-800 text-sm">Rendering the Full Dataset in the Browser Table</h4>
+              <p class="text-xs text-gray-500 mt-0.5">Displaying millions of rows at once causes the browser to freeze or time out.</p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0">
+              <span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall
+            </span>
+          </div>
+          <div class="px-6 py-5">
+            <p class="text-sm text-gray-600 leading-relaxed"><code class="font-mono bg-gray-100 px-1 rounded text-[11px]">st.dataframe(data)</code> sends every row to the browser as HTML — on a large file this makes the page unresponsive. Show a preview with <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">data.head()</code> and let users download the full dataset with <code class="font-mono bg-gray-100 px-1 rounded text-[11px]">st.download_button()</code>.</p>
+          </div>
+          <div class="relative grid grid-cols-1 sm:grid-cols-2">
+            <div class="p-5 bg-red-50/30">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong — all rows at once
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Sends all rows to the browser — can freeze the page
+st.dataframe(data)</code></pre>
+              </div>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none">
+              <span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200">
+                <span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span>
+              </span>
+            </div>
+            <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200">
+              <p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct — preview + download
+              </p>
+              <div class="rounded-xl overflow-hidden bg-code">
+                <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python"># Show a fast preview of the first 1000 rows
+st.dataframe(data.head(1000))
+# Offer the full dataset as a downloadable file
+st.download_button(&quot;Download All&quot;, data.to_csv())</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+            <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+            <p class="text-xs text-gray-600 leading-relaxed">The same principle applies in Excel — you wouldn&apos;t paste a million rows into a single view. Show a preview so the page loads fast, and give users a download link for the complete data when they need it.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A quick summary of what you learned</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span>
+              <p class="text-sm text-gray-700 font-medium leading-relaxed">You learned that a data application is a web-based tool that lets users interact with live data through filters, charts, and tables.</p>
+            </div>
+          </div>
+        </div>
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span>
+              <p class="text-sm text-gray-700 font-medium leading-relaxed">You learned why organizations prefer data apps over static reports &mdash; reports go stale instantly and generate constant re-export requests.</p>
+            </div>
+          </div>
+        </div>
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span>
+              <p class="text-sm text-gray-700 font-medium leading-relaxed">You learned how data apps streamline analytics workflows by letting business users filter, chart, and export data without writing code.</p>
+            </div>
+          </div>
+        </div>
+        <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+            <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+            <div class="relative flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span>
+              <p class="text-sm text-gray-700 font-medium leading-relaxed">You learned that Streamlit, Dash, Shiny for Python, and Panel are the main Python frameworks for building data applications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0"><span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span></span>
+          <div>
+            <p class="text-sm font-bold text-white">Lesson Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 4 key concepts. Ready for the knowledge check?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="knowledge-check">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:brain"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Knowledge Check</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5">Test your understanding before moving on</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6" role="tablist">
+        <button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+        <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+        <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+        <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+      </div>
+
+      <!-- Q1 — Multiple Choice -->
+      <div class="qz-panel qz-panel-anim" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+              <div><h3 class="font-bold text-gray-800">Multiple Choice</h3><p class="text-xs text-gray-500 mt-0.5">Select the best answer</p></div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q0">
+              <p class="text-sm font-semibold text-gray-800 mb-4">Which of the following best describes a data application?</p>
+              <div class="space-y-2">
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">A static PDF report emailed weekly</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, true)">A web-based tool that lets users filter, chart, and explore data interactively</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">A Python script that runs once and prints output to the terminal</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">An Excel file stored on a shared drive</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 — True/False -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q2</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+              <div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q1">
+              <p class="text-sm font-semibold text-gray-800 mb-4">A data application requires users to know SQL in order to filter and explore data.</p>
+              <div class="flex gap-3">
+                <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+                <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 — Multiple Choice (application) -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q3</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+              <div><h3 class="font-bold text-gray-800">Multiple Choice</h3><p class="text-xs text-gray-500 mt-0.5">Select the best answer</p></div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q2">
+              <p class="text-sm font-semibold text-gray-800 mb-4">A sales manager asks you for a new filtered view of Q3 revenue every Monday. What is the best long-term solution?</p>
+              <div class="space-y-2">
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">Write a SQL query and email the CSV each week</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, true)">Build a data app where the manager can filter by quarter themselves</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">Create a pivot table in Excel and share the file</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">Set up a cron job that emails the report automatically</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 — Multiple Choice (framework) -->
+      <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+        <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+            <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+            <div class="relative flex items-center gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span>
+              <div><h3 class="font-bold text-gray-800">Multiple Choice</h3><p class="text-xs text-gray-500 mt-0.5">Select the best answer</p></div>
+            </div>
+          </div>
+          <div class="px-6 py-5 space-y-4">
+            <div class="quiz-question" data-qid="quiz-q3">
+              <p class="text-sm font-semibold text-gray-800 mb-4">Which Python framework lets you build a data app using only a regular Python script &mdash; no HTML, CSS, or JavaScript required?</p>
+              <div class="space-y-2">
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">Django</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">Flask</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, true)">Streamlit</button>
+                <button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 transition-colors" onclick="checkQuiz(this, false)">FastAPI</button>
+              </div>
+              <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="next-lesson" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+      </div>
+    </div>
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">2</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 5 &middot; Lesson 2</p>
+          <h3 class="text-base font-bold text-gray-800">Introduction to Streamlit</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:play"></span></span>
+            <div><p class="text-sm font-semibold text-gray-700">Install &amp; run Streamlit</p></div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:puzzle-piece"></span></span>
+            <div><p class="text-sm font-semibold text-gray-700">Core Streamlit widgets</p></div>
+          </div>
+          <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+            <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:sitemap"></span></span>
+            <div><p class="text-sm font-semibold text-gray-700">App layout &amp; structure</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        <div class="flex flex-col sm:flex-row gap-3 mt-6"><a href="../mod_03_api_data_for_applications/lesson10_loading_api_data_into_pandas.html" class="lesson-nav-link group flex-1 flex items-center gap-3 rounded-xl border border-gray-100 bg-white px-5 py-4 no-underline hover:border-[#CB187D] transition-colors">
+  <span class="iconify text-gray-300 text-sm shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-left"></span>
+  <div class="min-w-0">
+    <p class="text-xs text-gray-400">Previous</p>
+    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors truncate">Loading API Data into Pandas</p>
+  </div>
+</a><a href="lesson02_introduction_to_streamlit.html" class="lesson-nav-link group flex-1 flex items-center gap-3 rounded-xl border border-gray-100 bg-white px-5 py-4 no-underline hover:border-[#CB187D] transition-colors text-right">
+  <div class="min-w-0 ml-auto">
+    <p class="text-xs text-gray-400">Next</p>
+    <p class="text-sm font-semibold text-gray-800 group-hover:text-[#CB187D] transition-colors truncate">Introduction to Streamlit</p>
+  </div>
+  <span class="iconify text-gray-300 text-sm shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:chevron-right"></span>
+</a></div>
+      </main>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleToc() {
+    const sidebar = document.querySelector('.lesson-toc-sidebar');
+    const icon = document.getElementById('toc-toggle-icon');
+    const collapsed = sidebar.classList.toggle('toc-collapsed');
+    icon.setAttribute('data-icon', collapsed ? 'fa6-solid:angles-right' : 'fa6-solid:angles-left');
+    if (window.Iconify) Iconify.scan();
+  }
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = [...tocLinks].map(link => document.getElementById(link.getAttribute('href').replace('#', ''))).filter(Boolean);
+  function updateScrollSpy() {
+    let currentId = '';
+    sections.forEach(section => { if (window.scrollY >= section.offsetTop - 120) currentId = section.id; });
+    tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + currentId); });
+  }
+  function updateScrollProgress() {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+  function updateBackToTop() { document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400); }
+  window.addEventListener('scroll', () => { updateScrollSpy(); updateScrollProgress(); updateBackToTop(); });
+
+  function copyCode(btn) {
+    const container = btn.closest('.relative') || btn.parentElement.closest('div');
+    const pre = container ? container.querySelector('pre') : null;
+    const text = pre ? pre.innerText : '';
+    function showFeedback() {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';
+      btn.style.background = 'rgba(34,197,94,0.2)'; btn.style.borderColor = 'rgba(34,197,94,0.5)'; btn.style.color = '#4ade80';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; }, 2000);
+    }
+    function fallbackCopy() {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); showFeedback();
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy); } else { fallbackCopy(); }
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    if (!isOpen && window.Prism) Prism.highlightAllUnder(body);
+  }
+
+  function switchTab(btn, panelId) {
+    const container = btn.closest('.bg-white') || btn.closest('section') || btn.parentElement.closest('div');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById(panelId);
+    if (panel) { panel.classList.add('active'); if (window.Prism) Prism.highlightAllUnder(panel); }
+  }
+
+  const kcColors = [
+    { num: '#CB187D', numShadow: 'rgba(203,24,125,0.25)', activeBg: '#fdf0f7' },
+    { num: '#7c3aed', numShadow: 'rgba(124,58,237,0.25)', activeBg: '#f5f3ff' },
+    { num: '#2563eb', numShadow: 'rgba(37,99,235,0.25)',  activeBg: '#eff6ff' },
+    { num: '#059669', numShadow: 'rgba(5,150,105,0.25)',  activeBg: '#ecfdf5' },
+    { num: '#d97706', numShadow: 'rgba(217,119,6,0.25)',  activeBg: '#fffbeb' },
+    { num: '#0891b2', numShadow: 'rgba(8,145,178,0.25)',  activeBg: '#ecfeff' }
+  ];
+  function switchKcTab(idx) {
+    const c = kcColors[idx % kcColors.length];
+    const tabs = document.querySelectorAll('.kc-tab');
+    const panels = document.querySelectorAll('.kc-panel');
+    const indicator = document.querySelector('.kc-indicator');
+    tabs.forEach((t, i) => {
+      const num = t.querySelector('.kc-tab-num');
+      const label = t.querySelector('.kc-tab-label');
+      if (i === idx) {
+        t.classList.add('kc-tab-active'); t.style.background = c.activeBg;
+        if (num) { num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
+        if (label) { label.style.color = '#111827'; }
+      } else {
+        t.classList.remove('kc-tab-active'); t.style.background = '';
+        if (num) { num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
+        if (label) { label.style.color = '#9ca3af'; }
+      }
+    });
+    if (indicator && tabs[idx]) { indicator.style.top = tabs[idx].offsetTop + 'px'; indicator.style.height = tabs[idx].offsetHeight + 'px'; indicator.style.background = c.num; }
+    panels.forEach((p, i) => { if (i === idx) { p.classList.remove('hidden'); p.classList.remove('kc-panel-anim'); void p.offsetWidth; p.classList.add('kc-panel-anim'); } else { p.classList.add('hidden'); } });
+    const visible = panels[idx]; if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+
+  function _switchDarkPills(prefix, idx) {
+    document.querySelectorAll('.' + prefix + '-step').forEach((s, i) => {
+      if (i === idx) {
+        s.classList.add(prefix + '-step-active');
+        s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)'; s.style.color = '#fff';
+        s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
+      } else {
+        s.classList.remove(prefix + '-step-active');
+        s.style.background = '#1f2937'; s.style.color = '#ffffff'; s.style.boxShadow = 'none';
+      }
+    });
+    document.querySelectorAll('.' + prefix + '-panel').forEach((p, i) => {
+      if (i === idx) { p.classList.remove('hidden'); p.classList.remove(prefix + '-panel-anim'); void p.offsetWidth; p.classList.add(prefix + '-panel-anim'); }
+      else { p.classList.add('hidden'); }
+    });
+    const visible = document.querySelectorAll('.' + prefix + '-panel:not(.hidden)')[0];
+    if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+  function switchCeTab(idx) { _switchDarkPills('ce', idx); }
+  function switchMkTab(idx) { _switchDarkPills('mk', idx); }
+  function switchPeTab(idx) { _switchDarkPills('pe', idx); }
+  function switchQzTab(idx) { _switchDarkPills('qz', idx); }
+
+  function checkQuiz(btn, answer) {
+    const question = btn.closest('.quiz-question');
+    const feedback = question.querySelector('.quiz-feedback');
+    const buttons = question.querySelectorAll('.quiz-btn');
+    buttons.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
+    if (answer === true) {
+      btn.classList.add('correct'); btn.style.opacity = '1';
+      feedback.textContent = '\u2713 Correct! This is a key concept from the lesson.';
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-green-600';
+    } else {
+      btn.classList.add('incorrect'); btn.style.opacity = '1';
+      feedback.textContent = '\u2717 Not quite \u2014 review the lesson recap above for a refresher.';
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-red-500';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => { if (window.Prism) Prism.highlightAll(); });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1818 @@
+"""
+Rebuild lesson04_exporting_data.html from scratch.
+Fixes every audit issue found in the original file.
+"""
+import os, re, html as htmlmod
+
+TARGET = os.path.join("pages", "mod_05_data_application", "lesson04_exporting_data.html")
+
+# ── Lesson metadata ───────────────────────────────────────
+LESSON_NUM   = 4
+LESSON_TITLE = "Exporting Data"
+MODULE_NUM   = 5
+MODULE_TITLE = "Building Data Applications"
+TRACK_LABEL  = "Data Applications Track"
+PROGRESS     = "4/7"
+PREV_LESSON  = ("lesson03_interactive_filters.html", "Interactive Filters")
+NEXT_LESSON  = ("lesson05_deploying_data_applications.html", "Deploying Data Applications")
+
+# ── 5 Objectives ──────────────────────────────────────────
+objectives = [
+    ("fa6-solid:file-csv",      "Export a DataFrame to CSV",             "Convert a pandas DataFrame to CSV text using to_csv() and serve it through a download button"),
+    ("fa6-solid:download",      "Add a Streamlit download button",       "Use st.download_button() to let users save files directly from the browser"),
+    ("fa6-solid:file-excel",    "Export data to Excel format",           "Write a DataFrame to an .xlsx file in memory using to_excel() with an openpyxl BytesIO buffer"),
+    ("fa6-solid:tag",           "Generate dynamic filenames",            "Build descriptive filenames that include filter values or timestamps so downloads are self-documenting"),
+    ("fa6-solid:filter",        "Export only the filtered dataset",      "Ensure the download always reflects the current dashboard filter state, not the full unfiltered data"),
+]
+
+# ── Overview — shipping-dock analogy ──────────────────────
+HOOK_QUOTE = "Exporting data lets your dashboard users take the exact slice of information they see on screen and carry it away as a file they can open in Excel, attach to an email, or drop into a presentation."
+ANALOGY_INTRO = "Think of your Streamlit app like a warehouse with a shipping dock: the data lives on shelves inside the building, the user picks what they need, and the shipping dock packages it into a labeled box that leaves the building. Each export feature is one station on that dock."
+overview_cards = [
+    ("fa6-solid:file-csv",  "CSV Export",            "The plain cardboard box &mdash; lightweight, opens everywhere",
+     "Calling df.to_csv(index=False) converts a DataFrame into a comma-separated text string that virtually every tool on earth can open. You pass that string straight to st.download_button() and the browser saves it as a .csv file the user can double-click into Excel."),
+    ("fa6-solid:download",  "Download Button",       "The shipping label &mdash; one click and the box leaves the dock",
+     "st.download_button() renders a clickable button in the browser that triggers a file download with zero page navigation. You give it a label, the file data, and a file_name, and Streamlit handles the rest &mdash; no server routes, no HTML form tricks."),
+    ("fa6-solid:file-excel","Excel Export",           "The branded gift box &mdash; formatted and ready to present",
+     "When stakeholders want formatted spreadsheets, you write the DataFrame to an in-memory BytesIO buffer with df.to_excel() and pass those bytes to the download button. The result is a real .xlsx file the user can open in Excel with column widths, sheets, and headers intact."),
+    ("fa6-solid:tag",       "Dynamic Filenames",      "The address label &mdash; tells you what is inside without opening",
+     "Hard-coding a filename like &ldquo;data.csv&rdquo; forces users to rename every download manually. Building a name from the active filter values and a timestamp (e.g., sales_west_2025-04-19.csv) makes each file instantly identifiable in a downloads folder."),
+    ("fa6-solid:filter",    "Filtered Exports",       "The packing slip &mdash; confirms the box contains exactly what was ordered",
+     "If you export the original unfiltered DataFrame instead of the filtered one, users download data that does not match what they see on screen. Always pass the same filtered variable to both the chart and the download button so the file and the visual stay in sync."),
+]
+OVERVIEW_TIP = "A download button that exports exactly what the user sees turns your dashboard from a read-only display into a self-service reporting tool &mdash; stakeholders stop asking you to pull data."
+
+# ── Key Takeaways ─────────────────────────────────────────
+takeaways = [
+    ("pink", "fa6-solid:file-csv", "to_csv() Returns a String, Not a File",
+     "Calling df.to_csv(index=False) does not write to disk &mdash; it returns a plain Python string you can pass directly to st.download_button(). Forgetting index=False adds a numeric index column that confuses users who open the file in Excel.",
+     ["to_csv()", "index=False", "string output"]),
+    ("violet", "fa6-solid:download", "One Button Handles the Entire Download",
+     "st.download_button() creates the UI element, attaches the file payload, and triggers the browser download in a single call. You do not need to write routes, generate temporary files on disk, or manage cleanup &mdash; Streamlit handles all of it.",
+     ["st.download_button()", "zero routing", "browser download"]),
+    ("blue", "fa6-solid:file-excel", "Excel Export Needs a BytesIO Buffer",
+     "Unlike CSV, to_excel() writes binary data, so you must create an io.BytesIO() buffer, write into it, and call buffer.getvalue() before passing it to the download button. Skipping this step causes a TypeError because download_button expects bytes, not a file handle.",
+     ["BytesIO", "to_excel()", "binary data"]),
+    ("emerald", "fa6-solid:tag", "Descriptive Filenames Prevent Confusion",
+     "When a user downloads three different filter combinations in a row, generic names like data.csv overwrite each other or become impossible to tell apart. Including the filter value and a date stamp in the filename makes every download self-documenting.",
+     ["f-string", "timestamp", "self-documenting"]),
+    ("amber", "fa6-solid:filter", "Always Export the Filtered Variable",
+     "A common silent bug is passing the original df to the download button instead of the filtered variable. The dashboard shows filtered charts, but the file contains the full dataset &mdash; users do not realize the mismatch until they open the file in Excel.",
+     ["filtered variable", "data mismatch", "silent bug"]),
+]
+
+# ── Key Concepts (5 tabs) ─────────────────────────────────
+kc_tabs = [
+    {
+        "label": "CSV Export",
+        "icon": "fa6-solid:file-csv",
+        "color": "pink",
+        "badge": "Core",
+        "intro": "df.to_csv() converts a pandas DataFrame into a comma-separated values string that you can pass directly to a Streamlit download button or write to disk.",
+        "code": """import pandas as pd
+
+# Sample DataFrame
+df = pd.DataFrame({
+    "region": ["West", "East", "West"],      # text column
+    "sales":  [4500, 3200, 5100]             # numeric column
+})
+
+# Convert to CSV string — index=False omits the row numbers
+csv_text = df.to_csv(index=False)
+
+print(csv_text)
+# Output:
+# region,sales
+# West,4500
+# East,3200
+# West,5100""",
+        "params": [
+            ("index", "bool", "False removes the automatic 0, 1, 2 row-number column"),
+            ("sep",   "str",  "Change the delimiter &mdash; use sep=&quot;\\t&quot; for tab-separated files"),
+            ("columns", "list", "Export only specific columns: columns=[&quot;region&quot;, &quot;sales&quot;]"),
+            ("encoding", "str", "Set file encoding &mdash; default is utf-8"),
+        ],
+        "tip": "Always pass index=False unless your downstream tool specifically needs row numbers &mdash; an extra unnamed column confuses most Excel users.",
+    },
+    {
+        "label": "Download Button",
+        "icon": "fa6-solid:download",
+        "color": "violet",
+        "badge": "Core",
+        "intro": "st.download_button() renders a button that triggers a browser file download when the user clicks it &mdash; no server routes or temporary files required.",
+        "code": """import streamlit as st
+import pandas as pd
+
+df = pd.read_csv("sales.csv")               # load dataset
+
+csv_text = df.to_csv(index=False)            # convert to CSV string
+
+# Render the download button
+st.download_button(
+    label="Download CSV",                    # button text
+    data=csv_text,                           # file contents (str or bytes)
+    file_name="sales_report.csv",            # suggested filename
+    mime="text/csv"                          # MIME type for the browser
+)""",
+        "params": [
+            ("label",     "str",       "Text displayed on the button"),
+            ("data",      "str/bytes", "The file content &mdash; a string for CSV, bytes for Excel"),
+            ("file_name", "str",       "Suggested filename the browser uses for Save As"),
+            ("mime",      "str",       "MIME type &mdash; text/csv for CSV, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet for Excel"),
+        ],
+        "tip": "Place the download button near the chart it relates to so users see the data and the export option in the same visual context.",
+    },
+    {
+        "label": "Excel Export",
+        "icon": "fa6-solid:file-excel",
+        "color": "blue",
+        "badge": "Intermediate",
+        "intro": "df.to_excel() writes a DataFrame as a real .xlsx spreadsheet, but it needs a BytesIO buffer because download_button expects bytes, not a file path.",
+        "code": """import streamlit as st
+import pandas as pd
+import io                                    # for BytesIO buffer
+
+df = pd.read_csv("sales.csv")               # load dataset
+
+# Create an in-memory binary buffer
+buffer = io.BytesIO()
+
+# Write the DataFrame into the buffer as Excel
+df.to_excel(buffer, index=False, engine="openpyxl")
+
+# Reset the buffer position to the beginning
+buffer.seek(0)
+
+# Offer the Excel file for download
+st.download_button(
+    label="Download Excel",
+    data=buffer.getvalue(),                  # read bytes from buffer
+    file_name="sales_report.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)""",
+        "params": [
+            ("engine",     "str",  "Use &quot;openpyxl&quot; for .xlsx files (install with pip install openpyxl)"),
+            ("sheet_name", "str",  "Name the worksheet tab &mdash; default is &quot;Sheet1&quot;"),
+            ("index",      "bool", "False removes the row-number column, same as CSV"),
+            ("startrow",   "int",  "Skip rows at the top if you want a header area"),
+        ],
+        "tip": "Always call buffer.seek(0) after to_excel() &mdash; the write cursor is at the end of the buffer, and reading from there gives you zero bytes.",
+    },
+    {
+        "label": "Dynamic Filenames",
+        "icon": "fa6-solid:tag",
+        "color": "emerald",
+        "badge": "Best Practice",
+        "intro": "Building a filename from the active filter values and a timestamp makes every download self-documenting so users can tell files apart in their downloads folder.",
+        "code": """import streamlit as st
+import pandas as pd
+from datetime import date
+
+df = pd.read_csv("sales.csv")
+
+# Let the user pick a region
+region = st.selectbox("Region", df["region"].unique())
+
+# Filter the data
+filtered = df[df["region"] == region]
+
+# Build a descriptive filename
+today = date.today().isoformat()             # e.g. "2025-04-19"
+safe_region = region.lower().replace(" ", "_")  # e.g. "west"
+filename = f"sales_{safe_region}_{today}.csv"   # e.g. "sales_west_2025-04-19.csv"
+
+# Download with the dynamic name
+st.download_button(
+    label=f"Download {region} Data",         # button label matches filter
+    data=filtered.to_csv(index=False),
+    file_name=filename
+)""",
+        "params": [
+            ("date.today().isoformat()", "str",  "Returns today&rsquo;s date as YYYY-MM-DD, safe for filenames"),
+            ("str.replace()",            "str",  "Swap spaces for underscores to avoid path issues"),
+            ("f-string",                 "str",  "Embed variables directly inside the filename string"),
+        ],
+        "tip": "Sanitize filter values before embedding them in filenames &mdash; characters like / or : break file paths on some operating systems.",
+    },
+    {
+        "label": "Filtered Exports",
+        "icon": "fa6-solid:filter",
+        "color": "orange",
+        "badge": "Gotcha",
+        "intro": "The download button must receive the same filtered DataFrame that the chart displays &mdash; passing the original unfiltered variable is a silent bug that ships wrong data to users.",
+        "code": """import streamlit as st
+import pandas as pd
+
+df = pd.read_csv("sales.csv")               # full dataset
+
+region = st.selectbox("Region", df["region"].unique())
+filtered = df[df["region"] == region]        # filtered subset
+
+# Show the filtered chart
+st.bar_chart(filtered.set_index("product")["sales"])
+
+# CORRECT — export the filtered variable
+st.download_button(
+    label="Download Filtered Data",
+    data=filtered.to_csv(index=False),       # same variable as the chart
+    file_name="filtered_sales.csv"
+)
+
+# WRONG — this would export ALL regions, not just the selected one
+# st.download_button(
+#     label="Download Data",
+#     data=df.to_csv(index=False),           # BUG: uses unfiltered df
+#     file_name="sales.csv"
+# )""",
+        "params": [
+            ("filtered variable", "DataFrame", "Always use the variable that was created after applying filters"),
+            ("len(filtered)",     "int",       "Display the row count so users can verify the export size"),
+        ],
+        "tip": "Add st.caption(f&quot;{len(filtered)} rows will be exported&quot;) above the download button &mdash; it gives users instant confirmation that the file matches what they see.",
+    },
+]
+
+# ── Code Examples (5 tabs) ────────────────────────────────
+code_examples = [
+    {
+        "title": "Basic CSV Download",
+        "desc": "This example converts a DataFrame to CSV and adds a download button with a single line of data prep.",
+        "code": """import streamlit as st
+import pandas as pd
+
+# Load the sales dataset
+df = pd.read_csv("sales.csv")
+
+# Convert entire DataFrame to a CSV string
+csv_text = df.to_csv(index=False)            # no row numbers
+
+# Render a download button on the page
+st.download_button(
+    label="Download All Sales",              # text on the button
+    data=csv_text,                           # the CSV string
+    file_name="all_sales.csv",               # suggested filename
+    mime="text/csv"                          # tells the browser it is CSV
+)""",
+        "terminal_cmd": "streamlit run export_csv.py",
+        "terminal_out": """  You can now view your Streamlit app in your browser.
+  Local URL: http://localhost:8501
+
+  [Download All Sales] button appears on page
+  Click → browser saves all_sales.csv (3 columns, 150 rows)""",
+        "tip": "The mime parameter is optional for CSV &mdash; Streamlit infers it from the file_name extension &mdash; but setting it explicitly avoids surprises with unusual filenames.",
+    },
+    {
+        "title": "Filtered CSV Export",
+        "desc": "This example filters the DataFrame by a user-selected region and exports only the matching rows.",
+        "code": """import streamlit as st
+import pandas as pd
+
+df = pd.read_csv("sales.csv")               # full dataset
+
+# Let the user choose a region
+region = st.selectbox("Region", df["region"].unique())
+
+# Filter to selected region only
+filtered = df[df["region"] == region]        # new DataFrame
+
+# Show how many rows will be exported
+st.caption(f"{len(filtered)} rows match your selection")
+
+# Export the filtered data — not the original df
+csv_text = filtered.to_csv(index=False)
+st.download_button(
+    label=f"Download {region} Sales",        # label reflects filter
+    data=csv_text,
+    file_name=f"sales_{region.lower()}.csv"  # dynamic filename
+)""",
+        "terminal_cmd": "streamlit run filtered_export.py",
+        "terminal_out": """  Local URL: http://localhost:8501
+
+  Region selectbox: [West ▼]
+  \"42 rows match your selection\"
+  [Download West Sales] button appears
+  Click → browser saves sales_west.csv (42 rows)""",
+        "tip": "Always export the filtered variable, not the original df &mdash; this is the most common export bug and users will not notice the mismatch until they open the file.",
+    },
+    {
+        "title": "Excel File Export",
+        "desc": "This example writes a DataFrame to an in-memory Excel file and offers it for download as .xlsx.",
+        "code": """import streamlit as st
+import pandas as pd
+import io                                    # BytesIO buffer
+
+df = pd.read_csv("sales.csv")
+
+# Create a binary buffer in memory
+buffer = io.BytesIO()
+
+# Write the DataFrame as an Excel file into the buffer
+df.to_excel(
+    buffer,
+    index=False,                             # no row numbers
+    sheet_name="Sales Data",                 # custom sheet name
+    engine="openpyxl"                        # required for .xlsx
+)
+
+buffer.seek(0)                               # rewind to the start
+
+# Offer the Excel file for download
+st.download_button(
+    label="Download Excel Report",
+    data=buffer.getvalue(),                  # read bytes from buffer
+    file_name="sales_report.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)""",
+        "terminal_cmd": "streamlit run excel_export.py",
+        "terminal_out": """  Local URL: http://localhost:8501
+
+  [Download Excel Report] button appears
+  Click → browser saves sales_report.xlsx
+  Open in Excel → \"Sales Data\" sheet tab, 150 rows, no index column""",
+        "tip": "Install openpyxl first (pip install openpyxl) &mdash; pandas will raise an ImportError if the engine is missing, and the error message does not always make the cause obvious.",
+    },
+    {
+        "title": "Timestamped Filenames",
+        "desc": "This example builds a filename from the active filter and today&rsquo;s date so every download is uniquely named.",
+        "code": """import streamlit as st
+import pandas as pd
+from datetime import date
+
+df = pd.read_csv("sales.csv")
+
+region = st.selectbox("Region", df["region"].unique())
+filtered = df[df["region"] == region]
+
+# Build a self-documenting filename
+today = date.today().isoformat()             # \"2025-04-19\"
+safe_name = region.lower().replace(" ", "_") # \"west\"
+filename = f"sales_{safe_name}_{today}.csv"  # \"sales_west_2025-04-19.csv\"
+
+st.write(f"Filename: **{filename}**")        # preview for the user
+
+st.download_button(
+    label=f"Download {region} Data",
+    data=filtered.to_csv(index=False),
+    file_name=filename                       # dynamic name
+)""",
+        "terminal_cmd": "streamlit run timestamped_export.py",
+        "terminal_out": """  Local URL: http://localhost:8501
+
+  Region selectbox: [West ▼]
+  Filename: sales_west_2025-04-19.csv
+  [Download West Data] button appears
+  Click → browser saves sales_west_2025-04-19.csv""",
+        "tip": "Use date.today().isoformat() instead of custom strftime formats &mdash; the YYYY-MM-DD pattern sorts chronologically in file managers and is safe on every operating system.",
+    },
+    {
+        "title": "Multi-Format Export",
+        "desc": "This example lets users choose between CSV and Excel export with a radio button, then serves the matching format.",
+        "code": """import streamlit as st
+import pandas as pd
+import io
+
+df = pd.read_csv("sales.csv")
+
+region = st.selectbox("Region", df["region"].unique())
+filtered = df[df["region"] == region]
+
+# Let the user pick the export format
+fmt = st.radio("Export format", ["CSV", "Excel"], horizontal=True)
+
+if fmt == "CSV":
+    st.download_button(
+        label="Download CSV",
+        data=filtered.to_csv(index=False),   # string for CSV
+        file_name=f"sales_{region.lower()}.csv",
+        mime="text/csv"
+    )
+else:
+    buffer = io.BytesIO()                    # binary buffer for Excel
+    filtered.to_excel(buffer, index=False, engine="openpyxl")
+    buffer.seek(0)                           # rewind before reading
+    st.download_button(
+        label="Download Excel",
+        data=buffer.getvalue(),              # bytes for Excel
+        file_name=f"sales_{region.lower()}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )""",
+        "terminal_cmd": "streamlit run multi_format_export.py",
+        "terminal_out": """  Local URL: http://localhost:8501
+
+  Region: [West ▼]
+  Export format: ● CSV  ○ Excel
+  [Download CSV] button appears
+  Switch to Excel → [Download Excel] button replaces it""",
+        "tip": "Using st.radio() with horizontal=True keeps the format toggle compact &mdash; avoid st.selectbox() for just two choices because a dropdown feels heavy for a binary option.",
+    },
+]
+
+# ── Comparison rows ───────────────────────────────────────
+comparison_rows = [
+    ("fa6-solid:file-csv", "CSV Export",
+     "df.to_csv()", "Python converts the DataFrame to a comma-separated string you can serve for download.",
+     "SELECT ... INTO OUTFILE", "SQL can export query results to a file on the database server, but not directly to a user&rsquo;s browser.",
+     "File &rarr; Save As &rarr; CSV", "Excel can save any worksheet as a .csv file from the File menu."),
+    ("fa6-solid:download", "Download Button",
+     "st.download_button()", "Streamlit renders a one-click download button that sends the file to the browser.",
+     "n/a", "SQL has no built-in UI &mdash; a separate BI tool or web app handles user-facing downloads.",
+     "File &rarr; Save As", "Excel users save files locally; there is no concept of a browser download button."),
+    ("fa6-solid:file-excel", "Excel Export",
+     "df.to_excel(buffer)", "pandas writes a real .xlsx file into a memory buffer you can serve to the browser.",
+     "n/a", "SQL does not natively produce Excel files &mdash; a reporting tool converts query output.",
+     "Native format", "Excel already works in .xlsx &mdash; no conversion needed."),
+    ("fa6-solid:tag", "Dynamic Filenames",
+     "f\"sales_{region}_{today}.csv\"", "Python f-strings build filenames from variables at runtime.",
+     "CONCAT() in filename", "Some database tools allow dynamic names via string concatenation, but it is uncommon.",
+     "Save As &rarr; type a name", "Excel users manually type a filename each time they save."),
+    ("fa6-solid:filter", "Filtered Export",
+     "filtered.to_csv()", "You pass the already-filtered DataFrame to the export function.",
+     "WHERE clause in export query", "SQL filters rows before exporting by adding a WHERE clause to the query.",
+     "Filter &rarr; copy visible", "In Excel, you filter rows, copy visible cells, and paste into a new sheet to save."),
+]
+
+# ── Practice Exercises (5) ────────────────────────────────
+practice_exercises = [
+    {
+        "title": "CSV Download Setup",
+        "tasks": [
+            "Load sales.csv into a pandas DataFrame",
+            "Convert the DataFrame to a CSV string with no index column",
+            "Add an st.download_button() that saves the file as all_sales.csv",
+        ],
+        "solution": """import streamlit as st
+import pandas as pd
+
+# 1. Load the dataset
+df = pd.read_csv("sales.csv")
+
+# 2. Convert to CSV string — no index
+csv_text = df.to_csv(index=False)
+
+# 3. Add the download button
+st.download_button(
+    label="Download All Sales",
+    data=csv_text,
+    file_name="all_sales.csv",
+    mime="text/csv"
+)""",
+        "why": "Setting up a basic CSV download is the foundation for every other export feature &mdash; you will reuse this three-step pattern in every dashboard you build.",
+    },
+    {
+        "title": "Filtered Data Export",
+        "tasks": [
+            "Add a selectbox widget that lets users pick a region from the dataset",
+            "Filter the DataFrame to only rows matching the selected region",
+            "Export the filtered DataFrame (not the original) with a download button",
+            "Display the row count above the button using st.caption()",
+        ],
+        "solution": """import streamlit as st
+import pandas as pd
+
+df = pd.read_csv("sales.csv")
+
+# 1. Region selector
+region = st.selectbox("Region", df["region"].unique())
+
+# 2. Filter to selected region
+filtered = df[df["region"] == region]
+
+# 4. Show row count
+st.caption(f"{len(filtered)} rows will be exported")
+
+# 3. Export the filtered variable
+st.download_button(
+    label=f"Download {region} Sales",
+    data=filtered.to_csv(index=False),
+    file_name=f"sales_{region.lower()}.csv"
+)""",
+        "why": "Exporting filtered data is the most requested feature in analytics dashboards &mdash; it lets stakeholders carry away exactly the slice they were reviewing.",
+    },
+    {
+        "title": "Excel Export with BytesIO",
+        "tasks": [
+            "Import io and create a BytesIO buffer",
+            "Write the DataFrame into the buffer using to_excel() with engine=&quot;openpyxl&quot;",
+            "Reset the buffer position to zero with buffer.seek(0)",
+            "Add a download button that serves the .xlsx file",
+        ],
+        "solution": """import streamlit as st
+import pandas as pd
+import io
+
+df = pd.read_csv("sales.csv")
+
+# 1. Create buffer
+buffer = io.BytesIO()
+
+# 2. Write Excel data into buffer
+df.to_excel(buffer, index=False, engine="openpyxl")
+
+# 3. Rewind buffer
+buffer.seek(0)
+
+# 4. Download button for Excel
+st.download_button(
+    label="Download Excel",
+    data=buffer.getvalue(),
+    file_name="sales_report.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)""",
+        "why": "Many business users prefer Excel over CSV because it preserves column formatting and supports multiple sheets &mdash; offering both formats doubles your dashboard&rsquo;s usefulness.",
+    },
+    {
+        "title": "Dynamic Filename Builder",
+        "tasks": [
+            "Add a selectbox for region and a date_input for the report date",
+            "Build a filename string that includes the region and date",
+            "Replace spaces in the region name with underscores",
+            "Show a preview of the filename with st.write() before the download button",
+        ],
+        "solution": """import streamlit as st
+import pandas as pd
+from datetime import date
+
+df = pd.read_csv("sales.csv")
+
+# 1. Widgets
+region = st.selectbox("Region", df["region"].unique())
+report_date = st.date_input("Report date", value=date.today())
+
+# 3. Sanitize region name
+safe_name = region.lower().replace(" ", "_")
+
+# 2. Build filename
+filename = f"sales_{safe_name}_{report_date.isoformat()}.csv"
+
+# 4. Preview
+st.write(f"Filename: **{filename}**")
+
+filtered = df[df["region"] == region]
+st.download_button(
+    label="Download Report",
+    data=filtered.to_csv(index=False),
+    file_name=filename
+)""",
+        "why": "Descriptive filenames save your users minutes every day &mdash; instead of renaming data.csv after each download, they get a self-documenting file they can archive directly.",
+    },
+    {
+        "title": "Multi-Format Export Toggle",
+        "tasks": [
+            "Add a radio button with CSV and Excel as options",
+            "If CSV is selected, create a CSV download button",
+            "If Excel is selected, create an Excel download button using BytesIO",
+            "Make sure both paths use the filtered DataFrame and a dynamic filename",
+        ],
+        "solution": """import streamlit as st
+import pandas as pd
+import io
+from datetime import date
+
+df = pd.read_csv("sales.csv")
+region = st.selectbox("Region", df["region"].unique())
+filtered = df[df["region"] == region]
+safe = region.lower().replace(" ", "_")
+today = date.today().isoformat()
+
+# 1. Format toggle
+fmt = st.radio("Format", ["CSV", "Excel"], horizontal=True)
+
+if fmt == "CSV":
+    # 2. CSV path
+    st.download_button(
+        label="Download CSV",
+        data=filtered.to_csv(index=False),
+        file_name=f"sales_{safe}_{today}.csv",
+        mime="text/csv"
+    )
+else:
+    # 3. Excel path
+    buf = io.BytesIO()
+    filtered.to_excel(buf, index=False, engine="openpyxl")
+    buf.seek(0)
+    st.download_button(
+        label="Download Excel",
+        data=buf.getvalue(),
+        file_name=f"sales_{safe}_{today}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )""",
+        "why": "Offering multiple formats with a single toggle makes your dashboard flexible enough for both technical users who prefer CSV and business users who live in Excel.",
+    },
+]
+
+# ── Mistakes (5 tabs) ─────────────────────────────────────
+mistakes = [
+    {
+        "title": "Exporting the Unfiltered DataFrame",
+        "why_happens": "Beginners pass the original df to the download button instead of the filtered variable, because both exist in scope and the code does not raise an error.",
+        "wrong": """# BUG: exports ALL rows, not the filtered subset
+st.download_button(
+    label="Download",
+    data=df.to_csv(index=False),    # df is unfiltered!
+    file_name="report.csv"
+)""",
+        "correct": """# CORRECT: export the filtered variable
+st.download_button(
+    label="Download",
+    data=filtered.to_csv(index=False),  # filtered matches chart
+    file_name="report.csv"
+)""",
+        "fix": "Always use the same variable name in both the chart and the download button &mdash; if the chart says filtered, the export must say filtered too.",
+    },
+    {
+        "title": "Forgetting index=False in to_csv()",
+        "why_happens": "The default for to_csv() includes a numeric row index (0, 1, 2, ...) as the first column, which confuses users when they open the file in Excel.",
+        "wrong": """# Extra unnamed column appears in the CSV
+csv_text = df.to_csv()      # index=True by default""",
+        "correct": """# Clean CSV — no row numbers
+csv_text = df.to_csv(index=False)""",
+        "fix": "Add index=False to every to_csv() call unless your downstream consumer specifically needs row numbers &mdash; hint: they almost never do.",
+    },
+    {
+        "title": "Skipping buffer.seek(0) for Excel",
+        "why_happens": "After to_excel() writes into a BytesIO buffer, the cursor is at the end. Reading from that position returns zero bytes, so the download produces an empty file.",
+        "wrong": """buffer = io.BytesIO()
+df.to_excel(buffer, index=False, engine="openpyxl")
+# Missing buffer.seek(0)!
+st.download_button("Download", data=buffer.getvalue(), ...)
+# Downloads an empty .xlsx file""",
+        "correct": """buffer = io.BytesIO()
+df.to_excel(buffer, index=False, engine="openpyxl")
+buffer.seek(0)                    # rewind to the start
+st.download_button("Download", data=buffer.getvalue(), ...)
+# Downloads a valid .xlsx file""",
+        "fix": "Always call buffer.seek(0) immediately after to_excel() &mdash; treat it as a mandatory step, not an optional one.",
+    },
+    {
+        "title": "Hard-Coding the Same Filename",
+        "why_happens": "Using a fixed filename like data.csv means every download overwrites the previous one in the user&rsquo;s downloads folder, and files become impossible to tell apart.",
+        "wrong": """# Every download is named \"data.csv\"
+st.download_button(
+    label="Download",
+    data=filtered.to_csv(index=False),
+    file_name="data.csv"           # generic name
+)""",
+        "correct": """# Filename includes filter + date
+filename = f"sales_{region.lower()}_{date.today()}.csv"
+st.download_button(
+    label="Download",
+    data=filtered.to_csv(index=False),
+    file_name=filename             # self-documenting
+)""",
+        "fix": "Build filenames with f-strings that embed the active filter value and today&rsquo;s date &mdash; users should never have to rename a downloaded file.",
+    },
+    {
+        "title": "Using the Wrong MIME Type for Excel",
+        "why_happens": "Setting mime=&quot;text/csv&quot; for an Excel file causes some browsers to append .csv to the filename or open the file as garbled text instead of launching Excel.",
+        "wrong": """st.download_button(
+    label="Download Excel",
+    data=buffer.getvalue(),
+    file_name="report.xlsx",
+    mime="text/csv"               # WRONG mime for Excel!
+)""",
+        "correct": """st.download_button(
+    label="Download Excel",
+    data=buffer.getvalue(),
+    file_name="report.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)""",
+        "fix": "Use text/csv for .csv files and application/vnd.openxmlformats-officedocument.spreadsheetml.sheet for .xlsx files &mdash; copy-paste the long MIME string to avoid typos.",
+    },
+]
+
+# ── Real-World Use (6 cards) ──────────────────────────────
+real_world = [
+    ("fa6-solid:chart-pie", "Sales Dashboards",
+     "Account managers export weekly regional sales summaries as CSV files and paste them into executive slide decks."),
+    ("fa6-solid:stethoscope", "Healthcare Reporting",
+     "Clinic administrators download filtered patient visit data as Excel files to submit to regulatory agencies."),
+    ("fa6-solid:money-bill-trend-up", "Finance Teams",
+     "Analysts export filtered expense reports from an internal dashboard so they can run pivot tables in Excel offline."),
+    ("fa6-solid:truck", "Supply Chain Tools",
+     "Logistics coordinators download shipment status data by date range and share it with warehouse partners via email."),
+    ("fa6-solid:graduation-cap", "Education Platforms",
+     "Instructors export student grade data filtered by course section to generate end-of-term reports."),
+    ("fa6-solid:bullhorn", "Marketing Analytics",
+     "Campaign managers export ad performance metrics by channel and date into CSV files for external agency review."),
+]
+
+# ── Quiz (5 questions) ────────────────────────────────────
+quiz = [
+    {
+        "type": "mc",
+        "stem": "Which method converts a pandas DataFrame to a CSV string without row numbers?",
+        "options": [
+            ("df.to_csv(index=False)", True),
+            ("df.export_csv()", False),
+            ("df.to_csv(header=False)", False),
+            ("df.write_csv(no_index=True)", False),
+        ],
+        "fb_correct": "Correct &mdash; to_csv(index=False) returns a CSV string with no row-number column.",
+        "fb_wrong": "Not quite &mdash; the correct call is df.to_csv(index=False). There is no export_csv() or write_csv() method on DataFrames.",
+    },
+    {
+        "type": "tf",
+        "stem": "st.download_button() requires you to create a temporary file on disk before serving it to the user.",
+        "answer": False,
+        "fb_correct": "Correct &mdash; st.download_button() accepts a string or bytes directly; no temporary file is needed.",
+        "fb_wrong": "Not quite &mdash; st.download_button() can take a string or bytes object directly, so you never need to write a temp file.",
+    },
+    {
+        "type": "mc",
+        "stem": "You need to export a DataFrame as an Excel file. Which import do you need in addition to pandas and streamlit?",
+        "options": [
+            ("io (for BytesIO)", True),
+            ("csv (for csv.writer)", False),
+            ("json (for json.dumps)", False),
+            ("os (for file paths)", False),
+        ],
+        "fb_correct": "Correct &mdash; you need io.BytesIO() as an in-memory buffer for to_excel() output.",
+        "fb_wrong": "Not quite &mdash; to_excel() writes binary data, so you need io.BytesIO() as a buffer. The csv, json, and os modules are not involved.",
+    },
+    {
+        "type": "tf",
+        "stem": "Calling buffer.seek(0) after to_excel() is optional and only affects performance.",
+        "answer": False,
+        "fb_correct": "Correct &mdash; without seek(0), the buffer reads from the end and produces zero bytes, resulting in an empty file.",
+        "fb_wrong": "Not quite &mdash; seek(0) is mandatory. Without it, buffer.getvalue() reads from the cursor position at the end and gives you an empty file.",
+    },
+    {
+        "type": "mc",
+        "stem": "Your dashboard shows a bar chart of filtered sales data. Which variable should you pass to the download button?",
+        "options": [
+            ("The filtered DataFrame that the chart uses", True),
+            ("The original unfiltered DataFrame", False),
+            ("A hard-coded sample DataFrame", False),
+            ("The chart object returned by st.bar_chart()", False),
+        ],
+        "fb_correct": "Correct &mdash; always export the same filtered variable the chart displays so the file matches the visual.",
+        "fb_wrong": "Not quite &mdash; you must pass the filtered DataFrame to the download button so the exported file matches the chart the user sees.",
+    },
+]
+
+# ── Next Lesson preview ───────────────────────────────────
+next_preview = [
+    ("fa6-solid:cloud-arrow-up", "Deployment environments"),
+    ("fa6-solid:gears",          "Streamlit Cloud setup"),
+    ("fa6-solid:shield-halved",  "Sharing and access control"),
+]
+
+# ── Module sidebar lessons ────────────────────────────────
+sidebar_lessons = [
+    ("lesson01_why_build_data_apps.html",           "1. Why Build Data Apps?"),
+    ("lesson02_introduction_to_streamlit.html",      "2. Introduction to Streamlit"),
+    ("lesson03_interactive_filters.html",             "3. Interactive Filters"),
+    ("lesson04_exporting_data.html",                  "4. Exporting Data"),
+    ("lesson05_deploying_data_applications.html",     "5. Deploying Data Applications"),
+    ("lesson06_shiny_for_python.html",                "6. Shiny for Python"),
+    ("lesson07_streamlit_vs_shiny.html",              "7. Streamlit vs Shiny"),
+]
+
+# ═══════════════════════════════════════════════════════════
+# BUILDER
+# ═══════════════════════════════════════════════════════════
+
+def e(text):
+    """HTML-escape helper — pass-through for pre-escaped content."""
+    return text  # content is already escaped where needed
+
+def indent(html, n=0):
+    pad = "  " * n
+    return "\n".join(pad + line for line in html.strip().split("\n"))
+
+# ── CSS ────────────────────────────────────────────────────
+CSS = r"""<style>
+/* ── CSS Variables — font tokens (:root) ──────────────────── */
+:root { --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; --font-mono: 'Fira Code', monospace; }
+
+/* ── Global reset — smooth scroll ─────────────────────────── */
+* { scroll-behavior: smooth; }
+
+/* ── Prism.js — syntax highlighted code blocks ────────────── */
+pre[class*="language-"] { border-radius: 0.75rem; font-family: var(--font-mono); font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
+code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
+
+/* ── Heading resets — strip Confluence default margins ────── */
+h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
+
+/* ── Brand utility classes ────────────────────────────────── */
+.text-brand { color: #CB187D; }
+.bg-brand   { background: #CB187D; }
+.bg-brand-soft { background: #fdf0f7; }
+.brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+.bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
+.bg-code { background: #1e1e2e; }
+.border-code-sep { border-color: rgba(255,255,255,0.08); }
+.pre-reset { margin: 0; border-radius: 0; background: transparent; }
+
+/* ── Key Concepts sidebar tabs (.kc-tab / .kc-tab-active) ── */
+.kc-tab-active { background: #fdf0f7; }
+.kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+.kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+@keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Code Examples pill tabs (.ce-step / .ce-step-active) ── */
+.ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
+.ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+/* ── Common Mistakes pill tabs (.mk-step / .mk-step-active) */
+.mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
+.mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+/* ── Knowledge Check quiz tabs (.qz-step / .qz-step-active) */
+.qz-step:not(.qz-step-active):hover { background: #374151; color: #d1d5db; }
+.qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+
+/* ── Practice Exercise tabs (.pe-step / .pe-step-active) ── */
+.pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+.pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+.task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+
+/* ── Accordion — used in Overview & Key Ideas sections ──── */
+.accordion-body { display: none !important; }
+.accordion-body.open { display: block !important; }
+.accordion-toggle { display:flex !important; align-items:center !important; gap:8px !important; width:100% !important; padding:10px 16px !important; border-radius:10px !important; font-size:0.8rem !important; font-weight:600 !important; cursor:pointer !important; border:2px dashed #f5c6e0 !important; background:#fdf0f7 !important; color:#7F004C !important; line-height:1.2 !important; text-decoration:none !important; transition:background 0.15s, border-color 0.15s !important; }
+.accordion-toggle:hover { background:#f9d9ee !important; border-color:#CB187D !important; }
+.accordion-toggle.open { background:#fdf0f7 !important; border-color:#CB187D !important; border-style:solid !important; }
+.accordion-chevron { margin-left:auto !important; transition:transform 0.2s !important; }
+.accordion-toggle.open .accordion-chevron { transform:rotate(180deg) !important; }
+
+/* ── Hero banner — full-width gradient header ─────────────── */
+.hero-container { position:relative; border-radius:1.25rem; overflow:hidden; min-height:380px; background:linear-gradient(135deg,#CB187D 0%,#CB187D 40%,#a31268 65%,#7F004C 100%); }
+.hero-dots { position:absolute; inset:0; opacity:0.06; background-image:radial-gradient(circle,rgba(255,255,255,0.7) 1px,transparent 1px); background-size:24px 24px; }
+.hero-glow { position:absolute; border-radius:50%; pointer-events:none; filter:blur(70px); }
+.hero-pill { pointer-events:none; cursor:default; background:#ffffff; border:none; color:#7F004C; font-weight:700; }
+
+/* ── Scroll progress bar — fixed top-of-page indicator ───── */
+.scroll-progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,#CB187D,#6366f1,#CB187D); background-size:200% 100%; animation:scrollGradient 3s linear infinite; z-index:9999; transition:width 0.15s; }
+@keyframes scrollGradient { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
+
+/* ── Page layout — two-column: TOC sidebar + main content ── */
+.lesson-layout { display:flex; gap:1.75rem; align-items:flex-start; }
+.lesson-toc-sidebar { width:240px; flex-shrink:0; position:sticky; top:1.5rem; max-height:calc(100vh - 2rem); overflow-y:auto; transition:width 0.25s ease, opacity 0.25s ease; }
+.lesson-toc-sidebar.toc-collapsed { width:44px; overflow:hidden; }
+.lesson-toc-sidebar.toc-collapsed .toc-body { display:none; }
+.lesson-toc-sidebar.toc-collapsed .toc-header-label { display:none; }
+.lesson-toc-sidebar.toc-collapsed .toc-module-list { display:none; }
+.toc-toggle-btn { background:none; border:none; cursor:pointer; padding:2px; color:#CB187D; display:flex; align-items:center; justify-content:center; position:absolute; right:8px; top:50%; transform:translateY(-50%); border-radius:6px; transition:background 0.15s; }
+.toc-toggle-btn:hover { background:#fdf0f7; }
+.toc-link { transition: color 0.15s, padding-left 0.15s; }
+.toc-link:hover { color:#CB187D; padding-left:4px; }
+.toc-link.active { color:#CB187D; font-weight:600; border-left:3px solid #CB187D; padding-left:8px; }
+
+/* ── Objective cards (.obj-card) ──────────────────────────── */
+.obj-card { transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
+.obj-card:hover { box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); border-color: #f5c6e0; background-color: #ffffff; }
+.obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+.obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+.obj-card:hover .obj-icon .iconify { color: white !important; }
+#key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+#key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
+
+/* ── Generic outline tab buttons (.tab-btn / .tab-panel) ── */
+.tab-btn { display:inline-flex; align-items:center; gap:6px; padding:7px 18px; font-size:0.82rem; font-weight:600; cursor:pointer; border:1.5px solid #e5e7eb; border-radius:999px; color:#6b7280; background:#fff; line-height:1.2; transition:color 0.15s, background 0.15s, border-color 0.15s; }
+.tab-btn:hover { color:#CB187D; border-color:#CB187D; background:#fdf0f7; }
+.tab-btn.active { color:#fff; background:#CB187D; border-color:#CB187D; }
+.tab-panel { display:none; } .tab-panel.active { display:block; }
+
+/* ── Code block copy button (.copy-btn) ───────────────────── */
+.copy-btn { position:absolute; top:10px; right:12px; display:inline-flex; align-items:center; background:rgba(203,24,125,0.15); border:1px solid rgba(203,24,125,0.3); color:#CB187D; border-radius:6px; padding:3px 8px; font-size:0.65rem; font-weight:600; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+.copy-btn:hover { background:rgba(203,24,125,0.3); }
+.copy-btn-light { position:static; color:#fff; border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.1); }
+.copy-btn-light:hover { background:rgba(255,255,255,0.2); }
+
+/* ── Bottom lesson navigation — Previous / All Lessons / Next */
+.lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color:#CB187D; transition:color 0.15s; }
+
+/* ── Back-to-top floating button ──────────────────────────── */
+.back-to-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; border-radius:50%; background:#CB187D; color:white; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(203,24,125,0.3); cursor:pointer; opacity:0; transform:translateY(10px); transition:opacity 0.3s, transform 0.3s; z-index:50; border:none; }
+.back-to-top.visible { opacity:1; transform:translateY(0); }
+.back-to-top:hover { background:#7F004C; }
+
+/* ── Quiz answer feedback buttons (.quiz-btn.correct / .incorrect) */
+.quiz-btn.correct { background:#f0fdf4; border-color:#22c55e; color:#16a34a; }
+.quiz-btn.incorrect { background:#fef2f2; border-color:#ef4444; color:#dc2626; }
+
+/* ── Card hover animations — Mistake, Flow, Recap, Overview cards */
+.mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08); }
+
+/* ── Responsive — mobile breakpoint (<768px) ──────────────── */
+@media (max-width: 767px) { .lesson-toc-sidebar { display:none; } .lesson-layout { display:block; } .hero-container { min-height:auto; } .hero-split { flex-direction:column !important; } }
+
+/* ── Print styles — hide interactive chrome when printing ─── */
+@media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display:none; } .obj-card:hover { transform:none; box-shadow:none; } }
+
+/* ── Iconify icon alignment utility ───────────────────────── */
+.iconify { vertical-align: middle; flex-shrink: 0; }
+
+/* ═══ Confluence Hub-Root Isolation Block ═══════════════════ */
+#hub-root a.hero-pill { color: #CB187D !important; }
+#hub-root .hero-pill .opacity-55 { opacity: 1 !important; }
+#hub-root .hero-pill .opacity-50 { opacity: 1 !important; }
+#hub-root .toc-link:hover { color: #CB187D !important; }
+#hub-root .toc-link.active { color: #CB187D !important; font-weight: 600 !important; border-left: 3px solid #CB187D !important; padding-left: 8px !important; background-color: #fdf0f7 !important; }
+#hub-root .mod-lesson-active { background-color: #fdf0f7 !important; border-color: #CB187D !important; color: #CB187D !important; }
+#hub-root .mod-lesson-active .lesson-dot { background-color: #CB187D !important; }
+#hub-root .ce-step, #hub-root .mk-step, #hub-root .qz-step, #hub-root .pe-step { display:inline-flex !important; align-items:center !important; gap:0.5rem !important; padding:0.375rem 1rem !important; border-radius:9999px !important; font-size:0.75rem !important; font-weight:700 !important; line-height:1.2 !important; white-space:nowrap !important; border:none !important; cursor:pointer !important; }
+#hub-root .ce-step:not(.ce-step-active), #hub-root .mk-step:not(.mk-step-active), #hub-root .qz-step:not(.qz-step-active), #hub-root .pe-step:not(.pe-step-active) { background-color:#1f2937 !important; color:#ffffff !important; box-shadow:none !important; }
+#hub-root .ce-step-active, #hub-root .mk-step-active, #hub-root .qz-step-active, #hub-root .pe-step-active { background:linear-gradient(to right,#CB187D,#e84aad) !important; color:#ffffff !important; box-shadow:0 10px 25px -5px rgba(203,24,125,0.3) !important; }
+#hub-root .obj-card:hover { border-color: #f5c6e0 !important; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important; background-color: #ffffff !important; }
+#hub-root .obj-card:hover .obj-icon { background: #CB187D !important; }
+#hub-root .obj-card:hover .obj-icon .iconify { color: #ffffff !important; }
+/* ── Key Takeaway cards — keep border gray and icon gradient on hover ── */
+#hub-root #key-ideas .obj-card:hover { border-color: #f3f4f6 !important; background-color: #ffffff !important; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08) !important; }
+#hub-root #key-ideas .obj-card:hover .obj-icon { background: revert !important; }
+#hub-root .section-header { display:flex !important; align-items:center !important; gap:1rem !important; padding:1.25rem 2rem 1.25rem 1rem !important; background:#ffffff !important; border-bottom:1px solid #f3f4f6 !important; border-left:4px solid #CB187D !important; }
+#hub-root .section-icon { display:inline-flex !important; align-items:center !important; justify-content:center !important; width:2.75rem !important; height:2.75rem !important; border-radius:0.75rem !important; background:#CB187D !important; flex-shrink:0 !important; }
+#hub-root .section-title { font-size:1.25rem !important; font-weight:700 !important; color:#111827 !important; }
+#hub-root .section-subtitle { font-size:0.875rem !important; color:#9ca3af !important; }
+#hub-root .lesson-nav-link:hover p, #hub-root .lesson-nav-link:hover span, #hub-root .lesson-nav-link:hover svg { color: #CB187D !important; transition: color 0.15s !important; }
+</style>"""
+
+# ── HERO SVG ──────────────────────────────────────────────
+HERO_SVG = """<svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+  <defs>
+    <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+    <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+    <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+    <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+  </defs>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+  <g clip-path="url(#hexClip)" opacity="1">
+    <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/></g>
+    <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+    <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+    <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+  </g>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+  <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+  <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+  <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+  <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+</svg>"""
+
+# ═══════════════════════════════════════════════════════════
+# HTML generation helpers
+# ═══════════════════════════════════════════════════════════
+
+def section_header(icon, title, subtitle):
+    return f"""<div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="{icon}"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">{title}</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">{subtitle}</p>
+      </div>
+    </div>"""
+
+def amber_tip(text):
+    return f"""<div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip">
+  <span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span>
+  <p class="text-sm text-gray-600">{text}</p>
+</div>"""
+
+def style_a_code(filename, code, terminal_cmd=None, terminal_out=None):
+    """Style A dark-chrome code block — for #code-examples."""
+    lang = "bash" if filename.endswith(".sh") else "python"
+    icon = "fa6-solid:terminal" if lang == "bash" else "logos:python"
+    terminal_html = ""
+    if terminal_cmd and terminal_out:
+        terminal_html = f"""
+  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+    <div class="flex items-center gap-2 mb-1.5">
+      <span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span>
+      <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span>
+      <span class="text-[10px] text-gray-600 font-mono">$ {terminal_cmd}</span>
+    </div>
+    <div class="font-mono text-xs text-emerald-400 leading-relaxed">{terminal_out}</div>
+  </div>"""
+    return f"""<div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5">
+        <span class="iconify text-yellow-400 text-xs" data-icon="{icon}" data-width="12" data-height="12"></span>
+        <span class="text-[11px] font-semibold text-gray-400">{filename}</span>
+      </div>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <div class="bg-code">
+    <pre class="overflow-x-auto pre-reset"><code class="language-{lang}">{htmlmod.escape(code)}</code></pre>
+  </div>{terminal_html}
+</div>"""
+
+def style_b_code(label, code, lang="python"):
+    """Style B simple-dark code block — for #key-concepts."""
+    icon = "fa6-solid:terminal" if lang == "bash" else "logos:python"
+    display = "Bash" if lang == "bash" else "Python"
+    return f"""<div class="rounded-xl overflow-hidden bg-code shadow-md">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep">
+    <div class="flex items-center gap-2">
+      <span class="iconify" data-icon="{icon}" data-width="14" data-height="14"></span>
+      <span class="text-[11px] font-semibold text-gray-400">{display}</span>
+    </div>
+    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+  </div>
+  <pre class="overflow-x-auto pre-reset"><code class="language-{lang}">{htmlmod.escape(code)}</code></pre>
+</div>"""
+
+# ═══════════════════════════════════════════════════════════
+# BUILD SECTIONS
+# ═══════════════════════════════════════════════════════════
+
+# ── TOC links (12 canonical sections, no decision-flow) ───
+toc_sections = [
+    ("objective",       "fa6-solid:bullseye",          "Lesson Objective"),
+    ("overview",        "fa6-solid:binoculars",        "Overview"),
+    ("key-ideas",       "fa6-solid:lightbulb",         "Key Takeaways"),
+    ("key-concepts",    "fa6-solid:book-open",         "Key Concepts"),
+    ("code-examples",   "fa6-solid:code",              "Code Examples"),
+    ("comparison",      "fa6-solid:scale-balanced",    "SQL / Excel Comparison"),
+    ("practice",        "fa6-solid:pencil",            "Practice Exercises"),
+    ("mistakes",        "fa6-solid:triangle-exclamation","Common Mistakes"),
+    ("real-world",      "fa6-solid:briefcase",         "Real-World Use"),
+    ("recap",           "fa6-solid:list-check",        "Lesson Recap"),
+    ("knowledge-check", "fa6-solid:brain",             "Knowledge Check"),
+    ("next-lesson",     "fa6-solid:circle-arrow-right","Next Lesson"),
+]
+
+def build_toc_links():
+    lines = []
+    for sid, icon, label in toc_sections:
+        lines.append(f'<a href="#{sid}" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="{icon}"></span> {label}</a>')
+    return "\n".join(lines)
+
+def build_sidebar_lessons():
+    lines = []
+    for href, label in sidebar_lessons:
+        is_active = (f"lesson{LESSON_NUM:02d}_" in href)
+        if is_active:
+            lines.append(f'<a href="{href}" class="mod-lesson-active flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors"><span class="lesson-dot w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span><span class="truncate">{label}</span></a>')
+        else:
+            lines.append(f'<a href="{href}" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">{label}</span></a>')
+    return "\n".join(lines)
+
+# ── Objective section ─────────────────────────────────────
+def build_objective():
+    cards = []
+    for icon, title, desc in objectives:
+        cards.append(f"""<div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0">
+    <span class="iconify text-brand text-lg" data-icon="{icon}"></span>
+  </span>
+  <div>
+    <p class="text-sm font-semibold text-gray-800">{title}</p>
+    <p class="text-xs text-gray-500 mt-0.5">{desc}</p>
+  </div>
+</div>""")
+    n = len(objectives)
+    return f"""<section id="objective">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:bullseye", "Lesson Objective", "The goal and expected outcome of this lesson")}
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {"".join(cards)}
+      </div>
+      <div class="mt-5">
+        {amber_tip(f'This lesson covers <strong>{n} key concepts</strong> for exporting data from Streamlit dashboards &mdash; CSV and Excel downloads, dynamic filenames, and ensuring exports match the active filters.')}
+      </div>
+    </div>
+  </div>
+</section>"""
+
+# ── Overview section ──────────────────────────────────────
+def build_overview():
+    cards = []
+    for icon, title, subtitle, desc in overview_cards:
+        cards.append(f"""<div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+  <div class="flex items-center gap-3 mb-2.5">
+    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0">
+      <span class="iconify text-brand text-base" data-icon="{icon}"></span>
+    </span>
+    <div>
+      <p class="text-sm font-bold text-gray-800 leading-tight">{title}</p>
+      <p class="text-[10px] text-gray-400 italic leading-tight">{subtitle}</p>
+    </div>
+  </div>
+  <p class="text-xs text-gray-500 leading-relaxed">{desc}</p>
+</div>""")
+    return f"""<section id="overview">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:binoculars", "Overview", "A high-level introduction to exporting data")}
+    <div class="bg-white px-8 py-7 space-y-5">
+      <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+        <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+        <div class="relative flex items-start gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+            <span class="iconify text-base" data-icon="fa6-solid:quote-left"></span>
+          </span>
+          <p class="text-base text-gray-800 leading-relaxed font-medium">{HOOK_QUOTE}</p>
+        </div>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">{ANALOGY_INTRO}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {"".join(cards)}
+      </div>
+      {amber_tip(OVERVIEW_TIP)}
+    </div>
+  </div>
+</section>"""
+
+# ── Key Takeaways ─────────────────────────────────────────
+KT_COLORS = {
+    "pink":    {"border": "border-pink-100",   "bar": "from-[#CB187D] to-[#e84aad]", "icon": "from-[#CB187D] to-[#e84aad]", "pill_bg": "bg-pink-50",    "pill_text": "text-[#CB187D]",   "pill_border": "border-pink-100"},
+    "violet":  {"border": "border-violet-100", "bar": "from-violet-500 to-purple-400","icon": "from-violet-500 to-purple-600","pill_bg": "bg-violet-50",  "pill_text": "text-violet-600",  "pill_border": "border-violet-100"},
+    "blue":    {"border": "border-blue-100",   "bar": "from-blue-500 to-indigo-400",  "icon": "from-blue-500 to-indigo-600",  "pill_bg": "bg-blue-50",    "pill_text": "text-blue-600",    "pill_border": "border-blue-100"},
+    "emerald": {"border": "border-emerald-100","bar": "from-emerald-500 to-teal-400", "icon": "from-emerald-500 to-teal-600", "pill_bg": "bg-emerald-50", "pill_text": "text-emerald-600", "pill_border": "border-emerald-100"},
+    "amber":   {"border": "border-amber-100",  "bar": "from-amber-500 to-orange-400", "icon": "from-amber-500 to-orange-600", "pill_bg": "bg-amber-50",   "pill_text": "text-amber-600",   "pill_border": "border-amber-100"},
+}
+
+def build_key_ideas():
+    cards = []
+    for color, icon, heading, explanation, keywords in takeaways:
+        c = KT_COLORS[color]
+        pills = "".join(f'<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold {c["pill_bg"]} {c["pill_text"]} border {c["pill_border"]}">{kw}</span>' for kw in keywords)
+        cards.append(f"""<div class="obj-card rounded-2xl border {c["border"]} bg-white overflow-hidden shadow-sm">
+  <div class="h-1 bg-gradient-to-r {c["bar"]}"></div>
+  <div class="px-5 py-5 space-y-3 bg-white">
+    <div class="flex items-center gap-3">
+      <span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br {c["icon"]} shrink-0 shadow-md">
+        <span class="iconify text-white text-sm" data-icon="{icon}"></span>
+      </span>
+      <h3 class="text-sm font-bold text-gray-900">{heading}</h3>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">{explanation}</p>
+    <div class="flex flex-wrap gap-2">{pills}</div>
+  </div>
+</div>""")
+    return f"""<section id="key-ideas">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:lightbulb", "Key Takeaways", "The most important ideas to remember")}
+    <div class="bg-white px-8 py-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {"".join(cards)}
+      </div>
+    </div>
+  </div>
+</section>"""
+
+# ── Key Concepts (KC tabs) ────────────────────────────────
+KC_COLORS_MAP = [
+    {"name":"pink",    "border":"pink-100",   "bar":"from-[#CB187D] via-pink-400 to-rose-300",        "bg":"from-pink-50/60",    "icon":"from-[#CB187D] to-[#e84aad]", "badge_from":"from-pink-100","badge_to":"to-rose-100","badge_text":"text-[#CB187D]","table_bg":"bg-pink-50","table_text":"text-[#CB187D]","code_bg":"bg-pink-50","code_text":"text-pink-700"},
+    {"name":"violet",  "border":"violet-100", "bar":"from-violet-500 via-purple-400 to-fuchsia-300",  "bg":"from-violet-50/60",  "icon":"from-violet-500 to-purple-600","badge_from":"from-violet-100","badge_to":"to-purple-100","badge_text":"text-violet-600","table_bg":"bg-violet-50","table_text":"text-violet-600","code_bg":"bg-violet-50","code_text":"text-violet-700"},
+    {"name":"blue",    "border":"blue-100",   "bar":"from-blue-500 via-cyan-400 to-teal-300",          "bg":"from-blue-50/60",    "icon":"from-blue-500 to-indigo-600",  "badge_from":"from-blue-100","badge_to":"to-indigo-100","badge_text":"text-blue-600","table_bg":"bg-blue-50","table_text":"text-blue-600","code_bg":"bg-blue-50","code_text":"text-blue-700"},
+    {"name":"emerald", "border":"emerald-100","bar":"from-emerald-500 via-teal-400 to-cyan-300",       "bg":"from-emerald-50/60", "icon":"from-emerald-500 to-teal-600", "badge_from":"from-emerald-100","badge_to":"to-teal-100","badge_text":"text-emerald-600","table_bg":"bg-emerald-50","table_text":"text-emerald-600","code_bg":"bg-emerald-50","code_text":"text-emerald-700"},
+    {"name":"orange",  "border":"orange-100", "bar":"from-orange-500 via-amber-400 to-yellow-300",     "bg":"from-orange-50/60",  "icon":"from-orange-500 to-red-600",   "badge_from":"from-orange-100","badge_to":"to-amber-100","badge_text":"text-orange-600","table_bg":"bg-orange-50","table_text":"text-orange-600","code_bg":"bg-orange-50","code_text":"text-orange-700"},
+]
+
+def build_key_concepts():
+    tabs_html = []
+    panels_html = []
+    for i, kc in enumerate(kc_tabs):
+        c = KC_COLORS_MAP[i]
+        active_cls = " kc-tab-active" if i == 0 else ""
+        hidden_cls = "" if i == 0 else " hidden"
+        # Tab button
+        tabs_html.append(f"""<button onclick="switchKcTab({i})" class="kc-tab{active_cls} group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab">
+  <span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 {'bg-[#CB187D] text-white shadow-sm shadow-pink-200' if i==0 else 'bg-gray-100 text-gray-400'}"><span class="iconify text-[11px]" data-icon="{kc['icon']}"></span></span>
+  <span class="kc-tab-label text-xs font-bold leading-tight {'text-gray-900' if i==0 else 'text-gray-400'}">{kc['label']}</span>
+</button>""")
+        # Panel
+        params_html = ""
+        if kc.get("params"):
+            rows = "".join(f'<tr class="border-t border-gray-100"><td class="py-2 pr-3 align-top"><code class="text-xs font-mono font-semibold px-1.5 py-0.5 rounded {c["code_bg"]} {c["code_text"]}">{p[0]}</code></td><td class="py-2 pr-3 align-top text-[11px] text-gray-400 font-mono">{p[1]}</td><td class="py-2 align-top text-xs text-gray-600">{p[2]}</td></tr>' for p in kc["params"])
+            params_html = f"""<table class="w-full text-left mt-3"><thead><tr class="{c['table_bg']}"><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider {c['table_text']} rounded-tl-lg">Parameter</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider {c['table_text']}">Type</th><th class="py-1.5 px-2 text-[11px] font-bold uppercase tracking-wider {c['table_text']} rounded-tr-lg">Description</th></tr></thead><tbody>{rows}</tbody></table>"""
+        tip_html = amber_tip(kc["tip"]) if kc.get("tip") else ""
+        panels_html.append(f"""<div class="kc-panel kc-panel-anim{hidden_cls}" data-color="{c['name']}" role="tabpanel">
+  <div class="rounded-2xl border border-{c['border']} overflow-hidden">
+    <div class="h-1 bg-gradient-to-r {c['bar']}"></div>
+    <div class="bg-gradient-to-br {c['bg']} to-white p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br {c['icon']} shrink-0 shadow-md">
+            <span class="iconify text-white text-sm" data-icon="{kc['icon']}"></span>
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900 leading-tight">{kc['label']}</h3>
+            <p class="text-[10px] text-gray-400 mt-0.5">Concept {i+1} of {len(kc_tabs)}</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r {c['badge_from']} {c['badge_to']} {c['badge_text']}">{kc['badge']}</span>
+      </div>
+      <p class="text-sm text-gray-600 leading-relaxed">{kc['intro']}</p>
+      {style_b_code(kc['label'], kc['code'])}
+      {params_html}
+      {tip_html}
+    </div>
+  </div>
+</div>""")
+    return f"""<section id="key-concepts">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:book-open", "Key Concepts", "Core terms and definitions for this topic")}
+    <div class="bg-white px-6 py-7">
+      <div class="flex flex-col md:flex-row gap-0">
+        <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+          <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+          {"".join(tabs_html)}
+        </div>
+        <div class="flex-1 min-w-0 md:pl-5">
+          {"".join(panels_html)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+# ── Code Examples ─────────────────────────────────────────
+def build_code_examples():
+    n = len(code_examples)
+    tab_buttons = []
+    panels = []
+    for i, ce in enumerate(code_examples):
+        active = "ce-step-active" if i == 0 else ""
+        bg = "bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50" if i == 0 else "bg-gray-800 text-gray-400"
+        tab_buttons.append(f'<button onclick="switchCeTab({i})" class="ce-step {active} flex items-center gap-2 px-4 py-2 rounded-full {bg} transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">{ce["title"]}</span></button>')
+        hidden = "" if i == 0 else " hidden"
+        fname = ce["title"].lower().replace(" ", "_").replace("'","").replace("/","_") + ".py"
+        term_out = ce.get("terminal_out","").replace("\n", "<br>")
+        panels.append(f"""<div class="ce-panel ce-panel-anim{hidden}" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">{i+1:02d}</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:code"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Example {i+1} &mdash; {ce["title"]}</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <p class="text-sm text-gray-600 leading-relaxed">{ce["desc"]}</p>
+      {style_a_code(fname, ce["code"], ce.get("terminal_cmd"), ce.get("terminal_out"))}
+      {amber_tip(ce["tip"])}
+    </div>
+  </div>
+</div>""")
+    return f"""<section id="code-examples">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:code", "Code Examples", "Hands-on code snippets to explore the concepts")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        {"".join(tab_buttons)}
+      </div>
+      {"".join(panels)}
+    </div>
+  </div>
+</section>"""
+
+# ── Comparison ────────────────────────────────────────────
+def build_comparison():
+    rows_html = []
+    for i, (icon, label, py_code, py_desc, sql_code, sql_desc, xl_code, xl_desc) in enumerate(comparison_rows):
+        if i > 0:
+            rows_html.append("""<div class="flex items-center gap-3 mb-4">
+  <span class="flex-1 h-px bg-gray-100"></span>
+  <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0">
+    <span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span>
+  </span>
+  <span class="flex-1 h-px bg-gray-100"></span>
+</div>""")
+        rows_html.append(f"""<div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0">
+      <span class="iconify text-indigo-400 text-[11px]" data-icon="{icon}"></span>
+    </span>
+    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">{label}</span>
+  </div>
+  <div class="grid grid-cols-3 divide-x divide-gray-100">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Python</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">{py_code}</code>
+      <p class="text-xs text-gray-500 leading-relaxed">{py_desc}</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">SQL</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">{sql_code}</code>
+      <p class="text-xs text-gray-500 leading-relaxed">{sql_desc}</p>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-2">
+      <span class="text-xs text-gray-400">Excel</span>
+      <code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">{xl_code}</code>
+      <p class="text-xs text-gray-500 leading-relaxed">{xl_desc}</p>
+    </div>
+  </div>
+</div>""")
+    return f"""<section id="comparison">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:scale-balanced", "SQL / Excel Comparison", "How exporting compares across Python, SQL, and Excel")}
+    <div class="bg-white px-8 py-7 space-y-5">
+      {"".join(rows_html)}
+    </div>
+  </div>
+</section>"""
+
+# ── Practice ──────────────────────────────────────────────
+def build_practice():
+    n = len(practice_exercises)
+    tab_buttons = []
+    panels = []
+    for i, pe in enumerate(practice_exercises):
+        active = "pe-step-active" if i == 0 else ""
+        bg = "bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50" if i == 0 else "bg-gray-800 text-gray-400"
+        tab_buttons.append(f'<button onclick="switchPeTab({i})" class="pe-step {active} flex items-center gap-2 px-4 py-2 rounded-full {bg} transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">{pe["title"]}</span></button>')
+        hidden = "" if i == 0 else " hidden"
+        task_items = "".join(f'<li class="text-sm text-gray-600">{t}</li>' for t in pe["tasks"])
+        fname = f"solution_{i+1}.py"
+        panels.append(f"""<div class="pe-panel pe-panel-anim{hidden}" role="tabpanel">
+  <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">{i+1:02d}</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:pencil"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">Exercise {i+1} &mdash; {pe["title"]}</h3>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200"><span class="iconify text-[10px]" data-icon="fa6-solid:leaf"></span> Beginner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="flex items-start gap-3 rounded-xl p-4 task-box">
+        <span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p>
+          <ol class="list-decimal list-inside space-y-1">{task_items}</ol>
+        </div>
+      </div>
+      <button class="accordion-toggle w-full" onclick="toggleAccordion(this)">
+        <span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution
+        <span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span>
+      </button>
+      <div class="accordion-body">
+        {style_a_code(fname, pe["solution"])}
+        <div class="mt-3">{amber_tip(pe["why"])}</div>
+      </div>
+    </div>
+  </div>
+</div>""")
+    return f"""<section id="practice">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:pencil", "Practice Exercises", "Guided exercises to reinforce your learning")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        {"".join(tab_buttons)}
+      </div>
+      {"".join(panels)}
+    </div>
+  </div>
+</section>"""
+
+# ── Mistakes ──────────────────────────────────────────────
+def build_mistakes():
+    n = len(mistakes)
+    tab_buttons = []
+    panels = []
+    for i, mk in enumerate(mistakes):
+        active = "mk-step-active" if i == 0 else ""
+        bg = "bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50" if i == 0 else "bg-gray-800 text-gray-400"
+        tab_buttons.append(f'<button onclick="switchMkTab({i})" class="mk-step {active} flex items-center gap-2 px-4 py-2 rounded-full {bg} transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">{mk["title"]}</span></button>')
+        hidden = "" if i == 0 else " hidden"
+        panels.append(f"""<div class="mk-panel mk-panel-anim{hidden}" role="tabpanel">
+  <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200">
+      <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0">
+        <span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span>
+      </span>
+      <div class="min-w-0 flex-1">
+        <h4 class="font-bold text-gray-800 text-sm">{mk["title"]}</h4>
+        <p class="text-xs text-gray-500 mt-0.5">{mk["why_happens"]}</p>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-bold text-red-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:xmark"></span> Wrong</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">{htmlmod.escape(mk["wrong"])}</code></pre>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-emerald-500 mb-2 flex items-center gap-1"><span class="iconify" data-icon="fa6-solid:check"></span> Correct</p>
+          <div class="rounded-xl overflow-hidden bg-code">
+            <pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">{htmlmod.escape(mk["correct"])}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40">
+      <span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span>
+      <p class="text-xs text-gray-600 leading-relaxed">{mk["fix"]}</p>
+    </div>
+  </div>
+</div>""")
+    return f"""<section id="mistakes">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:triangle-exclamation", "Common Mistakes", "Frequent errors and how to avoid them")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        {"".join(tab_buttons)}
+      </div>
+      {"".join(panels)}
+    </div>
+  </div>
+</section>"""
+
+# ── Real-World ────────────────────────────────────────────
+def build_real_world():
+    cards = []
+    for icon, title, desc in real_world:
+        cards.append(f"""<div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]">
+    <span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="{icon}"></span>
+  </div>
+  <div>
+    <p class="text-sm font-semibold text-gray-700">{title}</p>
+    <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+  </div>
+</div>""")
+    return f"""<section id="real-world">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:briefcase", "Real-World Use", "Practical applications in real-world workflows")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="rounded-xl p-5 flex items-start gap-4 border border-[#f5c6e0] bg-[#fdf0f7]">
+        <span class="iconify mt-0.5 shrink-0 text-xl text-[#CB187D]" data-icon="fa6-solid:earth-americas"></span>
+        <p class="text-sm text-gray-700 leading-relaxed">Export features appear in nearly every analytics dashboard &mdash; any time users need to take data out of the browser and into another tool, a download button is the solution.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {"".join(cards)}
+      </div>
+    </div>
+  </div>
+</section>"""
+
+# ── Recap ─────────────────────────────────────────────────
+recap_items = [
+    ("fa6-solid:file-csv",  "CSV Export",          "You learned that df.to_csv(index=False) converts a DataFrame to a comma-separated string ready for download."),
+    ("fa6-solid:download",  "Download Button",     "You learned that st.download_button() handles the entire browser download in a single function call."),
+    ("fa6-solid:file-excel","Excel Export",         "You learned that to_excel() requires a BytesIO buffer and buffer.seek(0) before reading the bytes."),
+    ("fa6-solid:tag",       "Dynamic Filenames",    "You learned to build self-documenting filenames from filter values and timestamps using f-strings."),
+    ("fa6-solid:filter",    "Filtered Exports",     "You learned to always pass the filtered variable to the download button so the file matches the chart."),
+]
+
+def build_recap():
+    cards = []
+    for i, (icon, title, desc) in enumerate(recap_items):
+        cards.append(f"""<div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">{i+1:02d}</span>
+    <div class="relative flex items-start gap-3">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5">
+        <span class="iconify text-sm" data-icon="{icon}"></span>
+      </span>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">{title}</p>
+        <p class="text-[11px] text-gray-600 leading-snug">{desc}</p>
+      </div>
+    </div>
+  </div>
+</div>""")
+    n = len(recap_items)
+    return f"""<section id="recap">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:list-check", "Lesson Recap", "A quick summary of what you learned")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {"".join(cards)}
+      </div>
+      <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+        <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+        <div class="relative flex items-center gap-4">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0">
+            <span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span>
+          </span>
+          <div>
+            <p class="text-sm font-bold text-white">Lesson Complete!</p>
+            <p class="text-xs text-white/80 mt-0.5">You&#39;ve covered {n} key concepts. Ready for the knowledge check?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+# ── Knowledge Check ───────────────────────────────────────
+def build_knowledge_check():
+    n = len(quiz)
+    tab_buttons = []
+    panels = []
+    for i, q in enumerate(quiz):
+        active = "qz-step-active" if i == 0 else ""
+        bg = "bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50" if i == 0 else "bg-gray-800 text-gray-400"
+        tab_buttons.append(f'<button onclick="switchQzTab({i})" class="qz-step {active} flex items-center gap-2 px-4 py-2 rounded-full {bg} transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question {i+1}</span></button>')
+        hidden = "" if i == 0 else " hidden"
+        if q["type"] == "tf":
+            answers_html = f"""<div class="flex gap-3">
+            <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, {str(q['answer']).lower()})"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+            <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, {str(not q['answer']).lower()})"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+          </div>"""
+            q_type_label = "True or False"
+        else:
+            opts = []
+            for label, correct in q["options"]:
+                hover_cls = "hover:border-[#CB187D] hover:bg-[#fdf0f7]" if correct else "hover:border-gray-300 hover:bg-gray-50"
+                opts.append(f'<button class="quiz-btn w-full text-left px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 {hover_cls} transition-colors" onclick="checkQuiz(this, {str(correct).lower()})">{htmlmod.escape(label)}</button>')
+            answers_html = f'<div class="grid gap-2">{"".join(opts)}</div>'
+            q_type_label = "Multiple Choice"
+        panels.append(f"""<div class="qz-panel qz-panel-anim{hidden}" role="tabpanel">
+  <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+    <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+      <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q{i+1}</span>
+      <div class="relative flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md">
+          <span class="iconify text-base" data-icon="fa6-solid:circle-question"></span>
+        </span>
+        <div>
+          <h3 class="font-bold text-gray-800">{q_type_label}</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-5 space-y-4">
+      <div class="quiz-question" data-qid="quiz-q{i}" data-fb-correct="{q['fb_correct']}" data-fb-wrong="{q['fb_wrong']}">
+        <p class="text-sm font-semibold text-gray-800 mb-4">{q['stem']}</p>
+        {answers_html}
+        <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+      </div>
+    </div>
+  </div>
+</div>""")
+    return f"""<section id="knowledge-check">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:brain", "Knowledge Check", "Test your understanding before moving on")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-2 mb-6 flex-wrap" role="tablist">
+        {"".join(tab_buttons)}
+      </div>
+      {"".join(panels)}
+    </div>
+  </div>
+</section>"""
+
+# ── Next Lesson ───────────────────────────────────────────
+def build_next_lesson():
+    preview_cards = []
+    for icon, text in next_preview:
+        preview_cards.append(f"""<div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50">
+  <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="{icon}"></span></span>
+  <div><p class="text-sm font-semibold text-gray-700">{text}</p></div>
+</div>""")
+    next_num = LESSON_NUM + 1
+    return f"""<section id="next-lesson" class="scroll-mt-24">
+  <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    {section_header("fa6-solid:circle-arrow-right", "Next Lesson", "Preview of what comes next")}
+    <div class="bg-white px-8 py-7 space-y-6">
+      <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0">
+          <span class="text-white font-bold text-lg">{next_num}</span>
+        </span>
+        <div class="min-w-0">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module {MODULE_NUM} &middot; Lesson {next_num}</p>
+          <h3 class="text-base font-bold text-gray-800">{NEXT_LESSON[1]}</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {"".join(preview_cards)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+# ── Bottom Nav ────────────────────────────────────────────
+def build_bottom_nav():
+    prev_html = f"""<a href="{PREV_LESSON[0]}" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all">
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span>
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">{PREV_LESSON[1]}</p>
+      </div>
+    </a>"""
+    next_html = f"""<a href="{NEXT_LESSON[0]}" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p>
+        <p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">{NEXT_LESSON[1]}</p>
+      </div>
+      <span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span>
+    </a>"""
+    return f"""<section>
+  <div class="flex flex-col sm:flex-row gap-3">
+    {prev_html}
+    <a href="../../hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full">
+      <span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span>
+    </a>
+    {next_html}
+  </div>
+</section>"""
+
+# ── JavaScript ────────────────────────────────────────────
+SCRIPT = r"""<script>
+function toggleToc(){const s=document.querySelector('.lesson-toc-sidebar'),i=document.getElementById('toc-toggle-icon'),c=s.classList.toggle('toc-collapsed');i.setAttribute('data-icon',c?'fa6-solid:angles-right':'fa6-solid:angles-left');if(window.Iconify)Iconify.scan();}
+const tocLinks=document.querySelectorAll('.toc-link');const sections=[...tocLinks].map(l=>document.getElementById(l.getAttribute('href').replace('#',''))).filter(Boolean);
+function updateScrollSpy(){let id='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)id=s.id;});tocLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}
+function updateScrollProgress(){const w=document.documentElement.scrollTop||document.body.scrollTop;const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;document.getElementById('scroll-progress').style.width=(h>0?(w/h)*100:0)+'%';}
+function updateBackToTop(){document.getElementById('back-to-top').classList.toggle('visible',window.scrollY>400);}
+window.addEventListener('scroll',()=>{updateScrollSpy();updateScrollProgress();updateBackToTop();});
+function copyCode(btn){const c=btn.closest('.relative')||btn.parentElement.closest('div');const pre=c?c.querySelector('pre'):null;const text=pre?pre.innerText:'';function fb(){const o=btn.innerHTML;btn.innerHTML='<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';btn.style.background='rgba(34,197,94,0.2)';btn.style.borderColor='rgba(34,197,94,0.5)';btn.style.color='#4ade80';setTimeout(()=>{btn.innerHTML=o;btn.style.background='';btn.style.borderColor='';btn.style.color='';},2000);}function fc(){const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);fb();}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(fb).catch(fc);}else{fc();}}
+function toggleAccordion(btn){const b=btn.nextElementSibling;const o=b.classList.contains('open');btn.classList.toggle('open',!o);b.classList.toggle('open',!o);if(!o&&window.Prism)Prism.highlightAllUnder(b);}
+const kcColors=[{num:'#CB187D',numShadow:'rgba(203,24,125,0.25)',activeBg:'#fdf0f7'},{num:'#7c3aed',numShadow:'rgba(124,58,237,0.25)',activeBg:'#f5f3ff'},{num:'#2563eb',numShadow:'rgba(37,99,235,0.25)',activeBg:'#eff6ff'},{num:'#059669',numShadow:'rgba(5,150,105,0.25)',activeBg:'#ecfdf5'},{num:'#c74905',numShadow:'rgba(199,73,5,0.25)',activeBg:'#ffddb3'}];
+function switchKcTab(idx){const c=kcColors[idx%kcColors.length];const tabs=document.querySelectorAll('.kc-tab');const panels=document.querySelectorAll('.kc-panel');const ind=document.querySelector('.kc-indicator');tabs.forEach((t,i)=>{const n=t.querySelector('.kc-tab-num'),l=t.querySelector('.kc-tab-label');if(i===idx){t.classList.add('kc-tab-active');t.style.background=c.activeBg;if(n){n.style.background=c.num;n.style.color='#fff';n.style.boxShadow='0 2px 8px '+c.numShadow;}if(l)l.style.color='#111827';}else{t.classList.remove('kc-tab-active');t.style.background='';if(n){n.style.background='#f3f4f6';n.style.color='#9ca3af';n.style.boxShadow='none';}if(l)l.style.color='#9ca3af';}});if(ind&&tabs[idx]){ind.style.top=tabs[idx].offsetTop+'px';ind.style.height=tabs[idx].offsetHeight+'px';ind.style.background=c.num;}panels.forEach((p,i)=>{if(i===idx){p.classList.remove('hidden');p.classList.remove('kc-panel-anim');void p.offsetWidth;p.classList.add('kc-panel-anim');}else{p.classList.add('hidden');}});const v=panels[idx];if(v&&window.Prism)Prism.highlightAllUnder(v);}
+function _switchDarkPills(pfx,idx){document.querySelectorAll('.'+pfx+'-step').forEach((s,i)=>{if(i===idx){s.classList.add(pfx+'-step-active');s.style.background='linear-gradient(to right,#CB187D,#e84aad)';s.style.color='#fff';s.style.boxShadow='0 10px 25px -5px rgba(203,24,125,0.3)';}else{s.classList.remove(pfx+'-step-active');s.style.background='#1f2937';s.style.color='#9ca3af';s.style.boxShadow='none';}});document.querySelectorAll('.'+pfx+'-panel').forEach((p,i)=>{if(i===idx){p.classList.remove('hidden');p.classList.remove(pfx+'-panel-anim');void p.offsetWidth;p.classList.add(pfx+'-panel-anim');}else{p.classList.add('hidden');}});const v=document.querySelectorAll('.'+pfx+'-panel:not(.hidden)')[0];if(v&&window.Prism)Prism.highlightAllUnder(v);}
+function switchCeTab(i){_switchDarkPills('ce',i);}
+function switchMkTab(i){_switchDarkPills('mk',i);}
+function switchPeTab(i){_switchDarkPills('pe',i);}
+function switchQzTab(i){_switchDarkPills('qz',i);}
+function checkQuiz(btn,answer){const q=btn.closest('.quiz-question');const fb=q.querySelector('.quiz-feedback');const btns=q.querySelectorAll('.quiz-btn');const fbC=q.getAttribute('data-fb-correct');const fbW=q.getAttribute('data-fb-wrong');btns.forEach(b=>{b.disabled=true;b.style.opacity='0.6';});if(answer===true){btn.classList.add('correct');btn.style.opacity='1';fb.textContent=fbC||'\u2713 Correct!';fb.className='quiz-feedback mt-2 text-sm font-medium text-green-600';}else{btn.classList.add('incorrect');btn.style.opacity='1';fb.textContent=fbW||'\u2717 Not quite \u2014 review the lesson above.';fb.className='quiz-feedback mt-2 text-sm font-medium text-red-500';}}
+document.addEventListener('DOMContentLoaded',()=>{if(window.Prism)Prism.highlightAll();});
+</script>"""
+
+# ═══════════════════════════════════════════════════════════
+# ASSEMBLE FULL FILE
+# ═══════════════════════════════════════════════════════════
+
+NUM_OBJ = len(objectives)
+
+HTML = f"""<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+
+{CSS}
+
+<div class="scroll-progress" id="scroll-progress" style="width:0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div id="hub-root" class="bg-gray-50 min-h-screen">
+
+<!-- HERO -->
+<div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+  <section class="hero-container">
+    <div class="hero-dots"></div>
+    <div class="hero-glow" style="width:350px;height:350px;top:-80px;right:0;background:rgba(255,255,255,0.12);"></div>
+    <div class="hero-glow" style="width:280px;height:280px;bottom:-50px;left:5%;background:rgba(127,0,76,0.35);"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#f5c6e0 30%,#CB187D 50%,#f5c6e0 70%,transparent 100%);opacity:0.7;"></div>
+    <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+      <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-solid:window-maximize"></span> Module {MODULE_NUM}</span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="inline-flex items-center gap-1"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span></span> Intermediate</span>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 5 min read</span>
+          </div>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson {LESSON_NUM:02d}</p>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">{LESSON_TITLE}</h1>
+          <p class="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-lg">{MODULE_TITLE} &middot; {TRACK_LABEL}</p>
+          <div class="flex items-center gap-4 mb-5 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+                <span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span>
+              </span>
+              <span class="text-white/85 font-medium text-xs">Python Learning Hub</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span><span class="font-extrabold">{NUM_OBJ}</span><span class="font-semibold opacity-55">Goals</span></a>
+            <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span><span class="font-extrabold">{len(code_examples)}</span><span class="font-semibold opacity-55">Examples</span></a>
+            <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span><span class="font-extrabold">{len(practice_exercises)}</span><span class="font-semibold opacity-55">Exercises</span></a>
+            <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span><span class="font-extrabold">{PROGRESS}</span><span class="font-semibold opacity-55">Progress</span></span>
+          </div>
+        </div>
+        <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+          <div style="padding:0.25rem;opacity:0.75;">
+            {HERO_SVG}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+  <div class="lesson-layout">
+    <aside class="lesson-toc-sidebar">
+      <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+        <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+          <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+          <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation">
+            <span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span>
+          </button>
+        </div>
+        <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+          {build_toc_links()}
+        </nav>
+        <div class="toc-module-list px-3 py-3">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+          <div class="space-y-1">
+            {build_sidebar_lessons()}
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="min-w-0 flex-1 space-y-10">
+
+{build_objective()}
+
+{build_overview()}
+
+{build_key_ideas()}
+
+{build_key_concepts()}
+
+{build_code_examples()}
+
+{build_comparison()}
+
+{build_practice()}
+
+{build_mistakes()}
+
+{build_real_world()}
+
+{build_recap()}
+
+{build_knowledge_check()}
+
+{build_next_lesson()}
+
+{build_bottom_nav()}
+
+    </main>
+  </div>
+</div>
+
+</div>
+
+{SCRIPT}"""
+
+# ═══════════════════════════════════════════════════════════
+# WRITE & VERIFY
+# ═══════════════════════════════════════════════════════════
+os.makedirs(os.path.dirname(TARGET), exist_ok=True)
+with open(TARGET, "w", encoding="utf-8") as f:
+    f.write(HTML)
+
+lines = HTML.split("\n")
+print(f"✅ Wrote {TARGET} ({len(lines)} lines)")
+
+# Div balance
+opens = sum(l.count("<div") for l in lines)
+closes = sum(l.count("</div>") for l in lines)
+print(f"   Div balance: {opens - closes} (opens={opens}, closes={closes})")
+
+# Tab / panel counts
+for prefix, label in [("ce","CE"), ("kc","KC"), ("pe","PE"), ("mk","MK"), ("qz","QZ")]:
+    tabs_count = HTML.count(f"{prefix}-step ")  + HTML.count(f"{prefix}-step-active")
+    panels_count = HTML.count(f"{prefix}-panel ")
+    # More accurate: count the class assignments
+    import re as _re
+    tabs_count = len(_re.findall(rf'class="[^"]*{prefix}-step[ "]', HTML))
+    panels_count = len(_re.findall(rf'class="[^"]*{prefix}-panel[ "]', HTML))
+    print(f"   {label} tabs={tabs_count}, panels={panels_count}")
+
+# Section balance
+for sid in ["objective","overview","key-ideas","key-concepts","code-examples","comparison","practice","mistakes","real-world","recap","knowledge-check","next-lesson"]:
+    pattern = rf'<section id="{sid}"[^>]*>(.*?)</section>'
+    m = _re.search(pattern, HTML, _re.DOTALL)
+    if m:
+        block = m.group(1)
+        o = block.count("<div")
+        c = block.count("</div>")
+        status = "✅" if o == c else f"❌ ({o-c})"
+        print(f"   #{sid}: div balance {status}")
+    else:
+        print(f"   #{sid}: NOT FOUND ❌")

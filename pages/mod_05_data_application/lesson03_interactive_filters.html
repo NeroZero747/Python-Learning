@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 &mdash; Interactive Filters | Python Learning Hub</title>
+  <meta name="description" content="Learn Interactive Filters in Python. Part of the Building Data Applications module &mdash; Data Applications Track &mdash; Python Learning Hub.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" crossorigin="anonymous"></script>
+  <style>
+    * { scroll-behavior: smooth; }
+    pre[class*="language-"] { border-radius: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.875rem; margin: 0; padding: 1.25rem 1.5rem; }
+    code[class*="language-"], pre[class*="language-"] { background: #1e1e2e; }
+    body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #1f2937; line-height: 1.6; margin: 0; padding: 0; }
+    h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 0; padding: 0; line-height: 1.3; }
+    h2 { font-size: 1.25rem; font-weight: 700; }
+    h3 { font-size: 1rem; font-weight: 600; }
+    .text-brand { color: #CB187D; }
+    .text-brand-dark { color: #7F004C; }
+    .bg-brand { background: #CB187D; }
+    .bg-brand-soft { background: #fdf0f7; }
+    .brand-soft-panel { background: #fdf0f7; border-color: #f5c6e0; }
+    .bg-amber-tip { background: #fff7ed; border-color: #fed7aa; }
+    .bg-code { background: #1e1e2e; }
+    .border-code-sep { border-color: rgba(255, 255, 255, 0.08); }
+    .pre-reset { margin: 0; border-radius: 0; background: transparent; }
+    .kc-tab-active { background: #fdf0f7; }
+    .kc-tab:not(.kc-tab-active):hover { background: #f9fafb; }
+    .kc-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    @keyframes kcFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .ce-step:not(.ce-step-active):hover { background: #374151; color: #d1d5db; }
+    .ce-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .mk-step:not(.mk-step-active):hover { background: #374151; color: #d1d5db; }
+    .mk-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .qz-step:not(.qz-step-active):hover { background: #374151; color: #d1d5db; }
+    .qz-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .pe-step:not(.pe-step-active):hover { background: #374151; color: #d1d5db; }
+    .pe-panel-anim { animation: kcFadeIn 0.25s ease-out; }
+    .task-box { background: #fdf0f7; border: 1px solid #f5c6e0; }
+    .accordion-body { display: none !important; }
+    .accordion-body.open { display: block !important; }
+    .accordion-toggle { display: flex !important; align-items: center !important; gap: 8px !important; width: 100% !important; padding: 10px 16px !important; border-radius: 10px !important; font-size: 0.8rem !important; font-weight: 600 !important; cursor: pointer !important; border: 2px dashed #f5c6e0 !important; background: #fdf0f7 !important; color: #7F004C !important; line-height: 1.2 !important; text-decoration: none !important; transition: background 0.15s, border-color 0.15s !important; }
+    .accordion-toggle:hover { background: #f9d9ee !important; border-color: #CB187D !important; }
+    .accordion-toggle.open { background: #fdf0f7 !important; border-color: #CB187D !important; border-style: solid !important; }
+    .accordion-chevron { margin-left: auto !important; transition: transform 0.2s !important; }
+    .accordion-toggle.open .accordion-chevron { transform: rotate(180deg) !important; }
+    .hero-container { position: relative; border-radius: 1.25rem; overflow: hidden; min-height: 380px; background: linear-gradient(135deg, #CB187D 0%, #CB187D 40%, #a31268 65%, #7F004C 100%); }
+    .hero-dots { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px); background-size: 24px 24px; }
+    .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+    .hero-glow-1 { width: 350px; height: 350px; top: -80px; right: 0; background: rgba(255, 255, 255, 0.12); }
+    .hero-glow-2 { width: 280px; height: 280px; bottom: -50px; left: 5%; background: rgba(127, 0, 76, 0.35); }
+    .hero-glow-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #f5c6e0 30%, #CB187D 50%, #f5c6e0 70%, transparent 100%); opacity: 0.7; }
+    .hero-pill { background: #ffffff; border: none; color: #7F004C; font-weight: 700; transition: transform 0.2s ease; }
+    .hero-pill:hover { transform: translateY(-1px); }
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #CB187D, #6366f1, #CB187D); background-size: 200% 100%; animation: scrollGradient 3s linear infinite; z-index: 9999; transition: width 0.15s; }
+    @keyframes scrollGradient { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+    .lesson-layout { display: flex; gap: 1.75rem; align-items: flex-start; }
+    .lesson-toc-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 1.5rem; max-height: calc(100vh - 2rem); overflow-y: auto; transition: width 0.25s ease, opacity 0.25s ease; }
+    .lesson-toc-sidebar.toc-collapsed { width: 44px; overflow: hidden; }
+    .lesson-toc-sidebar.toc-collapsed .toc-body { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-header-label { display: none; }
+    .lesson-toc-sidebar.toc-collapsed .toc-module-list { display: none; }
+    .toc-toggle-btn { background: none; border: none; cursor: pointer; padding: 2px; color: #CB187D; display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border-radius: 6px; transition: background 0.15s; }
+    .toc-toggle-btn:hover { background: #fdf0f7; }
+    .toc-link { transition: color 0.15s, padding-left 0.15s; }
+    .toc-link:hover { color: #CB187D; padding-left: 4px; }
+    .toc-link.active { color: #CB187D; font-weight: 600; border-left: 3px solid #CB187D; padding-left: 8px; }
+    .obj-card { transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s ease, background-color 0.22s ease; }
+    .obj-card:hover { box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); border-color: #f5c6e0; background-color: #ffffff; }
+    .obj-card .obj-icon { transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s ease; }
+    .obj-card:hover .obj-icon { transform: scale(1.1); background-color: #CB187D; }
+    .obj-card:hover .obj-icon .iconify { color: white !important; }
+    #key-ideas .obj-card:hover { border-color: #f3f4f6; background-color: #ffffff; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.08); }
+    #key-ideas .obj-card:hover .obj-icon { transform: scale(1.1); background-color: revert; }
+    .tab-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1.5px solid #e5e7eb; border-radius: 999px; color: #6b7280; background: #fff; line-height: 1.2; transition: color 0.15s, background 0.15s, border-color 0.15s; }
+    .tab-btn:hover { color: #CB187D; border-color: #CB187D; background: #fdf0f7; }
+    .tab-btn.active { color: #fff; background: #CB187D; border-color: #CB187D; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .copy-btn { position: absolute; top: 10px; right: 12px; display: inline-flex; align-items: center; background: rgba(203, 24, 125, 0.15); border: 1px solid rgba(203, 24, 125, 0.3); color: #CB187D; border-radius: 6px; padding: 3px 8px; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .copy-btn:hover { background: rgba(203, 24, 125, 0.3); }
+    .copy-btn-light { position: static; color: #fff; border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.1); }
+    .copy-btn-light:hover { background: rgba(255, 255, 255, 0.2); }
+    .lesson-nav-link:hover p, .lesson-nav-link:hover span, .lesson-nav-link:hover svg { color: #CB187D; transition: color 0.15s; }
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: #CB187D; color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(203, 24, 125, 0.3); cursor: pointer; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 50; border: none; }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #7F004C; }
+    .quiz-btn.correct { background: #f0fdf4; border-color: #22c55e; color: #16a34a; }
+    .quiz-btn.incorrect { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+    .mistake-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .mistake-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08); }
+    .flow-stepper .flow-step { transition: transform 0.15s ease; }
+    .flow-stepper .flow-step:hover { transform: translateX(4px); }
+    .recap-item { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .recap-item:hover { transform: translateX(4px); box-shadow: -4px 0 0 0 #10b981; }
+    .overview-card { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+    .overview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -6px rgba(203, 24, 125, 0.12); border-color: rgba(203, 24, 125, 0.3); }
+    @media (max-width: 767px) { .lesson-toc-sidebar { display: none; } .lesson-layout { display: block; } #lesson-nav { display: block; } .hero-container { min-height: auto; } .hero-split { flex-direction: column !important; } .hero-abstract-card { margin-top: 1.5rem; } }
+    @media print { .lesson-toc-sidebar, .back-to-top, .scroll-progress, .copy-btn, .hero-container { display: none; } .obj-card:hover { transform: none; box-shadow: none; } }
+    .iconify { vertical-align: middle; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" style="width: 0%;"></div>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="iconify text-lg" data-icon="fa6-solid:arrow-up"></span>
+</button>
+
+<div class="bg-gray-50 min-h-screen">
+
+  <!-- HERO -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-5 pb-0">
+    <section class="hero-container">
+      <div class="hero-dots"></div>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-glow-line"></div>
+      <div class="relative z-10 px-8 py-8 md:px-12 md:py-10">
+        <div class="hero-split flex flex-col md:flex-row items-center gap-6 md:gap-10">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-solid:window-maximize"></span> Module 5</span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="inline-flex items-center gap-1"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#d1d5db;display:inline-block;"></span></span> Intermediate</span>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-regular:clock"></span> 5 min read</span>
+            </div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/90 mb-2">Lesson 03</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 leading-[1.15] tracking-tight">Interactive Filters</h1>
+            <p class="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-lg">Building Data Applications &middot; Data Applications Track</p>
+            <div class="flex items-center gap-4 mb-5 text-sm">
+              <div class="flex items-center gap-2"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:user"></span></span><span class="text-white/85 font-medium text-xs">Python Learning Hub</span></div>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <a href="#objective" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:bullseye" style="opacity:0.5;"></span><span class="font-extrabold">5</span><span class="font-semibold opacity-55">Goals</span></a>
+              <a href="#code-examples" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:code" style="opacity:0.5;"></span><span class="font-extrabold">5</span><span class="font-semibold opacity-55">Examples</span></a>
+              <a href="#practice" class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs no-underline"><span class="iconify text-[10px]" data-icon="fa6-solid:dumbbell" style="opacity:0.5;"></span><span class="font-extrabold">5</span><span class="font-semibold opacity-55">Exercises</span></a>
+              <span class="hero-pill inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs"><span class="iconify text-[10px]" data-icon="fa6-solid:layer-group" style="opacity:0.5;"></span><span class="font-extrabold">3<span class="font-bold opacity-50">/7</span></span><span class="font-semibold opacity-55">Progress</span></span>
+            </div>
+          </div>
+          <div class="w-full md:w-[300px] lg:w-[320px] shrink-0 self-center">
+            <div class="hero-abstract-card" style="padding:0.25rem;opacity:0.75;">
+              <svg viewBox="0 0 280 324" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="max-height:320px;" aria-hidden="true">
+  <defs>
+    <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a0a12"/><stop offset="45%" stop-color="#2d0a1e"/><stop offset="100%" stop-color="#0d0610"/></linearGradient>
+    <linearGradient id="hexBorder" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CB187D"/><stop offset="50%" stop-color="#e84aad"/><stop offset="100%" stop-color="#CB187D"/></linearGradient>
+    <radialGradient id="hexGlow" cx="50%" cy="38%" r="45%"><stop offset="0%" stop-color="#CB187D" stop-opacity="0.18"/><stop offset="100%" stop-color="#CB187D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pyGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD43B" stop-opacity="0.12"/><stop offset="100%" stop-color="#FFD43B" stop-opacity="0"/></radialGradient>
+    <clipPath id="hexClip"><polygon points="140,14 268,88 268,236 140,310 12,236 12,88"/></clipPath>
+  </defs>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexFill)"/>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="url(#hexGlow)"/>
+  <g clip-path="url(#hexClip)" opacity="1">
+    <g opacity="0.06"><circle cx="40" cy="100" r="1.2" fill="white"/><circle cx="60" cy="100" r="1.2" fill="white"/><circle cx="80" cy="100" r="1.2" fill="white"/><circle cx="100" cy="100" r="1.2" fill="white"/><circle cx="120" cy="100" r="1.2" fill="white"/><circle cx="160" cy="100" r="1.2" fill="white"/><circle cx="180" cy="100" r="1.2" fill="white"/><circle cx="200" cy="100" r="1.2" fill="white"/><circle cx="220" cy="100" r="1.2" fill="white"/><circle cx="240" cy="100" r="1.2" fill="white"/><circle cx="50" cy="120" r="1.2" fill="white"/><circle cx="70" cy="120" r="1.2" fill="white"/><circle cx="90" cy="120" r="1.2" fill="white"/><circle cx="110" cy="120" r="1.2" fill="white"/><circle cx="170" cy="120" r="1.2" fill="white"/><circle cx="190" cy="120" r="1.2" fill="white"/><circle cx="210" cy="120" r="1.2" fill="white"/><circle cx="230" cy="120" r="1.2" fill="white"/><circle cx="40" cy="200" r="1.2" fill="white"/><circle cx="60" cy="200" r="1.2" fill="white"/><circle cx="80" cy="200" r="1.2" fill="white"/><circle cx="100" cy="200" r="1.2" fill="white"/><circle cx="120" cy="200" r="1.2" fill="white"/><circle cx="160" cy="200" r="1.2" fill="white"/><circle cx="180" cy="200" r="1.2" fill="white"/><circle cx="200" cy="200" r="1.2" fill="white"/><circle cx="220" cy="200" r="1.2" fill="white"/><circle cx="240" cy="200" r="1.2" fill="white"/><circle cx="50" cy="220" r="1.2" fill="white"/><circle cx="70" cy="220" r="1.2" fill="white"/><circle cx="90" cy="220" r="1.2" fill="white"/><circle cx="110" cy="220" r="1.2" fill="white"/><circle cx="170" cy="220" r="1.2" fill="white"/><circle cx="190" cy="220" r="1.2" fill="white"/><circle cx="210" cy="220" r="1.2" fill="white"/><circle cx="230" cy="220" r="1.2" fill="white"/></g>
+    <g opacity="0.12" stroke="#CB187D" stroke-width="1" fill="none"><path d="M30,95 L55,95 L55,115 L80,115"/><path d="M35,110 L60,110 L60,130"/><circle cx="80" cy="115" r="2.5" fill="#CB187D" opacity="0.4"/><circle cx="55" cy="95" r="2" fill="#CB187D" opacity="0.35"/><circle cx="60" cy="130" r="2" fill="#CB187D" opacity="0.3"/></g>
+    <g opacity="0.12" stroke="#e84aad" stroke-width="1" fill="none"><path d="M250,95 L225,95 L225,115 L200,115"/><path d="M245,110 L220,110 L220,130"/><circle cx="200" cy="115" r="2.5" fill="#e84aad" opacity="0.4"/><circle cx="225" cy="95" r="2" fill="#e84aad" opacity="0.35"/><circle cx="220" cy="130" r="2" fill="#e84aad" opacity="0.3"/></g>
+    <g opacity="0.1" stroke="#CB187D" stroke-width="1" fill="none"><path d="M35,210 L60,210 L60,230 L85,230"/><path d="M40,225 L65,225 L65,240"/><circle cx="85" cy="230" r="2.5" fill="#CB187D" opacity="0.35"/><circle cx="65" cy="240" r="2" fill="#CB187D" opacity="0.3"/></g>
+    <g opacity="0.1" stroke="#e84aad" stroke-width="1" fill="none"><path d="M245,210 L220,210 L220,230 L195,230"/><path d="M240,225 L215,225 L215,240"/><circle cx="195" cy="230" r="2.5" fill="#e84aad" opacity="0.35"/><circle cx="215" cy="240" r="2" fill="#e84aad" opacity="0.3"/></g>
+    <g opacity="0.08" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="42" y="145">&gt;&gt;&gt; import pandas</text><text x="185" y="92">def main():</text><text x="38" y="92">class Data:</text></g>
+    <g opacity="0.07" fill="white" font-family="'Fira Code',monospace" font-size="7"><text x="160" y="255">return result</text><text x="42" y="260">for i in range:</text><text x="175" y="275">print("done")</text></g>
+    <g opacity="0.15" stroke="#FFD43B" stroke-width="1.5" fill="none" stroke-linecap="round"><polyline points="52,72 42,72 42,85"/><polyline points="228,72 238,72 238,85"/><polyline points="52,252 42,252 42,239"/><polyline points="228,252 238,252 238,239"/></g>
+    <g opacity="0.04" stroke="white" stroke-width="1" fill="none"><polygon points="70,155 85,146 100,155 100,173 85,182 70,173"/><polygon points="180,155 195,146 210,155 210,173 195,182 180,173"/><polygon points="125,260 140,251 155,260 155,278 140,287 125,278"/><polygon points="125,40 140,31 155,40 155,58 140,67 125,58"/></g>
+    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M25,160 Q60,140 60,162 Q60,185 95,165"/><path d="M25,180 Q55,195 75,180"/></g>
+    <g opacity="0.08" stroke="white" stroke-width="0.8" fill="none" stroke-dasharray="4,4"><path d="M255,160 Q220,140 220,162 Q220,185 185,165"/><path d="M255,180 Q225,195 205,180"/></g>
+    <circle cx="140" cy="145" r="55" fill="url(#pyGlow)"/>
+  </g>
+  <polygon points="140,14 268,88 268,236 140,310 12,236 12,88" fill="none" stroke="url(#hexBorder)" stroke-width="4" stroke-linejoin="round"/>
+  <polygon points="140,24 258,93 258,231 140,300 22,231 22,93" fill="none" stroke="#CB187D" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.25"/>
+  <foreignObject x="95" y="85" width="90" height="90"><div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><span class="iconify" data-icon="logos:python" style="font-size:70px;filter:drop-shadow(0 0 14px rgba(255,212,59,0.25));"></span></div></foreignObject>
+  <text x="140" y="205" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="30" letter-spacing="4" opacity="0.95">PYTHON</text>
+  <text x="140" y="230" text-anchor="middle" fill="#f5c6e0" font-family="Inter,sans-serif" font-weight="600" font-size="14" letter-spacing="5" opacity="0.8">LEARNING HUB</text>
+  <line x1="85" y1="185" x2="195" y2="185" stroke="#CB187D" stroke-width="1" stroke-opacity="0.35" stroke-linecap="round"/>
+  <line x1="100" y1="248" x2="180" y2="248" stroke="#FFD43B" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+  <g opacity="0.5"><rect x="113" y="255" width="54" height="16" rx="8" fill="#CB187D" opacity="0.2"/><rect x="113" y="255" width="54" height="16" rx="8" fill="none" stroke="#CB187D" stroke-width="0.6" opacity="0.35"/><text x="140" y="266.5" text-anchor="middle" fill="#f5c6e0" font-family="'Fira Code',monospace" font-weight="600" font-size="8" opacity="0.8">v1.0</text></g>
+</svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="max-w-[1280px] mx-auto px-4 pt-8 pb-12">
+    <div class="lesson-layout">
+      <aside class="lesson-toc-sidebar">
+        <div class="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+          <div class="toc-header relative flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+            <span class="toc-header-label text-xs font-bold uppercase tracking-widest text-brand">On This Page</span>
+            <button class="toc-toggle-btn" onclick="toggleToc()" title="Toggle navigation"><span class="iconify text-sm" id="toc-toggle-icon" data-icon="fa6-solid:angles-left"></span></button>
+          </div>
+          <nav class="toc-body px-2 py-2 border-b border-gray-100" aria-label="Page sections">
+            <a href="#objective" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:bullseye"></span> Lesson Objective</a>
+            <a href="#overview" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:binoculars"></span> Overview</a>
+            <a href="#key-ideas" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:lightbulb"></span> Key Takeaways</a>
+            <a href="#key-concepts" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:book-open"></span> Key Concepts</a>
+            <a href="#code-examples" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:code"></span> Code Examples</a>
+            <a href="#comparison" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:scale-balanced"></span> SQL / Excel Comparison</a>
+            <a href="#practice" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:dumbbell"></span> Practice Exercises</a>
+            <a href="#mistakes" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:triangle-exclamation"></span> Common Mistakes</a>
+            <a href="#real-world" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:briefcase"></span> Real-World Use</a>
+            <a href="#recap" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:list-check"></span> Lesson Recap</a>
+            <a href="#knowledge-check" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:brain"></span> Knowledge Check</a>
+            <a href="#next-lesson" class="toc-link flex items-center gap-2 text-xs text-gray-600 py-1.5 px-2 rounded-lg no-underline"><span class="iconify text-brand shrink-0" data-icon="fa6-solid:circle-arrow-right"></span> Next Lesson</a>
+          </nav>
+          <div class="toc-module-list px-3 py-3">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-1">Module Lessons</p>
+            <div class="space-y-1">
+              <a href="lesson01_why_build_data_apps.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">1. Why Build Data Apps?</span></a>
+              <a href="lesson02_introduction_to_streamlit.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">2. Introduction to Streamlit</span></a>
+              <a href="lesson03_interactive_filters.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-[#fdf0f7] border-[#CB187D] text-[#CB187D] text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-[#CB187D] shrink-0"></span><span class="truncate">3. Interactive Filters</span></a>
+              <a href="lesson04_exporting_data.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">4. Exporting Data</span></a>
+              <a href="lesson05_deploying_data_applications.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">5. Deploying Data Applications</span></a>
+              <a href="lesson06_shiny_for_python.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">6. Shiny for Python</span></a>
+              <a href="lesson07_streamlit_vs_shiny.html" class="flex items-center gap-2 px-3 py-2 rounded-lg border bg-white border-gray-100 text-gray-600 hover:border-gray-200 text-xs font-medium no-underline transition-colors"><span class="w-2 h-2 rounded-full bg-gray-300 shrink-0"></span><span class="truncate">7. Streamlit vs Shiny</span></a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="min-w-0 flex-1 space-y-10">
+
+        <section id="objective">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:bullseye"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Objective</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The goal and expected outcome of this lesson</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+                  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0"><span class="iconify text-brand text-lg" data-icon="fa6-solid:sliders"></span></span>
+                  <div><p class="text-sm font-semibold text-gray-800">Use Streamlit input widgets</p><p class="text-xs text-gray-500 mt-0.5">Add selectbox, slider, multiselect, and date_input widgets to capture user choices</p></div>
+                </div>
+                <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+                  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0"><span class="iconify text-brand text-lg" data-icon="fa6-solid:filter"></span></span>
+                  <div><p class="text-sm font-semibold text-gray-800">Filter a DataFrame with widget values</p><p class="text-xs text-gray-500 mt-0.5">Apply the value a widget returns to select matching rows from a pandas DataFrame</p></div>
+                </div>
+                <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+                  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0"><span class="iconify text-brand text-lg" data-icon="fa6-solid:layer-group"></span></span>
+                  <div><p class="text-sm font-semibold text-gray-800">Chain multiple filters together</p><p class="text-xs text-gray-500 mt-0.5">Combine two or more widgets so the dashboard narrows data through several dimensions at once</p></div>
+                </div>
+                <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+                  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0"><span class="iconify text-brand text-lg" data-icon="fa6-solid:chart-column"></span></span>
+                  <div><p class="text-sm font-semibold text-gray-800">Update charts from filtered data</p><p class="text-xs text-gray-500 mt-0.5">Pass a filtered DataFrame to st.bar_chart() or st.line_chart() so visuals refresh automatically</p></div>
+                </div>
+                <div class="obj-card flex items-start gap-4 rounded-xl border border-gray-100 bg-gray-50 px-4 py-4">
+                  <span class="obj-icon inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-soft shrink-0"><span class="iconify text-brand text-lg" data-icon="fa6-solid:table-columns"></span></span>
+                  <div><p class="text-sm font-semibold text-gray-800">Organize filters in the sidebar</p><p class="text-xs text-gray-500 mt-0.5">Move filter widgets into st.sidebar to keep the main content area clean and focused</p></div>
+                </div>
+              </div>
+              <div class="mt-5 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">This lesson teaches you to build <strong>interactive filters</strong> in Streamlit &mdash; from a single dropdown to a full sidebar-driven dashboard with charts that update on every user selection.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="overview">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:binoculars"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Overview</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A high-level summary of the topic</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-5">
+              <div class="relative rounded-2xl border border-[#f5c6e0] bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 overflow-hidden">
+                <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Py</span>
+                <div class="relative flex items-start gap-4">
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-base" data-icon="fa6-solid:quote-left"></span></span>
+                  <p class="text-base text-gray-800 leading-relaxed font-medium">An interactive filter lets your dashboard users choose exactly which slice of data they want to see — no code changes, no new report requests.</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed">Think of an interactive dashboard like a vending machine: the user presses buttons to select what they want, the machine delivers the matching item, and the display updates to show what was dispensed. Each Streamlit widget is one of those buttons.</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+                  <div class="flex items-center gap-3 mb-2.5">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-brand text-base" data-icon="fa6-solid:sliders"></span></span>
+                    <div><p class="text-sm font-bold text-gray-800 leading-tight">Input Widgets</p><p class="text-[10px] text-gray-400 italic leading-tight">The button panel — every choice at your fingertips</p></div>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">Streamlit provides ready-made input components like st.selectbox(), st.slider(), and st.multiselect() that you drop into your script with a single function call. Each widget returns the value the user selected, which you store in a plain Python variable and use in the rest of your code.</p>
+                </div>
+                <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+                  <div class="flex items-center gap-3 mb-2.5">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-brand text-base" data-icon="fa6-solid:filter"></span></span>
+                    <div><p class="text-sm font-bold text-gray-800 leading-tight">DataFrame Filtering</p><p class="text-[10px] text-gray-400 italic leading-tight">The dispensing mechanism — delivers only what you asked for</p></div>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">Once you have the user's choice in a variable, you filter your pandas DataFrame with a boolean condition like df[df["region"] == selected_region]. The result is a new DataFrame containing only the rows that match, leaving the original data untouched.</p>
+                </div>
+                <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+                  <div class="flex items-center gap-3 mb-2.5">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-brand text-base" data-icon="fa6-solid:layer-group"></span></span>
+                    <div><p class="text-sm font-bold text-gray-800 leading-tight">Chained Filters</p><p class="text-[10px] text-gray-400 italic leading-tight">The combo order — press two buttons for a narrower pick</p></div>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">You can stack multiple widgets so each one narrows the data further — for example, first select a region, then slide a date range. Each filter applies to the already-filtered DataFrame, giving the user precise control over what they see.</p>
+                </div>
+                <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+                  <div class="flex items-center gap-3 mb-2.5">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-brand text-base" data-icon="fa6-solid:chart-column"></span></span>
+                    <div><p class="text-sm font-bold text-gray-800 leading-tight">Reactive Charts</p><p class="text-[10px] text-gray-400 italic leading-tight">The display screen — shows exactly what was dispensed</p></div>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">When you pass a filtered DataFrame to st.bar_chart() or st.line_chart(), Streamlit redraws the chart every time a widget value changes. The user sees an instant visual update without clicking a refresh button.</p>
+                </div>
+                <div class="rounded-xl border border-gray-100 bg-gray-50 px-4 py-4 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/40 transition-colors">
+                  <div class="flex items-center gap-3 mb-2.5">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-brand text-base" data-icon="fa6-solid:table-columns"></span></span>
+                    <div><p class="text-sm font-bold text-gray-800 leading-tight">Sidebar Layout</p><p class="text-[10px] text-gray-400 italic leading-tight">The side panel — keeps buttons out of the product window</p></div>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">Placing filter widgets inside st.sidebar moves them to a collapsible left panel, keeping the main content area free for charts and tables. This separation makes dashboards easier to read, especially on smaller screens.</p>
+                </div>
+              </div>
+              <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Interactive filters turn a static report into a self-service tool — stakeholders explore the data on their own instead of asking you to re-run queries.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="key-ideas">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:lightbulb"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Takeaways</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">The most important ideas to remember</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="obj-card rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm">
+                  <div class="h-1 bg-gradient-to-r from-[#CB187D] to-[#e84aad]"></div>
+                  <div class="px-5 py-5 space-y-3 bg-white">
+                    <div class="flex items-center gap-3"><span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:sliders"></span></span><h3 class="text-sm font-bold text-gray-900">Every Widget Returns a Python Value</h3></div>
+                    <p class="text-sm text-gray-600 leading-relaxed">When a user interacts with st.selectbox() or st.slider(), the widget immediately returns the selected value into a normal Python variable. You never need to write callback functions or event listeners — just assign the result and use it downstream.</p>
+                    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">st.selectbox()</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">st.slider()</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-[#CB187D] border border-pink-100">return value</span></div>
+                  </div>
+                </div>
+                <div class="obj-card rounded-2xl border border-violet-100 bg-white overflow-hidden shadow-sm">
+                  <div class="h-1 bg-gradient-to-r from-violet-500 to-purple-400"></div>
+                  <div class="px-5 py-5 space-y-3 bg-white">
+                    <div class="flex items-center gap-3"><span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:filter"></span></span><h3 class="text-sm font-bold text-gray-900">Filtering Creates a New DataFrame, Not a View</h3></div>
+                    <p class="text-sm text-gray-600 leading-relaxed">The expression df[df["col"] == value] returns a brand-new DataFrame, leaving the original intact. If you accidentally filter the original variable without re-assigning, subsequent widgets will operate on stale data and produce confusing results.</p>
+                    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">boolean mask</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">new DataFrame</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-50 text-violet-600 border border-violet-100">assignment</span></div>
+                  </div>
+                </div>
+                <div class="obj-card rounded-2xl border border-blue-100 bg-white overflow-hidden shadow-sm">
+                  <div class="h-1 bg-gradient-to-r from-blue-500 to-indigo-400"></div>
+                  <div class="px-5 py-5 space-y-3 bg-white">
+                    <div class="flex items-center gap-3"><span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:layer-group"></span></span><h3 class="text-sm font-bold text-gray-900">Chained Filters Narrow Data Progressively</h3></div>
+                    <p class="text-sm text-gray-600 leading-relaxed">Each additional widget filters the already-filtered DataFrame, so the order you apply them matters. If the first filter removes all "West" rows, a second filter on city will never show cities from the West region.</p>
+                    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">progressive filtering</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">order matters</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-600 border border-blue-100">stacked widgets</span></div>
+                  </div>
+                </div>
+                <div class="obj-card rounded-2xl border border-emerald-100 bg-white overflow-hidden shadow-sm">
+                  <div class="h-1 bg-gradient-to-r from-emerald-500 to-teal-400"></div>
+                  <div class="px-5 py-5 space-y-3 bg-white">
+                    <div class="flex items-center gap-3"><span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:chart-column"></span></span><h3 class="text-sm font-bold text-gray-900">Charts Redraw on Every Widget Change</h3></div>
+                    <p class="text-sm text-gray-600 leading-relaxed">Streamlit re-executes your entire script from top to bottom whenever a widget value changes. Any chart that references the filtered DataFrame automatically reflects the new selection without you writing update logic.</p>
+                    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">script re-run</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">st.bar_chart()</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">auto-refresh</span></div>
+                  </div>
+                </div>
+                <div class="obj-card rounded-2xl border border-amber-100 bg-white overflow-hidden shadow-sm">
+                  <div class="h-1 bg-gradient-to-r from-amber-500 to-orange-400"></div>
+                  <div class="px-5 py-5 space-y-3 bg-white">
+                    <div class="flex items-center gap-3"><span class="obj-icon inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:table-columns"></span></span><h3 class="text-sm font-bold text-gray-900">Sidebar Keeps Filters Separate from Results</h3></div>
+                    <p class="text-sm text-gray-600 leading-relaxed">Moving widgets to st.sidebar prevents the filter controls from pushing your charts down the page. On mobile, the sidebar collapses into a hamburger menu, giving the user more screen space for data.</p>
+                    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">st.sidebar</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">layout</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-600 border border-amber-100">mobile-friendly</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="key-concepts">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:book-open"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Key Concepts</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Core terms and definitions for this topic</p>
+      </div>
+    </div>
+            <div class="bg-white px-6 py-7">
+              <div class="flex flex-col md:flex-row gap-0">
+                <div class="relative md:w-52 shrink-0 flex md:flex-col gap-1 md:border-r border-gray-100 md:pr-5 pb-4 md:pb-0" role="tablist">
+                  <div class="kc-indicator hidden md:block absolute right-0 top-0 w-[3px] rounded-full bg-[#CB187D] transition-all duration-300" style="height:68px;"></div>
+                  <button onclick="switchKcTab(0)" class="kc-tab kc-tab-active group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab"><span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-[#CB187D] text-white shadow-sm shadow-pink-200"><span class="iconify text-[11px]" data-icon="fa6-solid:sliders"></span></span><span class="kc-tab-label text-xs font-bold leading-tight text-gray-900">Input Widgets</span></button>
+                  <button onclick="switchKcTab(1)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab"><span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:filter"></span></span><span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Filtering DataFrames</span></button>
+                  <button onclick="switchKcTab(2)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab"><span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:layer-group"></span></span><span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Chaining Filters</span></button>
+                  <button onclick="switchKcTab(3)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab"><span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:chart-column"></span></span><span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Reactive Charts</span></button>
+                  <button onclick="switchKcTab(4)" class="kc-tab group flex items-center gap-3 w-full px-3 py-3 rounded-xl text-left transition-all duration-200" role="tab"><span class="kc-tab-num inline-flex items-center justify-center w-7 h-7 rounded-full shrink-0 transition-all duration-200 bg-gray-100 text-gray-400"><span class="iconify text-[11px]" data-icon="fa6-solid:table-columns"></span></span><span class="kc-tab-label text-xs font-bold leading-tight text-gray-400">Sidebar Layout</span></button>
+                </div>
+                <div class="flex-1 min-w-0 md:pl-5">
+                  <div class="kc-panel kc-panel-anim" data-color="pink" role="tabpanel">
+                    <div class="rounded-2xl border border-pink-100 overflow-hidden">
+                      <div class="h-1 bg-gradient-to-r from-[#CB187D] via-pink-400 to-rose-300"></div>
+                      <div class="bg-gradient-to-br from-pink-50/60 to-white p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:sliders"></span></span><div><h3 class="text-sm font-bold text-gray-900 leading-tight">Input Widgets</h3><p class="text-[10px] text-gray-400 mt-0.5">Concept 1 of 5</p></div></div>
+                          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-100 to-rose-100 text-pink-600">Core</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Streamlit input widgets are pre-built UI components that capture a user&rsquo;s choice and return it as a Python value you can use immediately in your script.</p>
+                        <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep"><div class="flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span><span class="text-[11px] font-semibold text-gray-400">Python</span></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                          <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)          # load your dataset
+
+# Dropdown — returns the selected string
+region = st.selectbox(
+    &quot;Select a region&quot;,                  # label shown to the user
+    df[&quot;region&quot;].unique()               # options pulled from the data
+)
+
+# Slider — returns the selected number
+min_sales = st.slider(
+    &quot;Minimum sales amount&quot;,             # label
+    min_value=0,                        # slider start
+    max_value=int(df[&quot;sales&quot;].max()),   # slider end
+    value=0                             # default position
+)</code></pre>
+                        </div>
+                        <div class="rounded-xl border border-gray-100 overflow-hidden">
+                          <table class="w-full text-xs">
+                            <thead><tr class="bg-pink-50"><th class="px-3 py-2 text-left font-bold text-pink-600">Common Widgets</th><th class="px-3 py-2 text-left font-bold text-pink-600">Description</th></tr></thead>
+                            <tbody>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-pink-700">st.selectbox()</td><td class="px-3 py-2 text-gray-600">Single-choice dropdown; returns one value</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-pink-700">st.multiselect()</td><td class="px-3 py-2 text-gray-600">Multi-choice dropdown; returns a list</td></tr>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-pink-700">st.slider()</td><td class="px-3 py-2 text-gray-600">Numeric or date slider; returns the selected value</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-pink-700">st.date_input()</td><td class="px-3 py-2 text-gray-600">Calendar date picker; returns a datetime.date</td></tr>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-pink-700">st.text_input()</td><td class="px-3 py-2 text-gray-600">Free-text field; returns a string</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Always pull dropdown options from the data itself (df["col"].unique()) instead of hard-coding a list. If the data changes, the widget stays in sync automatically.</p></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kc-panel kc-panel-anim hidden" data-color="violet" role="tabpanel">
+                    <div class="rounded-2xl border border-violet-100 overflow-hidden">
+                      <div class="h-1 bg-gradient-to-r from-violet-500 via-purple-400 to-fuchsia-300"></div>
+                      <div class="bg-gradient-to-br from-violet-50/60 to-white p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:filter"></span></span><div><h3 class="text-sm font-bold text-gray-900 leading-tight">Filtering DataFrames</h3><p class="text-[10px] text-gray-400 mt-0.5">Concept 2 of 5</p></div></div>
+                          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600">Core</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Filtering a DataFrame means using the value returned by a widget to create a boolean mask that selects only the rows you want to display or chart.</p>
+                        <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep"><div class="flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span><span class="text-[11px] font-semibold text-gray-400">Python</span></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                          <pre class="overflow-x-auto pre-reset"><code class="language-python"># region comes from st.selectbox() above
+filtered = df[df[&quot;region&quot;] == region]   # boolean mask: True where region matches
+
+st.write(f&quot;Showing {len(filtered)} rows for {region}&quot;)
+st.dataframe(filtered)                  # display the filtered table</code></pre>
+                        </div>
+                        <div class="rounded-xl border border-gray-100 overflow-hidden">
+                          <table class="w-full text-xs">
+                            <thead><tr class="bg-violet-50"><th class="px-3 py-2 text-left font-bold text-violet-600">Filter Patterns</th><th class="px-3 py-2 text-left font-bold text-violet-600">Description</th></tr></thead>
+                            <tbody>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-violet-700">df[df["col"] == val]</td><td class="px-3 py-2 text-gray-600">Exact match on a single value</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-violet-700">df[df["col"].isin(vals)]</td><td class="px-3 py-2 text-gray-600">Match any value in a list (multiselect)</td></tr>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-violet-700">df[df["col"] &gt;= num]</td><td class="px-3 py-2 text-gray-600">Numeric threshold (slider)</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-violet-700">df[(cond1) &amp; (cond2)]</td><td class="px-3 py-2 text-gray-600">Combine two conditions with &amp;</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Store the filter result in a new variable (filtered = ...) instead of overwriting the original df. You will need the original data to populate widget options for subsequent filters.</p></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kc-panel kc-panel-anim hidden" data-color="blue" role="tabpanel">
+                    <div class="rounded-2xl border border-blue-100 overflow-hidden">
+                      <div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-300"></div>
+                      <div class="bg-gradient-to-br from-blue-50/60 to-white p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:layer-group"></span></span><div><h3 class="text-sm font-bold text-gray-900 leading-tight">Chaining Filters</h3><p class="text-[10px] text-gray-400 mt-0.5">Concept 3 of 5</p></div></div>
+                          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-600">Intermediate</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Chaining filters means applying two or more widget selections in sequence so the displayed data narrows through multiple dimensions at once.</p>
+                        <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep"><div class="flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span><span class="text-[11px] font-semibold text-gray-400">Python</span></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                          <pre class="overflow-x-auto pre-reset"><code class="language-python"># Widget 1 — region dropdown
+region = st.selectbox(&quot;Region&quot;, df[&quot;region&quot;].unique())
+
+# Widget 2 — minimum sales slider
+min_sales = st.slider(&quot;Min sales&quot;, 0, int(df[&quot;sales&quot;].max()), 0)
+
+# Apply both filters in order
+filtered = df[df[&quot;region&quot;] == region]          # first: region
+filtered = filtered[filtered[&quot;sales&quot;] &gt;= min_sales]  # second: sales threshold
+
+st.metric(&quot;Rows after filtering&quot;, len(filtered))
+st.dataframe(filtered)</code></pre>
+                        </div>
+                        <div class="rounded-xl border border-gray-100 overflow-hidden">
+                          <table class="w-full text-xs">
+                            <thead><tr class="bg-blue-50"><th class="px-3 py-2 text-left font-bold text-blue-600">Chaining Tips</th><th class="px-3 py-2 text-left font-bold text-blue-600">Description</th></tr></thead>
+                            <tbody>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-blue-700">Order matters</td><td class="px-3 py-2 text-gray-600">Filter from broad to narrow so each step has enough rows to be meaningful</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-blue-700">Use &amp; in one line</td><td class="px-3 py-2 text-gray-600">df[(df["region"]==r) &amp; (df["sales"]>=n)] combines both conditions in a single expression</td></tr>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-blue-700">Show row count</td><td class="px-3 py-2 text-gray-600">Display st.metric() or len(filtered) so users see how many rows survive each filter</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">If a filter combination returns zero rows, show a friendly st.warning("No data matches your filters.") instead of an empty chart — otherwise the user thinks the dashboard is broken.</p></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kc-panel kc-panel-anim hidden" data-color="emerald" role="tabpanel">
+                    <div class="rounded-2xl border border-emerald-100 overflow-hidden">
+                      <div class="h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-300"></div>
+                      <div class="bg-gradient-to-br from-emerald-50/60 to-white p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:chart-column"></span></span><div><h3 class="text-sm font-bold text-gray-900 leading-tight">Reactive Charts</h3><p class="text-[10px] text-gray-400 mt-0.5">Concept 4 of 5</p></div></div>
+                          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600">Core</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">A reactive chart is one that automatically redraws itself whenever the user changes a filter widget, because Streamlit re-runs the entire script on every interaction.</p>
+                        <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep"><div class="flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span><span class="text-[11px] font-semibold text-gray-400">Python</span></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                          <pre class="overflow-x-auto pre-reset"><code class="language-python"># filtered already contains only the matching rows
+st.subheader(f&quot;Sales in {region}&quot;)
+
+# Bar chart — grouped by product
+st.bar_chart(
+    filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum()  # aggregate first
+)
+
+# Line chart — trend over time
+st.line_chart(
+    filtered.groupby(&quot;date&quot;)[&quot;sales&quot;].sum()
+)</code></pre>
+                        </div>
+                        <div class="rounded-xl border border-gray-100 overflow-hidden">
+                          <table class="w-full text-xs">
+                            <thead><tr class="bg-emerald-50"><th class="px-3 py-2 text-left font-bold text-emerald-600">Built-in Chart Functions</th><th class="px-3 py-2 text-left font-bold text-emerald-600">Description</th></tr></thead>
+                            <tbody>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-emerald-700">st.bar_chart(data)</td><td class="px-3 py-2 text-gray-600">Vertical bar chart; pass a Series or DataFrame</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-emerald-700">st.line_chart(data)</td><td class="px-3 py-2 text-gray-600">Line chart; great for time-series trends</td></tr>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-emerald-700">st.area_chart(data)</td><td class="px-3 py-2 text-gray-600">Filled area chart; same API as line_chart</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-emerald-700">st.metric(label, value)</td><td class="px-3 py-2 text-gray-600">Single KPI number with optional delta arrow</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Group or aggregate the filtered data before charting (e.g., .groupby("product")["sales"].sum()). Passing raw row-level data to st.bar_chart() produces a bar for every row, which is usually unreadable.</p></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kc-panel kc-panel-anim hidden" data-color="orange" role="tabpanel">
+                    <div class="rounded-2xl border border-orange-100 overflow-hidden">
+                      <div class="h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-300"></div>
+                      <div class="bg-gradient-to-br from-orange-50/60 to-white p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 shrink-0 shadow-md"><span class="iconify text-white text-sm" data-icon="fa6-solid:table-columns"></span></span><div><h3 class="text-sm font-bold text-gray-900 leading-tight">Sidebar Layout</h3><p class="text-[10px] text-gray-400 mt-0.5">Concept 5 of 5</p></div></div>
+                          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-600">Layout</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">st.sidebar is a built-in Streamlit container that renders widgets in a collapsible left panel, keeping filter controls visually separate from the main results area.</p>
+                        <div class="rounded-xl overflow-hidden bg-code shadow-md">
+                          <div class="flex items-center justify-between px-4 py-2 border-b border-code-sep"><div class="flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="14" data-height="14"></span><span class="text-[11px] font-semibold text-gray-400">Python</span></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                          <pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)
+
+# -- Sidebar filters --
+st.sidebar.header(&quot;Filters&quot;)           # sidebar heading
+region = st.sidebar.selectbox(          # widget inside sidebar
+    &quot;Region&quot;, df[&quot;region&quot;].unique()
+)
+min_sales = st.sidebar.slider(
+    &quot;Min sales&quot;, 0, int(df[&quot;sales&quot;].max()), 0
+)
+
+# -- Main area --
+filtered = df[(df[&quot;region&quot;] == region) &amp; (df[&quot;sales&quot;] &gt;= min_sales)]
+st.title(&quot;Sales Dashboard&quot;)
+st.dataframe(filtered)
+st.bar_chart(filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum())</code></pre>
+                        </div>
+                        <div class="rounded-xl border border-gray-100 overflow-hidden">
+                          <table class="w-full text-xs">
+                            <thead><tr class="bg-orange-50"><th class="px-3 py-2 text-left font-bold text-orange-600">Sidebar Methods</th><th class="px-3 py-2 text-left font-bold text-orange-600">Description</th></tr></thead>
+                            <tbody>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-orange-700">st.sidebar.selectbox()</td><td class="px-3 py-2 text-gray-600">Dropdown inside the sidebar</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-orange-700">st.sidebar.slider()</td><td class="px-3 py-2 text-gray-600">Slider inside the sidebar</td></tr>
+                              <tr class=""><td class="px-3 py-2 font-mono font-semibold text-orange-700">st.sidebar.header()</td><td class="px-3 py-2 text-gray-600">Section heading in the sidebar</td></tr>
+                              <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-semibold text-orange-700">st.sidebar.markdown()</td><td class="px-3 py-2 text-gray-600">Rich text inside the sidebar</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">On mobile devices the sidebar auto-collapses into a hamburger icon. Test your dashboard at a narrow viewport width to make sure labels and options still fit comfortably.</p></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="code-examples">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:code"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Code Examples</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Hands-on code snippets to explore the concepts</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="flex items-center gap-2 mb-6" role="tablist">
+                <button onclick="switchCeTab(0)" class="ce-step ce-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Dropdown Filter</span></button>
+                <button onclick="switchCeTab(1)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Slider Filter</span></button>
+                <button onclick="switchCeTab(2)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Multiselect Filter</span></button>
+                <button onclick="switchCeTab(3)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Chained Filters + Chart</span></button>
+                <button onclick="switchCeTab(4)" class="ce-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:code"></span><span class="ce-step-label text-xs font-bold">Full Dashboard</span></button>
+              </div>
+              <div class="ce-panel ce-panel-anim" role="tabpanel">
+                <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                    <div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">dropdown_filter.py</span></div></div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)               # load the dataset
+
+region = st.selectbox(                       # create a dropdown widget
+    &quot;Select a region&quot;,                       # label the user sees
+    df[&quot;region&quot;].unique()                    # options from the data
+)
+
+filtered = df[df[&quot;region&quot;] == region]        # filter rows by selection
+st.dataframe(filtered)                       # show the filtered table</code></pre></div>
+                  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                    <div class="flex items-center gap-2 mb-1.5"><span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span><span class="text-[10px] text-gray-600 font-mono">$ streamlit run dropdown_filter.py</span></div>
+                    <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre-wrap">$ streamlit run dropdown_filter.py
+
+  You can now view your Streamlit app in your browser.
+  Local URL: http://localhost:8501
+
+  [Region dropdown: West selected]
+  Showing 342 rows</div>
+                  </div>
+                </div>
+                <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">The dropdown automatically lists every unique value in the column. If the column has too many values (100+), consider st.text_input() with a search pattern instead.</p></div>
+              </div>
+              <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+                <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                    <div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">slider_filter.py</span></div></div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)
+
+min_sales = st.slider(                       # numeric slider widget
+    &quot;Minimum sales amount&quot;,                  # label text
+    min_value=0,                             # left end of slider
+    max_value=int(df[&quot;sales&quot;].max()),        # right end from data
+    value=0                                  # default position
+)
+
+filtered = df[df[&quot;sales&quot;] &gt;= min_sales]      # keep rows above threshold
+st.write(f&quot;Rows with sales &gt;= {min_sales}: {len(filtered)}&quot;)
+st.dataframe(filtered)</code></pre></div>
+                  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                    <div class="flex items-center gap-2 mb-1.5"><span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span><span class="text-[10px] text-gray-600 font-mono">$ streamlit run slider_filter.py</span></div>
+                    <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre-wrap">$ streamlit run slider_filter.py
+
+  Local URL: http://localhost:8501
+
+  [Slider set to 500]
+  Rows with sales &gt;= 500: 189</div>
+                  </div>
+                </div>
+                <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Set a sensible default value for the slider so the dashboard loads with meaningful data rather than showing all rows or zero rows.</p></div>
+              </div>
+              <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+                <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                    <div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">multiselect_filter.py</span></div></div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)
+
+products = st.multiselect(                   # multi-choice dropdown
+    &quot;Select products&quot;,                       # label
+    options=df[&quot;product&quot;].unique(),           # all choices
+    default=df[&quot;product&quot;].unique()[:3]       # pre-select first 3
+)
+
+if products:                                 # guard against empty list
+    filtered = df[df[&quot;product&quot;].isin(products)]  # .isin() for lists
+    st.dataframe(filtered)
+else:
+    st.warning(&quot;Please select at least one product.&quot;)</code></pre></div>
+                  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                    <div class="flex items-center gap-2 mb-1.5"><span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span><span class="text-[10px] text-gray-600 font-mono">$ streamlit run multiselect_filter.py</span></div>
+                    <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre-wrap">$ streamlit run multiselect_filter.py
+
+  Local URL: http://localhost:8501
+
+  [Products: Widget, Gadget, Gizmo selected]
+  Showing 456 rows</div>
+                  </div>
+                </div>
+                <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Always guard multiselect with an if-check. When the user clears all selections, .isin([]) returns zero rows and charts render empty — a warning message is much friendlier.</p></div>
+              </div>
+              <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+                <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                    <div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">chained_filters.py</span></div></div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)
+
+# Two filters in the sidebar
+st.sidebar.header(&quot;Filters&quot;)
+region = st.sidebar.selectbox(&quot;Region&quot;, df[&quot;region&quot;].unique())
+min_sales = st.sidebar.slider(&quot;Min sales&quot;, 0, int(df[&quot;sales&quot;].max()), 0)
+
+# Apply both filters
+filtered = df[(df[&quot;region&quot;] == region) &amp; (df[&quot;sales&quot;] &gt;= min_sales)]
+
+# Main area — chart + table
+st.title(f&quot;Sales in {region}&quot;)
+st.bar_chart(filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum())
+st.dataframe(filtered)</code></pre></div>
+                  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                    <div class="flex items-center gap-2 mb-1.5"><span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span><span class="text-[10px] text-gray-600 font-mono">$ streamlit run chained_filters.py</span></div>
+                    <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre-wrap">$ streamlit run chained_filters.py
+
+  Local URL: http://localhost:8501
+
+  [Sidebar: Region=West, Min sales=200]
+  Sales in West
+  [Bar chart: Widget 1200, Gadget 850, Gizmo 640]
+  Showing 127 rows</div>
+                  </div>
+                </div>
+                <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Placing both filters in the sidebar keeps the main area dedicated to results. The chart and table update together every time either filter changes.</p></div>
+              </div>
+              <div class="ce-panel ce-panel-anim hidden" role="tabpanel">
+                <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                  <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]">
+                    <div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">full_dashboard.py</span></div></div>
+                    <button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button>
+                  </div>
+                  <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+st.set_page_config(layout=&quot;wide&quot;)           # use full browser width
+df = pd.read_csv(&quot;sales.csv&quot;)
+
+# -- Sidebar filters --
+st.sidebar.header(&quot;Dashboard Filters&quot;)
+region = st.sidebar.selectbox(&quot;Region&quot;, [&quot;All&quot;] + list(df[&quot;region&quot;].unique()))
+products = st.sidebar.multiselect(&quot;Products&quot;, df[&quot;product&quot;].unique(), default=df[&quot;product&quot;].unique())
+min_sales = st.sidebar.slider(&quot;Min sales&quot;, 0, int(df[&quot;sales&quot;].max()), 0)
+
+# -- Apply filters --
+filtered = df.copy()                         # start with full data
+if region != &quot;All&quot;:
+    filtered = filtered[filtered[&quot;region&quot;] == region]
+filtered = filtered[filtered[&quot;product&quot;].isin(products)]
+filtered = filtered[filtered[&quot;sales&quot;] &gt;= min_sales]
+
+# -- KPI row --
+col1, col2, col3 = st.columns(3)            # three metric columns
+col1.metric(&quot;Total Sales&quot;, f&quot;${filtered[&#x27;sales&#x27;].sum():,.0f}&quot;)
+col2.metric(&quot;Avg Sale&quot;, f&quot;${filtered[&#x27;sales&#x27;].mean():,.0f}&quot;)
+col3.metric(&quot;Rows&quot;, len(filtered))
+
+# -- Charts --
+st.bar_chart(filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum())
+st.dataframe(filtered)</code></pre></div>
+                  <div class="border-t border-white/5 bg-[#11111b] px-4 py-3">
+                    <div class="flex items-center gap-2 mb-1.5"><span class="iconify text-emerald-400 text-[10px]" data-icon="fa6-solid:terminal"></span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Terminal</span><span class="text-[10px] text-gray-600 font-mono">$ streamlit run full_dashboard.py</span></div>
+                    <div class="font-mono text-xs text-emerald-400 leading-relaxed whitespace-pre-wrap">$ streamlit run full_dashboard.py
+
+  Local URL: http://localhost:8501
+
+  [Sidebar: Region=All, Products=all, Min sales=0]
+  Total Sales: $124,500  |  Avg Sale: $312  |  Rows: 400
+  [Bar chart with all products]</div>
+                  </div>
+                </div>
+                <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600">Adding an "All" option to the dropdown with ["All"] + list(...) lets users see the unfiltered view without removing the dropdown entirely.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="comparison">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:scale-balanced"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">SQL / Excel Comparison</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">How this topic compares across Python, SQL, and Excel</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-5">
+              <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50"><span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0"><span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:sliders"></span></span><span class="text-xs font-bold uppercase tracking-widest text-gray-400">Dropdown Filter</span></div>
+                <div class="grid grid-cols-3 divide-x divide-gray-100">
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Python</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">st.selectbox()</code><p class="text-xs text-gray-500 leading-relaxed">A dropdown that returns the selected value as a Python string you can use immediately.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">SQL</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">WHERE col = &#x27;value&#x27;</code><p class="text-xs text-gray-500 leading-relaxed">SQL filters with a WHERE clause, but requires a new query each time.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Excel</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Data &gt; Filter</code><p class="text-xs text-gray-500 leading-relaxed">Excel AutoFilter lets you pick values from a dropdown in the column header.</p></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 mb-4"><span class="flex-1 h-px bg-gray-100"></span><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span></span><span class="flex-1 h-px bg-gray-100"></span></div>
+              <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50"><span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0"><span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:filter"></span></span><span class="text-xs font-bold uppercase tracking-widest text-gray-400">Boolean Mask</span></div>
+                <div class="grid grid-cols-3 divide-x divide-gray-100">
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Python</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">df[df["col"] == val]</code><p class="text-xs text-gray-500 leading-relaxed">Pandas boolean indexing selects rows where the condition is True.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">SQL</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">WHERE col &gt;= 100</code><p class="text-xs text-gray-500 leading-relaxed">SQL uses comparison operators in the WHERE clause for the same effect.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Excel</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Custom AutoFilter</code><p class="text-xs text-gray-500 leading-relaxed">Excel AutoFilter supports number comparisons like "greater than" via custom rules.</p></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 mb-4"><span class="flex-1 h-px bg-gray-100"></span><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span></span><span class="flex-1 h-px bg-gray-100"></span></div>
+              <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50"><span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0"><span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:layer-group"></span></span><span class="text-xs font-bold uppercase tracking-widest text-gray-400">Chained Conditions</span></div>
+                <div class="grid grid-cols-3 divide-x divide-gray-100">
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Python</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">df[(c1) &amp; (c2)]</code><p class="text-xs text-gray-500 leading-relaxed">Combine multiple conditions with &amp; (and) or | (or) inside the brackets.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">SQL</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">WHERE c1 AND c2</code><p class="text-xs text-gray-500 leading-relaxed">SQL chains conditions with AND / OR keywords.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Excel</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">Multiple Filters</code><p class="text-xs text-gray-500 leading-relaxed">Apply AutoFilter on several columns; Excel combines them with AND logic.</p></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 mb-4"><span class="flex-1 h-px bg-gray-100"></span><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span></span><span class="flex-1 h-px bg-gray-100"></span></div>
+              <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50"><span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0"><span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:chart-column"></span></span><span class="text-xs font-bold uppercase tracking-widest text-gray-400">Reactive Chart</span></div>
+                <div class="grid grid-cols-3 divide-x divide-gray-100">
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Python</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">st.bar_chart(filtered)</code><p class="text-xs text-gray-500 leading-relaxed">Chart redraws automatically on every widget change because Streamlit re-runs the script.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">SQL</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">BI Dashboard</code><p class="text-xs text-gray-500 leading-relaxed">Tools like Power BI or Tableau refresh visuals when a slicer changes.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Excel</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">PivotChart + Slicer</code><p class="text-xs text-gray-500 leading-relaxed">Excel PivotCharts linked to slicers update when you click a slicer button.</p></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 mb-4"><span class="flex-1 h-px bg-gray-100"></span><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#fdf0f7] shrink-0"><span class="iconify text-[#CB187D] text-xs" data-icon="fa6-solid:scale-balanced"></span></span><span class="flex-1 h-px bg-gray-100"></span></div>
+              <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <div class="px-5 py-2 flex items-center gap-2 border-b border-gray-100 bg-gray-50"><span class="inline-flex items-center justify-center w-5 h-5 rounded bg-indigo-50 shrink-0"><span class="iconify text-indigo-400 text-[11px]" data-icon="fa6-solid:table-columns"></span></span><span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sidebar Layout</span></div>
+                <div class="grid grid-cols-3 divide-x divide-gray-100">
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Python</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-indigo-50 text-indigo-700">st.sidebar.selectbox()</code><p class="text-xs text-gray-500 leading-relaxed">Moves widgets to a collapsible left panel, separating controls from content.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">SQL</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-orange-50 text-orange-700">Parameters pane</code><p class="text-xs text-gray-500 leading-relaxed">SSRS and Power BI have a parameters panel separate from the report body.</p></div>
+                  <div class="px-4 py-4 flex flex-col gap-2"><span class="text-xs text-gray-400">Excel</span><code class="text-xs font-mono font-semibold px-2 py-1 rounded-lg self-start bg-emerald-50 text-emerald-700">n/a</code><p class="text-xs text-gray-500 leading-relaxed">Excel does not have a sidebar concept; filters live inside the sheet.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="practice">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:pencil"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Practice Exercises</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Guided exercises to reinforce your learning</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="flex items-center gap-2 mb-6" role="tablist">
+                <button onclick="switchPeTab(0)" class="pe-step pe-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Your First Dropdown</span></button>
+                <button onclick="switchPeTab(1)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Filter and Display Rows</span></button>
+                <button onclick="switchPeTab(2)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Add a Slider</span></button>
+                <button onclick="switchPeTab(3)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Add a Chart</span></button>
+                <button onclick="switchPeTab(4)" class="pe-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:pencil"></span><span class="pe-step-label text-xs font-bold">Move Filters to Sidebar</span></button>
+              </div>
+              <div class="pe-panel pe-panel-anim" role="tabpanel">
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span><div><h3 class="font-bold text-gray-800">Your First Dropdown</h3></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="flex items-start gap-3 rounded-xl p-4 task-box"><span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span><div><p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p><ol class="list-decimal list-inside space-y-1 text-sm text-gray-600">
+                      <li>Create a new file called <code>filters.py</code> and import streamlit and pandas.</li>
+                      <li>Load <code>sales.csv</code> into a DataFrame called <code>df</code>.</li>
+                      <li>Add a <code>st.selectbox()</code> for the <code>region</code> column and store the result in a variable.</li>
+                      <li>Display the selected region with <code>st.write()</code>.</li>
+                    </ol></div></div>
+                    <button class="accordion-toggle w-full" onclick="toggleAccordion(this)"><span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution<span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span></button>
+                    <div class="accordion-body">
+                      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]"><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">solution_1.py</span></div></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                        <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">import streamlit as st
+import pandas as pd
+
+df = pd.read_csv(&quot;sales.csv&quot;)           # load data
+region = st.selectbox(                   # dropdown widget
+    &quot;Select a region&quot;,
+    df[&quot;region&quot;].unique()
+)
+st.write(f&quot;You selected: {region}&quot;)      # show the choice</code></pre></div>
+                      </div>
+                      <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600"><strong>Why this matters:</strong> This pattern — widget &#x2192; variable &#x2192; use — is the foundation of every Streamlit filter. Every exercise below builds on it.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span><div><h3 class="font-bold text-gray-800">Filter and Display Rows</h3></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="flex items-start gap-3 rounded-xl p-4 task-box"><span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span><div><p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p><ol class="list-decimal list-inside space-y-1 text-sm text-gray-600">
+                      <li>Reuse the <code>region</code> variable from Exercise 1.</li>
+                      <li>Create a new variable <code>filtered</code> that contains only the rows matching the selected region.</li>
+                      <li>Display the row count with <code>st.metric()</code>.</li>
+                      <li>Show the filtered table with <code>st.dataframe()</code>.</li>
+                    </ol></div></div>
+                    <button class="accordion-toggle w-full" onclick="toggleAccordion(this)"><span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution<span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span></button>
+                    <div class="accordion-body">
+                      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]"><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">solution_2.py</span></div></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                        <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">filtered = df[df[&quot;region&quot;] == region]   # boolean mask
+st.metric(&quot;Matching rows&quot;, len(filtered))
+st.dataframe(filtered)                   # interactive table</code></pre></div>
+                      </div>
+                      <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600"><strong>Why this matters:</strong> Filtering before displaying ensures the user only sees relevant data, which keeps the dashboard fast and focused.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span><div><h3 class="font-bold text-gray-800">Add a Slider</h3></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="flex items-start gap-3 rounded-xl p-4 task-box"><span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span><div><p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p><ol class="list-decimal list-inside space-y-1 text-sm text-gray-600">
+                      <li>Below the region dropdown, add a <code>st.slider()</code> for minimum sales.</li>
+                      <li>Set <code>min_value=0</code> and <code>max_value</code> to the column maximum.</li>
+                      <li>Apply both the region filter and the slider filter to the DataFrame.</li>
+                      <li>Display the doubly-filtered table.</li>
+                    </ol></div></div>
+                    <button class="accordion-toggle w-full" onclick="toggleAccordion(this)"><span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution<span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span></button>
+                    <div class="accordion-body">
+                      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]"><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">solution_3.py</span></div></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                        <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">min_sales = st.slider(
+    &quot;Minimum sales&quot;,
+    min_value=0,
+    max_value=int(df[&quot;sales&quot;].max()),
+    value=0
+)
+filtered = df[(df[&quot;region&quot;] == region) &amp; (df[&quot;sales&quot;] &gt;= min_sales)]
+st.dataframe(filtered)</code></pre></div>
+                      </div>
+                      <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600"><strong>Why this matters:</strong> Chaining a slider with a dropdown gives users two-dimensional control, which is far more useful than a single filter.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span><div><h3 class="font-bold text-gray-800">Add a Chart</h3></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="flex items-start gap-3 rounded-xl p-4 task-box"><span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span><div><p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p><ol class="list-decimal list-inside space-y-1 text-sm text-gray-600">
+                      <li>Below the filtered table, add a <code>st.bar_chart()</code> showing sales by product.</li>
+                      <li>Group the filtered DataFrame by <code>product</code> and sum the <code>sales</code> column.</li>
+                      <li>Add a <code>st.subheader()</code> above the chart that includes the selected region name.</li>
+                    </ol></div></div>
+                    <button class="accordion-toggle w-full" onclick="toggleAccordion(this)"><span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution<span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span></button>
+                    <div class="accordion-body">
+                      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]"><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">solution_4.py</span></div></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                        <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">st.subheader(f&quot;Sales breakdown in {region}&quot;)
+st.bar_chart(
+    filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum()
+)</code></pre></div>
+                      </div>
+                      <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600"><strong>Why this matters:</strong> A chart that updates with every filter change turns raw numbers into an instant visual story the user can explore.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pe-panel pe-panel-anim hidden" role="tabpanel">
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:pencil"></span></span><div><h3 class="font-bold text-gray-800">Move Filters to Sidebar</h3></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="flex items-start gap-3 rounded-xl p-4 task-box"><span class="iconify text-xl shrink-0 mt-0.5 text-brand" data-icon="fa6-solid:clipboard-list"></span><div><p class="text-xs font-bold uppercase tracking-widest mb-1 text-brand">Your Task</p><ol class="list-decimal list-inside space-y-1 text-sm text-gray-600">
+                      <li>Move the <code>st.selectbox()</code> and <code>st.slider()</code> into <code>st.sidebar</code>.</li>
+                      <li>Add a <code>st.sidebar.header("Filters")</code> above them.</li>
+                      <li>Keep the chart and table in the main content area.</li>
+                      <li>Run the app and verify filters appear on the left panel.</li>
+                    </ol></div></div>
+                    <button class="accordion-toggle w-full" onclick="toggleAccordion(this)"><span class="iconify text-xs" data-icon="fa6-solid:key"></span> Show Solution<span class="iconify text-xs accordion-chevron" data-icon="fa6-solid:chevron-down"></span></button>
+                    <div class="accordion-body">
+                      <div class="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181825]"><div class="flex items-center gap-3"><div class="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#1e1e2e] border border-white/5"><span class="iconify text-yellow-400 text-xs" data-icon="logos:python" data-width="12" data-height="12"></span><span class="text-[11px] font-semibold text-gray-400">solution_5.py</span></div></div><button class="copy-btn copy-btn-light" onclick="copyCode(this)"><span class="iconify mr-1" data-icon="fa6-regular:copy"></span>Copy</button></div>
+                        <div class="bg-code"><pre class="overflow-x-auto pre-reset"><code class="language-python">st.sidebar.header(&quot;Filters&quot;)
+region = st.sidebar.selectbox(&quot;Region&quot;, df[&quot;region&quot;].unique())
+min_sales = st.sidebar.slider(&quot;Min sales&quot;, 0, int(df[&quot;sales&quot;].max()), 0)
+
+filtered = df[(df[&quot;region&quot;] == region) &amp; (df[&quot;sales&quot;] &gt;= min_sales)]
+st.title(&quot;Sales Dashboard&quot;)
+st.bar_chart(filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum())
+st.dataframe(filtered)</code></pre></div>
+                      </div>
+                      <div class="mt-3 rounded-xl p-4 flex items-start gap-3 border bg-amber-tip"><span class="iconify text-orange-400 mt-0.5 shrink-0" data-icon="fa6-solid:circle-info"></span><p class="text-sm text-gray-600"><strong>Why this matters:</strong> Sidebar layout is the standard pattern for production Streamlit dashboards because it separates controls from content.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="mistakes">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:triangle-exclamation"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Common Mistakes</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Frequent errors and how to avoid them</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="flex items-center gap-2 mb-6" role="tablist">
+                <button onclick="switchMkTab(0)" class="mk-step mk-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Hard-coding dropdown options</span></button>
+                <button onclick="switchMkTab(1)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Overwriting the original DataFrame</span></button>
+                <button onclick="switchMkTab(2)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Empty multiselect crashes chart</span></button>
+                <button onclick="switchMkTab(3)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Filtering before loading data</span></button>
+                <button onclick="switchMkTab(4)" class="mk-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:bug"></span><span class="mk-step-label text-xs font-bold">Forgetting to aggregate before charting</span></button>
+              </div>
+              <div class="mk-panel mk-panel-anim" role="tabpanel">
+                <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0"><span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span></span><div class="min-w-0 flex-1"><h4 class="font-bold text-gray-800 text-sm">Hard-coding dropdown options</h4><p class="text-xs text-gray-500 mt-0.5">Beginners type a manual list instead of pulling options from the data.</p></div><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0"><span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall</span></div>
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 bg-red-50/30"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">st.selectbox(&quot;Region&quot;, [&quot;West&quot;, &quot;East&quot;])</code></pre></div></div>
+                    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none"><span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200"><span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span></span></div>
+                    <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">st.selectbox(&quot;Region&quot;, df[&quot;region&quot;].unique())</code></pre></div></div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40"><span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span><p class="text-xs text-gray-600 leading-relaxed">If a new region appears in the data, the hard-coded list will miss it. Always use <code>df["col"].unique()</code> to keep the widget in sync with the actual data.</p></div>
+                </div>
+              </div>
+              <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+                <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0"><span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span></span><div class="min-w-0 flex-1"><h4 class="font-bold text-gray-800 text-sm">Overwriting the original DataFrame</h4><p class="text-xs text-gray-500 mt-0.5">Assigning the filter result back to <code>df</code> destroys the unfiltered data that other widgets need.</p></div><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0"><span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall</span></div>
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 bg-red-50/30"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = df[df[&quot;region&quot;] == region]  # overwrites df!</code></pre></div></div>
+                    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none"><span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200"><span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span></span></div>
+                    <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">filtered = df[df[&quot;region&quot;] == region]  # new variable</code></pre></div></div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40"><span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span><p class="text-xs text-gray-600 leading-relaxed">Always store filter results in a new variable. If you overwrite <code>df</code>, the next widget that calls <code>df["col"].unique()</code> will only see values from the already-filtered subset.</p></div>
+                </div>
+              </div>
+              <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+                <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0"><span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span></span><div class="min-w-0 flex-1"><h4 class="font-bold text-gray-800 text-sm">Empty multiselect crashes chart</h4><p class="text-xs text-gray-500 mt-0.5">When the user clears all multiselect options, <code>.isin([])</code> returns zero rows and <code>st.bar_chart()</code> renders an empty, confusing visual.</p></div><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0"><span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall</span></div>
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 bg-red-50/30"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">filtered = df[df[&quot;product&quot;].isin(products)]
+st.bar_chart(filtered)</code></pre></div></div>
+                    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none"><span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200"><span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span></span></div>
+                    <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">if products:
+    filtered = df[df[&quot;product&quot;].isin(products)]
+    st.bar_chart(filtered)
+else:
+    st.warning(&quot;Select at least one product.&quot;)</code></pre></div></div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40"><span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span><p class="text-xs text-gray-600 leading-relaxed">Always guard a multiselect filter with <code>if products:</code>. The one-line guard prevents empty charts and gives the user a clear next step.</p></div>
+                </div>
+              </div>
+              <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+                <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0"><span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span></span><div class="min-w-0 flex-1"><h4 class="font-bold text-gray-800 text-sm">Filtering before loading data</h4><p class="text-xs text-gray-500 mt-0.5">Placing the widget above <code>pd.read_csv()</code> causes a NameError because the DataFrame does not exist yet.</p></div><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0"><span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall</span></div>
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 bg-red-50/30"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">region = st.selectbox(&quot;Region&quot;, df[&quot;region&quot;].unique())
+df = pd.read_csv(&quot;sales.csv&quot;)</code></pre></div></div>
+                    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none"><span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200"><span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span></span></div>
+                    <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">df = pd.read_csv(&quot;sales.csv&quot;)
+region = st.selectbox(&quot;Region&quot;, df[&quot;region&quot;].unique())</code></pre></div></div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40"><span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span><p class="text-xs text-gray-600 leading-relaxed">Load data first, then create widgets that reference it. In Streamlit, code runs top to bottom on every interaction, so order matters.</p></div>
+                </div>
+              </div>
+              <div class="mk-panel mk-panel-anim hidden" role="tabpanel">
+                <div class="mistake-card rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-red-50/60 to-white border-b border-gray-200"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-red-100 shrink-0"><span class="iconify text-red-500 text-base" data-icon="fa6-solid:bug"></span></span><div class="min-w-0 flex-1"><h4 class="font-bold text-gray-800 text-sm">Forgetting to aggregate before charting</h4><p class="text-xs text-gray-500 mt-0.5">Passing raw row-level data to <code>st.bar_chart()</code> creates one bar per row, producing an unreadable mess.</p></div><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-600 shrink-0"><span class="iconify text-[10px]" data-icon="fa6-solid:terminal"></span> Pitfall</span></div>
+                  <div class="relative grid grid-cols-1 sm:grid-cols-2">
+                    <div class="p-5 bg-red-50/30"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-red-500 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:xmark"></span></span> Wrong</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">st.bar_chart(filtered[&quot;sales&quot;])  # one bar per row</code></pre></div></div>
+                    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden sm:flex items-center z-10 pointer-events-none"><span class="w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white ring-2 ring-gray-200"><span class="iconify text-xs text-[#CB187D]" data-icon="fa6-solid:arrow-right"></span></span></div>
+                    <div class="p-5 bg-emerald-50/30 border-t sm:border-t-0 sm:border-l border-gray-200"><p class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500"><span class="iconify text-white text-[10px]" data-icon="fa6-solid:check"></span></span> Correct</p><div class="rounded-xl overflow-hidden bg-code"><pre class="overflow-x-auto pre-reset px-4 py-3"><code class="language-python">st.bar_chart(filtered.groupby(&quot;product&quot;)[&quot;sales&quot;].sum())</code></pre></div></div>
+                  </div>
+                  <div class="flex items-start gap-3 px-5 py-3.5 border-t border-gray-200 bg-amber-50/40"><span class="iconify text-orange-400 text-base shrink-0 mt-0.5" data-icon="fa6-solid:lightbulb"></span><p class="text-xs text-gray-600 leading-relaxed">Group and aggregate (sum, mean, count) before charting. This gives you one bar per category, which is what users actually expect to see.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="real-world">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:briefcase"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Real-World Use</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Practical applications in real-world workflows</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]"><span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:chart-bar"></span></div>
+                  <div><p class="text-sm font-semibold text-gray-700">Sales Analytics</p><p class="text-xs text-gray-500 mt-0.5 leading-relaxed">A regional manager selects their territory from a dropdown and sees only their team's revenue, targets, and top products — no SQL required.</p></div>
+                </div>
+                <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]"><span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:stethoscope"></span></div>
+                  <div><p class="text-sm font-semibold text-gray-700">Healthcare Dashboards</p><p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Hospital staff filter patient data by department and date range to track bed occupancy, average length of stay, and readmission rates.</p></div>
+                </div>
+                <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]"><span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:landmark"></span></div>
+                  <div><p class="text-sm font-semibold text-gray-700">Financial Reporting</p><p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Finance teams use a date slider and account-type multiselect to drill into monthly expenses, comparing actuals against budget in real time.</p></div>
+                </div>
+                <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]"><span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:bullhorn"></span></div>
+                  <div><p class="text-sm font-semibold text-gray-700">Marketing Campaigns</p><p class="text-xs text-gray-500 mt-0.5 leading-relaxed">A marketing analyst filters by campaign name and channel to see click-through rates, conversion funnels, and spend versus return.</p></div>
+                </div>
+                <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]"><span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:truck"></span></div>
+                  <div><p class="text-sm font-semibold text-gray-700">Supply Chain Monitoring</p><p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Operations managers filter shipments by warehouse and carrier to spot delivery delays and compare on-time performance.</p></div>
+                </div>
+                <div class="group flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 transition-all duration-200 hover:border-[#f5c6e0] hover:bg-[#fdf0f7]/50 hover:shadow-sm">
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-[#fdf0f7] shrink-0 transition-colors group-hover:bg-[#CB187D]"><span class="iconify text-sm text-[#CB187D] group-hover:text-white" data-icon="fa6-solid:graduation-cap"></span></div>
+                  <div><p class="text-sm font-semibold text-gray-700">Education Analytics</p><p class="text-xs text-gray-500 mt-0.5 leading-relaxed">School administrators filter student data by grade level and subject to identify performance trends and allocate tutoring resources.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="recap">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:list-check"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Lesson Recap</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">A quick summary of what you learned</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+                    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">01</span>
+                    <div class="relative flex items-start gap-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span><div><p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Input Widgets</p><p class="text-[11px] text-gray-600 leading-snug">You learned that Streamlit widgets like <code>st.selectbox()</code> and <code>st.slider()</code> return plain Python values you can use immediately in your code.</p></div></div>
+                  </div>
+                </div>
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+                    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">02</span>
+                    <div class="relative flex items-start gap-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span><div><p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">DataFrame Filtering</p><p class="text-[11px] text-gray-600 leading-snug">You practiced filtering a pandas DataFrame by applying a boolean mask built from the widget&rsquo;s return value.</p></div></div>
+                  </div>
+                </div>
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+                    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">03</span>
+                    <div class="relative flex items-start gap-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span><div><p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Chained Filters</p><p class="text-[11px] text-gray-600 leading-snug">You combined multiple widgets to narrow data through several dimensions at once, giving users precise control.</p></div></div>
+                  </div>
+                </div>
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+                    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">04</span>
+                    <div class="relative flex items-start gap-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span><div><p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Reactive Charts</p><p class="text-[11px] text-gray-600 leading-snug">You connected filtered data to <code>st.bar_chart()</code> and saw how charts update automatically on every widget change.</p></div></div>
+                  </div>
+                </div>
+                <div class="relative rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md hover:border-[#f5c6e0] transition-all duration-300">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-5 py-5 overflow-hidden">
+                    <span class="absolute -right-3 -top-3 text-[5rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">05</span>
+                    <div class="relative flex items-start gap-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white shadow-md shrink-0 mt-0.5"><span class="iconify text-sm" data-icon="fa6-solid:check"></span></span><div><p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-1">Sidebar Layout</p><p class="text-[11px] text-gray-600 leading-snug">You organized filter widgets inside <code>st.sidebar</code> to keep the main content area clean and focused.</p></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#CB187D] to-[#e84aad] px-6 py-5">
+                <span class="absolute right-6 top-1/2 -translate-y-1/2 text-[4rem] font-black text-white/10 leading-none select-none pointer-events-none">&#10003;</span>
+                <div class="relative flex items-center gap-4"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm shrink-0"><span class="iconify text-white text-lg" data-icon="fa6-solid:trophy"></span></span><div><p class="text-sm font-bold text-white">Lesson Complete!</p><p class="text-xs text-white/80 mt-0.5">You&#39;ve covered 5 key concepts. Ready for the knowledge check?</p></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="knowledge-check">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:brain"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Knowledge Check</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Test your understanding before moving on</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="flex items-center gap-2 mb-6" role="tablist">
+                <button onclick="switchQzTab(0)" class="qz-step qz-step-active flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#CB187D] to-[#e84aad] text-white shadow-lg shadow-pink-200/50 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 1</span></button>
+                <button onclick="switchQzTab(1)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 2</span></button>
+                <button onclick="switchQzTab(2)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 3</span></button>
+                <button onclick="switchQzTab(3)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 4</span></button>
+                <button onclick="switchQzTab(4)" class="qz-step flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-gray-400 transition-all duration-250" role="tab"><span class="iconify text-[13px]" data-icon="fa6-solid:circle-question"></span><span class="qz-step-label text-xs font-bold">Question 5</span></button>
+              </div>
+              <div class="qz-panel qz-panel-anim" role="tabpanel">
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q1</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span><div><h3 class="font-bold text-gray-800">Multiple Choice</h3><p class="text-xs text-gray-500 mt-0.5">Select the best answer</p></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="quiz-question" data-qid="quiz-q0" data-fb-correct="st.selectbox() is the standard dropdown widget. It returns whichever option the user picks." data-fb-wrong="Not quite &amp;mdash; st.selectbox() is the correct function. It creates a dropdown and returns the selected value.">
+                      <p class="text-sm font-semibold text-gray-800 mb-4">Which Streamlit function creates a dropdown menu that returns the selected value?</p>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">st.dropdown()</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, true)">st.selectbox()</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">st.radio()</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">st.input()</button>
+                      </div>
+                      <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q2</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span><div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="quiz-question" data-qid="quiz-q1" data-fb-correct="Correct! Boolean indexing returns a new DataFrame. The original stays untouched." data-fb-wrong="Actually, boolean indexing returns a new DataFrame &amp;mdash; the original is never modified.">
+                      <p class="text-sm font-semibold text-gray-800 mb-4">Filtering a DataFrame with df[df["col"] == val] modifies the original DataFrame in place.</p>
+                      <div class="flex gap-3">
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+                      </div>
+                      <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q3</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span><div><h3 class="font-bold text-gray-800">Multiple Choice</h3><p class="text-xs text-gray-500 mt-0.5">Select the best answer</p></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="quiz-question" data-qid="quiz-q2" data-fb-correct="Streamlit re-executes the whole script on every widget change, so all downstream elements update automatically." data-fb-wrong="Streamlit actually re-runs the entire script from top to bottom on every widget interaction &amp;mdash; there is no manual refresh step.">
+                      <p class="text-sm font-semibold text-gray-800 mb-4">What happens when a user moves a Streamlit slider to a new position?</p>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">Only the slider widget re-renders</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">The chart updates but the table does not</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, true)">Streamlit re-runs the entire script from top to bottom</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">Nothing happens until the user clicks a Refresh button</button>
+                      </div>
+                      <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q4</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span><div><h3 class="font-bold text-gray-800">Multiple Choice</h3><p class="text-xs text-gray-500 mt-0.5">Select the best answer</p></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="quiz-question" data-qid="quiz-q3" data-fb-correct="A friendly warning is the best UX. It tells the user what to do next instead of showing a confusing empty chart." data-fb-wrong="The best practice is to show a st.warning() message so the user knows to select at least one option.">
+                      <p class="text-sm font-semibold text-gray-800 mb-4">Your multiselect widget allows the user to clear all selections. What should your code do when the selection list is empty?</p>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">Pass the empty list to .isin() and display an empty chart</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">Raise a Python exception to alert the user</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, true)">Show a st.warning() message and skip the chart</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors text-left" onclick="checkQuiz(this, false)">Automatically select all options</button>
+                      </div>
+                      <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="qz-panel qz-panel-anim hidden" role="tabpanel">
+                <div class="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div class="relative bg-gradient-to-br from-[#fdf0f7] via-white to-[#fef3f9] px-6 py-5 border-b border-gray-100 overflow-hidden">
+                    <span class="absolute -right-4 -top-4 text-[6rem] font-black text-[#CB187D]/[0.04] leading-none select-none pointer-events-none">Q5</span>
+                    <div class="relative flex items-center gap-3"><span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#CB187D] to-[#e84aad] text-white text-sm font-bold shadow-md"><span class="iconify text-base" data-icon="fa6-solid:circle-question"></span></span><div><h3 class="font-bold text-gray-800">True or False</h3><p class="text-xs text-gray-500 mt-0.5">Select the correct answer</p></div></div>
+                  </div>
+                  <div class="px-6 py-5 space-y-4">
+                    <div class="quiz-question" data-qid="quiz-q4" data-fb-correct="Correct! st.sidebar creates a separate panel. On mobile it collapses into a hamburger menu." data-fb-wrong="This is actually true &amp;mdash; st.sidebar renders widgets in a collapsible left panel, keeping the main area clear.">
+                      <p class="text-sm font-semibold text-gray-800 mb-4">Placing widgets inside st.sidebar moves them to a collapsible left panel that is separate from the main content area.</p>
+                      <div class="flex gap-3">
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-[#CB187D] hover:bg-[#fdf0f7] transition-colors" onclick="checkQuiz(this, true)"><span class="iconify mr-1.5" data-icon="fa6-solid:check"></span> True</button>
+                        <button class="quiz-btn px-5 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600 hover:border-red-400 hover:bg-red-50 transition-colors" onclick="checkQuiz(this, false)"><span class="iconify mr-1.5" data-icon="fa6-solid:xmark"></span> False</button>
+                      </div>
+                      <p class="quiz-feedback mt-3 text-sm font-medium hidden"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="next-lesson" class="scroll-mt-24">
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div class="flex items-center gap-4 pl-4 pr-8 py-5 bg-white border-b border-gray-100 border-l-4 border-l-[#CB187D]">
+      <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#CB187D] shrink-0">
+        <span class="iconify text-white text-base" data-icon="fa6-solid:circle-arrow-right"></span>
+      </span>
+      <div class="min-w-0">
+        <h2 class="text-xl font-bold text-gray-900 leading-tight">Next Lesson</h2>
+        <p class="text-sm text-gray-400 leading-snug mt-0.5 line-clamp-1">Preview of what comes next</p>
+      </div>
+    </div>
+            <div class="bg-white px-8 py-7 space-y-6">
+              <div class="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#fdf0f7] px-5 py-4"><span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#CB187D] shrink-0"><span class="text-white font-bold text-lg">4</span></span><div class="min-w-0"><p class="text-xs font-bold uppercase tracking-widest text-[#CB187D] mb-0.5">Module 5 &middot; Lesson 4</p><h3 class="text-base font-bold text-gray-800">Exporting Data</h3><p class="text-sm text-gray-500 mt-0.5">Next you will learn:</p></div></div>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-brand mb-3">What You Will Learn</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:file-arrow-down"></span></span><div><p class="text-sm font-semibold text-gray-700">CSV &amp; Excel export</p></div></div>
+                  <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:download"></span></span><div><p class="text-sm font-semibold text-gray-700">Download buttons</p></div></div>
+                  <div class="obj-card flex items-center gap-3 rounded-xl border border-gray-100 px-4 py-3 bg-gray-50"><span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#CB187D] shrink-0"><span class="iconify text-white text-sm" data-icon="fa6-solid:file-lines"></span></span><div><p class="text-sm font-semibold text-gray-700">File generation</p></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="lesson02_introduction_to_streamlit.html" class="lesson-nav-link group flex-1 flex items-center gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all no-underline"><span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-left"></span><div class="min-w-0"><p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Previous</p><p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Introduction to Streamlit</p></div></a>
+            <a href="../../pages/hub_home_page.html" class="lesson-nav-link group flex items-center justify-center gap-2 rounded-2xl bg-transparent px-6 py-5 transition-all sm:w-auto w-full no-underline"><span class="iconify text-gray-400 text-base group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:table-cells-large"></span><span class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors whitespace-nowrap">All Lessons</span></a>
+            <a href="lesson04_exporting_data.html" class="lesson-nav-link group flex-1 flex items-center justify-end gap-4 rounded-2xl bg-transparent px-6 py-5 transition-all text-right no-underline"><div class="min-w-0"><p class="text-xs font-semibold uppercase tracking-widest text-gray-400 group-hover:text-[#CB187D] transition-colors mb-0.5">Next</p><p class="text-sm font-bold text-gray-700 group-hover:text-[#CB187D] transition-colors truncate">Exporting Data</p></div><span class="iconify text-gray-300 text-xl shrink-0 group-hover:text-[#CB187D] transition-colors" data-icon="fa6-solid:arrow-right"></span></a>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <footer class="border-t border-gray-100 bg-white py-8">
+    <div class="max-w-[1280px] mx-auto px-4 text-center">
+      <p class="text-xs text-gray-400"><span class="iconify inline text-sm mr-1" data-icon="logos:python"></span> Python Learning Hub &middot; Data Applications Track &middot; Building Data Applications</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function toggleToc() {
+    const sidebar = document.querySelector('.lesson-toc-sidebar');
+    const icon = document.getElementById('toc-toggle-icon');
+    const collapsed = sidebar.classList.toggle('toc-collapsed');
+    icon.setAttribute('data-icon', collapsed ? 'fa6-solid:angles-right' : 'fa6-solid:angles-left');
+    if (window.Iconify) Iconify.scan();
+  }
+
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = [...tocLinks].map(link => document.getElementById(link.getAttribute('href').replace('#', ''))).filter(Boolean);
+  function updateScrollSpy() {
+    let currentId = '';
+    sections.forEach(section => { if (window.scrollY >= section.offsetTop - 120) currentId = section.id; });
+    tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + currentId); });
+  }
+  function updateScrollProgress() {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
+  }
+  function updateBackToTop() { document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400); }
+  window.addEventListener('scroll', () => { updateScrollSpy(); updateScrollProgress(); updateBackToTop(); });
+
+  function copyCode(btn) {
+    const container = btn.closest('.relative') || btn.parentElement.closest('div');
+    const pre = container ? container.querySelector('pre') : null;
+    const text = pre ? pre.innerText : '';
+    function showFeedback() {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="iconify mr-1" data-icon="fa6-solid:check"></span>Copied!';
+      btn.style.background = 'rgba(34,197,94,0.2)'; btn.style.borderColor = 'rgba(34,197,94,0.5)'; btn.style.color = '#4ade80';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; }, 2000);
+    }
+    function fallbackCopy() {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); showFeedback();
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy); } else { fallbackCopy(); }
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    if (!isOpen && window.Prism) Prism.highlightAllUnder(body);
+  }
+
+  const kcColors = [
+    { num: '#CB187D', numShadow: 'rgba(203,24,125,0.25)', activeBg: '#fdf0f7' },
+    { num: '#7c3aed', numShadow: 'rgba(124,58,237,0.25)', activeBg: '#f5f3ff' },
+    { num: '#2563eb', numShadow: 'rgba(37,99,235,0.25)',  activeBg: '#eff6ff' },
+    { num: '#059669', numShadow: 'rgba(5,150,105,0.25)',  activeBg: '#ecfdf5' },
+    { num: '#c74905', numShadow: 'rgba(199,73,5,0.25)',   activeBg: '#ffddb3' }
+  ];
+  function switchKcTab(idx) {
+    const c = kcColors[idx % kcColors.length];
+    const tabs = document.querySelectorAll('.kc-tab');
+    const panels = document.querySelectorAll('.kc-panel');
+    const indicator = document.querySelector('.kc-indicator');
+    tabs.forEach((t, i) => {
+      const num = t.querySelector('.kc-tab-num');
+      const label = t.querySelector('.kc-tab-label');
+      if (i === idx) {
+        t.classList.add('kc-tab-active'); t.style.background = c.activeBg;
+        if (num) { num.style.background = c.num; num.style.color = '#fff'; num.style.boxShadow = '0 2px 8px ' + c.numShadow; }
+        if (label) { label.style.color = '#111827'; }
+      } else {
+        t.classList.remove('kc-tab-active'); t.style.background = '';
+        if (num) { num.style.background = '#f3f4f6'; num.style.color = '#9ca3af'; num.style.boxShadow = 'none'; }
+        if (label) { label.style.color = '#9ca3af'; }
+      }
+    });
+    if (indicator && tabs[idx]) { indicator.style.top = tabs[idx].offsetTop + 'px'; indicator.style.height = tabs[idx].offsetHeight + 'px'; indicator.style.background = c.num; }
+    panels.forEach((p, i) => { if (i === idx) { p.classList.remove('hidden'); p.classList.remove('kc-panel-anim'); void p.offsetWidth; p.classList.add('kc-panel-anim'); } else { p.classList.add('hidden'); } });
+    const visible = panels[idx]; if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+
+  function _switchDarkPills(prefix, idx) {
+    document.querySelectorAll('.' + prefix + '-step').forEach((s, i) => {
+      if (i === idx) {
+        s.classList.add(prefix + '-step-active');
+        s.style.background = 'linear-gradient(to right, #CB187D, #e84aad)'; s.style.color = '#fff';
+        s.style.boxShadow = '0 10px 25px -5px rgba(203,24,125,0.3)';
+      } else {
+        s.classList.remove(prefix + '-step-active');
+        s.style.background = '#1f2937'; s.style.color = '#9ca3af'; s.style.boxShadow = 'none';
+      }
+    });
+    document.querySelectorAll('.' + prefix + '-panel').forEach((p, i) => {
+      if (i === idx) { p.classList.remove('hidden'); p.classList.remove(prefix + '-panel-anim'); void p.offsetWidth; p.classList.add(prefix + '-panel-anim'); }
+      else { p.classList.add('hidden'); }
+    });
+    const visible = document.querySelectorAll('.' + prefix + '-panel:not(.hidden)')[0];
+    if (visible && window.Prism) Prism.highlightAllUnder(visible);
+  }
+  function switchCeTab(idx) { _switchDarkPills('ce', idx); }
+  function switchMkTab(idx) { _switchDarkPills('mk', idx); }
+  function switchPeTab(idx) { _switchDarkPills('pe', idx); }
+  function switchQzTab(idx) { _switchDarkPills('qz', idx); }
+
+  function checkQuiz(btn, answer) {
+    const question = btn.closest('.quiz-question');
+    const feedback = question.querySelector('.quiz-feedback');
+    const buttons = question.querySelectorAll('.quiz-btn');
+    buttons.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
+    if (answer === true) {
+      btn.classList.add('correct'); btn.style.opacity = '1';
+      const msg = question.dataset.fbCorrect || 'Correct!';
+      feedback.innerHTML = '\u2713 ' + msg;
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-green-600';
+    } else {
+      btn.classList.add('incorrect'); btn.style.opacity = '1';
+      const msg = question.dataset.fbWrong || 'Not quite \u2014 review the lesson recap above.';
+      feedback.innerHTML = '\u2717 ' + msg;
+      feedback.className = 'quiz-feedback mt-2 text-sm font-medium text-red-500';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => { if (window.Prism) Prism.highlightAll(); });
+</script>
+
+</body>
+</html>
