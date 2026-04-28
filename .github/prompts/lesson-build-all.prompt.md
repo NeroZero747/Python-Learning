@@ -8,12 +8,12 @@ promptFiles:
   - .github/prompts/lesson-overview.prompt.md
   - .github/prompts/lesson-key-takeaways.prompt.md
   - .github/prompts/lesson-key-concepts.prompt.md
-  - .github/prompts/lesson-decision-flow.prompt.md
+  # - .github/prompts/lesson-decision-flow.prompt.md
   - .github/prompts/lesson-code-examples.prompt.md
-  - .github/prompts/lesson-comparison.prompt.md
+  # - .github/prompts/lesson-comparison.prompt.md
   - .github/prompts/lesson-practice-exercises.prompt.md
   - .github/prompts/lesson-common-mistakes.prompt.md
-  - .github/prompts/lesson-real-world.prompt.md
+  # - .github/prompts/lesson-real-world.prompt.md
   - .github/prompts/lesson-recap.prompt.md
   - .github/prompts/lesson-knowledge-check.prompt.md
   - .github/prompts/lesson-next-lesson.prompt.md
@@ -52,13 +52,13 @@ PUB_DATE: ...
 [3] overview         → hook sentence + analogy; list topics covered here (key-takeaways must not repeat)
 [4] key-takeaways    → 3 cards; each covers NEW ground not in overview
 [5] key-concepts     → 1 sidebar tab per major syntax element / type
-[6] decision-flow    → CONDITIONAL — include if topic has branching/looping/flow control logic;
-                        skip if topic is purely declarative (e.g. imports, print statements, data types)
+<!-- [6] decision-flow    → CONDITIONAL — include if topic has branching/looping/flow control logic;
+                        skip if topic is purely declarative (e.g. imports, print statements, data types) -->
 [7] code-examples    → 3 tabs with descriptive labels; confirm EXAMPLES_COUNT here
-[8] comparison       → Python vs SQL vs Excel; 2–4 concept rows
+<!-- [8] comparison       → Python vs SQL vs Excel; 2–4 concept rows -->
 [9] practice         → 3 exercises; confirm EXERCISES_COUNT here
 [10] common-mistakes → 3 mistakes; lead with the exact error
-[11] real-world      → 3 scenario cards + before/after table; no code blocks
+<!-- [11] real-world      → 3 scenario cards + before/after table; no code blocks -->
 [12] recap           → 2×2 grid; MUST use identical labels + icons to #objective cards
 [13] knowledge-check → 4 True/False questions; one per objective
 [14] next-lesson     → lesson badge + 3 preview cards + bottom nav
@@ -130,7 +130,7 @@ Apply the full instructions from each section's loaded prompt file, working thro
 
    Build `#hero` **after** `#code-examples` and `#practice` so the stat counts are confirmed.
 
-4. **Decision-flow gate:** If the brief says `skip`, do not run the `lesson-decision-flow` prompt. If `include`, run it after `#key-concepts`.
+<!-- 4. **Decision-flow gate:** If the brief says `skip`, do not run the `lesson-decision-flow` prompt. If `include`, run it after `#key-concepts`. -->
 
 5. **Focus checklist — these are reminders of the most critical constraint per section. They do NOT replace reading the full sub-prompt template before writing each section:**
 
@@ -139,10 +139,10 @@ Apply the full instructions from each section's loaded prompt file, working thro
    | Section | Style to use |
    |---|---|
    | `#code-examples` | Style A — dark chrome, `border border-gray-800 shadow-lg`, with terminal pane |
-   | `#decision-flow` | Style A — dark chrome, **no** terminal pane |
+   <!-- | `#decision-flow` | Style A — dark chrome, **no** terminal pane | -->
    | `#practice` | Style A — dark chrome, **no** terminal pane |
    | `#key-concepts` | Style B — `bg-code shadow-md` + `border-b border-code-sep`, language label |
-   | `#comparison` | Style B + `flex flex-col flex-1` on outer div |
+   <!-- | `#comparison` | Style B + `flex flex-col flex-1` on outer div | -->
    | `#mistakes` split panels | Style B-lite — bare `bg-code`, `px-4 py-3` on `<pre>`, no header |
    | `#mistakes` single-column | Style B |
 
@@ -154,12 +154,12 @@ Apply the full instructions from each section's loaded prompt file, working thro
    - **overview** → 4-part: hook banner → "Think of…" analogy intro → 2-col card grid → amber tip
    - **key-takeaways** → 3 cards (pink / violet / blue); each deepens understanding, never restates overview
    - **key-concepts** → sidebar tabs; define the concept BEFORE showing code; widget + code + color tip per tab
-   - **decision-flow** → 4 flowchart nodes + 3 concept cards; match the topic's actual flow logic
+   <!-- - **decision-flow** → 4 flowchart nodes + 3 concept cards; match the topic's actual flow logic -->
    - **code-examples** → 3 tabs with descriptive pill labels; every code line has an inline comment
-   - **comparison** → Python / SQL / Excel columns; 2–4 concept rows; side-by-side code blocks
+   <!-- - **comparison** → Python / SQL / Excel columns; 2–4 concept rows; side-by-side code blocks -->
    - **practice** → 3 exercises; task description must be clear enough to act on without re-reading
    - **common-mistakes** → 3 mistakes; lead with the exact error type or what breaks; wrong then correct code
-   - **real-world** → 3 scenario cards + before/after table; no code blocks; human-scale numbers
+   <!-- - **real-world** → 3 scenario cards + before/after table; no code blocks; human-scale numbers -->
    - **recap** → 2×2 grid; labels + icons MUST match #objective exactly; short action-verb sentences (8–14 words)
    - **knowledge-check** → 4 True/False questions (one per objective); reinforce, never trick; mix true + false answers
    - **next-lesson** → lesson badge + 3 preview cards + bottom nav; omit Previous link if first lesson of module
@@ -172,7 +172,7 @@ After all sections are saved, run this checklist against `TARGET_FILE`:
 
 - [ ] All 4 objective card labels appear **verbatim** in both `#recap` and `#knowledge-check`
 - [ ] `#key-takeaways` has zero topics that overlap with the overview topics listed in the brief
-- [ ] `#decision-flow` is either fully present (4 flow nodes + 3 concept cards) or fully absent — never partial
+<!-- - [ ] `#decision-flow` is either fully present (4 flow nodes + 3 concept cards) or fully absent — never partial -->
 - [ ] Hero stat pills (`EXAMPLES_COUNT`, `EXERCISES_COUNT`) match the actual tab count in `#code-examples` and `#practice`
 - [ ] All JS tab switcher functions (`switchCeTab`, `switchMkTab`, `switchPeTab`, `switchQzTab`, `switchKcTab`) call the correct number of panels
 - [ ] `mod-lesson-active` class is on the current lesson's `<a>` in the module TOC sidebar
